@@ -2,7 +2,7 @@ import useTicker from '../../shared/hooks/useTicker.js';
 import { SORTIE_HOURS, formatHour } from '../../data/twinData.js';
 
 // 24-hour time scrub with sortie tick marks and a play button. Between sorties the
-// measured state ages — the parent shows the staleness accruing. Playing animates
+// measured state ages  -  the parent shows the staleness accruing. Playing animates
 // the diel cycle.
 export default function TimeScrub({ hour, setHour, playing, setPlaying }) {
   useTicker(playing, 220, () => setHour((h) => (h + 0.5 > 23.5 ? 0 : Math.round((h + 0.5) * 2) / 2)));
@@ -39,7 +39,7 @@ export default function TimeScrub({ hour, setHour, playing, setPlaying }) {
         </div>
       </div>
       <p className="muted" style={{ margin: '6px 0 0', fontSize: 'var(--fs-xs)' }}>
-        Sorties run pre-dawn, midday, and dusk (▲). Between them the last measurement ages — freshness is always shown, never assumed.
+        Sorties run pre-dawn, midday, and dusk (▲). Between them the last measurement ages  -  freshness is always shown, never assumed.
       </p>
     </div>
   );

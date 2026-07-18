@@ -33,7 +33,7 @@ export default function SiteOverview() {
         <span className="tag-mono">As of {formatHour(AS_OF_HOUR)} · next sortie {formatHour(nextSortie)}</span>
       </div>
 
-      {/* cage status grid — one is No-Data to prove grey never reads as green */}
+      {/* cage status grid  -  one is No-Data to prove grey never reads as green */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 12 }}>
         {cages.map((c) => {
           const stId = stationIdForCage(c);
@@ -43,13 +43,13 @@ export default function SiteOverview() {
             <StatTile
               key={c.unit_id}
               label={`${c.unit_id} · ${c.species}`}
-              value={c.status === 'no_data' ? '—' : surface != null ? surface : '—'}
+              value={c.status === 'no_data' ? '-' : surface != null ? surface : '-'}
               unit={c.status === 'no_data' ? '' : 'mg/L surface'}
               status={c.status}
               ageMinutes={c.status === 'no_data' ? null : stAge}
               awaiting={c.status === 'no_data'}
               provenance="illustrative_synthetic"
-              footnote={c.status === 'no_data' ? 'Sensor missing/stale — this is NOT “safe”.' : undefined}
+              footnote={c.status === 'no_data' ? 'Sensor missing/stale: this is NOT “safe”.' : undefined}
             />
           );
         })}

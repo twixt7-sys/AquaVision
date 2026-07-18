@@ -3,13 +3,13 @@ import SampleDataBanner from '../../shared/components/SampleDataBanner.jsx';
 import StatusBadge from '../../shared/components/StatusBadge.jsx';
 import { predictiveHealthNotes } from '../../data/demoFixtures.js';
 
-// Predictive health — the mechanism in plain sentences ("you logged low DO twice
+// Predictive health  -  the mechanism in plain sentences ("you logged low DO twice
 // and haven't logged since"), never a bare score. It reveals the mechanism; it
 // does not "predict" (banned word) and never says the water is "safe".
 export default function PredictiveHealth() {
   return (
     <Pad>
-      <ScreenHead title="Predictive health" sub="What your logs suggest is coming — in plain language" />
+      <ScreenHead title="Predictive health" sub="What your logs suggest is coming  -  in plain language" />
       <SampleDataBanner compact />
       <div className="stack" style={{ gap: 12 }}>
         {predictiveHealthNotes.map((n, i) => (

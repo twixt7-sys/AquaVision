@@ -1,61 +1,81 @@
+import { ArrowRight, FlaskConical, Monitor, Smartphone } from 'lucide-react';
+import { motion } from 'motion/react';
 import { navigate } from './router.js';
-import { oneLiner, company } from './data/index.js';
+import { oneLiner } from './data/index.js';
+import AppPageBackground from './shared/components/AppPageBackground.jsx';
+import { AquaVisionLogoLockup } from './shared/components/AquaVisionBrandLogo.jsx';
+import FrameModeToggle from './shared/components/FrameModeToggle.jsx';
+import { Button } from './shared/components/ui/button.jsx';
+import { Card, CardContent } from './shared/components/ui/card.jsx';
+import { PondBuddy } from './shared/components/PondBuddy.jsx';
 
-// Landing — logo, the one-liner, two mode buttons, and the honesty framing that
-// makes the whole prototype credible.
 export default function Landing() {
   return (
-    <div className="screen-root" style={{ alignItems: 'center', justifyContent: 'center', padding: '40px 20px' }}>
-      <div style={{ maxWidth: 860, width: '100%', textAlign: 'center' }}>
-        <img
-          src="/assets/logo-lockup.jpg"
-          alt="AquaVision — Fisheries, Aquaculture, Technology"
-          style={{ width: 260, maxWidth: '70%', borderRadius: 16, marginBottom: 8 }}
-        />
-        <p
-          style={{
-            letterSpacing: '.28em',
-            fontSize: 'var(--fs-xs)',
-            color: 'var(--av-current)',
-            textTransform: 'uppercase',
-            margin: '4px 0 24px',
-          }}
-        >
-          AI-powered aquaculture management, from first pond to smart farm
+    <div className="relative flex min-h-dvh items-center justify-center px-5 py-10">
+      <AppPageBackground />
+      <motion.div
+        className="w-full max-w-xl text-center"
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.35, ease: 'easeOut' }}
+      >
+        <AquaVisionLogoLockup width={320} className="mb-3" />
+
+        <p className="mb-6 mt-1 text-[11px] uppercase tracking-[0.28em] text-accent">
+          AI-powered aquaculture management
         </p>
 
-        <p style={{ fontSize: 'var(--fs-lg)', color: 'var(--text)', maxWidth: 720, margin: '0 auto 8px' }}>
-          “We meet fish farmers where they are — from their first pond to their first drone.”
+        <p className="mx-auto mb-2 max-w-xl text-lg leading-snug text-foreground">
+          “We meet fish farmers where they are: from their first pond to their first drone.”
         </p>
-        <p className="muted" style={{ maxWidth: 680, margin: '0 auto 32px', fontSize: 'var(--fs-sm)' }}>
-          {oneLiner}
-        </p>
+        <p className="mx-auto mb-6 max-w-lg text-sm text-muted-foreground">{oneLiner}</p>
 
-        <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <button className="btn" style={{ fontSize: 'var(--fs-lg)', padding: '14px 28px' }} onClick={() => navigate('/demo/free/home')}>
-            ▤ Open the product
-            <span style={{ fontWeight: 400, fontSize: 'var(--fs-xs)', opacity: 0.85 }}>Free · Premium · Enterprise</span>
-          </button>
-        </div>
-
-        <div
-          className="card"
-          style={{ marginTop: 40, textAlign: 'left', maxWidth: 720, marginInline: 'auto', borderColor: 'color-mix(in srgb, var(--av-critical) 30%, var(--border))' }}
-        >
-          <div className="section-title" style={{ color: 'var(--av-critical)' }}>A note on honesty</div>
-          <p style={{ margin: 0, fontSize: 'var(--fs-sm)' }}>
-            This is a concept prototype. The app has <b>zero users</b> and the hardware is <b>TRL 3 — nothing flown</b>.
-            Every data figure carries a provenance badge, and anything marked{' '}
-            <span style={{ color: 'var(--av-critical)', fontWeight: 600 }}>SAMPLE DATA — NOT REAL</span> is fabricated to
-            demonstrate the interface. That discipline is the point, not a disclaimer.
+        <div className="mx-auto mb-6 flex max-w-md flex-col items-center gap-2 rounded-2xl border border-border/50 bg-card/80 px-4 py-3 shadow-sm">
+          <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-muted-foreground">
+            Pitch frame
+          </p>
+          <FrameModeToggle tone="onLight" />
+          <p className="flex items-center gap-3 text-[11px] text-muted-foreground">
+            <span className="inline-flex items-center gap-1"><Smartphone size={12} /> Phone</span>
+            <span className="inline-flex items-center gap-1"><Monitor size={12} /> Desktop</span>
           </p>
         </div>
 
-        <p className="muted" style={{ marginTop: 24, fontSize: 'var(--fs-xs)' }}>
-          {company.identity?.one_liner ? '' : ''}
-          <a href="#/charts">Chart gallery ↗</a> · Keyboard-driven · Works fully offline
+        <div className="mx-auto mb-8 max-w-md rounded-3xl border border-border/50 bg-card/80 p-3 shadow-sm text-left">
+          <PondBuddy
+            lines={[
+              "Hi. I'm **Avi**, your pond buddy. I'll keep you honest about what we know and what we don't.",
+              'Tap **Open the product** to walk the Free, Premium, and Enterprise demos.',
+              'Every figure carries a provenance badge. Sample data stays loud on purpose.',
+            ]}
+            mood="happy"
+          />
+        </div>
+
+        <Button size="lg" className="h-12 px-7 text-base" onClick={() => navigate('/demo/free/home')}>
+          Open the product
+          <ArrowRight className="size-4" />
+        </Button>
+        <p className="mt-2 font-mono text-[11px] text-muted-foreground">Free · Premium · Enterprise</p>
+
+        <Card className="mt-10 border-[color-mix(in_srgb,var(--status-critical)_28%,var(--border))] text-left">
+          <CardContent className="px-5 py-4">
+            <div className="mb-2 flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-[var(--status-critical)]">
+              <FlaskConical className="size-3.5" /> A note on honesty
+            </div>
+            <p className="m-0 text-sm text-foreground">
+              This is a concept prototype. The app has <b>zero users</b> and the hardware is{' '}
+              <b>TRL 3: nothing flown</b>. Every data figure carries a provenance badge, and anything marked{' '}
+              <span className="font-semibold text-[var(--status-critical)]">SAMPLE DATA · NOT REAL</span> is fabricated
+              to demonstrate the interface. That discipline is the point, not a disclaimer.
+            </p>
+          </CardContent>
+        </Card>
+
+        <p className="mt-6 text-xs text-muted-foreground">
+          <a href="#/charts">Chart gallery ↗</a> · Works fully offline
         </p>
-      </div>
+      </motion.div>
     </div>
   );
 }

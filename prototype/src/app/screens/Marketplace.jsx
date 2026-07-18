@@ -1,7 +1,7 @@
 import { Pad, ScreenHead } from './_kit.jsx';
 import { marketplaceListings } from '../../data/demoFixtures.js';
 
-// Marketplace — the take rate is visible by design (paid because a third party is
+// Marketplace  -  the take rate is visible by design (paid because a third party is
 // also getting paid; the revenue mechanism is transparent, not hidden).
 export default function Marketplace() {
   return (

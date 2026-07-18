@@ -2,7 +2,7 @@ import { Pad, ScreenHead } from './_kit.jsx';
 import SampleDataBanner from '../../shared/components/SampleDataBanner.jsx';
 import { recommendations } from '../../data/demoFixtures.js';
 
-// Each recommendation states the data it was based on — no black-box advice.
+// Each recommendation states the data it was based on  -  no black-box advice.
 export default function Recommendations() {
   return (
     <Pad>

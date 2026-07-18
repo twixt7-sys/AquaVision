@@ -1,7 +1,7 @@
 import ProvenanceBadge from '../shared/components/ProvenanceBadge.jsx';
 import { telemetry } from '../data/index.js';
 
-// Reports — an export preview that KEEPS the QC flags, source_type, and provenance
+// Reports  -  an export preview that KEEPS the QC flags, source_type, and provenance
 // columns intact (dashboard-spec.json: manual readings must never be styled like
 // sensor readings; QC and provenance travel with the data).
 const snap = telemetry.synthetic_multichannel_snapshot.reading;

@@ -1,23 +1,50 @@
-// Shared layout helpers for the phone-framed app screens.
-export function Pad({ children }) {
-  return <div style={{ padding: '16px 16px 28px', display: 'flex', flexDirection: 'column', gap: 14 }}>{children}</div>;
+import { TriangleAlert } from 'lucide-react';
+import { Card, CardContent } from '../../shared/components/ui/card.jsx';
+import { cn } from '../../shared/components/ui/utils.js';
+
+export function Pad({ children, className }) {
+  return (
+    <div className={cn('flex flex-col gap-3.5 px-4 pb-7 pt-4', className)}>{children}</div>
+  );
 }
 
 export function ScreenHead({ title, sub }) {
   return (
-    <div>
-      <h3 style={{ margin: 0, fontSize: 'var(--fs-xl)' }}>{title}</h3>
-      {sub && <p className="muted" style={{ margin: '2px 0 0', fontSize: 'var(--fs-sm)' }}>{sub}</p>}
+    <div className="mb-0.5">
+      <h3 className="m-0 text-xl font-semibold tracking-tight text-foreground">{title}</h3>
+      {sub && <p className="m-0 mt-1 text-sm text-muted-foreground">{sub}</p>}
     </div>
   );
 }
 
-export function AppCard({ children, accent, onClick }) {
+/** Soft Theria-style surface  -  border/50, rounded-2xl, optional left accent. */
+export function AppCard({ children, accent, onClick, className }) {
+  return (
+    <Card
+      onClick={onClick}
+      className={cn(
+        'gap-0',
+        onClick && 'cursor-pointer transition-transform duration-200 hover:scale-[1.01] active:scale-[0.99]',
+        className,
+      )}
+      style={
+        accent
+          ? { borderLeftWidth: 3, borderLeftColor: accent, borderLeftStyle: 'solid' }
+          : undefined
+      }
+    >
+      <CardContent className="px-4 py-3.5">{children}</CardContent>
+    </Card>
+  );
+}
+
+export function SoftPanel({ children, className }) {
   return (
     <div
-      className="card"
-      onClick={onClick}
-      style={{ padding: '14px 16px', cursor: onClick ? 'pointer' : 'default', borderLeft: accent ? `3px solid ${accent}` : undefined }}
+      className={cn(
+        'relative overflow-hidden rounded-3xl border border-border/50 bg-muted/40 p-4 shadow-sm sm:p-5',
+        className,
+      )}
     >
       {children}
     </div>
@@ -26,8 +53,9 @@ export function AppCard({ children, accent, onClick }) {
 
 export function Disclaimer({ children }) {
   return (
-    <p style={{ margin: 0, fontSize: 'var(--fs-xs)', color: 'var(--av-advisory)' }}>
-      ⚠ {children}
+    <p className="m-0 flex items-start gap-1.5 text-xs text-[var(--status-advisory)]">
+      <TriangleAlert className="mt-0.5 size-3.5 shrink-0" aria-hidden />
+      <span>{children}</span>
     </p>
   );
 }

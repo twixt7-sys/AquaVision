@@ -1,29 +1,23 @@
-// Persistent "SAMPLE DATA — NOT REAL" strip. Pinned to any view fed by the
-// synthetic datasets. Per sample-telemetry.json / sample-pond-twin-state.json,
-// it must be impossible for a viewer to mistake this data for real.
+import { FlaskConical } from 'lucide-react';
+import { cn } from './ui/utils.js';
+
 export default function SampleDataBanner({ compact = false }) {
   return (
     <div
       role="note"
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: 10,
-        background: 'color-mix(in srgb, var(--av-critical) 12%, var(--surface))',
-        borderLeft: '4px solid var(--av-critical)',
-        borderRadius: 'var(--r-sm)',
-        color: 'var(--text)',
-        padding: compact ? '6px 12px' : '10px 14px',
-        fontSize: 'var(--fs-sm)',
-      }}
+      data-slot="sample-data-banner"
+      className={cn(
+        'flex items-center gap-2.5 rounded-md border-l-4 border-[var(--status-critical)]',
+        'bg-[color-mix(in_srgb,var(--status-critical)_12%,var(--card))] text-foreground',
+        compact ? 'px-3 py-1.5 text-xs' : 'px-3.5 py-2.5 text-sm',
+      )}
     >
-      <span
-        style={{ color: 'var(--av-critical)', fontWeight: 700, letterSpacing: '.03em', whiteSpace: 'nowrap' }}
-      >
-        ⚠ SAMPLE DATA — NOT REAL
+      <span className="inline-flex items-center gap-1.5 font-bold tracking-wide text-[var(--status-critical)] whitespace-nowrap">
+        <FlaskConical className="size-3.5 shrink-0" aria-hidden />
+        SAMPLE DATA · NOT REAL
       </span>
       {!compact && (
-        <span className="muted">
+        <span className="text-muted-foreground">
           Every number shown here is fabricated to demonstrate the interface. It describes no real pond, fish, or sortie.
         </span>
       )}

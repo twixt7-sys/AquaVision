@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import TopDownMap from './pondtwin/TopDownMap.jsx';
 
-// Map view — the calibrated concentration field with its calibration quality made
+// Map view  -  the calibrated concentration field with its calibration quality made
 // visible ON the map (n and R² printed, and honestly labelled as illustrative).
 // Uncertainty layer toggle defaults on.
 export default function MapView() {
@@ -23,7 +23,7 @@ export default function MapView() {
           <span><b>Calibration quality</b></span>
           <span className="num">n = 3 stations</span>
           <span className="num">R² = 0.71 (illustrative)</span>
-          <span className="muted">The optical field is calibrated by the probe. With only 3 in-situ points, confidence away from them is low — and we show it.</span>
+          <span className="muted">The optical field is calibrated by the probe. With only 3 in-situ points, confidence away from them is low  -  and we show it.</span>
         </div>
       </div>
 

@@ -2,8 +2,7 @@ import { createContext, useContext } from 'react';
 import { navigate } from '../router.js';
 
 // Screen registry per tier, mirroring dashboard-spec.json#/one_shell_three_tiers.
-// Enterprise inherits nothing visually (full-width dashboard); Free/Premium render
-// inside a phone frame.
+// Free/Premium can render in a phone or desktop pitch frame (FrameModeToggle).
 export const TIERS = {
   free: {
     label: 'Free',
@@ -16,7 +15,7 @@ export const TIERS = {
       { id: 'feeding', label: 'Feeding' },
       { id: 'disease', label: 'Disease ID' },
       { id: 'forum', label: 'Community' },
-      { id: 'learning', label: 'Learning' },
+      { id: 'learning', label: 'Farmer education' },
       { id: 'records', label: 'Records' },
     ],
   },

@@ -1,0 +1,4 @@
+/* Self-hosted Inter (variable font) so the app works fully offline  -  Theria technique. */
+@import '@fontsource-variable/inter';
+/* JetBrains Mono kept ONLY for telemetry / coordinate numbers (AquaVision rule). */
+@import '@fontsource-variable/jetbrains-mono';

@@ -1,7 +1,7 @@
 import { Pad, ScreenHead } from './_kit.jsx';
 import { consultationThread } from '../../data/demoFixtures.js';
 
-// Paid expert consultation — booking + a message thread with a real human. The
+// Paid expert consultation  -  booking + a message thread with a real human. The
 // disease-ID and assistant flows route here when confidence is low.
 export default function Consultation() {
   const { expert, booked, messages } = consultationThread;
