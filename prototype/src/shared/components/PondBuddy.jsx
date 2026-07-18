@@ -183,14 +183,14 @@ export function PondBuddy({
         type="button"
         onClick={handleTap}
         aria-label={`${name} says: ${plainBuddyLine(lines[safeIndex])}. Tap for the next message.`}
-        className="relative flex w-full items-center gap-3.5 px-1 py-1 text-left sm:gap-4"
+        className="relative flex w-full items-center gap-2.5 px-0.5 py-0.5 text-left"
       >
         <div className="flex shrink-0 flex-col items-center">
           <motion.div
             animate={{ rotate: [0, -2, 0, 2, 0] }}
             transition={{ duration: 5.6, repeat: Infinity, ease: 'easeInOut' }}
             whileHover={{ scale: 1.07, rotate: -3 }}
-            className="h-20 w-20 sm:h-24 sm:w-24"
+            className="h-14 w-14"
           >
             <motion.div
               animate={{ y: [0, -4, 0] }}
@@ -212,19 +212,19 @@ export function PondBuddy({
             aria-hidden
             animate={{ scaleX: [1, 0.78, 1], opacity: [0.4, 0.22, 0.4] }}
             transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
-            className="mt-1.5 h-1.5 w-12 rounded-full bg-foreground/20 blur-[1px]"
+            className="mt-1 h-1 w-9 rounded-full bg-foreground/20 blur-[1px]"
           />
         </div>
 
-        <div className="relative min-w-0 flex-1 rounded-2xl border border-border/50 bg-card px-3.5 py-3 shadow-sm">
+        <div className="relative min-w-0 flex-1 rounded-xl border border-border/50 bg-card px-2.5 py-2 shadow-sm">
           <span
             aria-hidden
-            className="absolute -left-[5px] top-1/2 h-2.5 w-2.5 -translate-y-1/2 rotate-45 border-b border-l border-border/50 bg-card"
+            className="absolute -left-[4px] top-1/2 h-2 w-2 -translate-y-1/2 rotate-45 border-b border-l border-border/50 bg-card"
           />
-          <p className="text-[9px] font-bold uppercase tracking-widest text-accent">
+          <p className="text-[8px] font-bold uppercase tracking-widest text-accent">
             {name} · {tagline}
           </p>
-          <div className="mt-1 flex min-h-[2.5rem] items-center">
+          <div className="mt-0.5 flex min-h-[2rem] items-center">
             <AnimatePresence mode="wait">
               <motion.p
                 key={safeIndex}
@@ -232,7 +232,7 @@ export function PondBuddy({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -4 }}
                 transition={{ duration: 0.18 }}
-                className="text-[13px] leading-snug text-foreground sm:text-sm"
+                className="text-xs leading-snug text-foreground"
               >
                 {renderBuddyLine(lines[safeIndex])}
               </motion.p>

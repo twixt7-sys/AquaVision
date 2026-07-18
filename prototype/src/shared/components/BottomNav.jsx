@@ -79,16 +79,16 @@ export default function BottomNav({ tier, screen, wide = false }) {
           </div>
 
           <div
-            className="relative flex shrink-0 flex-col items-center px-3 transition-all duration-300 ease-out"
+            className="relative flex shrink-0 flex-col items-center px-2 transition-all duration-300 ease-out"
             style={{
-              transform: screen === center.id ? 'translateY(-1.6rem) scale(1.12)' : 'translateY(0)',
+              transform: screen === center.id ? 'translateY(-1.35rem) scale(1.08)' : 'translateY(0)',
             }}
           >
             <button
               type="button"
               onClick={() => go(center.id)}
               className={cn(
-                'group relative flex h-12 w-12 items-center justify-center rounded-2xl border shadow-sm transition-all duration-300',
+                'group relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-2xl border p-0 shadow-sm transition-all duration-300',
                 isPremium
                   ? 'border-[#8A6BC4]/50 bg-gradient-to-br from-[#2A3F7A] to-[#4A3A8A]'
                   : 'border-white/20 bg-[#1C507A]',
@@ -102,15 +102,15 @@ export default function BottomNav({ tier, screen, wide = false }) {
             >
               {screen === center.id && <span className="droplet-ripple rounded-2xl" />}
               {center.id === 'home' || center.id === 'recommendations' ? (
-                <AquaVisionLogoMark size="sm" className="relative z-10 h-10 w-10" />
+                <AquaVisionLogoMark size="md" className="relative z-10 h-14 w-14" />
               ) : (
-                <center.icon size={18} strokeWidth={2.25} className="relative z-10" />
+                <center.icon size={22} strokeWidth={2.25} className="relative z-10" />
               )}
             </button>
             {screen === center.id && (
               <div
                 className={cn(
-                  'absolute -bottom-2 h-4 w-12 animate-pulse rounded-full blur-lg',
+                  'absolute -bottom-2 h-4 w-14 animate-pulse rounded-full blur-lg',
                   isPremium ? 'bg-[#8A6BC4]/40' : 'bg-accent/30',
                 )}
               />

@@ -33,7 +33,8 @@ function saveSize(mode, size) {
 function clampSize(mode, w, h) {
   const min = mode === 'desktop' ? DESKTOP_MIN : PHONE_MIN;
   const maxW = Math.min(window.innerWidth - 48, mode === 'desktop' ? 1400 : 520);
-  const maxH = Math.min(window.innerHeight - 120, mode === 'desktop' ? 960 : 900);
+  // Leave room for the demo top nav + page padding
+  const maxH = Math.min(window.innerHeight - 160, mode === 'desktop' ? 960 : 900);
   return {
     w: Math.round(Math.min(maxW, Math.max(min.w, w))),
     h: Math.round(Math.min(maxH, Math.max(min.h, h))),
@@ -92,15 +93,15 @@ function ResizeHandle({ onDrag }) {
     <button
       type="button"
       aria-label="Resize frame"
-      title="Drag to resize"
+      title="Drag corner to resize frame"
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
       onPointerCancel={onPointerUp}
-      className="absolute bottom-1 right-1 z-20 flex h-5 w-5 cursor-nwse-resize items-end justify-end rounded-sm border-0 bg-transparent p-0.5 text-[#043B66]/50 hover:text-accent"
+      className="absolute bottom-0 right-0 z-30 flex h-10 w-10 cursor-nwse-resize items-end justify-end rounded-tl-lg border-0 bg-gradient-to-tl from-[#043B66]/35 via-[#043B66]/10 to-transparent p-1.5 text-[#043B66]/70 transition-colors hover:from-accent/40 hover:text-accent active:text-accent"
     >
-      <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden>
-        <path d="M11 7v4H7M11 11L6 6M11 4L4 11" stroke="currentColor" strokeWidth="1.4" fill="none" strokeLinecap="round" />
+      <svg width="14" height="14" viewBox="0 0 12 12" aria-hidden>
+        <path d="M11 7v4H7M11 11L6 6M11 4L4 11" stroke="currentColor" strokeWidth="1.6" fill="none" strokeLinecap="round" />
       </svg>
     </button>
   );

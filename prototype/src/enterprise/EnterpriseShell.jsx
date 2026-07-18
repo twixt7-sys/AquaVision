@@ -3,9 +3,7 @@ import { Menu, Building2, Radio } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { navigate } from '../router.js';
 import { TIERS } from '../app/TierContext.jsx';
-import TierSwitcher from '../app/TierSwitcher.jsx';
 import SampleDataBanner from '../shared/components/SampleDataBanner.jsx';
-import AppPageBackground from '../shared/components/AppPageBackground.jsx';
 import Sidebar from '../shared/components/Sidebar.jsx';
 import { AquaVisionBrandLogo } from '../shared/components/AquaVisionBrandLogo.jsx';
 import { Button } from '../shared/components/ui/button.jsx';
@@ -36,11 +34,10 @@ export default function EnterpriseShell({ screen }) {
   const activeLabel = screens.find((s) => s.id === screen)?.label || 'Overview';
 
   return (
-    <div className="relative flex min-h-dvh">
-      <AppPageBackground />
-
-      <aside className="relative hidden w-[240px] shrink-0 flex-col border-r border-accent/20 bg-gradient-to-b from-[#052A40] via-[#043B66] to-[#031820] md:flex">
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-accent/15 to-transparent" />
+    <div className="relative flex min-h-full">
+      <aside className="relative hidden w-[260px] shrink-0 flex-col border-r border-accent/25 bg-gradient-to-b from-[#031820] via-[#052A40] to-[#043B66] md:flex">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-accent/20 to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-px bg-gradient-to-b from-accent/40 via-accent/10 to-transparent" />
         <div className="relative border-b border-accent/20 px-4 py-4">
           <div className="flex items-center gap-2.5">
             <AquaVisionBrandLogo size="md" className="-m-1" />
@@ -48,7 +45,7 @@ export default function EnterpriseShell({ screen }) {
               <div className="text-xs font-bold tracking-[0.16em] text-white">
                 AQUA<span className="text-accent">VISION</span>
               </div>
-              <div className="mt-0.5 inline-flex items-center gap-1 rounded-sm bg-accent/15 px-1.5 py-0.5 font-mono text-[10px] text-accent">
+              <div className="mt-0.5 inline-flex items-center gap-1 rounded-sm bg-accent/20 px-1.5 py-0.5 font-mono text-[10px] text-accent ring-1 ring-accent/30">
                 <Building2 className="size-2.5" aria-hidden />
                 Enterprise
               </div>
@@ -68,7 +65,7 @@ export default function EnterpriseShell({ screen }) {
               className={cn(
                 'mb-0.5 block w-full rounded-md px-3 py-2.5 text-left text-sm transition-all',
                 s.id === screen
-                  ? 'border-l-2 border-accent bg-gradient-to-r from-accent/20 to-transparent font-semibold text-accent shadow-[inset_0_0_20px_rgba(68,167,210,0.08)]'
+                  ? 'border-l-2 border-accent bg-gradient-to-r from-accent/25 to-transparent font-semibold text-accent shadow-[inset_0_0_24px_rgba(68,167,210,0.1)]'
                   : 'border-l-2 border-transparent text-white/60 hover:bg-white/5 hover:text-white',
               )}
             >
@@ -93,8 +90,8 @@ export default function EnterpriseShell({ screen }) {
       </aside>
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="sticky top-0 z-40 border-b border-accent/20 bg-gradient-to-r from-[#043B66] via-[#0B608F] to-[#1C507A] pt-safe shadow-[0_8px_28px_rgba(4,59,102,0.35)]">
-          <div className="h-0.5 w-full bg-gradient-to-r from-accent via-white/40 to-accent" />
+        <header className="sticky top-0 z-40 border-b border-accent/25 bg-gradient-to-r from-[#031820] via-[#043B66] to-[#0B608F] pt-safe shadow-[0_10px_32px_rgba(3,24,32,0.45)]">
+          <div className="h-0.5 w-full bg-gradient-to-r from-accent via-white/50 to-accent" />
           <div className="flex items-center gap-3 px-4 py-2.5">
             <Button
               variant="ghost"
@@ -108,16 +105,19 @@ export default function EnterpriseShell({ screen }) {
             <div className="min-w-0 md:hidden">
               <AquaVisionBrandLogo size="sm" />
             </div>
-            <TierSwitcher />
-            <div className="grow" />
-            <div className="hidden text-right sm:block">
+            <div className="min-w-0">
               <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-accent/90">{activeLabel}</p>
-              <p className="font-mono text-[11px] text-white/55">Phase 3 · Smart Aquaculture</p>
+              <p className="font-mono text-[11px] text-white/55">Phase 3 · Smart Aquaculture · command deck</p>
+            </div>
+            <div className="grow" />
+            <div className="hidden items-center gap-2 rounded-md border border-accent/25 bg-black/20 px-2.5 py-1 font-mono text-[10px] text-accent/90 sm:flex">
+              <span className="size-1.5 animate-pulse rounded-full bg-[var(--status-ok)]" />
+              Ops nominal
             </div>
           </div>
         </header>
 
-        <div className="overflow-y-auto bg-gradient-to-br from-[#E8F4FA] via-background to-[#F0F7FB] px-4 py-4 pb-10 sm:px-6">
+        <div className="overflow-y-auto bg-gradient-to-br from-[#DCEEF8] via-[#F4F8FB] to-[#E8F0F6] px-4 py-4 pb-10 sm:px-6">
           <div className="mb-3.5">
             <SampleDataBanner />
           </div>

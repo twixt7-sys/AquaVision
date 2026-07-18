@@ -3,7 +3,7 @@ import { useTier, TIERS, goToTier } from './TierContext.jsx';
 import { Tabs, TabsList, TabsTrigger } from '../shared/components/ui/tabs.jsx';
 import { cn } from '../shared/components/ui/utils.js';
 
-const TIER_STYLE = {
+const TIER_STYLE_DARK = {
   free: {
     active:
       'data-[state=active]:!bg-white/20 data-[state=active]:!text-white data-[state=active]:shadow-none',
@@ -21,23 +21,47 @@ const TIER_STYLE = {
   },
 };
 
-export default function TierSwitcher() {
+const TIER_STYLE_LIGHT = {
+  free: {
+    active:
+      'data-[state=active]:!bg-[#1C507A] data-[state=active]:!text-white data-[state=active]:shadow-sm',
+    idle: 'text-muted-foreground hover:text-foreground hover:bg-muted/80',
+  },
+  premium: {
+    active:
+      'data-[state=active]:!bg-gradient-to-r data-[state=active]:from-[#8A6BC4] data-[state=active]:to-[#6B8AD4] data-[state=active]:!text-white data-[state=active]:shadow-sm',
+    idle: 'text-[#6B5B95] hover:bg-[#8A6BC4]/10 hover:text-[#5A4A85]',
+  },
+  enterprise: {
+    active:
+      'data-[state=active]:!bg-gradient-to-r data-[state=active]:from-[#052A40] data-[state=active]:to-[#0B608F] data-[state=active]:!text-accent data-[state=active]:shadow-sm',
+    idle: 'text-[#0B608F] hover:bg-accent/10 hover:text-[#043B66]',
+  },
+};
+
+export default function TierSwitcher({ tone = 'onDark', className }) {
   const { tier } = useTier();
+  const onLight = tone === 'onLight';
+  const styles = onLight ? TIER_STYLE_LIGHT : TIER_STYLE_DARK;
+
   return (
     <Tabs value={tier} onValueChange={goToTier}>
       <TabsList
         className={cn(
-          'h-9 gap-0.5 border p-0.5 text-white/70',
-          tier === 'enterprise'
-            ? 'border-accent/30 bg-[#031820]/55'
-            : tier === 'premium'
-              ? 'border-[#8A6BC4]/35 bg-[#1a1030]/45'
-              : 'border-white/15 bg-black/25',
+          'h-9 gap-0.5 border p-0.5',
+          onLight
+            ? 'border-border bg-muted/70 text-muted-foreground'
+            : tier === 'enterprise'
+              ? 'border-accent/30 bg-[#031820]/55 text-white/70'
+              : tier === 'premium'
+                ? 'border-[#8A6BC4]/35 bg-[#1a1030]/45 text-white/70'
+                : 'border-white/15 bg-black/25 text-white/70',
+          className,
         )}
         aria-label="Product tier"
       >
         {Object.keys(TIERS).map((k) => {
-          const style = TIER_STYLE[k];
+          const style = styles[k];
           return (
             <TabsTrigger
               key={k}
