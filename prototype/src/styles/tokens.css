@@ -1,0 +1,52 @@
+/* AquaVision design tokens.
+   Brand blues are the 7 hexes sampled from assets/color_scheme.png, mapped onto
+   the token ROLES defined in data/01_company/brand-identity.json.
+   Semantic status colors and provenance-badge colors are kept verbatim from
+   brand-identity.json — they are deliberately NOT brand blues (a water-quality
+   alert must never be mistaken for a brand accent; that is a safety decision).
+   Dark mode is the default and the only fully-built theme (operators check the
+   dashboard before dawn; a white screen at 04:30 is hostile). */
+
+:root {
+  /* --- primary blues: color_scheme.png -> brand-identity roles --- */
+  --av-deep: #043B66;      /* Deep Water — primary dark, dark UI surfaces */
+  --av-ocean: #0B608F;     /* Ocean — interactive elements, links, chart series 1 */
+  --av-current: #44A7D2;   /* Current — accents, active states, chart series 2 */
+  --av-shallow: #3D5F83;   /* Shallow — muted accent, dividers, chart series 3 */
+  --av-hull: #1C507A;      /* repurposed as elevated dark surface tint */
+  --av-mist: #EFF2F5;      /* Mist — body text on dark, light tint */
+  --av-white: #FFFFFF;     /* high-emphasis text, logo field */
+  --av-slate: #7C93A6;     /* secondary text, captions */
+
+  /* --- semantic status — verbatim from brand-identity.json --- */
+  --av-ok: #2E9E6B;        /* Nominal — within safe operating band */
+  --av-advisory: #E0A82E;  /* Advisory — trending toward a threshold */
+  --av-warning: #E2721F;   /* Warning — threshold breached, act */
+  --av-critical: #C63B2F;  /* Critical — acute risk, act now */
+  --av-unknown: #8A97A0;   /* No Data — NOT the same as safe; grey must never read as green */
+
+  /* --- provenance badge accents — verbatim from brand-identity.json --- */
+  --av-target-purple: #8A6BC4;
+
+  /* --- type scale: 1.25 major third, 16px base --- */
+  --fs-xs: 12px; --fs-sm: 14px; --fs-base: 16px; --fs-lg: 20px;
+  --fs-xl: 25px; --fs-2xl: 31px; --fs-3xl: 39px; --fs-4xl: 49px;
+  --font-display: 'Inter Tight Variable', 'Inter Variable', system-ui, sans-serif;
+  --font-body: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'SF Mono', Consolas, monospace;
+
+  /* --- spacing / radius --- */
+  --r-sm: 6px; --r-md: 10px; --r-lg: 14px; --r-xl: 20px;
+
+  /* --- dark surfaces (default), derived from --av-deep with color-mix (no new hexes) --- */
+  --bg: color-mix(in srgb, var(--av-deep) 62%, black);
+  --surface: color-mix(in srgb, var(--av-deep) 82%, black);
+  --surface-2: color-mix(in srgb, var(--av-hull) 60%, black);
+  --border: color-mix(in srgb, var(--av-hull) 72%, black);
+  --text: var(--av-mist);
+  --text-2: var(--av-slate);
+  --heading: var(--av-white);
+  --link: var(--av-current);
+  --link-hover: var(--av-mist);
+  color-scheme: dark;
+}

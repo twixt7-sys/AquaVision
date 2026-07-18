@@ -1,0 +1,21 @@
+{
+  "id": "chart-three-phase-funnel",
+  "chart_type": "funnel",
+  "title": "The Platform — Three Phases",
+  "subtitle": "Free app (acquisition) → premium (monetization) → smart hardware (upgrade layer, moat)",
+  "description": "The spine of the company shown once, plainly. A free app widens the top of the funnel, a premium tier narrows but monetizes the middle, and the hardware layer deepens revenue at the bottom. The stage-to-stage conversion rates are deliberately empty: they are Phase 1 measurement questions, not assumptions we get to skip. With zero users today there is no measured activation, retention, or free-to-paid conversion to show.",
+  "provenance": "design_target",
+  "SYNTHETIC_WARNING": "The stage widths are illustrative of the land-and-expand shape only. Every conversion number is unmeasured and rendered empty on purpose. Do not read a funnel volume as a user count.",
+  "series": [
+    {
+      "name": "Land-and-expand funnel",
+      "provenance": "design_target",
+      "data": [
+        { "stage": "Phase 1 — Free app (acquisition)", "value": null, "unit": "monthly active farmers", "required_input": "Organic/community-led acquisition rate and activation rate — awaiting Phase 1 launch", "status": "not measured", "note": "Widest stage by design: no price barrier, any smallholder with a phone and a pond qualifies." },
+        { "stage": "Phase 2 — Premium (monetization)", "value": null, "unit": "paying subscribers", "required_input": "Free-to-paid conversion rate — cannot exist before users do", "status": "not measured", "note": "Need-triggered upgrade once a farm outgrows manual logging. This is where AquaVision becomes a subscription-plus-take-rate business." },
+        { "stage": "Phase 3 — Smart hardware (upgrade layer)", "value": null, "unit": "hardware-service accounts", "required_input": "Share of premium farms that outgrow software-only tracking; dock/service capacity", "status": "not measured", "note": "A hardware sale into a customer the platform already knows — not a cold sale to a stranger. The data moat is built before the hardware ships." }
+      ]
+    }
+  ],
+  "rendering_guidance": "Render the three stages with EMPTY value cells and the required-input labels filled. The honesty of the empty cells is the point — the shape communicates the strategy; the missing numbers communicate the discipline."
+}

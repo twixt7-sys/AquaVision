@@ -1,0 +1,66 @@
+/* Chart CSS — recreated for dark mode from site/assets/style.css.
+   The ported SVG chart components depend on these class names. */
+
+.chart { margin: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 18px; }
+.chart-bare { background: none; border: none; padding: 0; }
+.chart-prov { margin-bottom: 8px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.chart-title { font-family: var(--font-display); color: var(--heading); font-size: var(--fs-lg); margin: 0 0 2px; }
+.chart-sub { color: var(--text-2); font-size: var(--fs-sm); margin: 0 0 10px; }
+
+.chart-svg { width: 100%; height: auto; display: block; }
+.chart-svg .grid { stroke: var(--border); stroke-width: 1; fill: none; }
+.chart-svg .axis { stroke: var(--text-2); stroke-width: 1.2; }
+.chart-svg .panel-frame { stroke: var(--border); }
+.chart-svg text { font-family: var(--font-body); }
+.chart-svg .tick { fill: var(--text-2); font-size: 11px; font-variant-numeric: tabular-nums; }
+.chart-svg .axis-label { fill: var(--text-2); font-size: 12px; font-weight: 600; }
+.chart-svg .anno-text { font-size: 11px; font-weight: 600; }
+.chart-svg .panel-title { font-size: 11px; font-weight: 700; }
+
+.chart-legend { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 18px; padding: 0; margin: 10px 0 0; font-size: var(--fs-sm); color: var(--text-2); }
+.chart-legend-col { flex-direction: column; gap: 6px; }
+.chart-legend li { display: flex; align-items: center; margin: 0; }
+.chart-legend .swatch { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 7px; }
+
+.anno-list { list-style: none; padding: 0; margin: 10px 0 0; font-size: var(--fs-sm); }
+.anno { display: flex; gap: 8px; padding: 3px 0; align-items: baseline; }
+.anno-critical { color: var(--av-critical); }
+.anno-warning { color: var(--av-warning); }
+.anno-advisory { color: var(--av-advisory); }
+.anno-info { color: var(--text-2); }
+
+/* donut */
+.donut-row { display: flex; flex-wrap: wrap; gap: 24px; }
+.donut { display: flex; align-items: center; gap: 16px; flex: 1 1 300px; }
+.donut svg { width: 190px; height: 190px; flex-shrink: 0; }
+.donut h4 { margin: 0 0 8px; }
+
+/* funnel — honest-empty stages */
+.funnel { display: flex; flex-direction: column; gap: 14px; margin: 0; }
+.funnel-cols { display: flex; gap: 24px; flex-wrap: wrap; }
+.funnel-col { flex: 1 1 300px; }
+.funnel-col > h4 { font-size: var(--fs-sm); }
+.funnel-stage { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+.funnel-bar {
+  background: linear-gradient(90deg, var(--av-deep), var(--av-ocean));
+  color: var(--av-mist); border-radius: 8px; padding: 10px 16px;
+  font-family: var(--font-display); font-weight: 600; min-width: 42%;
+}
+.funnel-meta { padding-left: 14px; font-size: var(--fs-sm); display: flex; flex-direction: column; gap: 3px; }
+.funnel-empty { color: var(--av-unknown); border: 1px dashed var(--av-unknown); border-radius: 6px; padding: 2px 8px; display: inline-flex; gap: 5px; align-items: center; font-size: var(--fs-xs); font-weight: 600; width: fit-content; }
+
+/* chart data table */
+.chart-data { margin-top: 12px; }
+.chart-data summary { cursor: pointer; color: var(--link); font-size: var(--fs-sm); }
+.table-scroll { overflow-x: auto; margin: .6em 0; border: 1px solid var(--border); border-radius: 8px; }
+.chart-data table { border-collapse: collapse; width: 100%; font-size: var(--fs-sm); }
+.chart-data th, .chart-data td { text-align: left; padding: 7px 11px; border-bottom: 1px solid var(--border); }
+.chart-data th { background: var(--surface-2); color: var(--heading); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: .04em; }
+.chart-data td.num { text-align: right; }
+
+/* sparkline */
+.sparkline { width: 120px; height: 30px; display: block; }
+
+/* the honest blocking-inputs note (market sizing) */
+.blocking-inputs { margin-top: 14px; }
+.blocking-inputs table { font-size: var(--fs-sm); }

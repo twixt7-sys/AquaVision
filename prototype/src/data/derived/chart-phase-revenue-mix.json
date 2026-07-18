@@ -1,0 +1,22 @@
+{
+  "id": "chart-phase-revenue-mix",
+  "chart_type": "funnel",
+  "title": "Phase 2 — Where the Revenue Comes From",
+  "subtitle": "The four monetization lines that turn Phase 1's logged history into a business",
+  "description": "Premium is not one price — it is a subscription plus a take-rate plus paid services. This chart names the four revenue lines and, deliberately, leaves every figure empty: none has a measured price point, attach rate, or willingness-to-pay yet. It is rendered as stages rather than a pie precisely because a pie would require percentages that would have to be fabricated.",
+  "provenance": "modeled_projection",
+  "SYNTHETIC_WARNING": "No revenue figure here is measured. Each line's contribution is unknown until Phase 2 has real paying customers. Rendered empty on purpose.",
+  "series": [
+    {
+      "name": "Phase 2 revenue lines",
+      "provenance": "modeled_projection",
+      "data": [
+        { "stage": "Premium subscription", "value": null, "unit": "ARPU / mo", "required_input": "Measured willingness-to-pay and free-to-paid conversion — awaiting Phase 2", "status": "not measured", "note": "Predictive health alerts, analytics, and recommendations trained on the farmer's own logged history." },
+        { "stage": "Marketplace take-rate", "value": null, "unit": "% of GMV", "required_input": "Marketplace GMV and take-rate — no listings or orders exist yet", "status": "not measured", "note": "Feed, equipment, livestock, and buyer matching. Paid by design because a third party is also getting paid." },
+        { "stage": "Expert consultations", "value": null, "unit": "fee per booking", "required_input": "Consultation booking rate and fee — awaiting Phase 2", "status": "not measured", "note": "Paid access to vets and extension officers, routed from the disease-ID and assistant flows." },
+        { "stage": "Phase 3 hardware-as-a-service", "value": null, "unit": "per-dock recurring", "required_input": "Measured hardware-service price and unit economics — Phase 3 is TRL 3, nothing flown", "status": "not measured", "note": "The eventual deepest revenue line, sold as an upgrade. Shown here to place it on the same spine, not to claim it is near-term." }
+      ]
+    }
+  ],
+  "rendering_guidance": "Render every value cell EMPTY with the required-input filled. This is a modeled structure of revenue lines, not a forecast of their sizes."
+}
