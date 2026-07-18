@@ -10,9 +10,7 @@ import telemetrySchema from '@data/06_software/telemetry-schema.json';
 import twinState from '@data/12_datasets/sample-pond-twin-state.json';
 import telemetry from '@data/12_datasets/sample-telemetry.json';
 import kpis from '@data/12_datasets/kpi-definitions.json';
-import pitchOutline from '@data/13_pitch/pitch-deck-outline.json';
 import elevator from '@data/13_pitch/elevator-pitches.json';
-import faq from '@data/13_pitch/faq-objections.json';
 
 export {
   brand,
@@ -24,9 +22,7 @@ export {
   twinState,
   telemetry,
   kpis,
-  pitchOutline,
   elevator,
-  faq,
 };
 
 // Convenience accessors used across the app.

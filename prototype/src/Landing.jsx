@@ -32,13 +32,9 @@ export default function Landing() {
         </p>
 
         <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <button className="btn" style={{ fontSize: 'var(--fs-lg)', padding: '14px 28px' }} onClick={() => navigate('/pitch/1')}>
-            ▶ Pitch mode
-            <span style={{ fontWeight: 400, fontSize: 'var(--fs-xs)', opacity: 0.85 }}>16-slide guided deck</span>
-          </button>
-          <button className="btn btn-ghost" style={{ fontSize: 'var(--fs-lg)', padding: '14px 28px' }} onClick={() => navigate('/demo/free/home')}>
-            ▤ Demo mode
-            <span style={{ fontWeight: 400, fontSize: 'var(--fs-xs)', opacity: 0.85 }}>touch the product</span>
+          <button className="btn" style={{ fontSize: 'var(--fs-lg)', padding: '14px 28px' }} onClick={() => navigate('/demo/free/home')}>
+            ▤ Open the product
+            <span style={{ fontWeight: 400, fontSize: 'var(--fs-xs)', opacity: 0.85 }}>Free · Premium · Enterprise</span>
           </button>
         </div>
 

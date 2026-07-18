@@ -1,0 +1,365 @@
+{
+  "$schema": "internal://aquavision/restyle-plan",
+  "id": "aquavision-theria-restyle-plan",
+  "title": "AquaVision App Restyle — adopt Theria Finance's techniques with a distinct aqua identity",
+  "version": "1.0.0",
+  "created": "2026-07-19",
+  "summary": "A structured plan to rebuild the AquaVision product demo (prototype/src/app + prototype/src/enterprise) using the same stack, design-token architecture, component library, chart plumbing, layout patterns, and code techniques observed in theria-FinanceApp/theria-finance — but re-skinned to AquaVision's own aqua/aquaculture identity and, critically, preserving AquaVision's non-negotiable honesty rules.",
+
+  "source_reference": {
+    "repo": "theria-FinanceApp/theria-finance",
+    "what_it_is": "A mobile-first personal-finance PWA. Vite 6 + React 18 + TypeScript, Tailwind CSS v4, shadcn/ui (Radix primitives), lucide-react icons, recharts, motion (framer-motion), feature-sliced architecture, React-Context state, self-hosted Inter, offline PWA.",
+    "key_files_studied": [
+      "theria-finance/package.json",
+      "src/shared/styles/theme.css",
+      "src/shared/styles/index.css",
+      "src/shared/styles/fonts.css",
+      "src/shared/components/ui/utils.ts",
+      "src/shared/components/ui/button.tsx",
+      "src/shared/components/ui/card.tsx",
+      "src/shared/components/ui/chart.tsx",
+      "src/app/App.tsx",
+      "src/shared/components/IconComponent.tsx",
+      "vite.config.ts"
+    ]
+  },
+
+  "identity_shift": {
+    "principle": "Borrow every TECHNIQUE and STRUCTURE; change the SENSE. Theria reads as a warm emerald finance app. AquaVision must read as a calm, instrument-grade aquaculture platform — 'data-dense but calm, an instrument, not a landing page' (brand-identity.json).",
+    "from": "Emerald/green finance palette (--primary #10B981), hexagon signature element, income/expense semantics, warm rounded 0.75rem radius, light-default theme.",
+    "to": "Aqua/ocean palette (from assets/color_scheme.png), droplet/A-triangle signature element (the logo mark), measured/interpolated/sample + status semantics, tighter 0.625rem radius, DARK-default theme (operators check before dawn).",
+    "hard_constraint": "AquaVision's honesty system overrides any purely-cosmetic theria pattern. See preservation_constraints."
+  },
+
+  "target_stack": {
+    "keep": ["Vite", "React 18", "hash-free or hash router (decide in phase 0)"],
+    "adopt_from_theria": {
+      "styling": "Tailwind CSS v4 via @tailwindcss/vite, shadcn/ui token system with @theme inline mapping",
+      "components": "shadcn/ui (Radix primitives + class-variance-authority + clsx + tailwind-merge, the cn() helper)",
+      "icons": "lucide-react, wrapped in a dynamic IconComponent",
+      "charts": "recharts, wrapped in a ChartContainer + ChartConfig provider that themes series from CSS vars",
+      "animation": "motion (framer-motion) for AnimatePresence screen transitions and micro-interactions",
+      "toasts": "sonner",
+      "fonts": "@fontsource-variable/inter (self-hosted, offline)",
+      "pwa": "vite-plugin-pwa (offline-first precache incl. fonts) — optional, phase 8"
+    },
+    "language_decision": {
+      "recommendation": "Migrate to TypeScript to match theria and get the shadcn component types for free.",
+      "alternative": "Stay JSX and vendor shadcn components as .jsx (drop the type annotations). Faster but loses type safety. Recommend TS."
+    },
+    "dependencies_to_add": [
+      "tailwindcss@^4", "@tailwindcss/vite@^4",
+      "class-variance-authority", "clsx", "tailwind-merge", "tw-animate-css",
+      "lucide-react",
+      "recharts@^2.15",
+      "motion",
+      "sonner",
+      "@radix-ui/react-slot", "@radix-ui/react-dialog", "@radix-ui/react-tabs",
+      "@radix-ui/react-tooltip", "@radix-ui/react-select", "@radix-ui/react-switch",
+      "@radix-ui/react-scroll-area", "@radix-ui/react-separator", "@radix-ui/react-progress",
+      "@radix-ui/react-dropdown-menu", "@radix-ui/react-popover",
+      "vite-plugin-pwa (phase 8)"
+    ],
+    "already_present": ["react", "react-dom", "@fontsource-variable/inter", "vite"],
+    "drop_or_repurpose": ["@fontsource/inter-tight and jetbrains-mono may stay for display/mono; theria uses Inter for everything — keep Inter as the single family, keep JetBrains Mono only for telemetry numbers"]
+  },
+
+  "design_tokens": {
+    "technique": "Copy theria/theme.css verbatim in STRUCTURE: :root fallback tokens, .dark overrides, and an @theme inline block that maps every --token to a --color-* Tailwind utility. Then re-value the palette for AquaVision. Keep theria's responsive rem grid and radius-derivation technique.",
+    "responsive_rem_grid": "--font-size: clamp(13px, calc(100vw * 16 / 402), 16px) — scale rem to a 402px phone frame (AquaVision's PhoneFrame is ~390–402px). Same technique as theria's 386px frame.",
+    "radius": "--radius: 0.625rem (tighter than theria's 0.75rem — reads as an instrument). Keep the sm/md/lg/xl derivations.",
+    "default_theme": "dark (AquaVision default). Provide a light theme too, but ship dark.",
+    "aqua_palette": {
+      "note": "Blues sampled from assets/color_scheme.png, mapped onto the shadcn token roles theria uses.",
+      "dark_default": {
+        "--background": "#052A40",
+        "--foreground": "#EFF2F5",
+        "--card": "#083750",
+        "--card-foreground": "#EFF2F5",
+        "--popover": "#083750",
+        "--primary": "#0B608F",
+        "--primary-foreground": "#FFFFFF",
+        "--secondary": "#1C507A",
+        "--secondary-foreground": "#EFF2F5",
+        "--muted": "#123B57",
+        "--muted-foreground": "#7C93A6",
+        "--accent": "#44A7D2",
+        "--accent-foreground": "#052A40",
+        "--destructive": "#C63B2F",
+        "--border": "rgba(68,167,210,0.18)",
+        "--input": "rgba(68,167,210,0.10)",
+        "--ring": "#44A7D2",
+        "--chart-1": "#44A7D2",
+        "--chart-2": "#0B608F",
+        "--chart-3": "#3D5F83",
+        "--chart-4": "#EFF2F5",
+        "--chart-5": "#7C93A6"
+      },
+      "light": {
+        "--background": "#F0F7FB",
+        "--foreground": "#043B66",
+        "--card": "#FFFFFF",
+        "--primary": "#0B608F",
+        "--accent": "#44A7D2",
+        "--muted": "#DCEBF4",
+        "--muted-foreground": "#5A7284",
+        "--border": "rgba(11,96,143,0.15)",
+        "--ring": "#0B608F"
+      }
+    },
+    "domain_semantic_tokens": {
+      "note": "Theria has --income/--expense. AquaVision replaces these with its own domain + honesty tokens, kept VERBATIM from brand-identity.json so the honesty system survives the restyle.",
+      "status": {
+        "--status-ok": "#2E9E6B",
+        "--status-advisory": "#E0A82E",
+        "--status-warning": "#E2721F",
+        "--status-critical": "#C63B2F",
+        "--status-nodata": "#8A97A0"
+      },
+      "provenance": {
+        "--prov-sourced": "#2E9E6B",
+        "--prov-calculated": "#0B608F",
+        "--prov-projection": "#E0A82E",
+        "--prov-target": "#8A6BC4",
+        "--prov-sample": "#C63B2F",
+        "--prov-assumption": "#8A97A0"
+      },
+      "twin": {
+        "--measured": "#44A7D2 (sharp, solid)",
+        "--interpolated": "fades with confidence — opacity-driven, not a token",
+        "--sample": "#C63B2F (SAMPLE DATA badge)"
+      }
+    },
+    "splash_shell": "Copy theria's decoupled always-dark splash tokens; re-tint the radial glow to aqua (rgba(68,167,210,0.18)) instead of emerald."
+  },
+
+  "typography": {
+    "technique": "Copy theria's approach exactly: self-host Inter Variable via @fontsource-variable/inter in a fonts.css; set * { font-family } globally; put h1–h4/label/button/input defaults in @layer base so Tailwind utilities override them.",
+    "family": "'Inter Variable' as the single UI family (matches theria). Keep 'JetBrains Mono Variable' ONLY for telemetry/coordinate numbers (tabular-nums), which is an AquaVision requirement not present in theria.",
+    "scale": "Use Tailwind's --text-* scale (theria drives h1=--text-2xl, h2=--text-xl, h3=--text-lg, h4=--text-base). Weight medium (500) for headings via --font-weight-medium.",
+    "numerals": "font-variant-numeric: tabular-nums lining-nums on every telemetry/financial number (AquaVision rule; theria does not enforce this)."
+  },
+
+  "iconography": {
+    "technique_from_theria": "lucide-react everywhere, plus a dynamic <IconComponent name=... /> that resolves `Icons[name]` at runtime with a Circle fallback. Buttons auto-size svgs to size-4 via the cva base string.",
+    "apply": "Port IconComponent verbatim. Replace AquaVision's current emoji/text glyphs (✓ ⚠ ⌀ ▲ ◇ 🔒 🐟 in StatusBadge/ProvenanceBadge/EmptyState/etc.) with lucide icons for a coherent icon language.",
+    "icon_mapping": {
+      "status.nominal": "CheckCircle2",
+      "status.advisory": "AlertCircle",
+      "status.warning": "TriangleAlert",
+      "status.critical": "OctagonAlert",
+      "status.no_data": "CircleDashed (hollow — keeps 'absence, not safe')",
+      "provenance.sample": "FlaskConical or Beaker",
+      "provenance.sourced": "BadgeCheck",
+      "provenance.projection": "TrendingUp",
+      "provenance.target": "Crosshair",
+      "nav.free": "Fish",
+      "nav.premium": "Sparkles",
+      "nav.enterprise": "Radar",
+      "pondtwin": "Waves",
+      "drone": "Drone or Send",
+      "disease": "Stethoscope",
+      "feeding": "UtensilsCrossed",
+      "water_log": "Droplets"
+    },
+    "signature_element": {
+      "theria": "A CSS hexagon (index.css .hexagon) with gradient, inner highlight, box-shadow glow, hover scale, and an active pulse keyframe — used for nav/brand.",
+      "aquavision_reinterpretation": "A DROPLET or A-triangle (the AquaVision logo mark: triangle + fish-eye + wave). Recreate the SAME technique — clip-path shape, gradient fill (deep→ocean), inner white highlight, glow box-shadow, hover scale, active pulse keyframe re-tinted to aqua — as a .droplet / .av-mark class. Use it for the bottom-nav active indicator and the brand logo.",
+      "keyframes": "Re-tint theria's hexagon-pulse and add a subtle 'ripple' pulse (expanding ring) to echo water."
+    }
+  },
+
+  "component_library": {
+    "technique": "Adopt the shadcn/ui pattern: each primitive is a small file in shared/components/ui/, built on a Radix primitive, styled with a cva() variant map + the cn() helper, exposing data-slot attributes. Copy theria's utils.ts (cn) verbatim.",
+    "port_these_shadcn_components": [
+      "button", "card", "badge", "tabs", "dialog", "sheet", "drawer", "select",
+      "switch", "tooltip", "scroll-area", "separator", "progress", "skeleton",
+      "dropdown-menu", "popover", "sonner (toaster)", "chart"
+    ],
+    "rebuild_aquavision_primitives_on_top": {
+      "note": "AquaVision's honesty components must be rebuilt as Tailwind/shadcn-styled versions, NOT deleted. They are the product's identity.",
+      "StatusBadge": "shadcn Badge variant set (cva) with 5 states; icon+label ALWAYS; no_data uses a dashed hollow outline. Colors from --status-* tokens.",
+      "ProvenanceBadge": "Badge variant set for 6 provenance types; sample variant is loud.",
+      "SampleDataBanner": "shadcn Alert (destructive tone) pinned to synthetic views.",
+      "AlertCard": "shadcn Card with a left severity border; plain-sentence body; never a score.",
+      "StatTile": "shadcn Card + tabular-nums value + StatusBadge + StalenessTag.",
+      "StalenessTag": "small muted mono text with decay coloring.",
+      "PhoneFrame": "keep, but restyle bezel with tokens; theria is natively mobile so consider dropping the frame for a true full-bleed mobile shell on small viewports (see layout)."
+    }
+  },
+
+  "charts": {
+    "strategy": "HYBRID. Adopt theria's recharts + ChartContainer/ChartConfig plumbing for the conventional charts, but KEEP AquaVision's custom SVG for the honesty-critical visuals recharts cannot express safely.",
+    "adopt_recharts_via_ChartContainer": {
+      "technique": "Port theria's chart.tsx (ChartContainer, ChartStyle, ChartTooltip, ChartTooltipContent, ChartLegend). Series colors come from a ChartConfig object that emits per-series CSS vars (--color-<key>) scoped by [data-chart=id], themed light/dark.",
+      "use_for": [
+        "chart-global-production (grouped bar -> recharts BarChart)",
+        "chart-species-production-mix (donut -> recharts PieChart)",
+        "chart-do-diel-cycle (line -> recharts LineChart with ReferenceLine thresholds)",
+        "chart-tech-readiness (line -> recharts LineChart)",
+        "history DO time-series"
+      ],
+      "config_mapping": "Build a helper that converts an AquaVision chart_payload into a recharts data array + ChartConfig, mapping payload.series -> chart-1..5 tokens and annotations.hline -> <ReferenceLine>."
+    },
+    "keep_custom_svg_for": {
+      "reason": "These encode honesty rules recharts does not do out of the box.",
+      "list": [
+        "chart-do-depth-profile & enterprise Profile view — depth axis DOWNWARD, gaps-as-gaps, thermocline band",
+        "chart-market-sizing / three-phase-funnel / phase-revenue-mix — honest-empty funnels with required-input rows",
+        "chart-financial-projection — qualitative spend envelopes + KILL GATE styling",
+        "chart-manual-vs-omnidrone — radar (recharts RadarChart is acceptable; port if desired)",
+        "PondTwin TopDownMap / SliceView — 2.5D SVG with confidence-driven opacity + feTurbulence uncertainty; NOT a recharts use case"
+      ],
+      "restyle_action": "Keep chartSvg.js logic, but swap hard-coded var(--av-*) chart series for the new --chart-1..5 tokens and the aqua status tokens so custom and recharts charts share one palette."
+    },
+    "preserve": "Gaps rendered as gaps, depth axes downward, thresholds dashed+labelled, provenance badge on every chart, SAMPLE DATA on synthetic charts."
+  },
+
+  "layout": {
+    "technique_from_theria": "Mobile-first app shell driven by a currentScreen state machine, wrapped in motion AnimatePresence for screen transitions; a bottom nav for primary destinations; a FloatingActionButton for the main create action; a slide-in Sidebar for secondary destinations; safe-area insets (pt-safe/pb-safe/pb-bottom-nav); an AppPageBackground layer.",
+    "apply_to_aquavision": {
+      "shell": "Replace the current DemoMode left-rail + PhoneFrame with a theria-style shell: on phone widths, render full-bleed with a bottom nav; on desktop, center in a device frame OR show the sidebar. Reuse AnimatePresence for screen changes.",
+      "primary_nav": "Bottom nav reinterpreting the three tiers and their key screens. Active item uses the droplet signature indicator (the reinterpreted hexagon).",
+      "tier_switch": "Keep Free/Premium/Enterprise as a segmented control in the header (already exists as TierSwitcher) — restyle with shadcn Tabs.",
+      "fab": "A FloatingActionButton for the free tier's primary action ('Log a reading'); reuse theria's FAB open/close + quick-actions carousel technique.",
+      "enterprise": "Keep the full-width dashboard sidebar (theria's Sidebar.tsx pattern) for the Phase 3 views.",
+      "safe_area": "Adopt the pt-safe / pb-bottom-nav utilities so it feels installed on a phone."
+    },
+    "screen_pattern": "Each screen is header + scrollable content of shadcn Cards, matching theria's screen composition (e.g. HomeScreen.tsx)."
+  },
+
+  "state_and_architecture": {
+    "feature_sliced_migration": {
+      "technique": "Theria organizes as src/features/<feature>/{components,hooks,screens,lib,types}, src/core/{state,lib,config,routing,utils}, src/app/{screens,components}, src/shared/{components,components/ui,hooks,styles,types}.",
+      "aquavision_mapping": {
+        "src/app/screens (free/premium)": "-> src/features/<feature>/screens  (assistant, setup, water-log, feeding, disease-id, forum, learning, records, analytics, predictive-health, recommendations, marketplace, consultation)",
+        "src/enterprise/*": "-> src/features/enterprise/screens + src/features/pondtwin/",
+        "src/shared/components/*": "-> src/shared/components/ui (shadcn) + src/shared/components (AquaVision primitives)",
+        "src/data/*": "-> src/core/data (keep @data alias to ../data)",
+        "src/app/DemoMode + TierContext": "-> src/app/App.tsx (shell) + src/core/state/TierContext.tsx"
+      },
+      "note": "This is a reorganization; it can be deferred (phase 7) so styling lands first."
+    },
+    "state": "Adopt theria's React-Context provider stack pattern (ThemeProvider, plus a light AquaVision set: ThemeContext for dark/light, TierContext already exists). Wrap App in providers as theria's App.tsx does.",
+    "code_conventions": [
+      "cn() for class merging everywhere",
+      "cva() variant maps for any component with >1 visual variant",
+      "data-slot attributes on primitives",
+      "one component per file, helpers extracted (Guidelines.md)",
+      "Tailwind utilities over inline styles (the current prototype uses inline styles heavily — convert to Tailwind classes)"
+    ]
+  },
+
+  "animation": {
+    "technique": "motion (framer-motion). AnimatePresence around the screen switcher; layout/scale micro-interactions on cards and the FAB; the droplet active-pulse via CSS keyframes.",
+    "apply": "Screen transitions on tier/screen change; subtle enter animation on StatTiles and AlertCards; ripple pulse on the active bottom-nav droplet."
+  },
+
+  "pwa_offline": {
+    "technique": "vite-plugin-pwa with autoUpdate, precache **/*.{js,css,html,svg,png,woff2}, a web manifest (name, theme_color aqua #0B608F, background #052A40, maskable icons).",
+    "apply": "Optional phase 8. AquaVision already bundles data + fonts offline; adding the PWA manifest makes it installable on a phone at the venue.",
+    "icons": "Reuse theria's scripts/generate-icons.mjs (sharp) technique to emit pwa-192/512 + maskable from the AquaVision logo mark."
+  },
+
+  "preservation_constraints": {
+    "must_survive_the_restyle": [
+      "SAMPLE DATA — NOT REAL badge on every synthetic-fed view",
+      "Provenance badges on all data figures (6 types)",
+      "Status never encoded by color alone — always icon + text label",
+      "No Data (grey/hollow) must never read as safe/green",
+      "Staleness/age always shown next to a status",
+      "Depth axes increase downward; never inverted",
+      "Gaps rendered as gaps; never interpolate across missing data",
+      "Alerts as plain sentences, never bare risk scores",
+      "PondTwin interpolated volume renders visibly less certain than measured points; simulated layer stays empty",
+      "Banned phrases never appear (elevator-pitches.json#/the_words_never_to_use): 'prevents fish kills', 'detects toxins', 'diagnoses', 'predicts', 'revolutionary', invented user/conversion counts",
+      "TRL 3 / zero-users honesty framing on the landing"
+    ],
+    "rule": "Where a theria cosmetic choice conflicts with any item above, the AquaVision honesty rule wins."
+  },
+
+  "phased_implementation": [
+    { "phase": 0, "name": "Stack setup", "steps": [
+      "Decide TS vs JSX (recommend TS).",
+      "Add tailwindcss v4 + @tailwindcss/vite to vite.config; add react plugin already present.",
+      "Create src/shared/styles/{fonts.css,tailwind.css,theme.css,index.css} mirroring theria; import in main.",
+      "Add cn() util (shared/components/ui/utils.ts).",
+      "Verify Tailwind classes render and dark theme is default."
+    ]},
+    { "phase": 1, "name": "Tokens & identity", "steps": [
+      "Author theme.css with the aqua palette (dark default + light), radius 0.625rem, responsive rem clamp, @theme inline mapping.",
+      "Add domain semantic tokens (status/provenance/twin) verbatim from brand-identity.json.",
+      "Recreate the droplet signature element (clip-path + gradient + glow + pulse) re-tinted aqua."
+    ]},
+    { "phase": 2, "name": "shadcn primitives", "steps": [
+      "Port button, card, badge, tabs, dialog, sheet, drawer, select, switch, tooltip, scroll-area, separator, progress, skeleton, dropdown-menu, popover, sonner, chart from theria; re-theme via tokens.",
+      "Port IconComponent + adopt lucide-react."
+    ]},
+    { "phase": 3, "name": "AquaVision primitives on shadcn", "steps": [
+      "Rebuild StatusBadge, ProvenanceBadge, SampleDataBanner, AlertCard, StatTile, StalenessTag, EmptyState, UpgradeTeaser as Tailwind/cva components using the new tokens + lucide icons.",
+      "Verify honesty rules preserved (icon+label, grey≠green, sample badge)."
+    ]},
+    { "phase": 4, "name": "Charts", "steps": [
+      "Port chart.tsx (ChartContainer/ChartConfig).",
+      "Write payload->recharts adapter; convert diel/global-production/species-mix/tech-readiness/history to recharts.",
+      "Re-token the retained custom SVG charts (depth-profile, funnels, waterfall, PondTwin) to --chart-*/status tokens."
+    ]},
+    { "phase": 5, "name": "App shell & layout", "steps": [
+      "Build a theria-style App shell: currentScreen state + AnimatePresence + bottom nav + FAB + header TierSwitcher (Tabs).",
+      "Reinterpret the droplet as the active bottom-nav indicator.",
+      "Adopt safe-area utilities; full-bleed on phone widths, device frame/sidebar on desktop."
+    ]},
+    { "phase": 6, "name": "Restyle every screen", "steps": [
+      "Convert Free, Premium, and Enterprise screens from inline styles to shadcn Cards + Tailwind utilities, keeping content and honesty intact.",
+      "Restyle PondTwin controls (TimeScrub, LayerToggles) with slider/switch primitives."
+    ]},
+    { "phase": 7, "name": "Feature-sliced reorg (optional)", "steps": [
+      "Move screens into src/features/<feature>/screens, shared ui into src/shared/components/ui, data into src/core/data.",
+      "Update imports; add @ alias to src (theria uses @ -> ./src)."
+    ]},
+    { "phase": 8, "name": "PWA + polish (optional)", "steps": [
+      "Add vite-plugin-pwa manifest + icons (generate from logo mark).",
+      "Add motion micro-interactions and sonner toasts.",
+      "Contrast pass in light + dark; verify offline install."
+    ]}
+  ],
+
+  "file_plan": {
+    "new_or_replaced": [
+      "vite.config.(ts|js) — add @tailwindcss/vite, @ alias, (phase 8) VitePWA",
+      "src/shared/styles/fonts.css — @import @fontsource-variable/inter",
+      "src/shared/styles/tailwind.css — @import 'tailwindcss'; @import 'tw-animate-css'",
+      "src/shared/styles/theme.css — AquaVision tokens + @theme inline (the heart of the restyle)",
+      "src/shared/styles/index.css — imports + global font-family + scrollbars + safe-area utils + droplet keyframes",
+      "src/shared/components/ui/*.tsx — ported shadcn primitives",
+      "src/shared/components/ui/utils.ts — cn()",
+      "src/shared/components/IconComponent.tsx — lucide dynamic resolver",
+      "src/shared/components/ui/chart.tsx — recharts ChartContainer",
+      "src/core/charts/payloadToRecharts.ts — adapter",
+      "src/app/App.(tsx|jsx) — theria-style shell (replaces current DemoMode routing)",
+      "src/shared/components/BottomNav.tsx, FloatingActionButton.tsx, Sidebar.tsx, AppPageBackground.tsx"
+    ],
+    "restyled_in_place": [
+      "All prototype/src/app/screens/* and prototype/src/enterprise/* (inline styles -> Tailwind/shadcn)",
+      "prototype/src/shared/charts/chartSvg.js (re-token only)",
+      "prototype/src/enterprise/pondtwin/* (re-token + shadcn controls)"
+    ],
+    "removed": ["pitch mode — already removed in this pass"],
+    "unchanged": ["prototype/src/data/* (canonical @data imports and fixtures keep working)"]
+  },
+
+  "verification": {
+    "build": "npm run build must pass; bundle self-contained/offline.",
+    "visual": "Headless-Chrome render of key routes (home, water log, disease id, analytics, enterprise overview, pondtwin) — confirm content + no console errors, as done for the current prototype.",
+    "identity": "Side-by-side: AquaVision must read as aqua/instrument, NOT emerald/finance, while structurally mirroring theria (token system, cards, bottom nav, recharts, lucide, droplet signature).",
+    "honesty_regression": "Automated grep for banned phrases in authored copy; manual check that SAMPLE DATA badge, grey≠green No-Data, depth-down axis, and gaps-as-gaps all survive."
+  },
+
+  "open_decisions_for_the_user": [
+    "TypeScript migration (recommended) vs stay JSX.",
+    "Keep the desktop PhoneFrame, or go full theria-style mobile-first full-bleed with a device frame only on wide screens.",
+    "Do the feature-sliced reorg (phase 7) now or defer.",
+    "Ship the PWA manifest (phase 8) for an installable venue demo.",
+    "Reconcile the two AquaVision palette sources (brand-identity.json tokens vs color_scheme.png) before locking theme.css — this plan uses the color_scheme.png hexes already chosen for the current prototype."
+  ]
+}
