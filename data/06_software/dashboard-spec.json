@@ -1,0 +1,119 @@
+{
+  "id": "dashboard-spec",
+  "title": "Dashboard Specification",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "design_target",
+
+  "the_governing_insight": {
+    "statement": "The dashboard must be an ANSWER, not an analytics tool.",
+    "reasoning": "The user is a farm manager at 05:30 who has forty other things to do today. She does not want to explore a dataset. She wants to know whether her fish are in danger and what to do about it. Every analytics feature we add is a question we have failed to answer for her.",
+    "the_test": "Can she get the answer in under five seconds, on a phone, in sunlight, half awake? If not, we have built a tool for ourselves and called it a product.",
+    "the_second_screen": "Everything else — the profiles, the maps, the history — lives one level down, for the days when she wants to understand rather than decide. That layer is genuinely valuable and it must not be the front door."
+  },
+
+  "the_top_level_view": {
+    "content": "One line per site: is anything wrong, and how sure are we?",
+    "states": [
+      { "state": "Nominal", "meaning": "Everything measured is within band, and we measured recently.", "colour": "--av-ok" },
+      { "state": "Advisory", "meaning": "Something is trending toward a threshold. Watch it.", "colour": "--av-advisory" },
+      { "state": "Warning", "meaning": "A threshold is breached. Act.", "colour": "--av-warning" },
+      { "state": "Critical", "meaning": "Acute risk to stock. Act now.", "colour": "--av-critical" },
+      { "state": "No Data", "meaning": "We did not measure, the sensor failed, or the data is stale.", "colour": "--av-unknown", "the_critical_rule": "NO DATA MUST NEVER READ AS SAFE. This is the single most important rule in the UI. A grey tile that a tired person glances at and reads as 'not red, therefore fine' is how a monitoring system kills someone's harvest. Grey must feel like an absence, not a reassurance — and it must be visually distinct from green in a way that survives sunlight, colour blindness, and a two-second glance." }
+    ],
+    "the_staleness_rule": "Every state carries its age. 'Nominal, measured 14 minutes ago' and 'Nominal, measured 9 hours ago' are radically different statements, and the second one after a storm is worthless. Data has a half-life; the UI must show it decaying."
+  },
+
+  "accessibility_as_safety": {
+    "statement": "This is not a compliance checkbox. It is a safety requirement.",
+    "rules": [
+      "Status is NEVER encoded by colour alone. Every status carries an icon and a text label. Roughly 1 in 12 men has a red/green colour vision deficiency, and that demographic is heavily represented among fish farmers.",
+      "Dark mode is mandatory, not a preference. Operators check this before dawn, and a white screen at 04:30 is genuinely hostile — it destroys night vision on a person who may be about to walk onto a dike in the dark.",
+      "Readable in direct tropical sunlight on a phone. Test it outside, not in the office.",
+      "Tap targets sized for wet hands.",
+      "The critical path must work on a slow connection. A manager on a lakeshore with one bar must be able to see whether her fish are dying."
+    ]
+  },
+
+  "alert_design": {
+    "the_principle": "An alert that cannot explain itself will be ignored the third time, and the third time may be the real one.",
+    "every_alert_carries": [
+      "What was measured, where, and when.",
+      "What threshold it crossed, and where that threshold came from — cite the source.",
+      "The evidence: the profile chart, or the image crop.",
+      "What we do NOT know. If the ammonia channel was QC-failed, say so.",
+      "A concrete suggested action, or an honest 'we do not have a recommendation'."
+    ],
+    "the_language_rule": {
+      "bad": "Risk score: 78/100",
+      "good": "Bottom 3 m at cages 3-5 is anoxic (1.1 mg/L at 6 m, measured 04:52). Heavy rain forecast tonight. If the column mixes, that water reaches your fish.",
+      "why": "The score is unvalidated and it hides its reasoning. The sentence is measured fact plus a stated mechanism, and it lets an experienced operator apply twenty years of judgement to it. Given their expertise, that is not a compromise — it is a better product."
+    },
+    "alert_fatigue": "Track the acknowledge-to-action rate as a first-class product metric. If people stop acting on alerts, the product has failed no matter how accurate the sensors are. See data-pipeline.json#/the_alert_fatigue_problem."
+  },
+
+  "views": [
+    {
+      "view": "Site overview",
+      "audience": "Everyone",
+      "content": "The five-second answer. Status per unit, staleness, active alerts, next sortie."
+    },
+    {
+      "view": "Profile view",
+      "audience": "Manager, technician",
+      "content": "The vertical profile chart. Depth on the Y axis, DOWNWARD.",
+      "the_axis_rule": "Depth increases downward. Always. Never invert it to make the chart look like a conventional line graph. The whole point is to make the water column legible, and a depth axis that runs upward breaks the one intuition the user has.",
+      "features": ["Overlay yesterday's profile", "Overlay the dawn and afternoon profiles to show diel amplitude", "Threshold lines drawn with their citations", "QC flags visible per point — a suspect reading must look suspect"]
+    },
+    {
+      "view": "Twin",
+      "audience": "Manager, owner",
+      "content": "The 3D water body. See digital-twin.json.",
+      "the_hard_requirement": "Interpolated volume must look less certain than measured points. A smooth confident gradient over unmeasured water is the most persuasive lie this product could tell, and it is the version that demos best."
+    },
+    {
+      "view": "Map",
+      "audience": "Manager",
+      "content": "The calibrated concentration field over the site.",
+      "requirement": "The uncertainty field must be viewable, and the calibration quality (n points, R²) must be visible on the map itself — not buried in metadata. A map fitted on 3 points with an R² of 0.41 should look different from one fitted on 8 points with an R² of 0.92."
+    },
+    {
+      "view": "History",
+      "audience": "Manager, owner, auditor",
+      "content": "Time series with events overlaid: sorties, alerts, aeration runs, dispensing, weather, mortality.",
+      "why_it_matters": "This is where the farmer's intuition and the data meet. A manager who sees the profile shape from the week before her last kill, and recognises it, has learned something no alert could teach her. It is also the view that makes the case for the subscription — the value compounds with duration."
+    },
+    {
+      "view": "Reports",
+      "audience": "Manager, auditor",
+      "content": "Date-ranged environmental export with QC flags and provenance intact.",
+      "the_discipline": "Include the QC flags. An auditor should see which readings we do not trust. Hiding them makes the report look better and be worth less — and an auditor who later discovers we filtered silently will disbelieve everything."
+    },
+    {
+      "view": "Fleet health",
+      "audience": "Technician, AquaVision ops",
+      "content": "Aircraft, dock, sonde status. Calibration due dates. Sonde site assignment.",
+      "note": "Sonde site assignment appears here because it is a biosecurity control. A sonde at the wrong site is an incident, not a logistics detail."
+    }
+  ],
+
+  "what_the_dashboard_will_not_show": [
+    { "item": "A technician performance metric", "why": "The moment we surface 'response time by staff member', the technician becomes the adversary of the system. They charge the batteries and clean the probe. If they perceive it as surveillance of them, it will be broken every time it matters and we will never find out why. This is a product decision derived directly from the technician persona and it must survive the owner asking for it." },
+    { "item": "An unvalidated fish kill risk score", "why": "A false negative reads as 'you are safe'. Until validated, show the mechanism and let the farmer conclude. See ai-ml-models.json#/models/kill-risk-forecast." },
+    { "item": "A toxicity indicator", "why": "We measure pigments, not toxins. People eat the fish." },
+    { "item": "A confident biomass number", "why": "We do not measure biomass. Displaying the farmer's own estimate back to them in an authoritative font launders a guess into a fact." },
+    { "item": "Interpolation across a sensor outage", "why": "A smooth line through missing data is a lie the eye believes. Render gaps as gaps." }
+  ],
+
+  "the_webpage_consuming_this_repository": {
+    "note": "This repository is designed to be read by a custom HTML page. That page is a different artefact from the operational dashboard above, and conflating them would produce something that serves neither.",
+    "guidance": [
+      "Fetch manifest.json first; lazy-load sections from index.files[] by id.",
+      "Render the provenance badge on EVERY quantitative claim. The badge palette is in brand-identity.json#/palette/provenance_badges. This is a load-bearing safety feature of the repository, not decoration — do not strip it for visual cleanliness.",
+      "The `illustrative_synthetic` badge must be impossible to miss. That data describes no real pond.",
+      "Chart payloads under data/12_datasets/charts/ conform to schema-registry.json#/definitions/chart_payload and can be rendered generically.",
+      "Where a record has an `honest_note`, `caveat`, or `the_hard_truth` field, that is usually the intellectually important part. Do not collapse it behind a 'read more'.",
+      "Cross-link glossary terms wherever they appear in prose."
+    ]
+  }
+}

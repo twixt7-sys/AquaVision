@@ -1,0 +1,51 @@
+{
+  "id": "kpi-definitions",
+  "title": "KPI Definitions",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "description": "Every KPI the system and the business track, with a PRECISE operational definition. Conforms to schema-registry.json#/definitions/kpi. The definition is the point — if two people can compute different numbers from it, it is not finished.",
+
+  "the_discipline": "Each KPI has a `status`: measured (from real data), modeled (from a projection), target_only (a goal with no baseline), or awaiting_data (defined but empty). At TRL 3, almost everything is target_only or awaiting_data — and saying so is the honest thing. A dashboard of confident KPIs with no data behind them is theatre.",
+
+  "operational_kpis": [
+    { "id": "kpi-survival-rate", "label": "Survival Rate", "definition": "Proportion of stocked individuals harvested alive, per unit per cycle.", "formula": "harvested_count / stocked_count", "unit": "%", "direction": "higher_is_better", "status": "awaiting_data", "note": "The headline outcome a farmer actually cares about. Our value claim ultimately reduces to moving this number. Sourced from operator harvest records, not measured by us." },
+    { "id": "kpi-fcr", "label": "Feed Conversion Ratio", "definition": "Mass of feed supplied divided by biomass gain, per unit per cycle.", "formula": "feed_supplied_kg / biomass_gain_kg", "unit": "ratio", "direction": "lower_is_better", "acceptable_band": { "min": 1.0, "max": 2.5 }, "status": "awaiting_data", "citation_ids": ["innovasea-fcr-guide"] },
+    { "id": "kpi-do-minimum", "label": "Diel DO Minimum", "definition": "The lowest dissolved oxygen recorded at a unit in a 24h period, at the shallowest cage-relevant depth.", "unit": "mg/L", "direction": "higher_is_better", "acceptable_band": { "min": 3.0, "max": null }, "status": "awaiting_data", "note": "The number nobody currently has, because it occurs pre-dawn. THE flagship measurement." },
+    { "id": "kpi-do-amplitude", "label": "Diel DO Amplitude", "definition": "Difference between the daily DO maximum and minimum at a unit.", "formula": "do_max - do_min over 24h", "unit": "mg/L", "direction": "band_is_better", "status": "awaiting_data", "note": "A large amplitude signals a large algal standing crop and therefore a large nightly oxygen demand — a leading indicator a single daily reading cannot produce." },
+    { "id": "kpi-stratification-strength", "label": "Stratification Strength", "definition": "Schmidt stability index normalised by column depth.", "unit": "dimensionless", "direction": "band_is_better", "status": "awaiting_data", "citation_ids": ["idso-schmidt-stability-1973"] },
+    { "id": "kpi-oxygen-debt", "label": "Hypolimnetic Oxygen Debt", "definition": "Depth-integrated oxygen deficit below the thermocline.", "unit": "mg/L*m", "direction": "lower_is_better", "status": "awaiting_data", "note": "Quantifies the size of the bad-water reservoir waiting to be delivered by mixing." },
+    { "id": "kpi-aeration-hours", "label": "Aeration Runtime", "definition": "Total aerator operating hours per unit per period.", "unit": "hours", "direction": "lower_is_better", "status": "awaiting_data", "note": "The VERIFIABLE ROI anchor. Metered, already budgeted, checkable in one cycle. Lead with this. See value-proposition.json#/the_value_hierarchy." }
+  ],
+
+  "system_health_kpis": [
+    { "id": "kpi-sortie-success", "label": "Sortie Success Rate", "definition": "Completed sorties / attempted sorties, excluding weather scrubs.", "unit": "%", "direction": "higher_is_better", "status": "target_only", "target": 98 },
+    { "id": "kpi-availability-seasonal", "label": "Seasonal Availability", "definition": "Fraction of scheduled sorties actually flown, reported PER SEASON not annually.", "unit": "%", "direction": "higher_is_better", "status": "target_only", "note": "MUST be reported seasonally. Availability is lowest in the monsoon, which is when risk is highest. An annual average hides exactly the gap that matters. See mission-profiles.json#/environmental_envelope." },
+    { "id": "kpi-data-completeness", "label": "Data Completeness", "definition": "Fraction of expected measurements that were captured, QC-passed, and stored.", "unit": "%", "direction": "higher_is_better", "status": "target_only" },
+    { "id": "kpi-sensor-drift", "label": "Sensor Drift", "definition": "Deviation of the sonde against the laboratory reference at the weekly check, per channel.", "unit": "channel-specific", "direction": "lower_is_better", "status": "target_only", "note": "The metric that catches silent fouling. See risk R-01." },
+    { "id": "kpi-calibration-quality", "label": "Retrieval Calibration Quality", "definition": "R² and RMSE of the site-and-day-local NDCI-to-chlorophyll regression.", "unit": "R² / µg/L", "direction": "higher_is_better", "status": "awaiting_data", "note": "Often fitted on 3-4 points, so often poor. This KPI exists to make that honesty visible rather than hidden." }
+  ],
+
+  "product_health_kpis": [
+    { "id": "kpi-alert-action-rate", "label": "Alert-to-Action Rate", "definition": "Fraction of dispatched alerts that led to a logged operator action within a defined window.", "unit": "%", "direction": "higher_is_better", "status": "awaiting_data", "note": "A FIRST-CLASS product health metric. If it falls, people have stopped trusting the alerts and the product has failed regardless of sensor accuracy. This is the alert-fatigue early-warning signal. See data-pipeline.json." },
+    { "id": "kpi-false-alarm-rate", "label": "False Alarm Rate", "definition": "Fraction of alerts a human reviewer marked as not warranting the alert.", "unit": "%", "direction": "lower_is_better", "status": "awaiting_data", "note": "Drives alert fatigue. Tune models for precision to keep this low, accepting lower recall." },
+    { "id": "kpi-detection-precision", "label": "Anomaly Detection Precision", "definition": "True positives / (true positives + false positives), on human-reviewed detections.", "unit": "%", "direction": "higher_is_better", "status": "awaiting_data", "target": 90, "note": "Precision is prioritised over recall here. See ai-ml-models.json." }
+  ],
+
+  "business_kpis": [
+    { "id": "kpi-stations-per-dock", "label": "Stations per Dock", "definition": "Active sampling stations served by one dock.", "unit": "count", "direction": "higher_is_better", "status": "awaiting_data", "note": "The dominant driver of unit economics. See unit-economics.json." },
+    { "id": "kpi-contribution-margin-dock", "label": "Contribution Margin per Dock", "definition": "Revenue per dock minus cost-to-serve per dock, per period.", "unit": "currency", "direction": "higher_is_better", "status": "awaiting_data", "note": "Cannot be computed until real BOM and maintenance costs and a real price exist. Deliberately empty rather than modeled." },
+    { "id": "kpi-maintenance-labour-dock", "label": "Maintenance Labour per Dock", "definition": "Field-labour hours per dock per period.", "unit": "hours", "direction": "lower_is_better", "status": "awaiting_data", "note": "The most-underestimated cost line. See risk R-14." },
+    { "id": "kpi-churn", "label": "Customer Churn", "definition": "Fraction of customers not renewing per period.", "unit": "%", "direction": "lower_is_better", "status": "awaiting_data", "note": "Expected low once trust is established (data lock-in, hardware in our docks), but unproven." }
+  ],
+
+  "impact_kpis": [
+    { "id": "kpi-loss-events-avoided", "label": "Mortality Events Mitigated", "definition": "Documented cases where a warning led to an intervention that a farmer judged prevented or reduced a loss.", "unit": "count", "direction": "higher_is_better", "status": "awaiting_data", "note": "A COUNTERFACTUAL and therefore hard to measure honestly. Requires the methodology in methodology.json. Never claim a prevented kill without the evidence structure to support it." },
+    { "id": "kpi-dangerous-trips-avoided", "label": "Dangerous Boat Trips Avoided", "definition": "Pre-dawn/bad-weather manual monitoring trips replaced by autonomous sorties.", "unit": "count", "direction": "higher_is_better", "status": "awaiting_data", "note": "The occupational-safety impact. Concrete and measurable." },
+    { "id": "kpi-smallholder-reach", "label": "Smallholder Reach", "definition": "Smallholder operators served (via cooperatives/programmes) as a fraction of total served.", "unit": "%", "direction": "higher_is_better", "status": "awaiting_data", "note": "The equity metric. Measures whether the mission is being served or quietly abandoned in favour of the payers. See social-economic-impact.json." }
+  ],
+
+  "the_meta_point": {
+    "statement": "Almost every KPI here is status awaiting_data or target_only.",
+    "why_that_is_correct": "At TRL 3 there is no real data, so honest KPIs are empty. A dashboard showing confident values for these would be fabricating them. The value of this file today is that it DEFINES each metric precisely, so that the moment real data arrives, everyone computes the same number — and nobody can quietly redefine a KPI to make it look better. Pre-committing the definitions is a discipline, not a limitation."
+  }
+}

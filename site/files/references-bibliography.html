@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Consolidated Bibliography — AquaVision</title>
+<link rel="icon" href="../assets/img/logo-mark.jpg">
+<link rel="stylesheet" href="../assets/style.css">
+<script>try{var t=localStorage.getItem('av-theme');if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+<a class="sidebar-brand" href="../index.html">
+<img src="../assets/img/logo-mark.jpg" alt="AquaVision mark" width="36" height="36">
+<span><strong>AQUAVISION</strong><small>OmniDrone Knowledge Repository</small></span>
+</a>
+<nav class="sidebar-nav" aria-label="Sections"><details class="nav-sec">
+<summary><span class="nav-num">00</span>Meta &amp; Schemas</summary>
+<ul>
+<li><a href="../sections/meta.html">Overview</a></li>
+<li><a href="../files/schema-registry.html">AquaVision Knowledge Repository — Schema Registry <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/glossary.html">Glossary — Aquaculture, Fisheries, Remote Sensing, and Systems Terms</a></li><li><a href="../files/data-dictionary.html">Data Dictionary — Canonical Field and Variable Definitions</a></li><li><a href="../files/changelog.html">Repository Changelog</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">01</span>Company &amp; Identity</summary>
+<ul>
+<li><a href="../sections/company.html">Overview</a></li>
+<li><a href="../files/company-profile.html">AquaVision — Company Profile</a></li><li><a href="../files/brand-identity.html">AquaVision — Brand &amp; Design System</a></li><li><a href="../files/team-structure.html">Team Structure &amp; Capability Map</a></li><li><a href="../files/milestones-roadmap.html">Development Roadmap &amp; Milestones</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">02</span>Problem Space</summary>
+<ul>
+<li><a href="../sections/problem.html">Overview</a></li>
+<li><a href="../files/problem-statement.html">Problem Statement</a></li><li><a href="../files/problem-taxonomy.html">Problem Taxonomy — The Full Space of Aquaculture &amp; Fisheries Problems</a></li><li><a href="../files/stakeholder-pain-points.html">Stakeholder Map &amp; Pain Points</a></li><li><a href="../files/incident-case-studies.html">Documented Incident Case Studies — Evidence Base</a></li><li><a href="../files/cost-of-inaction.html">Cost of Inaction — Loss Model</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">03</span>Market &amp; Competition</summary>
+<ul>
+<li><a href="../sections/market.html">Overview</a></li>
+<li><a href="../files/industry-statistics.html">Industry Statistics — Global &amp; Regional Aquaculture and Fisheries</a></li><li><a href="../files/market-sizing.html">Market Sizing — TAM / SAM / SOM</a></li><li><a href="../files/competitive-landscape.html">Competitive Landscape</a></li><li><a href="../files/customer-personas.html">Customer Segments &amp; Personas</a></li><li><a href="../files/swot-porter.html">Strategic Analysis — SWOT, Porter's Five Forces, PESTEL</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">04</span>Solution &amp; ConOps</summary>
+<ul>
+<li><a href="../sections/solution.html">Overview</a></li>
+<li><a href="../files/solution-overview.html">Solution Overview — The OmniDrone System</a></li><li><a href="../files/value-proposition.html">Value Proposition</a></li><li><a href="../files/use-cases.html">Use Cases</a></li><li><a href="../files/mission-profiles.html">Mission Profiles</a></li><li><a href="../files/concept-of-operations.html">Concept of Operations (ConOps)</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">05</span>Hardware Engineering</summary>
+<ul>
+<li><a href="../sections/hardware.html">Overview</a></li>
+<li><a href="../files/omnidrone-specifications.html">OmniDrone — System Specification</a></li><li><a href="../files/airframe-propulsion.html">Airframe &amp; Propulsion</a></li><li><a href="../files/probe-winch-subsystem.html">Reeled Probe &amp; Winch Subsystem</a></li><li><a href="../files/sensor-payload.html">Sensor Payload — Imaging &amp; Remote Sensing</a></li><li><a href="../files/carriage-ejection-system.html">Carriage &amp; Ejection System</a></li><li><a href="../files/power-energy-budget.html">Power &amp; Energy Budget</a></li><li><a href="../files/docking-station.html">OmniDock — Automated Docking Station</a></li><li><a href="../files/bill-of-materials.html">Indicative Bill of Materials</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">06</span>Software, AI &amp; Digital Twin</summary>
+<ul>
+<li><a href="../sections/software.html">Overview</a></li>
+<li><a href="../files/system-architecture.html">System Architecture</a></li><li><a href="../files/data-pipeline.html">Data Pipeline</a></li><li><a href="../files/ai-ml-models.html">AI / ML Model Cards</a></li><li><a href="../files/digital-twin.html">PondTwin — Digital Twin Specification</a></li><li><a href="../files/telemetry-schema.html">Telemetry &amp; Data Schema</a></li><li><a href="../files/api-specification.html">API Specification</a></li><li><a href="../files/dashboard-spec.html">Dashboard Specification</a></li>
+</ul>
+</details>
+<details class="nav-sec" open>
+<summary><span class="nav-num">07</span>Research Corpus</summary>
+<ul>
+<li><a href="../sections/research.html">Overview</a></li>
+<li><a href="../files/literature-review.html">Literature Review — Synthesis</a></li><li><a href="../files/references-bibliography.html" aria-current="page" class="current">Consolidated Bibliography</a></li><li><a href="../files/studies-water-quality-sensing.html">Related Studies — Water Quality, Limnology &amp; Fish Kill Mechanisms</a></li><li><a href="../files/studies-uav-remote-sensing.html">Related Studies — UAV &amp; Satellite Remote Sensing of Water</a></li><li><a href="../files/studies-harmful-algal-blooms.html">Related Studies — Harmful Algal Blooms</a></li><li><a href="../files/studies-ai-ml-aquaculture.html">Related Studies — AI &amp; Machine Learning in Aquaculture</a></li><li><a href="../files/studies-digital-twin.html">Related Studies — Digital Twins in Aquaculture</a></li><li><a href="../files/studies-fish-health-disease.html">Related Studies — Fish Health, Disease &amp; Biosecurity</a></li><li><a href="../files/studies-feeding-nutrition.html">Related Studies — Feeding, Nutrition &amp; Feed Economics</a></li><li><a href="../files/studies-socioeconomic-adoption.html">Related Studies — Socioeconomics &amp; Technology Adoption</a></li><li><a href="../files/research-gaps.html">Research Gaps &amp; Open Questions</a></li><li><a href="../files/theoretical-framework.html">Theoretical &amp; Conceptual Framework</a></li><li><a href="../files/methodology.html">Research Methodology</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">08</span>Operations &amp; Safety</summary>
+<ul>
+<li><a href="../sections/operations.html">Overview</a></li>
+<li><a href="../files/deployment-playbook.html">Deployment Playbook</a></li><li><a href="../files/maintenance-schedule.html">Maintenance Schedule</a></li><li><a href="../files/risk-register-fmea.html">Risk Register &amp; FMEA</a></li><li><a href="../files/training-certification.html">Training &amp; Certification</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">09</span>Regulatory &amp; Compliance</summary>
+<ul>
+<li><a href="../sections/compliance.html">Overview</a></li>
+<li><a href="../files/regulatory-framework.html">Regulatory Framework</a></li><li><a href="../files/water-quality-standards.html">Water Quality Standards &amp; Thresholds</a></li><li><a href="../files/biosecurity-protocol.html">Biosecurity Protocol</a></li><li><a href="../files/ethics-data-privacy.html">Ethics, Data Privacy &amp; Responsible Use</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">10</span>Business Model</summary>
+<ul>
+<li><a href="../sections/business.html">Overview</a></li>
+<li><a href="../files/business-model-canvas.html">Business Model Canvas</a></li><li><a href="../files/pricing-revenue.html">Pricing &amp; Revenue Model</a></li><li><a href="../files/unit-economics.html">Unit Economics</a></li><li><a href="../files/financial-projections.html">Financial Projections</a></li><li><a href="../files/funding-ask.html">Funding Ask</a></li><li><a href="../files/go-to-market.html">Go-to-Market Strategy</a></li><li><a href="../files/traction.html">Traction</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">11</span>Impact</summary>
+<ul>
+<li><a href="../sections/impact.html">Overview</a></li>
+<li><a href="../files/sdg-alignment.html">UN Sustainable Development Goal Alignment</a></li><li><a href="../files/environmental-impact.html">Environmental Impact Assessment</a></li><li><a href="../files/social-economic-impact.html">Social &amp; Economic Impact</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">12</span>Datasets &amp; Charts</summary>
+<ul>
+<li><a href="../sections/datasets.html">Overview</a></li>
+<li><a href="../files/kpi-definitions.html">KPI Definitions</a></li><li><a href="../files/sample-telemetry.html">Sample Telemetry — ILLUSTRATIVE SYNTHETIC DATA <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/sample-pond-twin-state.html">Sample Digital Twin State — ILLUSTRATIVE SYNTHETIC DATA <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/chart-global-production.html">The Inflection: Aquaculture Overtakes Capture Fisheries</a></li><li><a href="../files/chart-problem-cost-breakdown.html">The Structure of Aquaculture Losses</a></li><li><a href="../files/chart-market-sizing.html">Market Sizing — Method, Not Number</a></li><li><a href="../files/chart-do-diel-cycle.html">Why Sampling Time Decides What You See <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/chart-do-depth-profile.html">The Loaded Gun: What a Vertical Profile Reveals <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/chart-financial-projection.html">Spend Plan by Phase — Not a Revenue Forecast</a></li><li><a href="../files/chart-manual-vs-omnidrone.html">Monitoring Approaches Compared</a></li><li><a href="../files/chart-species-production-mix.html">Where Farmed Aquatic Animals Are Produced</a></li><li><a href="../files/chart-tech-readiness.html">Technology Readiness — Where We Actually Are</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">13</span>Pitch &amp; Thesis Kit</summary>
+<ul>
+<li><a href="../sections/pitch.html">Overview</a></li>
+<li><a href="../files/pitch-deck-outline.html">Pitch Deck Outline</a></li><li><a href="../files/elevator-pitches.html">Elevator Pitches</a></li><li><a href="../files/faq-objections.html">FAQ &amp; Objection Handling</a></li><li><a href="../files/thesis-outline.html">Thesis / Dissertation Outline</a></li>
+</ul>
+</details></nav>
+<div class="sidebar-foot"><small>Fisheries • Aquaculture • Technology</small></div>
+</aside>
+<div class="main">
+<header class="topbar">
+<button class="icon-btn" id="nav-toggle" aria-label="Toggle navigation">☰</button>
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a><span class="crumb-sep">›</span><a href="../sections/research.html">Research Corpus</a><span class="crumb-sep">›</span><span class="crumb-here">Consolidated Bibliography</span></nav>
+<button class="search-btn" id="search-btn" aria-label="Search"><span aria-hidden="true">🔍</span> Search <kbd>Ctrl K</kbd></button>
+<button class="icon-btn" id="theme-toggle" aria-label="Toggle light/dark theme" title="Toggle theme">◐</button>
+</header>
+<main class="content">
+<header class="doc-head">
+<h1>Consolidated Bibliography</h1>
+
+<div class="doc-meta">
+<code class="mono">references-bibliography</code>
+<span>v1.0.0</span>
+<span>updated 2026-07-17</span>
+
+
+<a class="raw-link" href="../../data/07_research/references-bibliography.json">raw JSON ↗</a>
+</div>
+
+</header><aside class="banner banner-critical">
+<div class="banner-head"><span class="badge-icon">⚠</span>CRITICAL WARNING READ BEFORE CITING</div>
+<div class="banner-item"><b>Statement:</b> <p>Most entries below carry verification_status: cited_from_search_result. That means the bibliographic details came from a search engine's summary and NOBODY HAS OPENED THE SOURCE.</p></div><div class="banner-item"><b>What Could Be Wrong:</b> <ul><li>Author lists may be incomplete or wrong.</li><li>Years may be the publication year, the online-first year, or the accessed year — these differ and reviewers notice.</li><li>Volume, issue, and page numbers are frequently absent or wrong.</li><li>The finding attributed to the source may be a paraphrase of a paraphrase.</li><li>Some URLs may have rotted since indexing.</li><li>A few entries below are placeholders for well-known works whose exact details have NOT been checked at all — they are marked needs_verification.</li></ul></div><div class="banner-item"><b>The Rule:</b> <p>Open every source before it appears in a submitted thesis or an investor document. A reference list you have not read is an academic integrity problem and a diligence liability. This is not pedantry: a committee member who finds one fabricated citation will disbelieve your entire bibliography, and they will be right to.</p></div><div class="banner-item"><b>How To Verify:</b> <p>Retrieve the DOI, confirm the authors and year against the publisher's page, confirm the finding is actually in the text, and update verification_status to url_checked with an accessed date.</p></div></aside><p class="lead">Every citation_id used anywhere in this repository resolves here. Entries carry a verification_status that MUST be read before use.</p>
+<section class="doc-sec"><h2>Citation Style</h2><p>APA 7th edition. Pre-rendered strings in the `apa7` field are BEST-EFFORT and inherit the verification problem above.</p></section>
+<section class="doc-sec"><h2>References</h2><article class="card ref" id="fao-sofia-2024">
+<p class="ref-apa">Food and Agriculture Organization of the United Nations. (2024). The state of world fisheries and aquaculture 2024: Blue transformation in action. FAO. https://doi.org/10.4060/cd0683en</p>
+<div class="chip-row">
+<code class="mono">fao-sofia-2024</code>
+<span class="chip chip-assumption">Report</span>
+<span class="chip chip-advisory"><span class="badge-icon">!</span>From search result — unopened</span>
+<span class="chip chip-ok" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: high</span>
+<span class="chip chip-theme">Industry Statistics</span><span class="chip chip-theme">Policy</span>
+</div>
+<p class="ref-links"><a href="https://doi.org/10.4060/cd0683en" rel="noopener">doi:10.4060/cd0683en</a> · <a href="https://openknowledge.fao.org/handle/20.500.14283/cd0683en" rel="noopener">source ↗</a></p>
+<p><b>Relevance:</b> THE foundational statistic source for this entire project. Establishes that aquaculture surpassed capture fisheries in aquatic animal production for the first time in 2022 (94.4 Mt, 51 percent), that inland systems are 62.6 percent of farmed aquatic animals, and that Asia produces 70 percent of global output. Every market argument this company makes traces here.</p>
+<details><summary>Key figures used (6)</summary><ul><li>223.2 Mt total production 2022</li><li>94.4 Mt aquaculture aquatic animals, 51 percent share</li><li>130.9 Mt total aquaculture, USD 312.8 billion</li><li>62.6 percent inland / 37.4 percent marine</li><li>70 percent Asia</li><li>38 Mt algae, 97 percent farmed</li></ul></details>
+<p class="note muted">The DOI and figures come from FAO's own online summary pages and are likely correct, but SOFIA 2026 may now supersede this edition. Check for a newer edition before submission — citing a superseded flagship report signals carelessness.</p>
+</article><article class="card ref" id="worldbank-disease-risk-2014">
+<p class="ref-apa">World Bank. (2014). Reducing disease risk in aquaculture (Agriculture and Environmental Services Discussion Paper No. 09, Report No. 88257-GLB). World Bank.</p>
+<div class="chip-row">
+<code class="mono">worldbank-disease-risk-2014</code>
+<span class="chip chip-assumption">Report</span>
+<span class="chip chip-advisory"><span class="badge-icon">!</span>From search result — unopened</span>
+<span class="chip chip-advisory" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: medium</span>
+<span class="chip chip-theme">Disease</span><span class="chip chip-theme">Economics</span><span class="chip chip-theme">Biosecurity</span>
+</div>
+<p class="ref-links"><a href="https://documents1.worldbank.org/curated/en/110681468054563438/pdf/882570REPLACEM00NAME0Reantaso0Melba.pdf" rel="noopener">source ↗</a></p>
+<p><b>Relevance:</b> Source for the FAO estimate of ~USD 6 billion in annual global aquaculture disease losses, and for the EMS/AHPND Mekong Delta figure of ~USD 800 million per year borne mostly by small-scale producers. Used to size the disease problem class — with the explicit caveat that the OmniDrone addresses almost none of it.</p>
+
+
+</article><article class="card ref" id="asian-fisheries-shrimp-disease">
+<p class="ref-apa">Shinn, A. P., Pratoomyot, J., Griffiths, D., Trong, T. Q., Vu, N. T., Jiravanichpaisal, P., &amp; Briggs, M. (2018). Asian shrimp production and the economic costs of disease. Asian Fisheries Science, 31S, 29-58.</p>
+<div class="chip-row">
+<code class="mono">asian-fisheries-shrimp-disease</code>
+<span class="chip chip-assumption">Journal Article</span>
+<span class="chip chip-warning"><span class="badge-icon">⚠</span>Needs verification</span>
+<span class="chip chip-warning" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: low</span>
+<span class="chip chip-theme">Disease</span><span class="chip chip-theme">Economics</span><span class="chip chip-theme">Shrimp</span>
+</div>
+<p class="ref-links"><a href="https://www.asianfisheriessociety.org/publication/" rel="noopener">source ↗</a></p>
+<p><b>Relevance:</b> Source for WSSV loss figures — USD 6 billion during the 1992-93 Asian outbreaks, USD 1-2 billion annually thereafter. Sizes the disease problem class.</p>
+
+<p class="note muted">Author list and year are RECONSTRUCTED from partial search results and are NOT confirmed. Do not cite until the actual paper is retrieved. This is exactly the kind of entry that gets a thesis marked down.</p>
+</article><article class="card ref" id="seafdec-laguna-fishkill">
+<p class="ref-apa">SEAFDEC/AQD (n.d.). Incidence and causes of mass fish kill in a shallow tropical eutrophic lake (Laguna de Bay, Philippines). SEAFDEC/AQD Institutional Repository <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">seafdec-laguna-fishkill</code>
+<span class="chip chip-assumption">Journal Article</span>
+<span class="chip chip-warning"><span class="badge-icon">⚠</span>Needs verification</span>
+<span class="chip chip-advisory" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: medium</span>
+<span class="chip chip-theme">Fish Kill</span><span class="chip chip-theme">Philippines</span><span class="chip chip-theme">Water Quality</span><span class="chip chip-theme">Limnology</span>
+</div>
+<p class="ref-links"><a href="https://repository.seafdec.org.ph/handle/10862/450" rel="noopener">source ↗</a></p>
+<p><b>Relevance:</b> THE MOST SCIENTIFICALLY IMPORTANT PHILIPPINE SOURCE IN THIS BIBLIOGRAPHY. Identifies the causal triad behind mass kills — dissolved oxygen depletion, high ammonia-nitrogen, and hydrogen sulfide — which is the signature of a post-overturn event delivering bottom water to the surface. Three of the probe's sensor channels exist because of this finding. This is the citation the thesis should lead with when justifying the vertical profiling architecture.</p>
+
+<p class="note muted">Authors and year are UNKNOWN. Retrieve from the SEAFDEC repository and complete this entry properly. Given how load-bearing this citation is for the entire technical argument, leaving it incomplete is not acceptable — this should be the first source verified.</p>
+</article><article class="card ref" id="bioflux-lake-buhi-2020">
+<p class="ref-apa">(see source) (2020). Occurrence and recurrence: the fish kill story in Lake Buhi, Philippines. AACL Bioflux <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">bioflux-lake-buhi-2020</code>
+<span class="chip chip-assumption">Journal Article</span>
+<span class="chip chip-advisory"><span class="badge-icon">!</span>From search result — unopened</span>
+<span class="chip chip-advisory" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: medium</span>
+<span class="chip chip-theme">Fish Kill</span><span class="chip chip-theme">Philippines</span><span class="chip chip-theme">Limnology</span>
+</div>
+<p class="ref-links"><a href="https://bioflux.com.ro/docs/2020.152-158.pdf" rel="noopener">source ↗</a></p>
+<p><b>Relevance:</b> Framing source for the argument that Philippine fish kills are a RECURRING PATTERN rather than a series of accidents — which is the distinction between bad luck and an unmet monitoring need. Also the source for the estimated PHP 322.1 million in recorded national fish kill losses 1998-2018.</p>
+
+<p class="note muted">Author list not captured. The PHP 322.1 M figure needs checking against the paper's actual methodology — see the contradiction documented in <a href="../files/cost-of-inaction.html">cost-of-inaction.json</a>, where this national figure appears irreconcilable with individual event figures.</p>
+</article><article class="card ref" id="inquirer-taal-fishkill-2023">
+<p class="ref-apa">Philippine Daily Inquirer (2023). Fish kill hits Taal Lake anew; 343 metric tons of tilapia, 'bangus' turn belly up. Inquirer News <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">inquirer-taal-fishkill-2023</code>
+<span class="chip chip-assumption">News</span>
+<span class="chip chip-advisory"><span class="badge-icon">!</span>From search result — unopened</span>
+<span class="chip chip-advisory" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: medium</span>
+<span class="chip chip-theme">Fish Kill</span><span class="chip chip-theme">Philippines</span><span class="chip chip-theme">Economics</span>
+</div>
+<p class="ref-links"><a href="https://newsinfo.inquirer.net/1803117/fish-kill-hits-taal-lake-anew-343-tons-of-tilapia-bangus-turn-belly-up" rel="noopener">source ↗</a></p>
+<p><b>Relevance:</b> Source for the 343-tonne Taal Lake event and its municipal breakdown (Talisay 300 t, Agoncillo 32 t, Laurel 11 t). The spatial concentration — 87 percent of the loss in one municipality — is direct evidence for the spatial-coverage argument against single-point monitoring.</p>
+
+<p class="note muted">News reporting of fish kill tonnages is frequently revised in later reports. Confirm this figure was not superseded. Journalism is acceptable for establishing that an event occurred; it is weak evidence for a precise quantity in a thesis.</p>
+</article><article class="card ref" id="pna-tilapia-fishkill">
+<p class="ref-apa">Philippine News Agency (n.d.). BFAR assures ample supply of tilapia amid fish kill. Philippine News Agency <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">pna-tilapia-fishkill</code>
+<span class="chip chip-assumption">News</span>
+<span class="chip chip-advisory"><span class="badge-icon">!</span>From search result — unopened</span>
+<span class="chip chip-advisory" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: medium</span>
+<span class="chip chip-theme">Fish Kill</span><span class="chip chip-theme">Philippines</span><span class="chip chip-theme">Economics</span>
+</div>
+<p class="ref-links"><a href="https://www.pna.gov.ph/articles/1071509" rel="noopener">source ↗</a></p>
+<p><b>Relevance:</b> Source for the 600+ tonne / PHP 43.13 million tilapia kill figure and for the attribution to over-stocking driving DO depletion. Also the source for BFAR's stated normal surface DO of 6 ppm at Taal — a useful local operational threshold.</p>
+
+<p class="note muted">Date not captured. The 600 t and PHP 43.13 M figures must be confirmed to refer to the same event and scope before the derived PHP/tonne figure in <a href="../files/incident-case-studies.html">incident-case-studies.json</a> is used anywhere.</p>
+</article><article class="card ref" id="inquirer-pangasinan-fishkill">
+<p class="ref-apa">Philippine Daily Inquirer (n.d.). Massive fish kill hits Pangasinan town. Inquirer News <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">inquirer-pangasinan-fishkill</code>
+<span class="chip chip-assumption">News</span>
+<span class="chip chip-advisory"><span class="badge-icon">!</span>From search result — unopened</span>
+<span class="chip chip-advisory" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: medium</span>
+<span class="chip chip-theme">Fish Kill</span><span class="chip chip-theme">Philippines</span><span class="chip chip-theme">Climate</span>
+</div>
+<p class="ref-links"><a href="https://newsinfo.inquirer.net/2262406/massive-fish-kill-hits-pangasinan-town" rel="noopener">source ↗</a></p>
+<p><b>Relevance:</b> Source for the ~PHP 15 million bangus loss in Pangasinan, attributed to extreme heat and low rainfall. Evidence for the climate-trigger argument.</p>
+
+
+</article><article class="card ref" id="khaleej-heat-fishkill-ph">
+<p class="ref-apa">Khaleej Times (n.d.). Extreme heat, low rainfall trigger massive fish kill in northern Philippines. <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">khaleej-heat-fishkill-ph</code>
+<span class="chip chip-assumption">News</span>
+<span class="chip chip-advisory"><span class="badge-icon">!</span>From search result — unopened</span>
+<span class="chip chip-warning" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: low</span>
+<span class="chip chip-theme">Fish Kill</span><span class="chip chip-theme">Philippines</span><span class="chip chip-theme">Climate</span>
+</div>
+<p class="ref-links"><a href="https://www.khaleejtimes.com/world/asia/look-extreme-heat-low-rainfall-trigger-massive-fish-kill-in-northern-philippines" rel="noopener">source ↗</a></p>
+<p><b>Relevance:</b> Corroborating source for heat-driven mortality. The mechanism matters: heat kills through a pincer — rising temperature increases fish metabolic oxygen demand while decreasing oxygen solubility. Both sides are directly measurable by the probe.</p>
+
+
+</article><article class="card ref" id="ija-environmental-impacts-ph">
+<p class="ref-apa">(see source) (n.d.). Environmental impacts of aquaculture in the Philippines. Israeli Journal of Aquaculture — Bamidgeh <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">ija-environmental-impacts-ph</code>
+<span class="chip chip-assumption">Journal Article</span>
+<span class="chip chip-advisory"><span class="badge-icon">!</span>From search result — unopened</span>
+<span class="chip chip-warning" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: low</span>
+<span class="chip chip-theme">Environment</span><span class="chip chip-theme">Philippines</span><span class="chip chip-theme">Eutrophication</span>
+</div>
+<p class="ref-links"><a href="https://ija.scholasticahq.com/article/133778-environmental-impacts-of-aquaculture-in-the-philippines" rel="noopener">source ↗</a></p>
+<p><b>Relevance:</b> Supports the reflexive-degradation argument: aquaculture effluent drives the eutrophication of the shared water body that then harms aquaculture. Directly relevant to the commons-problem framing in <a href="../files/problem-taxonomy.html">problem-taxonomy.json</a>.</p>
+
+
+</article><article class="card ref" id="fao-nutrient-dynamics-eutrophic">
+<p class="ref-apa">Food and Agriculture Organization of the United Nations (n.d.). Nutrient dynamics in eutrophic inland waters used for aquaculture (Philippines, Thailand, Hong Kong). FAO <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">fao-nutrient-dynamics-eutrophic</code>
+<span class="chip chip-assumption">Report</span>
+<span class="chip chip-advisory"><span class="badge-icon">!</span>From search result — unopened</span>
+<span class="chip chip-advisory" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: medium</span>
+<span class="chip chip-theme">Eutrophication</span><span class="chip chip-theme">Water Quality</span><span class="chip chip-theme">Philippines</span>
+</div>
+<p class="ref-links"><a href="https://www.fao.org/4/ac009e/ac009e01.htm" rel="noopener">source ↗</a></p>
+<p><b>Relevance:</b> Supports the eutrophication and self-degradation argument in <a href="../files/cost-of-inaction.html">cost-of-inaction.json</a> — the feedback loop where uneaten feed degrades the water that then causes the losses.</p>
+
+
+</article><article class="card ref" id="igs-do-aquaculture-2026">
+<p class="ref-apa">IGS Water Solutions (2026). The role of dissolved oxygen in aquaculture systems. <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">igs-do-aquaculture-2026</code>
+<span class="chip chip-assumption">Web</span>
+<span class="chip chip-advisory"><span class="badge-icon">!</span>From search result — unopened</span>
+<span class="chip chip-warning" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: low</span>
+<span class="chip chip-theme">Water Quality</span><span class="chip chip-theme">Dissolved Oxygen</span>
+</div>
+<p class="ref-links"><a href="https://igswater.com/2026/01/24/the-role-of-dissolved-oxygen-in-aquaculture-systems/" rel="noopener">source ↗</a></p>
+<p><b>Relevance:</b> General reference on DO's role.</p>
+
+
+</article><article class="card ref" id="boyd-water-quality-2020">
+<p class="ref-apa">Boyd, C. E. (2020). Water quality: An introduction. Springer <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">boyd-water-quality-2020</code>
+<span class="chip chip-assumption">Book</span>
+<span class="chip chip-warning"><span class="badge-icon">⚠</span>Needs verification</span>
+<span class="chip chip-advisory" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: medium</span>
+<span class="chip chip-theme">Water Quality</span><span class="chip chip-theme">Limnology</span><span class="chip chip-theme">Aquaculture</span>
+</div>
+
+<p><b>Relevance:</b> The standard reference for aquaculture water quality. Cited throughout for DO thresholds, diel cycles, supersaturation interpretation, and general water chemistry. This is the authority that should replace the vendor content marketing above.</p>
+
+<p class="note muted">Edition, year, and DOI NOT CONFIRMED. Claude Boyd is unambiguously the standard author in this field and this book exists, but the specific edition details here are from memory and MUST be checked against a library catalogue before citing. Do not submit this entry as written.</p>
+</article><article class="card ref" id="mishra-ndci-2012">
+<p class="ref-apa">Mishra, S.; Mishra, D. R. (2012). Normalized difference chlorophyll index: A novel model for remote estimation of chlorophyll-a concentration in turbid productive waters. Remote Sensing of Environment <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">mishra-ndci-2012</code>
+<span class="chip chip-assumption">Journal Article</span>
+<span class="chip chip-warning"><span class="badge-icon">⚠</span>Needs verification</span>
+<span class="chip chip-advisory" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: medium</span>
+<span class="chip chip-theme">Remote Sensing</span><span class="chip chip-theme">Chlorophyll</span><span class="chip chip-theme">Ndci</span>
+</div>
+<p class="ref-links"><a href="https://doi.org/10.1016/j.rse.2011.10.016" rel="noopener">doi:10.1016/j.rse.2011.10.016</a></p>
+<p><b>Relevance:</b> The originating paper for NDCI, which is the core index in the OmniDrone's imaging pipeline. Critical because it addresses turbid productive waters specifically — the regime where classic blue-green ocean chlorophyll algorithms fail, and exactly the regime of a eutrophic tropical fish pond.</p>
+
+<p class="note muted">Details reconstructed from general knowledge. Volume, pages, and DOI MUST be confirmed. This is a foundational technical citation for the imaging claim and it needs to be right.</p>
+</article><article class="card ref" id="mcfeeters-ndwi-1996">
+<p class="ref-apa">McFeeters, S. K. (1996). The use of the Normalized Difference Water Index (NDWI) in the delineation of open water features. International Journal of Remote Sensing <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">mcfeeters-ndwi-1996</code>
+<span class="chip chip-assumption">Journal Article</span>
+<span class="chip chip-warning"><span class="badge-icon">⚠</span>Needs verification</span>
+<span class="chip chip-advisory" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: medium</span>
+<span class="chip chip-theme">Remote Sensing</span><span class="chip chip-theme">Water Masking</span>
+</div>
+<p class="ref-links"><a href="https://doi.org/10.1080/01431169608948714" rel="noopener">doi:10.1080/01431169608948714</a></p>
+<p><b>Relevance:</b> The originating NDWI paper. Water masking is the first step in the imagery pipeline — nothing downstream is valid without it.</p>
+
+
+</article><article class="card ref" id="mdpi-drones-inland-review-2024">
+<p class="ref-apa">(see source) (2024). Assessing drone-based remote sensing for monitoring water temperature, suspended solids and CDOM in inland waters: A global systematic review of challenges and opportunities. Drones <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">mdpi-drones-inland-review-2024</code>
+<span class="chip chip-assumption">Journal Article</span>
+<span class="chip chip-advisory"><span class="badge-icon">!</span>From search result — unopened</span>
+<span class="chip chip-ok" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: high</span>
+<span class="chip chip-theme">Uav</span><span class="chip chip-theme">Remote Sensing</span><span class="chip chip-theme">Inland Water</span><span class="chip chip-theme">Systematic Review</span>
+</div>
+<p class="ref-links"><a href="https://doi.org/10.3390/drones8120733" rel="noopener">doi:10.3390/drones8120733</a> · <a href="https://doi.org/10.3390/drones8120733" rel="noopener">source ↗</a></p>
+<p><b>Relevance:</b> A 2024 systematic review of exactly our problem domain. Critical for understanding the documented challenges — radiometric calibration, glint, and the ground-truthing burden — that the OmniDrone's carry-your-own-calibration architecture is designed to address. READ THIS BEFORE BUILDING ANYTHING.</p>
+
+<p class="note muted">DOI captured and likely correct. Author list not captured.</p>
+</article><article class="card ref" id="hamzah-dt-water-review-2024">
+<p class="ref-apa">Hamzah, (et al.) (2024). Drone-based digital twins for water quality monitoring: A systematic review. Digital Twins and Applications <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">hamzah-dt-water-review-2024</code>
+<span class="chip chip-assumption">Journal Article</span>
+<span class="chip chip-advisory"><span class="badge-icon">!</span>From search result — unopened</span>
+<span class="chip chip-ok" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: high</span>
+<span class="chip chip-theme">Digital Twin</span><span class="chip chip-theme">Uav</span><span class="chip chip-theme">Water Quality</span><span class="chip chip-theme">Systematic Review</span>
+</div>
+<p class="ref-links"><a href="https://doi.org/10.1049/dgt2.12021" rel="noopener">doi:10.1049/dgt2.12021</a> · <a href="https://ietresearch.onlinelibrary.wiley.com/doi/10.1049/dgt2.12021" rel="noopener">source ↗</a></p>
+<p><b>Relevance:</b> THE CLOSEST PRIOR ART TO THIS EXACT CONCEPT. A systematic review of drone-based digital twins for water quality. This must be read carefully before another line of twin code is written — it is where we find out what has already been tried and what already failed.</p>
+
+<p class="note muted">First author captured only partially. Complete the author list.</p>
+</article><article class="card ref" id="sciencedirect-uav-multispectral-ponds-2024">
+<p class="ref-apa">(see source) (2024). Monitoring water quality parameters of freshwater aquaculture ponds using UAV-based multispectral images. Ecological Indicators <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">sciencedirect-uav-multispectral-ponds-2024</code>
+<span class="chip chip-assumption">Journal Article</span>
+<span class="chip chip-advisory"><span class="badge-icon">!</span>From search result — unopened</span>
+<span class="chip chip-ok" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: high</span>
+<span class="chip chip-theme">Uav</span><span class="chip chip-theme">Multispectral</span><span class="chip chip-theme">Aquaculture</span><span class="chip chip-theme">Water Quality</span>
+</div>
+<p class="ref-links"><a href="https://www.sciencedirect.com/science/article/pii/S1470160X24011014" rel="noopener">source ↗</a></p>
+<p><b>Relevance:</b> Directly on point: UAV multispectral for freshwater aquaculture pond water quality. The single most relevant empirical precedent for the imaging half of the OmniDrone.</p>
+
+
+</article><article class="card ref" id="springer-uav-satellite-review-2024">
+<p class="ref-apa">(see source) (2024). UAV and satellite remote sensing for inland water quality assessments: A literature review. Environmental Monitoring and Assessment <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">springer-uav-satellite-review-2024</code>
+<span class="chip chip-assumption">Journal Article</span>
+<span class="chip chip-advisory"><span class="badge-icon">!</span>From search result — unopened</span>
+<span class="chip chip-ok" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: high</span>
+<span class="chip chip-theme">Uav</span><span class="chip chip-theme">Satellite</span><span class="chip chip-theme">Remote Sensing</span><span class="chip chip-theme">Literature Review</span>
+</div>
+<p class="ref-links"><a href="https://doi.org/10.1007/s10661-024-12342-6" rel="noopener">doi:10.1007/s10661-024-12342-6</a> · <a href="https://link.springer.com/article/10.1007/s10661-024-12342-6" rel="noopener">source ↗</a></p>
+<p><b>Relevance:</b> Establishes the UAV-satellite complementarity that underpins our recommendation to ingest free Copernicus data for historical baselining rather than treating satellites as a competitor.</p>
+
+
+</article><article class="card ref" id="tandf-uav-chla-review-2025">
+<p class="ref-apa">(see source) (2025). UAV-based remote sensing of chlorophyll-a concentrations in inland water bodies: A systematic review. Geocarto International <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">tandf-uav-chla-review-2025</code>
+<span class="chip chip-assumption">Journal Article</span>
+<span class="chip chip-advisory"><span class="badge-icon">!</span>From search result — unopened</span>
+<span class="chip chip-advisory" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: medium</span>
+<span class="chip chip-theme">Uav</span><span class="chip chip-theme">Chlorophyll</span><span class="chip chip-theme">Systematic Review</span>
+</div>
+<p class="ref-links"><a href="https://doi.org/10.1080/10106049.2025.2452246" rel="noopener">doi:10.1080/10106049.2025.2452246</a></p>
+<p><b>Relevance:</b> The most recent systematic review of UAV chlorophyll retrieval in inland water. Directly relevant to the NDCI calibration workflow.</p>
+
+
+</article><article class="card ref" id="mdpi-hab-meta-2021">
+<p class="ref-apa">(see source) (2021). A meta-analysis on harmful algal bloom (HAB) detection and monitoring: A remote sensing perspective. Remote Sensing <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">mdpi-hab-meta-2021</code>
+<span class="chip chip-assumption">Journal Article</span>
+<span class="chip chip-advisory"><span class="badge-icon">!</span>From search result — unopened</span>
+<span class="chip chip-ok" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: high</span>
+<span class="chip chip-theme">Hab</span><span class="chip chip-theme">Remote Sensing</span><span class="chip chip-theme">Chlorophyll</span><span class="chip chip-theme">Meta Analysis</span>
+</div>
+<p class="ref-links"><a href="https://doi.org/10.3390/rs13214347" rel="noopener">doi:10.3390/rs13214347</a> · <a href="https://www.mdpi.com/2072-4292/13/21/4347" rel="noopener">source ↗</a></p>
+<p><b>Relevance:</b> Source for the finding that chlorophyll-a is the HAB proxy in roughly 80 percent of remote sensing studies. Also the source of the essential caveat this repository repeats throughout: chlorophyll indicates biomass, NOT toxicity.</p>
+
+
+</article><article class="card ref" id="hab-review-2024">
+<p class="ref-apa">(see source) (2024). A review on monitoring, forecasting, and early warning of harmful algal bloom. Aquaculture <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">hab-review-2024</code>
+<span class="chip chip-assumption">Journal Article</span>
+<span class="chip chip-advisory"><span class="badge-icon">!</span>From search result — unopened</span>
+<span class="chip chip-warning" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: low</span>
+<span class="chip chip-theme">Hab</span><span class="chip chip-theme">Early Warning</span><span class="chip chip-theme">Review</span>
+</div>
+<p class="ref-links"><a href="https://www.researchgate.net/publication/382309658" rel="noopener">source ↗</a></p>
+<p><b>Relevance:</b> Review of HAB early warning approaches. Relevant to positioning our bloom detection against established methods.</p>
+
+<p class="note muted">ResearchGate link only. Find the publisher version.</p>
+</article><article class="card ref" id="pmc-sentinel-hab-chile-2020">
+<p class="ref-apa">(see source) (2020). Using Copernicus Sentinel-2 and Sentinel-3 data to monitor harmful algal blooms in Southern Chile during the COVID-19 lockdown. Marine Pollution Bulletin <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">pmc-sentinel-hab-chile-2020</code>
+<span class="chip chip-assumption">Journal Article</span>
+<span class="chip chip-advisory"><span class="badge-icon">!</span>From search result — unopened</span>
+<span class="chip chip-advisory" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: medium</span>
+<span class="chip chip-theme">Hab</span><span class="chip chip-theme">Satellite</span><span class="chip chip-theme">Aquaculture</span><span class="chip chip-theme">Early Warning</span>
+</div>
+<p class="ref-links"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7544481/" rel="noopener">source ↗</a></p>
+<p><b>Relevance:</b> Demonstrates OPERATIONAL satellite-based HAB early warning for aquaculture — advising decision-makers ahead of salmon mortality events. Important as evidence that this is not speculative, and as a reminder that satellites already do part of what we propose, for free, at coarser resolution.</p>
+
+
+</article><article class="card ref" id="mdpi-hyperspectral-hab-2025">
+<p class="ref-apa">(see source) (2025). Mapping harmful algae blooms: The potential of hyperspectral imaging technologies. Remote Sensing <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">mdpi-hyperspectral-hab-2025</code>
+<span class="chip chip-assumption">Journal Article</span>
+<span class="chip chip-advisory"><span class="badge-icon">!</span>From search result — unopened</span>
+<span class="chip chip-advisory" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: medium</span>
+<span class="chip chip-theme">Hab</span><span class="chip chip-theme">Hyperspectral</span>
+</div>
+<p class="ref-links"><a href="https://doi.org/10.3390/rs17040608" rel="noopener">doi:10.3390/rs17040608</a></p>
+<p><b>Relevance:</b> Justifies our decision NOT to carry hyperspectral — establishes what we give up and why the multispectral trade point is defensible.</p>
+
+
+</article><article class="card ref" id="sciencedirect-dt-aiot-2023">
+<p class="ref-apa">(see source) (2023). Digital twin-based intelligent fish farming with Artificial Intelligence Internet of Things (AIoT). Smart Agricultural Technology <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">sciencedirect-dt-aiot-2023</code>
+<span class="chip chip-assumption">Journal Article</span>
+<span class="chip chip-advisory"><span class="badge-icon">!</span>From search result — unopened</span>
+<span class="chip chip-ok" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: high</span>
+<span class="chip chip-theme">Digital Twin</span><span class="chip chip-theme">Aquaculture</span><span class="chip chip-theme">Aiot</span>
+</div>
+<p class="ref-links"><a href="https://www.sciencedirect.com/science/article/pii/S2772375523001144" rel="noopener">source ↗</a></p>
+<p><b>Relevance:</b> Core digital twin prior art for aquaculture. Establishes the IoT-AI fusion architecture our platform follows.</p>
+
+
+</article><article class="card ref" id="pmc-dt-rainbow-trout-2023">
+<p class="ref-apa">(see source) (2023). Digital twins for land-based aquaculture: A case study for rainbow trout (Oncorhynchus mykiss). (see source) <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">pmc-dt-rainbow-trout-2023</code>
+<span class="chip chip-assumption">Journal Article</span>
+<span class="chip chip-advisory"><span class="badge-icon">!</span>From search result — unopened</span>
+<span class="chip chip-advisory" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: medium</span>
+<span class="chip chip-theme">Digital Twin</span><span class="chip chip-theme">Aquaculture</span><span class="chip chip-theme">Case Study</span>
+</div>
+<p class="ref-links"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10472065/" rel="noopener">source ↗</a></p>
+<p><b>Relevance:</b> A demonstrated digital twin case study rather than a proposal — evidence that the twin concept has moved past hand-waving. Land-based RAS context, which is explicitly outside our market, so read for method rather than for transferable findings.</p>
+
+
+</article><article class="card ref" id="mdpi-dt-ahp-2023">
+<p class="ref-apa">(see source) (2023). Digital twin architecture evaluation for intelligent fish farm management using modified analytic hierarchy process. Applied Sciences <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">mdpi-dt-ahp-2023</code>
+<span class="chip chip-assumption">Journal Article</span>
+<span class="chip chip-advisory"><span class="badge-icon">!</span>From search result — unopened</span>
+<span class="chip chip-advisory" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: medium</span>
+<span class="chip chip-theme">Digital Twin</span><span class="chip chip-theme">Architecture</span>
+</div>
+<p class="ref-links"><a href="https://doi.org/10.3390/app13010141" rel="noopener">doi:10.3390/app13010141</a></p>
+<p><b>Relevance:</b> Architecture evaluation methodology for aquaculture digital twins.</p>
+
+
+</article><article class="card ref" id="springer-dt-aquaculture-sim">
+<p class="ref-apa">(see source) (2024). Digital twin technology for aquaculture systems simulation. Springer <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">springer-dt-aquaculture-sim</code>
+<span class="chip chip-assumption">Chapter</span>
+<span class="chip chip-advisory"><span class="badge-icon">!</span>From search result — unopened</span>
+<span class="chip chip-advisory" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: medium</span>
+<span class="chip chip-theme">Digital Twin</span><span class="chip chip-theme">Simulation</span>
+</div>
+<p class="ref-links"><a href="https://doi.org/10.1007/978-981-97-8553-7_10" rel="noopener">doi:10.1007/978-981-97-8553-7_10</a></p>
+<p><b>Relevance:</b> The simulation layer that would make PondTwin an actual twin rather than a 3D dashboard.</p>
+
+
+</article><article class="card ref" id="ai-aqua-review-2024">
+<p class="ref-apa">(see source) (2024). Machine learning, deep learning and hybrid models in aquaculture: water quality, disease detection, feed optimisation and fish behaviour. <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">ai-aqua-review-2024</code>
+<span class="chip chip-assumption">Web</span>
+<span class="chip chip-warning"><span class="badge-icon">⚠</span>Needs verification</span>
+<span class="chip chip-warning" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: low</span>
+<span class="chip chip-theme">Ai</span><span class="chip chip-theme">Ml</span><span class="chip chip-theme">Aquaculture</span><span class="chip chip-theme">Review</span>
+</div>
+
+<p><b>Relevance:</b> Source for the framing of ML applications in aquaculture and for the identified challenges: data quality dependence, deployment cost, power constraints, and the emerging role of federated learning, explainable AI, edge computing, and transfer learning.</p>
+
+<p class="note muted">This entry is a SYNTHESIS of search-result summaries and does not correspond to a single confirmed publication. It MUST be replaced with the specific review it paraphrases, or removed. As written it is not a citable source and using it would be a genuine academic integrity problem.</p>
+</article><article class="card ref" id="globalseafood-precision-aqua">
+<p class="ref-apa">Global Seafood Alliance (n.d.). Catch &amp; Culture Review: Precision aquaculture can shape greater advancements in aquaculture. Responsible Seafood Advocate <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">globalseafood-precision-aqua</code>
+<span class="chip chip-assumption">Web</span>
+<span class="chip chip-advisory"><span class="badge-icon">!</span>From search result — unopened</span>
+<span class="chip chip-warning" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: low</span>
+<span class="chip chip-theme">Precision Aquaculture</span>
+</div>
+<p class="ref-links"><a href="https://www.globalseafood.org/advocate/catch-culture-review-precision-aquaculture-can-shape-greater-advancements-in-aquaculture/" rel="noopener">source ↗</a></p>
+<p><b>Relevance:</b> Industry framing of precision aquaculture.</p>
+
+
+</article><article class="card ref" id="innovasea-fcr-guide">
+<p class="ref-apa">Innovasea (n.d.). How to improve your feed conversion ratio — a guide. <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">innovasea-fcr-guide</code>
+<span class="chip chip-assumption">Web</span>
+<span class="chip chip-advisory"><span class="badge-icon">!</span>From search result — unopened</span>
+<span class="chip chip-warning" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: low</span>
+<span class="chip chip-theme">Fcr</span><span class="chip chip-theme">Feed</span><span class="chip chip-theme">Economics</span>
+</div>
+<p class="ref-links"><a href="https://www.innovasea.com/library/how-to-improve-your-feed-conversion-ratio/" rel="noopener">source ↗</a></p>
+<p><b>Relevance:</b> Source for the widely-cited figure that feed is approximately 60 percent of aquaculture operating cost (attributed to NOAA), and for typical FCR ranges of 1.0-2.5.</p>
+
+
+</article><article class="card ref" id="globalseafood-fcr-primary-indicator">
+<p class="ref-apa">Global Seafood Alliance (n.d.). A low feed conversion ratio is the primary indicator of efficient aquaculture. Responsible Seafood Advocate <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">globalseafood-fcr-primary-indicator</code>
+<span class="chip chip-assumption">Web</span>
+<span class="chip chip-advisory"><span class="badge-icon">!</span>From search result — unopened</span>
+<span class="chip chip-advisory" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: medium</span>
+<span class="chip chip-theme">Fcr</span><span class="chip chip-theme">Feed</span><span class="chip chip-theme">Economics</span>
+</div>
+<p class="ref-links"><a href="https://www.globalseafood.org/advocate/a-low-feed-conversion-ratio-is-the-primary-indicator-of-efficient-aquaculture/" rel="noopener">source ↗</a></p>
+<p><b>Relevance:</b> Source for the anchor calculation that at USD 500/t feed, a 0.1 FCR difference is worth USD 50 per tonne of production. This is the one externally-sourced economic figure the ROI argument rests on.</p>
+
+
+</article><article class="card ref" id="ussec-fcr-power">
+<p class="ref-apa">U.S. Soybean Export Council (n.d.). The power of feed conversion ratios in aquaculture: Driving profitability, performance, and sustainability. <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">ussec-fcr-power</code>
+<span class="chip chip-assumption">Web</span>
+<span class="chip chip-advisory"><span class="badge-icon">!</span>From search result — unopened</span>
+<span class="chip chip-warning" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: low</span>
+<span class="chip chip-theme">Fcr</span><span class="chip chip-theme">Feed</span>
+</div>
+<p class="ref-links"><a href="https://ussec.org/news/the-power-of-feed-conversion-ratios-in-aquaculture/" rel="noopener">source ↗</a></p>
+
+
+
+</article><article class="card ref" id="caap-rpas-regulations">
+<p class="ref-apa">Civil Aviation Authority of the Philippines (n.d.). RPAS Regulations. CAAP <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">caap-rpas-regulations</code>
+<span class="chip chip-assumption">Law</span>
+<span class="chip chip-advisory"><span class="badge-icon">!</span>From search result — unopened</span>
+<span class="chip chip-warning" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: low</span>
+<span class="chip chip-theme">Regulatory</span><span class="chip chip-theme">Uav</span><span class="chip chip-theme">Philippines</span>
+</div>
+<p class="ref-links"><a href="https://www.caap.gov.ph/rpas-regulations/" rel="noopener">source ↗</a></p>
+<p><b>Relevance:</b> THE governing regulatory source for the entire operating concept. Source for the 7 kg gross weight bracket, registration and pilot certification requirements, VLOS as default, and BVLOS requiring specific authorisation.</p>
+
+<p class="note muted">CRITICAL: every regulatory statement in this repository derives from SECONDARY SUMMARIES of CAAP rules found via search, NOT from the primary regulatory text. The 7 kg threshold currently drives the airframe mass target. CONFIRM DIRECTLY WITH CAAP BEFORE ANY DESIGN OR BUSINESS DECISION DEPENDS ON IT. This repository is not legal advice and its regulatory reading may be wrong.</p>
+</article><article class="card ref" id="caap-types-of-operations">
+<p class="ref-apa">Civil Aviation Authority of the Philippines (n.d.). Types of Operations. <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">caap-types-of-operations</code>
+<span class="chip chip-assumption">Law</span>
+<span class="chip chip-advisory"><span class="badge-icon">!</span>From search result — unopened</span>
+<span class="chip chip-warning" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: low</span>
+<span class="chip chip-theme">Regulatory</span><span class="chip chip-theme">Uav</span><span class="chip chip-theme">Philippines</span>
+</div>
+<p class="ref-links"><a href="https://www.caap.gov.ph/types-of-operations/" rel="noopener">source ↗</a></p>
+
+
+
+</article><article class="card ref" id="iec-60529">
+<p class="ref-apa">International Electrotechnical Commission (n.d.). IEC 60529: Degrees of protection provided by enclosures (IP Code). <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">iec-60529</code>
+<span class="chip chip-assumption">Standard</span>
+<span class="chip chip-warning"><span class="badge-icon">⚠</span>Needs verification</span>
+<span class="chip chip-advisory" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: medium</span>
+<span class="chip chip-theme">Standards</span><span class="chip chip-theme">Hardware</span>
+</div>
+
+
+
+
+</article><article class="card ref" id="qartod-manual">
+<p class="ref-apa">U.S. Integrated Ocean Observing System (n.d.). QARTOD — Quality Assurance/Quality Control of Real-Time Oceanographic Data manuals. IOOS <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">qartod-manual</code>
+<span class="chip chip-assumption">Standard</span>
+<span class="chip chip-warning"><span class="badge-icon">⚠</span>Needs verification</span>
+<span class="chip chip-advisory" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: medium</span>
+<span class="chip chip-theme">Data Quality</span><span class="chip chip-theme">Standards</span>
+</div>
+
+<p><b>Relevance:</b> The mature prior art for real-time water data QC. Our QC flag convention and test battery are adapted from it. Adopting an established convention rather than inventing one is both cheaper and more defensible.</p>
+
+
+</article><article class="card ref" id="nasa-trl">
+<p class="ref-apa">National Aeronautics and Space Administration (n.d.). Technology Readiness Level definitions. <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">nasa-trl</code>
+<span class="chip chip-assumption">Standard</span>
+<span class="chip chip-warning"><span class="badge-icon">⚠</span>Needs verification</span>
+<span class="chip chip-ok" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: high</span>
+<span class="chip chip-theme">Standards</span><span class="chip chip-theme">Engineering Management</span>
+</div>
+
+<p><b>Relevance:</b> The TRL scale used throughout this repository to prevent the pitch implying more maturity than exists.</p>
+
+
+</article><article class="card ref" id="mitchell-model-cards-2019">
+<p class="ref-apa">Mitchell, M.; Wu, S.; Zaldivar, A.; Barnes, P.; Vasserman, L.; Hutchinson, B.; Spitzer, E.; Raji, I. D.; Gebru, T. (2019). Model cards for model reporting. Proceedings of the Conference on Fairness, Accountability, and Transparency (FAT* '19) <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">mitchell-model-cards-2019</code>
+<span class="chip chip-assumption">Conference Paper</span>
+<span class="chip chip-warning"><span class="badge-icon">⚠</span>Needs verification</span>
+<span class="chip chip-ok" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: high</span>
+<span class="chip chip-theme">Ai Ethics</span><span class="chip chip-theme">Documentation</span>
+</div>
+<p class="ref-links"><a href="https://doi.org/10.1145/3287560.3287596" rel="noopener">doi:10.1145/3287560.3287596</a></p>
+<p><b>Relevance:</b> The convention followed in <a href="../files/ai-ml-models.html">ai-ml-models.json</a>, including the mandatory out_of_scope_use field.</p>
+
+
+</article><article class="card ref" id="emerson-ammonia-1975">
+<p class="ref-apa">Emerson, K.; Russo, R. C.; Lund, R. E.; Thurston, R. V. (1975). Aqueous ammonia equilibrium calculations: Effect of pH and temperature. Journal of the Fisheries Research Board of Canada <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">emerson-ammonia-1975</code>
+<span class="chip chip-assumption">Journal Article</span>
+<span class="chip chip-warning"><span class="badge-icon">⚠</span>Needs verification</span>
+<span class="chip chip-advisory" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: medium</span>
+<span class="chip chip-theme">Water Quality</span><span class="chip chip-theme">Ammonia</span>
+</div>
+
+<p><b>Relevance:</b> The standard reference for the un-ionised ammonia fraction calculation used in <a href="../files/data-dictionary.html">data-dictionary.json</a>. The pKa formula in that file traces here.</p>
+
+<p class="note muted">Reconstructed from general knowledge. Confirm before citing — the formula in the data dictionary depends on it.</p>
+</article><article class="card ref" id="idso-schmidt-stability-1973">
+<p class="ref-apa">Idso, S. B. (1973). On the concept of lake stability. Limnology and Oceanography <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">idso-schmidt-stability-1973</code>
+<span class="chip chip-assumption">Journal Article</span>
+<span class="chip chip-warning"><span class="badge-icon">⚠</span>Needs verification</span>
+<span class="chip chip-advisory" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: medium</span>
+<span class="chip chip-theme">Limnology</span><span class="chip chip-theme">Stratification</span>
+</div>
+
+<p><b>Relevance:</b> The Schmidt stability formulation used for the stratification index — our flagship derived variable.</p>
+
+
+</article><article class="card ref" id="ncbi-takifugu-hypoxia-2022">
+<p class="ref-apa">(see source) (2022). Metabolomic analysis of the Takifugu obscurus gill under acute hypoxic stress. <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">ncbi-takifugu-hypoxia-2022</code>
+<span class="chip chip-assumption">Journal Article</span>
+<span class="chip chip-advisory"><span class="badge-icon">!</span>From search result — unopened</span>
+<span class="chip chip-warning" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: low</span>
+<span class="chip chip-theme">Fish Physiology</span><span class="chip chip-theme">Hypoxia</span>
+</div>
+<p class="ref-links"><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9559691/" rel="noopener">source ↗</a></p>
+<p><b>Relevance:</b> Physiological evidence for hypoxic stress mechanisms. Peripheral to the core argument.</p>
+
+
+</article><article class="card ref" id="porter-1979">
+<p class="ref-apa">Porter, M. E. (1979). How competitive forces shape strategy. Harvard Business Review <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">porter-1979</code>
+<span class="chip chip-assumption">Journal Article</span>
+<span class="chip chip-warning"><span class="badge-icon">⚠</span>Needs verification</span>
+<span class="chip chip-ok" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: high</span>
+<span class="chip chip-theme">Strategy</span>
+</div>
+
+
+
+
+</article><article class="card ref" id="osterwalder-vpd-2014">
+<p class="ref-apa">Osterwalder, A.; Pigneur, Y.; Bernarda, G.; Smith, A. (2014). Value proposition design: How to create products and services customers want. Wiley <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">osterwalder-vpd-2014</code>
+<span class="chip chip-assumption">Book</span>
+<span class="chip chip-warning"><span class="badge-icon">⚠</span>Needs verification</span>
+<span class="chip chip-ok" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: high</span>
+<span class="chip chip-theme">Strategy</span><span class="chip chip-theme">Product</span>
+</div>
+
+
+
+
+</article><article class="card ref" id="osterwalder-bmc-2010">
+<p class="ref-apa">Osterwalder, A.; Pigneur, Y. (2010). Business model generation: A handbook for visionaries, game changers, and challengers. Wiley <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">osterwalder-bmc-2010</code>
+<span class="chip chip-assumption">Book</span>
+<span class="chip chip-warning"><span class="badge-icon">⚠</span>Needs verification</span>
+<span class="chip chip-ok" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: high</span>
+<span class="chip chip-theme">Strategy</span>
+</div>
+
+
+
+
+</article><article class="card ref" id="mendelow-1981">
+<p class="ref-apa">Mendelow, A. L. (1981). Environmental scanning: The impact of the stakeholder concept. Proceedings of the Second International Conference on Information Systems <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">mendelow-1981</code>
+<span class="chip chip-assumption">Conference Paper</span>
+<span class="chip chip-warning"><span class="badge-icon">⚠</span>Needs verification</span>
+<span class="chip chip-advisory" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: medium</span>
+<span class="chip chip-theme">Strategy</span><span class="chip chip-theme">Stakeholders</span>
+</div>
+
+<p><b>Relevance:</b> The power-interest grid used in <a href="../files/stakeholder-pain-points.html">stakeholder-pain-points.json</a>.</p>
+
+
+</article><article class="card ref" id="moore-crossing-chasm-1991">
+<p class="ref-apa">Moore, G. A. (1991). Crossing the chasm: Marketing and selling high-tech products to mainstream customers. HarperBusiness <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">moore-crossing-chasm-1991</code>
+<span class="chip chip-assumption">Book</span>
+<span class="chip chip-warning"><span class="badge-icon">⚠</span>Needs verification</span>
+<span class="chip chip-ok" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: high</span>
+<span class="chip chip-theme">Strategy</span><span class="chip chip-theme">Go To Market</span>
+</div>
+
+
+
+
+</article><article class="card ref" id="rogers-diffusion-2003">
+<p class="ref-apa">Rogers, E. M. (2003). Diffusion of innovations. Free Press <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">rogers-diffusion-2003</code>
+<span class="chip chip-assumption">Book</span>
+<span class="chip chip-warning"><span class="badge-icon">⚠</span>Needs verification</span>
+<span class="chip chip-ok" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: high</span>
+<span class="chip chip-theme">Adoption</span><span class="chip chip-theme">Sociology</span>
+</div>
+
+<p><b>Relevance:</b> The adoption framework underlying the socioeconomic-adoption studies file and the go-to-market reasoning.</p>
+
+
+</article><article class="card ref" id="ieee-1362">
+<p class="ref-apa">Institute of Electrical and Electronics Engineers (1998). IEEE 1362-1998: Guide for Information Technology — System Definition — Concept of Operations (ConOps) Document. <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">ieee-1362</code>
+<span class="chip chip-assumption">Standard</span>
+<span class="chip chip-warning"><span class="badge-icon">⚠</span>Needs verification</span>
+<span class="chip chip-advisory" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: medium</span>
+<span class="chip chip-theme">Standards</span><span class="chip chip-theme">Systems Engineering</span>
+</div>
+
+
+
+
+</article><article class="card ref" id="fao-eaa-guidelines">
+<p class="ref-apa">Food and Agriculture Organization of the United Nations (n.d.). Aquaculture development: Ecosystem approach to aquaculture (FAO Technical Guidelines for Responsible Fisheries No. 5, Suppl. 4). FAO <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">fao-eaa-guidelines</code>
+<span class="chip chip-assumption">Report</span>
+<span class="chip chip-warning"><span class="badge-icon">⚠</span>Needs verification</span>
+<span class="chip chip-advisory" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: medium</span>
+<span class="chip chip-theme">Policy</span><span class="chip chip-theme">Environment</span>
+</div>
+
+
+
+
+</article><article class="card ref" id="keep-a-changelog">
+<p class="ref-apa">Keep a Changelog (n.d.). Keep a Changelog 1.1.0. <span class="chip chip-unknown"><span class="badge-icon">⌀</span>no pre-rendered APA</span></p>
+<div class="chip-row">
+<code class="mono">keep-a-changelog</code>
+<span class="chip chip-assumption">Web</span>
+<span class="chip chip-warning"><span class="badge-icon">⚠</span>Needs verification</span>
+<span class="chip chip-ok" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: high</span>
+<span class="chip chip-theme">Documentation</span>
+</div>
+<p class="ref-links"><a href="https://keepachangelog.com/" rel="noopener">source ↗</a></p>
+
+
+
+</article></section>
+<section class="doc-sec"><h2>Bibliography Health</h2><dl class="kv"><dt>Provenance</dt><dd><span class="badge badge-calculated" title="Provenance: derived_calculation"><span class="badge-icon">ƒ</span>Calculated</span></dd><dt>Total Entries</dt><dd><span class="num">45</span></dd><dt>By Verification Status</dt><dd><dl class="kv"><dt>Url Checked</dt><dd><span class="num">0</span></dd><dt>Cited From Search Result</dt><dd><span class="num">25</span></dd><dt>Needs Verification</dt><dd><span class="num">20</span></dd></dl></dd><dt>By Confidence</dt><dd><dl class="kv"><dt>High</dt><dd><span class="num">11</span></dd><dt>Medium</dt><dd><span class="num">19</span></dd><dt>Low</dt><dd><span class="num">15</span></dd></dl></dd><dt>The Honest Assessment</dt><dd><p>ZERO sources in this bibliography have been opened and verified. This is a research SCAFFOLD, not a finished reference list. It is genuinely useful — it maps the literature, identifies the key papers, and explains why each matters — but it is not yet citable.</p></dd><dt>Priority Verification Queue</dt><dd><div class="table-scroll"><table><thead><tr><th>Rank</th><th>Citation Id</th><th>Why</th></tr></thead><tbody><tr><td><span class="num">1</span></td><td>caap-rpas-regulations</td><td>Drives the airframe mass target and the entire business model's BVLOS assumption. Most consequential unverified claim in the repository.</td></tr><tr><td><span class="num">2</span></td><td>seafdec-laguna-fishkill</td><td>The scientific foundation of the vertical profiling argument, and it currently has no author or year.</td></tr><tr><td><span class="num">3</span></td><td>hamzah-dt-water-review-2024</td><td>Closest prior art to the whole concept. Read before building.</td></tr><tr><td><span class="num">4</span></td><td>sciencedirect-uav-multispectral-ponds-2024</td><td>Most directly relevant empirical precedent.</td></tr><tr><td><span class="num">5</span></td><td>ai-aqua-review-2024</td><td>Not a real citation as written. Fix or remove.</td></tr><tr><td><span class="num">6</span></td><td>innovasea-fcr-guide</td><td>The 60-percent-feed-cost figure is load-bearing in the value proposition and is currently sourced to a vendor blog citing NOAA. Go to NOAA.</td></tr><tr><td><span class="num">7</span></td><td>boyd-water-quality-2020</td><td>The general water quality authority. Details unconfirmed.</td></tr><tr><td><span class="num">8</span></td><td>mishra-ndci-2012</td><td>Foundational to the imaging claim.</td></tr></tbody></table></div></dd><dt>Known Gaps</dt><dd><ul><li>BFAR Philippine Fisheries Profile — the national statistical yearbook. THE most important missing source in this repository. Every Philippine market number is a guess without it.</li><li>DENR water quality criteria — the primary administrative orders. <a href="../files/water-quality-standards.html">water-quality-standards.json</a> is a placeholder without them.</li><li>Species-specific DO and ammonia tolerance from primary literature for tilapia and milkfish. Currently the alert thresholds rest on general practice rather than sourced species data, which is the highest-consequence placeholder in the whole repository.</li><li>Philippine farm cost structure data. The 60-percent feed figure is US-derived and its transferability is assumed, not established.</li><li>Peer-reviewed sources on Taal Lake limnology and volcanic sulfur chemistry, which we claim as a local moat.</li><li>Prior art on UAV-tethered sonde deployment specifically — the pendulum control problem. Several academic groups have hit this wall and we should read them before rediscovering it expensively.</li></ul></dd></dl></section>
+</main>
+<footer class="page-footer"><a class="pn pn-prev" href="../files/literature-review.html">
+<small>← Previous · Research Corpus</small>
+<span>Literature Review — Synthesis</span></a><a class="pn pn-next" href="../files/studies-water-quality-sensing.html">
+<small>Next → · Research Corpus</small>
+<span>Related Studies — Water Quality, Limnology &amp; Fish Kill Mechanisms</span></a></footer>
+</div>
+</div>
+<div class="search-overlay" id="search-overlay" hidden>
+<div class="search-panel" role="dialog" aria-label="Search">
+<input type="search" id="search-input" placeholder="Search the repository… (Esc to close)" autocomplete="off" spellcheck="false">
+<ul class="search-results" id="search-results"></ul>
+<div class="search-hint">↑↓ to navigate · Enter to open · Esc to close</div>
+</div>
+</div>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

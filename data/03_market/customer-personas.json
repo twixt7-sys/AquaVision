@@ -1,0 +1,109 @@
+{
+  "id": "customer-personas",
+  "title": "Customer Segments & Personas",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "assumption",
+  "confidence": "speculative",
+  "honest_framing": "These personas are constructed from industry literature and structural reasoning. They are NOT derived from interviews, because none have been conducted. They are hypotheses to falsify in Phase 0, and they are named as fictional composites so nobody mistakes them for research subjects. Personas built without fieldwork tend to describe the customer the founders wish existed.",
+
+  "personas": [
+    {
+      "id": "persona-mang-tonio",
+      "label": "Mang Tonio — Smallholder Cage Operator",
+      "archetype": "The one who needs it most and can afford it least",
+      "operation_scale": "6-10 tilapia cages in a lake, ~1 cycle per 5-6 months, financed on credit against harvest",
+      "geography": "Taal Lake or Laguna de Bay",
+      "profile": "Twenty years on this water. Reads the wind, the colour, and the way the fish come up better than any instrument. Lost most of a cycle two years ago and is still paying it back. Has a smartphone. Does not have a boat motor he trusts at 4 a.m.",
+      "jobs_to_be_done": ["Get this cycle to harvest", "Service the debt", "Not lose everything again"],
+      "pains": ["A kill event is existential, not inconvenient", "Shares the lake with operators who overstock", "No proof of good practice for the lender", "Has been sold a gadget before that broke and nobody came back"],
+      "gains_sought": ["Certainty enough to sleep", "Evidence for the lender", "A warning he can actually act on"],
+      "current_workflow": "Visual inspection morning and evening. Occasional Secchi disc. Judgement.",
+      "willingness_to_pay": { "as_capital": "effectively zero", "as_service_per_cycle": "unknown — plausibly a small amount if bundled into an input or credit package he already pays", "provenance": "assumption" },
+      "adoption_barriers": ["Cost", "No emergency aeration to deploy even if warned", "Distrust of vendors", "Cannot fix it when it breaks"],
+      "decision_criteria": ["Did it work for someone I know on this lake?", "What happens when it breaks?", "Can I stop paying if it does not help?"],
+      "the_uncomfortable_truth": "If we warn Mang Tonio at 3 a.m. that his DO is collapsing, he has no aerator. The warning tells him what he is about to lose. Selling him a monitoring subscription in that circumstance is close to selling him a countdown clock. Either the product includes a response capability he can afford, or he is reached through a cooperative that owns shared emergency aeration, or he is not our customer yet — and we should say the third thing out loud rather than build a business plan on a dignified fiction.",
+      "verdict": "Not the beachhead. The reason the company exists, and the reason the cooperative channel matters."
+    },
+    {
+      "id": "persona-marissa",
+      "label": "Marissa — Commercial Farm Operations Manager",
+      "archetype": "The realistic first customer",
+      "operation_scale": "40+ cages or 20+ ha of ponds, staff of 12, aeration installed, feed purchased by the tonne",
+      "geography": "Commercial operation, lake or brackish",
+      "profile": "Agriculture degree, runs the farm on a budget she defends to an owner quarterly. Has a paper logbook system that works and that she knows is inadequate. Buys inputs on ROI. Has been to a trade show. Sceptical but not closed.",
+      "jobs_to_be_done": ["Hit the survival and FCR numbers", "Explain variance to the owner", "Pass the certification audit without a two-week fire drill", "Keep the electricity bill defensible"],
+      "pains": ["Cannot personally observe 40 units", "Aeration runs on a schedule nobody can justify", "Feed is 60 percent of cost with no feedback loop", "Cannot explain why survival was 68 percent this cycle and 84 percent last", "Audit records compiled by hand"],
+      "gains_sought": ["A number she can put in front of the owner", "Lower kWh", "Measurable FCR movement", "Records that compile themselves"],
+      "current_workflow": "Staff take readings at set times, record on paper, escalate by phone when something looks wrong. Escalation is usually too late.",
+      "willingness_to_pay": { "as_service": "real — has a budget line for inputs and consultants", "requires": "a computable ROI in one cycle", "provenance": "assumption" },
+      "adoption_barriers": ["Needs to see it work on a comparable farm first", "Will not be the guinea pig without a discount or a guarantee", "Owner approval for anything above a threshold"],
+      "decision_criteria": ["What is the payback period?", "Who else runs it?", "What happens on the day it does not fly?", "Does it integrate with what I already have?"],
+      "why_she_is_the_beachhead": "She has money, she has response capacity — aerators she can switch on when warned — and she has a person (herself) whose job is to care about the number. All three are required for the value proposition to close. Mang Tonio has one of the three.",
+      "the_pitch_to_her": "Lead with aeration electricity, not with fish kills. Aeration is a metered, monthly, already-budgeted cost, and a pilot showing fewer aerator-hours at equal DO is a self-contained business case she can verify herself in one cycle without believing a word of our mortality modelling. Fish kill avoidance is the emotional pitch; aeration efficiency is the checkable one. She buys the checkable one."
+    },
+    {
+      "id": "persona-coop-chair",
+      "label": "Ka Dolores — Cooperative Chairperson",
+      "archetype": "The aggregator who makes smallholder economics work",
+      "operation_scale": "Represents 40-80 member operators on one lake",
+      "profile": "Elected. Answers to members. Negotiates with the LGU over cage permits and with traders over price. Has seen technology projects arrive with a donor and leave with the donor.",
+      "jobs_to_be_done": ["Protect members from correlated losses", "Represent members credibly in lake management disputes", "Secure group credit or insurance", "Demonstrate the co-op earns its dues"],
+      "pains": ["Members suffer the same kill on the same night", "No data to argue carrying capacity against the big operators", "Cannot get group insurance because the risk is unquantified", "Every vendor promises and leaves"],
+      "willingness_to_pay": { "structure": "one platform amortised across members via dues or a per-cycle levy", "why_this_works": "converts an impossible per-farm capital cost into a viable per-member fee", "provenance": "assumption" },
+      "adoption_barriers": ["Must justify it to a members' assembly", "Will not commit before seeing it survive a monsoon", "Burned before"],
+      "why_she_matters": "She is the only realistic route to the smallholder, and she also solves the shared-lake commons problem: the co-op has a legitimate collective interest in lake-wide data that no individual member has. A co-op with its own environmental record becomes a party to lake management rather than a subject of it. That is a political value, not just a technical one, and it may be worth more to her than the fish.",
+      "the_pitch_to_her": "Not ROI. Collective bargaining power and member protection. And a very concrete answer to 'what happens when you leave'."
+    },
+    {
+      "id": "persona-bfar-officer",
+      "label": "Engr. Reyes — BFAR Regional Officer",
+      "archetype": "The regulator who is also a potential customer",
+      "profile": "Mandated to manage fish kills and carrying capacity across a region, with a handful of staff, a boat, and a sonde. Gets called after the fish are dead and asked why he did not prevent it.",
+      "jobs_to_be_done": ["Prevent kills, or at least explain them", "Set defensible carrying capacity limits", "Respond to incidents credibly"],
+      "pains": ["Responds after the fact, always", "Cannot enforce limits without measurements to justify them", "No continuous data on any water body he is responsible for"],
+      "willingness_to_pay": { "structure": "programme funding, data subscription, or procurement — not a farm service contract", "provenance": "assumption" },
+      "why_he_matters": "Both a channel into every lake in a region and a veto holder. Aligned early, he is the most powerful distribution partner available. Approached only when we need something, he is an obstacle.",
+      "strategic_note": "Engage in Phase 0 with nothing to sell. Regulators remember who showed up before they had an ask, and the memory is long."
+    },
+    {
+      "id": "persona-technician",
+      "label": "Jun — Farm Technician",
+      "archetype": "Not the buyer. Can kill the deal anyway.",
+      "profile": "Lives on site. Takes the boat out before dawn. Finds the dead fish first and gets asked why he did not see it coming. Twenty-six, good with a phone, has never been asked his opinion about a purchase.",
+      "pains": ["The pre-dawn boat run is genuinely dangerous and everyone treats it as routine", "Blamed when fish die despite having no instrument", "Fills a logbook nobody reads"],
+      "gains_sought": ["Not drowning", "Evidence it was not his fault", "Less pointless clipboard work"],
+      "why_he_matters_more_than_the_org_chart_suggests": "He charges the batteries, cleans the probe, and reports the faults. If he perceives the drone as management's surveillance of his performance, it will be broken every time it matters and nobody will ever prove why. Technology deployments die here, quietly, and the vendor never finds out.",
+      "design_implication": "Never surface a technician-performance metric. Frame the product as HIS instrument — the thing that proves he was right — not as management's monitor of him. This is a product design constraint derived from a persona, which is what personas are actually for."
+    },
+    {
+      "id": "persona-owner-investor",
+      "label": "Mr. Chua — Farm Owner / Absentee Investor",
+      "archetype": "Signs the cheque, never visits",
+      "profile": "Owns the farm as one asset among several. Sees a P&L quarterly. Does not know what a thermocline is and does not need to.",
+      "jobs_to_be_done": ["Predictable returns", "Know the asset is not being mismanaged"],
+      "decision_criteria": ["Payback period", "What does it save"],
+      "why_he_matters": "Above a threshold, Marissa needs his approval. The pitch to him is one slide with a payback period, not a water chemistry lecture. Different artefact entirely — see pitch-deck-outline.json.",
+      "risk": "He is also the person most likely to want the technician-performance dashboard. Say no."
+    }
+  ],
+
+  "segmentation_logic": {
+    "primary_axis": "Response capacity — does this operator have the means to act on a warning?",
+    "why_this_axis": "Not scale, not geography, not species. Response capacity is the variable that determines whether our information has any value at all. A large farm with no aeration is a worse prospect than a mid-size farm with it. This is a non-obvious segmentation and it falls directly out of the loss model in cost-of-inaction.json.",
+    "segments": [
+      { "segment": "Has capacity + has budget", "example": "Marissa", "verdict": "Beachhead. Sell now." },
+      { "segment": "Has capacity + no budget", "example": "Struggling mid-size farm", "verdict": "Financing problem. Solvable later." },
+      { "segment": "No capacity + has budget", "example": "Extensive pond operation with no aerators", "verdict": "Sell the response capability first, or partner with an aeration vendor. Monitoring alone is a countdown clock." },
+      { "segment": "No capacity + no budget", "example": "Mang Tonio", "verdict": "Not addressable directly. Reach via cooperative or public programme, or not at all — and be honest about which." }
+    ]
+  },
+
+  "what_would_falsify_these_personas": [
+    "If commercial managers say aeration already runs on a DO meter they own, the aeration ROI evaporates and Marissa is not the beachhead.",
+    "If cooperatives have no mechanism to levy members for a shared service, the smallholder route closes entirely and the impact story collapses.",
+    "If technicians are enthusiastic rather than threatened, the surveillance concern is over-engineered and we have added a constraint for nothing.",
+    "If BFAR has continuous monitoring already deployed on the target lakes, the entire public-good argument needs rebuilding.",
+    "Each of these is a question, not a speculation. Ask them in Phase 0. Any one of them coming back the wrong way should change the plan, and the plan should be built so that it can."
+  ]
+}

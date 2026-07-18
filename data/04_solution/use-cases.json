@@ -1,0 +1,170 @@
+{
+  "id": "use-cases",
+  "title": "Use Cases",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "design_target",
+  "note": "Each use case traces to a problem id in problem-taxonomy.json and generates requirements in the hardware and software files. A use case that traces to nothing is a feature someone wanted.",
+
+  "use_cases": [
+    {
+      "id": "uc-01-dawn-profile",
+      "title": "The Pre-Dawn Profile",
+      "priority": "must",
+      "traces_to": ["prob-diel-sampling-bias", "prob-blindness-at-depth", "wq-do-depletion"],
+      "actor": "System (autonomous), overseen by farm manager",
+      "trigger": "Scheduled, 04:30 local",
+      "preconditions": ["Dock has charge", "Weather within envelope", "Airspace clear"],
+      "flow": [
+        "Dock opens, drone launches on the stored route.",
+        "Transits to station 1, establishes a stable hover at profiling altitude.",
+        "Winch pays out; sonde descends at controlled rate, sampling continuously.",
+        "Descends to configured depth or until bottom proximity is detected.",
+        "Recovers, transits to station 2. Repeats across the array.",
+        "Returns to dock. Probe is rinsed. Data uploads.",
+        "Platform computes the diel minimum, the thermocline depth, and the oxygen debt.",
+        "If any threshold is breached, an alert goes to the manager's phone."
+      ],
+      "postconditions": ["Profiles stored", "Dashboard updated", "Alerts dispatched if triggered"],
+      "value_delivered": "The number nobody has ever had: what the dissolved oxygen actually was at the daily minimum, at depth, at every cage. This is the single most valuable sortie the system flies and it is the one a human will never do reliably.",
+      "why_this_is_use_case_one": "Because the entire diel-bias argument reduces to this flight. A system that cannot fly at 04:30 unattended has not solved the problem it was built for — it has only made the 9 a.m. reading more convenient.",
+      "failure_modes": ["Dock fails to open in rain", "Wind exceeds envelope precisely during the season of greatest risk", "Probe fouls and drifts without failing loudly"],
+      "honest_note": "Requires BVLOS or a pilot willing to be at the dock at 04:30. Without BVLOS authorisation, this use case — the flagship one — is either illegal or expensive. That dependency is the sharpest reason BVLOS sits on the critical path."
+    },
+    {
+      "id": "uc-02-bloom-mapping",
+      "title": "Algal Bloom Mapping and Ground-Truthing",
+      "priority": "must",
+      "traces_to": ["bio-hab", "prob-hab"],
+      "actor": "System, initiated by schedule or by satellite/dashboard trigger",
+      "flow": [
+        "Multispectral survey grid flown at constrained solar angle to control glint.",
+        "NDWI applied first to mask non-water pixels.",
+        "NDCI computed per water pixel, producing a relative chlorophyll field.",
+        "System identifies the index extremes and plans probe stations at high, medium, and low index locations.",
+        "Probe drops at each, measuring in-situ fluorometric chlorophyll-a and phycocyanin.",
+        "Local regression fits index to concentration for this site, this day, this illumination.",
+        "The whole map is converted from relative index to estimated concentration with a stated confidence interval.",
+        "If phycocyanin is elevated alongside chlorophyll, the system flags cyanobacterial suspicion and recommends laboratory sampling."
+      ],
+      "value_delivered": "A concentration map of the entire water body, calibrated by measurements taken minutes earlier by the same machine — rather than an uncalibrated index that cannot be compared to yesterday's.",
+      "citation_ids": ["mishra-ndci-2012", "mcfeeters-ndwi-1996", "mdpi-hab-meta-2021", "sciencedirect-uav-multispectral-ponds-2024"],
+      "boundary": "The output is biomass, not toxicity. The system recommends sampling; it never declares water safe or unsafe. People eat the shellfish and that boundary is not negotiable.",
+      "why_it_matters": "This is the architectural insight made operational — the probe calibrating the camera, in one sortie. It is the use case to demo."
+    },
+    {
+      "id": "uc-03-stratification-watch",
+      "title": "Stratification and Overturn Watch",
+      "priority": "must",
+      "traces_to": ["wq-stratification", "wq-overturn", "prob-blindness-at-depth"],
+      "flow": [
+        "Repeated profiles across days build a time series of thermocline depth and Schmidt stability.",
+        "Near-bottom DO and ORP quantify the hypolimnetic oxygen debt — the size of the bad water waiting below.",
+        "Weather forecast is ingested: incoming cold fronts, heavy rain, and wind events are the triggers.",
+        "When a strongly stratified column with a large oxygen debt meets a forecast mixing event, the system raises an advisory.",
+        "Advisory names the mechanism in plain language, not a score: 'the bottom three metres are anoxic and rain is forecast tonight; mixing would bring that water to your cages.'"
+      ],
+      "value_delivered": "Visibility of the specific mechanism identified in the Laguna de Bay research as the cause of mass kills — DO depletion with ammonia and hydrogen sulfide — days before it fires.",
+      "citation_ids": ["seafdec-laguna-fishkill", "idso-schmidt-stability-1973"],
+      "honest_note": "This is the use case the whole product exists for, and it is the one we cannot yet deliver. The composite risk score is unvalidated. Until Phase 3, the system can SHOW the stratification and the oxygen debt — which is already more than anyone has — but it must not claim to predict the kill. Showing the mechanism and letting an experienced farmer draw the conclusion is both honest and, given their expertise, probably better.",
+      "the_bitter_irony": "The mixing event we are warning about is usually a storm. We cannot fly in the storm. So the system's job is to have measured the loaded gun in the days beforehand, not to observe the trigger being pulled. That is a real capability and it should be described in exactly those terms."
+    },
+    {
+      "id": "uc-04-mortality-scan",
+      "title": "Surface Mortality and Distress Scan",
+      "priority": "must",
+      "traces_to": ["bio-mortality-detection", "bio-stress-behaviour", "prob-disease-detection"],
+      "flow": [
+        "RGB survey over cage array at detection altitude.",
+        "CV model detects floating mortalities and surface-piping behaviour.",
+        "Detections carry calibrated confidence and are geolocated to a specific cage.",
+        "Manager receives an alert with the image crop attached — never a bare classification.",
+        "Human confirms or rejects. The rejection is training data."
+      ],
+      "value_delivered": "Mortality found in a morning sortie rather than at the next manual round, and localised to a cage rather than to a farm.",
+      "boundary": "Floating mortalities only. In species whose dead fish sink, the majority of mortality is invisible to this use case, which caps the claim substantially and must be stated when selling it.",
+      "note": "Surface piping is the higher-value detection of the two. It is a strong, visually obvious hypoxia signal and it means the fish are in trouble RIGHT NOW — which is actionable in a way that counting corpses is not."
+    },
+    {
+      "id": "uc-05-precision-feeding",
+      "title": "Condition-Aware Feed Dispensing",
+      "priority": "should",
+      "traces_to": ["op-feed-waste", "op-feed-distribution", "prob-feed-waste"],
+      "flow": [
+        "Before a feed run, the system checks current DO and temperature at the cages.",
+        "If DO is below the feeding threshold, the system recommends deferring — stressed fish do not convert feed, and feeding into low oxygen adds organic load to water that is already short.",
+        "If conditions permit, the drone dispenses the metered ration across a planned pattern rather than dumping at one point.",
+        "Dispensed mass and coordinates are logged against the cage record."
+      ],
+      "value_delivered": "Feed applied when the fish can use it and spread where they are. Attacks the largest cost line and the primary kill mechanism with one action.",
+      "citation_ids": ["innovasea-fcr-guide", "ussec-fcr-power"],
+      "the_loop": "This is the reflexive insight from cost-of-inaction.json made operational: overfeeding wastes money AND degrades water AND stresses fish AND worsens conversion AND requires more feed. Feeding on evidence breaks the loop at its cheapest point.",
+      "honest_limitation": "We infer feeding appetite from water condition. Incumbent systems watch the fish eat with an underwater camera, which is a direct observation and strictly better feedback. A knowledgeable buyer will point this out and they will be right. Our answer is coverage — we do this across forty cages, they do it in the one cage with the camera."
+    },
+    {
+      "id": "uc-06-targeted-treatment",
+      "title": "Targeted Conditioner or Treatment Application",
+      "priority": "should",
+      "traces_to": ["prob-treatment-delivery", "wq-ph-swing"],
+      "flow": [
+        "Twin identifies a spatial hotspot — a low-pH region, a low-DO pocket.",
+        "Operator reviews the recommendation, the dose, and the coverage area.",
+        "Operator authorises. This step is not skippable.",
+        "Drone dispenses to the specified coordinates and logs actual delivered mass and position.",
+        "Follow-up profile measures the effect. The loop closes."
+      ],
+      "value_delivered": "Treatment goes where the problem is instead of across the whole pond, which cuts chemical use and cost. And nobody puts a boat out at 4 a.m. in bad weather to do it.",
+      "safety_gate": "Human authorisation is mandatory and hard-coded. An autonomous system that doses a water body on its own judgement is one model error away from poisoning a harvest, and the feature would demo beautifully right up until it did.",
+      "regulatory_note": "Anything beyond conditioners and lime — specifically veterinary medicines — crosses into regulated territory. See regulatory-framework.json before assuming this use case is legal for a given substance."
+    },
+    {
+      "id": "uc-07-post-typhoon",
+      "title": "Post-Typhoon Rapid Damage Assessment",
+      "priority": "could",
+      "traces_to": ["env-typhoon-damage", "op-cage-maintenance"],
+      "flow": [
+        "After the storm passes and conditions return to the flight envelope, a survey grid is flown over the array.",
+        "Imagery identifies displaced cages, collapsed structure, torn nets above the waterline, and debris fields.",
+        "Profiles check for salinity shock and post-storm mixing effects.",
+        "Report generated for the operator and, if relevant, the insurer."
+      ],
+      "value_delivered": "Hours instead of days to know what survived, and nobody has to walk on damaged structure over deep water to find out.",
+      "why_it_is_underrated": "Philippine-specific, emotionally concrete, and it opens an insurance-adjacent customer relationship. It is also the one use case where our weather limitation is irrelevant, because by definition we fly afterwards."
+    },
+    {
+      "id": "uc-08-pollution-detection",
+      "title": "Pollution Event Detection",
+      "priority": "could",
+      "traces_to": ["env-oil-spill", "env-industrial-effluent", "env-solid-waste"],
+      "flow": ["Routine survey imagery is screened for oil sheen, foam, unusual colour, and debris.", "Detection triggers a probe drop at the plume edge and centre.", "Operator is notified with imagery and chemistry."],
+      "boundary": "Detects the plume and the anomaly. Does not identify the compound and cannot attribute it to a source. Attribution is a legal question our data can support and not settle — and overstating that in front of a farmer who then accuses a neighbour is how a company acquires a lawsuit."
+    },
+    {
+      "id": "uc-09-audit-record",
+      "title": "Certification Audit Record Generation",
+      "priority": "should",
+      "traces_to": ["econ-cert-compliance", "prob-data-fragmentation"],
+      "flow": ["Continuous logging accumulates against the site and unit records.", "At audit time, the operator exports a date-ranged environmental report.", "Report includes QC flags and provenance, so an auditor can see which readings are trustworthy."],
+      "value_delivered": "Eliminates a task the farm currently pays someone hours to do by hand.",
+      "why_it_matters_commercially": "Lowest-risk claim in the product and a genuine wedge into commercial farms. It requires no belief in anything we model — it is just logging done properly."
+    },
+    {
+      "id": "uc-10-carrying-capacity",
+      "title": "Lake-Scale Carrying Capacity Assessment",
+      "priority": "could",
+      "traces_to": ["op-stocking-density", "wq-eutrophication", "env-fish-kill"],
+      "actor": "Cooperative, LGU, or BFAR",
+      "flow": ["Profiles aggregated across multiple operators' units over a season.", "Spatial and temporal patterns of oxygen demand mapped against stocking.", "Evidence base assembled for a carrying capacity discussion."],
+      "value_delivered": "The first quantitative basis for a decision that is currently made politically or not at all.",
+      "the_tension": "This use case requires multi-farm data and directly collides with farmer data sensitivity. The operator who benefits from the lake-wide analysis is the one who least wants their own stocking visible in it. Unresolved. See ethics-data-privacy.json.",
+      "note": "Potentially the highest public value of the whole platform and the hardest to actually deliver, because it is a governance problem wearing a technology costume."
+    }
+  ],
+
+  "use_case_prioritisation": {
+    "method": "MoSCoW, weighted by whether the use case proves the core claim or merely uses it.",
+    "must_have_rationale": "UC-01, UC-02, UC-03, and UC-04 collectively prove the depth-plus-imaging claim. Without all four, the platform is a camera with an expensive accessory.",
+    "the_demo_use_case": "UC-02. It shows the probe calibrating the camera in a single flight, which is the only thing about this product that a competitor cannot trivially copy.",
+    "the_revenue_use_case": "UC-09 and the aeration side of UC-01. Boring, checkable, and they pay for the deployment while the interesting claims are still being proven."
+  }
+}

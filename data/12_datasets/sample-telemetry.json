@@ -1,0 +1,77 @@
+{
+  "id": "sample-telemetry",
+  "title": "Sample Telemetry — ILLUSTRATIVE SYNTHETIC DATA",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "illustrative_synthetic",
+
+  "DANGER_READ_THIS_FIRST": {
+    "banner": "EVERY NUMBER IN THIS FILE IS FABRICATED. IT DESCRIBES NO REAL POND, NO REAL FISH, AND NO REAL SORTIE.",
+    "purpose": "This data exists for ONE reason: so the webpage developer has correctly-shaped records to build and test the dashboard and twin against, before real data exists. It shows the SHAPE of the data, not any fact about the world.",
+    "the_absolute_rule": "This data must NEVER appear in a thesis results chapter, a pitch as evidence, or any context implying it is real. The webpage MUST render the illustrative_synthetic badge (see brand-identity.json) prominently on anything derived from it. If this data is ever mistaken for real, the integrity of the entire repository is compromised.",
+    "how_it_was_made": "Hand-constructed to be physically plausible — a realistic diel DO curve, a realistic thermocline, a realistic post-front DO crash — so the charts look believable while being entirely invented. That plausibility is exactly what makes it dangerous if mislabelled."
+  },
+
+  "synthetic_site": {
+    "site_id": "SYNTH-LAKE-01",
+    "label": "Synthetic Demo Lake (NOT REAL)",
+    "note": "A fictional lake cage site loosely modelled on the described dynamics of Philippine lake cage culture. Any resemblance to a real site is coincidental and unintended."
+  },
+
+  "synthetic_diel_do_profile": {
+    "description": "A fabricated but physically plausible 24-hour DO series at 0.5 m depth, showing the diel cycle: afternoon supersaturation, pre-dawn minimum. Illustrates why sampling time matters.",
+    "provenance": "illustrative_synthetic",
+    "unit": "mg/L",
+    "depth_m": 0.5,
+    "series": [
+      { "hour": 0, "do_mgl": 5.2 }, { "hour": 1, "do_mgl": 4.7 }, { "hour": 2, "do_mgl": 4.1 },
+      { "hour": 3, "do_mgl": 3.6 }, { "hour": 4, "do_mgl": 3.1 }, { "hour": 5, "do_mgl": 2.8 },
+      { "hour": 6, "do_mgl": 3.0 }, { "hour": 7, "do_mgl": 3.9 }, { "hour": 8, "do_mgl": 5.1 },
+      { "hour": 9, "do_mgl": 6.4 }, { "hour": 10, "do_mgl": 7.8 }, { "hour": 11, "do_mgl": 9.1 },
+      { "hour": 12, "do_mgl": 10.3 }, { "hour": 13, "do_mgl": 11.2 }, { "hour": 14, "do_mgl": 11.6 },
+      { "hour": 15, "do_mgl": 11.4 }, { "hour": 16, "do_mgl": 10.6 }, { "hour": 17, "do_mgl": 9.4 },
+      { "hour": 18, "do_mgl": 8.1 }, { "hour": 19, "do_mgl": 7.2 }, { "hour": 20, "do_mgl": 6.6 },
+      { "hour": 21, "do_mgl": 6.1 }, { "hour": 22, "do_mgl": 5.7 }, { "hour": 23, "do_mgl": 5.4 }
+    ],
+    "the_teaching_point": "A manual sample at 09:00 reads 6.4 mg/L (fine). The 05:00 minimum is 2.8 mg/L (acute stress). Same day, same pond. This is the diel sampling bias, illustrated with invented-but-plausible numbers.",
+    "annotations": [
+      { "hour": 5, "label": "Pre-dawn minimum — 2.8 mg/L — nobody is measuring", "severity": "warning" },
+      { "hour": 9, "label": "Typical manual sample time — 6.4 mg/L — looks safe", "severity": "info" },
+      { "hour": 14, "label": "Supersaturation 11.6 mg/L — large algal crop, big demand tonight", "severity": "advisory" }
+    ]
+  },
+
+  "synthetic_depth_profile": {
+    "description": "A fabricated single-station vertical profile showing thermal stratification and hypolimnetic hypoxia — the loaded-gun condition.",
+    "provenance": "illustrative_synthetic",
+    "station_id": "SYNTH-ST-04",
+    "timestamp_note": "fictional pre-dawn profile",
+    "samples": [
+      { "depth_m": 0.5, "temp_c": 29.8, "do_mgl": 3.1, "ph": 8.1, "orp_mv": 180, "turbidity_ntu": 18 },
+      { "depth_m": 1.0, "temp_c": 29.7, "do_mgl": 3.0, "ph": 8.0, "orp_mv": 175, "turbidity_ntu": 19 },
+      { "depth_m": 2.0, "temp_c": 29.4, "do_mgl": 2.7, "ph": 7.9, "orp_mv": 160, "turbidity_ntu": 21 },
+      { "depth_m": 3.0, "temp_c": 28.1, "do_mgl": 2.0, "ph": 7.6, "orp_mv": 90, "turbidity_ntu": 26 },
+      { "depth_m": 4.0, "temp_c": 25.3, "do_mgl": 0.9, "ph": 7.2, "orp_mv": -40, "turbidity_ntu": 34 },
+      { "depth_m": 5.0, "temp_c": 24.1, "do_mgl": 0.4, "ph": 7.0, "orp_mv": -120, "turbidity_ntu": 41 },
+      { "depth_m": 6.0, "temp_c": 23.8, "do_mgl": 0.2, "ph": 6.9, "orp_mv": -180, "turbidity_ntu": 45 }
+    ],
+    "the_teaching_point": "The thermocline sits at ~3-4 m (temp drops from 28.1 to 25.3). Below it: anoxic (0.2-0.9 mg/L), negative ORP (sulfide-generating), acidifying. The surface looks survivable at 3.1 mg/L. A cold rain that mixes this column delivers the anoxic, sulfide-laden bottom water to the fish. This is the mechanism from the Laguna de Bay literature, illustrated with invented numbers.",
+    "derived_illustrative": { "thermocline_depth_m": 3.5, "note": "computed from the fabricated profile above; still synthetic" }
+  },
+
+  "synthetic_multichannel_snapshot": {
+    "description": "A fabricated single-instant surface snapshot showing the full channel set, for testing dashboard tile layouts.",
+    "provenance": "illustrative_synthetic",
+    "reading": { "do_mgl": 5.4, "temp_c": 29.6, "ph": 8.0, "salinity_ppt": 0.3, "turbidity_ntu": 19, "chla_ugl": 42, "phycocyanin_ugl": 8, "orp_mv": 165, "tan_mgl": 0.6, "nh3_un_ionised_mgl": 0.018 },
+    "note": "Every value invented. Included so the dashboard developer can lay out the tile grid, wire up the alert-colour logic, and test the provenance badge — NOT so anyone learns anything about water."
+  },
+
+  "for_the_webpage_developer": {
+    "instructions": [
+      "Use these arrays to build and test charts.",
+      "Render the illustrative_synthetic badge on EVERYTHING derived from this file. It should be impossible for a viewer to mistake this for real data.",
+      "When real telemetry arrives (repository v2.0.0), delete this file and remove the synthetic badges in the SAME change. A stale synthetic badge on real data is nearly as damaging as real-looking synthetic data.",
+      "The diel and depth arrays are deliberately physically plausible so your charts look right. That is a feature for development and a hazard for honesty — hence the badges."
+    ]
+  }
+}

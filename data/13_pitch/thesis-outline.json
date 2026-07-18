@@ -1,0 +1,87 @@
+{
+  "id": "thesis-outline",
+  "title": "Thesis / Dissertation Outline",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "design_target",
+  "note": "A chapter structure for an engineering/technology thesis on the OmniDrone concept, mapped to the repository files that supply each chapter. Written for a DESIGN-AND-FEASIBILITY thesis (which is what TRL 3 supports), with a clear path to a results-bearing thesis once validation data exists.",
+
+  "the_honest_framing": {
+    "what_kind_of_thesis_this_can_be_now": "A design, specification, and feasibility study with a pre-registered validation methodology. It contributes a problem analysis, a system architecture, an identified research gap, and a testable plan. It does NOT contribute empirical results, because none exist.",
+    "what_it_becomes_after_validation": "An empirical thesis once Phase 2-3 data exists — the profile-vs-reference agreement, the calibration-uncertainty curve, and the stratification-precursor analysis are all publishable results.",
+    "the_discipline": "Write in proposal/design tense now. Do not use results language until there are results. A committee will forgive an honest feasibility study; it will fail a study that claims validation it does not have.",
+    "the_tempting_error": "Presenting the synthetic sample data as results. The illustrative_synthetic data exists ONLY to build the webpage. It must never appear in a results chapter. See sample-telemetry.json."
+  },
+
+  "chapters": [
+    {
+      "n": 1,
+      "title": "Introduction",
+      "contents": ["Background: the aquaculture inflection and its significance", "Problem statement", "The reframe: monitoring as a labour-economics problem", "Research questions and objectives", "Scope and delimitation (what the system does NOT do)", "Significance of the study", "Thesis structure"],
+      "source_files": ["problem-statement.json", "problem-taxonomy.json#/coverage_legend", "solution-overview.json#/what_the_system_is_not"],
+      "note": "Use the problem taxonomy's coverage classification as the scope delimitation — it's already structured as inclusion/exclusion criteria."
+    },
+    {
+      "n": 2,
+      "title": "Review of Related Literature and Studies",
+      "contents": ["The five-move argument (aquaculture context → failure mechanism → monitoring gap → remote-sensing calibration problem → digital-twin observation famine)", "Thematic synthesis across the eight study collections", "The identified research gap", "Counter-evidence and inconvenient findings", "Theoretical framework"],
+      "source_files": ["literature-review.json", "studies-water-quality-sensing.json", "studies-uav-remote-sensing.json", "studies-harmful-algal-blooms.json", "studies-ai-ml-aquaculture.json", "studies-digital-twin.json", "studies-fish-health-disease.json", "studies-feeding-nutrition.json", "studies-socioeconomic-adoption.json", "research-gaps.json", "theoretical-framework.json", "references-bibliography.json"],
+      "the_advice": "Lead with the Laguna de Bay triad (DO + ammonia + H2S) — it's a published, mechanistic, Philippine finding that independently justifies the vertical-profiling design. Don't bury your best evidence. AND: verify every citation before submission — the bibliography currently has ZERO opened sources.",
+      "critical_warning": "The bibliography is a scaffold, not a finished reference list. Every source must be retrieved and confirmed before this chapter is submitted. See references-bibliography.json#/CRITICAL_WARNING_READ_BEFORE_CITING."
+    },
+    {
+      "n": 3,
+      "title": "System Design and Specification",
+      "contents": ["Concept of operations", "Requirements baseline with traceability", "Hardware architecture (airframe, winch, sensors, dispensing, power, dock)", "Software architecture (pipeline, fusion, models, twin, telemetry, API)", "The core architectural contribution: self-calibrating observation", "Design trade-offs and the mass-budget finding"],
+      "source_files": ["concept-of-operations.json", "omnidrone-specifications.json", "probe-winch-subsystem.json", "sensor-payload.json", "airframe-propulsion.json", "carriage-ejection-system.json", "power-energy-budget.json", "docking-station.json", "system-architecture.json", "data-pipeline.json", "ai-ml-models.json", "digital-twin.json", "telemetry-schema.json"],
+      "note": "The mass-budget analysis (which does NOT close fully-configured) is a genuine engineering finding and belongs here honestly, not hidden. It demonstrates rigorous feasibility analysis — a strength, not a weakness."
+    },
+    {
+      "n": 4,
+      "title": "Methodology",
+      "contents": ["Research design (mixed-methods, sequential)", "The validation study design", "The control-group problem and its ethical resolution", "Data quality protocol", "Analysis plan (Bland-Altman for agreement, calibration-uncertainty curves, mixed-effects for chronic loss)", "Ethics", "Validity threats", "Falsification conditions"],
+      "source_files": ["methodology.json"],
+      "note": "This chapter is unusually strong for a feasibility thesis because the methodology is pre-registered. The control-group ethical analysis and the explicit falsification conditions are genuine scholarly contributions. Foreground them."
+    },
+    {
+      "n": 5,
+      "title": "Results",
+      "status": "AWAITING DATA",
+      "contents_when_available": ["Profile-vs-reference agreement (RQ1)", "Calibration-uncertainty-vs-N curve (RQ2)", "Stratification precursor analysis (RQ3)", "Chronic-loss correlation (RQ4)", "Adoption/behaviour-change findings (RQ5)"],
+      "current_state": "EMPTY. No results exist. In the feasibility version of the thesis, this chapter is replaced by 'Feasibility Analysis' — the payload budget, the energy budget, and the risk analysis, which ARE completable now and constitute an analytical feasibility result.",
+      "source_files_for_feasibility_version": ["power-energy-budget.json#/mission_energy_analysis", "omnidrone-specifications.json#/the_mass_budget", "risk-register-fmea.json"],
+      "the_hard_rule": "Do NOT populate this with synthetic sample data. Ever."
+    },
+    {
+      "n": 6,
+      "title": "Discussion",
+      "contents": ["Interpretation of the feasibility analysis", "The system's contribution to the identified gap", "Limitations (weather, benthic blind spot, affordability, unvalidated prediction)", "The ethical tensions (over-stocking, antimicrobial use, equity, surveillance)", "Comparison with alternatives (USV, buoy, satellite)"],
+      "source_files": ["swot-porter.json", "competitive-landscape.json", "ethics-data-privacy.json", "risk-register-fmea.json"],
+      "note": "The limitations and ethical-tensions sections are where an honest thesis distinguishes itself. Include the over-stocking paradox and the affordability barrier as first-class discussion points, not buried caveats."
+    },
+    {
+      "n": 7,
+      "title": "Conclusion and Recommendations",
+      "contents": ["Summary of contributions", "Answers to the research questions (to the extent the feasibility study can answer them)", "Recommendations for the next development phase", "Future work (the validation programme)"],
+      "source_files": ["milestones-roadmap.json", "methodology.json#/what_would_falsify_the_whole_thesis"]
+    }
+  ],
+
+  "front_and_back_matter": {
+    "abstract": "See elevator-pitches.json#/the_thesis_abstract_version — written in honest proposal tense.",
+    "references": "references-bibliography.json — with the standing warning that every entry must be verified before submission.",
+    "appendices": ["Full requirements baseline", "The data dictionary and schema", "The risk register (FMEA)", "The complete study-record collections", "Glossary"]
+  },
+
+  "the_contribution_statement": {
+    "what_this_thesis_genuinely_contributes": [
+      "A structured problem analysis grounding a documented, recurring, mechanistically-understood failure mode in published evidence.",
+      "A reframing of the monitoring problem as labour-economics rather than instrumentation.",
+      "A system architecture whose central novelty is self-generated calibration ground truth, addressing a gap the UAV water-quality literature repeatedly identifies.",
+      "A feasibility analysis (mass, energy, risk) that honestly reports where the concept does and does not close.",
+      "A pre-registered validation methodology including an ethical resolution to the control-group problem and explicit falsification conditions."
+    ],
+    "what_it_does_not_claim": "Empirical validation of any performance or predictive capability. That is future work, and the thesis says so plainly.",
+    "why_this_is_a_legitimate_thesis": "A design-and-feasibility study with a rigorous problem analysis, an identified gap, a specified system, and a pre-registered method is a complete and defensible scholarly contribution at this stage. It becomes a stronger, results-bearing thesis after the validation season — but it does not need to overclaim to be worth defending now."
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "id": "water-quality-standards",
+  "title": "Water Quality Standards & Thresholds",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "assumption",
+  "confidence": "low",
+
+  "THE_MOST_IMPORTANT_WARNING_IN_THE_REPOSITORY": "The numerical thresholds below are INDICATIVE PLACEHOLDERS drawn from general aquaculture practice. They have NOT been sourced to primary DENR administrative orders or to species-specific primary literature. THESE NUMBERS DRIVE ALERT THRESHOLDS. An incorrect threshold here becomes a false 'all clear' or a false alarm in production, and a false all-clear can cost a harvest. This is the single highest-consequence set of placeholders in the entire repository. Do not wire these into any alerting logic until they are replaced with sourced, species- and life-stage-specific values verified by an aquaculture scientist.",
+
+  "why_thresholds_are_harder_than_they_look": {
+    "points": [
+      "Thresholds are species-specific AND life-stage-specific. A fingerling and an adult of the same species tolerate different conditions.",
+      "Toxicity thresholds are coupled. Ammonia toxicity depends on pH and temperature; nitrite toxicity depends on chloride. A single ammonia threshold with no pH context is meaningless.",
+      "Regulatory criteria (DENR) and biological criteria (what actually harms the fish) are DIFFERENT numbers with different purposes. The system may need to report against both.",
+      "Chronic and acute thresholds differ. A level that is lethal in an hour differs from one that impairs growth over a cycle — and the chronic one may matter more economically (see the sleeper hypothesis in cost-of-inaction.json)."
+    ]
+  },
+
+  "regulatory_criteria": {
+    "source_required": "DENR Administrative Orders establishing water quality guidelines and effluent standards, by water body classification.",
+    "status": "NOT OBTAINED — placeholder",
+    "note": "Philippine surface waters are classified (e.g., Class C is commonly associated with fishery use), and each class carries numerical criteria. The correct criteria depend on the water body's classification. Obtain the current DAO and the classification of each target water body. Reporting against the wrong class is a compliance error.",
+    "placeholder_fields": {
+      "dissolved_oxygen_min_mgl": "unknown — obtain from DAO",
+      "ph_range": "unknown — obtain from DAO",
+      "temperature_criteria": "unknown",
+      "ammonia_criteria": "unknown",
+      "note": "Deliberately left unknown rather than guessed. A guessed regulatory number is worse than a blank one."
+    }
+  },
+
+  "biological_thresholds_indicative": {
+    "status": "INDICATIVE ONLY — general practice, not sourced species data. Replace before use in alerting.",
+    "provenance": "assumption",
+    "citation_ids": ["boyd-water-quality-2020"],
+    "dissolved_oxygen": {
+      "warmwater_finfish_general": {
+        "desirable_mgl": ">= 5.0",
+        "sublethal_stress_below_mgl": 3.0,
+        "acute_risk_below_mgl": 2.0,
+        "note": "General warmwater guidance. Tilapia are relatively hypoxia-tolerant, which is WHY a tilapia kill is alarming — conditions severe enough to kill tilapia are severe indeed. Species-specific values required.",
+        "citation_ids": ["boyd-water-quality-2020", "igs-do-aquaculture-2026"]
+      },
+      "taal_local_reference": { "surface_normal_ppm": 6.0, "source": "BFAR statement via news reporting", "citation_ids": ["pna-tilapia-fishkill"], "note": "A useful LOCAL operational reference, but sourced to journalism. Confirm against BFAR's published criteria." }
+    },
+    "un_ionised_ammonia": {
+      "note": "It is the UN-IONISED fraction (NH3) that is toxic, and that fraction rises steeply with pH and temperature. Never apply a threshold to total ammonia without the pH and temperature context. See data-dictionary.json for the computation.",
+      "indicative_chronic_mgl_nh3": "~0.02 (advisory), rising toxicity above",
+      "citation_ids": ["emerson-ammonia-1975", "boyd-water-quality-2020"]
+    },
+    "ph": { "indicative_range": "6.5-9.0 for most warmwater culture", "note": "pH's operational significance is mainly as a modulator of ammonia and sulfide toxicity and as a diurnal-swing diagnostic, not as a direct killer at these ranges." },
+    "temperature": { "note": "Species-specific. Drives oxygen solubility (inversely), metabolic demand, and ammonia toxicity. The killing combination in a heat event is rising demand meeting falling solubility." },
+    "nitrite": { "note": "Toxicity strongly mitigated by chloride, so the same NO2 number is a different risk in brackish versus fresh water. Report salinity alongside." },
+    "hydrogen_sulfide": { "note": "Toxic at very low concentrations; more toxic at low pH. We infer it from near-bottom ORP and anoxia rather than measure it directly." }
+  },
+
+  "the_alerting_implication": {
+    "statement": "The alert thresholds in data-dictionary.json currently reference these indicative values.",
+    "the_rule": "Those alert thresholds are PROVISIONAL and must be re-derived from sourced species data before any customer relies on them. An alert is a promise that a number means something. Making that promise on an unsourced threshold is the failure mode this whole file exists to prevent.",
+    "the_configuration_principle": "Thresholds must be per-site and per-species configurable, set by someone who knows the stock — not hard-coded global constants. A tilapia fingerling threshold applied to an adult milkfish pond is a wrong alarm in both directions."
+  },
+
+  "secchi_depth_note": {
+    "why_it_is_here": "The Secchi disc is the oldest and most trusted field measure of transparency, and every extension worker understands it.",
+    "the_opportunity": "It gives the OmniDrone a free ground-truth calibration target that farmers already trust. Preserving it in the product — reporting an equivalent Secchi depth alongside the turbidity and chlorophyll numbers — is a cheap trust-building bridge between the instrument and the operator's existing intuition."
+  },
+
+  "what_must_be_obtained": [
+    "DENR water quality DAO and the classification of each target water body.",
+    "Species- and life-stage-specific DO, ammonia, nitrite, temperature, and pH tolerances from primary literature for tilapia, milkfish, and the shrimp species — verified by an aquaculture scientist.",
+    "BFAR's operational thresholds and fish-kill investigation criteria.",
+    "Local reference values for each target lake (Taal's are distinct because of volcanic sulfur input)."
+  ]
+}

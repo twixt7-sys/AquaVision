@@ -1,0 +1,80 @@
+{
+  "id": "environmental-impact",
+  "title": "Environmental Impact Assessment",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "assumption",
+  "confidence": "low",
+
+  "the_principle": "A product sold on environmental stewardship must account for its OWN footprint, honestly, including the harms. An environmental impact section that lists only benefits is not an assessment; it is an advertisement.",
+
+  "positive_impacts": [
+    {
+      "impact": "Reduced eutrophication of shared water bodies",
+      "mechanism": "Condition-aware feeding reduces uneaten feed, the primary driver of the nutrient loading that degrades the water. Carrying-capacity analytics support collective management.",
+      "citation_ids": ["fao-nutrient-dynamics-eutrophic", "ija-environmental-impacts-ph"],
+      "magnitude": "Potentially significant, UNPROVEN. Depends on farms actually feeding on evidence and on carrying-capacity analytics being adopted.",
+      "the_caveat": "Undercut by the over-stocking paradox — the same instruments could enable intensification that increases loading. Net effect is genuinely uncertain and must not be claimed as unambiguously positive."
+    },
+    {
+      "impact": "Reduced chemical and antimicrobial use",
+      "mechanism": "Precision placement delivers a given effect with less total substance.",
+      "the_caveat": "Cuts both ways — easier dosing can increase total use. See ethics-data-privacy.json#/the_antimicrobial_stewardship_tension."
+    },
+    {
+      "impact": "Earlier pollution detection",
+      "mechanism": "Sheen, effluent, and debris detection supports faster response to pollution events in shared waters.",
+      "magnitude": "Real but incremental."
+    },
+    {
+      "impact": "Data for ecosystem-based management",
+      "mechanism": "Continuous multi-farm environmental data is exactly what an ecosystem approach to aquaculture (EAA) requires and currently lacks.",
+      "citation_ids": ["fao-eaa-guidelines"],
+      "magnitude": "Potentially the largest positive impact — but it requires the cross-farm data governance problem to be solved, which is unresolved."
+    }
+  ],
+
+  "the_products_own_footprint": {
+    "note": "The harms the solution itself causes. Named honestly.",
+    "impacts": [
+      {
+        "impact": "Battery lifecycle and electronic waste",
+        "detail": "Lithium packs are a consumable, replaced frequently given the sortie cadence and dock heat. Drones, docks, and sondes are electronic hardware with a disposal footprint. A distributed network multiplies this.",
+        "mitigation": "Battery recycling programme; design for repairability and component reuse; honest lifecycle accounting rather than ignoring it.",
+        "status": "must be designed, currently unaddressed"
+      },
+      {
+        "impact": "Ditching contamination risk",
+        "detail": "A drone that ditches puts lithium and electronics into a food-production water body. This is why containment and buoyancy are first-class requirements — but the residual risk is non-zero.",
+        "mitigation": "Positive buoyancy, lithium containment, locator beacon, water-aware failsafe. See airframe-propulsion.json#/the_ditching_provision.",
+        "the_honest_note": "A sunk drone in a lake people fish from is an environmental incident, not just a lost asset. We design against it and we disclose the residual risk."
+      },
+      {
+        "impact": "Manufacturing and supply chain footprint",
+        "detail": "Carbon composite, rare-earth motor magnets, and sensor electronics carry embodied impacts.",
+        "mitigation": "Beyond our early control, but worth honest accounting rather than omission."
+      },
+      {
+        "impact": "Operational energy",
+        "detail": "Modest per sortie, and solar-powered docks make it largely renewable in operation. This is the one footprint line that is genuinely small.",
+        "mitigation": "Solar dock design. See docking-station.json."
+      },
+      {
+        "impact": "Wildlife disturbance",
+        "detail": "A drone over a lake disturbs birds and other wildlife. Repeated daily overflight has a non-zero ecological cost, especially near breeding or roosting sites.",
+        "mitigation": "Flight-path planning around sensitive areas; NOT using the platform for active wildlife deterrence (a deliberate exclusion — see problem-taxonomy.json bio-predation)."
+      }
+    ]
+  },
+
+  "the_net_assessment": {
+    "statement": "The net environmental impact is genuinely uncertain and depends on adoption patterns we cannot yet predict.",
+    "the_honest_reasoning": "If the product reduces feed waste and supports carrying-capacity management, the benefit likely exceeds the hardware footprint. If it primarily enables intensification and easier chemical dosing, the net could be negative. The outcome depends on HOW it is adopted and marketed, not just on what it does — which places a real responsibility on the company's own choices.",
+    "why_state_it_this_way": "Because claiming a confident net-positive impact at this stage would be exactly the sustainability-washing the field is full of. The intellectually honest position is that the sign of the net impact is a function of the company's own discipline, and that is both true and a stronger statement than a fabricated positive number."
+  },
+
+  "lifecycle_thinking": {
+    "commitment": "Before scale, conduct a real lifecycle assessment of the hardware, not a hand-wave. A distributed network of hundreds of drones, docks, and sondes has a material footprint that a single-unit intuition misses.",
+    "status": "not done — flagged as a pre-scale requirement"
+  }
+}

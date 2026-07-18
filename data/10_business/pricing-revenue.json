@@ -1,0 +1,80 @@
+{
+  "id": "pricing-revenue",
+  "title": "Pricing & Revenue Model",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "modeled_projection",
+  "confidence": "speculative",
+
+  "READ_THIS_FIRST": "There are NO prices in this file, and that is deliberate. Pricing requires knowing the cost to serve (a BOM with zero real quotes), the value delivered (unproven), and willingness to pay (unmeasured). Inventing a subscription price now would produce a number that flows into the financial model and the funding ask and is wrong at the root. This file gives the pricing LOGIC and the inputs required, so a real price can be set the moment Phase 0 supplies them. A founder who says 'here is how we will price and here is what we need to know first' is more credible than one who presents a confident price built on nothing.",
+
+  "pricing_philosophy": {
+    "principle": "Price against value delivered, not cost incurred — but anchor on the value the customer can VERIFY, not the value we claim.",
+    "why": "The verifiable value (aeration savings, audit-labour savings) is a floor the customer will accept because they can check it. The claimed value (avoided mortality) is a ceiling we cannot prove. Price near the verifiable floor to win the deal, and let the unverifiable upside be the reason they renew once they have seen it.",
+    "the_anti_pattern": "Pricing against avoided-mortality value would produce a high number justified by a claim we cannot substantiate, which collapses the first time a sophisticated buyer asks for evidence."
+  },
+
+  "the_pricing_inputs_required": [
+    { "input": "Cost to serve per site per period", "source": "Real BOM + measured maintenance labour + dock amortisation + battery opex + field ops", "status": "NOT KNOWN", "criticality": "blocking" },
+    { "input": "Aeration electricity spend per operator", "source": "Phase 0 farmer discovery", "status": "NOT KNOWN", "note": "This is the verifiable-value anchor. It may be the single most important pricing input." },
+    { "input": "Feed spend and current FCR per operator", "source": "Phase 0", "status": "NOT KNOWN" },
+    { "input": "Measured willingness to pay", "source": "Paid pilots, not surveys", "status": "NOT KNOWN", "note": "Stated WTP in agri surveys is inflated. Only a paid invoice is evidence." },
+    { "input": "Number of cages/stations per site", "source": "Phase 0", "status": "NOT KNOWN", "note": "Drives per-cage pricing and the buoy crossover threshold." }
+  ],
+
+  "candidate_pricing_structures": [
+    {
+      "structure": "Per-site monitoring subscription (monthly or per-cycle)",
+      "pro": "Predictable revenue, aligns our incentive with uptime, keeps the data relationship alive, spreads cost so no capital barrier.",
+      "con": "Requires the customer to value ongoing service, not a one-time fix.",
+      "verdict": "Most likely primary model."
+    },
+    {
+      "structure": "Per-cage or per-station pricing",
+      "pro": "Scales with the customer's operation and with our cost to serve.",
+      "con": "Complex to explain; may penalise the dense clusters that are our best economics.",
+      "verdict": "Possible modifier on the subscription."
+    },
+    {
+      "structure": "Cooperative group subscription",
+      "pro": "Amortises one dock across many members — converts an impossible per-farm cost into a viable per-member fee. The smallholder route.",
+      "con": "Requires the co-op to have a levy mechanism (unconfirmed).",
+      "verdict": "Essential for the smallholder segment."
+    },
+    {
+      "structure": "Dispensing/treatment delivery as a metered service",
+      "pro": "Pay-per-use for a discrete valuable action.",
+      "con": "Small revenue if dispensing is repositioned as treatment-only (which the engineering suggests it should be).",
+      "verdict": "Ancillary."
+    },
+    {
+      "structure": "Institutional/programme contract (BFAR, LGU, development finance)",
+      "pro": "Larger, more stable, aligned with the public-good framing. Funds smallholder reach.",
+      "con": "Procurement cycles are long; different sales motion entirely.",
+      "verdict": "A distinct and important stream, not a substitute for commercial revenue."
+    },
+    {
+      "structure": "Outcome-based / risk-share pricing",
+      "pro": "Maximally aligned; addresses the trust problem by putting our fee at risk.",
+      "con": "We cannot bear that risk before validation, and attributing outcomes is a measurement nightmare (see the control-group problem in methodology.json).",
+      "verdict": "Aspirational. Interesting once validated; dangerous before."
+    }
+  ],
+
+  "the_hardware_question": {
+    "should_we_sell_the_drone": "Almost certainly not, at least initially.",
+    "reasoning": [
+      "A USD 20k+ capital ask to a fish farm is a non-starter on affordability and on gadget-fatigue.",
+      "Selling the hardware transfers maintenance and calibration responsibility to a customer who cannot do it, which destroys the data quality the whole product depends on.",
+      "Service retention keeps the data relationship, which is the moat.",
+      "We WANT the drones back in our docks being maintained by our people, because a fouled sensor in a customer's hands produces confidently wrong data that damages our reputation, not just theirs."
+    ],
+    "model": "AquaVision owns the hardware; the customer buys the service. Monitoring-as-infrastructure, not equipment sales."
+  },
+
+  "revenue_projection_status": {
+    "statement": "No revenue projection appears here.",
+    "why": "It would require a price (unknown), a customer count (unknown), and a conversion rate (unknown), multiplied together into a number that would look authoritative and be meaningless. See financial-projections.json, which builds a SCENARIO STRUCTURE rather than a forecast, precisely so the assumptions are visible and attackable.",
+    "when_this_gets_filled_in": "After Phase 0 supplies the cost, the aeration-spend anchor, and at least one paid-pilot WTP data point. Not before."
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "id": "studies-harmful-algal-blooms",
+  "title": "Related Studies — Harmful Algal Blooms",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "theme": "harmful_algal_blooms",
+  "provenance": "verified_external",
+  "verification_notice": "Records derived from search-result summaries. Open the sources before citing.",
+
+  "the_boundary_this_collection_defends": "Every study here measures PIGMENTS. None of them measure TOXINS. That gap is where lawsuits live and where people get poisoned, and this collection exists partly to keep the company honest about it.",
+
+  "studies": [
+    {
+      "citation_id": "mdpi-hab-meta-2021",
+      "theme": "harmful_algal_blooms",
+      "study_type": "meta_analysis",
+      "geography": "Global",
+      "year": 2021,
+      "summary": "A meta-analysis of harmful algal bloom detection and monitoring from a remote sensing perspective, synthesising the methods and proxies used across the published record.",
+      "key_findings": [
+        "Chlorophyll-a is the proxy used in approximately 80 percent of HAB detection and monitoring studies.",
+        "Chlorophyll-a is present in both toxic and non-toxic algal species, so it indicates potential bloom presence — not toxicity.",
+        "NDCI and NDVI are applied to estimate chlorophyll-a distribution in HAB monitoring."
+      ],
+      "relevance_to_omnidrone": "Establishes chlorophyll-a as the field-standard proxy and therefore justifies our sensor selection. More importantly, it is the source of the caveat this repository repeats everywhere: chlorophyll indicates biomass, NOT toxicity.",
+      "supports_or_challenges": "mixed",
+      "the_boundary_it_draws": "If 80 percent of the field uses a proxy that cannot distinguish toxic from non-toxic algae, then the field's collective capability is 'detect that a bloom is happening', not 'detect that it is dangerous'. Any product claiming otherwise is claiming something the science does not support. A high chlorophyll reading is a reason to sample, not a diagnosis.",
+      "why_this_matters_ethically": "People eat the shellfish. A system that implies water is safe, and is wrong, harms someone who never agreed to be part of our experiment. This is the sharpest ethical line in the whole product and it is drawn by this paper.",
+      "priority": "HIGH"
+    },
+    {
+      "citation_id": "pmc-sentinel-hab-chile-2020",
+      "theme": "harmful_algal_blooms",
+      "study_type": "case_study",
+      "geography": "Southern Chile",
+      "year": 2020,
+      "summary": "Copernicus Sentinel-2 and Sentinel-3 data used to monitor harmful algal blooms during COVID-19 lockdown, when in-situ sampling was impossible.",
+      "key_findings": [
+        "Daily observation of algal blooms from satellite.",
+        "Advised decision-makers in time to prepare for possible mass salmon mortality events.",
+        "Sentinel-2A/B at 10 m resolution combined with in-situ sampling enabled enhanced detection of fine-scale HABs.",
+        "ACOLITE atmospheric correction with NDCI delivered detail on patchy dinoflagellate blooms."
+      ],
+      "relevance_to_omnidrone": "The most important and most uncomfortable study in this collection. It is operational, demonstrated, free satellite HAB early warning for aquaculture — proof that a meaningful part of our value proposition already exists at zero cost.",
+      "supports_or_challenges": "challenges",
+      "the_challenge_stated_plainly": "If free Sentinel data already gives salmon farms actionable bloom warnings, what are we selling? Our honest answers are: 10 m pixels cannot resolve an individual cage; multi-day revisit misses processes that move in hours; clouds render optical satellites nearly useless during a Philippine monsoon, which is the season of greatest risk; and satellites never see depth. Those are real answers, but the burden of proof is ours and the incumbent is free.",
+      "the_detail_that_rescues_us": "Note the phrase 'combined with in-situ sampling' in their own finding. Even the satellite work needs ground truth. The calibration problem does not go away at 10 m — it just gets solved by someone else's boat. Our architecture is an answer to the same problem their method has.",
+      "the_strategic_read": "This pushes toward complementarity. Ingest Sentinel for baselining and regional context; sell resolution, cadence, cloud-immunity, and depth. Also note the lockdown framing: the value of remote observation spikes exactly when humans cannot reach the water — which is also our pre-dawn and post-storm argument.",
+      "priority": "HIGH"
+    },
+    {
+      "citation_id": "hab-review-2024",
+      "theme": "harmful_algal_blooms",
+      "study_type": "systematic_review",
+      "year": 2024,
+      "summary": "A review of monitoring, forecasting, and early warning of harmful algal blooms.",
+      "relevance_to_omnidrone": "Positions our bloom detection against the established early warning landscape. Important for understanding what 'early warning' means as a term of art in this field, so we do not claim a capability the field defines more strictly than we do.",
+      "supports_or_challenges": "context_only",
+      "limitations": "ResearchGate link only. Find the publisher version.",
+      "priority": "MEDIUM"
+    },
+    {
+      "citation_id": "mdpi-hyperspectral-hab-2025",
+      "theme": "harmful_algal_blooms",
+      "study_type": "systematic_review",
+      "year": 2025,
+      "summary": "The potential of hyperspectral imaging technologies for mapping harmful algal blooms.",
+      "relevance_to_omnidrone": "Justifies our decision NOT to carry hyperspectral by establishing what we give up. Hyperspectral offers species-level pigment discrimination; we accept multispectral's coarser discrimination in exchange for mass, cost, and data volume we can actually fly.",
+      "supports_or_challenges": "challenges",
+      "the_honest_trade": "Hyperspectral could get closer to distinguishing toxic taxa from harmless ones — which is precisely the boundary we cannot cross with multispectral. We are choosing a cheaper sensor that is less able to answer the question that matters most. That is a defensible engineering trade given our mass budget, but it should be stated as a limitation rather than presented as an optimisation.",
+      "the_partial_mitigation": "Phycocyanin fluorometry on the probe gives us cyanobacterial discrimination that chlorophyll alone cannot. It is a point measurement, not a map — but it is a genuine partial answer, and it is a good example of the probe covering for the camera's limitations.",
+      "priority": "MEDIUM"
+    },
+    {
+      "citation_id": "springer-hab-iot-device",
+      "theme": "harmful_algal_blooms",
+      "study_type": "engineering_prototype",
+      "title_note": "Early warning of harmful algal blooms: A low-cost integrated IoT device with spectrofluorometry and automated plankton imaging",
+      "url": "https://link.springer.com/chapter/10.1007/978-3-031-78572-6_11",
+      "summary": "A low-cost IoT device combining spectrofluorometry with automated plankton imaging for HAB early warning.",
+      "relevance_to_omnidrone": "Directly competitive prior art in the fixed-sensor category, and more capable than us on the one axis that matters most: automated plankton IMAGING gets closer to taxonomic identification than our pigment fluorometry ever will. A device that can see the organism can distinguish a toxic dinoflagellate from a harmless diatom. We cannot.",
+      "supports_or_challenges": "challenges",
+      "the_lesson": "This is a good illustration of the buoy category's real strength. A fixed device can carry a microscope; a flying one cannot. Our answer is coverage and depth, not fidelity at a point — and this study is a useful reminder that at any single point, a fixed instrument will usually beat us.",
+      "the_hybrid_implication": "One of these at the index station plus our spatial coverage would be substantially better than either alone. This is the third independent line of reasoning in this repository pointing at a buoy hybrid. At some point that convergence should stop being noted and start driving the roadmap.",
+      "verification_status": "cited_from_search_result",
+      "priority": "MEDIUM"
+    },
+    {
+      "citation_id": "ncbi-chla-fluorescence-early-warning",
+      "theme": "harmful_algal_blooms",
+      "study_type": "empirical_field",
+      "title_note": "A novel and convenient method for early warning of algal cell density by chlorophyll fluorescence parameters and its application in a highland lake",
+      "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6031977/",
+      "summary": "Using chlorophyll fluorescence parameters for early warning of algal cell density in a lake.",
+      "relevance_to_omnidrone": "Methodological support for the in-situ fluorometric chlorophyll channel on the probe — the channel that calibrates our aerial NDCI retrieval. Establishes that fluorometry is a workable early-warning signal in a real lake, not just in a laboratory.",
+      "supports_or_challenges": "supports",
+      "verification_status": "cited_from_search_result",
+      "priority": "MEDIUM"
+    },
+    {
+      "citation_id": "usbr-hab-detection-guide",
+      "theme": "harmful_algal_blooms",
+      "study_type": "policy_report",
+      "title_note": "Harmful Algal Bloom Remote Sensing Detection Tools Guide",
+      "container": "U.S. Bureau of Reclamation",
+      "url": "https://data.usbr.gov/rise/content-rise-public/rise/catalog-item/binary/Harmful%20Algal%20Bloom%20Remote%20Sensing%20Detection%20Tools%20Guide.pdf",
+      "summary": "A practitioner's guide to remote sensing tools for HAB detection.",
+      "relevance_to_omnidrone": "Practitioner-oriented rather than academic — useful for understanding what operational HAB monitoring actually looks like for an agency, as opposed to what it looks like in a paper. Relevant to the BFAR-as-customer scenario.",
+      "supports_or_challenges": "context_only",
+      "verification_status": "cited_from_search_result",
+      "priority": "LOW"
+    }
+  ],
+
+  "synthesis": {
+    "what_is_established": [
+      "Chlorophyll-a is the standard remote sensing proxy for HABs, used in ~80 percent of studies.",
+      "Red-edge indices (NDCI) work in turbid productive inland water.",
+      "Satellite HAB early warning for aquaculture is operational and free.",
+      "Even satellite-based approaches require in-situ ground truth."
+    ],
+    "the_boundary_the_whole_field_shares": "Pigments are not toxins. No remote sensing method in this collection can tell a farmer whether their bloom is dangerous — only that it is large. Escalation to laboratory assay is unavoidable, and any product that blurs this line is making a claim the entire field cannot support.",
+    "our_position": {
+      "what_we_can_honestly_claim": "Spatial mapping of algal biomass across the whole water body, calibrated by in-situ measurements taken minutes earlier by the same machine, at a resolution that resolves individual cages, on days when clouds blind the satellites, plus a phycocyanin channel that flags cyanobacterial suspicion.",
+      "what_we_must_never_claim": "That we detect toxins, that we can declare water safe, or that a chlorophyll number is a food safety assessment.",
+      "the_operational_rule": "High chlorophyll plus elevated phycocyanin triggers a RECOMMENDATION TO SAMPLE. It never triggers an all-clear and it never triggers a toxicity declaration. The closure decision belongs to BFAR and must remain there."
+    },
+    "the_uncomfortable_summary": "This is the theme where our competition is strongest. Satellites do bloom mapping free. Fixed IoT devices with plankton imaging do taxonomy better than we can. Our defensible claims here are narrower than the marketing instinct will want them to be: resolution, cadence, cloud-immunity, depth, and same-sortie calibration. Those are real. They are not 'we detect harmful algal blooms', and the distance between those two statements is where an honest company differs from a fraudulent one."
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "id": "concept-of-operations",
+  "title": "Concept of Operations (ConOps)",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "design_target",
+  "note": "Follows the spirit of IEEE 1362 ConOps structure. Describes how the system is used in the field, by whom, under what authority.",
+  "citation_ids": ["ieee-1362"],
+
+  "operational_context": {
+    "environment": "Tropical inland or brackish water body. Fish cages or ponds. Shore access via dike or bank. Grid power unreliable or absent. Cellular coverage intermittent. Monsoon season for roughly half the year. Ambient temperature 25-35 C, humidity high, water corrosive and biologically active.",
+    "the_design_case": "Not a research site. A working farm, operated by people with other jobs to do, where the drone is the least important thing happening that day. If the system requires attention, it will not get it."
+  },
+
+  "operating_modes": [
+    {
+      "mode": "Attended VLOS",
+      "description": "Certificated remote pilot present, aircraft in visual line of sight, pilot able to take control.",
+      "regulatory_status": "Permitted under standard CAAP rules, subject to registration and pilot certification.",
+      "citation_ids": ["caap-rpas-regulations"],
+      "when_used": "Phases 1-3. All early operations. Any first flight at a new site.",
+      "economics": "Poor. A pilot per sortie destroys the cost-per-observation advantage that is the entire premise. In this mode we are an expensive way to do what a boat does.",
+      "honest_note": "This is the mode we will actually operate in for years. The business model should be stress-tested against it rather than against the mode we hope to get."
+    },
+    {
+      "mode": "Supervised BVLOS",
+      "description": "Aircraft beyond visual line of sight, remote pilot monitoring from the dashboard, able to command return.",
+      "regulatory_status": "Requires specific CAAP authorisation.",
+      "citation_ids": ["caap-rpas-regulations", "caap-types-of-operations"],
+      "when_used": "The target operating mode from Phase 4.",
+      "economics": "This is where the model works. One pilot supervising several docks."
+    },
+    {
+      "mode": "Autonomous scheduled",
+      "description": "Dock-initiated sorties on schedule with no human in the launch loop; human notified of results and of exceptions.",
+      "regulatory_status": "Requires BVLOS authorisation plus a substantial safety case. Do not assume this is available.",
+      "when_used": "Aspirational. The dawn sweep needs it.",
+      "the_dependency": "The flagship use case — the 04:30 profile — requires either this mode or a person at the dock at 04:30. If neither is available, the product's most distinctive value is unreachable. This is the sharpest expression of why BVLOS is on the critical path, and it should be said in exactly these terms to investors rather than buried."
+    },
+    {
+      "mode": "Manual override",
+      "description": "Pilot takes direct control.",
+      "when_used": "Any anomaly. Always available. Never removed."
+    }
+  ],
+
+  "roles_and_authority": [
+    { "role": "Remote Pilot in Command", "authority": "Final authority on flight. Can abort any mission for any reason without justification. This authority is never delegated to software.", "requirement": "CAAP RPA Controller Certificate", "citation_ids": ["caap-rpas-regulations"] },
+    { "role": "Farm Manager", "authority": "Authorises dispensing actions. Sets thresholds. Receives alerts. Does NOT have flight authority.", "note": "The separation matters: the person with commercial pressure to fly must not be the person who decides it is safe to fly." },
+    { "role": "Farm Technician", "authority": "Ground handling, probe cleaning, battery handling, fault reporting. No flight authority.", "note": "The system depends on this person's goodwill more than any org chart admits." },
+    { "role": "AquaVision Operations", "authority": "Maintains the platform, the models, and the fleet. Cannot unilaterally change alert thresholds on a customer's farm." },
+    { "role": "The software", "authority": "None that matters. It schedules, measures, computes, and recommends. It does not decide to dispense, does not declare water safe, and does not fly outside the envelope a human set." }
+  ],
+
+  "a_day_in_the_life": {
+    "note": "The narrative version. This is what should be storyboarded for the pitch — it is more persuasive than any feature list.",
+    "sequence": [
+      { "time": "04:30", "event": "Dock opens. Drone launches into still, dark air. Nav lights on. Nobody is awake." },
+      { "time": "04:35-04:52", "event": "Six stations. At each: hover, winch out, sonde descends through the warm surface layer into the cold water below, sampling all the way down. At cage 4 the profile shows the thermocline has risen a metre since yesterday and the bottom two metres are at 1.1 mg/L." },
+      { "time": "04:55", "event": "Docked. Probe rinsed. Data uploaded over the dock's link." },
+      { "time": "04:56", "event": "Platform computes: stratification strengthening, oxygen debt growing, and the forecast has heavy rain tonight. Advisory raised." },
+      { "time": "05:30", "event": "Marissa's phone buzzes as she wakes. Not a score — a sentence: 'Bottom water at cages 3-5 is anoxic and rain is forecast tonight. If it mixes, that water reaches your fish. Consider running aerators at 3-5 from this evening.'" },
+      { "time": "06:00", "event": "She looks at the profile chart. She has seen this shape before, in the week before the 2024 kill. This time she has the chart." },
+      { "time": "07:00", "event": "Mortality scan. Nothing. Good." },
+      { "time": "10:00", "event": "Bloom survey. Chlorophyll rising in the north corner where the wind pushes it. Probe confirms 68 µg/L there against 22 µg/L at the dock. The map is calibrated to those two points." },
+      { "time": "15:00", "event": "Afternoon profile. DO at the surface is 11 mg/L — supersaturated. The algae are working hard. The diel amplitude is the largest of the month, which means tonight's respiration demand will be the largest of the month." },
+      { "time": "18:00", "event": "Aerators on at cages 3-5. Marissa's decision, made with a chart instead of a feeling." },
+      { "time": "23:00", "event": "The rain arrives. The drone does not fly; it cannot. It measured the loaded gun days ago." },
+      { "time": "04:30 (+1)", "event": "Dock opens. The column has mixed. Surface DO at cage 4 is 2.8 mg/L — bad, but the aerators have been running for ten hours and the fish are alive." }
+    ],
+    "the_honest_footnote": "This narrative is a design intent, not a case study. Nothing in it has happened. It is written in past tense because that is how storyboards work, and it must be labelled clearly wherever it is used so that nobody mistakes it for a customer testimonial. Note also what the story does NOT claim: the drone did not prevent the mixing, did not fly in the storm, and did not make the decision. It measured, and a person acted. That is the real product and it is enough."
+  },
+
+  "human_machine_boundary": {
+    "principle": "The system observes and recommends. The human decides and is accountable.",
+    "hard_rules": [
+      "No autonomous dispensing of any substance. Ever. A model error becomes a poisoned pond.",
+      "No autonomous declaration that water is safe. The system reports what it measured and what it did not measure. Absence of a detection is not a clearance, and the UI must never let grey read as green.",
+      "No flight outside the human-set envelope, regardless of mission priority.",
+      "Every alert states its evidence and its uncertainty. An alert that cannot explain itself will be ignored the third time, and the third time may be the real one."
+    ],
+    "why_these_are_hard_rules": "Each one blocks a feature that would demo well. That is precisely why they are written down before the demo pressure arrives rather than after."
+  },
+
+  "failure_handling": {
+    "link_loss": "Continue the current mission if within envelope, then return to dock. Do NOT hover in place awaiting a link — that burns the reserve that gets the aircraft home.",
+    "low_battery": "Abort mission, return, and land. The reserve is not negotiable and is not available to finish 'just one more station'. Every ditched aircraft in this industry was one more station away from the dock.",
+    "winch_jam_with_probe_deployed": "The nightmare case. A drone with a fouled sonde caught on a net is a tethered aircraft with a finite battery. Requires a tether cutter as a last resort — which means deliberately dropping the most expensive part of the payload into the lake to save the aircraft, and recovering it later. The cutter must exist, and the decision to use it should be a human's, not a timer's.",
+    "probe_snag_on_structure": "Detect via winch tension anomaly. Attempt a controlled release, then escalate to the pilot.",
+    "dock_unavailable": "Divert to a pre-surveyed alternate landing site. Over a lake, there may not be one — which is why alternate site survey is part of site commissioning and not an afterthought.",
+    "sensor_fault": "Flag the channel, continue the mission with the remaining sensors, and mark the profile partial. Never interpolate over a dead sensor. A smooth line through missing data is a lie the eye believes.",
+    "ditching": "Assume it will happen. The aircraft should float, carry a locator beacon, and contain its lithium. A sunk drone in a lake used for food production is an environmental incident, not just a lost asset."
+  },
+
+  "site_commissioning": {
+    "note": "What must happen before the first sortie at any new site. Skipping this is how sites become incidents.",
+    "steps": [
+      "Airspace check and, where required, CAAP coordination.",
+      "LGU and water body authority permission. In Philippine lakes the LGU is the practical gatekeeper.",
+      "Community notification. Not a legal requirement in most cases; a social licence requirement in all of them. A drone that appears over a lake without warning acquires a reputation before it acquires a customer.",
+      "Dock siting: shore access, power or solar, connectivity, security.",
+      "Obstacle survey: power lines, masts, trees, and the cage structure itself.",
+      "Alternate landing site identification.",
+      "Bathymetry and station definition — profiles are only comparable across time if the stations are fixed.",
+      "Baseline profiles at every station across at least one diel cycle, before any claim is made about anything.",
+      "Ingest available Copernicus history for the water body. Free, and it gives the site a past on day one."
+    ]
+  },
+
+  "training_and_handover": {
+    "principle": "The farm's people must be able to run the routine and recognise the abnormal without calling us.",
+    "detail_file": "data/08_operations/training-certification.json",
+    "the_test": "Can the technician clean the probe correctly, swap a battery, and recognise a fouled sensor reading? If not, the deployment will degrade quietly into confidently wrong data — which is worse than no data, because someone will act on it."
+  }
+}

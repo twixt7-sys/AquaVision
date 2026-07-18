@@ -1,0 +1,162 @@
+{
+  "id": "telemetry-schema",
+  "title": "Telemetry & Data Schema",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "design_target",
+  "description": "The wire and storage format for everything the OmniDrone produces. This is the contract between aircraft, dock, cloud, twin, and dashboard. Field definitions resolve against data-dictionary.json; do not duplicate semantics here.",
+
+  "design_rules": [
+    "UTC always, RFC 3339, millisecond precision. Local time is a presentation concern. Storing local time would destroy the diel analysis the first time a site crosses a DST or timezone boundary — and the diel analysis is the product.",
+    "Every measurement carries a QC flag at source. Unflagged data is untrusted data.",
+    "Every position carries a horizontal accuracy estimate. A position without an error bar cannot answer whether two profiles are at the same station.",
+    "Model outputs live in a separate object from measurements. Never the same array.",
+    "Records are append-only. A correction is a new record referencing the original.",
+    "A TAN reading without its pH and temperature partners at the same depth and instant is rejected at ingestion, not stored and patched later."
+  ],
+
+  "record_types": {
+    "sortie": {
+      "description": "One flight, dock to dock.",
+      "schema": {
+        "sortie_id": { "type": "string", "format": "uuid", "required": true },
+        "site_id": { "type": "string", "required": true },
+        "dock_id": { "type": "string", "required": true },
+        "aircraft_id": { "type": "string", "required": true },
+        "sonde_id": { "type": "string", "required": true, "note": "Critical for biosecurity traceability. Which probe was in which water, when. This field is why an epidemiological trace is possible after an outbreak." },
+        "mission_profile_id": { "type": "string", "required": true },
+        "payload_config": { "type": "array", "items": "string", "note": "Which modules were fitted. The mass budget forces per-mission configuration, so this varies and must be recorded." },
+        "started_utc": { "type": "string", "format": "date-time", "required": true },
+        "ended_utc": { "type": "string", "format": "date-time" },
+        "outcome": { "type": "string", "enum": ["completed", "aborted_weather", "aborted_battery", "aborted_fault", "aborted_operator", "lost"] },
+        "abort_reason": { "type": "string" },
+        "pilot_id": { "type": "string", "note": "Null only under an authorised autonomous mode. Its absence is a regulatory fact, not a missing field." },
+        "operating_mode": { "type": "string", "enum": ["attended_vlos", "supervised_bvlos", "autonomous_scheduled", "manual"] },
+        "weather_at_launch": { "type": "object" },
+        "energy_used_wh": { "type": "number" },
+        "calibration_panel_pre": { "type": "string", "note": "Reference to the pre-sortie panel image. An imaging sortie without this is not radiometrically usable." },
+        "calibration_panel_post": { "type": "string" }
+      }
+    },
+
+    "profile": {
+      "description": "One probe descent and ascent at one station.",
+      "schema": {
+        "profile_id": { "type": "string", "format": "uuid", "required": true },
+        "sortie_id": { "type": "string", "required": true },
+        "station_id": { "type": "string", "required": true, "note": "Fixed stations make profiles comparable across time. An ad-hoc station is a measurement without a time series." },
+        "position": { "type": "object", "properties": { "lat": "number", "lon": "number", "accuracy_m": "number" }, "required": true },
+        "started_utc": { "type": "string", "format": "date-time", "required": true },
+        "direction": { "type": "string", "enum": ["descent", "ascent"], "note": "Both are recorded. Comparing them is a free hysteresis check — if descent and ascent disagree, the descent rate exceeded the sensor's response time and the profile is smeared." },
+        "descent_rate_ms": { "type": "number" },
+        "max_depth_m": { "type": "number" },
+        "target_depth_m": { "type": "number" },
+        "is_partial": { "type": "boolean", "note": "True if max_depth < target_depth. A partial profile cannot compute stratification indices and must never be silently averaged into a site statistic." },
+        "partial_reason": { "type": "string", "enum": ["bottom_detected", "snag", "battery", "operator_abort", "fault", "wind"] },
+        "samples": { "type": "array", "items": "sample" }
+      }
+    },
+
+    "sample": {
+      "description": "One instant, one depth, all channels.",
+      "schema": {
+        "t_utc": { "type": "string", "format": "date-time", "required": true },
+        "depth_m": { "type": "number", "required": true, "note": "From the pressure transducer, NOT from winch payout. Payout is corrupted by tether angle in current and wind, and the error grows with depth." },
+        "payout_m": { "type": "number", "note": "Recorded as a cross-check only. If payout and depth diverge substantially, the tether is streaming and the station position is not what the GPS says." },
+        "do_mgl": { "type": ["number", "null"] },
+        "temp_c": { "type": ["number", "null"] },
+        "ph": { "type": ["number", "null"] },
+        "ec_uscm": { "type": ["number", "null"] },
+        "salinity_ppt": { "type": ["number", "null"] },
+        "turbidity_ntu": { "type": ["number", "null"] },
+        "chla_ugl": { "type": ["number", "null"] },
+        "phycocyanin_ugl": { "type": ["number", "null"] },
+        "orp_mv": { "type": ["number", "null"] },
+        "tan_mgl": { "type": ["number", "null"] },
+        "qc": { "type": "object", "description": "Per-channel QC flag. Keys mirror the channel names, values are QARTOD codes.", "required": true }
+      },
+      "note": "Nulls mean the channel was not fitted or not read. They never mean zero. A null DO and a 0.0 mg/L DO are radically different facts and conflating them would be catastrophic."
+    },
+
+    "imagery_product": {
+      "description": "A processed imagery output. Never the raw frames — those stay at the edge until bandwidth permits.",
+      "schema": {
+        "product_id": { "type": "string", "format": "uuid" },
+        "sortie_id": { "type": "string" },
+        "product_type": { "type": "string", "enum": ["ndwi_mask", "ndci_field", "chla_field", "thermal_field", "rgb_mosaic"] },
+        "captured_utc": { "type": "string", "format": "date-time" },
+        "solar_elevation_deg": { "type": "number", "note": "Recorded so glint contamination can be assessed retrospectively. A survey flown outside the glint window is not silently discarded — it is flagged." },
+        "illumination_stability": { "type": "number", "note": "Derived from the downwelling irradiance log. A survey flown through changing cloud is not comparable and this field is how we know." },
+        "radiometric_calibration_ref": { "type": "string", "note": "Which panel image calibrated this. Null means the product is NOT radiometrically comparable to any other product and must be flagged as such." },
+        "uncertainty_field_ref": { "type": "string", "required": true, "note": "Mandatory for any concentration product. A concentration map without an uncertainty field is an overclaim, and it will be believed." },
+        "calibration_regression": { "type": "object", "properties": { "n_points": "integer", "r_squared": "number", "rmse": "number", "valid_range": "object" }, "note": "The site-and-day-local fit that converted index to concentration. n_points will often be 3 or 4 — that is the normal case and the honest thing to do is show the resulting wide confidence interval rather than hide it." }
+      }
+    },
+
+    "detection": {
+      "description": "A model output. Deliberately a separate record type from any measurement.",
+      "schema": {
+        "detection_id": { "type": "string", "format": "uuid" },
+        "sortie_id": { "type": "string" },
+        "model_id": { "type": "string", "required": true },
+        "model_version": { "type": "string", "required": true, "note": "Without this, a detection cannot be re-evaluated when the model changes, and the historical record becomes uninterpretable." },
+        "class": { "type": "string" },
+        "confidence": { "type": "number", "note": "Calibrated posterior. If it is not calibrated, this field must be null rather than populated with a raw softmax score dressed as a probability." },
+        "position": { "type": "object" },
+        "unit_id": { "type": "string" },
+        "evidence_ref": { "type": "string", "required": true, "note": "The image crop. A bare classification with no evidence is unactionable and will be ignored." },
+        "human_review": { "type": "object", "properties": { "reviewed_by": "string", "reviewed_utc": "string", "verdict": { "enum": ["confirmed", "rejected", "unclear"] } }, "note": "Rejections are training data and are as valuable as confirmations." }
+      }
+    },
+
+    "derived_index": {
+      "description": "Computed limnological quantities. Separate from measurements because they are inferences, even when the inference is deterministic physics.",
+      "schema": {
+        "profile_id": { "type": "string" },
+        "thermocline_depth_m": { "type": ["number", "null"], "note": "Null when the column is mixed. Null is a finding, not a gap." },
+        "stratification_index": { "type": ["number", "null"] },
+        "oxygen_debt_index": { "type": ["number", "null"] },
+        "diel_amplitude_mgl": { "type": ["number", "null"], "note": "Requires both a dawn and an afternoon profile. Two well-timed sorties produce a number that four badly-timed ones cannot." },
+        "computation_version": { "type": "string" },
+        "inputs_complete": { "type": "boolean", "note": "False if computed from a partial profile. A stability index from a truncated column is not comparable to one from a full column." }
+      }
+    },
+
+    "dispensing_action": {
+      "description": "A record of material leaving the aircraft. Legally and ethically the most consequential record type in the system.",
+      "schema": {
+        "action_id": { "type": "string", "format": "uuid" },
+        "sortie_id": { "type": "string" },
+        "substance": { "type": "string", "required": true },
+        "substance_class": { "type": "string", "enum": ["feed", "lime", "conditioner", "probiotic", "veterinary_medicine"], "note": "veterinary_medicine triggers additional regulatory records. See regulatory-framework.json." },
+        "commanded_mass_kg": { "type": "number" },
+        "delivered_mass_kg": { "type": "number", "required": true, "note": "FROM THE LOAD CELL, not from the command. What we intended and what happened are different facts and both must be recorded." },
+        "positions": { "type": "array", "items": "object" },
+        "authorised_by": { "type": "string", "required": true, "note": "A human user id. This field can never be null or system-generated. There is no autonomous dispensing." },
+        "authorised_utc": { "type": "string", "format": "date-time", "required": true },
+        "dose_ceiling_kg": { "type": "number", "note": "The firmware limit in force for this mission." }
+      }
+    }
+  },
+
+  "qc_flags": {
+    "convention": "QARTOD codes. See data-dictionary.json for the full battery of tests.",
+    "citation_ids": ["qartod-manual"],
+    "codes": { "1": "good", "2": "not_evaluated", "3": "suspect", "4": "fail", "9": "missing" },
+    "the_rule_that_matters": "Flag 3 (suspect) data is shown to humans and excluded from automated triggers. This split is deliberate: a human can weigh a suspect reading in context; an alert rule cannot, and a false alarm from a fouled sensor at 04:30 destroys trust in the whole system."
+  },
+
+  "ingestion_validation": {
+    "reject_rather_than_repair": "Malformed records are rejected at the boundary and returned to the dock's error queue. They are NOT partially stored and patched later. A dataset containing quietly repaired records is a dataset nobody can defend in an audit or a thesis.",
+    "mandatory_checks": [
+      "Schema conformance.",
+      "Partner presence — TAN without pH and temp at the same depth and instant is rejected.",
+      "Temporal monotonicity within a profile.",
+      "Position accuracy present.",
+      "QC flags present on every channel.",
+      "Model records carry model_version.",
+      "Imagery concentration products carry an uncertainty field reference.",
+      "Dispensing records carry a human authoriser."
+    ]
+  }
+}

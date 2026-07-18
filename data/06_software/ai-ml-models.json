@@ -1,0 +1,166 @@
+{
+  "id": "ai-ml-models",
+  "title": "AI / ML Model Cards",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "design_target",
+  "convention": "Follows the Model Cards convention (Mitchell et al., 2019). Every card carries an out_of_scope_use field, because a model card without one is marketing.",
+  "citation_ids": ["mitchell-model-cards-2019"],
+
+  "STATUS_BANNER": "NO MODEL HAS BEEN TRAINED. NO MODEL HAS BEEN EVALUATED. Every `performance` field below is null and every `target_performance` field is an aspiration. These are specifications for models we intend to build, written before the data exists, so that the evaluation criteria are fixed before anyone has an incentive to move them.",
+
+  "the_governing_principle": {
+    "statement": "The order in which these models ship is a safety decision, not a product decision.",
+    "reasoning": "The models are ordered below from 'safe to be wrong' to 'dangerous to be wrong'. A misclassified piece of debris costs a farmer thirty seconds of annoyance. A false negative from the kill-risk model reads as 'you are safe' and could cost a harvest. The temptation will be to ship the exciting one first because it demos well. Resist it.",
+    "the_rule": "No model ships until its failure mode has been costed in the customer's currency, not ours."
+  },
+
+  "models": [
+    {
+      "id": "water-masking",
+      "name": "Water Masking (NDWI threshold)",
+      "task": "Separate water pixels from land, vegetation, structure, and boats.",
+      "status": "concept",
+      "architecture_candidate": "Threshold on NDWI, with a learned refinement only if thresholding proves inadequate.",
+      "why_it_is_first": "Everything downstream depends on it. A dike pixel entering a chlorophyll statistic corrupts the statistic silently.",
+      "intended_use": "Preprocessing for every imagery product.",
+      "out_of_scope_use": "Not a shoreline mapping tool. Not for land use classification.",
+      "inputs": ["Green reflectance", "NIR reflectance"],
+      "outputs": ["Binary water mask", "Mask confidence"],
+      "citation_ids": ["mcfeeters-ndwi-1996"],
+      "performance": null,
+      "target_performance": { "note": "High recall on water, high precision on exclusion. Prefer excluding an ambiguous pixel over including it — a smaller, cleaner mask beats a larger, contaminated one." },
+      "known_failure_modes": ["Cage netting and floats within a water body", "Shadow", "Dense floating algal mat, which may read as vegetation and be masked out — precisely the thing we most want to measure", "Turbid shallow margins"],
+      "the_interesting_failure": "A thick surface algal mat can be misclassified as vegetation and masked out of the analysis. The bloom disappears from the chlorophyll map exactly when it is worst. This is a known NDWI pathology and it must be explicitly tested for, not discovered in production.",
+      "human_oversight": "Mask visible and overridable in the UI."
+    },
+    {
+      "id": "chla-retrieval",
+      "name": "Chlorophyll-a Retrieval (NDCI + local regression)",
+      "task": "Convert per-pixel NDCI into estimated chlorophyll-a concentration with uncertainty.",
+      "status": "concept",
+      "architecture_candidate": "Site-and-day-local regression of NDCI against in-situ fluorometric chlorophyll from the same sortie. Start with linear or simple nonlinear; do not reach for a neural network to fit four points.",
+      "why_not_a_global_model": "Turbidity, CDOM, and illumination differ enough between lakes — and between two days on the same lake — that a global fit is confidently wrong. The literature is consistent on this and it is the main reason UAV retrievals fail in production.",
+      "citation_ids": ["mishra-ndci-2012", "mdpi-drones-inland-review-2024", "sciencedirect-uav-multispectral-ponds-2024"],
+      "intended_use": "Spatial mapping of algal biomass across a water body, calibrated by same-sortie ground truth.",
+      "out_of_scope_use": [
+        "NOT a toxicity measurement. Chlorophyll indicates algal biomass, not toxin presence. A high reading is a reason to sample, not a diagnosis.",
+        "NOT valid outside the range of the in-situ points it was fitted on. Extrapolating a three-point regression beyond its calibration range is fabrication.",
+        "NOT comparable across sites without refitting."
+      ],
+      "inputs": ["NDCI field", "Water mask", "In-situ chlorophyll at known stations", "Turbidity as covariate"],
+      "outputs": ["Concentration field", "Per-pixel uncertainty field"],
+      "performance": null,
+      "target_performance": { "note": "To be set against the reference sonde in Phase 3. Setting a target accuracy now, before any data, would be inventing a number." },
+      "known_failure_modes": [
+        "Sun glint contamination saturating the signal",
+        "Fitting on 3-4 points produces a fragile regression with wide confidence intervals — this is the normal case, not an edge case",
+        "High turbidity decoupling the red-edge signal from chlorophyll",
+        "Extrapolation beyond the calibration range"
+      ],
+      "the_honest_problem": "With only three or four probe stations per sortie, the regression will often be poorly constrained. The correct response is to show the wide uncertainty, not to hide it behind a smooth colour ramp. A precise-looking map that is not precise will be believed, and a farmer will act on it.",
+      "human_oversight": "Uncertainty field always rendered. Maps below a confidence threshold are shown as 'insufficient calibration' rather than as a map."
+    },
+    {
+      "id": "surface-anomaly",
+      "name": "Surface Anomaly Detection",
+      "task": "Detect and classify floating mortalities, surface-piping fish, oil sheen, foam, algal mats, debris, and above-water net damage.",
+      "status": "concept",
+      "architecture_candidate": "Small-object detection CNN, quantised for edge inference at a few watts.",
+      "intended_use": "Flag surface anomalies for human review, geolocated to a specific cage.",
+      "out_of_scope_use": [
+        "NOT a mortality count. It detects floating fish; it does not count stock.",
+        "NOT a disease diagnosis.",
+        "NOT for assessing personnel performance. This is a hard rule — see the technician persona in customer-personas.json."
+      ],
+      "inputs": ["RGB imagery at <=15 mm GSD"],
+      "outputs": ["Detections with class, calibrated confidence, and geolocation", "Image crop as evidence"],
+      "performance": null,
+      "target_performance": {
+        "note": "Precision matters far more than recall here, and this is counterintuitive.",
+        "reasoning": "A missed dead fish is found on the next sortie two hours later. A false alarm at 04:30 that drags a manager out of bed for nothing destroys trust in the whole system, and the third false alarm means the tenth alert — the real one — is ignored. Alert fatigue is not a UX problem; it is a safety failure. Tune for precision and accept lower recall.",
+        "target_precision": ">= 0.90",
+        "target_recall": ">= 0.60",
+        "status": "targets only — no data exists"
+      },
+      "known_failure_modes": ["Sun glint mimicking sheen", "Floating debris versus fish", "Wave texture as false positives", "Birds", "Species and lighting variation between sites"],
+      "the_generalisation_problem": "A model trained on one lake will likely fail on another — different water colour, different light, different debris, different species. The Phase 3 gate deliberately requires evaluation on a HELD-OUT SITE, not a held-out split of the same site. A random split of one lake's imagery proves nothing about generalisation and would flatter the model badly.",
+      "fairness_and_harm_considerations": "The imagery contains people, boats, and houses. The model must not be extended to person detection, and the training data pipeline must not retain identifiable imagery of individuals. See ethics-data-privacy.json.",
+      "human_oversight": "Every detection routes to human confirmation with the image crop attached. A bare classification with no evidence is unactionable and will be ignored. Rejections become training data."
+    },
+    {
+      "id": "stratification-state",
+      "name": "Stratification State Estimation",
+      "task": "Compute thermocline depth, Schmidt stability, and hypolimnetic oxygen debt from a profile.",
+      "status": "concept",
+      "architecture_candidate": "Deterministic computation, not machine learning.",
+      "why_not_ml": "This is established limnological physics with a century of literature behind it. Using a learned model where a physical formula exists is worse in every dimension: less accurate, less interpretable, needs training data we do not have, and fails unpredictably outside its training distribution. The instinct to apply ML to everything should be resisted precisely here, where the physics is known.",
+      "citation_ids": ["idso-schmidt-stability-1973"],
+      "intended_use": "Quantify the water column's structure and the size of the oxygen-poor reservoir below.",
+      "out_of_scope_use": "Not a prediction. It describes the current state.",
+      "performance": null,
+      "target_performance": { "note": "Correctness is verifiable against the reference sonde. This is a computation, not an estimate." },
+      "known_failure_modes": ["Partial profiles — a profile that stopped at 5 m in a 12 m column cannot compute stability and must be flagged, not silently averaged", "Weak gradients where the thermocline is genuinely ambiguous"],
+      "human_oversight": "Profile chart always available. The number never appears without the shape it came from."
+    },
+    {
+      "id": "kill-risk-forecast",
+      "name": "Composite Fish Kill Risk Forecast",
+      "task": "Estimate the probability of a mass mortality event in a defined forward window.",
+      "status": "concept — NOT IMPLEMENTED, NOT VALIDATED, MUST NOT SHIP",
+      "the_warning": {
+        "statement": "This is the most dangerous artefact in the entire product, and it is the one everyone will ask for first.",
+        "why": "A false negative from this model does not read as 'no prediction available'. It reads as 'you are safe'. A farmer who defers running aerators because our score said 12/100 and then loses a harvest has been harmed BY US. We would have converted their uncertainty — which they knew how to live with — into a false certainty that they acted on.",
+        "the_asymmetry": "Without the model, the farmer is uncertain and cautious. With a wrong model, the farmer is confident and wrong. We can make things worse than doing nothing, which is not true of any other model in this file.",
+        "the_commercial_pressure": "This score is the single most compelling thing that could appear in a demo. Investors will ask for it. Customers will ask for it. The pressure to ship a plausible-looking version trained on thin data will be intense and continuous. This paragraph exists to be read on the day that pressure arrives."
+      },
+      "architecture_candidate": "Ensemble over stratification index, oxygen debt, chlorophyll trend, diel amplitude, weather forecast, and stocking density.",
+      "inputs": ["Stratification state time series", "Oxygen debt", "Chlorophyll trend", "Diel DO amplitude", "Weather forecast", "Stocking density (operator-supplied)"],
+      "outputs": ["Risk score", "Contributing factor attribution", "Uncertainty"],
+      "performance": null,
+      "target_performance": {
+        "note": "Cannot be set responsibly before seeing real events.",
+        "the_real_bar": "It must beat the experienced farmer's own judgement. If it cannot, it should not ship at any accuracy — an instrument that is worse than the expert it advises is a liability with a subscription fee.",
+        "required_evidence": "An honest confusion matrix against real events across at least one full seasonal cycle, including the events it missed."
+      },
+      "known_failure_modes": [
+        "Trained on too few events — mass kills are rare, so the positive class is tiny and the model will learn to always say 'no' and score 97 percent accurate. This is the classic rare-event trap and it will happen.",
+        "Site-specific dynamics that do not transfer between lakes",
+        "The trigger is usually a storm, and we cannot fly in storms, so our observations stop precisely when the event fires"
+      ],
+      "human_oversight": "Until validated: the system shows the MECHANISM — the stratification, the oxygen debt, the forecast — in plain language, and lets the farmer draw the conclusion. Given their expertise, that is probably better than a score anyway, and it is certainly more honest.",
+      "the_interim_product": "'The bottom three metres are anoxic and rain is forecast tonight' is a true statement, derived from measurement, that an experienced operator can act on. It requires no model, carries no false certainty, and is available on day one. Ship that."
+    },
+    {
+      "id": "feeding-advisor",
+      "name": "Condition-Aware Feeding Advisor",
+      "task": "Recommend whether to feed, defer, or reduce ration based on current water conditions.",
+      "status": "concept",
+      "architecture_candidate": "Rule-based initially, from published species thresholds. Learned refinement only once real FCR outcome data exists.",
+      "why_rules_first": "The physiology is known: fish in low DO do not convert feed, and feeding into low oxygen adds organic load to water that is already short. A rule encoding that is interpretable, debuggable, and correct on day one. A learned model would need outcome data we will not have for years and would be less explainable to the person deciding.",
+      "citation_ids": ["innovasea-fcr-guide", "boyd-water-quality-2020"],
+      "out_of_scope_use": "Not a feed formulation tool. Not a growth model.",
+      "human_oversight": "Advisory only. It never withholds feed autonomously.",
+      "known_limitation": "We infer appetite from water condition. Incumbent systems watch the fish eat with an underwater camera, which is a direct observation and strictly better feedback. Our advantage is coverage across forty cages, not fidelity in one."
+    }
+  ],
+
+  "cross_cutting_commitments": [
+    { "commitment": "Calibrated confidence, not raw softmax", "why": "An uncalibrated confidence shown as a percentage is decoration that looks like information. If we cannot calibrate it, we do not show a number." },
+    { "commitment": "Explainability is load-bearing, not a nice-to-have", "why": "An alert that tells a farmer to spend money on emergency aeration will be ignored unless it says why. XAI here is a commercial requirement before it is an ethical one.", "citation_ids": ["ai-aqua-review-2024"] },
+    { "commitment": "Evaluate on held-out SITES, not held-out splits", "why": "Random splits of one lake's data measure memorisation, not generalisation, and they will flatter every model in this file." },
+    { "commitment": "Publish the failures", "why": "The confusion matrix including the misses is the only honest evidence. A model card with only the good numbers is a brochure." },
+    { "commitment": "Federated or on-premise training where farmers require it", "why": "Farm production data is commercially sensitive and farmers have sound reasons to refuse to hand it over. Assuming we get to centralise it is an assumption, not a plan.", "citation_ids": ["ai-aqua-review-2024"] }
+  ],
+
+  "the_data_problem": {
+    "statement": "We have no training data, and the most valuable model needs the rarest events.",
+    "the_arithmetic": "Mass kills happen a few times a year per lake. A supervised model needs many examples. Even a multi-year, multi-site deployment yields tens of positive examples at best. This is a fundamental constraint, not an engineering inconvenience.",
+    "implications": [
+      "Physics-informed approaches beat pure data-driven ones for the rare-event problem. We know the mechanism; we should encode it rather than hope to learn it from a handful of examples.",
+      "The chronic sub-lethal hypothesis from cost-of-inaction.json is far more tractable ML — continuous outcomes, abundant data, every cycle a sample. If that hypothesis is right, it is both the better business AND the better machine learning problem. That coincidence is worth noticing.",
+      "Transfer from published datasets and from Copernicus history should be exploited hard. We are data-poor and the world is not."
+    ],
+    "citation_ids": ["ai-aqua-review-2024"]
+  }
+}

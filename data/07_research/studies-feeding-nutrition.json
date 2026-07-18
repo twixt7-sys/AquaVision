@@ -1,0 +1,146 @@
+{
+  "id": "studies-feeding-nutrition",
+  "title": "Related Studies — Feeding, Nutrition & Feed Economics",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "theme": "feeding_nutrition",
+  "provenance": "verified_external",
+  "verification_notice": "Records derived from search-result summaries. Several sources in this collection are vendor or industry-association content with commercial interests in feed — noted per record. Open the primary sources before citing.",
+
+  "why_this_theme_carries_the_ROI_argument": "Feed is the only loss category in this repository where the value of an improvement can be computed from EXTERNALLY SOURCED numbers rather than from our own assumptions. That makes it the ROI argument a sceptical buyer can check without trusting us — which is worth more than a bigger number they have to take on faith.",
+
+  "studies": [
+    {
+      "citation_id": "innovasea-fcr-guide",
+      "theme": "feeding_nutrition",
+      "study_type": "policy_report",
+      "summary": "Practitioner guide to improving feed conversion ratio in aquaculture.",
+      "key_findings": [
+        "Feed accounts for approximately 60 percent of total operating costs, making it the top expense for most fish farms (attributed to NOAA).",
+        "Other sources put feed as high as 70 percent of total production expense; in commercial prawn farming, feed is roughly 50-65 percent of variable cost.",
+        "FCR typically ranges from 1.0 to 2.5. Lower is better.",
+        "Reducing overfeeding is a primary opportunity for improving FCR.",
+        "Uneaten and undigested feed and their metabolic byproducts degrade water quality."
+      ],
+      "relevance_to_omnidrone": "The source of the 60-percent figure that anchors the entire feed value proposition, and the source of the explicit link between overfeeding and water quality degradation — which is the reflexive loop at the heart of our problem framing.",
+      "supports_or_challenges": "supports",
+      "limitations": "VENDOR CONTENT. Innovasea sells aquaculture technology and has a commercial interest in the FCR narrative. It attributes the 60 percent figure to NOAA — GO TO NOAA DIRECTLY. Also verify whether a US-derived cost structure transfers to Philippine tilapia and milkfish; that transferability is ASSUMED throughout this repository and is NOT established.",
+      "priority": "HIGH — this figure is load-bearing and is currently sourced to a vendor blog"
+    },
+    {
+      "citation_id": "globalseafood-fcr-primary-indicator",
+      "theme": "feeding_nutrition",
+      "study_type": "policy_report",
+      "summary": "Argues that low FCR is the primary indicator of efficient aquaculture.",
+      "key_findings": [
+        "At a feed price of USD 500 per tonne, a difference in FCR of 0.1 represents USD 50 per tonne of production.",
+        "A lower FCR reduces both feed cost per unit of production and waste entering the culture system."
+      ],
+      "relevance_to_omnidrone": "THE ANCHOR CALCULATION for the entire ROI argument. This is the one externally-sourced economic figure that lets us compute the value of an FCR improvement without inventing anything. The arithmetic is theirs; only the premise — that we deliver 0.1 — is ours.",
+      "supports_or_challenges": "supports",
+      "the_precise_boundary": "The arithmetic is sound and sourced. Whether the OmniDrone actually moves FCR by 0.1 is COMPLETELY UNPROVEN. State it as: 'the industry values a 0.1 FCR improvement at USD 50/tonne; we hypothesise we can deliver that; here is how we would test it.' Never as: 'we save USD 50 per tonne.'",
+      "limitations": "Industry trade publication.",
+      "priority": "HIGH"
+    },
+    {
+      "citation_id": "ussec-fcr-power",
+      "theme": "feeding_nutrition",
+      "study_type": "policy_report",
+      "summary": "On the role of FCR in driving profitability, performance, and sustainability.",
+      "relevance_to_omnidrone": "Corroborating source for the FCR economics.",
+      "supports_or_challenges": "supports",
+      "limitations": "The U.S. Soybean Export Council is an industry association with a direct commercial interest in aquaculture feed ingredients. Note the conflict when citing. Corroboration from a party that benefits from the narrative is weak corroboration.",
+      "priority": "LOW"
+    },
+    {
+      "citation_id": "globalseafood-feed-quality",
+      "theme": "feeding_nutrition",
+      "study_type": "policy_report",
+      "title_note": "Consider feed quality, not just cost",
+      "url": "https://www.globalseafood.org/advocate/consider-feed-quality-not-just-cost/",
+      "summary": "Argues that feed selection on price alone is a false economy because feed quality drives FCR.",
+      "relevance_to_omnidrone": "Relevant to the feed-manufacturer channel strategy. Feed companies have a structural conflict with our product — we reduce feed waste, which reduces their volume — UNLESS they compete on demonstrated FCR rather than on tonnage. This source suggests the premium end of the market is moving that way, which is exactly the segment where a partnership could work.",
+      "supports_or_challenges": "context_only",
+      "the_strategic_read": "A feed company that competes on FCR NEEDS farm-level data to prove its claim, and currently has none. We generate exactly that data. That reframes the conflict as a potential partnership — and feed companies already reach every farm, already extend credit, and already have field technicians. Worth testing in Phase 0.",
+      "verification_status": "cited_from_search_result",
+      "priority": "MEDIUM"
+    },
+    {
+      "citation_id": "globalseafood-feed-cost-caution",
+      "theme": "feeding_nutrition",
+      "study_type": "policy_report",
+      "title_note": "Use caution when predicting profitability with feed cost per unit gain metrics",
+      "url": "https://www.globalseafood.org/advocate/use-caution-when-predicting-profitability-with-feed-cost-unit-gain-metrics/",
+      "summary": "Cautions against naive use of feed-cost-per-unit-gain metrics to predict profitability.",
+      "relevance_to_omnidrone": "IMPORTANT AND INCONVENIENT. This source directly cautions against the kind of simple arithmetic our ROI argument depends on.",
+      "supports_or_challenges": "challenges",
+      "why_we_include_it": "Because our value proposition leans on 'a 0.1 FCR improvement is worth USD 50/tonne', and here is an industry source saying that reasoning is more complicated than it looks. Reading and engaging with this before an investor does is the difference between a founder who has thought about it and one who has not. It should be read properly, not just cited as a hedge.",
+      "verification_status": "cited_from_search_result",
+      "priority": "HIGH — read this before finalising the ROI pitch"
+    },
+    {
+      "citation_id": "seafdec-cost-efficient-feeds",
+      "theme": "feeding_nutrition",
+      "study_type": "empirical_field",
+      "geography": "Philippines",
+      "title_note": "Development of cost-efficient feeds",
+      "container": "SEAFDEC/AQD",
+      "url": "https://www.seafdec.org.ph/development-of-cost-efficient-feeds/",
+      "summary": "SEAFDEC/AQD work on cost-efficient feed development for Southeast Asian aquaculture.",
+      "relevance_to_omnidrone": "The only Philippine-specific source in this collection, and therefore disproportionately valuable. Every other feed economics source here is US or global. SEAFDEC/AQD is also an obvious academic partner and recruiting ground — see team-structure.json.",
+      "supports_or_challenges": "context_only",
+      "the_gap_it_highlights": "We are building a Philippine product on US feed cost assumptions. SEAFDEC is where the local numbers live. Getting Philippine tilapia and milkfish cost structures from them should be a Phase 0 task.",
+      "verification_status": "cited_from_search_result",
+      "priority": "HIGH — the local data source we need"
+    },
+    {
+      "citation_id": "preprints-dt-fish-feeding-2024",
+      "theme": "feeding_nutrition",
+      "study_type": "engineering_prototype",
+      "year": 2024,
+      "summary": "A process-based digital twin for intelligent fish feeding management using multi-mode sensors and a smart feeding machine.",
+      "relevance_to_omnidrone": "The competitive reality check on our feeding use case. They observe feeding behaviour directly and actuate a fixed feeder; we infer appetite from water chemistry and dispense from an aircraft with a payload measured in kilograms.",
+      "supports_or_challenges": "challenges",
+      "the_conclusion_it_reinforces": "On the feeding use case specifically, this approach beats ours on both fidelity and throughput. This is a THIRD independent line of evidence — alongside the mass budget in omnidrone-specifications.json and the mission economics in mission-profiles.json — all pointing to the same conclusion: bulk feeding is not our function. Precision treatment delivery is. When three unrelated analyses converge, stop arguing and update.",
+      "priority": "MEDIUM"
+    }
+  ],
+
+  "the_reflexive_loop": {
+    "why_this_is_the_best_slide_available_to_this_company": "It is not a feature list. It is a coherent argument about how the system's dynamics actually work, and it falls out of the literature rather than out of our marketing.",
+    "the_loop": [
+      "Feed is dispensed on schedule rather than on evidence.",
+      "Fish in poor water conditions do not eat, or eat and convert poorly.",
+      "Uneaten feed decomposes, consuming oxygen and releasing ammonia.",
+      "Water quality degrades further.",
+      "Fish are more stressed, convert feed even worse, and grow slower.",
+      "More feed is needed for the same growth. FCR worsens.",
+      "More uneaten feed. Return to step 3."
+    ],
+    "citation_ids": ["innovasea-fcr-guide", "fao-nutrient-dynamics-eutrophic", "ija-environmental-impacts-ph"],
+    "the_insight": "Overfeeding is simultaneously the largest cost line AND a primary cause of the water quality problem that kills the fish. One intervention — feeding on evidence rather than on schedule — attacks both. That structure is rare and it is what elevates this from 'a drone with sensors' to a considered thesis about a system.",
+    "the_honest_caveat": "The loop is well-supported in the literature. Our ability to BREAK it is not. We infer appetite from water condition rather than observing feeding directly, which is a weaker intervention than the incumbents'. The loop is a real finding; our lever on it is a hypothesis."
+  },
+
+  "synthesis": {
+    "what_is_established": [
+      "Feed is roughly 60 percent of aquaculture operating cost — though this figure is US-derived and its transfer to Philippine species is assumed, not shown.",
+      "FCR typically ranges 1.0-2.5.",
+      "A 0.1 FCR improvement is worth roughly USD 50 per tonne at USD 500/t feed.",
+      "Overfeeding degrades water quality, which is the reflexive loop above.",
+      "Naive feed-cost-per-gain arithmetic should be treated with caution — per an industry source."
+    ],
+    "what_is_not_established": [
+      "That the OmniDrone moves FCR at all, let alone by 0.1.",
+      "That Philippine tilapia and milkfish farms have the same cost structure as the US-derived 60 percent figure.",
+      "That inferring appetite from water condition is an adequate substitute for observing fish eat.",
+      "That bulk feed dispensing from an aircraft is economically viable — three independent analyses say it is not."
+    ],
+    "the_action_items": [
+      "Get NOAA's primary source for the 60 percent figure.",
+      "Get Philippine cost structures from SEAFDEC/AQD.",
+      "Read the feed-cost-caution source properly before building the ROI pitch on the USD 50/tonne arithmetic.",
+      "Reposition the dispensing subsystem as precision treatment delivery. The evidence has converged and it is time to stop resisting it."
+    ]
+  }
+}

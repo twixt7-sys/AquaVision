@@ -1,0 +1,67 @@
+{
+  "id": "unit-economics",
+  "title": "Unit Economics",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "modeled_projection",
+  "confidence": "speculative",
+
+  "READ_THIS_FIRST": "This file contains NO unit economics numbers. It contains the MODEL and the drivers. The reason is stated bluntly: the cost side rests on a BOM with zero real supplier quotes and a maintenance burden that is estimated rather than measured, and the revenue side rests on a price that cannot be set until Phase 0. Multiplying two unknowns produces a confident-looking contribution margin that is wrong at the root, and every downstream financial figure inherits the error. What follows is the STRUCTURE, so that real numbers slot in cleanly and so a reviewer can see exactly which inputs are missing. This honesty is itself the deliverable at TRL 3.",
+
+  "the_unit": {
+    "chosen_unit": "One dock serving its cluster of stations.",
+    "why_the_dock_not_the_drone": "Coverage, cost, and revenue all scale with docks, not aircraft. A dock is what a customer installs and what a lake needs several of. See docking-station.json#/dock_network_economics.",
+    "the_implication": "Unit economics are DENSITY-driven. A dock over a dense cage cluster and a dock over a sparse lake have the same cost and very different revenue. Site density is therefore a hard qualification criterion, not a preference."
+  },
+
+  "the_cost_to_serve_model": {
+    "structure": "Per-dock, per-period cost = amortised capital + consumables + field labour + platform + regulatory allocation.",
+    "line_items": [
+      { "line": "Capital amortisation", "components": ["Drone (USD 15-40k, unquoted — see BOM)", "Dock (separate BOM, does not exist)", "Per-site sonde (a biosecurity requirement, and the most expensive single component)"], "note": "The per-site sonde is easy to forget and it is large. Single-site biosecurity assignment means every dock carries at least one dedicated sonde at the sonde's full price." },
+      { "line": "Battery opex", "note": "A CONSUMABLE. Packs degrade with cycling and with dock heat, and get replaced. Founders routinely capitalise this and understate opex. At four sorties/day, cycle accumulation is fast." },
+      { "line": "Field labour and maintenance", "note": "THE LINE THAT KILLS DISTRIBUTED HARDWARE BUSINESSES. Weekly sensor calibration and reference checks, corrosion inspection, a novel high-cycle winch, and a solar dock in a harsh environment. This is recurring, distributed, skilled labour. The honest estimate is larger than a hardware founder's first instinct. See maintenance-schedule.json." },
+      { "line": "Pilot cost (pre-BVLOS)", "note": "Under VLOS, a pilot per sortie. This alone can make early unit economics negative, which is why the model must be run under both VLOS and BVLOS assumptions." },
+      { "line": "Platform/cloud", "note": "Modest and scalable — the one software-like line." },
+      { "line": "Regulatory and insurance allocation", "note": "Certification, permits, liability cover." }
+    ],
+    "status": "Every line is a placeholder. Not one has a real quote or a measured value."
+  },
+
+  "the_revenue_per_unit_model": {
+    "structure": "Per-dock revenue = subscription per site (or per cage) x sites per dock, plus ancillary dispensing and reporting.",
+    "the_density_leverage": "Because cost per dock is roughly fixed but revenue scales with stations served, contribution margin per dock rises steeply with cluster density. A cooperative-served bay of forty members' cages on one dock is the best economics in the plan; a single farm on one dock is the worst.",
+    "status": "Blocked on price (Phase 0) and station density (Phase 0)."
+  },
+
+  "the_drivers_that_actually_matter": {
+    "note": "Ranked by leverage on the contribution margin. This ranking is the useful output of this file.",
+    "drivers": [
+      { "rank": 1, "driver": "Stations per dock (density)", "why": "Cost is roughly fixed per dock; revenue scales with stations. Density is the single largest lever and it is set at site-qualification time, not by anything we build." },
+      { "rank": 2, "driver": "Maintenance labour per dock", "why": "The largest recurring cost and the most underestimated. A 2x error here flips the sign of the margin." },
+      { "rank": 3, "driver": "BVLOS vs VLOS", "why": "A pilot per sortie under VLOS may make the margin negative. BVLOS is not just a nice-to-have; it may be the difference between a viable and an unviable unit." },
+      { "rank": 4, "driver": "Sonde cost and lifetime", "why": "Most expensive component, one per site, and drift-limited lifetime on the electrodes." },
+      { "rank": 5, "driver": "Sorties per day achievable", "why": "Battery turnaround (recharge vs swap) caps this and drives both battery opex and the value delivered." },
+      { "rank": 6, "driver": "Price realised", "why": "Bounded below by verifiable value (aeration savings) and above by WTP. Both unknown." }
+    ]
+  },
+
+  "the_sensitivity_the_founders_must_run": {
+    "task": "Once Phase 0 supplies real BOM quotes, real maintenance-labour estimates, and a real aeration-spend anchor, run the contribution margin per dock across: {VLOS vs BVLOS} x {sparse vs dense site} x {low vs high maintenance burden}.",
+    "the_likely_finding": "The plausible outcome is that dense + BVLOS + controlled-maintenance is comfortably positive, and sparse + VLOS + high-maintenance is comfortably negative — and that the business's viability is therefore a QUALIFICATION and OPERATING-MODE question as much as a pricing question. If that is the finding, the strategic conclusion is: only deploy to dense clusters, get BVLOS on the critical path, and treat maintenance as a first-class engineering-for-serviceability problem from day one.",
+    "provenance": "assumption",
+    "confidence": "medium",
+    "why_state_it_before_the_numbers": "Because the SHAPE of the answer is knowable now even though the magnitude is not, and the shape already dictates strategy: chase density, chase BVLOS, engineer for maintainability. Those three imperatives do not need the exact numbers to be correct."
+  },
+
+  "ltv_cac_note": {
+    "statement": "LTV/CAC cannot be computed and should not be faked.",
+    "why": "LTV needs a price, a margin, and a churn rate; CAC needs a sales cost per closed deal. We have none. But two structural observations hold: (1) high-touch relationship sales into a distrustful sector means HIGH CAC — this is not a low-touch SaaS motion; (2) data-compounding value and hardware-in-our-docks lock-in should mean LOW churn once trust is established. So the shape is high-CAC/low-churn, which favours a small number of deep, long relationships over broad thin adoption — reinforcing the dense-cluster, cooperative strategy.",
+    "provenance": "assumption"
+  },
+
+  "the_honest_bottom_line": {
+    "statement": "We do not know if the unit economics close, and we have said so at every layer rather than manufacturing a number that says they do.",
+    "what_we_do_know": "The economics are density-driven, maintenance-sensitive, and BVLOS-dependent. Those three facts are enough to shape the entire go-to-market before a single real number exists.",
+    "the_phase_0_deliverable": "Replace this file's structure with measured numbers. It is days of vendor calls and farmer conversations, not research, and it converts the largest financial uncertainty in the venture into a decision. Do it first."
+  }
+}

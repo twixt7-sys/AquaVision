@@ -1,0 +1,101 @@
+{
+  "id": "carriage-ejection-system",
+  "title": "Carriage & Ejection System",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "design_target",
+  "confidence": "low",
+
+  "READ_THIS_FIRST": {
+    "statement": "Two independent analyses in this repository — the mass budget in omnidrone-specifications.json and the mission economics in mission-profiles.json — arrived separately at the same conclusion: this subsystem cannot viably deliver bulk grow-out feed.",
+    "the_arithmetic": "A commercial cage takes tens of kilograms per feeding. This aircraft's total useful payload target is 1.8 kg, and that budget is already spent on the probe and the cameras. Meanwhile a person in a boat moves a 25 kg sack in one trip at effectively zero marginal cost. We would need dozens of sorties and dozens of battery cycles to do what one person does before breakfast.",
+    "the_conclusion": "Reposition this subsystem as a PRECISION TREATMENT DELIVERY system, not a feeding system. Small masses of high-value material — conditioners, lime, probiotics, treatments — placed precisely, at a specific coordinate, at a moment when nobody can safely put a boat out. That is a real and defensible capability. Competing with a man and a sack on bulk logistics is not.",
+    "why_this_matters_more_than_it_looks": "The concept description that started this project listed 'administer feeds' first among the dispensing functions. The engineering says feeds are the one thing this system should not do. Following the arithmetic rather than the original framing is what separates a specification from a wish list — and finding this yourself is far better than having an investor find it for you.",
+    "provenance": "derived_calculation",
+    "confidence": "medium"
+  },
+
+  "what_it_should_actually_do": {
+    "primary_role": "Deliver small, precisely metered doses of high-value material to a specific location identified by the digital twin, without putting a person on the water.",
+    "why_this_is_strategically_important": "It is the answer to the strongest objection against the entire venture — that information without response capacity is just a countdown clock. A platform that can act on its own finding is a fundamentally different proposition from one that can only report. That is worth carrying the mass for, even at 1.5 kg of payload.",
+    "the_scenarios_where_it_wins": [
+      "Lime or conditioner to a low-pH pocket the twin identified, at 5 a.m., in weather where a boat is dangerous.",
+      "Probiotic or conditioner applied evenly across a pattern that a person throwing by hand cannot achieve.",
+      "A starter ration spread across a nursery pond where the total mass IS small and even distribution matters more than tonnage.",
+      "Treatment to one cage in an array of forty, without dosing the other thirty-nine."
+    ],
+    "the_scenarios_where_it_loses": [
+      "Bulk grow-out feed. Every time. Do not pretend otherwise."
+    ]
+  },
+
+  "architecture": {
+    "configuration": "Twin ventral pods flanking the centre-line winch, per the supplied render.",
+    "render_note": "The render's twin-pod arrangement is a good instinct — it balances mass laterally around the winch and keeps the centre line free for the tether. Whether the pods' apparent volume matches any real dose requirement is unvalidated.",
+    "modules": [
+      {
+        "module": "Granular hopper",
+        "payload": "Pelleted feed, lime, granular conditioner",
+        "metering": "Auger or rotary valve with closed-loop mass feedback",
+        "why_closed_loop": "Open-loop metering by time or revolutions drifts with material density, humidity, and fill level. In the tropics, a pellet that has absorbed moisture has a different bulk density than the same pellet yesterday. Without a load cell measuring what actually left the hopper, the dose record is fiction — and the dose record is the thing that makes the system auditable.",
+        "empty_mass_kg": 0.30,
+        "target_dose_accuracy": "±5 percent of commanded mass"
+      },
+      {
+        "module": "Liquid module",
+        "payload": "Liquid conditioners, probiotics, treatments",
+        "metering": "Positive displacement pump with flow measurement",
+        "note": "Liquid sloshing shifts the centre of gravity in flight — a real and well-documented handling problem for agricultural spray drones. Baffled tank required, and the flight controller must expect a moving CG.",
+        "status": "phase 2 or later"
+      },
+      {
+        "module": "Spreader",
+        "purpose": "Achieve an even distribution pattern rather than dumping at a point.",
+        "note": "A spinning spreader disc in rotor downwash produces a pattern that is not the pattern in the brochure. Rotor wash dominates. Characterising the actual deposition pattern under the aircraft's own downwash is a real test task and it is the kind of thing that only shows up when someone flies it."
+      }
+    ]
+  },
+
+  "the_safety_architecture": {
+    "principle": "An uncommanded discharge is a poisoned pond. Design accordingly.",
+    "requirement_id": "REQ-HW-008",
+    "controls": [
+      { "control": "No autonomous dispensing, ever", "detail": "Every dispensing mission requires explicit human authorisation for that specific mission, that specific substance, that specific dose, and that specific location. The authorisation does not persist to the next mission.", "why": "A model error that miscounts a threshold becomes a chemical event. The feature that skips this gate would demo beautifully right up until the day it destroyed a customer's harvest — and there is no version of that story where the company survives it." },
+      { "control": "Mechanical interlock", "detail": "The dispensing mechanism is physically incapable of discharge without an armed state, and arming is a deliberate act." },
+      { "control": "Dose ceiling", "detail": "A hard maximum per mission, enforced in firmware, that no software command can exceed. The ceiling is set from the substance's label rate and the water volume, and it is not overridable from the dashboard." },
+      { "control": "Discharge logging", "detail": "Actual delivered mass and coordinates logged from the load cell, not from the commanded value. What we intended to dispense and what we dispensed are different facts and both matter." },
+      { "control": "Abort on anomaly", "detail": "Any dispensing anomaly aborts the mission and returns the aircraft with the load intact." }
+    ],
+    "the_dual_use_problem": {
+      "statement": "A drone that makes precision dosing easier also makes over-dosing easier.",
+      "reasoning": "The subsystem's whole value is that it lowers the cost and effort of applying a substance to water. That is good when the substance is lime and the operator is careful. It is bad when the substance is an antimicrobial and the operator is anxious about an outbreak. Lowering the friction on a behaviour increases the behaviour, and prophylactic antimicrobial use in aquaculture is already a public health problem.",
+      "our_position": "The dose ceiling and the human authorisation gate are the technical controls. The honest admission is that they are weak controls against a determined operator, and that this subsystem's contribution to antimicrobial stewardship could plausibly be negative rather than positive. This deserves a paragraph in the thesis ethics chapter rather than the usual silence.",
+      "citation_ids": ["worldbank-disease-risk-2014"]
+    }
+  },
+
+  "regulatory_gate": {
+    "warning": "Dispensing veterinary medicine is not the same activity as dispensing lime, legally.",
+    "detail": "Anything meeting the definition of a veterinary medicinal product brings in prescription requirements, professional oversight, record-keeping obligations, and withdrawal periods. The drone becomes an application device for a regulated substance, and the operator may need veterinary supervision.",
+    "citation_ids": ["caap-rpas-regulations"],
+    "note": "CAAP has issued advisory material covering special permits for agricultural spraying drones. Whether aquaculture dispensing falls under that framing, under BFAR's, under a veterinary framework, or under all three is UNRESOLVED and needs a lawyer rather than a founder's reading.",
+    "action": "Phase 0: get a legal opinion on the substance classes before designing the module around any of them. Building a medicine dispenser and then discovering it needs a veterinarian on site would be an expensive lesson.",
+    "detail_file": "data/09_compliance/regulatory-framework.json"
+  },
+
+  "requirements": [
+    { "id": "REQ-DIS-001", "statement": "The system shall not discharge any material without an explicit, per-mission human authorisation.", "type": "safety", "priority": "must", "verification_method": "inspection", "verification_status": "not_started" },
+    { "id": "REQ-DIS-002", "statement": "Dispensed mass shall be measured by load cell and logged, not inferred from the commanded value.", "type": "data", "priority": "must", "verification_method": "test", "rationale": "The dose record must reflect what happened, not what was intended." },
+    { "id": "REQ-DIS-003", "statement": "A firmware-enforced maximum dose per mission shall not be overridable from the dashboard.", "type": "safety", "priority": "must", "verification_method": "test" },
+    { "id": "REQ-DIS-004", "statement": "Dose accuracy shall be within ±5 percent of commanded mass across the full fill range and across the specified humidity range.", "type": "performance", "priority": "must", "verification_method": "test", "rationale": "Bulk density changes with humidity and fill level. A metering system characterised only on a fresh, dry, full hopper will drift in service." },
+    { "id": "REQ-DIS-005", "statement": "The dispensing module shall be removable such that profiling missions can fly without its mass.", "type": "interface", "priority": "must", "verification_method": "demonstration", "rationale": "The mass budget does not close with all payloads fitted. Per-mission configuration is not an optimisation; it is how the aircraft flies at all." },
+    { "id": "REQ-DIS-006", "statement": "The aircraft shall return with its load intact on any dispensing anomaly.", "type": "safety", "priority": "must", "verification_method": "test" }
+  ],
+
+  "open_questions": [
+    { "question": "What are real dose masses for the treatments farms actually use?", "why": "It determines whether this subsystem is useful at all. Currently we are designing a hopper without knowing what goes in it.", "resolve_by": "Phase 0 — ask five farms what they apply, how much, and how often. This is a conversation, not research, and it is currently unanswered." },
+    { "question": "What is the actual deposition pattern under rotor downwash?", "why": "The spreader's brochure pattern is not the pattern you get.", "resolve_by": "Phase 1 bench test with pattern collection trays" },
+    { "question": "Which substance classes are legally dispensable by an unmanned aircraft in the Philippines?", "why": "It defines the product.", "resolve_by": "Phase 0 legal opinion" },
+    { "question": "Does the liquid module's moving CG destabilise the aircraft during dispensing?", "why": "Well-documented problem in agricultural spray drones.", "resolve_by": "Phase 2" }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "id": "airframe-propulsion",
+  "title": "Airframe & Propulsion",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "design_target",
+  "confidence": "low",
+  "status_note": "Design targets only. No airframe exists. Component masses are placeholders pending a real vendor survey.",
+
+  "configuration": {
+    "type": "Quadrotor, X-configuration, ducted rotors",
+    "source_of_geometry": "The supplied render shows four shrouded rotors, a central fuselage, twin ventral pods, a forward gimbal, and a sprawled quadrupod gear with wide feet.",
+    "render_caveat": "The render is an industrial design study. Rotor diameter, arm length, and pod volume in the image have not been validated against this specification. Do not scale from the image."
+  },
+
+  "why_a_quadrotor": {
+    "considered_alternatives": [
+      { "option": "Hexarotor", "pro": "Motor-out redundancy — genuinely important over water where a failure means loss of aircraft.", "con": "More mass, more cost, more drag.", "verdict": "Should be seriously reconsidered. Over water, with no forced-landing option, single-motor-failure survivability is worth real mass. The render shows four rotors; the safety case may demand six. Do not let the industrial design decide the airframe configuration." },
+      { "option": "Fixed-wing VTOL", "pro": "Far better endurance and range — the thing we are worst at.", "con": "Cannot hover efficiently, and hovering is what the winch requires. Disqualifying.", "verdict": "Rejected. Our mission is hover-dominated by construction." },
+      { "option": "Coaxial quad (X8)", "pro": "Redundancy in a compact footprint.", "con": "Coaxial rotors lose efficiency to each other's wake.", "verdict": "Worth evaluating against the hexarotor." }
+    ],
+    "the_decision": "Quadrotor as the baseline because the render specifies it and it is the lightest configuration. FLAGGED FOR REVIEW: over-water operation with no forced-landing site is a strong argument for rotor redundancy, and this decision was made on aesthetics rather than on a safety analysis. Revisit before committing to tooling."
+  },
+
+  "ducted_rotors": {
+    "why": "Primarily safety. This machine operates near people on narrow dikes and small boats, and a shroud means a person cannot contact a blade.",
+    "requirement_id": "REQ-HW-010",
+    "secondary_benefits": ["Marginal static thrust improvement from a well-designed duct", "Protects the rotor from the tether — non-trivial, since we are flying with a line hanging beneath us", "Reads as benign, which matters for social licence"],
+    "costs": ["Mass — ducts are heavy and they are 1.35 kg of the airframe budget", "Drag in forward flight", "Increased wind sensitivity: a duct is a sail, and this aircraft already has a wind problem"],
+    "the_honest_trade": "Ducts cost endurance and worsen crosswind handling on an aircraft whose wind envelope is already its weakest attribute. They are retained because the safety case and the brand both want them. That is a defensible choice made knowingly. What would NOT be defensible is a later weight-saving exercise quietly deleting them without re-running the safety analysis that justified them.",
+    "flag": "If the mass budget must be recovered, the ducts are the largest single target and the one that must NOT be cut casually."
+  },
+
+  "propulsion_targets": {
+    "motors": 4,
+    "thrust_to_weight_target": 2.0,
+    "thrust_to_weight_rationale": "2:1 at MTOM is the conventional minimum for adequate control authority in wind. Below 1.8:1 the aircraft cannot recover from a gust while station-keeping, and station-keeping in wind is the entire profiling mission.",
+    "required_total_thrust_n": "approximately 133 N at 6.8 kg MTOM and 2:1",
+    "disc_loading_target": "Low. Larger rotors, lower disc loading, better hover efficiency and endurance — at the cost of a physically bigger aircraft.",
+    "disc_loading_note": "This is the central airframe trade. Hover efficiency improves as disc loading falls, and our mission is hover-dominated, so the physics pushes hard toward large rotors. Against that: a bigger aircraft is harder to dock, harder to transport, more wind-exposed, and heavier. The render's proportions suggest a moderate disc loading that has not been optimised against anything.",
+    "propellers": "Folding, for dock stowage. Field-replaceable without tools.",
+    "esc": "Redundant power feed. An ESC failure over water is a lost aircraft."
+  },
+
+  "structure": {
+    "materials": [
+      { "component": "Arms and primary structure", "material": "Carbon fibre composite", "why": "Stiffness-to-mass. Arm flex introduces vibration into the flight controller and blur into the imagery." },
+      { "component": "Shell", "material": "Moulded polymer, white", "why": "White is a thermal decision in a tropical deployment as much as an aesthetic one. Internal temperature rise degrades battery life and sensor accuracy, and a black airframe sitting on a dock at noon in the Philippines is an oven." },
+      { "component": "Fasteners", "material": "Marine-grade stainless or titanium", "why": "Galvanic corrosion in a brackish environment eats steel. This is a lesson every marine drone programme learns expensively." },
+      { "component": "Landing gear", "material": "Composite, sprawled quadrupod, wide feet", "why": "The render shows wide feet and a broad stance — correct for soft mud dikes and pitching boat decks. Good industrial design instinct." }
+    ],
+    "sealing": "IP54 minimum. Conformal coating on all boards regardless of enclosure rating, because enclosure seals fail and the tropics find every failure.",
+    "citation_ids": ["iec-60529"]
+  },
+
+  "the_ditching_provision": {
+    "principle": "Assume it goes in the water. Design for it rather than pretending it will not happen.",
+    "requirement_id": "REQ-HW-004",
+    "elements": [
+      { "element": "Positive buoyancy", "spec": "The aircraft floats, inverted or upright, with the payload attached.", "mass_cost_kg": 0.14 },
+      { "element": "Locator beacon", "spec": "Independent power, 4 hours minimum, audible and RF." },
+      { "element": "Lithium containment", "spec": "A submerged lithium pack in a food-production water body is an environmental incident, not just a lost asset. Containment is not optional and it is not primarily about protecting the battery." },
+      { "element": "Water-aware failsafe", "spec": "A conventional RTH assumes a land home point. Over a lake, a naive failsafe flies a dying aircraft toward a shore it cannot reach and ditches in deep water instead of on the nearest bank. The failsafe logic must know it is over water and must know where the reachable land is." }
+    ],
+    "why_this_is_a_first_class_requirement": "Marine drone programmes that treat ditching as an edge case lose aircraft and then discover the environmental and reputational cost afterwards. In a lake used for food production, with a community watching, a sunk drone with a lithium pack is a story. Budget the mass now."
+  },
+
+  "environmental_design": {
+    "temperature_range_c": { "min": 5, "max": 40 },
+    "humidity": "Condensing. Design for it.",
+    "corrosion": "Brackish exposure assumed even at freshwater sites — spray, sweat, and the dock's own salt environment near the coast.",
+    "uv": "Continuous tropical UV degrades polymers. Material selection matters for a machine that lives outdoors.",
+    "the_thermal_problem": "The dock sits in the sun. The aircraft sits in the dock. Ambient inside a closed dock at noon can exceed the battery's safe storage temperature, which shortens pack life substantially and silently. The dock needs ventilation or shading, and this is a dock requirement generated by an airframe constraint — the kind of cross-subsystem coupling that gets missed when subsystems are designed independently."
+  },
+
+  "open_questions": [
+    { "question": "Quad or hex?", "why": "Over-water motor-out survivability versus mass. Currently decided by a render rather than by analysis.", "resolve_by": "Phase 0 safety analysis" },
+    { "question": "What disc loading actually optimises a hover-dominated mission at this mass?", "why": "It sets the aircraft's size, which sets the dock, which sets the deployment cost.", "resolve_by": "Phase 0 — this is arithmetic, not research" },
+    { "question": "Do the ducts survive the mass budget?", "why": "1.35 kg of structure on a 6.8 kg aircraft, and the budget does not close.", "resolve_by": "Phase 0" },
+    { "question": "Can the airframe handle the tether reaction loads at the winch attachment?", "why": "A 90 N snag load through a centre-line attachment is a real structural case that has not been analysed.", "resolve_by": "Phase 1" }
+  ]
+}

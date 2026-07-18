@@ -1,0 +1,203 @@
+{
+  "id": "stakeholder-pain-points",
+  "title": "Stakeholder Map & Pain Points",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "assumption",
+  "confidence": "low",
+  "honest_framing": "These pain points are inferred from literature and from the structure of the industry. They are NOT from interviews, because no interviews have been conducted. Every entry is a hypothesis with a question attached that Phase 0 discovery must answer. A stakeholder map built from desk research describes the industry an outsider imagines.",
+
+  "stakeholders": [
+    {
+      "stakeholder_id": "smallholder-cage-operator",
+      "label": "Smallholder Cage Operator",
+      "description": "Operates a handful of cages in a lake, often financed by debt against the coming harvest. Frequently the family's sole income.",
+      "power": "low",
+      "interest": "very high",
+      "is_customer": "aspirationally",
+      "pains": [
+        { "pain": "A single kill event destroys a year of income and leaves the debt intact.", "severity": "existential" },
+        { "pain": "Cannot afford monitoring equipment, and would not have time to use it.", "severity": "high" },
+        { "pain": "Shares a lake with operators whose stocking decisions they cannot influence but whose consequences they absorb.", "severity": "high" },
+        { "pain": "Has no proof of good practice, so cannot access credit or insurance on decent terms.", "severity": "medium" },
+        { "pain": "Has been sold technology before that did not survive its first monsoon.", "severity": "medium" }
+      ],
+      "gains_sought": ["Not losing everything", "Sleeping through the night", "Being believed by a lender"],
+      "willingness_to_pay": "Very low as capital. Possibly meaningful as a per-cycle service fee bundled into inputs or credit, and only if the value is legible in the first cycle.",
+      "the_hard_truth": "This is the stakeholder with the most acute need and the least ability to pay. Every impact-oriented instinct says serve them first, and every commercial instinct says they cannot be the beachhead. The honest resolution is that they are reached through cooperatives, input suppliers, or public programmes — not through direct sales — and pretending otherwise produces a business plan that fails in year two.",
+      "discovery_questions": [
+        "What did the last kill actually cost you, including the debt?",
+        "If you had known 12 hours earlier, what would you have done — concretely, with what equipment?",
+        "Who do you already pay every cycle, and for what?"
+      ]
+    },
+    {
+      "stakeholder_id": "commercial-farm-manager",
+      "label": "Commercial Farm Manager",
+      "description": "Runs a larger operation with staff, some existing instrumentation, aeration capacity, and a budget line for inputs.",
+      "power": "medium",
+      "interest": "high",
+      "is_customer": "yes — the realistic beachhead",
+      "pains": [
+        { "pain": "Manages many units and cannot personally observe them all, so relies on staff reports of variable quality.", "severity": "high" },
+        { "pain": "Feed is the largest cost line and is dispensed with no feedback loop.", "severity": "high" },
+        { "pain": "Aeration is either run continuously — an enormous electricity bill — or reactively and too late.", "severity": "high" },
+        { "pain": "Certification audits demand environmental records that are compiled by hand from paper.", "severity": "medium" },
+        { "pain": "Losses are absorbable but they destroy the year's margin.", "severity": "high" },
+        { "pain": "Cannot answer the board's question of why survival was 68 percent this cycle and 84 percent last cycle, because nobody measured anything that would explain it.", "severity": "medium" }
+      ],
+      "gains_sought": ["Predictable survival rates", "Defensible FCR improvement", "Lower aeration electricity", "Audit-ready records without the clipboard"],
+      "willingness_to_pay": "Real. Has a budget, can compute an ROI, and already spends on inputs and consultants.",
+      "why_they_are_the_beachhead": "They have the three things a first customer must have: money, response capacity — aerators they can actually switch on when warned — and a person whose job it is to care about the number. The smallholder has the greatest need but cannot act on the information; this stakeholder can.",
+      "discovery_questions": [
+        "What does your aeration electricity cost per cycle, and how do you currently decide when to run it?",
+        "What would you pay to move FCR by 0.1?",
+        "Who compiles your audit records and how many hours does it take?"
+      ]
+    },
+    {
+      "stakeholder_id": "farm-technician",
+      "label": "Farm Technician / Caretaker",
+      "description": "The person who actually takes the readings, feeds the fish, and finds the mortalities. Often lives on site.",
+      "power": "low",
+      "interest": "high",
+      "is_customer": "no — but is the user, and can kill the deal",
+      "pains": [
+        { "pain": "Takes a boat out before dawn in bad weather. This is dangerous and everyone treats it as routine.", "severity": "high" },
+        { "pain": "Blamed when fish die, despite having no instrument that would have shown it coming.", "severity": "high" },
+        { "pain": "Records readings on paper that nobody reads.", "severity": "medium" }
+      ],
+      "gains_sought": ["Not drowning", "Evidence that it was not their fault", "Less pointless clipboard work"],
+      "critical_insight": "This stakeholder is where technology deployments die. If the technician perceives the drone as surveillance of their performance or as a threat to their job, they will not charge it, they will not clean the probe, and they will find that it was broken every time it mattered. The product must be framed and designed as their instrument — evidence that supports their judgement — not as management's monitor of them.",
+      "design_implication": "The dashboard must never surface a 'technician response time' metric. The moment it does, the technician becomes the adversary of the system and the data quality collapses. This is a genuine and commonly-made mistake.",
+      "discovery_questions": [
+        "What is the worst part of the pre-dawn round?",
+        "When fish died last time, what happened to you?"
+      ]
+    },
+    {
+      "stakeholder_id": "cooperative",
+      "label": "Fisherfolk Cooperative / Association",
+      "power": "medium",
+      "interest": "high",
+      "is_customer": "yes — plausibly the right unit of sale for smallholders",
+      "pains": [
+        { "pain": "Members suffer correlated losses; the co-op has no early warning to pass on.", "severity": "high" },
+        { "pain": "No credible data to represent members' interests in lake management disputes.", "severity": "medium" },
+        { "pain": "Cannot access group insurance because the risk is unquantified.", "severity": "medium" }
+      ],
+      "why_they_matter": "A cooperative can buy one drone and a dock and amortise it across forty members, which converts an impossible per-farm capital cost into a viable per-member service fee. If there is a route to the smallholder, it runs through here. It also converts the shared-lake commons problem from a source of conflict into a shared asset — the co-op has a legitimate interest in lake-wide data that no individual member does.",
+      "discovery_questions": ["What do members already pay dues for?", "Who arbitrates stocking disputes today?"]
+    },
+    {
+      "stakeholder_id": "bfar",
+      "label": "BFAR — Bureau of Fisheries and Aquatic Resources",
+      "power": "high",
+      "interest": "high",
+      "is_customer": "possibly — as a data buyer or programme funder",
+      "pains": [
+        { "pain": "Mandated to manage fish kills and carrying capacity with almost no continuous data.", "severity": "high" },
+        { "pain": "Responds to kills after the fact; cannot warn.", "severity": "high" },
+        { "pain": "Cannot enforce carrying capacity limits without measurements to justify them.", "severity": "high" }
+      ],
+      "why_they_matter": "A regulator is both a potential customer and a potential existential threat. Aligned early, they are a distribution channel into every lake in the country. Ignored, they are the body that decides whether your BVLOS operation and your dispensing system are permitted at all.",
+      "strategic_note": "Engage from Phase 0, not when you need something. Regulators remember which companies showed up before they had an ask."
+    },
+    {
+      "stakeholder_id": "denr",
+      "label": "DENR / Environmental Management Bureau",
+      "power": "high",
+      "interest": "medium",
+      "is_customer": "unlikely",
+      "relevance": "Owns the water quality criteria the system reports against and the effluent standards the farms are theoretically subject to."
+    },
+    {
+      "stakeholder_id": "caap",
+      "label": "CAAP — Civil Aviation Authority of the Philippines",
+      "power": "very high",
+      "interest": "low",
+      "is_customer": "no",
+      "relevance": "Holds a veto on the entire operating concept. BVLOS authorisation is the single largest external dependency in this business plan.",
+      "citation_ids": ["caap-rpas-regulations"],
+      "strategic_note": "CAAP has no interest in aquaculture outcomes and will not be moved by the impact story. They care about airspace safety and a well-constructed safety case. Bring an engineer, not a pitch deck."
+    },
+    {
+      "stakeholder_id": "lgu",
+      "label": "Local Government Unit",
+      "power": "high",
+      "interest": "high",
+      "is_customer": "possibly",
+      "pains": [
+        { "pain": "A lake fish kill is a local economic and political crisis.", "severity": "high" },
+        { "pain": "Adjudicates cage permits and stocking limits with no data.", "severity": "high" }
+      ],
+      "why_they_matter": "In Philippine lake systems, the LGU issues the permits. They are the practical gatekeeper for operating over a municipal water body, and their interest in avoiding a headline-generating kill is genuine and politically potent."
+    },
+    {
+      "stakeholder_id": "feed-supplier",
+      "label": "Feed Manufacturer / Distributor",
+      "power": "medium",
+      "interest": "medium",
+      "is_customer": "as a channel partner",
+      "strategic_note": "A fascinating and under-explored channel. Feed companies already reach every farm, already extend credit, and already have field technicians. They also have a structural conflict: our product reduces feed waste, which reduces their volume. Whether that conflict is fatal depends on whether they compete on volume or on demonstrated FCR — and the premium players increasingly compete on FCR. Worth testing.",
+      "pains": [{ "pain": "Cannot demonstrate their feed's real-world FCR advantage without farm-level data.", "severity": "medium" }]
+    },
+    {
+      "stakeholder_id": "insurer-lender",
+      "label": "Insurer / Agricultural Lender",
+      "power": "medium",
+      "interest": "medium",
+      "is_customer": "strategically interesting",
+      "pains": [
+        { "pain": "Cannot underwrite aquaculture risk because it is unmeasured, so either does not lend or prices punitively.", "severity": "high" },
+        { "pain": "No way to verify a claim or detect moral hazard after a kill.", "severity": "high" }
+      ],
+      "strategic_note": "Potentially the most valuable relationship available. Continuous environmental records turn an uninsurable asset into an insurable one. If insurance access becomes contingent on monitoring, the monitoring stops being a discretionary purchase — which changes the entire adoption curve. This is a long game and should not be in the Series A story, but it should be in the founders' heads.",
+      "why_not_now": "It requires years of loss history to price against, which we do not have. Chicken and egg."
+    },
+    {
+      "stakeholder_id": "academic-partner",
+      "label": "Academic / Research Institution",
+      "power": "low",
+      "interest": "high",
+      "is_customer": "as a research equipment buyer, marginally",
+      "why_they_matter": "Validation credibility. A claim that our profiles match a reference sonde carries little weight from us and substantial weight from a university fisheries department. They also have the historical lake data we lack and the students to do the paired sampling that Phase 3 requires.",
+      "what_they_want": "Publications and data access, not equity. This is a cheap partnership by startup standards and it should be pursued immediately."
+    },
+    {
+      "stakeholder_id": "lakeside-community",
+      "label": "Lakeside Community / Non-Farming Residents",
+      "power": "low",
+      "interest": "medium",
+      "is_customer": "no",
+      "pains": [
+        { "pain": "Bear the eutrophication and the smell of other people's aquaculture.", "severity": "medium" },
+        { "pain": "A drone overhead is a privacy intrusion they did not consent to.", "severity": "medium" }
+      ],
+      "critical_note": "This stakeholder has no commercial relationship with us and every ability to make our operation socially impossible. A drone flying over a lake photographs houses, boats, and people on shorelines. If the community reads the platform as surveillance, the company loses its social licence — and in a lake community, that is decided over months of conversation, not by a privacy policy. See ethics-data-privacy.json for the mitigations, but understand that the mitigation is mostly relationship, not technology."
+    },
+    {
+      "stakeholder_id": "consumer",
+      "label": "Seafood Consumer",
+      "power": "low",
+      "interest": "low",
+      "relevance": "Bears the food safety risk from HAB toxins and antimicrobial residues. Named because the ethical weight of the toxicity-claim boundary rests here: if the system implies water is safe and someone eats a contaminated bivalve, this is the person harmed."
+    }
+  ],
+
+  "power_interest_grid": {
+    "note": "Standard Mendelow classification for the UI to render as a 2x2.",
+    "citation_ids": ["mendelow-1981"],
+    "manage_closely": ["bfar", "lgu", "commercial-farm-manager", "caap"],
+    "keep_satisfied": ["denr", "caap"],
+    "keep_informed": ["cooperative", "smallholder-cage-operator", "farm-technician", "academic-partner", "lakeside-community"],
+    "monitor": ["consumer", "feed-supplier", "insurer-lender"],
+    "caveat": "CAAP appears in two quadrants deliberately. They have very high power and low interest, which is the textbook 'keep satisfied' position — but because they hold a veto on the core operating concept, treating them passively would be a mistake. Where the framework and the situation disagree, follow the situation."
+  },
+
+  "the_alignment_problem": {
+    "observation": "The stakeholder whose need is greatest (smallholder) is not the stakeholder who can pay (commercial farm), who is not the stakeholder who controls access (LGU/BFAR), who is not the stakeholder who decides if you may fly (CAAP), who is not the stakeholder who will actually operate the machine (technician).",
+    "implication": "Five different constituencies must each say yes for a single deployment, and each says yes for a different reason. This is not a product sale; it is a coalition. Any go-to-market plan that models this as 'find farmers, sell drones' has not understood the sector.",
+    "why_it_is_in_the_problem_section": "Because it is a problem — ours. It is the reason aquaculture technology has a poor adoption record despite good technology, and it deserves as much design attention as the winch."
+  }
+}

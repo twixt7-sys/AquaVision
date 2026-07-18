@@ -1,0 +1,132 @@
+{
+  "id": "data-pipeline",
+  "title": "Data Pipeline",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "design_target",
+  "description": "The processing path from sensor to decision. Stages are ordered; each stage's failure behaviour is specified, because in a monitoring system a silent pipeline failure is worse than a loud one.",
+
+  "the_governing_rule": "A monitoring system that fails silently is worse than no monitoring system, because someone is relying on it. Every stage below must fail loudly or degrade visibly. There is no acceptable silent failure anywhere in this pipeline.",
+
+  "stages": [
+    {
+      "stage": 1,
+      "name": "Acquisition",
+      "location": "edge — aircraft",
+      "does": "Read sensors, timestamp UTC, tag with depth from the pressure transducer, tag with position and accuracy.",
+      "fails_by": "Sensor fault flags the channel and continues. The sortie is not aborted for one dead channel — a profile with seven good channels is worth having.",
+      "silent_failure_risk": "A fouled sensor does not report a fault. It reports plausible, drifting, confidently wrong numbers. This is the pipeline's most dangerous failure and no stage here catches it — only the scheduled reference check against a laboratory standard does. That check is therefore not a maintenance chore; it is a data integrity control."
+    },
+    {
+      "stage": 2,
+      "name": "QC at source",
+      "location": "edge — aircraft",
+      "does": "Gross range, spike, rate-of-change, flat-line, and partner-presence tests. Flags applied per QARTOD codes.",
+      "citation_ids": ["qartod-manual"],
+      "why_at_the_edge": "Flagging at source means the flag travels with the data forever. QC applied later in the cloud cannot reconstruct what the sensor was doing at the moment of the reading.",
+      "the_flat_line_test": "Deserves special mention: a sensor that has stopped responding and started repeating its last value is the failure mode that most resembles good data. A flat line in a diel DO series is physically impossible and it is the cheapest fouling detector available."
+    },
+    {
+      "stage": 3,
+      "name": "Edge inference and reduction",
+      "location": "edge — aircraft",
+      "does": "NDWI mask, NDCI field, anomaly detection, compression.",
+      "why_here": "Raw multispectral imagery is too large to upload over intermittent cellular. And a bloom detection that requires backhaul fails on the day the network is congested — which, in a lake town during an incident, is exactly the day it will be.",
+      "constraint": "Every watt costs endurance."
+    },
+    {
+      "stage": 4,
+      "name": "Transfer to dock",
+      "location": "edge",
+      "does": "Local high-bandwidth link on docking. Full raw imagery moves here; only reduced products go further.",
+      "fails_by": "Retry. Data stays on the aircraft until acknowledged."
+    },
+    {
+      "stage": 5,
+      "name": "Store and forward",
+      "location": "edge — dock",
+      "does": "Buffer 7+ days locally. Forward when connectivity permits. Idempotent, resumable sync.",
+      "why_it_is_not_optional": "The link will be down. The pre-dawn profile — the most valuable data the system produces — must survive it. A dock that loses the dawn profile because the tower was congested has failed at the one thing it exists for.",
+      "requirement_id": "REQ-DOCK-005",
+      "clock_note": "A dock offline for days still needs UTC accuracy or the diel analysis is corrupted on reconnection. Local RTC discipline matters more than it looks."
+    },
+    {
+      "stage": 6,
+      "name": "Ingestion validation",
+      "location": "cloud",
+      "does": "Schema conformance, partner presence, monotonicity, mandatory-field checks. REJECTS rather than repairs.",
+      "why_reject": "A dataset containing quietly repaired records cannot be defended in an audit, a dispute, or a thesis. Rejected records go to the dock's error queue where a human sees them.",
+      "detail": "See telemetry-schema.json#/ingestion_validation"
+    },
+    {
+      "stage": 7,
+      "name": "Climatology QC",
+      "location": "cloud",
+      "does": "Compare against this site's historical distribution for this season and this hour.",
+      "why_it_cannot_be_at_the_edge": "It needs the site's history, which lives in the cloud.",
+      "the_cold_start_problem": "A new site has no climatology, so this test is inert for the first season. New sites are therefore the ones with the weakest QC — precisely when we know the least about the water and are most likely to be fooled. Copernicus history partially mitigates this and is free; use it."
+    },
+    {
+      "stage": 8,
+      "name": "Fusion",
+      "location": "cloud",
+      "does": "Fit the site-and-day-local NDCI-to-chlorophyll regression from same-sortie probe points. Apply across the masked field. Propagate uncertainty.",
+      "why_this_is_the_core": "This stage is the product. See system-architecture.json#/the_fusion_core.",
+      "fails_by": "If fewer than the minimum probe points exist, or the regression's confidence interval exceeds a threshold, the concentration field is NOT produced. The NDCI field is published as a relative index instead, clearly labelled as such. Refusing to produce a bad map is a feature.",
+      "the_normal_case": "Fitting on 3-4 points. The confidence interval will often be wide. Show it."
+    },
+    {
+      "stage": 9,
+      "name": "Derived indices",
+      "location": "cloud",
+      "does": "Thermocline depth, Schmidt stability, oxygen debt, diel amplitude.",
+      "fails_by": "Partial profiles produce nulls with `inputs_complete: false`, never an interpolated guess. A stability index computed from a truncated column is not comparable to one from a full column, and quietly computing it anyway would corrupt the time series that is our entire moat."
+    },
+    {
+      "stage": 10,
+      "name": "Twin update",
+      "location": "cloud",
+      "does": "Update measured state, recompute interpolation with its uncertainty field, decay stale state."
+    },
+    {
+      "stage": 11,
+      "name": "Alerting",
+      "location": "cloud primary, dock fallback",
+      "does": "Evaluate rules. Dispatch with evidence attached.",
+      "the_critical_design_decision": "Safety-critical alerts are RULE-BASED, not model-based. A threshold on measured DO fires locally at the dock with no cloud and no model. Model-based alerts are advisory and degrade gracefully when the cloud is unreachable.",
+      "why": "The alert that matters most must have the fewest dependencies. A DO-below-threshold alert should survive a cloud outage, a model regression, and a bad deploy. Coupling it to an ML inference service is an architecture that fails at 04:30.",
+      "suspect_data_rule": "QC flag 3 data is shown to humans but does NOT fire automated alerts. A false alarm from a fouled sensor at 04:30 costs more trust than a delayed alert costs fish — because after the third false alarm, the tenth alert is ignored, and the tenth may be real."
+    },
+    {
+      "stage": 12,
+      "name": "Presentation",
+      "location": "cloud + local dashboard",
+      "does": "Twin, dashboard, mobile, reports."
+    }
+  ],
+
+  "the_alert_fatigue_problem": {
+    "statement": "This is a safety issue disguised as a UX issue, and it will kill the product's value long before it kills a fish.",
+    "mechanism": "Every false alarm spends trust. Trust is not renewable at the rate we spend it. After the third 04:30 alert that turns out to be a fouled sensor or a floating coconut, the manager mutes notifications. Then the real one arrives and nobody sees it.",
+    "the_design_response": [
+      "Tune the anomaly model for PRECISION over recall, deliberately accepting misses. A missed dead fish is found two hours later; a false alarm at 04:30 is unrecoverable trust damage.",
+      "Suspect-flagged data never auto-alerts.",
+      "Every alert carries its evidence — the image crop, the profile chart, the threshold it crossed. An alert that cannot explain itself will be ignored the third time.",
+      "Escalate by severity, not by volume. Three advisories should not produce three notifications.",
+      "Track the alert-to-action rate as a first-class product metric. If people stop acting on alerts, the product has failed regardless of how accurate the sensors are."
+    ]
+  },
+
+  "data_retention": {
+    "raw": "Indefinite. It is the asset and the moat — three years of profiles on a lake nobody else has measured is worth more than the aircraft.",
+    "imagery": "Reduced products indefinite. Raw frames tiered to cold storage after processing; deleted only under the imagery privacy policy.",
+    "the_privacy_exception": "Raw imagery containing identifiable people must be handled under the retention limits in ethics-data-privacy.json, regardless of its scientific value. This is a genuine tension: the frames most useful for training are the ones over the busiest, most populated shorelines."
+  },
+
+  "what_is_deliberately_not_automated": [
+    "Dispensing. Human authorisation per mission, always.",
+    "Declaring water safe. The system reports what it measured and what it did not measure. Absence of a detection is not a clearance.",
+    "Overriding a QC flag. If a human decides a suspect reading is good, that is a new record with an author, not an edit.",
+    "Changing a customer's alert thresholds. We do not tune someone else's risk tolerance from our side of the network."
+  ]
+}

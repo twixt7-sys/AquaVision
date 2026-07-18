@@ -1,0 +1,96 @@
+{
+  "id": "deployment-playbook",
+  "title": "Deployment Playbook",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "design_target",
+  "purpose": "The operational runbook for taking a site from first contact to steady-state monitoring. Written as a checklist because in the field, prose is not read and steps get skipped — and a skipped commissioning step becomes an incident.",
+
+  "the_operating_reality": "A working fish farm is not a research site. The drone is the least important thing happening there on any given day. If an operation requires attention it will not get, it fails. Every procedure below is written for a person with other jobs to do.",
+
+  "phases": [
+    {
+      "phase": "Prospecting and qualification",
+      "goal": "Do not deploy where we will lose.",
+      "qualification_criteria": [
+        { "criterion": "Response capacity", "test": "Does the operator have aeration or other means to act on a warning?", "why": "A warning to a farm that cannot respond is a countdown clock, not a product. This is the first filter, not the last." },
+        { "criterion": "Station density", "test": "Enough cages/stations clustered within one dock's operating radius to beat a fixed buoy?", "why": "Below the scale threshold, a buoy wins and we should say so rather than sell a worse solution." },
+        { "criterion": "Site geometry", "test": "Clear launch/recovery approach, shore access, an alternate landing option over water?", "why": "No alternate landing site over a large lake is a drowning waiting to happen." },
+        { "criterion": "Permission chain", "test": "Can we actually get LGU, water-body authority, and airspace clearance here?", "why": "The best site technically is worthless if the coalition cannot be assembled. See stakeholder-pain-points.json#/the_alignment_problem." }
+      ],
+      "the_discipline": "Disqualifying a bad-fit prospect is a win, not a loss. A deployment that fails visibly on a lake costs more in reputation than the sale was worth, because lake communities talk."
+    },
+    {
+      "phase": "Site commissioning",
+      "goal": "Establish that we can fly here safely and that our measurements will be comparable over time.",
+      "checklist": [
+        "Airspace check; CAAP coordination where required.",
+        "LGU and water-body authority written permission.",
+        "Community notification — a social-licence requirement even where not a legal one. A drone appearing over a lake unannounced earns a reputation before it earns a customer.",
+        "Dock siting: shore access, power/solar, connectivity, security, typhoon exposure.",
+        "Obstacle survey: power lines, masts, trees, and the cage structure itself.",
+        "Alternate landing site identification and survey.",
+        "Bathymetry survey — one-time, rent the sensor.",
+        "Fixed station definition with RTK positions. Profiles are only comparable if the station is genuinely the same place each time.",
+        "Baseline profiles at every station across at least one full diel cycle before ANY claim is made about the site.",
+        "Ingest available Copernicus history for the water body — free, and it gives the site a past on day one.",
+        "Assign a dedicated sonde to this site and log the assignment. Biosecurity starts here."
+      ],
+      "gate": "No routine operation until baseline diel profiles exist. A site with no baseline cannot distinguish 'abnormal' from 'we have never looked before'."
+    },
+    {
+      "phase": "Onboarding and training",
+      "goal": "The farm's people can run the routine and recognise the abnormal without calling us.",
+      "detail_file": "data/08_operations/training-certification.json",
+      "the_test": "Can the technician clean the probe correctly, swap a battery, recognise a fouled-sensor reading, and interpret an alert? If not, the deployment degrades quietly into confidently wrong data — worse than no data, because someone acts on it."
+    },
+    {
+      "phase": "Steady-state operation",
+      "goal": "Reliable daily sorties against the diel and glint schedule.",
+      "daily_rhythm": "See concept-of-operations.json#/a_day_in_the_life and mission-profiles.json#/mission_scheduling_logic.",
+      "the_two_sorties_that_matter": "Dawn (DO minimum) and afternoon (DO maximum). The amplitude between them is a leading indicator that a single daily reading cannot produce. Two well-timed sorties beat four badly-timed ones."
+    },
+    {
+      "phase": "Multi-site scaling",
+      "goal": "Dock network density in a lake, then adjacent lakes.",
+      "biosecurity_gate": "A drone moving between sites is a pathogen vector. Single-site sonde assignment plus full decontamination between sites is mandatory. See biosecurity-protocol.json.",
+      "economics_note": "Dense clusters and cooperative-served bays are the good unit economics. Dispersed single farms are the bad ones. Scale toward density."
+    }
+  ],
+
+  "pre_flight_checklist": {
+    "note": "Run before every sortie. Automated where possible; human-confirmed where consequential.",
+    "items": [
+      "Weather within envelope — and remember the tethered-probe wind limit is BELOW the bare-aircraft limit, and unknown until flight-tested.",
+      "Battery charge and health sufficient for the mission plus reserve.",
+      "Airspace clear; no NOTAM conflict.",
+      "Assigned sonde present, clean, and within calibration.",
+      "Calibration panel imaged (imaging sorties).",
+      "Payload configured for THIS mission — the mass budget forces per-mission configuration, so the wrong payload is a real failure.",
+      "Failsafe home point and alternate landing confirmed as reachable over water.",
+      "For dispensing sorties: human authorisation obtained, substance and dose confirmed, dose ceiling set.",
+      "Tether cutter armed and functional."
+    ]
+  },
+
+  "post_flight_checklist": [
+    "Sonde and full tether length rinsed and, for inter-site movement, decontaminated.",
+    "Data uploaded or buffered.",
+    "Battery on charge.",
+    "Airframe inspected for damage, corrosion, and fouling.",
+    "Any anomaly logged — including near-misses. Blameless reporting; a hidden near-miss is a future crash.",
+    "Calibration panel imaged (imaging sorties)."
+  ],
+
+  "the_things_that_will_actually_go_wrong": {
+    "note": "Written from the failure modes catalogued across the hardware files, so field staff are not surprised.",
+    "items": [
+      { "problem": "Probe snags on cage netting", "response": "Tension anomaly detection; slack-and-retry; escalate to pilot; cutter as last resort. Log the station — a station that snags repeatedly must be moved even at the cost of coverage." },
+      { "problem": "Sensor reads plausible but wrong (fouling drift)", "response": "Caught only by the scheduled reference check, not by any onboard test. This is why the reference check is non-negotiable." },
+      { "problem": "Dock fails to open at 04:30", "response": "Dock self-reports the fault. Silent failure to open is the worst case — a missing dawn profile nobody notices until it matters." },
+      { "problem": "Wind picks up mid-sortie", "response": "Abort and return with reserve intact. Never finish 'one more station'." },
+      { "problem": "Link drops", "response": "Complete current mission if within envelope, then return. Do not hover awaiting the link — that burns the reserve." },
+      { "problem": "Battery lower than expected", "response": "The reserve is not available to finish the mission. Every ditched aircraft was one more station from the dock." }
+    ]
+  }
+}

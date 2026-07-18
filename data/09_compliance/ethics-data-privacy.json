@@ -1,0 +1,108 @@
+{
+  "id": "ethics-data-privacy",
+  "title": "Ethics, Data Privacy & Responsible Use",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "design_target",
+
+  "why_this_file_matters": "A platform that flies cameras over shared water, holds sensitive farm data, dispenses substances, and could be turned to surveillance carries real ethical weight. These are not compliance checkboxes; several of them are places where the company could do genuine harm, and a couple are places where the technology's second-order effects run against its stated purpose. This file names them plainly.",
+
+  "data_ownership": {
+    "principle": "The farmer's data belongs to the farmer. We are custodians, not owners.",
+    "why_it_binds_us": "It rules out the data-monetisation business models an investor will inevitably suggest — selling aggregated farm data, or building a proprietary dataset the farmer cannot take with them. Those models are available and lucrative and we are declining them, and the declining has to be real, in the architecture, not just in a values statement.",
+    "commitments": [
+      "Data is exportable in an open format, always.",
+      "Data is deletable on request.",
+      "Per-tenant isolation by construction, not by policy.",
+      "If we leave, the farmer keeps their history. See training-certification.json#/knowledge_transfer_and_exit."
+    ]
+  },
+
+  "the_aerial_imagery_problem": {
+    "statement": "A drone flying over a lake photographs houses, boats, shorelines, and people who are not our customers and did not consent.",
+    "why_it_is_serious": "This is personal data collected incidentally, and in a lake community it is also a social-licence question. The frames most useful for training our models are the ones over the busiest, most populated shorelines — so the scientific value and the privacy risk are maximised in the same place. That tension is real and unresolved.",
+    "controls": [
+      "Collect the minimum imagery necessary for the water quality and anomaly tasks.",
+      "No person-detection models. Not because it is hard — because building the capability changes what this company is, and a capability that exists will eventually be used.",
+      "Retention limits on raw imagery containing identifiable people, regardless of its training value.",
+      "On-board or edge blurring/masking of shoreline structures where feasible.",
+      "Geofence surveys to the water body; do not overfly dwellings unnecessarily.",
+      "Community notification at site commissioning — a social requirement, not just a legal one."
+    ],
+    "citation_ids": [],
+    "regulatory_hook": "Philippine Data Privacy Act of 2012. See regulatory-framework.json."
+  },
+
+  "the_surveillance_temptation": {
+    "statement": "The platform is an excellent surveillance tool, and it must not become one.",
+    "the_capabilities_we_are_declining": [
+      "IUU-fishing enforcement — detecting unauthorised vessels. Technically easy, and it would turn a farm instrument into an enforcement tool, making adversaries of the same coastal communities we need as customers.",
+      "Personnel monitoring — tracking who is where, how fast a technician responded. It would destroy the trust the technician relationship depends on. See risk R-12 and the technician persona.",
+      "Neighbour monitoring — using imagery to document a competitor's stocking or practices."
+    ],
+    "why_declining_matters": "Each of these is a real capability the hardware already has. Choosing not to build the software for them is an active choice, and it is the choice that keeps the company's relationship with lake communities collaborative rather than adversarial. A surveillance drone and a monitoring drone can be the same aircraft; they are not the same company.",
+    "the_governance": "These exclusions should be written into the company's charter or its terms, not left to case-by-case discretion, because the commercial pressure to add 'just one' enforcement contract will be real."
+  },
+
+  "the_overstocking_paradox": {
+    "statement": "Better instruments may let operators push stocking density closer to the edge, worsening the systemic risk the product exists to reduce.",
+    "why_it_is_uncomfortable": "The root cause of the disaster we sell against is over-stocking. Our product does not reduce stocking; it gives operators more confidence to approach the limit. There is a real version of this technology that makes the commons problem worse by enabling intensification.",
+    "our_partial_answer": [
+      "Carrying-capacity analytics that surface the SYSTEMIC cost, aimed at cooperatives and regulators who have an interest in the whole lake.",
+      "Not marketing the product as a licence to intensify.",
+      "Positioning the shared-lake data as a governance asset, not just a per-farm optimisation tool."
+    ],
+    "the_honest_admission": "This is a partial answer, not a solution. An individual operator with better instruments and a profit motive may stock harder regardless of what our lake-wide analytics say. We cannot fully resolve this, and the thesis ethics chapter should say so rather than pretend the technology is unambiguously beneficial. See risk R-15.",
+    "citation_ids": ["pna-tilapia-fishkill"]
+  },
+
+  "the_antimicrobial_stewardship_tension": {
+    "statement": "A drone that makes dosing easier makes over-dosing easier.",
+    "detail": "Lowering the friction on applying a substance increases the behaviour. When the substance is an antimicrobial and the operator is frightened of an outbreak, easier dosing may mean more prophylactic antimicrobial use — which is already a public health problem. Our contribution to antimicrobial stewardship could plausibly be negative.",
+    "controls": ["Firmware dose ceilings not overridable from the dashboard.", "Per-mission human authorisation.", "Substance-class gating with veterinary medicines legally separated.", "Precision placement that reduces total dose for a given effect — the one genuinely positive lever."],
+    "honest_note": "The controls are weak against a determined operator. This deserves a paragraph in the thesis, not silence. See carriage-ejection-system.json#/the_safety_architecture.",
+    "citation_ids": ["worldbank-disease-risk-2014"]
+  },
+
+  "algorithmic_responsibility": {
+    "principles": [
+      "No unvalidated predictive claim reaches a farmer. A false 'you are safe' can cost a livelihood. See ai-ml-models.json.",
+      "Every alert explains its evidence and states what it does not know.",
+      "The system advises; the human decides and is accountable. Consequential actions are never autonomous.",
+      "Confidence shown to users is calibrated, or it is not shown as a number.",
+      "Models are evaluated on held-out sites and their failures are published."
+    ]
+  },
+
+  "equity_and_extraction": {
+    "statement": "Research and commerce on smallholders can be extractive, and this sector has a history of it.",
+    "commitments": [
+      "Compensate farmers for research participation.",
+      "Informed consent that accounts for the power imbalance — a farmer who thinks participation brings a subsidy is not freely consenting.",
+      "Do not build a product that only serves the well-capitalised farms while studying the smallholders. The impact story is hollow if the smallholder is only ever a research subject and never a beneficiary.",
+      "The cooperative and financing channels exist so that the people with the greatest need are reached, not just observed."
+    ],
+    "the_hard_truth": "The stakeholder with the most acute need can least afford the product. Every honest document in this repository returns to this. It is an equity problem the company must actively work against, or it will default — as ventures do — to serving whoever can pay, and quietly abandon the mission it was founded on."
+  },
+
+  "the_data_governance_gap": {
+    "statement": "The lake-scale carrying-capacity use case needs cross-farm data, and the operator who benefits from the lake-wide picture is the one who least wants their own stocking visible in it.",
+    "status": "UNRESOLVED — a genuine open problem, flagged rather than pretended-solved.",
+    "the_tension": "The public good (managing shared carrying capacity) requires aggregating private, sensitive, commercially damaging data. The individual incentive is to withhold. Standard aggregation and anonymisation are weak when there are only forty operators on a named lake.",
+    "candidate_directions": ["Explicit, revocable, per-purpose consent.", "Differentially private aggregate outputs.", "Cooperative-level governance where members collectively consent to lake-wide analysis.", "Federated approaches that never centralise raw farm data."],
+    "why_it_is_here_and_not_solved": "Because it is cheap to design for now and impossible to retrofit, and because pretending it is solved would be worse than admitting it is open. See system-architecture.json and api-specification.json, both of which default to no sharing precisely because this is unresolved.",
+    "citation_ids": ["ai-aqua-review-2024"]
+  },
+
+  "responsible_use_summary": {
+    "the_commitments_that_cost_us_something": [
+      "No data monetisation — declines a lucrative model.",
+      "No surveillance capabilities — declines enforcement contracts.",
+      "No unvalidated predictions — declines the best demo feature.",
+      "No autonomous dispensing — declines a capability that would impress.",
+      "Compensated, consenting research — costs money and slows the work.",
+      "Serve the smallholder, not just the payer — costs margin."
+    ],
+    "why_list_them_this_way": "A responsible-use section that costs the company nothing is a marketing document. These commitments each forgo something real. That is how you tell whether an ethics policy is load-bearing: look for what it declines, not what it professes."
+  }
+}

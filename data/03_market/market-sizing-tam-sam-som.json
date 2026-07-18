@@ -1,0 +1,113 @@
+{
+  "id": "market-sizing",
+  "title": "Market Sizing — TAM / SAM / SOM",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "modeled_projection",
+  "confidence": "low",
+
+  "READ_THIS_FIRST": {
+    "statement": "This file contains NO market size number, and that is deliberate.",
+    "why": "A defensible bottom-up market size requires the number of aquaculture operations in the target geography, their size distribution, and their existing spend on monitoring and inputs. We have none of those. The BFAR Philippine Fisheries Profile has them; we have not obtained it.",
+    "what_we_could_do_instead": "We could take FAO's USD 312.8 billion global aquaculture output, apply an invented 'technology penetration rate' of 2 percent, and present a USD 6.3 billion TAM. It would look professional. It would be meaningless, because the 2 percent would be pulled from nothing and the whole number would inherit its arbitrariness. Every experienced investor has seen that exact slide a hundred times and discounts it to zero on sight.",
+    "what_this_file_does_instead": "It gives the METHOD, the inputs required, and the sensitivity structure — so that the moment real data arrives, the number can be computed honestly and defended under questioning. A founder who says 'here is my method and here is the one input I am missing' is more credible than one who presents a confident fabrication.",
+    "when_to_fill_this_in": "Phase 0, after obtaining BFAR statistics and completing farmer discovery. Not before."
+  },
+
+  "sizing_methodology": {
+    "chosen_approach": "Bottom-up, from operator counts and per-operator willingness to pay.",
+    "why_not_top_down": "Top-down sizing from industry output value requires a penetration assumption that carries the entire result. The number becomes a restatement of the assumption dressed as research. Bottom-up sizing can be wrong, but it can be checked — and a number that can be checked is worth more than a bigger number that cannot.",
+    "citation_ids": ["fao-sofia-2024"],
+    "formula": {
+      "TAM": "SUM over all aquaculture operations globally of (annual revenue per operation from monitoring + dispensing services)",
+      "SAM": "SUM over operations in reachable geographies, in culture systems the platform physically suits (open-water pond, lake cage, coastal pen — NOT RAS, NOT deep offshore), that are above the minimum scale threshold",
+      "SOM": "SAM x realistic share within the planning horizon, constrained by dock network coverage, service capacity, and regulatory permission"
+    }
+  },
+
+  "required_inputs": [
+    { "input": "Number of aquaculture operations in the Philippines by system type and scale", "source": "BFAR Philippine Fisheries Profile", "status": "NOT OBTAINED", "criticality": "blocking" },
+    { "input": "Cage counts by lake (Taal, Laguna de Bay, Buhi, Sampaloc, Bato)", "source": "LGU permits, LLDA, TVPL management", "status": "NOT OBTAINED", "criticality": "blocking for beachhead sizing" },
+    { "input": "Size distribution of operations — the median matters far more than the mean here, because a handful of large farms will dominate the mean and mislead the strategy", "source": "BFAR / PSA", "status": "NOT OBTAINED", "criticality": "blocking" },
+    { "input": "Current spend on water quality monitoring per operation", "source": "Farmer discovery interviews", "status": "NOT OBTAINED", "criticality": "blocking", "note": "Likely near zero for most operators, which is the crux of the whole commercial problem: we are not taking share from an existing budget line, we are trying to create one. Creating a budget line is far harder than winning share of an existing one, and the plan must reflect that." },
+    { "input": "Aeration electricity spend per operation", "source": "Farmer discovery interviews", "status": "NOT OBTAINED", "criticality": "high", "note": "This is the existing budget line we CAN take share from. It may be the more important number than the monitoring spend." },
+    { "input": "Feed spend per operation per cycle", "source": "Farmer discovery / feed distributors", "status": "NOT OBTAINED", "criticality": "high" },
+    { "input": "Willingness to pay, measured rather than asserted", "source": "Farmer discovery, ideally via a paid pilot rather than a survey question", "status": "NOT OBTAINED", "criticality": "blocking", "note": "Stated willingness to pay in agricultural surveys is notoriously inflated. The only reliable measurement is an invoice someone actually paid." }
+  ],
+
+  "market_definition": {
+    "what_is_in": [
+      { "segment": "Lake and reservoir cage culture", "rationale": "The core case. Stratification-driven risk, spatially distributed units, a shared water body, and no practical alternative monitoring method." },
+      { "segment": "Open brackish and freshwater pond culture", "rationale": "Large area, distributed units, real monitoring need. The largest segment by count." },
+      { "segment": "Coastal pen and near-shore marine cage", "rationale": "Physically viable for the platform; harder environment; later phase." }
+    ],
+    "what_is_out": [
+      { "segment": "Recirculating aquaculture systems (RAS)", "rationale": "Indoor, already instrumented, and fixed sensors are strictly better than an aerial platform in a tank. We would lose, correctly." },
+      { "segment": "Deep offshore cage", "rationale": "Beyond the endurance and sea-state envelope of a small multirotor. This is a vessel or fixed-platform problem." },
+      { "segment": "Single small ponds below the scale threshold", "rationale": "A fixed buoy is cheaper and better. Selling into this segment would be extracting money for a worse solution, which is both wrong and unsustainable." },
+      { "segment": "Capture fisheries", "rationale": "Different problem, different customer, and — for the surveillance applications — a different company than the one we want to be." }
+    ],
+    "why_the_exclusions_matter": "Roughly half of what a lazy sizing would count is genuinely not our market. Stating the exclusions up front is the difference between a credible SAM and an inflated one. It also protects the sales team from wasting a year on prospects that will never close."
+  },
+
+  "scale_threshold_analysis": {
+    "provenance": "assumption",
+    "the_question": "Below what operation size does a fixed sensor buoy beat the OmniDrone?",
+    "why_it_decides_everything": "This threshold sets the SAM. Set it too low and the sizing is fantasy; set it correctly and it is defensible.",
+    "the_logic": {
+      "buoy_economics": "A fixed buoy covers one point at one or few depths, at a low capital cost, forever, with no labour. For a single small pond, this is close to unbeatable and we should say so.",
+      "omnidrone_economics": "One drone covers N stations x D depths x F frequency, but carries a much higher capital and operating cost. Its cost per observation falls as N, D, and F rise.",
+      "the_crossover": "Cost_per_observation_buoy x (N x D) vs Cost_per_observation_drone. The drone wins when the number of distinct observation points needed is large — which is precisely the lake cage array case and precisely not the single-pond case.",
+      "the_asymmetry_that_favours_us": "A buoy cannot profile a water column without a vertical string of sensors, which multiplies its cost by D. The drone gets depth almost for free — the winch is already there, and paying out another two metres costs seconds. Depth is where our economics break in our favour, and it is not a coincidence that depth is also where the killing happens."
+    },
+    "estimated_threshold": "unknown — must be computed once real costs and real farm layouts are known",
+    "honest_note": "This analysis is the most useful thing in this file and it is currently qualitative. Making it quantitative should be a Phase 0 deliverable. It determines the SAM, the pricing, and the sales qualification criteria all at once."
+  },
+
+  "beachhead_definition": {
+    "segment": "Philippine lake cage culture operators, tilapia and milkfish, at cooperative or commercial scale",
+    "why_this_one": [
+      "The failure mode the platform is built to see (stratification-driven kills) is documented, recurring, and expensive there.",
+      "Operators are geographically concentrated around a small number of lakes, which makes a dock-based service network viable — a decisive operational advantage over dispersed pond geographies.",
+      "Cage arrays produce exactly the high N x D x F profile where our economics beat a buoy.",
+      "Existing cooperatives provide an aggregation layer that solves the smallholder affordability problem without requiring us to solve it.",
+      "Local knowledge of Taal's volcanic sulfur chemistry is defensible against imported generic products."
+    ],
+    "citation_ids": ["inquirer-taal-fishkill-2023", "seafdec-laguna-fishkill"],
+    "beachhead_sizing_status": "NOT COMPUTED — blocked on lake cage counts. This is the single highest-value missing datum in the repository, and it is obtainable with a phone call and a records request."
+  },
+
+  "expansion_path": {
+    "provenance": "modeled_projection",
+    "sequence": [
+      { "step": 1, "market": "Philippine lake cage culture", "reuses": "everything", "new_risk": "none — this is the design case" },
+      { "step": 2, "market": "Philippine brackish pond culture (milkfish, shrimp)", "reuses": "platform, sensing core", "new_risk": "Dispersed geography breaks the dock network economics; salinity and benthic species change the sensing value." },
+      { "step": 3, "market": "Philippine coastal marine cage", "reuses": "platform", "new_risk": "Sea state, corrosion, and endurance." },
+      { "step": 4, "market": "Southeast Asian regional (Vietnam, Indonesia, Thailand)", "reuses": "the whole product", "new_risk": "Regulatory re-approval per country, and local competition." }
+    ],
+    "note": "Each step is a real re-derisking, not a copy-paste. Business plans that show a smooth regional expansion curve are describing a spreadsheet, not a company."
+  },
+
+  "market_timing": {
+    "why_now": [
+      "Aquaculture passed capture fisheries in 2022 — the instrumentable share of the sector is now the majority.",
+      "UAV inland-water retrieval literature matured through 2024-2025, so the science is borrowable rather than inventable.",
+      "Edge inference at a few watts became practical.",
+      "Digital twin aquaculture moved from proposal to demonstrated case study."
+    ],
+    "citation_ids": ["fao-sofia-2024", "mdpi-drones-inland-review-2024", "sciencedirect-dt-aiot-2023", "pmc-dt-rainbow-trout-2023"],
+    "why_not_now": {
+      "note": "The honest counter-case, included because a founder who cannot argue the opposite side has not thought about it.",
+      "arguments": [
+        "BVLOS is not authorised, and the unit economics depend on it. We may be two years early to our own business model.",
+        "Smallholder willingness to pay may simply not exist at any price we can offer, in which case the market waits for a public programme rather than a startup.",
+        "Battery energy density remains the binding constraint on multirotor endurance and is improving slowly. The mission profile may be marginal today and comfortable in three years."
+      ]
+    }
+  },
+
+  "chart_hint": {
+    "chart_file": "data/12_datasets/charts/chart-market-sizing.json",
+    "rendering_note": "The chart file renders the METHOD and the missing inputs, not fabricated concentric circles. If a reviewer asks where the TAM number is, the answer — 'we do not have the operator counts yet, and here is exactly what we need' — is a better answer than a wrong number."
+  }
+}

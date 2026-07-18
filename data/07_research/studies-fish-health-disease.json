@@ -1,0 +1,108 @@
+{
+  "id": "studies-fish-health-disease",
+  "title": "Related Studies — Fish Health, Disease & Biosecurity",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "theme": "fish_health_disease",
+  "provenance": "verified_external",
+  "verification_notice": "Records derived from search-result summaries. Open the sources before citing.",
+
+  "the_honest_framing_of_this_theme": "This collection sizes an enormous problem that the OmniDrone barely touches. It is included because disease is a defining feature of the aquaculture landscape and any credible thesis must engage with it — and because the temptation to put a USD 6 billion figure on a slide and imply we address it is the single most dishonest move available to this company. This file exists partly to make that move impossible.",
+
+  "studies": [
+    {
+      "citation_id": "worldbank-disease-risk-2014",
+      "theme": "fish_health_disease",
+      "study_type": "policy_report",
+      "geography": "Global",
+      "year": 2014,
+      "summary": "World Bank discussion paper on reducing disease risk in aquaculture, synthesising the scale of losses and the management approaches available.",
+      "key_findings": [
+        "FAO estimates global aquaculture disease losses at approximately USD 6 billion annually.",
+        "EMS/AHPND in the Mekong Delta costs mostly small-scale producers roughly USD 800 million per year, excluding value chain job losses.",
+        "Biosecurity and risk management, not treatment, are the primary levers."
+      ],
+      "relevance_to_omnidrone": "Sizes the disease problem class and — critically — establishes that biosecurity is the lever. That finding cuts against us in one direction and for us in another. Against: our contribution to disease outcomes is marginal. For: it validates why biosecurity is a first-class hardware requirement in probe-winch-subsystem.json rather than an operational footnote. A probe dipped in pond A and then pond B is a pathogen vector with rotors, and this paper is why that sentence is in the specification.",
+      "supports_or_challenges": "challenges",
+      "the_brutal_honesty": "Almost none of this USD 6 billion is addressable by us. Disease losses are driven by pathogen introduction, broodstock quality, and biosecurity — not by observability. We detect consequences earlier and flag stress windows. Those are real but modest contributions. Putting the USD 6 billion figure on a slide in a way that implies we address it would be caught by any knowledgeable investor, and everything else on the slide would become suspect.",
+      "the_distributional_point": "The Mekong EMS losses land on small-scale producers who can least absorb them. That is the equity argument for aquaculture technology generally, and it is real. It is also the commercial trap this whole venture faces: the people who need it most can afford it least. No amount of pitch craft dissolves that.",
+      "priority": "HIGH"
+    },
+    {
+      "citation_id": "asian-fisheries-shrimp-disease",
+      "theme": "fish_health_disease",
+      "study_type": "policy_report",
+      "geography": "Asia",
+      "year": 2018,
+      "summary": "Analysis of Asian shrimp production and the economic costs of disease.",
+      "key_findings": [
+        "WSSV caused approximately USD 6 billion in losses during the 1992-93 Asian outbreaks and USD 1-2 billion annually in subsequent years.",
+        "AHPND (formerly EMS), characterised by rapid mass mortality approaching 100 percent, has caused losses in the billions annually since its first outbreak in 2010."
+      ],
+      "relevance_to_omnidrone": "Establishes the scale of shrimp disease loss and, by doing so, establishes the limits of our platform in shrimp culture.",
+      "supports_or_challenges": "challenges",
+      "the_structural_limitation_it_exposes": "Shrimp are BENTHIC. They live on the pond bottom. An aerial platform observing the surface has poor access to the animals themselves. Our probe measures the water they live in, which is genuinely useful, but we cannot see the shrimp. In a market where shrimp is a major export species, this is a real capability gap that must be stated rather than glossed — and it means our shrimp value proposition is water quality only, not health.",
+      "verification_status": "needs_verification",
+      "note": "Author list and year are RECONSTRUCTED and NOT confirmed. Do not cite until retrieved.",
+      "priority": "MEDIUM"
+    },
+    {
+      "citation_id": "ncbi-takifugu-hypoxia-2022",
+      "theme": "fish_health_disease",
+      "study_type": "empirical_lab",
+      "year": 2022,
+      "summary": "Metabolomic analysis of Takifugu obscurus gill tissue under acute hypoxic stress.",
+      "relevance_to_omnidrone": "Physiological evidence that hypoxia causes measurable cellular damage before mortality. This supports the argument that by the time fish pipe at the surface, the physiological damage is already done — the intervention window has largely closed, and survivors carry stress-induced immunosuppression into a disease window weeks later.",
+      "supports_or_challenges": "supports",
+      "the_connection_worth_making": "This is the mechanistic link between the water quality theme and the disease theme. Environmental stress does not just kill directly; it opens a disease window. That means the OmniDrone's contribution to disease outcomes, while modest, is not zero — reducing chronic hypoxic stress reduces the immunosuppression that precedes outbreaks. It is an indirect, unproven, second-order effect, and it should be described as exactly that rather than upgraded into a disease-prevention claim.",
+      "limitations": "Different species, laboratory conditions, acute rather than chronic exposure. Do not over-leverage.",
+      "priority": "LOW as a source, MEDIUM as a mechanism"
+    },
+    {
+      "citation_id": "preprints-wssv-review-2025",
+      "theme": "fish_health_disease",
+      "study_type": "systematic_review",
+      "year": 2025,
+      "title_note": "Combating White Spot Syndrome Virus",
+      "url": "https://www.preprints.org/manuscript/202508.0761/",
+      "summary": "Review of approaches to combating WSSV, reporting losses of approximately USD 19 billion annually worldwide across small- and commercial-scale shrimp farms.",
+      "relevance_to_omnidrone": "Corroborates the scale of WSSV loss, though the USD 19 billion figure is substantially higher than the USD 1-2 billion annual figure from the Asian Fisheries source. That discrepancy is itself informative — aquaculture loss statistics vary wildly in scope and methodology, and this repository has already documented the same problem with Philippine fish kill figures. Do not cite either number without understanding what it counts.",
+      "supports_or_challenges": "context_only",
+      "the_methodological_lesson": "Two credible sources differing by an order of magnitude on the same disease is a warning about the whole class of loss statistics used throughout this repository. Treat every big number in this domain as a scope question first and a magnitude second.",
+      "verification_status": "cited_from_search_result",
+      "note": "Preprint, not peer-reviewed. Weak source.",
+      "priority": "LOW"
+    }
+  ],
+
+  "what_the_omnidrone_actually_contributes_to_this_theme": {
+    "purpose": "Written explicitly so nobody has to infer it, and so nobody can overclaim it.",
+    "genuine_contributions": [
+      { "contribution": "Earlier detection of surface mortality", "strength": "modest", "caveat": "Floating mortalities only. In species whose dead fish sink — which is most of them, most of the time — the majority of mortality is invisible to an aerial platform. This caps the claim severely." },
+      { "contribution": "Detection of surface piping behaviour", "strength": "real", "why": "Piping is a strong, visually obvious hypoxia signal and it means the fish are in trouble NOW. Actionable in a way that counting corpses is not." },
+      { "contribution": "Flagging environmental stress windows that precede outbreaks", "strength": "indirect and unproven", "caveat": "Second-order. Plausible from the physiology; not demonstrated." },
+      { "contribution": "Reducing total antimicrobial use via precision dosing", "strength": "plausible", "the_dual_use_problem": "A drone that makes precision dosing easier also makes over-dosing easier. Lowering the friction on a behaviour increases the behaviour, and prophylactic antimicrobial use is already a public health problem. Our net contribution to antimicrobial stewardship could plausibly be NEGATIVE. This deserves honest treatment in the thesis ethics chapter rather than the usual optimistic framing." },
+      { "contribution": "Biosecurity traceability", "strength": "real", "why": "Every sonde's site history is logged, so an epidemiological trace is possible after an outbreak. This matters legally as much as biologically — if a farm has an outbreak and we visited, we will be asked, and being able to answer is not optional." }
+    ],
+    "what_we_do_not_contribute": [
+      "Diagnosis. A vet diagnoses. We detect consequences and preconditions.",
+      "Pathogen detection of any kind.",
+      "Anything meaningful for benthic species like shrimp beyond water quality.",
+      "Parasite detection — that requires individual fish examination and is where underwater vision systems win.",
+      "Broodstock or hatchery biosecurity, which is where the actual disease lever is."
+    ]
+  },
+
+  "the_biosecurity_inversion": {
+    "statement": "The most important thing this theme tells us is not what we contribute to disease management. It is what disease management demands of us.",
+    "the_reasoning": "A platform that moves between farms is a potential pathogen vector. The World Bank finding that biosecurity is the primary lever means that a carelessly-designed multi-site drone could impose net harm on the sector it claims to serve — spreading pathogens faster than it detects them. This is the strongest technical objection to the entire multi-site concept and it is usually raised by someone else, late, in a room where it is embarrassing.",
+    "our_response": "Single-site sonde assignment as the primary control, tool-free 60-second swap to make it operationally real, dock decontamination including the tether, and full movement logging. See probe-winch-subsystem.json#/biosecurity_design and biosecurity-protocol.json.",
+    "the_residual_risk": "The airframe itself contacts spray and aerosol. Full decontamination of the whole aircraft between sites is not practical at operational cadence. Residual transmission risk is non-zero and should be disclosed to customers rather than discovered by them.",
+    "the_cost": "A sonde per site is a significant and easily-missed capital line — see bill-of-materials.json, where it is flagged as excluded from the headline number. It is cheaper than an outbreak."
+  },
+
+  "synthesis": {
+    "the_honest_summary": "Disease is a USD 6 billion annual problem in aquaculture. The OmniDrone addresses a small, indirect fraction of it, and could — if designed carelessly — make it worse in two distinct ways: by spreading pathogens between farms, and by lowering the friction on prophylactic antimicrobial use. Both risks are engineered against; neither is eliminated.",
+    "why_this_theme_is_in_the_repository": "Because a thesis on aquaculture technology that ignores disease is incomplete, and because a pitch that cites disease losses without stating this boundary is dishonest. The correct use of this collection is to establish scale and then immediately state the limit — which is also, incidentally, the most credible thing you can do in a room full of people who know the sector."
+  }
+}

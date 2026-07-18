@@ -1,0 +1,77 @@
+{
+  "id": "biosecurity-protocol",
+  "title": "Biosecurity Protocol",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "design_target",
+  "confidence": "medium",
+
+  "why_this_is_a_first_class_document": "A drone whose probe visits pond A and then pond B is a pathogen vector with rotors. This is the single strongest technical objection to the multi-site concept, and it is answered here — in a protocol backed by hardware — or it is not answered at all. Aquaculture disease losses run to roughly USD 6 billion annually; a monitoring product that spreads disease between the farms it monitors would be a catastrophic own-goal.",
+  "citation_ids": ["worldbank-disease-risk-2014"],
+
+  "the_threat_model": {
+    "vectors": [
+      { "vector": "The sonde", "risk": "high", "why": "It is immersed in the culture water of every site it visits. The primary vector." },
+      { "vector": "The tether", "risk": "high", "why": "Also immersed, over its full deployed length, and routinely forgotten. Wiping the sonde while reeling in a contaminated tether accomplishes nothing." },
+      { "vector": "The airframe", "risk": "medium", "why": "Contacts spray and aerosol. Full decontamination at operational cadence is impractical, so residual risk is non-zero and must be disclosed." },
+      { "vector": "Dispensed material", "risk": "medium", "why": "Cross-contamination of hoppers and lines between substances and sites." },
+      { "vector": "Field staff and equipment", "risk": "medium", "why": "The oldest vector in aquaculture — boots, hands, tools. Not unique to us, but we add to the traffic." }
+    ],
+    "pathogens_of_concern": "Species-dependent. Viral (e.g., WSSV in shrimp), bacterial, parasitic, fungal. The specific decontaminant and contact time must be chosen against the pathogens relevant to the region and species — this requires an aquatic animal health specialist, not a founder's judgement."
+  },
+
+  "the_control_hierarchy": {
+    "note": "Ordered from strongest to weakest. Rely on the strongest; do not lean on the weakest.",
+    "controls": [
+      {
+        "control": "Single-site sonde assignment",
+        "strength": "primary — eliminate the vector rather than clean it",
+        "detail": "Each site has its own dedicated sonde. The drone travels between sites; the probe does not. A sonde is logged to a site and a sonde appearing at the wrong site is an incident.",
+        "cost": "A sonde per site is a real capital line (the sonde is the most expensive component — see bill-of-materials.json). It is far cheaper than an outbreak, and it is the reason this cost sits in the unit economics deliberately rather than being an oversight.",
+        "requirement_id": "REQ-HW-006",
+        "enabling_requirement": "Tool-free 60-second sonde swap. If swapping is a workshop job, single-site assignment fails in practice because nobody will do it."
+      },
+      {
+        "control": "Dock decontamination cycle",
+        "strength": "secondary",
+        "detail": "Freshwater rinse plus a validated decontaminant, applied to sonde AND full tether length, before any inter-site movement.",
+        "requirement_id": "REQ-HW-007",
+        "validation": "Efficacy audited quarterly by an aquatic health specialist. A biosecurity claim needs periodic evidence, not just a written procedure."
+      },
+      {
+        "control": "Movement logging and traceability",
+        "strength": "supporting",
+        "detail": "Every sonde's complete site-and-time history is recorded. After an outbreak, an epidemiological trace is possible.",
+        "why_it_matters_legally": "If a farm has an outbreak and we visited, we WILL be asked whether we brought it. A complete movement log is the difference between demonstrating we did not and being unable to say. This is liability protection as much as biosecurity."
+      },
+      {
+        "control": "Movement restrictions during declared outbreaks",
+        "strength": "supporting",
+        "detail": "A site under a disease declaration is quarantined from the shared-equipment rotation. Its dedicated sonde stays with it and is destroyed or terminally disinfected rather than returned to service."
+      },
+      {
+        "control": "Airframe surface hygiene",
+        "strength": "weak — acknowledged residual",
+        "detail": "Practical surface cleaning between sites, accepting that full airframe decontamination at cadence is not feasible.",
+        "honest_disclosure": "This is the residual risk. The airframe contacts aerosol and cannot be fully decontaminated at operational tempo. We disclose this to customers rather than let them discover it. Overclaiming 'fully biosecure' here would be exactly the kind of dishonesty the brand voice prohibits."
+      }
+    ]
+  },
+
+  "the_design_consequences": {
+    "statement": "Biosecurity is not a procedure layered on top of the hardware. It shaped the hardware.",
+    "consequences": [
+      "The tool-free rapid sonde swap (REQ-HW-006) exists because single-site assignment must be operationally trivial.",
+      "The dock decontamination station (docking-station.json) exists for this.",
+      "The tether rinse — not just the sonde rinse — is specified because the tether is the forgotten vector.",
+      "A per-site sonde is carried in the BOM and the unit economics deliberately, not by accident.",
+      "The sonde site-assignment field in the telemetry schema is a biosecurity control surfaced as data."
+    ],
+    "the_point": "A repository that treated biosecurity as an operational footnote would have a lighter BOM and better-looking unit economics — and a product that spreads disease. The cost is paid deliberately here because the alternative is worse."
+  },
+
+  "the_honest_position_for_the_pitch": {
+    "what_to_say": "Yes, a multi-site probe drone is a disease-transmission risk. We treat it as a first-class hardware requirement: dedicated per-site sondes, full-tether decontamination, complete movement traceability, and an audited efficacy programme. We also disclose the residual airframe-surface risk rather than claim it away.",
+    "why_volunteer_it": "A knowledgeable buyer or investor — especially anyone who has lived through an outbreak — will raise this objection. Having engineered the answer, and volunteering the residual limitation, converts the strongest objection against the concept into a demonstration of engineering seriousness. Waiting to be asked, and then improvising, does the opposite."
+  }
+}

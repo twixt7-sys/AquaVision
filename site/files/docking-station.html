@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OmniDock — Automated Docking Station — AquaVision</title>
+<link rel="icon" href="../assets/img/logo-mark.jpg">
+<link rel="stylesheet" href="../assets/style.css">
+<script>try{var t=localStorage.getItem('av-theme');if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+<a class="sidebar-brand" href="../index.html">
+<img src="../assets/img/logo-mark.jpg" alt="AquaVision mark" width="36" height="36">
+<span><strong>AQUAVISION</strong><small>OmniDrone Knowledge Repository</small></span>
+</a>
+<nav class="sidebar-nav" aria-label="Sections"><details class="nav-sec">
+<summary><span class="nav-num">00</span>Meta &amp; Schemas</summary>
+<ul>
+<li><a href="../sections/meta.html">Overview</a></li>
+<li><a href="../files/schema-registry.html">AquaVision Knowledge Repository — Schema Registry <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/glossary.html">Glossary — Aquaculture, Fisheries, Remote Sensing, and Systems Terms</a></li><li><a href="../files/data-dictionary.html">Data Dictionary — Canonical Field and Variable Definitions</a></li><li><a href="../files/changelog.html">Repository Changelog</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">01</span>Company &amp; Identity</summary>
+<ul>
+<li><a href="../sections/company.html">Overview</a></li>
+<li><a href="../files/company-profile.html">AquaVision — Company Profile</a></li><li><a href="../files/brand-identity.html">AquaVision — Brand &amp; Design System</a></li><li><a href="../files/team-structure.html">Team Structure &amp; Capability Map</a></li><li><a href="../files/milestones-roadmap.html">Development Roadmap &amp; Milestones</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">02</span>Problem Space</summary>
+<ul>
+<li><a href="../sections/problem.html">Overview</a></li>
+<li><a href="../files/problem-statement.html">Problem Statement</a></li><li><a href="../files/problem-taxonomy.html">Problem Taxonomy — The Full Space of Aquaculture &amp; Fisheries Problems</a></li><li><a href="../files/stakeholder-pain-points.html">Stakeholder Map &amp; Pain Points</a></li><li><a href="../files/incident-case-studies.html">Documented Incident Case Studies — Evidence Base</a></li><li><a href="../files/cost-of-inaction.html">Cost of Inaction — Loss Model</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">03</span>Market &amp; Competition</summary>
+<ul>
+<li><a href="../sections/market.html">Overview</a></li>
+<li><a href="../files/industry-statistics.html">Industry Statistics — Global &amp; Regional Aquaculture and Fisheries</a></li><li><a href="../files/market-sizing.html">Market Sizing — TAM / SAM / SOM</a></li><li><a href="../files/competitive-landscape.html">Competitive Landscape</a></li><li><a href="../files/customer-personas.html">Customer Segments &amp; Personas</a></li><li><a href="../files/swot-porter.html">Strategic Analysis — SWOT, Porter's Five Forces, PESTEL</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">04</span>Solution &amp; ConOps</summary>
+<ul>
+<li><a href="../sections/solution.html">Overview</a></li>
+<li><a href="../files/solution-overview.html">Solution Overview — The OmniDrone System</a></li><li><a href="../files/value-proposition.html">Value Proposition</a></li><li><a href="../files/use-cases.html">Use Cases</a></li><li><a href="../files/mission-profiles.html">Mission Profiles</a></li><li><a href="../files/concept-of-operations.html">Concept of Operations (ConOps)</a></li>
+</ul>
+</details>
+<details class="nav-sec" open>
+<summary><span class="nav-num">05</span>Hardware Engineering</summary>
+<ul>
+<li><a href="../sections/hardware.html">Overview</a></li>
+<li><a href="../files/omnidrone-specifications.html">OmniDrone — System Specification</a></li><li><a href="../files/airframe-propulsion.html">Airframe &amp; Propulsion</a></li><li><a href="../files/probe-winch-subsystem.html">Reeled Probe &amp; Winch Subsystem</a></li><li><a href="../files/sensor-payload.html">Sensor Payload — Imaging &amp; Remote Sensing</a></li><li><a href="../files/carriage-ejection-system.html">Carriage &amp; Ejection System</a></li><li><a href="../files/power-energy-budget.html">Power &amp; Energy Budget</a></li><li><a href="../files/docking-station.html" aria-current="page" class="current">OmniDock — Automated Docking Station</a></li><li><a href="../files/bill-of-materials.html">Indicative Bill of Materials</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">06</span>Software, AI &amp; Digital Twin</summary>
+<ul>
+<li><a href="../sections/software.html">Overview</a></li>
+<li><a href="../files/system-architecture.html">System Architecture</a></li><li><a href="../files/data-pipeline.html">Data Pipeline</a></li><li><a href="../files/ai-ml-models.html">AI / ML Model Cards</a></li><li><a href="../files/digital-twin.html">PondTwin — Digital Twin Specification</a></li><li><a href="../files/telemetry-schema.html">Telemetry &amp; Data Schema</a></li><li><a href="../files/api-specification.html">API Specification</a></li><li><a href="../files/dashboard-spec.html">Dashboard Specification</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">07</span>Research Corpus</summary>
+<ul>
+<li><a href="../sections/research.html">Overview</a></li>
+<li><a href="../files/literature-review.html">Literature Review — Synthesis</a></li><li><a href="../files/references-bibliography.html">Consolidated Bibliography</a></li><li><a href="../files/studies-water-quality-sensing.html">Related Studies — Water Quality, Limnology &amp; Fish Kill Mechanisms</a></li><li><a href="../files/studies-uav-remote-sensing.html">Related Studies — UAV &amp; Satellite Remote Sensing of Water</a></li><li><a href="../files/studies-harmful-algal-blooms.html">Related Studies — Harmful Algal Blooms</a></li><li><a href="../files/studies-ai-ml-aquaculture.html">Related Studies — AI &amp; Machine Learning in Aquaculture</a></li><li><a href="../files/studies-digital-twin.html">Related Studies — Digital Twins in Aquaculture</a></li><li><a href="../files/studies-fish-health-disease.html">Related Studies — Fish Health, Disease &amp; Biosecurity</a></li><li><a href="../files/studies-feeding-nutrition.html">Related Studies — Feeding, Nutrition &amp; Feed Economics</a></li><li><a href="../files/studies-socioeconomic-adoption.html">Related Studies — Socioeconomics &amp; Technology Adoption</a></li><li><a href="../files/research-gaps.html">Research Gaps &amp; Open Questions</a></li><li><a href="../files/theoretical-framework.html">Theoretical &amp; Conceptual Framework</a></li><li><a href="../files/methodology.html">Research Methodology</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">08</span>Operations &amp; Safety</summary>
+<ul>
+<li><a href="../sections/operations.html">Overview</a></li>
+<li><a href="../files/deployment-playbook.html">Deployment Playbook</a></li><li><a href="../files/maintenance-schedule.html">Maintenance Schedule</a></li><li><a href="../files/risk-register-fmea.html">Risk Register &amp; FMEA</a></li><li><a href="../files/training-certification.html">Training &amp; Certification</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">09</span>Regulatory &amp; Compliance</summary>
+<ul>
+<li><a href="../sections/compliance.html">Overview</a></li>
+<li><a href="../files/regulatory-framework.html">Regulatory Framework</a></li><li><a href="../files/water-quality-standards.html">Water Quality Standards &amp; Thresholds</a></li><li><a href="../files/biosecurity-protocol.html">Biosecurity Protocol</a></li><li><a href="../files/ethics-data-privacy.html">Ethics, Data Privacy &amp; Responsible Use</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">10</span>Business Model</summary>
+<ul>
+<li><a href="../sections/business.html">Overview</a></li>
+<li><a href="../files/business-model-canvas.html">Business Model Canvas</a></li><li><a href="../files/pricing-revenue.html">Pricing &amp; Revenue Model</a></li><li><a href="../files/unit-economics.html">Unit Economics</a></li><li><a href="../files/financial-projections.html">Financial Projections</a></li><li><a href="../files/funding-ask.html">Funding Ask</a></li><li><a href="../files/go-to-market.html">Go-to-Market Strategy</a></li><li><a href="../files/traction.html">Traction</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">11</span>Impact</summary>
+<ul>
+<li><a href="../sections/impact.html">Overview</a></li>
+<li><a href="../files/sdg-alignment.html">UN Sustainable Development Goal Alignment</a></li><li><a href="../files/environmental-impact.html">Environmental Impact Assessment</a></li><li><a href="../files/social-economic-impact.html">Social &amp; Economic Impact</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">12</span>Datasets &amp; Charts</summary>
+<ul>
+<li><a href="../sections/datasets.html">Overview</a></li>
+<li><a href="../files/kpi-definitions.html">KPI Definitions</a></li><li><a href="../files/sample-telemetry.html">Sample Telemetry — ILLUSTRATIVE SYNTHETIC DATA <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/sample-pond-twin-state.html">Sample Digital Twin State — ILLUSTRATIVE SYNTHETIC DATA <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/chart-global-production.html">The Inflection: Aquaculture Overtakes Capture Fisheries</a></li><li><a href="../files/chart-problem-cost-breakdown.html">The Structure of Aquaculture Losses</a></li><li><a href="../files/chart-market-sizing.html">Market Sizing — Method, Not Number</a></li><li><a href="../files/chart-do-diel-cycle.html">Why Sampling Time Decides What You See <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/chart-do-depth-profile.html">The Loaded Gun: What a Vertical Profile Reveals <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/chart-financial-projection.html">Spend Plan by Phase — Not a Revenue Forecast</a></li><li><a href="../files/chart-manual-vs-omnidrone.html">Monitoring Approaches Compared</a></li><li><a href="../files/chart-species-production-mix.html">Where Farmed Aquatic Animals Are Produced</a></li><li><a href="../files/chart-tech-readiness.html">Technology Readiness — Where We Actually Are</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">13</span>Pitch &amp; Thesis Kit</summary>
+<ul>
+<li><a href="../sections/pitch.html">Overview</a></li>
+<li><a href="../files/pitch-deck-outline.html">Pitch Deck Outline</a></li><li><a href="../files/elevator-pitches.html">Elevator Pitches</a></li><li><a href="../files/faq-objections.html">FAQ &amp; Objection Handling</a></li><li><a href="../files/thesis-outline.html">Thesis / Dissertation Outline</a></li>
+</ul>
+</details></nav>
+<div class="sidebar-foot"><small>Fisheries • Aquaculture • Technology</small></div>
+</aside>
+<div class="main">
+<header class="topbar">
+<button class="icon-btn" id="nav-toggle" aria-label="Toggle navigation">☰</button>
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a><span class="crumb-sep">›</span><a href="../sections/hardware.html">Hardware Engineering</a><span class="crumb-sep">›</span><span class="crumb-here">OmniDock — Automated Docking Station</span></nav>
+<button class="search-btn" id="search-btn" aria-label="Search"><span aria-hidden="true">🔍</span> Search <kbd>Ctrl K</kbd></button>
+<button class="icon-btn" id="theme-toggle" aria-label="Toggle light/dark theme" title="Toggle theme">◐</button>
+</header>
+<main class="content">
+<header class="doc-head">
+<h1>OmniDock — Automated Docking Station</h1>
+
+<div class="doc-meta">
+<code class="mono">docking-station</code>
+<span>v1.0.0</span>
+<span>updated 2026-07-17</span>
+<span class="badge badge-target" title="Provenance: design_target"><span class="badge-icon">◎</span>Target</span>
+<span class="chip chip-warning" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: low</span>
+<a class="raw-link" href="../../data/05_hardware/docking-station.json">raw JSON ↗</a>
+</div>
+
+</header><section class="doc-sec"><h2>Why the Dock Is A Co Equal Product</h2><dl class="kv"><dt>Statement</dt><dd><p>Four of the system's five distinguishing claims depend on the dock, not the aircraft. It is treated in most drone pitches as an accessory. Here it is the thing that makes the product a product.</p></dd><dt>The Four Dependencies</dt><dd><div class="table-scroll"><table><thead><tr><th>Claim</th><th>Depends On</th></tr></thead><tbody><tr><td>We measure the pre-dawn dissolved oxygen minimum</td><td>Autonomous launch. A drone that needs a human to launch it will never fly at 04:30, which means it only ever measures the safest hour of the day — precisely the failure it was built to fix.</td></tr><tr><td>Our probe fouls less than a moored buoy</td><td>The dock rinse cycle. Without it we are just a slower buoy with worse uptime.</td></tr><tr><td>Our multispectral time series is comparable across days</td><td>The calibrated reflectance panel living in the dock. Without it, every survey is a separate uncalibrated snapshot.</td></tr><tr><td>We operate across sites without spreading pathogens</td><td>The decontamination station.</td></tr></tbody></table></div></dd><dt>The Fifth</dt><dd>Depth profiling is the only claim that belongs purely to the aircraft.</dd><dt>The Business Consequence</dt><dd><p>Coverage is measured in docks, not drones. The dock is the unit of network economics, the unit of capital deployment, and the thing a customer actually installs. Price and plan accordingly.</p></dd></dl></section>
+<section class="doc-sec"><h2>Functions</h2><div class="table-scroll"><table><thead><tr><th>Function</th><th>Detail</th></tr></thead><tbody><tr><td>Shelter</td><td>Protects the aircraft from sun, rain, and salt spray between sorties. In tropical UV and monsoon rain, an unsheltered aircraft degrades fast.</td></tr><tr><td>Charge</td><td>Recharge or battery swap. See <a href="../files/power-energy-budget.html">power-energy-budget.json</a> — this decision is open and it determines sortie cadence.</td></tr><tr><td>Rinse</td><td>Freshwater rinse of the sonde AND the tether after every sortie. The tether is the part everyone forgets, and wiping the sonde while reeling in a contaminated line accomplishes nothing.</td></tr><tr><td>Decontaminate</td><td>Chemical decontamination cycle appropriate to the pathogens of concern before any inter-site movement.</td></tr><tr><td>Calibrate</td><td>Houses the calibrated reflectance panel imaged before and after every imaging sortie, and a sonde reference-check standard.</td></tr><tr><td>Backhaul</td><td>The site's connectivity point. Cellular primary, with local storage and store-and-forward for when the link is down — which it will be.</td></tr><tr><td>Compute</td><td>Local processing and storage so the site works when the cloud does not.</td></tr><tr><td>Secure</td><td>The aircraft is a valuable, portable asset sitting unattended on a lakeshore. This is not a hypothetical concern.</td></tr></tbody></table></div></section>
+<section class="doc-sec"><h2>The Thermal Problem</h2><dl class="kv"><dt>Statement</dt><dd><p>A closed box in tropical sun exceeds the battery's safe storage temperature. This degrades pack life substantially and silently.</p></dd><dt>Why It Is Here</dt><dd><p>It is a dock requirement generated by an airframe constraint — exactly the cross-subsystem coupling that gets missed when subsystems are designed independently.</p></dd><dt>Mitigations</dt><dd><ul><li>Passive ventilation with insect and vermin screening</li><li>White or reflective exterior</li><li>Shading structure</li><li>Active cooling if the arithmetic demands it, at a power cost the solar budget must carry</li></ul></dd><dt>Note</dt><dd><p class="note muted">Getting this wrong does not produce a dramatic failure. It produces batteries that quietly last half as long as the business model assumed, discovered a year in, in the operating cost line.</p></dd></dl></section>
+<section class="doc-sec"><h2>Siting Requirements</h2><div class="table-scroll"><table><thead><tr><th>Requirement</th><th>Detail</th></tr></thead><tbody><tr><td>Shore access</td><td>Reachable by a technician on foot or by short boat trip. If servicing the dock is an expedition, it will not be serviced.</td></tr><tr><td>Power</td><td>Grid where available; solar-plus-storage as the design case. Rural sites are the design case, not the edge case.</td></tr><tr><td>Connectivity</td><td>Cellular preferred. Store-and-forward mandatory regardless — the link will fail and the pre-dawn data must survive it.</td></tr><tr><td>Clear approach</td><td>No power lines, masts, or trees on the launch and recovery path. Surveyed at commissioning.</td></tr><tr><td>Within operating radius of the stations</td><td>800 m target, constrained by return-with-reserve rather than by radio range.</td></tr><tr><td>Land tenure</td><td>Someone owns the shore. That someone must agree, in writing, and they may not be the farm's owner.</td></tr><tr><td>Community visibility</td><td>A dock is a permanent, visible installation on a shoreline where people live. Siting it without talking to those people is how a company loses its social licence before it has a customer.</td></tr></tbody></table></div></section>
+<section class="doc-sec"><h2>Solar and Storage</h2><dl class="kv"><dt>Daily Energy Requirement Wh</dt><dd><span class="num">1300</span></dd><dt>Basis</dt><dd>Four sorties/day at ~220 Wh plus charging losses plus dock systems.</dd><dt>Provenance</dt><dd><span class="badge badge-calculated" title="Provenance: derived_calculation"><span class="badge-icon">ƒ</span>Calculated</span></dd><dt>The Monsoon Problem</dt><dd><p>Sizing for average insolation is easy. Sizing for an extended overcast monsoon stretch is expensive — days of storage, or accept degraded cadence. And the degraded cadence lands exactly during the season of highest fish kill risk.</p></dd><dt>The Compounding Honesty</dt><dd><p>We cannot fly in the storm AND we cannot charge in the overcast. Two independent limitations pointing the same direction, during the season that matters most. A fixed buoy has neither problem. This is the strongest technical argument for the buoy hybrid that our own competitive matrix already pointed at, and it should be confronted rather than buried in a solar sizing appendix.</p></dd></dl></section>
+<section class="doc-sec"><h2>Dock Network Economics</h2><dl class="kv"><dt>The Unit</dt><dd><p>One dock covers the stations within the aircraft's operating radius. A large lake needs several.</p></dd><dt>The Implication</dt><dd><p>Deployment cost scales with docks, which scales with water body area and geometry — not with the number of cages or the customer's revenue. A big, sparse lake is expensive to cover and generates the same revenue per cage as a small dense one.</p></dd><dt>The Strategic Consequence</dt><dd><p>Dense cage clusters are dramatically better unit economics than dispersed ones. This should be a hard sales qualification criterion, and it independently reinforces the lake-cage beachhead choice over dispersed pond geography. The geography chooses the customer.</p></dd><dt>The Cooperative Synergy</dt><dd><p>A dock serving forty co-op members' cages around one bay is the best economics available to this business. A dock serving one farm is the worst. This is another reason the cooperative channel matters beyond the affordability argument.</p></dd><dt>Detail File</dt><dd>data/10_business/<a href="../files/unit-economics.html">unit-economics.json</a></dd></dl></section>
+<section class="doc-sec"><h2>Requirements</h2><article class="card"><h3>REQ-DOCK-001</h3><dl class="kv"><dt>Statement</dt><dd>The dock shall launch and recover the aircraft without human presence.</dd><dt>Type</dt><dd>functional</dd><dt>Priority</dt><dd>must</dd><dt>Verification Method</dt><dd>test</dd><dt>Trace To</dt><dd><ul><li>mp-01-dawn-sweep</li></ul></dd><dt>Note</dt><dd><p class="note muted">Regulatory permission for unattended operation is a separate matter — see <a href="../files/regulatory-framework.html">regulatory-framework.json</a>. The dock being capable and the operation being legal are different questions.</p></dd></dl></article><article class="card"><h3>REQ-DOCK-002</h3><dl class="kv"><dt>Statement</dt><dd><p>The dock shall rinse the sonde and the full deployed length of the tether after every water sortie.</p></dd><dt>Type</dt><dd>functional</dd><dt>Priority</dt><dd>must</dd><dt>Verification Method</dt><dd>test</dd><dt>Rationale</dt><dd>The tether is a contamination and fouling path that is routinely overlooked.</dd></dl></article><article class="card"><h3>REQ-DOCK-003</h3><dl class="kv"><dt>Statement</dt><dd><p>The dock shall house a calibrated reflectance reference imaged before and after every imaging sortie.</p></dd><dt>Type</dt><dd>functional</dd><dt>Priority</dt><dd>must</dd><dt>Verification Method</dt><dd>demonstration</dd><dt>Trace To</dt><dd><ul><li>REQ-SEN-003</li></ul></dd></dl></article><article class="card"><h3>REQ-DOCK-004</h3><dl class="kv"><dt>Statement</dt><dd><p>The dock shall maintain internal temperature below the battery's safe storage limit under peak local insolation.</p></dd><dt>Type</dt><dd>environmental</dd><dt>Priority</dt><dd>must</dd><dt>Verification Method</dt><dd>test</dd><dt>Rationale</dt><dd>Silent battery degradation is an operating cost discovered a year late.</dd></dl></article><article class="card"><h3>REQ-DOCK-005</h3><dl class="kv"><dt>Statement</dt><dd><p>The dock shall store not less than 7 days of sortie data locally and forward it when connectivity returns.</p></dd><dt>Type</dt><dd>data</dd><dt>Priority</dt><dd>must</dd><dt>Verification Method</dt><dd>test</dd><dt>Rationale</dt><dd>The link will fail. The pre-dawn profile must survive it.</dd></dl></article><article class="card"><h3>REQ-DOCK-006</h3><dl class="kv"><dt>Statement</dt><dd><p>The dock shall operate on solar with storage sufficient for 3 consecutive days of overcast at reduced cadence.</p></dd><dt>Type</dt><dd>performance</dd><dt>Priority</dt><dd>should</dd><dt>Verification Method</dt><dd>analysis</dd></dl></article><article class="card"><h3>REQ-DOCK-007</h3><dl class="kv"><dt>Statement</dt><dd>The dock shall be serviceable by a technician with hand tools.</dd><dt>Type</dt><dd>usability</dd><dt>Priority</dt><dd>must</dd><dt>Verification Method</dt><dd>demonstration</dd></dl></article><article class="card"><h3>REQ-DOCK-008</h3><dl class="kv"><dt>Statement</dt><dd>The dock shall detect and report its own faults, including a failure to open.</dd><dt>Type</dt><dd>functional</dd><dt>Priority</dt><dd>must</dd><dt>Verification Method</dt><dd>test</dd><dt>Rationale</dt><dd><p>A dock that silently fails to open at 04:30 produces a missing dawn profile that nobody notices until it matters. Silent failure of the monitoring system is the worst failure mode a monitoring system has.</p></dd></dl></article></section>
+<section class="doc-sec"><h2>Open Questions</h2><div class="table-scroll"><table><thead><tr><th>Question</th><th>Why</th><th>Resolve By</th></tr></thead><tbody><tr><td>Recharge or swap?</td><td>Determines sortie cadence, dock complexity, and cost.</td><td>Phase 2</td></tr><tr><td>What decontaminant, at what contact time, against which pathogens?</td><td>It is a biosecurity claim, and claims need evidence. This needs an aquatic animal health specialist, not a founder's judgement.</td><td>Phase 1</td></tr><tr><td>Does the dock survive a typhoon, or is it removed?</td><td>A permanent lakeshore structure in the Philippines must answer this. If it is removed seasonally, the deployment model changes.</td><td>Phase 2</td></tr><tr><td>Who owns the shore, and what does that cost?</td><td>Land tenure is not an engineering problem and it will still stop a deployment.</td><td>Phase 0</td></tr></tbody></table></div></section>
+</main>
+<footer class="page-footer"><a class="pn pn-prev" href="../files/power-energy-budget.html">
+<small>← Previous · Hardware Engineering</small>
+<span>Power &amp; Energy Budget</span></a><a class="pn pn-next" href="../files/bill-of-materials.html">
+<small>Next → · Hardware Engineering</small>
+<span>Indicative Bill of Materials</span></a></footer>
+</div>
+</div>
+<div class="search-overlay" id="search-overlay" hidden>
+<div class="search-panel" role="dialog" aria-label="Search">
+<input type="search" id="search-input" placeholder="Search the repository… (Esc to close)" autocomplete="off" spellcheck="false">
+<ul class="search-results" id="search-results"></ul>
+<div class="search-hint">↑↓ to navigate · Enter to open · Esc to close</div>
+</div>
+</div>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

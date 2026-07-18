@@ -1,0 +1,60 @@
+{
+  "id": "changelog",
+  "title": "Repository Changelog",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "format": "Keep a Changelog 1.1.0 conventions, expressed as JSON.",
+  "citation_ids": ["keep-a-changelog"],
+
+  "entries": [
+    {
+      "version": "1.0.0",
+      "date": "2026-07-17",
+      "author": "AquaVision founding team (drafted with AI assistance)",
+      "summary": "Initial construction of the OmniDrone knowledge repository from the founding concept description.",
+      "added": [
+        "Full 14-section repository skeleton with manifest-driven index for webpage consumption.",
+        "Schema registry and data dictionary establishing the provenance discipline used throughout.",
+        "Problem space: taxonomy, stakeholder pain points, evidenced incident case studies, cost-of-inaction model.",
+        "Market: industry statistics sourced to FAO SOFIA 2024, TAM/SAM/SOM model, competitor teardown.",
+        "Hardware: airframe, probe winch, sensor payload, carriage/ejection, power budget, dock, indicative BOM.",
+        "Software: architecture, pipeline, model cards, digital twin specification, telemetry schema, API, dashboard spec.",
+        "Research corpus: thematic study collections across eight themes plus consolidated bibliography.",
+        "Operations, compliance, business model, impact, chart-ready datasets, and pitch/thesis kit."
+      ],
+      "known_gaps": [
+        "No field trial data exists. Every performance figure is a design target or a projection, tagged as such.",
+        "Bibliography entries derived from search-engine summaries carry verification_status = cited_from_search_result and MUST be opened and checked before thesis submission. Do not submit a reference list you have not read.",
+        "Financial projections are unvalidated models built on stated assumptions. The assumptions are listed so they can be attacked; attack them.",
+        "Regulatory analysis reflects a reading of publicly summarised CAAP rules as of mid-2026 and is not legal advice. Confirm with CAAP directly before any BVLOS commitment appears in an investor deck.",
+        "Competitor pricing is largely absent from public sources and is marked unknown rather than guessed."
+      ],
+      "decisions_recorded": [
+        "Chose to leave traction.json deliberately empty rather than populate it with invented customers. A pitch with honest zeros and a credible plan survives diligence; a pitch with invented traction does not.",
+        "Chose in-situ probe + multispectral fusion as the core scientific claim, rather than imagery alone, because uncalibrated indices do not produce defensible time series.",
+        "Chose to treat biosecurity cross-contamination as a first-class hardware requirement rather than an operational footnote, because it is the strongest technical objection to the multi-site concept."
+      ]
+    }
+  ],
+
+  "planned": [
+    {
+      "version": "1.1.0",
+      "intent": "Populate water-quality-standards.json with the verbatim DENR and BFAR numerical criteria after obtaining the primary administrative orders. Current entries are placeholders pending primary-source retrieval."
+    },
+    {
+      "version": "1.2.0",
+      "intent": "Replace competitor entries with findings from direct vendor quotes and demo access rather than public marketing copy."
+    },
+    {
+      "version": "2.0.0",
+      "intent": "First real data release: replace illustrative_synthetic telemetry with a genuine sortie dataset from the pilot site, and populate model performance fields from actual evaluation runs."
+    }
+  ],
+
+  "maintenance_policy": {
+    "on_edit": "Bump the file's own `version` and `last_updated`, and add an entry here. A repository whose changelog lags its content is a repository nobody trusts.",
+    "on_new_claim": "Any new quantitative claim requires a provenance tag and, if verified_external, a bibliography entry. No exceptions — this is the rule that keeps the thesis defensible.",
+    "on_data_arrival": "When real data replaces synthetic data, remove the illustrative_synthetic tag in the same commit. A stale synthetic tag on real data is nearly as damaging as the reverse."
+  }
+}

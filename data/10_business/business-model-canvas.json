@@ -1,0 +1,91 @@
+{
+  "id": "business-model-canvas",
+  "title": "Business Model Canvas",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "modeled_projection",
+  "confidence": "low",
+  "citation_ids": ["osterwalder-bmc-2010"],
+  "note": "The nine-block canvas, filled honestly. Where a block rests on an untested assumption, it says so. A canvas full of confident assertions at TRL 3 is a work of fiction; this one flags its fictions.",
+
+  "customer_segments": {
+    "primary": "Commercial lake-cage and pond aquaculture operators with response capacity (aeration) and a budget line.",
+    "secondary": "Cooperatives aggregating smallholders; BFAR/LGU as programme buyers.",
+    "explicitly_deferred": "Individual smallholders — the greatest need, no direct affordability. Reached via cooperatives or public programmes, not direct sales.",
+    "segmentation_axis": "Response capacity, not scale. See customer-personas.json#/segmentation_logic.",
+    "assumption_flag": "That this segment exists in sufficient density on the target lakes and will pay. UNTESTED — Phase 0."
+  },
+
+  "value_propositions": {
+    "ranked_by_verifiability": [
+      "Lower aeration electricity at equal or better DO (checkable in one cycle, metered, already budgeted).",
+      "Self-compiling environmental records for certification audits (replaces existing manual labour).",
+      "Measurable FCR improvement via condition-aware feeding (arithmetic sourced, magnitude unproven).",
+      "Earlier detection of deteriorating water quality (core claim, hard to demo on demand).",
+      "Avoided mass mortality (most compelling, least demonstrable, undercut by our own weather limitation)."
+    ],
+    "the_discipline": "Sell top-down this list, not bottom-up. Lead with the checkable ROI. See value-proposition.json#/the_value_hierarchy.",
+    "detail_file": "data/04_solution/value-proposition.json"
+  },
+
+  "channels": {
+    "direct": "Field sales to commercial farms — high-touch, relationship-led, slow. This sector does not buy from a website.",
+    "cooperative": "The route to smallholders and the best dock economics.",
+    "institutional": "BFAR/LGU programmes and development-finance-backed deployments.",
+    "partner": "Feed distributors (existing farm reach, but a structural conflict — we reduce their volume), aquaculture consultants (trusted gatekeepers), insurers/lenders (long game).",
+    "assumption_flag": "That cooperatives can levy members for a shared service. UNTESTED and load-bearing for the smallholder story."
+  },
+
+  "customer_relationships": {
+    "model": "High-touch service, not self-serve SaaS. The customer is buying an outcome and a relationship, and the relationship must survive the sector's memory of vendors who left.",
+    "retention_logic": "Value compounds with data duration — each cycle starts smarter. This is the argument for a subscription and for low churn once trust is established.",
+    "the_trust_problem": "Distrust of technology vendors is probably the biggest commercial obstacle in the whole plan, larger than any engineering problem. Earned honestly by the sector's history. Overcome only by demonstrated outcomes and a credible answer to 'what happens when you leave'."
+  },
+
+  "revenue_streams": {
+    "detail_file": "data/10_business/pricing-revenue.json",
+    "primary_model": "Monitoring-as-a-service subscription, priced against loss avoidance and aeration savings rather than hardware cost.",
+    "why_not_hardware_sales": "Selling a USD 20k+ drone to a fish farm is a non-starter on affordability and on the sector's gadget-fatigue. Service pricing spreads the cost, aligns our incentive with uptime, and keeps the data relationship alive.",
+    "possible_streams": ["Per-cycle or per-month monitoring subscription", "Per-dock deployment fee", "Dispensing service (treatment delivery)", "Data/reporting for certification", "Institutional programme contracts", "NOT data monetisation — deliberately declined, see ethics-data-privacy.json"]
+  },
+
+  "key_resources": {
+    "the_moat_such_as_it_is": "Accumulated site-specific data (years of profiles on lakes nobody else measures), local regulatory relationships, and the winch/calibration engineering. NONE of which exist yet — the moat is currently a plan.",
+    "physical": "Drones, docks, per-site sondes.",
+    "human": "See team-structure.json — none hired.",
+    "intellectual": "The self-calibrating observation architecture. Not patent-hard; the real defensibility is data and relationships.",
+    "the_honest_note": "At TRL 3 the key resource is the founding team's ability to execute Phase 0-3. Everything else is aspirational."
+  },
+
+  "key_activities": ["Hardware development (winch is the critical path)", "Field validation over a full season", "Regulatory pathway (BVLOS)", "Building the coalition per site (five constituencies must each say yes)", "Model training on real data", "Service delivery at scale — becomes the biggest activity"],
+
+  "key_partnerships": {
+    "essential": [
+      { "partner": "Academic institution", "for": "Validation credibility and historical data. Cheap by startup standards — they want publications, not equity. Pursue immediately." },
+      { "partner": "CAAP", "for": "The operating concept. A regulator relationship, engaged from Phase 0." },
+      { "partner": "Cooperatives", "for": "Smallholder reach and dock economics." },
+      { "partner": "Sensor vendor(s)", "for": "The sonde — with deliberate multi-vendor design to avoid margin capture." }
+    ],
+    "strategic_options": [
+      { "partner": "Insurer/lender", "for": "Turning monitoring from discretionary to required. Long game, possibly worth more than the drone." },
+      { "partner": "Buoy vendor", "for": "The hybrid our own competitive matrix points at. Integrate rather than displace." }
+    ]
+  },
+
+  "cost_structure": {
+    "detail_file": "data/10_business/unit-economics.json",
+    "major_lines": ["Hardware (drone + dock + per-site sonde)", "Field operations and maintenance labour — the biggest line at scale, routinely underestimated", "Battery opex (a consumable, not capital)", "R&D through validation", "Regulatory and certification", "Cloud/platform"],
+    "the_structural_challenge": "This is a hardware + field-service business, not a software business. It does not have software margins and it should not be pitched as if it does. The cost to serve is real, recurring, and geographically distributed.",
+    "assumption_flag": "Every cost line rests on a BOM with zero real quotes and a maintenance burden that is estimated, not measured. See risk R-14."
+  },
+
+  "the_canvas_verdict": {
+    "coherence": "The blocks fit together: service revenue matches a distributed cost structure, cooperative channels match smallholder economics, and the value hierarchy matches the trust problem.",
+    "the_three_assumptions_the_whole_canvas_rests_on": [
+      "That the target segment will pay (revenue).",
+      "That cooperatives can aggregate demand (channel + smallholder reach).",
+      "That BVLOS comes through (cost structure + flagship value)."
+    ],
+    "the_honest_summary": "This is a coherent business model built on three untested load-bearing assumptions. That is normal for TRL 3. What is not normal — and what this canvas does deliberately — is naming the three assumptions so they can be tested first, before the money is spent. A canvas that hides its assumptions behind confident prose is the more common and more dangerous artefact."
+  }
+}

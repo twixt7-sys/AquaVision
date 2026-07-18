@@ -1,0 +1,123 @@
+{
+  "id": "literature-review",
+  "title": "Literature Review — Synthesis",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "verified_external",
+  "purpose": "The narrative synthesis across the thematic study collections. Written to be adapted into a thesis Chapter 2. The thematic files hold the individual study records; this file holds the argument.",
+
+  "verification_notice": "Every claim here traces to references-bibliography.json, where ZERO sources have been opened and verified. This synthesis is built on search-result summaries. It is a credible MAP of the literature and a plan for reading it — it is not yet a literature review. Read the sources before submitting this.",
+
+  "the_argument_in_five_moves": {
+    "note": "A literature review should build an argument, not list papers. This is the argument.",
+    "moves": [
+      {
+        "move": 1,
+        "claim": "Aquaculture is now the majority of aquatic animal production, and it is intensifying.",
+        "evidence": "FAO SOFIA 2024: aquaculture surpassed capture fisheries for the first time in 2022 at 94.4 Mt and 51 percent of aquatic animal production. Inland systems account for 62.6 percent of farmed aquatic animals. Asia produces 70 percent of global output.",
+        "citation_ids": ["fao-sofia-2024"],
+        "so_what": "The sector's centre of gravity has shifted to systems that are owned, managed, and — in principle — instrumentable. This is what makes aquaculture technology a category at all."
+      },
+      {
+        "move": 2,
+        "claim": "Intensification produces a specific, well-understood, recurring failure mode: mass mortality driven by dissolved oxygen depletion and post-overturn toxicity.",
+        "evidence": "Philippine incident literature attributes mass kills to DO depletion, high ammonia-nitrogen, and hydrogen sulfide — the signature of bottom water reaching the surface. Over-stocking appears as the underlying cause; weather as the trigger. Lake Buhi research frames these as recurring rather than accidental.",
+        "citation_ids": ["seafdec-laguna-fishkill", "bioflux-lake-buhi-2020", "inquirer-taal-fishkill-2023", "pna-tilapia-fishkill"],
+        "so_what": "This is not an unsolved scientific mystery. The mechanism is known. The gap is observational, not theoretical.",
+        "the_key_insight": "The Laguna de Bay triad — DO depletion PLUS ammonia PLUS hydrogen sulfide — is diagnostic. Those three together do not describe surface water going bad; they describe HYPOLIMNETIC water arriving at the surface. That single observation is the strongest published justification for vertical profiling in this entire literature, and it should anchor the thesis."
+      },
+      {
+        "move": 3,
+        "claim": "The observation that would prevent these losses is technically available and practically unobtainable.",
+        "evidence": "Sondes are commodity instruments. Fixed buoys exist and are sold into aquaculture. Yet coverage requires many stations, many depths, many times daily, including pre-dawn — which is a labour problem, not an instrument problem.",
+        "so_what": "The bottleneck is the MARGINAL LABOUR COST OF AN OBSERVATION. Any intervention that does not attack that has not addressed the problem. This reframe is the intellectual centre of the whole project.",
+        "honest_note": "This move is the weakest link in the argument as currently evidenced. It is structural reasoning, not a cited finding. Nobody has published 'farmers do not monitor because it costs too much labour'. Establishing it empirically — via the Phase 0 farmer discovery — would be a genuine contribution and would convert the project's central premise from plausible to demonstrated."
+      },
+      {
+        "move": 4,
+        "claim": "UAV remote sensing of inland water is mature enough to borrow, but it has a documented, unsolved calibration problem.",
+        "evidence": "Multiple 2024-2025 systematic reviews establish UAV multispectral retrieval of chlorophyll, turbidity, and CDOM in inland water. NDCI using red and red-edge bands works where classic ocean algorithms fail in turbid productive water. But the reviews consistently identify radiometric calibration, sun glint, and the ground-truthing burden as the limiting challenges — and virtually every study solves ground truth by sending a boat out with a sonde.",
+        "citation_ids": ["mdpi-drones-inland-review-2024", "sciencedirect-uav-multispectral-ponds-2024", "springer-uav-satellite-review-2024", "tandf-uav-chla-review-2025", "mishra-ndci-2012", "mdpi-hab-meta-2021"],
+        "so_what": "THE GAP IS RIGHT HERE. The literature can map chlorophyll from a drone but needs a boat to calibrate it, and the boat is the entire cost. That is why these studies are papers and not products.",
+        "the_thesis_hinge": "This is where the OmniDrone's contribution sits. Not 'a drone that measures water' — that exists. The contribution is a platform that carries its own ground truth, so the calibration is generated in the same place, at the same time, under the same illumination, by the same machine. State the gap in exactly these terms and the novelty is obvious."
+      },
+      {
+        "move": 5,
+        "claim": "Digital twins for aquaculture have moved from proposal to demonstrated case study, and their limiting factor is observation density.",
+        "evidence": "AIoT-based fish farming twins, a rainbow trout land-based case study, architecture evaluation frameworks, and a systematic review of drone-based twins for water quality specifically.",
+        "citation_ids": ["sciencedirect-dt-aiot-2023", "pmc-dt-rainbow-trout-2023", "mdpi-dt-ahp-2023", "hamzah-dt-water-review-2024", "springer-dt-aquaculture-sim"],
+        "so_what": "Existing twins are fed by fixed sensors at one point or by manual sampling. A twin fed by depth-resolved profiles across many stations several times daily is a better-observed twin than this literature has had.",
+        "honest_note": "The twin is NOT our novelty. The observation architecture is. A thesis that claims to contribute a digital twin will be correctly told that several already exist. A thesis that claims to contribute a self-calibrating aerial observation architecture that makes better twins possible is defensible."
+      }
+    ],
+    "the_synthesis": "The literature establishes a documented, mechanistically understood, economically significant, recurring failure mode; a monitoring gap that is economic rather than technical; a remote sensing method that works but cannot calibrate itself affordably; and a modelling framework starved of observations. The OmniDrone sits at the intersection of the third and fourth of these. That intersection is a real gap and it is where the contribution lives."
+  },
+
+  "thematic_collections": [
+    { "theme": "Water quality and limnological sensing", "file": "data/07_research/studies-water-quality-sensing.json" },
+    { "theme": "UAV and satellite remote sensing", "file": "data/07_research/studies-uav-remote-sensing.json" },
+    { "theme": "Harmful algal blooms", "file": "data/07_research/studies-harmful-algal-blooms.json" },
+    { "theme": "AI and machine learning in aquaculture", "file": "data/07_research/studies-ai-ml-aquaculture.json" },
+    { "theme": "Digital twins", "file": "data/07_research/studies-digital-twin.json" },
+    { "theme": "Fish health and disease", "file": "data/07_research/studies-fish-health-disease.json" },
+    { "theme": "Feeding and nutrition economics", "file": "data/07_research/studies-feeding-nutrition.json" },
+    { "theme": "Socioeconomics and technology adoption", "file": "data/07_research/studies-socioeconomic-adoption.json" }
+  ],
+
+  "what_the_literature_says_that_is_inconvenient_for_us": {
+    "purpose": "A literature review that only surfaces supporting studies is not a literature review. These are the findings that argue against the venture, and they are more useful than the supporting ones.",
+    "items": [
+      {
+        "finding": "Satellite-based HAB early warning already works operationally for aquaculture, and it is free.",
+        "citation_ids": ["pmc-sentinel-hab-chile-2020"],
+        "the_challenge": "If Sentinel data already advises salmon farms ahead of mortality events at no cost, what exactly are we selling? Our answers — resolution, revisit rate, cloud penetration, depth — are real, but the burden of proof is on us and the free incumbent is genuinely good."
+      },
+      {
+        "finding": "Many academic UAV water-sampling prototypes exist. No dominant commercial product does.",
+        "citation_ids": ["hamzah-dt-water-review-2024", "mdpi-drones-inland-review-2024"],
+        "the_challenge": "This is a signal and founders habitually explain it away. Either the market is not there, or the engineering is harder than it looks, or nobody has paired it with a business model. Assume all three until proven otherwise. The honest reading of a mature research literature with no commercial winner is not 'the opportunity is untapped' — it is 'be very careful'."
+      },
+      {
+        "finding": "Deployment cost and power supply are repeatedly identified as the barriers to precision aquaculture adoption.",
+        "citation_ids": ["ai-aqua-review-2024"],
+        "the_challenge": "These are exactly our two weakest attributes. A multirotor is expensive and has a brutal energy budget. The literature is telling us that the thing that stops adoption is the thing we are worst at."
+      },
+      {
+        "finding": "ML model quality depends on substantial high-quality training data from IoT systems.",
+        "citation_ids": ["ai-aqua-review-2024"],
+        "the_challenge": "We have none, and our most valuable model needs the rarest events. Mass kills happen a few times a year per lake. Even a multi-year multi-site deployment yields tens of positive examples. This is a fundamental constraint on the predictive claim, not an engineering inconvenience."
+      },
+      {
+        "finding": "Salmon-derived precision aquaculture is well-capitalised and technically ahead, with underwater vision and biomass estimation we do not have.",
+        "citation_ids": ["globalseafood-precision-aqua"],
+        "the_challenge": "We compete on geography and cost structure, not technology. That is a weaker moat than a technical lead and it should be stated as such."
+      }
+    ],
+    "why_this_section_belongs_in_the_pitch_too": "Volunteering the counter-evidence is the cheapest credibility purchase available. An investor who finds these themselves discounts everything you said. An investor to whom you hand them concludes you have actually read the field."
+  },
+
+  "the_identified_research_gap": {
+    "statement": "No published work demonstrates an aerial platform that generates its own in-situ calibration for its own remote-sensing retrieval, in the same sortie, at the temporal resolution the diel cycle demands, in tropical smallholder-scale aquaculture.",
+    "the_components": [
+      "UAV multispectral inland water retrieval: ESTABLISHED, but ground-truthed by boat.",
+      "In-situ profiling sondes: ESTABLISHED, but delivered by boat or moored at one point.",
+      "Digital twins for aquaculture: ESTABLISHED, but starved of spatial observation.",
+      "The integration of all three on one vehicle: NOT DEMONSTRATED."
+    ],
+    "the_honest_caveat": "'Nobody has done X' is the weakest possible claim in a literature review, and it is usually wrong — it typically means 'we have not found it yet'. Before this appears in a thesis, search specifically for UAV-tethered sonde work, winched sensor deployment from rotorcraft, and adaptive sampling using aerial imagery. Several groups have likely attempted the pendulum control problem and their failures are worth more to us than our own would be.",
+    "priority_action": "A dedicated systematic search on UAV-deployed tethered sensors before claiming novelty."
+  },
+
+  "how_to_turn_this_into_chapter_2": {
+    "structure": [
+      "2.1 The aquaculture context — the FAO inflection and what it implies (Move 1).",
+      "2.2 The failure mode — mechanisms of mass mortality, with the Laguna de Bay triad as the anchor (Move 2).",
+      "2.3 The monitoring gap — why the observation is unobtainable, and the honest admission that this is reasoned rather than cited (Move 3).",
+      "2.4 Remote sensing of inland water — capability and the calibration problem (Move 4).",
+      "2.5 Digital twins in aquaculture — capability and the observation famine (Move 5).",
+      "2.6 Synthesis and research gap.",
+      "2.7 Counter-evidence and limitations — the inconvenient findings above. Put them in the chapter, not in a footnote."
+    ],
+    "the_advice": "The strongest version of this chapter leads with the Laguna de Bay triad. It is a published, mechanistic, Philippine finding that independently justifies the single most distinctive design decision in the product. Most theses bury their best evidence in the middle. Do not."
+  }
+}

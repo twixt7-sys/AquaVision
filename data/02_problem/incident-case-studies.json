@@ -1,0 +1,163 @@
+{
+  "id": "incident-case-studies",
+  "title": "Documented Incident Case Studies — Evidence Base",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "verified_external",
+  "purpose": "Real, reported fish kill and water quality incidents used as the evidence base for the problem statement. These are other people's losses, documented by journalists and scientists. Treat them with the seriousness they deserve — each figure below is somebody's harvest.",
+
+  "verification_notice": "Details below are drawn from search-result summaries of news reports and published studies. Every entry carries a `verification_status`. Before any of these appear in a thesis or a deck, open the primary source and confirm the figure. News reporting of fish kill tonnages is frequently revised upward or downward in later reports, and citing a superseded figure is an easy and avoidable error.",
+
+  "incidents": [
+    {
+      "incident_id": "taal-fishkill-2023",
+      "location": "Taal Lake, Batangas, Philippines",
+      "water_body_type": "Volcanic caldera lake, freshwater, cage culture",
+      "species_affected": ["Tilapia (Oreochromis niloticus)", "Milkfish / bangus (Chanos chanos)"],
+      "reported_loss_quantity": { "value": 343, "unit": "metric tonnes" },
+      "loss_breakdown": [
+        { "municipality": "Talisay", "tonnes": 300 },
+        { "municipality": "Agoncillo", "tonnes": 32 },
+        { "municipality": "Laurel", "tonnes": 11 }
+      ],
+      "attributed_causes": ["Dissolved oxygen depletion", "Suspected sulfur / volcanic activity contribution", "Over-stocking of cages"],
+      "citation_ids": ["inquirer-taal-fishkill-2023"],
+      "verification_status": "cited_from_search_result",
+      "why_this_matters_to_omnidrone": "Taal is the archetype of the target environment: dense cage aquaculture in a stratifying volcanic lake shared by multiple municipalities, with a documented history of recurrence. The concentration of loss in one municipality (300 of 343 tonnes in Talisay) is itself the argument for spatial monitoring — the kill was not uniform across the lake, which means a single monitoring point anywhere would have given the wrong answer for most operators.",
+      "what_the_omnidrone_would_have_seen": {
+        "honest_assessment": "Probably: a shoaling thermocline and rising hypolimnetic oxygen debt over the preceding days, and a spatial DO gradient concentrating in the Talisay area. Possibly: nothing useful, if the volcanic sulfur input was fast and chemical rather than slow and physical. We should not claim we would have prevented this. We should claim we would have seen the water column changing, which nobody did.",
+        "provenance": "assumption",
+        "caveat": "This is a retrospective counterfactual with no data behind it. It is a hypothesis to test in Phase 3, not a marketing claim. Presenting a counterfactual as a capability is exactly the overclaim the brand voice guidance prohibits."
+      }
+    },
+    {
+      "incident_id": "tilapia-fishkill-php43m",
+      "location": "Philippines (see primary source for specific water body)",
+      "species_affected": ["Tilapia"],
+      "reported_loss_quantity": { "value": 600, "unit": "metric tonnes", "qualifier": "over" },
+      "reported_loss_value": { "amount": 43130000, "currency": "PHP" },
+      "attributed_causes": ["Dissolved oxygen depletion", "Over-stocking of fish cages"],
+      "citation_ids": ["pna-tilapia-fishkill"],
+      "verification_status": "cited_from_search_result",
+      "why_this_matters_to_omnidrone": "One of the few incidents with a peso figure attached, which makes it usable in an ROI argument. It also names over-stocking explicitly as a contributing cause — which is a root cause the OmniDrone does not fix, and that limitation should be stated in the same breath as the loss figure.",
+      "derived_metric": {
+        "loss_per_tonne": { "amount": 71883, "currency": "PHP", "provenance": "derived_calculation", "formula": "43130000 PHP / 600 tonnes", "caveat": "Assumes the 600 t and PHP 43.13 M figures refer to the same event and the same scope. Verify before use — this is exactly the kind of cross-multiplied number that gets a thesis marked down." }
+      }
+    },
+    {
+      "incident_id": "pangasinan-bangus-fishkill",
+      "location": "Pangasinan, Philippines",
+      "water_body_type": "Brackish / coastal cage and pond culture",
+      "species_affected": ["Milkfish / bangus"],
+      "reported_loss_value": { "amount": 15000000, "currency": "PHP", "qualifier": "as much as" },
+      "attributed_causes": ["Extreme heat", "Low rainfall", "Dissolved oxygen depletion"],
+      "citation_ids": ["inquirer-pangasinan-fishkill", "khaleej-heat-fishkill-ph"],
+      "verification_status": "cited_from_search_result",
+      "why_this_matters_to_omnidrone": "A climate-triggered event rather than a stocking-triggered one, and therefore evidence for the 'this is getting worse' argument. Heat kills through a pincer: rising temperature simultaneously increases fish metabolic oxygen demand and decreases oxygen solubility. Both sides of that pincer are directly measurable by the probe, which makes this the cleanest case for the core sensing claim."
+    },
+    {
+      "incident_id": "philippines-fishkill-historical-1998-2018",
+      "location": "Philippines, national aggregate",
+      "period": { "start": "1998", "end": "2018" },
+      "reported_loss_value": { "amount": 322100000, "currency": "PHP", "qualifier": "estimated cumulative" },
+      "citation_ids": ["bioflux-lake-buhi-2020"],
+      "verification_status": "cited_from_search_result",
+      "why_this_matters_to_omnidrone": "A twenty-year national aggregate is the number that establishes this as a chronic structural problem rather than a run of bad luck.",
+      "critical_caveat": "PHP 322.1 M over 21 years averages roughly PHP 15 M per year nationally, which is SMALL — it is a fraction of a single large farm's annual revenue. Do NOT present this figure as the market opportunity. It almost certainly reflects only officially recorded incidents and excludes unreported smallholder losses, chronic sub-lethal production losses, and downstream economic effects. Used carelessly, this number argues AGAINST the venture. Used honestly, it argues that recorded losses are the visible tip of an unmeasured problem — which is, conveniently and genuinely, the thesis.",
+      "provenance_of_caveat": "derived_calculation"
+    },
+    {
+      "incident_id": "laguna-de-bay-fishkills",
+      "location": "Laguna de Bay, Philippines",
+      "water_body_type": "Shallow tropical eutrophic lake, extensive cage and pen culture",
+      "attributed_causes": ["Dissolved oxygen depletion", "High ammonia-nitrogen", "Hydrogen sulfide"],
+      "citation_ids": ["seafdec-laguna-fishkill", "fao-nutrient-dynamics-eutrophic"],
+      "verification_status": "cited_from_search_result",
+      "study_type": "Peer-reviewed / institutional research rather than news reporting",
+      "why_this_matters_to_omnidrone": "This is the most scientifically valuable entry in the file, because it identifies the causal triad — DO depletion, ammonia-N, and hydrogen sulfide — rather than just reporting a tonnage. That triad is precisely the signature of a post-overturn event: bottom water arriving at the surface. It is direct published support for the vertical profiling architecture, and it is the citation to lead with in the thesis.",
+      "design_implication": "Three of the probe's channels exist because of this finding. DO, ammonia, and the ORP-based sulfide inference are not a generic water quality panel — they are the specific diagnostic set for this documented mechanism."
+    },
+    {
+      "incident_id": "lake-buhi-recurrence",
+      "location": "Lake Buhi, Camarines Sur, Philippines",
+      "citation_ids": ["bioflux-lake-buhi-2020"],
+      "verification_status": "cited_from_search_result",
+      "study_type": "Peer-reviewed case study",
+      "why_this_matters_to_omnidrone": "The study's framing — 'occurrence AND recurrence' — is the important part. These are not accidents. They are a repeating pattern in a system whose dynamics are known, which means they are, in principle, anticipable. A one-off disaster is bad luck; a recurring one is an unmet monitoring need, and that distinction is the entire basis for a product."
+    },
+    {
+      "incident_id": "global-shrimp-wssv",
+      "location": "Global, principally Asia",
+      "species_affected": ["Penaeid shrimp"],
+      "reported_loss_value": { "amount": 6000000000, "currency": "USD", "qualifier": "during the 1992-93 outbreaks; USD 1-2 billion annually in subsequent years" },
+      "attributed_causes": ["White spot syndrome virus"],
+      "citation_ids": ["asian-fisheries-shrimp-disease", "worldbank-disease-risk-2014"],
+      "verification_status": "cited_from_search_result",
+      "why_this_matters_to_omnidrone": "Establishes the scale of aquaculture disease loss. Include with an explicit honesty note: the OmniDrone would have done little about WSSV. Shrimp are benthic, WSSV transmission is not primarily an environmental-observability problem, and the pathway to prevention is broodstock and biosecurity, not aerial sensing.",
+      "why_we_include_it_anyway": "Because it sizes the problem class and because environmental stress is a documented outbreak precondition. But if you put this number on a slide implying the OmniDrone addresses it, a knowledgeable investor will catch it and everything else on your slide becomes suspect."
+    },
+    {
+      "incident_id": "mekong-ems-losses",
+      "location": "Mekong Delta, Vietnam",
+      "reported_loss_value": { "amount": 800000000, "currency": "USD", "qualifier": "per year, mostly borne by small-scale producers" },
+      "attributed_causes": ["Early Mortality Syndrome / AHPND"],
+      "citation_ids": ["worldbank-disease-risk-2014"],
+      "verification_status": "cited_from_search_result",
+      "why_this_matters_to_omnidrone": "The distributional point is the one worth making: the losses land on small-scale producers who can least absorb them. That is the equity argument for the venture and it is real. It is also the commercial trap — the people who need this most can afford it least, and no amount of pitch craft dissolves that. See the financing discussion in go-to-market.json."
+    },
+    {
+      "incident_id": "global-aquaculture-disease-annual",
+      "location": "Global",
+      "reported_loss_value": { "amount": 6000000000, "currency": "USD", "qualifier": "estimated annual, FAO" },
+      "citation_ids": ["worldbank-disease-risk-2014"],
+      "verification_status": "cited_from_search_result",
+      "why_this_matters_to_omnidrone": "The headline number for the disease problem class."
+    }
+  ],
+
+  "patterns_across_incidents": {
+    "provenance": "derived_calculation",
+    "method": "Qualitative synthesis of the attributed_causes fields above.",
+    "findings": [
+      {
+        "pattern": "Dissolved oxygen depletion is the proximate cause in essentially every Philippine inland incident in this set.",
+        "implication": "DO is not one parameter among many. It is THE parameter. Any product that treats it as one tile among twenty on a dashboard has misread the problem.",
+        "confidence": "high"
+      },
+      {
+        "pattern": "Over-stocking appears as the underlying cause wherever investigators looked past the proximate one.",
+        "implication": "The industry's structural problem is density, and our product does not reduce density. We must be clear-eyed that we sell a mitigation for a problem whose cure is regulatory and behavioural.",
+        "confidence": "high",
+        "uncomfortable_corollary": "There is a version of this product that makes over-stocking MORE attractive, by letting operators push density closer to the edge with better instruments. That is a real risk of the technology and it deserves a paragraph in the thesis's ethics section rather than silence."
+      },
+      {
+        "pattern": "Weather — heat, drought, cold rain — is the trigger in the majority of cases.",
+        "implication": "Weather forecast integration is not a nice-to-have feature. It is half of the predictive signal, and it is free.",
+        "confidence": "high"
+      },
+      {
+        "pattern": "Losses are spatially concentrated within a water body, not uniform across it.",
+        "implication": "Direct support for the coverage argument over the single-buoy argument. Taal 2023 is the clean illustration: 87 percent of the reported tonnage in one municipality.",
+        "confidence": "medium",
+        "caveat": "Based on one well-broken-down incident. Do not over-generalise from a single case; look for more."
+      },
+      {
+        "pattern": "Reported loss figures vary wildly in scope and are rarely methodologically comparable.",
+        "implication": "This is a data quality warning, not a finding. The PHP 322.1 M twenty-year national figure and the PHP 43.13 M single-event figure cannot both be right unless the national figure counts only a narrow subset of events. Resolve this before either appears in a document with your name on it.",
+        "confidence": "high",
+        "action_required": "Obtain BFAR's primary fish kill records rather than relying on news aggregation."
+      }
+    ]
+  },
+
+  "what_this_evidence_base_lacks": [
+    "Sub-lethal chronic losses. Every incident here is a mass mortality event, because those are what get reported. The slow bleed — poor FCR, stunted growth, and low survival from chronic marginal water quality — is almost certainly larger in aggregate and is entirely invisible in this dataset. If the OmniDrone's real value is in the chronic case rather than the catastrophic one, this evidence base is looking in the wrong place, and that possibility should be actively investigated rather than assumed away.",
+    "Denominators. We have losses without knowing total production at risk, so no incident rate can be computed. A tonnage with no denominator cannot support a probability claim.",
+    "Counterfactuals. No incident here has a documented case of a farm that had monitoring and avoided the kill. That comparison is the actual evidence a rational buyer wants, and nobody has produced it. Producing it would be a genuine contribution and is a strong thesis objective in its own right.",
+    "Primary-source verification. Everything here is second-hand as of this revision."
+  ],
+
+  "chart_hint": {
+    "chart_file": "data/12_datasets/charts/chart-problem-cost-breakdown.json"
+  }
+}

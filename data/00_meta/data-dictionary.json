@@ -1,0 +1,283 @@
+{
+  "id": "data-dictionary",
+  "title": "Data Dictionary — Canonical Field and Variable Definitions",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "description": "Defines every measured variable the OmniDrone produces, its units, its valid range, its storage type, and its interpretation rules. This is the contract between the flight hardware, the ingestion pipeline, the digital twin, and the dashboard. If a variable is not in this file, it does not exist.",
+
+  "measured_variables": [
+    {
+      "key": "do_mgl",
+      "label": "Dissolved Oxygen",
+      "unit": "mg/L",
+      "type": "float",
+      "valid_range": { "min": 0.0, "max": 20.0 },
+      "precision": 0.01,
+      "sensor": "optical_do",
+      "depth_resolved": true,
+      "interpretation": "Master safety variable. Interpret against species threshold AND against time of day — a 5 mg/L reading at 15:00 is a very different fact from 5 mg/L at 05:00, because the afternoon reading is near the diel maximum and implies a dangerous pre-dawn minimum.",
+      "derived_partners": ["do_saturation_pct", "do_deficit"],
+      "alert_thresholds": { "advisory": 5.0, "warning": 3.5, "critical": 2.5, "direction": "below" },
+      "citation_ids": ["boyd-water-quality-2020", "igs-do-aquaculture-2026"]
+    },
+    {
+      "key": "do_saturation_pct",
+      "label": "Dissolved Oxygen Saturation",
+      "unit": "%",
+      "type": "float",
+      "valid_range": { "min": 0.0, "max": 250.0 },
+      "computed": true,
+      "formula": "100 * do_mgl / DO_solubility(temp_c, salinity_ppt, barometric_pressure_hpa)",
+      "interpretation": "Supersaturation above ~120% indicates intense photosynthesis and therefore a large algal standing crop — which is a warning of the night-time crash to come, not good news. This inversion catches inexperienced operators out constantly.",
+      "citation_ids": ["boyd-water-quality-2020"]
+    },
+    {
+      "key": "temp_c",
+      "label": "Water Temperature",
+      "unit": "degC",
+      "type": "float",
+      "valid_range": { "min": 0.0, "max": 45.0 },
+      "precision": 0.01,
+      "sensor": "thermistor",
+      "depth_resolved": true,
+      "interpretation": "Drives oxygen solubility (inversely), metabolic rate, ammonia toxicity fraction, and stratification. The vertical temperature profile IS the stratification measurement.",
+      "derived_partners": ["thermocline_depth_m", "stratification_index"]
+    },
+    {
+      "key": "ph",
+      "label": "pH",
+      "unit": "pH units",
+      "type": "float",
+      "valid_range": { "min": 3.0, "max": 12.0 },
+      "precision": 0.01,
+      "sensor": "iss_ph",
+      "depth_resolved": true,
+      "interpretation": "Never interpret alone. pH's operational significance is as a multiplier on ammonia and sulfide toxicity. Diurnal swing amplitude is itself diagnostic of low alkalinity and high algal load."
+    },
+    {
+      "key": "tan_mgl",
+      "label": "Total Ammonia Nitrogen",
+      "unit": "mg/L as N",
+      "type": "float",
+      "valid_range": { "min": 0.0, "max": 50.0 },
+      "precision": 0.01,
+      "sensor": "ise_ammonium",
+      "depth_resolved": true,
+      "interpretation": "Meaningless without simultaneous pH and temperature at the same depth and instant. The pipeline MUST reject a TAN reading that arrives without its pH/temp partners rather than storing it unpartnered.",
+      "derived_partners": ["nh3_un_ionised_mgl"]
+    },
+    {
+      "key": "nh3_un_ionised_mgl",
+      "label": "Un-ionised Ammonia",
+      "unit": "mg/L as N",
+      "type": "float",
+      "computed": true,
+      "formula": "tan_mgl / (1 + 10^(pKa(temp_c) - ph)) where pKa = 0.09018 + 2729.92/(temp_c + 273.15)",
+      "interpretation": "The actually toxic fraction. This is the number that should be shown to the farmer; TAN should be relegated to the diagnostic drill-down.",
+      "alert_thresholds": { "advisory": 0.02, "warning": 0.05, "critical": 0.10, "direction": "above" },
+      "citation_ids": ["emerson-ammonia-1975"]
+    },
+    {
+      "key": "no2_mgl",
+      "label": "Nitrite",
+      "unit": "mg/L as N",
+      "type": "float",
+      "valid_range": { "min": 0.0, "max": 20.0 },
+      "sensor": "ise_nitrite",
+      "interpretation": "Toxicity is strongly mitigated by chloride, so a nitrite number in brackish water and the same number in fresh water carry different risk. Store salinity alongside or the value is not actionable."
+    },
+    {
+      "key": "orp_mv",
+      "label": "Oxidation-Reduction Potential",
+      "unit": "mV",
+      "type": "float",
+      "valid_range": { "min": -600.0, "max": 800.0 },
+      "sensor": "orp_platinum",
+      "depth_resolved": true,
+      "interpretation": "Near-bottom ORP turning sharply negative indicates sediment going reducing and sulfide generation beginning. An integrative leading indicator that often moves before DO does."
+    },
+    {
+      "key": "turbidity_ntu",
+      "label": "Turbidity",
+      "unit": "NTU",
+      "type": "float",
+      "valid_range": { "min": 0.0, "max": 4000.0 },
+      "sensor": "nephelometric_optical",
+      "depth_resolved": true,
+      "interpretation": "Both a variable of interest and the primary confounder for every other optical measurement on the platform, including the multispectral camera. The fusion model must use it as a covariate, not ignore it."
+    },
+    {
+      "key": "chla_ugl",
+      "label": "Chlorophyll-a (in situ)",
+      "unit": "ug/L",
+      "type": "float",
+      "valid_range": { "min": 0.0, "max": 500.0 },
+      "sensor": "fluorometer_chla",
+      "depth_resolved": true,
+      "interpretation": "In-situ fluorometric Chl-a is the ground truth that calibrates the aerial NDCI retrieval. This pairing — point truth plus area estimate, gathered by the same vehicle in the same sortie — is the core scientific claim of the platform.",
+      "citation_ids": ["mishra-ndci-2012"]
+    },
+    {
+      "key": "phycocyanin_ugl",
+      "label": "Phycocyanin",
+      "unit": "ug/L",
+      "type": "float",
+      "valid_range": { "min": 0.0, "max": 500.0 },
+      "sensor": "fluorometer_pc",
+      "interpretation": "Cyanobacteria-specific pigment. High phycocyanin with high Chl-a raises toxin suspicion in a way that Chl-a alone cannot. Still not a toxin measurement — escalate to lab assay, never auto-declare toxicity."
+    },
+    {
+      "key": "salinity_ppt",
+      "label": "Salinity",
+      "unit": "ppt",
+      "type": "float",
+      "valid_range": { "min": 0.0, "max": 45.0 },
+      "sensor": "conductivity_derived",
+      "depth_resolved": true,
+      "interpretation": "In brackish milkfish and shrimp ponds, the halocline can be as important as the thermocline for stratification, and salinity governs oxygen solubility."
+    },
+    {
+      "key": "ec_uscm",
+      "label": "Electrical Conductivity",
+      "unit": "uS/cm",
+      "type": "float",
+      "valid_range": { "min": 0.0, "max": 100000.0 },
+      "sensor": "conductivity_4electrode"
+    },
+    {
+      "key": "depth_m",
+      "label": "Probe Depth",
+      "unit": "m",
+      "type": "float",
+      "valid_range": { "min": 0.0, "max": 30.0 },
+      "precision": 0.05,
+      "sensor": "pressure_transducer",
+      "interpretation": "The independent variable of every profile. Derived from pressure rather than winch payout, because payout is corrupted by line drift in current and wind. Trust the water, not the spool."
+    },
+    {
+      "key": "ndci",
+      "label": "Normalized Difference Chlorophyll Index",
+      "unit": "index",
+      "type": "float",
+      "valid_range": { "min": -1.0, "max": 1.0 },
+      "sensor": "multispectral_camera",
+      "computed": true,
+      "spatial": true,
+      "interpretation": "A per-pixel relative index, NOT a concentration. Converting NDCI to ug/L requires a local regression against in-situ Chl-a — which is why every sortie that computes NDCI must also drop the probe at least once.",
+      "citation_ids": ["mishra-ndci-2012"]
+    },
+    {
+      "key": "ndwi",
+      "label": "Normalized Difference Water Index",
+      "unit": "index",
+      "type": "float",
+      "valid_range": { "min": -1.0, "max": 1.0 },
+      "sensor": "multispectral_camera",
+      "computed": true,
+      "spatial": true,
+      "interpretation": "Water masking. Applied first in the imagery pipeline so that dike, vegetation, and boat pixels never enter a water quality statistic.",
+      "citation_ids": ["mcfeeters-ndwi-1996"]
+    },
+    {
+      "key": "surface_temp_c",
+      "label": "Surface Skin Temperature",
+      "unit": "degC",
+      "type": "float",
+      "sensor": "thermal_ir",
+      "spatial": true,
+      "interpretation": "Radiometric skin temperature, which is NOT the same as bulk temperature measured by the probe at 0.2 m — there is a cool-skin effect. Any claim that the thermal camera 'measures water temperature' must be qualified or it is wrong."
+    },
+    {
+      "key": "anomaly_class",
+      "label": "Surface Anomaly Classification",
+      "unit": "categorical",
+      "type": "enum",
+      "enum_values": ["none", "dead_fish", "distressed_surfacing", "oil_sheen", "foam_scum", "algal_mat", "debris", "net_damage", "unauthorised_vessel", "unknown_object"],
+      "sensor": "rgb_camera + cv_model",
+      "spatial": true,
+      "interpretation": "A model output, not a measurement. Always carries a confidence and always routes to human confirmation before any irreversible action. See ai-ml-models.json for the operating envelope."
+    },
+    {
+      "key": "anomaly_confidence",
+      "label": "Anomaly Detection Confidence",
+      "unit": "probability",
+      "type": "float",
+      "valid_range": { "min": 0.0, "max": 1.0 },
+      "interpretation": "Calibrated posterior, not a raw softmax score. If it is uncalibrated, the number is decoration and must not be surfaced to farmers as a percentage."
+    }
+  ],
+
+  "derived_indices": [
+    {
+      "key": "thermocline_depth_m",
+      "label": "Thermocline Depth",
+      "unit": "m",
+      "formula": "depth at max(|d(temp_c)/d(depth_m)|) subject to gradient > 0.5 degC/m",
+      "interpretation": "Null when the water column is mixed. A rapidly shoaling thermocline across successive profiles is the precursor signature of an overturn event.",
+      "provenance": "derived_calculation"
+    },
+    {
+      "key": "stratification_index",
+      "label": "Stratification Strength Index",
+      "unit": "dimensionless",
+      "formula": "Schmidt stability, normalised by water column depth",
+      "interpretation": "High stability plus a hypoxic hypolimnion plus an incoming cold front equals the classic Philippine lake fish kill setup. This composite is the OmniDrone's flagship predictive feature.",
+      "provenance": "derived_calculation",
+      "citation_ids": ["idso-schmidt-stability-1973"]
+    },
+    {
+      "key": "oxygen_debt_index",
+      "label": "Hypolimnetic Oxygen Debt",
+      "unit": "mg/L * m",
+      "formula": "integral over depth of max(0, DO_threshold - do_mgl) below thermocline",
+      "interpretation": "Quantifies the size of the oxygen-poor reservoir waiting to be delivered to the surface by mixing. This converts 'the bottom is anoxic' from a qualitative worry into a magnitude.",
+      "provenance": "derived_calculation"
+    },
+    {
+      "key": "kill_risk_score",
+      "label": "Composite Fish Kill Risk Score",
+      "unit": "0-100",
+      "formula": "See ai-ml-models.json#/models/kill-risk-forecast. Weighted ensemble over stratification_index, oxygen_debt_index, chla trend, weather forecast, and stocking density.",
+      "interpretation": "MODEL OUTPUT, NOT A FACT. Untrained and unvalidated as of this revision. Presenting this score to a farmer before validation would be dangerous: a false negative reads as 'you are safe' and could cost a harvest.",
+      "provenance": "design_target",
+      "status": "not_yet_implemented"
+    }
+  ],
+
+  "record_keys": {
+    "sortie_id": { "type": "string", "format": "uuid", "description": "One flight from dock departure to dock return." },
+    "site_id": { "type": "string", "description": "A managed water body." },
+    "unit_id": { "type": "string", "description": "A cage, pen, or pond within a site." },
+    "station_id": { "type": "string", "description": "A repeatable sampling location within a unit. Fixed stations make profiles comparable across time; ad-hoc stations do not." },
+    "profile_id": { "type": "string", "format": "uuid", "description": "One probe descent-and-ascent." },
+    "timestamp": { "type": "string", "format": "date-time", "description": "UTC, RFC 3339, millisecond precision. Local time is a presentation concern only. Storing local time here would destroy the diel analysis the moment a site crosses a timezone or DST boundary." },
+    "position": { "type": "object", "description": "WGS84 lat/lon plus ellipsoidal height and horizontal accuracy estimate. An accuracy field is mandatory — a position without an error bar cannot be used to decide whether two profiles are at the same station." }
+  },
+
+  "data_quality_flags": {
+    "description": "Every measurement record carries a QC flag. Adapted from the QARTOD convention used in operational oceanography, which is the mature prior art here.",
+    "citation_ids": ["qartod-manual"],
+    "flags": [
+      { "code": 1, "label": "good", "meaning": "Passed all automated tests." },
+      { "code": 2, "label": "not_evaluated", "meaning": "No QC applied. Must not be used in analysis without review." },
+      { "code": 3, "label": "suspect", "meaning": "Failed a soft test — e.g. spike test, or rate-of-change test. Show to humans, exclude from automated triggers." },
+      { "code": 4, "label": "fail", "meaning": "Failed a hard test — out of physical range, or sensor fault reported." },
+      { "code": 9, "label": "missing", "meaning": "Expected but absent." }
+    ],
+    "mandatory_tests": [
+      "gross_range_test — is the value physically possible at all?",
+      "climatology_test — is the value plausible for this site, this season?",
+      "spike_test — is this point wildly inconsistent with its neighbours?",
+      "rate_of_change_test — did it move faster than physics allows?",
+      "flat_line_test — has the sensor stopped responding and started repeating? (The failure mode that most resembles good data.)",
+      "partner_presence_test — for TAN, are pH and temperature present at the same depth and instant?"
+    ]
+  },
+
+  "integrity_rules": [
+    "A computed field must never be stored without its inputs. If nh3_un_ionised_mgl exists, tan_mgl, ph, and temp_c must exist in the same record.",
+    "Never overwrite a raw measurement with a corrected one. Corrections are new records referencing the original.",
+    "A profile with fewer than the configured minimum depth bins is a partial profile and must be flagged as such, not silently averaged into a site statistic.",
+    "Model outputs and measurements live in separate namespaces. The moment a prediction can be mistaken for an observation, the dataset is compromised."
+  ]
+}

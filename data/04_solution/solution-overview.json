@@ -1,0 +1,93 @@
+{
+  "id": "solution-overview",
+  "title": "Solution Overview — The OmniDrone System",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "design_target",
+
+  "the_system_in_one_paragraph": "The OmniDrone is an autonomous multirotor that launches from a shore-side dock, flies a planned route across a fish farm, and at each station lowers a multiparameter sonde on a powered winch to profile the water column from surface to bottom. While it hovers, a calibrated multispectral and thermal payload images the surrounding water, and the probe's in-situ chemistry calibrates that imagery into real concentrations rather than relative indices. A carriage and ejection system dispenses feed, lime, conditioners, or treatments to specific coordinates. Everything streams to the AquaVision platform, which fuses point profiles with area imagery, drives a digital twin of the water body, and surfaces the result as an answer rather than a dataset.",
+
+  "the_four_functions": [
+    {
+      "function_id": "f1-probe",
+      "label": "Profile — the reeled probe",
+      "what_it_does": "Lowers a sonde to measure dissolved oxygen, temperature, pH, ammonia, ORP, turbidity, chlorophyll-a, and conductivity at multiple depths at each station.",
+      "why_it_is_the_core": "Surface measurements cannot see stratification, and stratification is the precondition for the catastrophic failure mode. Every other function on this vehicle could be replicated by a competitor with an off-the-shelf drone. This one could not. If the winch fails, the product is a camera.",
+      "detail_file": "data/05_hardware/probe-winch-subsystem.json"
+    },
+    {
+      "function_id": "f2-scan",
+      "label": "Scan — surface anomaly detection",
+      "what_it_does": "Images the water surface in RGB, multispectral, and thermal, detecting floating mortalities, fish piping at the surface, oil sheen, foam, algal mats, debris, and net damage above the waterline.",
+      "boundary": "Sees the surface. Sunk mortalities and submerged structure are invisible to it, which caps the mortality-detection claim in species whose dead fish sink.",
+      "detail_file": "data/05_hardware/sensor-payload.json"
+    },
+    {
+      "function_id": "f3-dispense",
+      "label": "Dispense — carriage and ejection",
+      "what_it_does": "Carries and meters granular feed, lime, and liquid conditioners or treatments to GPS-referenced coordinates.",
+      "why_it_matters_more_than_it_looks": "This is the answer to the strongest objection against the whole venture — that information without response capacity is just a countdown clock. A platform that can act on its own finding is a different proposition from one that can only report.",
+      "detail_file": "data/05_hardware/carriage-ejection-system.json"
+    },
+    {
+      "function_id": "f4-transmit",
+      "label": "Transmit — the data multiplex",
+      "what_it_does": "Streams telemetry, profiles, and imagery to the platform for fusion, AI/ML analysis, digital twin update, and dashboard presentation.",
+      "detail_file": "data/06_software/system-architecture.json"
+    }
+  ],
+
+  "the_architectural_insight": {
+    "statement": "The probe and the camera are not two features. They are one instrument.",
+    "explanation": "A multispectral camera over inland water produces indices — NDCI, NDWI — which are relative numbers, not concentrations. Turning an index into a chlorophyll concentration requires a local regression against real measurements, and that regression is site-specific and drifts with conditions. Almost every UAV water quality study in the literature handles this by sending a boat out with a sonde. That is why almost none of them became products: the boat is the whole cost.",
+    "what_we_do_differently": "The vehicle carries its own ground truth. Every sortie that computes an index also drops the probe, so the calibration is generated in the same place, at the same time, under the same illumination, by the same machine. The point measurement extrapolates across the image; the image tells the point measurement where to look next.",
+    "why_this_is_the_thesis": "This is the defensible scientific contribution and it should be the centre of both the pitch and the dissertation. Not 'a drone with sensors' — a self-calibrating spatial sensing system where the two halves make each other work. State it in those terms.",
+    "citation_ids": ["mdpi-drones-inland-review-2024", "sciencedirect-uav-multispectral-ponds-2024", "mishra-ndci-2012"],
+    "honest_caveat": "Unproven. The calibration workflow must survive two different days and two different illumination conditions before this paragraph is anything more than a good idea. That is the Phase 1 exit gate."
+  },
+
+  "what_the_system_is_not": {
+    "purpose": "Volunteering boundaries is the cheapest credibility available. Every item here is something a reader might otherwise assume.",
+    "items": [
+      "Not a fish kill predictor. Not yet. The risk model is unvalidated and will be for at least a full season. Until then the claim is earlier detection, not prediction.",
+      "Not a toxin detector. It measures pigments correlated with taxa that sometimes produce toxins. A high chlorophyll reading is a reason to sample, not a diagnosis — and people eat the shellfish.",
+      "Not a disease diagnostic. It detects mortality and stress windows. A vet diagnoses.",
+      "Not a biomass estimator. No underwater vision. This is a real gap and it will eventually mean integrating with sonar vendors rather than competing with them.",
+      "Not autonomous in the decisions that matter. It does not medicate a pond on its own authority. Consequential actions stay with the person who owns the consequence.",
+      "Not a replacement for the farmer's experience. It extends that experience into the depths and hours where it has no access.",
+      "Not weatherproof. It cannot fly in the storms that trigger overturn events — which is a genuine limitation of the catastrophe-prevention story and the strongest argument for a fixed-buoy hybrid.",
+      "Not a surveillance platform. The IUU-enforcement application is deliberately not pursued; it would make adversaries of the communities we need as customers."
+    ]
+  },
+
+  "system_components": [
+    { "component": "OmniDrone", "role": "The aerial platform", "file": "data/05_hardware/omnidrone-specifications.json" },
+    { "component": "OmniDock", "role": "Shelter, charge, rinse, decontaminate, calibrate, backhaul. Converts a tool someone operates into infrastructure that runs.", "file": "data/05_hardware/docking-station.json" },
+    { "component": "AquaVision Platform", "role": "Ingestion, fusion, AI/ML, storage, API", "file": "data/06_software/system-architecture.json" },
+    { "component": "PondTwin", "role": "The digital twin the farmer actually looks at", "file": "data/06_software/digital-twin.json" }
+  ],
+
+  "why_the_dock_matters_as_much_as_the_drone": {
+    "note": "Under-appreciated in most drone pitches, including, so far, ours.",
+    "reasoning": [
+      "Autonomy is what makes the pre-dawn sortie possible, and the pre-dawn sortie is where the entire diel-bias argument lives. A drone that needs a human to launch it will never fly at 04:30, which means it will only ever measure the safest hour of the day — exactly the failure it was built to fix.",
+      "The dock is what lets the probe be dry between sorties, which is why we foul less than a moored sonde.",
+      "The dock holds the calibrated reflectance panel, without which the multispectral time series is not comparable across days.",
+      "The dock is the decontamination station, which is what makes multi-site operation biosecure rather than a pathogen distribution service.",
+      "The dock is the unit of network economics. Coverage is measured in docks, not drones."
+    ],
+    "conclusion": "Four of the system's five distinguishing claims depend on the dock, not the aircraft. The dock should be treated as a co-equal product, not an accessory."
+  },
+
+  "operating_concept_summary": {
+    "detail_file": "data/04_solution/concept-of-operations.json",
+    "sketch": "Dock on shore, solar or grid powered, connected. Scheduled sorties several times daily including pre-dawn. Each sortie: launch, transit, station-keep, profile, image, optionally dispense, next station, return, dock, rinse, charge, upload. Human oversight from the dashboard; human decision on every consequential action; certificated remote pilot in the loop until BVLOS authorisation permits otherwise."
+  },
+
+  "maturity_statement": {
+    "trl": 3,
+    "what_that_means": "The physics is established in the literature. The integration into this vehicle is not demonstrated in hardware. Nothing here has flown.",
+    "citation_ids": ["nasa-trl"],
+    "why_it_is_stated_prominently": "Because the render is persuasive and the specification is detailed, and together they can create an impression of maturity that does not exist. Anyone reading this repository should leave knowing exactly what stage this is at."
+  }
+}

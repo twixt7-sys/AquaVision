@@ -1,0 +1,99 @@
+{
+  "id": "studies-socioeconomic-adoption",
+  "title": "Related Studies — Socioeconomics & Technology Adoption",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "theme": "socioeconomic_adoption",
+  "provenance": "assumption",
+  "confidence": "low",
+
+  "THE_HONEST_STATE_OF_THIS_COLLECTION": {
+    "statement": "This is the emptiest and most important collection in the research corpus, and the imbalance is diagnostic.",
+    "the_problem": "We have eight thematic collections. Seven are populated with real studies about sensors, algorithms, twins, and fish. This one — about whether anyone will actually adopt, pay for, and keep using the technology — is nearly empty because we did not search for it properly.",
+    "why_that_is_revealing": "The team's instinct was to research the technology, not the adoption. That instinct is exactly why aquaculture technology has a poor adoption record despite good technology. The engineering questions are tractable and interesting; the adoption questions are messy and decisive. We went where the light was.",
+    "the_correction": "Adoption literature for smallholder agricultural technology in developing economies is a large, mature field with decades of hard-won findings about why good technology fails. Almost none of it is in this repository. That is a genuine gap and it should embarrass us more than a missing sensor datasheet would.",
+    "priority": "This collection deserves a dedicated literature search before Phase 1. It is more likely to change the plan than anything in the sensing literature."
+  },
+
+  "studies": [
+    {
+      "citation_id": "rogers-diffusion-2003",
+      "theme": "socioeconomic_adoption",
+      "study_type": "book",
+      "summary": "The foundational framework for how innovations spread through social systems: relative advantage, compatibility, complexity, trialability, and observability determine adoption rate.",
+      "relevance_to_omnidrone": "The five attributes are a direct diagnostic on our product, and the result is uncomfortable.",
+      "the_diagnostic": [
+        { "attribute": "Relative advantage", "our_score": "unknown", "why": "We believe it is large. We have not measured it, and the farmer's twenty years of experience is a stronger incumbent than we credit." },
+        { "attribute": "Compatibility", "our_score": "poor", "why": "Nothing about a drone fits an existing workflow. There is no budget line, no skill, no habit to attach to. We are asking for behaviour change, not a substitution." },
+        { "attribute": "Complexity", "our_score": "poor", "why": "It is a drone, a dock, a probe, a cloud service, and a dashboard. Every one of those is a thing that can break in a way the farmer cannot fix." },
+        { "attribute": "Trialability", "our_score": "poor", "why": "You cannot try a bit of it. The dock is a permanent installation. This is a major structural disadvantage that Rogers identifies as a strong predictor of slow adoption, and it argues hard for a service model over a sale." },
+        { "attribute": "Observability", "our_score": "mixed", "why": "The drone flying is highly visible — good. The benefit is a kill that did not happen — invisible. We are visible in our costs and invisible in our value, which is precisely the wrong way round." }
+      ],
+      "supports_or_challenges": "challenges",
+      "the_verdict": "On Rogers' framework, this product scores badly on four of five attributes. That is not a reason to stop; it is a reason to design the go-to-market around the weaknesses. Trialability argues for a service model rather than a capital sale. Observability argues for leading with the aeration electricity saving, which IS observable in a monthly bill, rather than with prevented catastrophes, which are not.",
+      "verification_status": "needs_verification",
+      "priority": "HIGH — this framework should shape go-to-market"
+    },
+    {
+      "citation_id": "moore-crossing-chasm-1991",
+      "theme": "socioeconomic_adoption",
+      "study_type": "book",
+      "summary": "On the gap between early adopters and the pragmatic early majority in technology markets, and why products die in it.",
+      "relevance_to_omnidrone": "The chasm framing predicts our specific failure mode: a well-capitalised demonstration farm adopts enthusiastically, generates a case study, and the pragmatic majority still does not buy — because the demonstration farm's conditions were not theirs.",
+      "the_application": "Our company-profile.json commits to 'build for the median farm, not the flagship'. That commitment is precisely a chasm-crossing strategy, and it was arrived at instinctively rather than from this literature. Worth grounding it properly.",
+      "supports_or_challenges": "context_only",
+      "verification_status": "needs_verification",
+      "priority": "MEDIUM"
+    },
+    {
+      "citation_id": "worldbank-disease-risk-2014",
+      "theme": "socioeconomic_adoption",
+      "study_type": "policy_report",
+      "summary": "Includes the finding that EMS/AHPND losses in the Mekong Delta fall mostly on small-scale producers who cannot afford them.",
+      "relevance_to_omnidrone": "The distributional finding is the equity core of this venture and also its commercial trap. The people who need this most can afford it least. This is not a pitch problem to be solved with better framing; it is a structural feature of the market.",
+      "supports_or_challenges": "challenges",
+      "priority": "MEDIUM"
+    },
+    {
+      "citation_id": "ai-aqua-review-2024",
+      "theme": "socioeconomic_adoption",
+      "summary": "Identifies high deployment cost and limited power supply as significant barriers to precision aquaculture adoption.",
+      "relevance_to_omnidrone": "The one piece of technology-adoption evidence we do have, and it names our two worst attributes as the field's binding constraints.",
+      "supports_or_challenges": "challenges",
+      "verification_status": "needs_verification",
+      "note": "This entry is not a verified publication. See references-bibliography.json.",
+      "priority": "MEDIUM"
+    }
+  ],
+
+  "what_this_collection_should_contain_and_does_not": {
+    "purpose": "A reading list, honestly labelled as work not yet done.",
+    "required_searches": [
+      { "topic": "Smallholder agricultural technology adoption in Southeast Asia", "why": "Decades of findings on why good technology fails in exactly our context. We have not looked." },
+      { "topic": "ICT4D and precision agriculture adoption in developing economies", "why": "The digital literacy, trust, and maintenance findings are directly transferable and we are currently guessing at all three." },
+      { "topic": "Cooperative-mediated technology delivery in fisheries", "why": "Our entire smallholder strategy rests on the cooperative channel. We have zero evidence it works and have not checked whether anyone has tried." },
+      { "topic": "Index insurance and agricultural credit in aquaculture", "why": "We flag insurance as potentially the most valuable strategic option in the business. We have not read a single paper on it." },
+      { "topic": "Willingness to pay studies in aquaculture technology", "why": "Our market sizing is blocked on this and we have not searched for whether the number already exists." },
+      { "topic": "Why aquaculture extension programmes fail", "why": "Farmer distrust of technology vendors is treated as a given throughout this repository. It is a researched phenomenon with documented causes and we have engaged with none of them." },
+      { "topic": "Gender and labour in Philippine aquaculture", "why": "Entirely absent from this repository. Who actually does the monitoring work, and does automating it help or displace them? We have not asked." },
+      { "topic": "Occupational safety in small-scale fisheries", "why": "We claim removing the pre-dawn boat run as a safety benefit. We have no data on the actual incidence of drowning or injury, so the claim is rhetorical." }
+    ]
+  },
+
+  "the_questions_this_theme_must_answer": {
+    "note": "These are the questions that decide whether the venture works. None of them are engineering questions, and none of them are currently answered.",
+    "questions": [
+      { "question": "Will a farmer act on a warning, or just watch the loss arrive with better information?", "status": "THE load-bearing assumption of the entire venture. Untested.", "how_to_answer": "Phase 0 farmer discovery, and only with farms that have response capacity." },
+      { "question": "Is there any price at which a smallholder will pay?", "status": "Unknown. Possibly no.", "how_to_answer": "Not a survey. An invoice. Stated willingness to pay in agricultural surveys is notoriously inflated; the only reliable measurement is money that actually moved." },
+      { "question": "Can a cooperative actually levy members for a shared service?", "status": "Assumed. Never checked.", "how_to_answer": "Ask three cooperative chairs. It is a phone call, and if the answer is no, the entire smallholder strategy collapses and the impact story with it." },
+      { "question": "Will the technician cooperate or quietly sabotage?", "status": "Hypothesised as a risk in customer-personas.json, based on structural reasoning rather than evidence.", "how_to_answer": "Talk to technicians, not just managers. Nobody ever does this and it is where deployments die." },
+      { "question": "Does the sector's history of vendor abandonment make us unsellable regardless of merit?", "status": "Treated as a given throughout this repository. Never investigated.", "how_to_answer": "Ask farmers what technology they were sold before, and what happened to it. The answers will be more useful than any competitive analysis." }
+    ]
+  },
+
+  "synthesis": {
+    "the_uncomfortable_conclusion": "The technical literature in this repository is reasonably well-mapped. The adoption literature is nearly absent. Yet on every honest reading of this project's risk profile, adoption is the more likely failure mode — the engineering problems are hard but tractable, while the adoption problems may be structural.",
+    "what_the_thin_evidence_we_have_says": "Rogers' framework scores us badly on four of five adoption attributes. The one adoption-barrier finding we have names deployment cost and power supply — our two worst attributes. The one distributional finding says the neediest cannot pay. Every piece of adoption evidence in this collection argues against the venture, and there are only four pieces.",
+    "the_honest_recommendation": "Before another sensor is specified, someone should spend two weeks reading smallholder technology adoption literature and two weeks talking to farmers. That month is more likely to change the plan — and to save the money — than any amount of winch engineering. This collection's emptiness is the most actionable finding in the research corpus, and it is a finding about us rather than about the field."
+  }
+}

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Strategic Analysis — SWOT, Porter's Five Forces, PESTEL — AquaVision</title>
+<link rel="icon" href="../assets/img/logo-mark.jpg">
+<link rel="stylesheet" href="../assets/style.css">
+<script>try{var t=localStorage.getItem('av-theme');if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+<a class="sidebar-brand" href="../index.html">
+<img src="../assets/img/logo-mark.jpg" alt="AquaVision mark" width="36" height="36">
+<span><strong>AQUAVISION</strong><small>OmniDrone Knowledge Repository</small></span>
+</a>
+<nav class="sidebar-nav" aria-label="Sections"><details class="nav-sec">
+<summary><span class="nav-num">00</span>Meta &amp; Schemas</summary>
+<ul>
+<li><a href="../sections/meta.html">Overview</a></li>
+<li><a href="../files/schema-registry.html">AquaVision Knowledge Repository — Schema Registry <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/glossary.html">Glossary — Aquaculture, Fisheries, Remote Sensing, and Systems Terms</a></li><li><a href="../files/data-dictionary.html">Data Dictionary — Canonical Field and Variable Definitions</a></li><li><a href="../files/changelog.html">Repository Changelog</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">01</span>Company &amp; Identity</summary>
+<ul>
+<li><a href="../sections/company.html">Overview</a></li>
+<li><a href="../files/company-profile.html">AquaVision — Company Profile</a></li><li><a href="../files/brand-identity.html">AquaVision — Brand &amp; Design System</a></li><li><a href="../files/team-structure.html">Team Structure &amp; Capability Map</a></li><li><a href="../files/milestones-roadmap.html">Development Roadmap &amp; Milestones</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">02</span>Problem Space</summary>
+<ul>
+<li><a href="../sections/problem.html">Overview</a></li>
+<li><a href="../files/problem-statement.html">Problem Statement</a></li><li><a href="../files/problem-taxonomy.html">Problem Taxonomy — The Full Space of Aquaculture &amp; Fisheries Problems</a></li><li><a href="../files/stakeholder-pain-points.html">Stakeholder Map &amp; Pain Points</a></li><li><a href="../files/incident-case-studies.html">Documented Incident Case Studies — Evidence Base</a></li><li><a href="../files/cost-of-inaction.html">Cost of Inaction — Loss Model</a></li>
+</ul>
+</details>
+<details class="nav-sec" open>
+<summary><span class="nav-num">03</span>Market &amp; Competition</summary>
+<ul>
+<li><a href="../sections/market.html">Overview</a></li>
+<li><a href="../files/industry-statistics.html">Industry Statistics — Global &amp; Regional Aquaculture and Fisheries</a></li><li><a href="../files/market-sizing.html">Market Sizing — TAM / SAM / SOM</a></li><li><a href="../files/competitive-landscape.html">Competitive Landscape</a></li><li><a href="../files/customer-personas.html">Customer Segments &amp; Personas</a></li><li><a href="../files/swot-porter.html" aria-current="page" class="current">Strategic Analysis — SWOT, Porter's Five Forces, PESTEL</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">04</span>Solution &amp; ConOps</summary>
+<ul>
+<li><a href="../sections/solution.html">Overview</a></li>
+<li><a href="../files/solution-overview.html">Solution Overview — The OmniDrone System</a></li><li><a href="../files/value-proposition.html">Value Proposition</a></li><li><a href="../files/use-cases.html">Use Cases</a></li><li><a href="../files/mission-profiles.html">Mission Profiles</a></li><li><a href="../files/concept-of-operations.html">Concept of Operations (ConOps)</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">05</span>Hardware Engineering</summary>
+<ul>
+<li><a href="../sections/hardware.html">Overview</a></li>
+<li><a href="../files/omnidrone-specifications.html">OmniDrone — System Specification</a></li><li><a href="../files/airframe-propulsion.html">Airframe &amp; Propulsion</a></li><li><a href="../files/probe-winch-subsystem.html">Reeled Probe &amp; Winch Subsystem</a></li><li><a href="../files/sensor-payload.html">Sensor Payload — Imaging &amp; Remote Sensing</a></li><li><a href="../files/carriage-ejection-system.html">Carriage &amp; Ejection System</a></li><li><a href="../files/power-energy-budget.html">Power &amp; Energy Budget</a></li><li><a href="../files/docking-station.html">OmniDock — Automated Docking Station</a></li><li><a href="../files/bill-of-materials.html">Indicative Bill of Materials</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">06</span>Software, AI &amp; Digital Twin</summary>
+<ul>
+<li><a href="../sections/software.html">Overview</a></li>
+<li><a href="../files/system-architecture.html">System Architecture</a></li><li><a href="../files/data-pipeline.html">Data Pipeline</a></li><li><a href="../files/ai-ml-models.html">AI / ML Model Cards</a></li><li><a href="../files/digital-twin.html">PondTwin — Digital Twin Specification</a></li><li><a href="../files/telemetry-schema.html">Telemetry &amp; Data Schema</a></li><li><a href="../files/api-specification.html">API Specification</a></li><li><a href="../files/dashboard-spec.html">Dashboard Specification</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">07</span>Research Corpus</summary>
+<ul>
+<li><a href="../sections/research.html">Overview</a></li>
+<li><a href="../files/literature-review.html">Literature Review — Synthesis</a></li><li><a href="../files/references-bibliography.html">Consolidated Bibliography</a></li><li><a href="../files/studies-water-quality-sensing.html">Related Studies — Water Quality, Limnology &amp; Fish Kill Mechanisms</a></li><li><a href="../files/studies-uav-remote-sensing.html">Related Studies — UAV &amp; Satellite Remote Sensing of Water</a></li><li><a href="../files/studies-harmful-algal-blooms.html">Related Studies — Harmful Algal Blooms</a></li><li><a href="../files/studies-ai-ml-aquaculture.html">Related Studies — AI &amp; Machine Learning in Aquaculture</a></li><li><a href="../files/studies-digital-twin.html">Related Studies — Digital Twins in Aquaculture</a></li><li><a href="../files/studies-fish-health-disease.html">Related Studies — Fish Health, Disease &amp; Biosecurity</a></li><li><a href="../files/studies-feeding-nutrition.html">Related Studies — Feeding, Nutrition &amp; Feed Economics</a></li><li><a href="../files/studies-socioeconomic-adoption.html">Related Studies — Socioeconomics &amp; Technology Adoption</a></li><li><a href="../files/research-gaps.html">Research Gaps &amp; Open Questions</a></li><li><a href="../files/theoretical-framework.html">Theoretical &amp; Conceptual Framework</a></li><li><a href="../files/methodology.html">Research Methodology</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">08</span>Operations &amp; Safety</summary>
+<ul>
+<li><a href="../sections/operations.html">Overview</a></li>
+<li><a href="../files/deployment-playbook.html">Deployment Playbook</a></li><li><a href="../files/maintenance-schedule.html">Maintenance Schedule</a></li><li><a href="../files/risk-register-fmea.html">Risk Register &amp; FMEA</a></li><li><a href="../files/training-certification.html">Training &amp; Certification</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">09</span>Regulatory &amp; Compliance</summary>
+<ul>
+<li><a href="../sections/compliance.html">Overview</a></li>
+<li><a href="../files/regulatory-framework.html">Regulatory Framework</a></li><li><a href="../files/water-quality-standards.html">Water Quality Standards &amp; Thresholds</a></li><li><a href="../files/biosecurity-protocol.html">Biosecurity Protocol</a></li><li><a href="../files/ethics-data-privacy.html">Ethics, Data Privacy &amp; Responsible Use</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">10</span>Business Model</summary>
+<ul>
+<li><a href="../sections/business.html">Overview</a></li>
+<li><a href="../files/business-model-canvas.html">Business Model Canvas</a></li><li><a href="../files/pricing-revenue.html">Pricing &amp; Revenue Model</a></li><li><a href="../files/unit-economics.html">Unit Economics</a></li><li><a href="../files/financial-projections.html">Financial Projections</a></li><li><a href="../files/funding-ask.html">Funding Ask</a></li><li><a href="../files/go-to-market.html">Go-to-Market Strategy</a></li><li><a href="../files/traction.html">Traction</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">11</span>Impact</summary>
+<ul>
+<li><a href="../sections/impact.html">Overview</a></li>
+<li><a href="../files/sdg-alignment.html">UN Sustainable Development Goal Alignment</a></li><li><a href="../files/environmental-impact.html">Environmental Impact Assessment</a></li><li><a href="../files/social-economic-impact.html">Social &amp; Economic Impact</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">12</span>Datasets &amp; Charts</summary>
+<ul>
+<li><a href="../sections/datasets.html">Overview</a></li>
+<li><a href="../files/kpi-definitions.html">KPI Definitions</a></li><li><a href="../files/sample-telemetry.html">Sample Telemetry — ILLUSTRATIVE SYNTHETIC DATA <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/sample-pond-twin-state.html">Sample Digital Twin State — ILLUSTRATIVE SYNTHETIC DATA <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/chart-global-production.html">The Inflection: Aquaculture Overtakes Capture Fisheries</a></li><li><a href="../files/chart-problem-cost-breakdown.html">The Structure of Aquaculture Losses</a></li><li><a href="../files/chart-market-sizing.html">Market Sizing — Method, Not Number</a></li><li><a href="../files/chart-do-diel-cycle.html">Why Sampling Time Decides What You See <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/chart-do-depth-profile.html">The Loaded Gun: What a Vertical Profile Reveals <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/chart-financial-projection.html">Spend Plan by Phase — Not a Revenue Forecast</a></li><li><a href="../files/chart-manual-vs-omnidrone.html">Monitoring Approaches Compared</a></li><li><a href="../files/chart-species-production-mix.html">Where Farmed Aquatic Animals Are Produced</a></li><li><a href="../files/chart-tech-readiness.html">Technology Readiness — Where We Actually Are</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">13</span>Pitch &amp; Thesis Kit</summary>
+<ul>
+<li><a href="../sections/pitch.html">Overview</a></li>
+<li><a href="../files/pitch-deck-outline.html">Pitch Deck Outline</a></li><li><a href="../files/elevator-pitches.html">Elevator Pitches</a></li><li><a href="../files/faq-objections.html">FAQ &amp; Objection Handling</a></li><li><a href="../files/thesis-outline.html">Thesis / Dissertation Outline</a></li>
+</ul>
+</details></nav>
+<div class="sidebar-foot"><small>Fisheries • Aquaculture • Technology</small></div>
+</aside>
+<div class="main">
+<header class="topbar">
+<button class="icon-btn" id="nav-toggle" aria-label="Toggle navigation">☰</button>
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a><span class="crumb-sep">›</span><a href="../sections/market.html">Market &amp; Competition</a><span class="crumb-sep">›</span><span class="crumb-here">Strategic Analysis — SWOT, Porter's Five Forces, PESTEL</span></nav>
+<button class="search-btn" id="search-btn" aria-label="Search"><span aria-hidden="true">🔍</span> Search <kbd>Ctrl K</kbd></button>
+<button class="icon-btn" id="theme-toggle" aria-label="Toggle light/dark theme" title="Toggle theme">◐</button>
+</header>
+<main class="content">
+<header class="doc-head">
+<h1>Strategic Analysis — SWOT, Porter's Five Forces, PESTEL</h1>
+
+<div class="doc-meta">
+<code class="mono">swot-porter</code>
+<span>v1.0.0</span>
+<span>updated 2026-07-17</span>
+<span class="badge badge-assumption" title="Provenance: assumption"><span class="badge-icon">?</span>Assumption</span>
+
+<a class="raw-link" href="../../data/03_market/swot-porter.json">raw JSON ↗</a>
+</div>
+
+</header><section class="doc-sec"><h2>Note</h2><p>Three standard frameworks applied honestly. The value of a SWOT is entirely in whether the weaknesses are real; a SWOT with four strengths and one polite weakness is a self-portrait, not an analysis.</p></section>
+<section class="doc-sec"><h2>Swot</h2><dl class="kv"><dt>Strengths</dt><dd><article class="card"><dl class="kv"><dt>Item</dt><dd>The reeled probe is a genuine architectural differentiator</dd><dt>Why</dt><dd><p>Depth-resolved chemistry from an aircraft is rare, and depth is where the killing mechanism lives. Nobody else in the accessible market pairs it with same-sortie imaging.</p></dd><dt>Confidence</dt><dd>high</dd></dl></article><article class="card"><dl class="kv"><dt>Item</dt><dd>Probe-calibrated imagery closes a real scientific gap</dd><dt>Why</dt><dd><p>Uncalibrated indices produce time series that are not comparable across days. Carrying the ground truth on the same vehicle is a clean answer to a problem the literature identifies repeatedly.</p></dd><dt>Citations</dt><dd><div class="cite-row"><a class="cite-chip" href="../files/references-bibliography.html#mdpi-drones-inland-review-2024" title="(see source) (2024)">mdpi-drones-inland-review-2024</a></div></dd><dt>Confidence</dt><dd>high</dd></dl></article><article class="card"><dl class="kv"><dt>Item</dt><dd>Building in the centre of the industry, not the periphery</dd><dt>Why</dt><dd><p>70 percent of aquatic animal production is in Asia. Tropical, smallholder-dense, monsoon-exposed conditions are our design case rather than an export afterthought.</p></dd><dt>Citations</dt><dd><div class="cite-row"><a class="cite-chip" href="../files/references-bibliography.html#fao-sofia-2024" title="Food and Agriculture Organization of the United Nations (2024)">fao-sofia-2024</a></div></dd><dt>Confidence</dt><dd>high</dd></dl></article><article class="card"><dl class="kv"><dt>Item</dt><dd>Dry-docked probe fouls far less than a moored sonde</dd><dt>Why</dt><dd><p>An unexpected but real advantage over the buoy category. Fouled optical sensors drift rather than fail, producing confidently wrong data. Ours gets rinsed between sorties.</p></dd><dt>Confidence</dt><dd>medium</dd></dl></article><article class="card"><dl class="kv"><dt>Item</dt><dd>Dispensing turns a warning into an action</dd><dt>Why</dt><dd>Answers the 'information without capacity' objection in hardware rather than in argument.</dd><dt>Confidence</dt><dd>medium</dd></dl></article><article class="card"><dl class="kv"><dt>Item</dt><dd>The problem is documented and recurring, not speculative</dd><dt>Why</dt><dd>Published kill events with peso figures and identified mechanisms.</dd><dt>Citations</dt><dd><div class="cite-row"><a class="cite-chip" href="../files/references-bibliography.html#seafdec-laguna-fishkill" title="SEAFDEC/AQD (n.d.)">seafdec-laguna-fishkill</a> <a class="cite-chip" href="../files/references-bibliography.html#inquirer-taal-fishkill-2023" title="Philippine Daily Inquirer (2023)">inquirer-taal-fishkill-2023</a></div></dd><dt>Confidence</dt><dd>high</dd></dl></article></dd><dt>Weaknesses</dt><dd><article class="card"><dl class="kv"><dt>Item</dt><dd>Nothing has flown</dd><dt>Why</dt><dd><p>TRL 3. Every performance number in this repository is a target. The gap between a render and an integrated aircraft is where most hardware ventures die.</p></dd><dt>Severity</dt><dd>critical</dd></dl></article><article class="card"><dl class="kv"><dt>Item</dt><dd>Endurance is structurally poor</dd><dt>Why</dt><dd><p>Multirotor physics. A USV or a buoy simply beats us on time-on-station and always will. We buy coverage with endurance and there is no engineering escape from that trade.</p></dd><dt>Severity</dt><dd>high</dd></dl></article><article class="card"><dl class="kv"><dt>Item</dt><dd>The winch is unproven and it is the hardest mechanism in the project</dd><dt>Why</dt><dd><p>Deploying and recovering a fouling, snagging, swinging mass from a hover, thousands of times, unattended. Little borrowable prior art.</p></dd><dt>Severity</dt><dd>critical</dd></dl></article><article class="card"><dl class="kv"><dt>Item</dt><dd>The business model assumes BVLOS, which we do not have</dd><dt>Why</dt><dd><p>Dock-based autonomous operation without a pilot present is the entire margin story, and it is contingent on an authorisation with a long lead time and no guarantee.</p></dd><dt>Citations</dt><dd><div class="cite-row"><a class="cite-chip" href="../files/references-bibliography.html#caap-rpas-regulations" title="Civil Aviation Authority of the Philippines (n.d.)">caap-rpas-regulations</a></div></dd><dt>Severity</dt><dd>critical</dd></dl></article><article class="card"><dl class="kv"><dt>Item</dt><dd>Weather grounds us exactly when the risk peaks</dd><dt>Why</dt><dd><p>The monsoon conditions that trigger overturn events are the conditions a small multirotor cannot fly in. This is close to fatal for the catastrophe-prevention pitch and it deserves a direct answer rather than a footnote. It is a strong argument for a buoy hybrid.</p></dd><dt>Severity</dt><dd>high</dd></dl></article><article class="card"><dl class="kv"><dt>Item</dt><dd>No team, no capital, no customers</dd><dt>Why</dt><dd>See <a href="../files/team-structure.html">team-structure.json</a> and <a href="../files/traction.html">traction.json</a>. Both are honestly empty.</dd><dt>Severity</dt><dd>high</dd></dl></article><article class="card"><dl class="kv"><dt>Item</dt><dd>The predictive claim is unvalidated and will remain so for at least a full season</dd><dt>Why</dt><dd>You cannot compress a year of weather.</dd><dt>Severity</dt><dd>high</dd></dl></article><article class="card"><dl class="kv"><dt>Item</dt><dd>We cannot see the fish</dd><dt>Why</dt><dd><p>No underwater vision, no biomass estimation. We infer fish state from water state, which is a weaker feedback loop than the incumbents' direct observation.</p></dd><dt>Severity</dt><dd>medium</dd></dl></article><article class="card"><dl class="kv"><dt>Item</dt><dd>The customer who needs it most cannot pay</dd><dt>Why</dt><dd>Structural, not solvable by better pitching.</dd><dt>Severity</dt><dd>high</dd></dl></article></dd><dt>Opportunities</dt><dd><article class="card"><dl class="kv"><dt>Item</dt><dd>Aquaculture crossed 50 percent of aquatic animal production and keeps growing</dd><dt>Citations</dt><dd><div class="cite-row"><a class="cite-chip" href="../files/references-bibliography.html#fao-sofia-2024" title="Food and Agriculture Organization of the United Nations (2024)">fao-sofia-2024</a></div></dd><dt>Confidence</dt><dd>high</dd></dl></article><article class="card"><dl class="kv"><dt>Item</dt><dd>Intensification worsens the problem we solve</dd><dt>Why</dt><dd><p>Our market grows as the sector's stocking density rises. Uncomfortable but structurally real.</p></dd><dt>Confidence</dt><dd>medium</dd></dl></article><article class="card"><dl class="kv"><dt>Item</dt><dd>Insurance and credit as a wedge</dd><dt>Why</dt><dd><p>Continuous environmental records make an uninsurable asset insurable. If insurance access becomes contingent on monitoring, adoption stops being discretionary. Possibly worth more than the drone.</p></dd><dt>Confidence</dt><dd>speculative</dd></dl></article><article class="card"><dl class="kv"><dt>Item</dt><dd>Free Copernicus satellite data as an instant historical baseline</dd><dt>Why</dt><dd>Nearly free capability, not yet in the architecture.</dd><dt>Citations</dt><dd><div class="cite-row"><a class="cite-chip" href="../files/references-bibliography.html#springer-uav-satellite-review-2024" title="(see source) (2024)">springer-uav-satellite-review-2024</a></div></dd><dt>Confidence</dt><dd>high</dd></dl></article><article class="card"><dl class="kv"><dt>Item</dt><dd>Certification audit burden</dd><dt>Why</dt><dd>Commercial farms already pay people to compile environmental records by hand.</dd><dt>Confidence</dt><dd>medium</dd></dl></article><article class="card"><dl class="kv"><dt>Item</dt><dd>Post-typhoon damage assessment</dd><dt>Why</dt><dd>Philippine-specific, opens an insurance-adjacent customer.</dd><dt>Confidence</dt><dd>medium</dd></dl></article><article class="card"><dl class="kv"><dt>Item</dt><dd>Local lake chemistry as a moat</dd><dt>Why</dt><dd>Taal's volcanic sulfur input is not in any imported product's model.</dd><dt>Confidence</dt><dd>medium</dd></dl></article><article class="card"><dl class="kv"><dt>Item</dt><dd>Occupational safety as a funding argument</dd><dt>Why</dt><dd><p>Removing the pre-dawn boat run is a human safety case that lands with LGUs and development funders where FCR arithmetic does not.</p></dd><dt>Confidence</dt><dd>medium</dd></dl></article></dd><dt>Threats</dt><dd><div class="table-scroll"><table><thead><tr><th>Item</th><th>Why</th><th>Severity</th></tr></thead><tbody><tr><td>The USV is a better architecture for part of this market</td><td>Better endurance, no aviation regulator, can profile continuously. Our answer is transit speed, aerial imaging, and topology-independence — and for some customers that is not enough.</td><td>high</td></tr><tr><td>Buoy vendors add spatial coverage, or we add buoys</td><td>The hybrid dominates either alone. Whoever gets there first defines the category.</td><td>high</td></tr><tr><td>Salmon incumbents come down-market with capital</td><td>If tropical aquaculture becomes valuable enough, well-funded incumbents with real validation data arrive. Our defence is local depth, not a technical lead.</td><td>medium</td></tr><tr><td>CAAP declines or delays BVLOS</td><td>Directly removes the margin.</td><td>critical</td></tr><tr><td>Willingness to pay simply does not exist</td><td>Most target operators currently spend approximately zero on monitoring. We are creating a budget line, not winning share of one — a fundamentally harder task.</td><td>critical</td></tr><tr><td>A high-profile crash or a wildlife incident</td><td>One drone in a lake, one propeller injury, or one bird strike story, and the social licence goes. Reputational risk in a small lake community compounds fast.</td><td>medium</td></tr><tr><td>We enable over-stocking</td><td>Better instruments may let operators push density closer to the edge. A real risk that the technology makes the underlying problem worse, and it deserves honest treatment rather than silence.</td><td>medium</td></tr><tr><td>Commoditisation of the imaging half</td><td>Any drone service can fly a multispectral camera. Only the probe is hard.</td><td>medium</td></tr></tbody></table></div></dd><dt>So What</dt><dd><dl class="kv"><dt>Strategy Implied</dt><dd><p>The strengths cluster around depth-plus-imaging; the weaknesses cluster around maturity, endurance, and regulation. That combination argues for: (1) prove the probe claim first, because it is the only defensible thing; (2) plan for a buoy hybrid rather than against it, because our own matrix says the hybrid wins; (3) start the BVLOS conversation immediately, because it is the longest pole; (4) sell aeration efficiency before selling catastrophe prevention, because we cannot fly in the weather where catastrophes happen.</p></dd><dt>The Uncomfortable Read</dt><dd><p>An honest reading of this SWOT says the OmniDrone is a coverage instrument for chronic management, not a catastrophe-prevention system — because we are grounded during the storms that cause catastrophes. That is a smaller, less thrilling story and it is probably the true one. It is also a better business, because chronic management pays every cycle. The pitch should follow the analysis rather than the drama.</p></dd></dl></dd></dl></section>
+<section class="doc-sec"><h2>Porters Five Forces</h2><dl class="kv"><dt>Citations</dt><dd><div class="cite-row"><a class="cite-chip" href="../files/references-bibliography.html#porter-1979" title="Porter, M. E. (1979)">porter-1979</a></div></dd><dt>Forces</dt><dd><article class="card"><dl class="kv"><dt>Force</dt><dd>Threat of New Entrants</dd><dt>Intensity</dt><dd>high</dd><dt>Reasoning</dt><dd><p>Multirotor airframes are commoditised, sondes are off-the-shelf, and multispectral cameras are purchasable. The barriers are the winch integration, the calibration workflow, and the regulatory certificate — real but not insurmountable, and none of them are patents.</p></dd><dt>Our Defence</dt><dd><p>Accumulated site-specific data, local relationships, and regulatory position. None of which we have yet. Our moat is a plan, not an asset.</p></dd><dt class="callout-dt">Honest Note</dt><dd><div class="callout">A well-funded team could replicate the hardware in eighteen months. What they could not quickly replicate is three years of Taal Lake profiles. That argues for deploying early and cheaply to start the data clock, even at poor margins.</div></dd></dl></article><article class="card"><dl class="kv"><dt>Force</dt><dd>Bargaining Power of Buyers</dd><dt>Intensity</dt><dd>high</dd><dt>Reasoning</dt><dd><p>Buyers have a free alternative: doing nothing, which is what they do now. They have no budget line to defend and no switching cost to overcome, which sounds good and is not — it means there is nothing to displace, so every sale is a fresh act of persuasion.</p></dd><dt>Our Defence</dt><dd>Demonstrated peso outcome in the first cycle. Nothing else works.</dd></dl></article><article class="card"><dl class="kv"><dt>Force</dt><dd>Bargaining Power of Suppliers</dd><dt>Intensity</dt><dd>medium</dd><dt>Reasoning</dt><dd><p>Sensor suppliers for aquaculture-grade sondes are concentrated, and the optical DO and fluorometer market has few credible vendors. Battery and flight controller supply is competitive. Chinese airframe component supply is cheap and abundant but carries geopolitical and export-control exposure.</p></dd><dt>Our Defence</dt><dd><p>Design for sensor interchangeability from the start. A probe architecture locked to one vendor's sonde hands them our margin.</p></dd></dl></article><article class="card"><dl class="kv"><dt>Force</dt><dd>Threat of Substitutes</dd><dt>Intensity</dt><dd>high</dd><dt>Reasoning</dt><dd><p>Buoys, USVs, satellites, manual sampling, and the farmer's own experience are all substitutes, and each is better than us on some axis. Experience in particular is free and has kept these farms alive for decades.</p></dd><dt>Our Defence</dt><dd><p>The specific combination. And genuine humility about the scale threshold below which a buoy simply wins.</p></dd></dl></article><article class="card"><dl class="kv"><dt>Force</dt><dd>Competitive Rivalry</dd><dt>Intensity</dt><dd>low today, rising</dd><dt>Reasoning</dt><dd><p>No dominant commercial drone-sonde product exists in this market. That is either an opportunity or a signal that the market is not there — and the honest position is that we do not yet know which.</p></dd><dt>Note</dt><dd><p class="note muted">Many academic prototypes, no commercial winner, is a pattern that rewards careful reading. Founders explain it away; they should not.</p></dd></dl></article></dd><dt>Overall Industry Attractiveness</dt><dd><p>Structurally difficult. High entrant threat, high buyer power, high substitute threat, and a customer base with no existing budget. The attractive part is not the industry structure — it is the growth of the underlying sector and the absence of an incumbent in this specific niche. Enter with clear eyes.</p></dd></dl></section>
+<section class="doc-sec"><h2>Pestel</h2><dl class="kv"><dt>Political</dt><dd><ul><li>LGU control of cage permits makes local politics a gating factor on every deployment.</li><li>BFAR and DENR mandates create both a customer and a regulator.</li><li>Fish kills are politically salient events in lake municipalities, which cuts both ways.</li></ul></dd><dt>Economic</dt><dd><ul><li>Smallholder capital scarcity is the binding commercial constraint.</li><li>Feed price volatility drives the FCR value proposition.</li><li>Aquaculture credit is thin and expensive because risk is unquantified — which is our long-term wedge.</li></ul></dd><dt>Social</dt><dd><ul><li>Distrust of technology vendors, earned by the sector's history.</li><li>Low digital literacy shapes the dashboard, not just its UX.</li><li>Drone overflight of lakeside communities is a social licence question decided over months of conversation, not by a privacy policy.</li><li>Occupational drowning risk is normalised in a way outsiders find shocking.</li></ul></dd><dt>Technological</dt><dd><ul><li>Multispectral sensor cost and mass have fallen to viability.</li><li>Edge inference at a few watts is now practical.</li><li>Battery energy density remains the binding endurance constraint and improves slowly.</li><li>Free Copernicus data is available and unexploited.</li></ul></dd><dt>Environmental</dt><dd><ul><li>Increasing frequency of thermal and rainfall extremes worsens the problem.</li><li>Eutrophication of shared water bodies is a commons tragedy with an information vacuum at its centre.</li><li>Volcanic activity at Taal is a locally distinctive chemistry driver.</li><li>Typhoons are a design condition, not an edge case.</li></ul></dd><dt>Legal</dt><dd><ul><li>CAAP RPAS rules gate the operating concept; BVLOS requires specific authorisation.</li><li>Medicine dispensing crosses into regulated veterinary territory.</li><li>Data privacy obligations attach to imagery of people and property.</li><li>Liability for a missed warning is genuinely unresolved and needs legal advice, not founder optimism.</li></ul></dd><dt>Citations</dt><dd><div class="cite-row"><a class="cite-chip" href="../files/references-bibliography.html#caap-rpas-regulations" title="Civil Aviation Authority of the Philippines (n.d.)">caap-rpas-regulations</a> <a class="cite-chip" href="../files/references-bibliography.html#fao-sofia-2024" title="Food and Agriculture Organization of the United Nations (2024)">fao-sofia-2024</a> <a class="cite-chip" href="../files/references-bibliography.html#khaleej-heat-fishkill-ph" title="Khaleej Times (n.d.)">khaleej-heat-fishkill-ph</a></div></dd></dl></section>
+</main>
+<footer class="page-footer"><a class="pn pn-prev" href="../files/customer-personas.html">
+<small>← Previous · Market &amp; Competition</small>
+<span>Customer Segments &amp; Personas</span></a><a class="pn pn-next" href="../files/solution-overview.html">
+<small>Next → · Solution &amp; ConOps</small>
+<span>Solution Overview — The OmniDrone System</span></a></footer>
+</div>
+</div>
+<div class="search-overlay" id="search-overlay" hidden>
+<div class="search-panel" role="dialog" aria-label="Search">
+<input type="search" id="search-input" placeholder="Search the repository… (Esc to close)" autocomplete="off" spellcheck="false">
+<ul class="search-results" id="search-results"></ul>
+<div class="search-hint">↑↓ to navigate · Enter to open · Esc to close</div>
+</div>
+</div>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

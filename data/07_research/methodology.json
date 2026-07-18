@@ -1,0 +1,177 @@
+{
+  "id": "methodology",
+  "title": "Research Methodology",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "design_target",
+  "purpose": "How the study's claims will be tested. Written before the data exists, so that the evaluation criteria are fixed before anyone has an incentive to move them.",
+
+  "why_this_file_is_written_now": "Pre-registering the method is the difference between a study and a rationalisation. Once profiles start arriving, there will be enormous pressure to find the analysis that makes the product look good. This file exists to make that harder.",
+
+  "research_questions": [
+    {
+      "id": "rq1",
+      "question": "Can an aerial platform produce depth-resolved water quality profiles that agree with a boat-deployed reference sonde within a defined tolerance?",
+      "type": "feasibility",
+      "why_it_is_first": "If the answer is no, nothing else matters. This is the moment the core claim is either true or it is not.",
+      "hypothesis": "H1: OmniDrone profiles will agree with a reference sonde within the stated per-channel accuracy across the full operating range, including high-turbidity and low-DO conditions.",
+      "null": "H0: No agreement within tolerance, or agreement that degrades systematically in the conditions of interest.",
+      "the_trap_to_avoid": "Testing only in clean, calm water. A sensor that is accurate in a clear tank and wrong in a eutrophic pond has failed, because the eutrophic pond is the entire use case. The ugly end of the range is the test that matters."
+    },
+    {
+      "id": "rq2",
+      "question": "Can in-situ chlorophyll measurements taken during the same sortie calibrate a UAV multispectral retrieval into concentration estimates with usable uncertainty?",
+      "type": "core_contribution",
+      "why_it_matters": "This is the study's novel claim — the platform carrying its own ground truth.",
+      "hypothesis": "H2: A site-and-day-local regression of NDCI against same-sortie in-situ chlorophyll will produce concentration estimates whose uncertainty is small enough to support an operational decision.",
+      "the_honest_expectation": "With 3-4 probe stations per sortie, the regression will often be poorly constrained. The interesting question is not whether it works sometimes; it is HOW MANY stations are needed before the uncertainty becomes useful. That is the publishable finding.",
+      "secondary_question": "Does a global (multi-site, multi-day) regression perform materially worse than the local one? The literature says it should. Demonstrating it on our own data would be a genuine contribution and would justify the architecture."
+    },
+    {
+      "id": "rq3",
+      "question": "Does depth-resolved, high-cadence observation reveal precursor conditions to mass mortality that surface sampling does not?",
+      "type": "core_contribution",
+      "hypothesis": "H3: Stratification strength and hypolimnetic oxygen debt will show measurable divergence from baseline in the days preceding mortality events, and this divergence will not be detectable in contemporaneous surface measurements.",
+      "the_design_requirement": "This REQUIRES a paired surface-only measurement series to compare against. Otherwise we can show that we saw something, but not that the incumbent method would have missed it — and the second claim is the one that matters. Collect both from day one.",
+      "the_rare_event_problem": "Mass kills happen a few times per year per lake. A single season may yield zero events, in which case this question is unanswerable and the study must say so rather than manufacture a positive finding from near-misses."
+    },
+    {
+      "id": "rq4",
+      "question": "Is chronic sub-lethal water quality variation associated with realised FCR and survival, on farms with no mortality events?",
+      "type": "the_sleeper",
+      "why_it_may_be_the_most_important_question": "If the answer is yes and the effect is large, the entire value proposition is misstated. We are pitching catastrophe insurance when the product may be continuous yield optimisation — a better business and a far more tractable analysis, because every cycle is a sample rather than every kill.",
+      "hypothesis": "H4: Cumulative exposure to sub-optimal DO correlates with degraded FCR and survival across a production cycle, independent of mortality events.",
+      "why_it_is_methodologically_easier": "Continuous outcome, abundant data, no rare-event problem. It is the one question in this list that a single season can actually answer with statistical power.",
+      "the_recommendation": "This question is currently ranked fourth and is probably the one to run hardest. It is the cheapest to answer and the most likely to change the company."
+    },
+    {
+      "id": "rq5",
+      "question": "Do operators given this information change their behaviour, and does the change improve outcomes?",
+      "type": "the_load_bearing_question",
+      "why_it_is_the_real_one": "Everything above is instrumentation. This is the question of whether the venture has a reason to exist.",
+      "hypothesis": "H5: Operators receiving depth-resolved alerts will take earlier intervention actions (aeration, feeding deferral, destocking) than a comparison group, and will achieve better survival and FCR.",
+      "the_brutal_methodological_problem": "This needs a control group, and a control group means deliberately withholding a warning from a farm that might lose its stock. That is ethically unacceptable and it is not negotiable. See the ethics section below."
+    }
+  ],
+
+  "study_design": {
+    "overall": "Mixed-methods, sequential. Engineering validation first (RQ1-2), then observational field study (RQ3-4), then quasi-experimental adoption study (RQ5).",
+    "phases": [
+      {
+        "phase": "Instrument validation",
+        "maps_to": ["rq1"],
+        "design": "Paired comparison. Every drone profile is matched with a boat-deployed reference sonde profile at the same station within a short time window.",
+        "analysis": "Bland-Altman agreement analysis per channel, not correlation.",
+        "why_bland_altman_not_correlation": "A high correlation coefficient can coexist with a large systematic bias — two instruments can track each other perfectly while one reads consistently 1.5 mg/L high. Correlation answers 'do they move together'; agreement answers 'can I substitute one for the other', which is the actual question. Reporting r² here would be a methodological error that a reviewer will catch.",
+        "sample_size": "To be determined by a power calculation against the stated tolerance. Do the calculation before collecting, not after.",
+        "stratification": "MUST include high-turbidity, low-DO, and high-chlorophyll conditions. A validation dataset drawn only from good days validates nothing."
+      },
+      {
+        "phase": "Calibration study",
+        "maps_to": ["rq2"],
+        "design": "Repeated sorties across varying illumination, season, and water conditions. Each sortie: imaging grid plus N probe stations, N varied deliberately from 2 to 8.",
+        "analysis": "Regression uncertainty as a function of N. Local versus global model comparison via cross-validation.",
+        "the_key_output": "A curve of retrieval uncertainty against number of ground-truth points. That curve is directly actionable — it tells the mission planner how many stations to fly — and it is a genuine contribution to the UAV water quality literature, which currently just says 'ground truth is needed' without quantifying how much.",
+        "held_out_validation": "Fit on one site, test on another. A random split of one lake's data measures memorisation, not generalisation."
+      },
+      {
+        "phase": "Longitudinal observation",
+        "maps_to": ["rq3", "rq4"],
+        "design": "Instrumented deployment at the pilot site for a minimum of one full annual cycle.",
+        "why_a_full_year_is_irreducible": "The dry-season thermal stress window and the monsoon overturn window are different mechanisms in different seasons. A six-month study sees one and concludes it understands both. You cannot compress a year of weather, and any funder who asks for results in six months is asking for a study that will mislead them.",
+        "paired_measurement": "Surface-only series collected alongside, to establish what the incumbent method would have seen.",
+        "analysis": "Time-series analysis of stratification and oxygen debt. For RQ4: mixed-effects model of cycle-level FCR and survival against cumulative sub-optimal DO exposure, with cage as a random effect."
+      },
+      {
+        "phase": "Adoption study",
+        "maps_to": ["rq5"],
+        "design": "See the ethics section. This is where the methodology gets genuinely hard.",
+        "status": "DESIGN UNRESOLVED"
+      }
+    ]
+  },
+
+  "the_control_group_problem": {
+    "statement": "The study's most important question requires a comparison group, and the obvious design is unethical.",
+    "the_unethical_design": "Randomise farms to receive alerts or not. Withhold warnings from the control group. Compare mortality.",
+    "why_it_is_unacceptable": "It means watching a farmer lose their stock — possibly their livelihood and the debt behind it — while holding information that might have saved it. No plausible scientific value justifies that. An ethics board should reject it and if one approved it, that would be a failure of the board rather than a licence to proceed.",
+    "the_alternatives_and_their_flaws": [
+      {
+        "design": "Stepped-wedge — all farms eventually receive the system, order randomised.",
+        "pro": "Everyone gets it. Ethically defensible. Standard in health services research for exactly this reason.",
+        "con": "Confounded by season, since farms onboarded in the dry season experience a different risk regime than those onboarded in the monsoon. Requires careful modelling and a longer study.",
+        "verdict": "The most defensible design available. Probably the answer."
+      },
+      {
+        "design": "Historical comparison — same farms, before and after.",
+        "pro": "No withholding.",
+        "con": "Heavily confounded by year-to-year weather variation, which is the dominant driver of the outcome. A good year after installation proves nothing.",
+        "verdict": "Weak alone. Useful as supporting evidence."
+      },
+      {
+        "design": "Observe-only period — collect data but do not alert, then switch on alerts.",
+        "pro": "Clean baseline.",
+        "con": "If we detect a developing kill during the observe-only period and stay silent, we are back to the unethical design with extra steps. There is no version of this where a genuine threat is observed and withheld.",
+        "verdict": "Only acceptable with an explicit, pre-registered break-glass rule: any detection above a defined severity triggers immediate disclosure and the farm exits the observation arm. State the rule in advance and honour it even when it costs the study."
+      },
+      {
+        "design": "Comparison against neighbouring un-instrumented farms on the same lake.",
+        "pro": "No withholding — we simply are not working with them. Shared weather controls the biggest confounder.",
+        "con": "Not randomised. Farms that adopt differ systematically from those that do not, and the difference is probably competence — which is also what drives outcomes. Selection bias points the wrong way and would flatter us.",
+        "verdict": "Useful, honestly caveated. Never presented as causal."
+      }
+    ],
+    "our_position": "Stepped-wedge as the primary design, with neighbouring-farm comparison as supporting evidence, and an explicit break-glass disclosure rule during any baseline period. If a funder or a reviewer pushes for the randomised-withholding design because it is cleaner, the answer is no, and this paragraph is why.",
+    "the_honest_consequence": "This means our causal evidence will always be weaker than a clean RCT would give. We accept that. A slightly weaker study is the correct price for not gambling with someone's livelihood, and a thesis that explains this trade explicitly is doing better science than one that quietly took the easy design."
+  },
+
+  "data_quality_protocol": {
+    "principle": "The QC battery is not a data-cleaning chore. It is the thing that makes the dataset defensible.",
+    "citation_ids": ["qartod-manual"],
+    "elements": [
+      "QARTOD-style flagging at source. See data-dictionary.json.",
+      "Scheduled reference-check of the sonde against a laboratory standard. This is the ONLY control that catches biofouling drift, which does not fail loudly — it produces plausible, confidently wrong numbers.",
+      "Descent-versus-ascent hysteresis check on every profile. If they disagree, the descent rate exceeded the sensor's response time and the profile is smeared.",
+      "Partial profiles flagged and excluded from aggregates by default.",
+      "Raw data immutable. Corrections are new records referencing the original."
+    ],
+    "the_pre_registration_commitment": "Exclusion criteria are defined BEFORE data collection. Deciding after the fact which profiles to exclude is how a null result becomes a positive one without anyone intending fraud."
+  },
+
+  "ethics": {
+    "human_subjects": [
+      "Farmer interviews require informed consent and ethics approval. Participants are often in precarious financial positions, which raises the bar on voluntariness — a farmer who believes participation might bring a subsidy is not freely consenting.",
+      "Farm production data is commercially sensitive. Anonymisation in publication is not sufficient when there are only forty cage operators on a lake and the paper names the lake.",
+      "Compensate participants for their time. Extractive research on smallholders is a real and common pattern and we should not add to it."
+    ],
+    "imagery": [
+      "Aerial imagery over a lake captures houses, boats, and people who did not consent and are not our customers.",
+      "Retention limits apply regardless of scientific value — and the frames most useful for training are the ones over the busiest, most populated shorelines. That tension is real.",
+      "No person-detection models. Not because it is hard, but because building it changes what this company is."
+    ],
+    "the_withholding_question": "Addressed above. It is the study's central ethical issue and it should have its own section in the dissertation rather than a line in a form.",
+    "dual_use": "The platform's surveillance and IUU-enforcement applications are deliberately out of scope. A researcher should note that the capability exists and that the choice not to pursue it is a choice.",
+    "conflict_of_interest": "The study evaluates a product the researchers have a commercial interest in. This must be declared prominently. It is also why pre-registering the analysis matters more here than in a disinterested study — the incentive to find a positive result is structural, not hypothetical."
+  },
+
+  "validity_threats": [
+    { "threat": "Single-site generalisation", "detail": "One lake's dynamics do not transfer. Taal's volcanic chemistry is not Laguna de Bay's eutrophication.", "mitigation": "Multi-site from Phase 3 where affordable. Otherwise state the limit plainly rather than generalising." },
+    { "threat": "Selection bias in adopting farms", "detail": "Farms that adopt are probably better-managed, and better management drives outcomes. The bias flatters us.", "mitigation": "Stepped-wedge; measure baseline management practice; state it." },
+    { "threat": "Hawthorne effect", "detail": "Farms in a study behave differently because they are being watched. Some of the improvement will be the observation, not the instrument.", "mitigation": "Long duration; measure the comparison group's practices too." },
+    { "threat": "Rare-event statistics", "detail": "A season with zero kills cannot answer RQ3. A naive classifier on this data will predict 'no kill' always and score 97 percent accurate.", "mitigation": "Report the confusion matrix, never accuracy. Be willing to conclude that the question is unanswered." },
+    { "threat": "Researcher degrees of freedom", "detail": "Many analytic choices, a commercial interest in the outcome, and no pre-registration equals a positive result regardless of the truth.", "mitigation": "This file. Pre-register the analysis and the exclusion criteria." },
+    { "threat": "Survivorship in the incident literature", "detail": "Our whole problem framing rests on reported kills. Unreported smallholder losses are invisible, and chronic loss is invisible entirely.", "mitigation": "RQ4 looks where the light is not." }
+  ],
+
+  "what_would_falsify_the_whole_thesis": {
+    "note": "A study that cannot state this is not a study.",
+    "conditions": [
+      "If drone profiles do not agree with reference sondes, the instrument does not work.",
+      "If same-sortie calibration does not meaningfully reduce retrieval uncertainty versus an uncalibrated index, the core architectural claim is empty.",
+      "If stratification and oxygen debt show no divergence before mortality events, the mechanism is not observable at our cadence and the platform cannot do the job.",
+      "If chronic water quality variation shows no association with FCR and survival, the sleeper hypothesis is dead and the product is catastrophe-only — which our own weather limitation makes a weak proposition.",
+      "If operators do not act on information, the venture has no reason to exist regardless of every other result."
+    ],
+    "the_commitment": "Any of these coming back negative should be published, not buried. A negative result on the observability thesis would be genuinely valuable to the field — it would tell every other team not to build this. That is worth more than a quiet pivot."
+  }
+}

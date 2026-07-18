@@ -1,0 +1,33 @@
+{
+  "id": "chart-financial-projection",
+  "chart_type": "waterfall",
+  "title": "Spend Plan by Phase — Not a Revenue Forecast",
+  "subtitle": "Milestone-gated use of funds through validation",
+  "description": "This is deliberately a SPEND plan gated by de-risking milestones, NOT a hockey-stick revenue projection. At TRL 3 with no price, no cost, and no customer, a revenue forecast would be fiction. What can be honestly shown is the shape of the spend — cheap first, expensive validation season — and the milestone each phase unlocks. A serious investor prefers this to a fabricated up-and-to-the-right curve.",
+  "provenance": "modeled_projection",
+  "citation_ids": [],
+  "axes": {
+    "x": { "label": "Phase", "type": "category" },
+    "y": { "label": "Relative spend envelope", "unit": "qualitative", "type": "category" }
+  },
+  "series": [
+    {
+      "name": "Spend envelope by phase (relative, not absolute)",
+      "provenance": "modeled_projection",
+      "note": "No dollar amounts — they depend on Phase 0 outputs (team size, hardware costs). Relative envelopes only.",
+      "data": [
+        { "phase": "Phase 0 — Definition", "envelope": "low", "unlocks": "Payload arithmetic; farmer WTP; BVLOS pathway; validation MOU", "kill_gate": true },
+        { "phase": "Phase 1 — Subsystem prototypes", "envelope": "medium", "unlocks": "Winch reliability; sensor accuracy" },
+        { "phase": "Phase 2 — Integrated prototype", "envelope": "medium-high", "unlocks": "Profile-vs-reference agreement — the core claim proven" },
+        { "phase": "Phase 3 — Field validation", "envelope": "high", "unlocks": "A full-season dataset; the right to predictive claims" },
+        { "phase": "Phase 4 — Commercial pilot", "envelope": "high", "unlocks": "First revenue; measured unit economics; BVLOS decision" }
+      ]
+    }
+  ],
+  "annotations": [
+    { "kind": "point_label", "value": "Phase 0", "label": "Cheapest phase, de-risks the most — has KILL criteria", "severity": "advisory" },
+    { "kind": "point_label", "value": "Phase 3", "label": "Longest and priciest — you cannot rush a season", "severity": "info" }
+  ],
+  "the_message": "Fund de-risking, not a forecast. Each phase removes a specific risk; Phase 0 can even trigger an honest stop. See financial-projections.json and funding-ask.json. When real revenue scenarios exist (post-Phase 4), render them as a three-scenario band (pessimistic/base/optimistic), never as a single confident line.",
+  "revenue_projection_status": "DELIBERATELY ABSENT. See financial-projections.json#/what_investors_should_take_from_this_file."
+}

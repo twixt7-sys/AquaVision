@@ -1,0 +1,98 @@
+{
+  "id": "bill-of-materials",
+  "title": "Indicative Bill of Materials",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "assumption",
+  "confidence": "speculative",
+
+  "READ_THIS_FIRST": "NO COMPONENT HAS BEEN SOURCED. NO SUPPLIER HAS BEEN CONTACTED. NO PRICE HAS BEEN QUOTED. Every figure below is an order-of-magnitude placeholder based on general knowledge of component categories. The correct use of this file is as a STRUCTURE to fill in during Phase 0 vendor engagement, and as an honest statement of what we do not know. Any BOM cost that reaches an investor deck must come from real quotes. A fabricated BOM is the fastest way to build a financial model that is wrong at the foundation, and every number downstream inherits the error.",
+
+  "currency": "USD",
+  "basis": "Prototype quantity (1-10 units). Volume pricing is a different exercise entirely and should not be assumed from these.",
+
+  "categories": [
+    {
+      "category": "Airframe & Propulsion",
+      "line_items": [
+        { "item": "Carbon composite structure and ducted shrouds", "qty": 1, "unit_cost_estimate": 900, "confidence": "low", "note": "Custom tooling dominates at prototype quantity. Ducted shrouds are not an off-the-shelf part." },
+        { "item": "Motors and ESCs", "qty": 4, "unit_cost_estimate": 110, "confidence": "medium" },
+        { "item": "Folding propellers", "qty": 4, "unit_cost_estimate": 35, "confidence": "medium" },
+        { "item": "Flight controller with redundant IMU", "qty": 1, "unit_cost_estimate": 350, "confidence": "medium" },
+        { "item": "RTK GNSS", "qty": 1, "unit_cost_estimate": 400, "confidence": "medium", "note": "RTK is required for repeatable station positioning. Profiles are only comparable across time if the stations are actually the same place, and consumer GNSS accuracy is not sufficient for that." },
+        { "item": "Telemetry radio", "qty": 1, "unit_cost_estimate": 180 },
+        { "item": "Landing gear", "qty": 1, "unit_cost_estimate": 120 },
+        { "item": "Float and ditching provision, locator beacon", "qty": 1, "unit_cost_estimate": 220 }
+      ]
+    },
+    {
+      "category": "Probe & Winch — the critical path",
+      "line_items": [
+        { "item": "Multiparameter sonde", "qty": 1, "unit_cost_estimate": 6500, "confidence": "speculative", "note": "THE BIGGEST UNKNOWN IN THIS FILE. Aquaculture-grade sondes with optical DO, fluorometric chlorophyll, phycocyanin, pH, ORP, conductivity, turbidity, and ammonium span a wide price range, and the ones light enough for this aircraft may not exist at all. If a custom probe is required, this line becomes a development programme rather than a purchase — with its own schedule, its own risk, and its own headcount. That possibility is not currently in the roadmap and it should be." },
+        { "item": "Winch motor, gearbox, spool, level-wind", "qty": 1, "unit_cost_estimate": 800, "confidence": "low", "note": "Custom. No off-the-shelf part does this." },
+        { "item": "Tether — combined strength and signal", "qty": 20, "unit": "m", "unit_cost_estimate": 18, "confidence": "low", "note": "Cost drops substantially if on-sonde logging removes the signal requirement, leaving a pure strength member. See the slip-ring discussion in probe-winch-subsystem.json — this simplification is worth serious evaluation." },
+        { "item": "Slip ring", "qty": 1, "unit_cost_estimate": 240, "note": "Eliminated entirely if on-sonde logging is adopted." },
+        { "item": "Tension sensor", "qty": 1, "unit_cost_estimate": 150, "note": "Not optional. It is the snag detector." },
+        { "item": "Tether cutter", "qty": 1, "unit_cost_estimate": 90, "note": "The cheapest safety-critical component on the aircraft." }
+      ],
+      "subtotal_note": "This category is roughly half the aircraft's component cost, and the sonde alone may exceed everything else combined. The economics of the whole product hinge on a component we have not priced."
+    },
+    {
+      "category": "Sensor Payload",
+      "line_items": [
+        { "item": "Multispectral camera, 5-band with red edge", "qty": 1, "unit_cost_estimate": 4200, "confidence": "medium" },
+        { "item": "Downwelling irradiance sensor", "qty": 1, "unit_cost_estimate": 600, "note": "Usually bundled with the multispectral unit. Do not let anyone delete it to save cost — it is the difference between a comparable time series and a pile of pictures." },
+        { "item": "RGB camera with gimbal", "qty": 1, "unit_cost_estimate": 900 },
+        { "item": "Thermal IR", "qty": 1, "unit_cost_estimate": 2200, "confidence": "medium", "note": "The first descope candidate on both mass and cost grounds. Lowest value per gram and per dollar in the payload." },
+        { "item": "Edge compute module", "qty": 1, "unit_cost_estimate": 500 },
+        { "item": "Calibrated reflectance panel", "qty": 1, "unit_cost_estimate": 400, "note": "Lives in the dock, not on the aircraft." }
+      ]
+    },
+    {
+      "category": "Dispensing",
+      "line_items": [
+        { "item": "Granular hopper with auger metering", "qty": 1, "unit_cost_estimate": 450, "confidence": "low" },
+        { "item": "Load cell", "qty": 1, "unit_cost_estimate": 80, "note": "Makes the dose record real rather than assumed." },
+        { "item": "Mechanical interlock", "qty": 1, "unit_cost_estimate": 60 }
+      ]
+    },
+    {
+      "category": "Power",
+      "line_items": [
+        { "item": "Battery pack, ~400 Wh", "qty": 3, "unit_cost_estimate": 380, "note": "Three packs minimum per aircraft for realistic sortie cadence under a recharge model. If the dock does battery swap, more. Packs are a consumable, not a capital item — they degrade and get replaced, and the financial model must treat them as opex." }
+      ]
+    }
+  ],
+
+  "rough_totals": {
+    "provenance": "assumption",
+    "confidence": "speculative",
+    "aircraft_component_cost_estimate_usd": 21000,
+    "range_estimate_usd": { "low": 14000, "high": 38000 },
+    "why_the_range_is_so_wide": "The sonde alone could be USD 3,000 or USD 12,000, and might have to be developed rather than bought. Until that one line is resolved by an actual vendor conversation, the total is not meaningful to within a factor of two.",
+    "what_is_NOT_in_this_number": [
+      "The dock. A separate BOM that does not exist yet and is a co-equal product.",
+      "Assembly labour.",
+      "Non-recurring engineering — the winch development alone is substantial.",
+      "Certification and testing.",
+      "Tooling.",
+      "Spares and consumables.",
+      "The per-site sonde required by single-site biosecurity assignment. Every site needs its own probe, and at the sonde's price that is a significant and easily-missed capital line."
+    ],
+    "the_honest_statement": "The aircraft component cost is plausibly USD 15-40k at prototype quantity. Fully-loaded system cost including the dock, NRE, and per-site sondes is unknown and is probably several times this. Any unit economics built on the number above is built on sand — see unit-economics.json, which says the same thing."
+  },
+
+  "supply_chain_considerations": [
+    { "consideration": "Sensor vendor lock-in", "risk": "A probe architecture locked to one vendor's sonde hands them our margin permanently. They will notice.", "mitigation": "Design for sensor interchangeability from day one, even at a mass and complexity cost. This is a strategic decision, not an engineering preference." },
+    { "consideration": "Chinese component dependency", "risk": "Airframe components, motors, and flight controllers are cheap and abundant from Chinese suppliers, with geopolitical and export-control exposure attached. Some customers — particularly government ones — may have procurement restrictions.", "mitigation": "Know the origin of every part before a government customer asks." },
+    { "consideration": "Lead times", "risk": "Specialist sensors have long lead times that will govern the prototype schedule regardless of how fast the team works.", "mitigation": "Order the sonde first. It is the long pole and it is also the biggest unknown." },
+    { "consideration": "Battery logistics", "risk": "Lithium shipping restrictions to and within the Philippines are real and they affect spares logistics for a distributed dock network.", "mitigation": "Understand this before promising a service level." }
+  ],
+
+  "the_phase_0_action": {
+    "task": "Replace every line in this file with a real quote from a real supplier.",
+    "effort": "Days of phone calls and emails. Not research.",
+    "why_it_matters_disproportionately": "The BOM feeds the unit economics, which feeds the pricing, which feeds the financial model, which feeds the funding ask. An error here propagates through every commercial document the company produces. It is also the single cheapest way to convert this repository's largest guess into a fact.",
+    "the_first_call": "A sonde vendor. Ask what their lightest unit with optical DO and fluorometric chlorophyll weighs and costs. That one answer resolves the mass budget, the BOM, and possibly the viability of the whole concept."
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "id": "social-economic-impact",
+  "title": "Social & Economic Impact",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "assumption",
+  "confidence": "low",
+
+  "note": "Impact claims are hypotheses until measured. This file states the mechanisms and, for each, what evidence would be needed to substantiate it. An impact claim without a measurement plan is aspiration.",
+
+  "economic_impacts": [
+    {
+      "impact": "Reduced catastrophic income volatility for aquaculture households",
+      "mechanism": "Earlier warning and response capacity reduce the frequency or severity of harvest-destroying kill events.",
+      "who_benefits": "Operators — most acutely smallholders, for whom a kill is existential.",
+      "citation_ids": ["inquirer-taal-fishkill-2023", "pna-tilapia-fishkill"],
+      "evidence_needed": "A matched comparison of income volatility between monitored and unmonitored farms across multiple cycles. See methodology.json — this is the load-bearing RQ5.",
+      "honest_caveat": "Directly limited by the affordability paradox and by whether farms can act on warnings."
+    },
+    {
+      "impact": "Improved production efficiency (FCR, survival, yield)",
+      "mechanism": "Condition-aware feeding and earlier intervention improve the production metrics that determine profitability.",
+      "citation_ids": ["innovasea-fcr-guide", "globalseafood-fcr-primary-indicator"],
+      "evidence_needed": "Measured FCR and survival differences, controlled for confounders. The chronic sub-lethal hypothesis (cost-of-inaction.json) is the key untested driver here."
+    },
+    {
+      "impact": "Access to credit and insurance",
+      "mechanism": "Continuous, verifiable environmental records turn an unquantified, uninsurable asset into an insurable one, potentially unlocking finance for the currently excluded.",
+      "who_benefits": "Smallholders and cooperatives most, because they are the most credit-excluded.",
+      "evidence_needed": "An insurer or lender actually pricing against the data. Requires loss history we do not have. Chicken-and-egg.",
+      "honest_note": "Potentially the largest long-run economic impact — possibly larger than the direct loss prevention — but the most speculative and the slowest to materialise."
+    },
+    {
+      "impact": "Reduced monitoring labour cost",
+      "mechanism": "Automates the manual monitoring round.",
+      "magnitude": "Modest monetarily; the labour is cheap. The safety benefit (below) matters more."
+    }
+  ],
+
+  "social_impacts": [
+    {
+      "impact": "Occupational safety — removing the pre-dawn boat run",
+      "mechanism": "The most valuable monitoring happens before dawn in conditions when putting a person in a small boat is most dangerous. Drowning is a real, normalised occupational hazard in this sector. The drone removes the need.",
+      "who_benefits": "Farm technicians and caretakers — the people at the sharp end.",
+      "why_it_is_underused": "This is a human-safety argument, not an efficiency one, and it lands with cooperatives, LGUs, and development funders in a way that FCR arithmetic does not. It is genuine and it should be prominent, not buried.",
+      "evidence_needed": "Documented reduction in dangerous boat trips; ideally sector injury/drowning statistics as context."
+    },
+    {
+      "impact": "Protecting the technician from blame",
+      "mechanism": "When fish die, the caretaker is blamed despite having no instrument that would have shown it coming. The system provides evidence that supports their judgement.",
+      "who_benefits": "Technicians. This is also why the system must be framed as THEIR instrument, not management's monitor. See customer-personas.json and risk R-12."
+    },
+    {
+      "impact": "Institutional capacity for lake management",
+      "mechanism": "Gives BFAR, LGUs, and cooperatives the continuous data they currently lack to make carrying-capacity and stocking decisions.",
+      "who_benefits": "The whole lake community, via better governance of a shared resource.",
+      "honest_caveat": "Depends on the cross-farm data governance problem being solved. Unresolved."
+    },
+    {
+      "impact": "Knowledge retention",
+      "mechanism": "A farm that has operated for fifteen years currently retains almost no data about its own water. The platform accumulates it, so each cycle starts smarter.",
+      "who_benefits": "Operators, and the sector's collective ability to build predictive models."
+    }
+  ],
+
+  "the_distributional_question": {
+    "statement": "Who actually captures the benefit determines whether the impact is positive or regressive.",
+    "the_risk": "If the product primarily serves well-capitalised commercial farms, it improves their competitive position against smallholders — a regressive outcome that widens inequality in the sector. Precision technology defaults to entrenching the advantage of those who can afford it.",
+    "the_commitment": "The cooperative and institutional channels are the mechanism for equitable distribution, and they are in the plan from the start precisely to counter this default. Whether they succeed is the difference between a product that reduces inequality and one that deepens it.",
+    "the_honest_admission": "We cannot guarantee the equitable outcome. We can commit to pursuing it actively and to measuring who actually benefits, rather than assuming the benefit is evenly distributed. See ethics-data-privacy.json#/equity_and_extraction.",
+    "citation_ids": ["worldbank-disease-risk-2014"]
+  },
+
+  "measuring_impact_honestly": {
+    "principle": "Impact must be measured against a counterfactual, not asserted from activity.",
+    "the_trap": "Counting drones deployed or profiles collected is measuring ACTIVITY, not IMPACT. Impact is the difference the activity made against what would have happened anyway.",
+    "the_method": "See methodology.json. The stepped-wedge design and neighbouring-farm comparison are how impact gets measured without the unethical withholding design. Impact claims in this file remain hypotheses until that measurement is done.",
+    "the_commitment": "Publish the impact evaluation including null results. If monitored farms do not do better than comparable unmonitored ones, that is a finding the field needs, and burying it would be both dishonest and a disservice to every other team considering this approach."
+  },
+
+  "the_impact_thesis_in_one_paragraph": {
+    "statement": "In a sector where a single night can destroy a family's year of income, where the people most exposed are the least equipped to see it coming, and where the dangerous work of watching the water falls on someone in a small boat before dawn — a platform that makes the water legible, at depth, at scale, at low marginal labour cost, has the potential for genuine social and economic good. That potential is real, it is bounded by affordability and by adoption, it carries second-order risks of intensification and inequality, and it is entirely unproven. Stated that way, it is both honest and, for the right impact investor or thesis committee, compelling."
+  }
+}

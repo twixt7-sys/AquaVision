@@ -1,0 +1,195 @@
+{
+  "id": "research-gaps",
+  "title": "Research Gaps & Open Questions",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "derived_calculation",
+  "purpose": "Everything this repository does not know, ranked by consequence. This is the file a thesis committee should read first and the file a founder should reread monthly.",
+
+  "the_ranking_principle": "Ranked by 'if this answer comes back wrong, how much of the plan dies?' — not by how interesting the question is. The most consequential gaps are usually the most boring ones.",
+
+  "tier_1_existential": {
+    "description": "If any of these resolves badly, the venture as conceived does not work. All are answerable in Phase 0 with phone calls and arithmetic — none require research.",
+    "gaps": [
+      {
+        "id": "gap-response-capacity",
+        "question": "Will a farmer act on a warning, or merely watch the loss arrive with better information?",
+        "why_existential": "The entire venture assumes information changes behaviour. If a warning arrives at 3 a.m. and the farmer has no affordable response available, the product informs people about their own losses in real time. That is not a business.",
+        "current_status": "UNTESTED. Assumed throughout every file in this repository.",
+        "how_to_resolve": "Phase 0 discovery. Ask twenty-five operators: 'if you had known twelve hours earlier, what would you have done — concretely, with what equipment?' The answers decide the product.",
+        "cost_to_resolve": "Two weeks of conversations.",
+        "flagged_in": ["problem-statement.json", "cost-of-inaction.json", "customer-personas.json"]
+      },
+      {
+        "id": "gap-payload-budget",
+        "question": "Can the aircraft carry the mission at all?",
+        "why_existential": "The paper mass budget in omnidrone-specifications.json DOES NOT CLOSE with all payloads fitted — 6.56 kg against a 7 kg target, leaving no dispensing capacity.",
+        "current_status": "PARTIALLY RESOLVED, and the resolution changed the product. Per-mission payload configuration is required, and dispensing must be repositioned as precision treatment rather than bulk feeding.",
+        "the_remaining_unknown": "The component masses are invented. A real sonde may weigh double the 0.55 kg assumed, in which case the budget breaks again.",
+        "how_to_resolve": "Call a sonde vendor. Ask what their lightest unit with optical DO and fluorometric chlorophyll weighs. One phone call resolves the largest single uncertainty in the hardware.",
+        "cost_to_resolve": "One afternoon."
+      },
+      {
+        "id": "gap-bvlos",
+        "question": "Will CAAP authorise BVLOS, and on what timeline?",
+        "why_existential": "The flagship use case — the 04:30 dawn sweep — requires either BVLOS or a human at the dock before dawn. Without it, the diel-bias argument that justifies the whole platform is unreachable, and the unit economics collapse.",
+        "current_status": "UNKNOWN. Our entire regulatory reading comes from secondary summaries of CAAP rules found via search. We have not spoken to CAAP.",
+        "how_to_resolve": "Talk to CAAP. In Phase 0, with nothing to ask for.",
+        "cost_to_resolve": "A meeting. It has a long lead time, which is why it must start now rather than in Phase 4."
+      },
+      {
+        "id": "gap-willingness-to-pay",
+        "question": "Is there any price at which the target customer will pay?",
+        "why_existential": "Most target operators currently spend approximately zero on water quality monitoring. We are not taking share from a budget line; we are trying to create one — a fundamentally harder task.",
+        "current_status": "UNKNOWN. Market sizing is blocked on it.",
+        "how_to_resolve": "Not a survey — stated willingness to pay in agricultural surveys is notoriously inflated. The only reliable measurement is an invoice someone actually paid.",
+        "cost_to_resolve": "A paid pilot, eventually. Meanwhile, ask what they already pay for and to whom."
+      },
+      {
+        "id": "gap-winch-viability",
+        "question": "Can a winch deploy and recover a sonde from a hover, reliably, unattended, in a cage array?",
+        "why_existential": "It is the only defensible thing about the product. Without it we are a camera drone with no position.",
+        "current_status": "UNKNOWN. The pendulum control problem and the snagging problem are both unresolved.",
+        "how_to_resolve": "Phase 1 gantry testing, then Phase 2 flight. But FIRST: a systematic literature search on UAV-tethered sondes. Somebody has almost certainly hit this wall and their published failure is worth more than our own would be.",
+        "cost_to_resolve": "The search is a week. The testing is a phase."
+      }
+    ]
+  },
+
+  "tier_2_shapes_the_product": {
+    "description": "These do not kill the venture but they change what it is.",
+    "gaps": [
+      {
+        "id": "gap-chronic-vs-catastrophic",
+        "question": "Is chronic sub-lethal loss larger in aggregate than catastrophic mortality?",
+        "why_it_matters_enormously": "If yes, the entire value proposition is misstated throughout this repository. We are pitching catastrophe insurance when the real product may be continuous yield optimisation — a different message, a different customer conversation, a different pricing model, and a far better business, because it pays on every cycle rather than on the rare bad one.",
+        "the_secondary_prize": "It is also a far more tractable machine learning problem: continuous outcomes, abundant data, every cycle a sample. Catastrophe prediction has a rare-event problem that may be insurmountable. If this hypothesis is right, it solves the business AND the ML at once.",
+        "current_status": "SPECULATIVE. Flagged as the most important untested claim in the repository.",
+        "how_to_resolve": "Phase 3 longitudinal correlation: continuous water quality against realised FCR and survival on farms with NO kill events.",
+        "flagged_in": ["cost-of-inaction.json", "ai-ml-models.json"],
+        "note": "This gap deserves more attention than it is getting. It is the difference between a good business and a great one, and nobody is looking at it."
+      },
+      {
+        "id": "gap-weather-availability",
+        "question": "What fraction of the monsoon season is actually flyable?",
+        "why_it_matters": "We cannot fly in the storms that trigger overturn events, and we cannot charge in extended overcast. Our availability is lowest exactly when risk is highest, for two independent reasons.",
+        "the_implication": "An honest reading says the OmniDrone is a coverage instrument for CHRONIC management, not a catastrophe-prevention system. That is a smaller, less thrilling story and it is probably the true one.",
+        "current_status": "UNQUANTIFIED. Any availability figure quoted to a customer must be seasonal, not annual, or it is misleading.",
+        "how_to_resolve": "Historical weather data against the flight envelope. This is a desk exercise available today and nobody has done it."
+      },
+      {
+        "id": "gap-buoy-hybrid",
+        "question": "Should the product include fixed buoys?",
+        "why_it_matters": "FOUR independent lines of reasoning in this repository point at a buoy hybrid: the competitive matrix says the hybrid dominates either alone; the weather gap says we need continuity we cannot provide; the HAB collection notes fixed devices can carry plankton imaging we cannot; and the dock's solar limitation compounds the availability problem.",
+        "current_status": "Noted four times, acted on zero times.",
+        "the_observation": "When four unrelated analyses converge on the same conclusion, that is a finding, not a coincidence. This should stop being a footnote and start driving the roadmap.",
+        "how_to_resolve": "An architecture decision, not research. Make it."
+      },
+      {
+        "id": "gap-scale-threshold",
+        "question": "Below what operation size does a fixed buoy simply beat us?",
+        "why_it_matters": "It sets the SAM, the pricing, and the sales qualification criteria all at once. Selling below the threshold means extracting money for a worse solution.",
+        "current_status": "Qualitative only.",
+        "how_to_resolve": "Arithmetic, once real costs and real farm layouts are known. Phase 0."
+      },
+      {
+        "id": "gap-dispensing-doses",
+        "question": "What are the real dose masses of the treatments farms actually use?",
+        "why_it_matters": "We are designing a hopper without knowing what goes in it.",
+        "current_status": "UNKNOWN.",
+        "how_to_resolve": "Ask five farms what they apply, how much, and how often. A conversation, not research."
+      }
+    ]
+  },
+
+  "tier_3_evidence_gaps": {
+    "description": "Things the literature does not establish that our argument needs.",
+    "gaps": [
+      {
+        "id": "gap-counterfactual",
+        "question": "Does earlier detection actually change outcomes?",
+        "why_it_matters": "No published study documents a farm that had monitoring and avoided a kill. That comparison is the actual evidence a rational buyer wants, and nobody has produced it.",
+        "current_status": "ABSENT FROM THE LITERATURE ENTIRELY.",
+        "the_opportunity": "Producing it would be a genuine scientific contribution and a strong thesis objective in its own right — quite apart from its commercial value.",
+        "how_to_resolve": "A matched comparison: farms with and without monitoring, same lake, same season. Hard, but publishable."
+      },
+      {
+        "id": "gap-philippine-statistics",
+        "question": "How many aquaculture operations are there, of what size, where?",
+        "why_it_matters": "Every Philippine market number in this repository is a guess without it. Market sizing is blocked.",
+        "current_status": "The BFAR Philippine Fisheries Profile has this. We have not obtained it.",
+        "how_to_resolve": "A records request. This is the single highest-value missing datum in the repository and it is obtainable with a phone call."
+      },
+      {
+        "id": "gap-loss-statistics-contradiction",
+        "question": "Why do Philippine fish kill loss figures not reconcile?",
+        "why_it_matters": "The PHP 322.1 M twenty-year national figure and the PHP 43.13 M single-event figure cannot both be right unless the national figure counts only a narrow subset. Until resolved, neither number should anchor a business case.",
+        "current_status": "CONTRADICTION DOCUMENTED, UNRESOLVED.",
+        "how_to_resolve": "BFAR primary incident records. Resolving it would itself be publishable."
+      },
+      {
+        "id": "gap-species-thresholds",
+        "question": "What are the actual DO and ammonia tolerance thresholds for Philippine tilapia and milkfish, by life stage?",
+        "why_it_matters": "THE HIGHEST-CONSEQUENCE PLACEHOLDER IN THE REPOSITORY. Our alert thresholds currently rest on general aquaculture practice. An incorrect threshold becomes a false 'all clear' in production — the system tells a farmer their fish are fine and they are not.",
+        "current_status": "PLACEHOLDER. industry-statistics.json says 'unknown — populate from primary source' and nobody has.",
+        "how_to_resolve": "Primary literature search. This is a week of work and it is currently gating a safety-critical function."
+      },
+      {
+        "id": "gap-feed-cost-transferability",
+        "question": "Does the US-derived '60 percent of operating cost' feed figure transfer to Philippine tilapia and milkfish?",
+        "why_it_matters": "It anchors the entire ROI argument and it is currently sourced to a vendor blog citing NOAA.",
+        "current_status": "ASSUMED, not established.",
+        "how_to_resolve": "SEAFDEC/AQD has Philippine cost structures. Ask them."
+      },
+      {
+        "id": "gap-monitoring-labour-claim",
+        "question": "Is it actually true that farmers do not monitor because the labour costs too much?",
+        "why_it_matters": "This is the reframe at the intellectual centre of the whole project — that the bottleneck is the marginal labour cost of an observation. It is structural reasoning, not a cited finding. Nobody has published it.",
+        "current_status": "The weakest link in the literature review's argument, and it is the link everything else hangs from.",
+        "how_to_resolve": "Establish it empirically in Phase 0 discovery. Doing so would convert the project's central premise from plausible to demonstrated — and would be a contribution in itself."
+      }
+    ]
+  },
+
+  "tier_4_the_gap_about_our_gaps": {
+    "gaps": [
+      {
+        "id": "gap-adoption-literature",
+        "question": "Why is the socioeconomic adoption collection nearly empty when adoption is the most likely failure mode?",
+        "the_finding": "This repository has eight research themes. Seven are populated with studies about sensors, algorithms, twins, and fish. The one about whether anyone will adopt, pay for, and keep using the technology has four entries, all of which argue against the venture.",
+        "why_it_is_diagnostic": "The team's instinct was to research the technology, not the adoption. That instinct is precisely why aquaculture technology has a poor adoption record despite good technology. We went where the light was.",
+        "current_status": "ACKNOWLEDGED IN studies-socioeconomic-adoption.json AND NOT YET CORRECTED.",
+        "how_to_resolve": "Two weeks reading smallholder technology adoption literature. It is more likely to change the plan — and save the money — than any amount of winch engineering.",
+        "priority": "This is the most actionable finding in the entire research corpus, and it is a finding about us rather than about the field."
+      },
+      {
+        "id": "gap-prior-art-search",
+        "question": "Has anyone already built a UAV-tethered sonde and failed?",
+        "why_it_matters": "We claim novelty in the integration. 'Nobody has done X' is the weakest possible claim in a literature review and it usually means 'we have not found it yet'.",
+        "current_status": "NOT SEARCHED. Flagged in three separate files as required and never done.",
+        "how_to_resolve": "A dedicated systematic search on UAV-tethered sensors, winched deployment from rotorcraft, and adaptive aerial sampling. A week. Before Phase 1, not after.",
+        "the_stakes": "If somebody hit the pendulum wall and published it, that paper is worth more to us than a month of our own flight testing."
+      },
+      {
+        "id": "gap-verification",
+        "question": "Are our citations real?",
+        "the_state": "ZERO sources in the bibliography have been opened and verified. Twenty-five are cited from search-result summaries; twenty need verification outright. One (ai-aqua-review-2024) is not a real citation at all and must be fixed or removed.",
+        "why_it_matters": "A committee member who finds one fabricated citation will disbelieve the entire bibliography, and they will be right to.",
+        "how_to_resolve": "Open every source. The priority queue is in references-bibliography.json#/bibliography_health."
+      }
+    ]
+  },
+
+  "the_meta_observation": {
+    "statement": "Almost every Tier 1 gap is resolvable in Phase 0 with phone calls and arithmetic. None require a laboratory, a prototype, or a grant.",
+    "the_list": [
+      "Call a sonde vendor — resolves the mass budget.",
+      "Call CAAP — resolves the regulatory pathway.",
+      "Request BFAR statistics — unblocks market sizing.",
+      "Talk to twenty-five farmers — resolves response capacity and willingness to pay.",
+      "Run a literature search — resolves the prior art question.",
+      "Read the weather data — resolves seasonal availability."
+    ],
+    "the_point": "Six weeks of unglamorous work would resolve more risk than a year of engineering. The temptation will be to build the winch first, because building is more satisfying than asking. That temptation is the thing most likely to kill this company, and it is worth naming plainly here so that it can be recognised when it arrives."
+  }
+}

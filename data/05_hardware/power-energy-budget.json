@@ -1,0 +1,128 @@
+{
+  "id": "power-energy-budget",
+  "title": "Power & Energy Budget",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "design_target",
+  "confidence": "low",
+
+  "WARNING": "This is a paper model built on assumed efficiencies and assumed component power draws. It has not been validated against any hardware. Its purpose is to show whether the mission profiles are plausible and to identify what must be measured. Treat the METHOD as the deliverable and every NUMBER as a placeholder.",
+
+  "the_governing_physics": {
+    "statement": "Hovering is expensive, and our unique value requires hovering.",
+    "explanation": "A multirotor in hover burns power continuously just to stay up. Forward flight is meaningfully more efficient because the rotors work in translational lift. Our profiling missions are hover-dominated — the aircraft sits still while the winch does its slow work. So the missions that deliver our only defensible capability are also our least efficient flight mode.",
+    "why_this_is_not_a_solvable_problem": "It is the shape of the physics, not a design flaw. Every engineering hour spent trying to make hover cheap is better spent accepting the constraint and designing the operation around it: shorter sorties, more of them, fast dock turnaround.",
+    "the_strategic_consequence": "Our endurance will always lose to a USV and a buoy. We should stop treating that as a weakness to hide and start treating it as a known trade we made deliberately in exchange for coverage and aerial imaging."
+  },
+
+  "battery": {
+    "chemistry": "Li-ion or LiPo",
+    "mass_target_kg": 1.8,
+    "assumed_specific_energy_whkg": 220,
+    "specific_energy_note": "220 Wh/kg is a reasonable current-generation assumption for a usable pack including cells, BMS, casing, and connectors — NOT a cell-level datasheet number. Cell-level figures are marketing; pack-level is what flies.",
+    "assumed_pack_energy_wh": 396,
+    "usable_fraction": 0.80,
+    "usable_energy_wh": 317,
+    "usable_fraction_rationale": "Never discharge below ~20 percent. Deep discharge destroys cycle life, and cycle life is an operating cost in a system flying four sorties a day. The reserve is also the safety margin that gets the aircraft home.",
+    "provenance": "assumption"
+  },
+
+  "power_draw_estimates": {
+    "note": "ASSUMED. Every one of these must be measured on real hardware.",
+    "items": [
+      { "system": "Propulsion — hover at MTOM", "watts": 720, "note": "Dominates everything. The other line items are rounding errors against this." },
+      { "system": "Propulsion — cruise", "watts": 520, "note": "Roughly 70 percent of hover. This ratio is why the mortality-scan mission covers more area for less energy than a profiling mission." },
+      { "system": "Winch — paying out", "watts": 12, "note": "Gravity does most of the work. The motor is mostly braking." },
+      { "system": "Winch — recovering", "watts": 45 },
+      { "system": "Sonde", "watts": 3 },
+      { "system": "Multispectral + irradiance sensor", "watts": 6 },
+      { "system": "RGB + thermal gimbal", "watts": 11 },
+      { "system": "Edge compute", "watts": 14, "note": "Only matters because it is on for the whole sortie. Fourteen watts for twenty minutes is real energy when the budget is 317 Wh." },
+      { "system": "Flight controller, GNSS, radio", "watts": 8 }
+    ],
+    "the_observation": "Propulsion is roughly 92 percent of the draw. Every non-propulsion optimisation is noise. The way to buy endurance is to reduce mass or reduce hover time — nothing else moves the needle, and time spent optimising the compute module's power is time wasted."
+  },
+
+  "mission_energy_analysis": {
+    "provenance": "derived_calculation",
+    "confidence": "low",
+    "method": "Sum of (power x time) per mission phase, against 317 Wh usable.",
+    "missions": [
+      {
+        "mission": "mp-01-dawn-sweep (6 stations, 8 m profiles)",
+        "phases": [
+          { "phase": "Launch and transit to station 1", "min": 1.5, "mode": "cruise", "wh": 13.0 },
+          { "phase": "6 x (profile at station)", "min": 13.2, "mode": "hover", "wh": 158.4, "note": "8 m down at 0.3 m/s plus 8 m up at 0.8 m/s plus settling = roughly 132 s per station. This is where the energy goes." },
+          { "phase": "5 x inter-station transit", "min": 2.5, "mode": "cruise", "wh": 21.7 },
+          { "phase": "Return to dock", "min": 1.5, "mode": "cruise", "wh": 13.0 },
+          { "phase": "Payload systems, whole sortie", "min": 18.7, "mode": "n/a", "wh": 11.5 }
+        ],
+        "total_wh": 217.6,
+        "usable_wh": 317,
+        "margin_pct": 31,
+        "verdict": "CLOSES, with margin. This is the flagship mission and on this model it is viable.",
+        "the_caveat": "This assumes hover at 720 W. If the real figure is 900 W — entirely plausible for a shrouded aircraft carrying a swinging pendulum in wind — the mission consumes 265 Wh and the margin drops to 16 percent, which is uncomfortably close to the reserve. The single most important measurement in Phase 2 is real hover power with a deployed probe in wind."
+      },
+      {
+        "mission": "mp-03-station-keeping (1 station, 15 m, 0.25 m resolution)",
+        "estimated_total_wh": 105,
+        "verdict": "CLOSES easily. Deep single-station profiling is cheap because there is no transit.",
+        "note": "Suggests deep profiling at an index station could be done more often than currently planned. Worth reconsidering the schedule."
+      },
+      {
+        "mission": "mp-04-mortality-scan (12 ha survey, no probe)",
+        "estimated_total_wh": 112,
+        "verdict": "CLOSES comfortably. Pure cruise, light payload. The cheapest useful mission we fly.",
+        "implication": "Mortality scans could run more frequently than planned at negligible marginal cost. Currently scheduled twice daily; three or four times would cost little and would tighten mortality detection latency substantially. Worth revisiting."
+      },
+      {
+        "mission": "mp-02-bloom-survey (12 ha imaging + 3 probe stations)",
+        "estimated_total_wh": 189,
+        "verdict": "CLOSES with ~40 percent margin."
+      }
+    ],
+    "the_headline_finding": {
+      "statement": "On this paper model, the mission set closes. The binding constraint is hover power, and hover power is the number we have the least confidence in.",
+      "sensitivity": "A 25 percent error in hover power turns the flagship mission from comfortable to marginal. Nothing else in the model has that leverage.",
+      "the_action": "Measure hover power with a real payload on a real airframe in real wind, as early as possible. It is the number the whole concept hinges on and it is currently a guess."
+    }
+  },
+
+  "the_sensitivity_table": {
+    "provenance": "derived_calculation",
+    "note": "Dawn sweep margin against hover power assumption. This table is the honest summary of how much we actually know.",
+    "rows": [
+      { "hover_power_w": 620, "mission_wh": 190, "margin_pct": 40, "verdict": "comfortable" },
+      { "hover_power_w": 720, "mission_wh": 218, "margin_pct": 31, "verdict": "baseline assumption" },
+      { "hover_power_w": 820, "mission_wh": 245, "margin_pct": 23, "verdict": "acceptable" },
+      { "hover_power_w": 900, "mission_wh": 266, "margin_pct": 16, "verdict": "marginal — reduce stations to 5" },
+      { "hover_power_w": 1000, "mission_wh": 293, "margin_pct": 8, "verdict": "FAILS — the mission must be restructured" }
+    ],
+    "how_to_read_this": "We do not know which row we are on. That is the honest state of the project's most important number."
+  },
+
+  "dock_energy": {
+    "recharge_vs_swap": {
+      "the_question": "Does the dock recharge the pack in place, or swap it for a charged one?",
+      "recharge": { "pro": "Simple, no mechanism, cheap dock", "con": "Turnaround is measured in tens of minutes to an hour. That caps sortie cadence hard." },
+      "swap": { "pro": "Minutes of turnaround. More sorties per day, which is the correct answer to short endurance.", "con": "A robotic swap mechanism is its own engineering project, plus spare packs per dock." },
+      "the_reasoning": "Short endurance is answered by MORE SORTIES, not longer ones. Recharge caps sorties per day at roughly the number of hours available divided by the charge time. If we want a dawn sweep, a mortality scan, a bloom survey, and an afternoon profile, recharge may not keep up — especially since the missions cluster in the solar window rather than spreading evenly.",
+      "the_recommendation": "Start with recharge for Phase 2 simplicity. Model the sortie cadence honestly against charge time. If cadence binds — and the schedule in mission-profiles.json suggests it will — swap becomes necessary and it should be planned for, not discovered.",
+      "status": "OPEN"
+    },
+    "solar_viability": {
+      "requirement": "Rural sites have unreliable or absent grid power. Solar is a design condition, not an option.",
+      "the_arithmetic": "Four sorties/day at ~220 Wh each is ~880 Wh of flight energy, plus charging losses, plus dock systems. Call it 1.3 kWh/day. In Philippine insolation that is a modest panel — but the monsoon is the problem, not the arithmetic. Extended overcast means the dock must carry days of storage or accept degraded cadence exactly during the season of highest risk.",
+      "provenance": "derived_calculation",
+      "the_irony": "Our availability is lowest when the risk is highest, for two independent reasons: we cannot fly in the weather, and we cannot charge in the overcast. Both point the same direction, and both are honest limitations that a fixed buoy does not share."
+    }
+  },
+
+  "what_must_be_measured": [
+    { "measurement": "Hover power at MTOM with full payload", "why": "The number the concept hinges on. Everything else is a rounding error.", "when": "Phase 2, first flight" },
+    { "measurement": "Hover power with a deployed probe in 5 m/s wind", "why": "The pendulum's drag and the control effort to hold station against it are not in this model at all.", "when": "Phase 2" },
+    { "measurement": "Real pack-level specific energy of the chosen cells", "why": "220 Wh/kg is an assumption." },
+    { "measurement": "Cruise power at survey speed", "why": "Sets the imaging missions." },
+    { "measurement": "Charge time from 20 percent to 90 percent", "why": "Decides recharge versus swap, which decides the dock." }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "id": "maintenance-schedule",
+  "title": "Maintenance Schedule",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "design_target",
+  "note": "Intervals are design targets, not field-validated. A tropical, brackish, biologically active environment is harsh on hardware, and real intervals will likely be shorter than these until proven otherwise. Corrosion and fouling do not respect the maintenance manual.",
+
+  "the_maintenance_philosophy": {
+    "principle": "Maintainable by a technician with hand tools, or it will not be maintained.",
+    "reasoning": "A distributed network of docks on remote lakeshores cannot each have an engineer. If a task needs a laptop, a calibration rig, or a specialist, it will be deferred until it becomes a failure. Design maintenance for the person who is actually there.",
+    "the_hidden_failure": "The most dangerous maintenance lapse is the one that produces no visible symptom: a fouled sensor drifting, a dock battery cooking in the sun, a corroding connector. These degrade the DATA, not the flight, and nobody notices until a decision is made on bad numbers."
+  },
+
+  "scheduled_tasks": [
+    { "task": "Sonde reference check against laboratory standard", "interval": "weekly (initially; extend only with evidence)", "why": "THE MOST IMPORTANT MAINTENANCE TASK IN THE SYSTEM. It is the only control that catches biofouling drift, which produces plausible, confidently wrong readings with no other symptom. Skipping it does not stop the drone flying — it stops the data being trustworthy, silently.", "who": "Trained technician", "criticality": "data_integrity" },
+    { "task": "Sonde optical window and wiper clean", "interval": "after every sortie (rinse) + weekly (detail)", "who": "Technician" },
+    { "task": "pH and ISE electrode calibration", "interval": "weekly", "why": "Glass pH electrodes and ion-selective electrodes drift fast. Ammonia is uninterpretable without accurate pH, so a drifted pH electrode corrupts two channels.", "who": "Technician" },
+    { "task": "Winch cycle inspection — tether wear, level-wind, cutter function", "interval": "every 100 cycles", "why": "The winch is the highest-risk mechanism and its failure over water is unrecoverable. Inspect the cutter especially — it is the last resort in a snag and it must work when everything else has already failed.", "who": "Technician + periodic specialist" },
+    { "task": "Tether replacement", "interval": "on wear indication or every N cycles (TBD from Phase 1 cycle testing)", "who": "Technician" },
+    { "task": "Propeller inspection and replacement", "interval": "monthly + on any strike", "who": "Technician" },
+    { "task": "Airframe corrosion inspection", "interval": "monthly", "why": "Brackish and salt-spray exposure eats fasteners and connectors. Galvanic corrosion is the quiet killer of marine drones.", "who": "Technician" },
+    { "task": "Motor and bearing inspection", "interval": "quarterly", "who": "Specialist" },
+    { "task": "Battery health assessment and cycle-count review", "interval": "monthly", "why": "Packs degrade, especially if the dock cooks them. A pack that has silently lost capacity shortens every mission's reserve — the safety margin erodes invisibly.", "who": "Technician" },
+    { "task": "Dock thermal check", "interval": "monthly", "why": "A dock running hot in the sun degrades battery life silently. See docking-station.json#/the_thermal_problem.", "who": "Technician" },
+    { "task": "Dock mechanism (open/close, rinse, decon) function test", "interval": "weekly", "who": "Technician" },
+    { "task": "Solar and storage capacity check", "interval": "monthly + before monsoon season", "why": "The monsoon is when both flight availability and charging capacity are lowest, and it is when risk is highest. Enter it with the storage system verified.", "who": "Technician" },
+    { "task": "Multispectral radiometric calibration verification", "interval": "monthly", "why": "Calibration drift makes the time series incomparable across months without anyone seeing an error.", "who": "Specialist" },
+    { "task": "Failsafe and geofence verification", "interval": "monthly + after any firmware change", "why": "A water-aware failsafe that silently broke is discovered during the emergency it was meant to handle.", "who": "Specialist" },
+    { "task": "Decontamination efficacy audit", "interval": "quarterly", "who": "Aquatic health specialist", "why": "A biosecurity claim needs periodic evidence, not just a documented procedure." },
+    { "task": "Full airframe overhaul", "interval": "annually or by flight hours", "who": "Specialist" }
+  ],
+
+  "consumables": [
+    { "item": "Batteries", "note": "A consumable, not a capital item. They degrade and get replaced. The financial model must treat pack replacement as opex — this is a line founders routinely forget." },
+    { "item": "Tether", "note": "Wears with cycling and fouling." },
+    { "item": "Propellers", "note": "Strike damage is routine near structure." },
+    { "item": "pH/ISE electrodes", "note": "Limited service life; drift-limited, not wear-limited." },
+    { "item": "Decontaminant", "note": "Ongoing per-site cost." },
+    { "item": "Calibration standards", "note": "For the reference check and electrode calibration." }
+  ],
+
+  "spares_strategy": {
+    "principle": "A distributed lake network cannot wait for a part to ship. Downtime during the risk season is when the product most needs to work.",
+    "critical_spares": ["Assigned sonde per site (also a biosecurity requirement)", "Battery packs", "Tether and cutter assembly", "Propellers", "pH/ISE electrodes"],
+    "lithium_logistics_note": "Lithium shipping restrictions within the Philippines are real and affect how fast a dead pack can be replaced at a remote dock. Understand this before promising a service level."
+  },
+
+  "the_maintenance_burden_as_a_business_risk": {
+    "statement": "Maintenance is where distributed hardware businesses quietly bleed margin, and this one has an unusually heavy burden.",
+    "why_heavy": "Weekly sensor calibration and reference checks, corrosion in a brackish tropical environment, a novel high-cycle winch, and a solar dock that cooks its own batteries — each is a recurring field-labour cost. The unit economics in unit-economics.json must carry a realistic maintenance labour line, and the honest version of that line is probably larger than a hardware founder's first instinct.",
+    "the_implication": "Field operations becomes the biggest function at scale, not engineering. This surprises hardware founders every time, and the ones who do not plan for it discover it in the margin."
+  }
+}

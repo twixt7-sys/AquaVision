@@ -1,0 +1,112 @@
+{
+  "id": "studies-ai-ml-aquaculture",
+  "title": "Related Studies — AI & Machine Learning in Aquaculture",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "theme": "ai_ml_aquaculture",
+  "provenance": "verified_external",
+  "verification_notice": "Records derived from search-result summaries. Open the sources before citing. One entry in this collection (ai-aqua-review-2024) is NOT a verified publication and must be fixed or removed.",
+
+  "studies": [
+    {
+      "citation_id": "ai-aqua-review-2024",
+      "theme": "ai_ml_aquaculture",
+      "study_type": "systematic_review",
+      "year": 2024,
+      "summary": "Review of machine learning, deep learning, attention mechanisms, and hybrid models applied to aquaculture — water quality monitoring, disease detection, feed optimisation, and fish behaviour analysis.",
+      "key_findings": [
+        "ML, DL, attention mechanisms, and hybrid models are driving gains across water quality, disease detection, feed optimisation, and behaviour analysis.",
+        "Model accuracy depends on acquiring substantial, high-quality training data from IoT systems.",
+        "High deployment costs and limited power supply for real-time data transmission pose significant challenges.",
+        "Federated learning, explainable AI, edge computing, and transfer learning are emerging responses to data privacy, scalability, and adaptability constraints."
+      ],
+      "relevance_to_omnidrone": "The framing source for our ML approach and, more usefully, for the constraints on it. The identified barriers — deployment cost, power supply, data scarcity — map exactly onto our weakest attributes.",
+      "supports_or_challenges": "challenges",
+      "the_challenge_stated_plainly": "This review is telling us that the things preventing ML adoption in aquaculture are deployment cost and power supply. A multirotor is expensive and has a brutal energy budget. The literature is identifying our two worst attributes as the field's binding constraints.",
+      "what_it_gives_us": "The four emerging responses it names are all directly applicable and all already in our architecture for independent reasons: edge computing because connectivity is unreliable; explainable AI because farmers ignore alerts they cannot interrogate; federated learning because farm data is commercially sensitive; transfer learning because we are data-poor. That convergence is reassuring — we arrived at these from first principles and the field agrees.",
+      "verification_status": "needs_verification",
+      "CRITICAL_NOTE": "THIS ENTRY IS NOT A REAL CITATION AS WRITTEN. It is a synthesis of search-result summaries that does not correspond to a single confirmed publication. It must be replaced with the specific review it paraphrases, or removed entirely. Citing it in a thesis as-is would be a genuine academic integrity problem, not a technicality. This is the most urgent fix in the whole bibliography.",
+      "priority": "MUST FIX OR REMOVE"
+    },
+    {
+      "citation_id": "globalseafood-precision-aqua",
+      "theme": "ai_ml_aquaculture",
+      "study_type": "policy_report",
+      "summary": "Industry framing of precision aquaculture and the role of data-driven prediction models pre-trained on multi-mode sensor datasets.",
+      "relevance_to_omnidrone": "Establishes the observe-interpret-decide-act loop we are instrumenting.",
+      "supports_or_challenges": "supports",
+      "limitations": "Trade publication.",
+      "priority": "LOW"
+    },
+    {
+      "citation_id": "mitchell-model-cards-2019",
+      "theme": "ai_ml_aquaculture",
+      "study_type": "conference_paper",
+      "year": 2019,
+      "summary": "Introduces model cards as a documentation standard for transparent model reporting, including intended use, out-of-scope use, and disaggregated performance.",
+      "relevance_to_omnidrone": "The convention followed in ai-ml-models.json. The out_of_scope_use field is the one that matters here: it is what forces us to write down, before the commercial pressure arrives, that the chlorophyll model is not a toxin detector and the anomaly model is not a staff performance monitor.",
+      "supports_or_challenges": "context_only",
+      "why_it_is_in_this_collection": "Because the most important ML decision in this project is not architectural. It is the decision not to ship the kill-risk model until it is validated. A documentation standard that forces that decision to be written down and defended is doing real work.",
+      "priority": "MEDIUM"
+    },
+    {
+      "citation_id": "sciencedirect-dt-aiot-2023",
+      "theme": "ai_ml_aquaculture",
+      "study_type": "engineering_prototype",
+      "year": 2023,
+      "summary": "AIoT fish farming with cloud-based digital twins using ML and computer vision to monitor feeding behaviour, disease, and growth.",
+      "relevance_to_omnidrone": "Demonstrates computer vision for feeding behaviour and disease monitoring — capabilities adjacent to our surface anomaly detection but with underwater access we lack.",
+      "supports_or_challenges": "mixed",
+      "priority": "MEDIUM"
+    },
+    {
+      "citation_id": "arxiv-uav-path-planning-wq",
+      "theme": "ai_ml_aquaculture",
+      "study_type": "modeling_simulation",
+      "year": 2025,
+      "summary": "Safe path planning and observation quality enhancement for UAVs in water quality monitoring tasks.",
+      "relevance_to_omnidrone": "The adaptive sampling problem formalised — where should the aircraft go next to maximise information gain, subject to safety and energy constraints? This is directly the mp-02 adaptive station selection problem, and someone has already done the theory.",
+      "supports_or_challenges": "supports",
+      "the_practical_note": "Version one should let the operator pick probe stations from the NDCI map. This literature is the path to automating that later, and it is worth reading before building the naive version.",
+      "priority": "MEDIUM"
+    }
+  ],
+
+  "the_data_problem": {
+    "why_this_section_exists": "The most important thing about ML in this project is not which architecture we pick. It is that we do not have data, and the model that matters most needs the rarest events.",
+    "the_arithmetic": {
+      "statement": "Mass kills happen a few times per year per lake. A supervised model needs many examples. Even a multi-year, multi-site deployment yields tens of positive examples at best.",
+      "the_consequence": "A naive classifier trained on this will learn to always predict 'no kill' and score 97 percent accurate. This is the classic rare-event trap and it WILL happen if anyone evaluates on accuracy rather than on the confusion matrix.",
+      "provenance": "derived_calculation"
+    },
+    "the_implications": [
+      {
+        "implication": "Physics-informed beats pure data-driven for the rare-event problem.",
+        "reasoning": "We KNOW the mechanism — stratification, oxygen debt, weather trigger. Encoding known physics is strictly better than hoping to learn it from a handful of examples. This is why stratification-state estimation in ai-ml-models.json is deterministic computation rather than ML, and that choice should be defended rather than apologised for."
+      },
+      {
+        "implication": "The chronic sub-lethal hypothesis is a far more tractable ML problem than catastrophe prediction.",
+        "reasoning": "Continuous outcomes, abundant data, every cycle a sample. If the hypothesis in cost-of-inaction.json is right — that chronic loss exceeds catastrophic loss — then it is simultaneously the better business AND the better machine learning problem. That coincidence is worth noticing and it should probably reorder the research priorities.",
+        "confidence": "speculative but strategically important"
+      },
+      {
+        "implication": "Transfer learning and public data are not optional.",
+        "reasoning": "We are data-poor and the world is not. Copernicus history is free. Published inland water datasets exist. Exploit them hard before collecting our own."
+      },
+      {
+        "implication": "Evaluate on held-out SITES, never held-out splits.",
+        "reasoning": "A random split of one lake's imagery measures memorisation, not generalisation, and it will flatter every model we build. The Phase 3 gate requires site-level holdout specifically to prevent this self-deception."
+      }
+    ]
+  },
+
+  "synthesis": {
+    "what_the_field_establishes": "ML works in aquaculture across water quality, disease, feeding, and behaviour. The methods are mature enough to borrow.",
+    "what_the_field_warns_us_about": "Deployment cost, power supply, and training data scarcity are the binding constraints — and they are our three weakest attributes.",
+    "our_position": {
+      "the_discipline": "The models in this project are ordered by how dangerous it is to be wrong, not by how well they demo. Water masking and chlorophyll retrieval ship first because a mistake costs a bad map. The kill-risk score ships last, or never, because a false negative reads as 'you are safe' and can cost a harvest.",
+      "the_thing_to_hold_onto": "Without a model, a farmer is uncertain and cautious. With a wrong model, a farmer is confident and wrong. We can make things worse than doing nothing — which is not true of any other component in this system. That asymmetry should govern every ML decision in the project.",
+      "the_interim_product": "'The bottom three metres are anoxic and rain is forecast tonight' requires no model, carries no false certainty, is derived entirely from measurement, and is available on day one. Given the farmer's twenty years of experience, it may also be a better product than a score. Ship that first."
+    }
+  }
+}

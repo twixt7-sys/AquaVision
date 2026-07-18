@@ -1,0 +1,193 @@
+{
+  "id": "industry-statistics",
+  "title": "Industry Statistics — Global & Regional Aquaculture and Fisheries",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "verified_external",
+  "primary_source": "FAO, The State of World Fisheries and Aquaculture (SOFIA) 2024, reporting 2022 data.",
+  "citation_ids": ["fao-sofia-2024"],
+
+  "currency_note": "Values in USD as published by FAO. No inflation adjustment applied.",
+  "vintage_warning": "SOFIA 2024 reports 2022 data — a two-year lag is normal for this dataset. As of this repository's date (July 2026), SOFIA 2026 may be available and would supersede these figures. Check before using in a submission. Citing a superseded flagship report is a small error that signals a large carelessness.",
+
+  "headline_figures": [
+    {
+      "stat_id": "total-production-2022",
+      "label": "Total global fisheries and aquaculture production",
+      "value": 223.2,
+      "unit": "million tonnes",
+      "year": 2022,
+      "breakdown": { "aquatic_animals": 185.4, "algae": 37.8 },
+      "change_note": "A 4.4 percent increase from 2020, and a record high.",
+      "citation_ids": ["fao-sofia-2024"],
+      "provenance": "verified_external"
+    },
+    {
+      "stat_id": "aquaculture-overtakes-capture",
+      "label": "Aquaculture surpassed capture fisheries in aquatic animal production for the first time",
+      "value": 94.4,
+      "unit": "million tonnes of aquatic animals from aquaculture",
+      "share_of_total_aquatic_animals_pct": 51,
+      "year": 2022,
+      "citation_ids": ["fao-sofia-2024"],
+      "provenance": "verified_external",
+      "why_this_is_the_slide": "This is the single most important statistic available to this company, and it should be slide two. It marks a structural inflection: humanity now gets most of its aquatic animal protein from systems that someone owns, manages, and could in principle instrument. Capture fisheries cannot be sensor-optimised in any meaningful way — you cannot put a dashboard on the open ocean. Farmed systems can. The addressable surface for aquaculture technology crossed 50 percent of the sector in 2022 and it is still growing. Every argument this company makes rests on this number."
+    },
+    {
+      "stat_id": "aquaculture-total-2022",
+      "label": "Total aquaculture production (including algae)",
+      "value": 130.9,
+      "unit": "million tonnes",
+      "value_usd": { "amount": 312800000000, "currency": "USD" },
+      "share_of_total_production_pct": 59,
+      "year": 2022,
+      "citation_ids": ["fao-sofia-2024"],
+      "provenance": "verified_external"
+    },
+    {
+      "stat_id": "inland-vs-marine-split",
+      "label": "Inland vs marine/coastal share of farmed aquatic animals",
+      "inland_pct": 62.6,
+      "marine_coastal_pct": 37.4,
+      "year": 2022,
+      "citation_ids": ["fao-sofia-2024"],
+      "provenance": "verified_external",
+      "why_this_matters_to_omnidrone": "Nearly two-thirds of farmed aquatic animals come from inland systems — ponds, lakes, reservoirs. That is precisely the OmniDrone's environment. Inland water is where stratification, eutrophication, and overturn dominate, and it is where a small aerial platform is operationally viable. A marine-cage-first strategy would be fighting for the smaller share in the harder environment. The data says start inland, and our beachhead choice matches it."
+    },
+    {
+      "stat_id": "asia-share",
+      "label": "Asia's share of global aquatic animal output",
+      "value": 70,
+      "unit": "percent",
+      "year": 2022,
+      "regional_breakdown": [
+        { "region": "Asia", "pct": 70 },
+        { "region": "Europe", "pct": 9 },
+        { "region": "Latin America and the Caribbean", "pct": 9 },
+        { "region": "Africa", "pct": 7 },
+        { "region": "Northern America", "pct": 3 },
+        { "region": "Oceania", "pct": 1 }
+      ],
+      "citation_ids": ["fao-sofia-2024"],
+      "provenance": "verified_external",
+      "why_this_matters_to_omnidrone": "Seventy percent of the world's aquatic animal production is on our doorstep. A Philippine company building for Southeast Asian conditions is building for the centre of the industry, not the periphery — which is an unusual and genuine structural advantage. Most aquaculture technology is built in Norway and Scotland for salmon, then exported to Asia where it fits poorly. Building for tropical, smallholder-dense, monsoon-exposed conditions from the start is a real differentiator, not a consolation."
+    },
+    {
+      "stat_id": "algae-production",
+      "label": "Global algae production",
+      "value": 38,
+      "unit": "million tonnes (wet weight)",
+      "from_aquaculture_pct": 97,
+      "year": 2022,
+      "growth_note": "Up 4 percent from 2020, and up from just 12 million tonnes in 2000.",
+      "citation_ids": ["fao-sofia-2024"],
+      "provenance": "verified_external",
+      "relevance": "Seaweed farming has tripled in two decades. It is adjacent to our core — the sensing needs differ substantially — but the growth trajectory makes it worth watching as an expansion vector."
+    }
+  ],
+
+  "trend_analysis": {
+    "provenance": "derived_calculation",
+    "observations": [
+      {
+        "trend": "Aquaculture crossed 50 percent of aquatic animal production in 2022 and continues to grow while capture fisheries are flat.",
+        "implication_for_us": "Our addressable base grows structurally without us doing anything. Rising tide.",
+        "confidence": "high"
+      },
+      {
+        "trend": "Growth is coming from intensification more than from new water area, because the good sites are taken.",
+        "implication_for_us": "Intensification means higher stocking density means higher oxygen demand means more frequent water quality crises. The trend that drives the industry's growth is the same trend that creates our problem. Our market grows because the problem gets worse — which is uncomfortable to say out loud but is the honest structure of the opportunity.",
+        "confidence": "medium",
+        "caveat": "Inferred from the pattern rather than directly stated in SOFIA. Verify against SOFIA's intensification discussion before citing."
+      },
+      {
+        "trend": "Algae production tripled from 2000 to 2022.",
+        "implication_for_us": "Adjacent expansion option, low priority.",
+        "confidence": "high"
+      }
+    ]
+  },
+
+  "philippine_context": {
+    "status": "INCOMPLETE — this is the most important gap in this file",
+    "why_it_matters": "Our beachhead is the Philippines. Global FAO figures establish that the sector matters; they say nothing about our actual market. National production by species, number of operators, cage counts by lake, and farm-level cost structures are all required and all currently absent.",
+    "required_sources": [
+      "BFAR Philippine Fisheries Profile — the annual statistical yearbook. This is the single most important document this repository is missing.",
+      "Philippine Statistics Authority fisheries production data.",
+      "LLDA (Laguna Lake Development Authority) cage inventories and water quality monitoring records.",
+      "Taal Lake Protected Landscape and Seascape management records for cage counts.",
+      "SEAFDEC/AQD technical publications for species-specific culture practice and cost structures."
+    ],
+    "known_fragments": [
+      {
+        "fact": "Tilapia and milkfish cage farming in Taal Lake is described as a multimillion-peso industry, and Taal is the country's third-largest freshwater body.",
+        "citation_ids": ["inquirer-taal-fishkill-2023"],
+        "provenance": "verified_external",
+        "note": "Journalistic characterisation, not a statistic. Insufficient for market sizing."
+      },
+      {
+        "fact": "Dissolved oxygen at Taal's surface is considered normal at 6 ppm.",
+        "citation_ids": ["pna-tilapia-fishkill"],
+        "provenance": "verified_external",
+        "note": "A useful local operational threshold, sourced to a BFAR statement in news reporting. Confirm against BFAR's published criteria."
+      }
+    ],
+    "action": "Obtaining the BFAR Philippine Fisheries Profile is a Phase 0 priority. Until then, every Philippine market number in this repository is a guess, and the market-sizing file says so explicitly."
+  },
+
+  "target_species_profiles": {
+    "provenance": "assumption",
+    "note": "Species-specific tolerance figures below are indicative ranges from general aquaculture practice and MUST be replaced with sourced, species- and life-stage-specific values from the primary literature before they inform any alert threshold. An incorrect threshold here becomes a false 'all clear' in production. This is the highest-consequence placeholder in the repository.",
+    "species": [
+      {
+        "common_name": "Nile Tilapia",
+        "scientific_name": "Oreochromis niloticus",
+        "systems": ["Lake cage", "Freshwater pond"],
+        "philippine_significance": "Dominant freshwater cultured species; the species in most reported lake kill events.",
+        "notable_traits": "Relatively hypoxia-tolerant compared with most cultured finfish — which is exactly why a tilapia kill is alarming. If conditions killed tilapia, they were severe.",
+        "indicative_do_threshold_mgl": "unknown — populate from primary source",
+        "citation_ids": ["pna-tilapia-fishkill"]
+      },
+      {
+        "common_name": "Milkfish / Bangus",
+        "scientific_name": "Chanos chanos",
+        "systems": ["Brackish pond", "Lake cage", "Marine pen"],
+        "philippine_significance": "National fish; major brackish and lake cage species.",
+        "notable_traits": "Euryhaline — tolerates a wide salinity range, which makes salinity profiling operationally relevant across its culture systems.",
+        "indicative_do_threshold_mgl": "unknown — populate from primary source",
+        "citation_ids": ["inquirer-pangasinan-fishkill"]
+      },
+      {
+        "common_name": "Whiteleg Shrimp",
+        "scientific_name": "Litopenaeus vannamei",
+        "systems": ["Brackish pond"],
+        "notable_traits": "Benthic. Aerial observation has poor access to the animals themselves — a structural limitation of our platform in shrimp culture that must be stated honestly rather than glossed.",
+        "citation_ids": ["asian-fisheries-shrimp-disease"]
+      },
+      {
+        "common_name": "Giant Tiger Prawn",
+        "scientific_name": "Penaeus monodon",
+        "systems": ["Brackish pond"],
+        "philippine_significance": "Historically the flagship export species; devastated by disease."
+      },
+      {
+        "common_name": "Seaweed (Eucheuma / Kappaphycus)",
+        "systems": ["Coastal line culture"],
+        "philippine_significance": "Major coastal livelihood crop.",
+        "relevance": "Different sensing problem entirely — no oxygen demand, no feeding. Expansion option, not core."
+      }
+    ]
+  },
+
+  "how_to_use_these_statistics": [
+    "The aquaculture-overtakes-capture figure is the opening argument. Use it once, prominently, and let it do its work.",
+    "The 62.6 percent inland figure justifies the platform choice. Use it when challenged on why aerial rather than marine.",
+    "The 70 percent Asia figure justifies the geography. Use it when a foreign investor asks why not start in Norway.",
+    "Do NOT use the USD 312.8 billion aquaculture value as a market size. It is the value of the FISH, not of the technology addressable within it. Conflating industry output with technology TAM is the most common and most transparent error in agritech pitches, and every professional investor is watching for it. See market-sizing-tam-sam-som.json for the defensible construction."
+  ],
+
+  "chart_hints": [
+    { "chart_file": "data/12_datasets/charts/chart-global-production.json" },
+    { "chart_file": "data/12_datasets/charts/chart-species-production-mix.json" }
+  ]
+}

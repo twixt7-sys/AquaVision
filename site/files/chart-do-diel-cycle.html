@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why Sampling Time Decides What You See — AquaVision</title>
+<link rel="icon" href="../assets/img/logo-mark.jpg">
+<link rel="stylesheet" href="../assets/style.css">
+<script>try{var t=localStorage.getItem('av-theme');if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+<a class="sidebar-brand" href="../index.html">
+<img src="../assets/img/logo-mark.jpg" alt="AquaVision mark" width="36" height="36">
+<span><strong>AQUAVISION</strong><small>OmniDrone Knowledge Repository</small></span>
+</a>
+<nav class="sidebar-nav" aria-label="Sections"><details class="nav-sec">
+<summary><span class="nav-num">00</span>Meta &amp; Schemas</summary>
+<ul>
+<li><a href="../sections/meta.html">Overview</a></li>
+<li><a href="../files/schema-registry.html">AquaVision Knowledge Repository — Schema Registry <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/glossary.html">Glossary — Aquaculture, Fisheries, Remote Sensing, and Systems Terms</a></li><li><a href="../files/data-dictionary.html">Data Dictionary — Canonical Field and Variable Definitions</a></li><li><a href="../files/changelog.html">Repository Changelog</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">01</span>Company &amp; Identity</summary>
+<ul>
+<li><a href="../sections/company.html">Overview</a></li>
+<li><a href="../files/company-profile.html">AquaVision — Company Profile</a></li><li><a href="../files/brand-identity.html">AquaVision — Brand &amp; Design System</a></li><li><a href="../files/team-structure.html">Team Structure &amp; Capability Map</a></li><li><a href="../files/milestones-roadmap.html">Development Roadmap &amp; Milestones</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">02</span>Problem Space</summary>
+<ul>
+<li><a href="../sections/problem.html">Overview</a></li>
+<li><a href="../files/problem-statement.html">Problem Statement</a></li><li><a href="../files/problem-taxonomy.html">Problem Taxonomy — The Full Space of Aquaculture &amp; Fisheries Problems</a></li><li><a href="../files/stakeholder-pain-points.html">Stakeholder Map &amp; Pain Points</a></li><li><a href="../files/incident-case-studies.html">Documented Incident Case Studies — Evidence Base</a></li><li><a href="../files/cost-of-inaction.html">Cost of Inaction — Loss Model</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">03</span>Market &amp; Competition</summary>
+<ul>
+<li><a href="../sections/market.html">Overview</a></li>
+<li><a href="../files/industry-statistics.html">Industry Statistics — Global &amp; Regional Aquaculture and Fisheries</a></li><li><a href="../files/market-sizing.html">Market Sizing — TAM / SAM / SOM</a></li><li><a href="../files/competitive-landscape.html">Competitive Landscape</a></li><li><a href="../files/customer-personas.html">Customer Segments &amp; Personas</a></li><li><a href="../files/swot-porter.html">Strategic Analysis — SWOT, Porter's Five Forces, PESTEL</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">04</span>Solution &amp; ConOps</summary>
+<ul>
+<li><a href="../sections/solution.html">Overview</a></li>
+<li><a href="../files/solution-overview.html">Solution Overview — The OmniDrone System</a></li><li><a href="../files/value-proposition.html">Value Proposition</a></li><li><a href="../files/use-cases.html">Use Cases</a></li><li><a href="../files/mission-profiles.html">Mission Profiles</a></li><li><a href="../files/concept-of-operations.html">Concept of Operations (ConOps)</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">05</span>Hardware Engineering</summary>
+<ul>
+<li><a href="../sections/hardware.html">Overview</a></li>
+<li><a href="../files/omnidrone-specifications.html">OmniDrone — System Specification</a></li><li><a href="../files/airframe-propulsion.html">Airframe &amp; Propulsion</a></li><li><a href="../files/probe-winch-subsystem.html">Reeled Probe &amp; Winch Subsystem</a></li><li><a href="../files/sensor-payload.html">Sensor Payload — Imaging &amp; Remote Sensing</a></li><li><a href="../files/carriage-ejection-system.html">Carriage &amp; Ejection System</a></li><li><a href="../files/power-energy-budget.html">Power &amp; Energy Budget</a></li><li><a href="../files/docking-station.html">OmniDock — Automated Docking Station</a></li><li><a href="../files/bill-of-materials.html">Indicative Bill of Materials</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">06</span>Software, AI &amp; Digital Twin</summary>
+<ul>
+<li><a href="../sections/software.html">Overview</a></li>
+<li><a href="../files/system-architecture.html">System Architecture</a></li><li><a href="../files/data-pipeline.html">Data Pipeline</a></li><li><a href="../files/ai-ml-models.html">AI / ML Model Cards</a></li><li><a href="../files/digital-twin.html">PondTwin — Digital Twin Specification</a></li><li><a href="../files/telemetry-schema.html">Telemetry &amp; Data Schema</a></li><li><a href="../files/api-specification.html">API Specification</a></li><li><a href="../files/dashboard-spec.html">Dashboard Specification</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">07</span>Research Corpus</summary>
+<ul>
+<li><a href="../sections/research.html">Overview</a></li>
+<li><a href="../files/literature-review.html">Literature Review — Synthesis</a></li><li><a href="../files/references-bibliography.html">Consolidated Bibliography</a></li><li><a href="../files/studies-water-quality-sensing.html">Related Studies — Water Quality, Limnology &amp; Fish Kill Mechanisms</a></li><li><a href="../files/studies-uav-remote-sensing.html">Related Studies — UAV &amp; Satellite Remote Sensing of Water</a></li><li><a href="../files/studies-harmful-algal-blooms.html">Related Studies — Harmful Algal Blooms</a></li><li><a href="../files/studies-ai-ml-aquaculture.html">Related Studies — AI &amp; Machine Learning in Aquaculture</a></li><li><a href="../files/studies-digital-twin.html">Related Studies — Digital Twins in Aquaculture</a></li><li><a href="../files/studies-fish-health-disease.html">Related Studies — Fish Health, Disease &amp; Biosecurity</a></li><li><a href="../files/studies-feeding-nutrition.html">Related Studies — Feeding, Nutrition &amp; Feed Economics</a></li><li><a href="../files/studies-socioeconomic-adoption.html">Related Studies — Socioeconomics &amp; Technology Adoption</a></li><li><a href="../files/research-gaps.html">Research Gaps &amp; Open Questions</a></li><li><a href="../files/theoretical-framework.html">Theoretical &amp; Conceptual Framework</a></li><li><a href="../files/methodology.html">Research Methodology</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">08</span>Operations &amp; Safety</summary>
+<ul>
+<li><a href="../sections/operations.html">Overview</a></li>
+<li><a href="../files/deployment-playbook.html">Deployment Playbook</a></li><li><a href="../files/maintenance-schedule.html">Maintenance Schedule</a></li><li><a href="../files/risk-register-fmea.html">Risk Register &amp; FMEA</a></li><li><a href="../files/training-certification.html">Training &amp; Certification</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">09</span>Regulatory &amp; Compliance</summary>
+<ul>
+<li><a href="../sections/compliance.html">Overview</a></li>
+<li><a href="../files/regulatory-framework.html">Regulatory Framework</a></li><li><a href="../files/water-quality-standards.html">Water Quality Standards &amp; Thresholds</a></li><li><a href="../files/biosecurity-protocol.html">Biosecurity Protocol</a></li><li><a href="../files/ethics-data-privacy.html">Ethics, Data Privacy &amp; Responsible Use</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">10</span>Business Model</summary>
+<ul>
+<li><a href="../sections/business.html">Overview</a></li>
+<li><a href="../files/business-model-canvas.html">Business Model Canvas</a></li><li><a href="../files/pricing-revenue.html">Pricing &amp; Revenue Model</a></li><li><a href="../files/unit-economics.html">Unit Economics</a></li><li><a href="../files/financial-projections.html">Financial Projections</a></li><li><a href="../files/funding-ask.html">Funding Ask</a></li><li><a href="../files/go-to-market.html">Go-to-Market Strategy</a></li><li><a href="../files/traction.html">Traction</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">11</span>Impact</summary>
+<ul>
+<li><a href="../sections/impact.html">Overview</a></li>
+<li><a href="../files/sdg-alignment.html">UN Sustainable Development Goal Alignment</a></li><li><a href="../files/environmental-impact.html">Environmental Impact Assessment</a></li><li><a href="../files/social-economic-impact.html">Social &amp; Economic Impact</a></li>
+</ul>
+</details>
+<details class="nav-sec" open>
+<summary><span class="nav-num">12</span>Datasets &amp; Charts</summary>
+<ul>
+<li><a href="../sections/datasets.html">Overview</a></li>
+<li><a href="../files/kpi-definitions.html">KPI Definitions</a></li><li><a href="../files/sample-telemetry.html">Sample Telemetry — ILLUSTRATIVE SYNTHETIC DATA <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/sample-pond-twin-state.html">Sample Digital Twin State — ILLUSTRATIVE SYNTHETIC DATA <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/chart-global-production.html">The Inflection: Aquaculture Overtakes Capture Fisheries</a></li><li><a href="../files/chart-problem-cost-breakdown.html">The Structure of Aquaculture Losses</a></li><li><a href="../files/chart-market-sizing.html">Market Sizing — Method, Not Number</a></li><li><a href="../files/chart-do-diel-cycle.html" aria-current="page" class="current">Why Sampling Time Decides What You See <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/chart-do-depth-profile.html">The Loaded Gun: What a Vertical Profile Reveals <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/chart-financial-projection.html">Spend Plan by Phase — Not a Revenue Forecast</a></li><li><a href="../files/chart-manual-vs-omnidrone.html">Monitoring Approaches Compared</a></li><li><a href="../files/chart-species-production-mix.html">Where Farmed Aquatic Animals Are Produced</a></li><li><a href="../files/chart-tech-readiness.html">Technology Readiness — Where We Actually Are</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">13</span>Pitch &amp; Thesis Kit</summary>
+<ul>
+<li><a href="../sections/pitch.html">Overview</a></li>
+<li><a href="../files/pitch-deck-outline.html">Pitch Deck Outline</a></li><li><a href="../files/elevator-pitches.html">Elevator Pitches</a></li><li><a href="../files/faq-objections.html">FAQ &amp; Objection Handling</a></li><li><a href="../files/thesis-outline.html">Thesis / Dissertation Outline</a></li>
+</ul>
+</details></nav>
+<div class="sidebar-foot"><small>Fisheries • Aquaculture • Technology</small></div>
+</aside>
+<div class="main">
+<header class="topbar">
+<button class="icon-btn" id="nav-toggle" aria-label="Toggle navigation">☰</button>
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a><span class="crumb-sep">›</span><a href="../sections/datasets.html">Datasets &amp; Charts</a><span class="crumb-sep">›</span><span class="crumb-here">Why Sampling Time Decides What You See</span></nav>
+<button class="search-btn" id="search-btn" aria-label="Search"><span aria-hidden="true">🔍</span> Search <kbd>Ctrl K</kbd></button>
+<button class="icon-btn" id="theme-toggle" aria-label="Toggle light/dark theme" title="Toggle theme">◐</button>
+</header>
+<main class="content">
+<header class="doc-head">
+<h1>Why Sampling Time Decides What You See</h1>
+<p class="subtitle">The diel dissolved oxygen cycle over 24 hours</p>
+<div class="doc-meta">
+<code class="mono">chart-do-diel-cycle</code>
+
+
+<span class="badge badge-synthetic" title="Provenance: illustrative_synthetic"><span class="badge-icon">⚠</span>SAMPLE DATA — NOT REAL</span>
+
+<a class="raw-link" href="../../data/12_datasets/charts/chart-do-diel-cycle.json">raw JSON ↗</a>
+</div>
+<div class="cite-row"><a class="cite-chip" href="../files/references-bibliography.html#boyd-water-quality-2020" title="Boyd, C. E. (2020)">boyd-water-quality-2020</a></div>
+</header><aside class="banner banner-critical">
+<div class="banner-head"><span class="badge-icon">⚠</span>SYNTHETIC WARNING</div>
+<p>THIS CURVE IS FABRICATED. It is physically plausible but describes no real pond. It illustrates the MECHANISM. The webpage MUST show the illustrative_synthetic badge. Replace with real telemetry at v2.0.0.</p></aside><p class="lead">Dissolved oxygen peaks in mid-afternoon and bottoms out just before dawn. A manual sample at 9 a.m. reads a safe 6.4 mg/L; the 5 a.m. minimum on the same day is 2.8 mg/L — acute stress. This is the diel sampling bias, and it is the entire argument for autonomous pre-dawn monitoring.</p><figure class="chart"><div class="chart-prov"><span class="badge badge-synthetic" title="Provenance: illustrative_synthetic"><span class="badge-icon">⚠</span>SAMPLE DATA — NOT REAL</span></div><svg class="chart-svg" viewBox="0 0 760 400" role="img"><rect x="144.69565217391306" y="16" width="88.69565217391303" height="340" fill="var(--av-advisory)" opacity="0.10"><title>The hours a person is not on the water</title></rect><text class="anno-text" x="189.04347826086956" y="28" text-anchor="middle" fill="var(--av-advisory)"><tspan x="189.04347826086956" dy="0">The hours a person is</tspan><tspan x="189.04347826086956" dy="12">not on the water</tspan></text><line class="grid" x1="56" y1="356" x2="736" y2="356"/><text class="tick" x="48" y="360" text-anchor="end">0</text><line class="grid" x1="56" y1="290.61538461538464" x2="736" y2="290.61538461538464"/><text class="tick" x="48" y="294.61538461538464" text-anchor="end">2.5</text><line class="grid" x1="56" y1="225.23076923076923" x2="736" y2="225.23076923076923"/><text class="tick" x="48" y="229.23076923076923" text-anchor="end">5</text><line class="grid" x1="56" y1="159.84615384615387" x2="736" y2="159.84615384615387"/><text class="tick" x="48" y="163.84615384615387" text-anchor="end">7.5</text><line class="grid" x1="56" y1="94.46153846153845" x2="736" y2="94.46153846153845"/><text class="tick" x="48" y="98.46153846153845" text-anchor="end">10</text><line class="grid" x1="56" y1="29.076923076923094" x2="736" y2="29.076923076923094"/><text class="tick" x="48" y="33.076923076923094" text-anchor="end">12.5</text><text class="tick" x="56" y="374" text-anchor="middle">0</text><text class="tick" x="203.82608695652175" y="374" text-anchor="middle">5</text><text class="tick" x="351.6521739130435" y="374" text-anchor="middle">10</text><text class="tick" x="499.47826086956525" y="374" text-anchor="middle">15</text><text class="tick" x="647.304347826087" y="374" text-anchor="middle">20</text><line class="axis" x1="56" y1="356" x2="736" y2="356"/><line class="axis" x1="56" y1="16" x2="56" y2="356"/><text class="axis-label" x="396" y="394" text-anchor="middle">Hour of day (h)</text><text class="axis-label" transform="rotate(-90)" x="-186" y="14" text-anchor="middle">Dissolved oxygen (mg/L)</text><line x1="56" y1="277.53846153846155" x2="736" y2="277.53846153846155" stroke="var(--av-warning)" stroke-dasharray="6 4" stroke-width="1.5"/><text class="anno-text" x="732" y="272.53846153846155" text-anchor="end" fill="var(--av-warning)">Sub-lethal stress threshold (indicative) (3)</text><line x1="56" y1="225.23076923076923" x2="736" y2="225.23076923076923" stroke="var(--av-advisory)" stroke-dasharray="6 4" stroke-width="1.5"/><text class="anno-text" x="732" y="220.23076923076923" text-anchor="end" fill="var(--av-advisory)">Desirable minimum (indicative) (5)</text><polyline points="56,220 85.6,233.1 115.1,248.8 144.7,261.8 174.3,274.9 203.8,282.8 233.4,277.5 263,254 292.5,222.6 322.1,188.6 351.7,152 381.2,118 410.8,86.6 440.3,63.1 469.9,52.6 499.5,57.8 529,78.8 558.6,110.2 588.2,144.2 617.7,167.7 647.3,183.4 676.9,196.5 706.4,206.9 736,214.8" fill="none" stroke="var(--av-ocean)" stroke-width="2.2" stroke-linejoin="round"/><circle cx="56" cy="220" r="2.4" fill="var(--av-ocean)"/><circle cx="85.56521739130434" cy="233.0769230769231" r="2.4" fill="var(--av-ocean)"/><circle cx="115.13043478260869" cy="248.76923076923077" r="2.4" fill="var(--av-ocean)"/><circle cx="144.69565217391306" cy="261.8461538461538" r="2.4" fill="var(--av-ocean)"/><circle cx="174.26086956521738" cy="274.9230769230769" r="2.4" fill="var(--av-ocean)"/><circle cx="203.82608695652175" cy="282.7692307692308" r="2.4" fill="var(--av-ocean)"/><circle cx="233.3913043478261" cy="277.53846153846155" r="2.4" fill="var(--av-ocean)"/><circle cx="262.95652173913044" cy="254" r="2.4" fill="var(--av-ocean)"/><circle cx="292.52173913043475" cy="222.6153846153846" r="2.4" fill="var(--av-ocean)"/><circle cx="322.0869565217391" cy="188.6153846153846" r="2.4" fill="var(--av-ocean)"/><circle cx="351.6521739130435" cy="152" r="2.4" fill="var(--av-ocean)"/><circle cx="381.2173913043478" cy="118.00000000000003" r="2.4" fill="var(--av-ocean)"/><circle cx="410.7826086956522" cy="86.61538461538458" r="2.4" fill="var(--av-ocean)"/><circle cx="440.3478260869565" cy="63.076923076923094" r="2.4" fill="var(--av-ocean)"/><circle cx="469.9130434782609" cy="52.61538461538464" r="2.4" fill="var(--av-ocean)"/><circle cx="499.47826086956525" cy="57.84615384615387" r="2.4" fill="var(--av-ocean)"/><circle cx="529.0434782608695" cy="78.76923076923077" r="2.4" fill="var(--av-ocean)"/><circle cx="558.6086956521739" cy="110.15384615384616" r="2.4" fill="var(--av-ocean)"/><circle cx="588.1739130434783" cy="144.15384615384616" r="2.4" fill="var(--av-ocean)"/><circle cx="617.7391304347826" cy="167.69230769230768" r="2.4" fill="var(--av-ocean)"/><circle cx="647.304347826087" cy="183.3846153846154" r="2.4" fill="var(--av-ocean)"/><circle cx="676.8695652173913" cy="196.46153846153845" r="2.4" fill="var(--av-ocean)"/><circle cx="706.4347826086956" cy="206.92307692307693" r="2.4" fill="var(--av-ocean)"/><circle cx="736" cy="214.76923076923077" r="2.4" fill="var(--av-ocean)"/><circle cx="203.82608695652175" cy="282.7692307692308" r="5" fill="none" stroke="var(--av-critical)" stroke-width="2"/><text class="anno-text" x="215.82608695652175" y="276.7692307692308" text-anchor="start" fill="var(--av-critical)"><tspan x="215.82608695652175" dy="0">Pre-dawn minimum — nobody</tspan><tspan x="215.82608695652175" dy="12">is measuring</tspan></text><circle cx="322.0869565217391" cy="188.6153846153846" r="5" fill="none" stroke="var(--av-slate)" stroke-width="2"/><text class="anno-text" x="334.0869565217391" y="182.6153846153846" text-anchor="start" fill="var(--av-slate)"><tspan x="334.0869565217391" dy="0">Typical manual sample —</tspan><tspan x="334.0869565217391" dy="12">looks safe</tspan></text></svg><ul class="chart-legend"><li><span class="swatch" style="background:var(--av-ocean)"></span>Surface DO (0.5 m) — SYNTHETIC</li></ul><details class="chart-data"><summary>Data table</summary><h4>Surface DO (0.5 m) — SYNTHETIC</h4><div class="table-scroll"><table><thead><tr><th>x</th><th>y (mg/L)</th></tr></thead><tbody><tr><td class="num">0</td><td class="num">5.2</td></tr><tr><td class="num">1</td><td class="num">4.7</td></tr><tr><td class="num">2</td><td class="num">4.1</td></tr><tr><td class="num">3</td><td class="num">3.6</td></tr><tr><td class="num">4</td><td class="num">3.1</td></tr><tr><td class="num">5</td><td class="num">2.8</td></tr><tr><td class="num">6</td><td class="num">3</td></tr><tr><td class="num">7</td><td class="num">3.9</td></tr><tr><td class="num">8</td><td class="num">5.1</td></tr><tr><td class="num">9</td><td class="num">6.4</td></tr><tr><td class="num">10</td><td class="num">7.8</td></tr><tr><td class="num">11</td><td class="num">9.1</td></tr><tr><td class="num">12</td><td class="num">10.3</td></tr><tr><td class="num">13</td><td class="num">11.2</td></tr><tr><td class="num">14</td><td class="num">11.6</td></tr><tr><td class="num">15</td><td class="num">11.4</td></tr><tr><td class="num">16</td><td class="num">10.6</td></tr><tr><td class="num">17</td><td class="num">9.4</td></tr><tr><td class="num">18</td><td class="num">8.1</td></tr><tr><td class="num">19</td><td class="num">7.2</td></tr><tr><td class="num">20</td><td class="num">6.6</td></tr><tr><td class="num">21</td><td class="num">6.1</td></tr><tr><td class="num">22</td><td class="num">5.7</td></tr><tr><td class="num">23</td><td class="num">5.4</td></tr></tbody></table></div></details></figure><section class="doc-sec"><h2>Notes</h2><p>Threshold lines are INDICATIVE (see <a href="../files/water-quality-standards.html">water-quality-standards.json</a>) and must be replaced with sourced species-specific values. The teaching value survives even with placeholder thresholds because the point is the SHAPE and the sampling-time bias, not the exact numbers.</p></section>
+</main>
+<footer class="page-footer"><a class="pn pn-prev" href="../files/chart-market-sizing.html">
+<small>← Previous · Datasets &amp; Charts</small>
+<span>Market Sizing — Method, Not Number</span></a><a class="pn pn-next" href="../files/chart-do-depth-profile.html">
+<small>Next → · Datasets &amp; Charts</small>
+<span>The Loaded Gun: What a Vertical Profile Reveals</span></a></footer>
+</div>
+</div>
+<div class="search-overlay" id="search-overlay" hidden>
+<div class="search-panel" role="dialog" aria-label="Search">
+<input type="search" id="search-input" placeholder="Search the repository… (Esc to close)" autocomplete="off" spellcheck="false">
+<ul class="search-results" id="search-results"></ul>
+<div class="search-hint">↑↓ to navigate · Enter to open · Esc to close</div>
+</div>
+</div>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

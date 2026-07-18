@@ -1,0 +1,148 @@
+{
+  "id": "studies-water-quality-sensing",
+  "title": "Related Studies — Water Quality, Limnology & Fish Kill Mechanisms",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "theme": "water_quality_sensing",
+  "provenance": "verified_external",
+  "verification_notice": "Records derived from search-result summaries. Open the sources before citing.",
+
+  "why_this_theme_is_the_scientific_foundation": "This collection contains the evidence that the problem is real, recurring, mechanistically understood, and specifically vertical. Everything the OmniDrone does at depth is justified from here.",
+
+  "studies": [
+    {
+      "citation_id": "seafdec-laguna-fishkill",
+      "theme": "water_quality_sensing",
+      "study_type": "empirical_field",
+      "geography": "Laguna de Bay, Philippines",
+      "summary": "Investigation of the incidence and causes of mass fish kill in a shallow tropical eutrophic lake supporting extensive cage and pen culture.",
+      "key_findings": [
+        "Fish kills implicated dissolved oxygen depletion, high ammonia-nitrogen, and hydrogen sulfide.",
+        "The lake is shallow, tropical, and eutrophic — a regime where stratification can establish and break down rapidly."
+      ],
+      "relevance_to_omnidrone": "THE SINGLE MOST IMPORTANT SOURCE IN THIS REPOSITORY FOR THE TECHNICAL ARGUMENT. The causal triad it identifies is not a generic water quality panel — it is a diagnostic signature. DO depletion plus ammonia-N plus hydrogen sulfide together do not describe surface water going bad. They describe HYPOLIMNETIC water arriving at the surface: oxygen-poor, ammonia-rich, sulfide-laden bottom water delivered by mixing. Three of the probe's channels exist because of this finding.",
+      "supports_or_challenges": "supports",
+      "the_design_consequence": "A surface sensor cannot see any of this coming. The bottom water is the killing agent and it is invisible from above until it arrives. This paper is the published justification for the entire reeled-probe architecture, and it is why the thesis should lead with it rather than with the FAO statistics.",
+      "limitations": "Author and year not yet retrieved. Given how load-bearing this citation is, that is unacceptable — it is the first source to verify.",
+      "priority": "HIGHEST — verify first"
+    },
+    {
+      "citation_id": "bioflux-lake-buhi-2020",
+      "theme": "water_quality_sensing",
+      "study_type": "case_study",
+      "geography": "Lake Buhi, Camarines Sur, Philippines",
+      "year": 2020,
+      "summary": "Case study of fish kill occurrence and recurrence in Lake Buhi, including an estimate of PHP 322.1 million in recorded national fish kill losses from 1998 to 2018.",
+      "key_findings": [
+        "Fish kills in this system are a recurring pattern, not isolated accidents.",
+        "Cumulative recorded national losses 1998-2018 estimated at PHP 322.1 million."
+      ],
+      "relevance_to_omnidrone": "The 'occurrence AND recurrence' framing is the intellectually valuable part. A one-off disaster is bad luck; a repeating one in a system whose dynamics are known is an unmet monitoring need. That distinction is the entire basis for a product.",
+      "supports_or_challenges": "mixed",
+      "the_challenging_part": "The PHP 322.1 M figure over 21 years averages roughly PHP 15 M per year nationally — a small number, less than a single large farm's annual revenue. Cited carelessly, this statistic argues AGAINST the venture. It also appears irreconcilable with individual event figures (one reported event alone was PHP 43.13 M). Either the national figure counts only a narrow subset of investigated incidents, or the event figures are inflated by reporting. We do not know which, and resolving it requires BFAR's primary records.",
+      "action": "Obtain BFAR primary fish kill records. Resolving this contradiction would itself be a publishable contribution and it is currently blocking any honest loss quantification.",
+      "priority": "HIGH"
+    },
+    {
+      "citation_id": "inquirer-taal-fishkill-2023",
+      "theme": "water_quality_sensing",
+      "study_type": "case_study",
+      "geography": "Taal Lake, Batangas, Philippines",
+      "year": 2023,
+      "summary": "Reporting of a 343-tonne fish kill affecting tilapia and milkfish across three municipalities.",
+      "key_findings": [
+        "343 t total: Talisay 300 t, Agoncillo 32 t, Laurel 11 t.",
+        "Attributed to DO depletion, with suspected volcanic sulfur contribution and cage over-stocking."
+      ],
+      "relevance_to_omnidrone": "The spatial breakdown is the finding that matters and it is easy to miss. Eighty-seven percent of the loss occurred in ONE municipality. The kill was not uniform across the lake — which means a single monitoring point anywhere in Taal would have given the wrong answer for most operators. This is direct empirical support for the spatial coverage argument against the fixed-buoy category.",
+      "supports_or_challenges": "supports",
+      "the_local_moat": "Taal's volcanic sulfur input is a locally distinctive chemistry driver that no imported generic product models. If we can characterise it, that is a defensible advantage that a Norwegian salmon platform cannot replicate by spending money.",
+      "limitations": "Journalistic. Adequate for a pitch, weak for a dissertation. Tonnage figures are frequently revised in later reports.",
+      "priority": "MEDIUM"
+    },
+    {
+      "citation_id": "pna-tilapia-fishkill",
+      "theme": "water_quality_sensing",
+      "study_type": "case_study",
+      "geography": "Philippines",
+      "summary": "Reporting of a tilapia fish kill exceeding 600 tonnes valued at PHP 43.13 million, with BFAR commentary on causes.",
+      "key_findings": [
+        "Over-stocking of cages observed in affected areas, contributing to DO depletion.",
+        "Surface DO considered normal at 6 ppm in the affected lake."
+      ],
+      "relevance_to_omnidrone": "One of the few incidents with a peso figure, so it is usable in an ROI argument. The 6 ppm normal threshold is a useful local operational anchor sourced to BFAR.",
+      "supports_or_challenges": "mixed",
+      "the_uncomfortable_finding": "Over-stocking is named as a contributing cause. That is the ROOT cause, and the OmniDrone does not fix it. We make the consequences of over-stocking visible; we do not make anyone destock. Worse, there is a plausible reading in which better instruments let operators push density CLOSER to the edge — meaning the technology could make the underlying problem worse. That deserves a paragraph in the thesis ethics chapter rather than silence.",
+      "priority": "MEDIUM"
+    },
+    {
+      "citation_id": "khaleej-heat-fishkill-ph",
+      "theme": "water_quality_sensing",
+      "study_type": "case_study",
+      "geography": "Northern Philippines",
+      "summary": "Extreme heat and low rainfall triggering mass fish kill.",
+      "relevance_to_omnidrone": "Evidence for the climate-trigger argument. The mechanism is worth stating precisely because it is a pincer: rising temperature simultaneously INCREASES fish metabolic oxygen demand and DECREASES oxygen solubility. The two curves move against each other, which is why heat events kill. Both sides of the pincer are directly measurable by the probe, which makes this the cleanest physical case for the core sensing claim.",
+      "supports_or_challenges": "supports",
+      "limitations": "Foreign general-interest outlet. Weak source. Find the primary BFAR report.",
+      "priority": "LOW as a source, HIGH as a mechanism"
+    },
+    {
+      "citation_id": "fao-nutrient-dynamics-eutrophic",
+      "theme": "water_quality_sensing",
+      "study_type": "policy_report",
+      "geography": "Philippines, Thailand, Hong Kong",
+      "summary": "FAO analysis of nutrient dynamics in eutrophic inland waters used for aquaculture.",
+      "relevance_to_omnidrone": "Supports the reflexive-degradation argument — the feedback loop where uneaten feed drives the eutrophication that depletes the oxygen that kills the fish that the feeding was meant to grow. This loop is the most intellectually interesting structure in the problem space and the strongest single slide available to the pitch.",
+      "supports_or_challenges": "supports",
+      "priority": "MEDIUM"
+    },
+    {
+      "citation_id": "ija-environmental-impacts-ph",
+      "theme": "water_quality_sensing",
+      "study_type": "policy_report",
+      "geography": "Philippines",
+      "summary": "Review of the environmental impacts of aquaculture in the Philippines.",
+      "relevance_to_omnidrone": "Supports the commons-problem framing: in a shared lake, each operator's stocking imposes oxygen demand on everyone, and without measurement there is no basis for allocating carrying capacity. This is the strongest public-good argument for the platform and therefore the strongest argument for government and development-finance interest.",
+      "supports_or_challenges": "supports",
+      "the_tension": "The public-good use case requires multi-farm data, which collides directly with farmer data sensitivity. The operator who benefits from the lake-wide analysis is the one who least wants their own stocking visible in it. Unresolved. See ethics-data-privacy.json.",
+      "priority": "MEDIUM"
+    },
+    {
+      "citation_id": "boyd-water-quality-2020",
+      "theme": "water_quality_sensing",
+      "study_type": "book",
+      "summary": "The standard textbook reference for aquaculture water quality.",
+      "relevance_to_omnidrone": "The general authority for DO thresholds, diel cycles, supersaturation interpretation, and water chemistry throughout this repository. Should replace the vendor content marketing currently cited alongside it.",
+      "supports_or_challenges": "context_only",
+      "key_concepts_we_rely_on": [
+        "The diel DO cycle: photosynthesis by day, respiration by night, with the minimum just before dawn — the structural basis of our entire scheduling argument.",
+        "Supersaturation above ~120 percent indicates a large algal standing crop and therefore a large night-time oxygen demand. It is a WARNING, not good news — an inversion that catches inexperienced operators out constantly.",
+        "Un-ionised ammonia fraction rises steeply with pH and temperature, which is why TAN is uninterpretable without both."
+      ],
+      "priority": "HIGH — verify the edition details"
+    },
+    {
+      "citation_id": "ncbi-takifugu-hypoxia-2022",
+      "theme": "water_quality_sensing",
+      "study_type": "empirical_lab",
+      "year": 2022,
+      "summary": "Metabolomic analysis of pufferfish gill tissue under acute hypoxic stress.",
+      "relevance_to_omnidrone": "Physiological evidence that hypoxia causes measurable cellular damage before mortality — supporting the argument that by the time fish pipe at the surface, the damage is done and the intervention window has largely closed. Survivors carry stress-induced immunosuppression into a disease window weeks later, which is why the mortality invoice arrives twice.",
+      "supports_or_challenges": "supports",
+      "limitations": "Different species, laboratory conditions, acute exposure. Peripheral to the core argument and should not be over-leveraged.",
+      "priority": "LOW"
+    }
+  ],
+
+  "synthesis": {
+    "the_mechanism_the_literature_establishes": "Stratification isolates the hypolimnion. The hypolimnion goes anoxic and accumulates ammonia and hydrogen sulfide. A weather trigger — cold rain, wind, a passing front — mixes the column. Bottom water reaches the fish. They die within hours. Over-stocking sets the stage by driving the oxygen demand that makes the hypolimnion anoxic in the first place.",
+    "why_this_matters_for_the_design": "Every step of that chain happens below the surface, over days, and is invisible to a surface measurement until the final hours. The mechanism is not a mystery — it is a well-characterised limnological process that nobody is watching.",
+    "what_the_literature_does_not_establish": [
+      "That earlier detection changes outcomes. Nobody has published a matched comparison of farms with and without monitoring. This is the load-bearing assumption of the entire venture and it is uncited.",
+      "That chronic sub-lethal loss exceeds catastrophic loss. Every study here examines mass mortality events, because those are what get reported. The slow bleed is invisible in this literature and may be much larger.",
+      "Reliable loss denominators. We have tonnages without total production at risk, so no incident rate can be computed.",
+      "Species-specific thresholds for Philippine tilapia and milkfish from primary sources. Our alert thresholds currently rest on general practice, which is the highest-consequence placeholder in the repository."
+    ],
+    "the_research_opportunity": "A documented counterfactual — a farm that had monitoring and avoided a kill — does not exist in this literature. Producing one would be a genuine contribution and it is exactly what a rational buyer wants to see. It is also a strong thesis objective in its own right."
+  }
+}

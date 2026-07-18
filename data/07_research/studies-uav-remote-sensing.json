@@ -1,0 +1,147 @@
+{
+  "id": "studies-uav-remote-sensing",
+  "title": "Related Studies — UAV & Satellite Remote Sensing of Water",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "theme": "uav_remote_sensing",
+  "provenance": "verified_external",
+  "verification_notice": "All records derived from search-result summaries. Open the sources before citing. See references-bibliography.json.",
+
+  "why_this_theme_matters_most": "This is the theme where our contribution lives. The literature can map water quality from a drone; it cannot calibrate the map without a boat. That gap is the OmniDrone's reason to exist, and this collection is the evidence that the gap is real.",
+
+  "studies": [
+    {
+      "citation_id": "mdpi-drones-inland-review-2024",
+      "theme": "uav_remote_sensing",
+      "study_type": "systematic_review",
+      "geography": "Global",
+      "year": 2024,
+      "summary": "A global systematic review of drone-based remote sensing for monitoring water temperature, suspended solids, and CDOM in inland waters, cataloguing challenges and opportunities across the published record.",
+      "key_findings": [
+        "UAV remote sensing offers high spatial and temporal resolution, flexibility, the ability to capture at different times of day, and relatively low cost compared with satellite or crewed platforms.",
+        "Radiometric calibration is a persistent, unsolved practical challenge across studies.",
+        "Ground-truthing requirements constrain operational deployment.",
+        "Inland waters are optically complex — turbidity and CDOM confound retrievals in ways open-ocean algorithms do not handle."
+      ],
+      "relevance_to_omnidrone": "This is the methodological foundation for the imaging half of the platform, AND the clearest published statement of the problem our architecture solves. The review identifies ground-truthing as a limiting constraint; our answer is to carry the ground truth on the vehicle. Read this before writing another line of imaging code.",
+      "supports_or_challenges": "mixed",
+      "the_mixed_part": "It supports the method and challenges the operational viability. The challenges it catalogues — calibration, glint, ground truth — are exactly the things that must work for us, and the review is telling us they routinely do not.",
+      "limitations": "A review of research studies, not of commercial deployments. It tells us what researchers achieved under controlled conditions with a boat on standby, not what survives a working farm.",
+      "priority": "HIGHEST"
+    },
+    {
+      "citation_id": "sciencedirect-uav-multispectral-ponds-2024",
+      "theme": "uav_remote_sensing",
+      "study_type": "empirical_field",
+      "year": 2024,
+      "summary": "Monitoring water quality parameters of freshwater aquaculture ponds using UAV-based multispectral imagery.",
+      "key_findings": [
+        "UAV multispectral imagery can retrieve water quality parameters in freshwater aquaculture ponds specifically.",
+        "Drone remote sensing offers mobility, flexibility, economy, low atmospheric interference at low altitude, and high image resolution.",
+        "Monitoring water quality is central to water exchange decisions, precise feeding, and product quality control."
+      ],
+      "relevance_to_omnidrone": "The most directly analogous empirical precedent in the literature — UAV multispectral over aquaculture ponds is precisely half of our concept. It establishes feasibility for the imaging function and gives us a methodological baseline to build on rather than reinvent.",
+      "supports_or_challenges": "supports",
+      "the_gap_it_leaves": "It does the imaging. It does not do the depth, and it does not carry its own calibration. That is the space we occupy.",
+      "priority": "HIGHEST"
+    },
+    {
+      "citation_id": "springer-uav-satellite-review-2024",
+      "theme": "uav_remote_sensing",
+      "study_type": "systematic_review",
+      "year": 2024,
+      "summary": "A literature review of UAV and satellite remote sensing for inland water quality assessment, including integrated approaches.",
+      "key_findings": [
+        "Integrated UAV-satellite systems bridge local high-precision data and regional-scale monitoring.",
+        "Reported validation showed high consistency with observed total nitrogen concentrations, with average urban prediction errors around 15 percent.",
+        "Drones equipped with sensor arrays can collect high-resolution spatial and temporal data on temperature, turbidity, pH, and pollutant concentrations across large and inaccessible water bodies."
+      ],
+      "relevance_to_omnidrone": "Establishes the UAV-satellite complementarity that underpins our recommendation to ingest free Copernicus data. Satellites give a new site an instant historical baseline we could not otherwise afford; the UAV gives the local precision the satellite lacks. This reframes satellites from competitor to free infrastructure — a strategically important reframe that fell directly out of reading this review.",
+      "supports_or_challenges": "supports",
+      "the_action_it_generates": "Ingest Copernicus from day one. It is nearly free capability and it is not currently in our architecture. This is the cheapest improvement available to the platform.",
+      "priority": "HIGH"
+    },
+    {
+      "citation_id": "tandf-uav-chla-review-2025",
+      "theme": "uav_remote_sensing",
+      "study_type": "systematic_review",
+      "year": 2025,
+      "summary": "A systematic review of UAV-based remote sensing of chlorophyll-a concentrations in inland water bodies.",
+      "relevance_to_omnidrone": "The most recent systematic review specifically on UAV chlorophyll retrieval — the exact retrieval our fusion core performs. Should define our methodological baseline and tell us which index and which regression form the field has converged on.",
+      "supports_or_challenges": "supports",
+      "priority": "HIGH"
+    },
+    {
+      "citation_id": "mishra-ndci-2012",
+      "theme": "uav_remote_sensing",
+      "study_type": "modeling_simulation",
+      "year": 2012,
+      "summary": "Introduces the Normalized Difference Chlorophyll Index, a red / red-edge band ratio for estimating chlorophyll-a in turbid productive waters.",
+      "key_findings": [
+        "NDCI = (R_rededge - R_red) / (R_rededge + R_red).",
+        "Red-edge based indices succeed in turbid productive water where classic blue-green ocean chlorophyll algorithms fail."
+      ],
+      "relevance_to_omnidrone": "The originating source for the core index in our imaging pipeline, and the reason the multispectral payload MUST include a red-edge band. This single paper determines a hardware requirement (REQ-SEN-001) — which is a nice illustration of literature driving engineering rather than decorating it.",
+      "supports_or_challenges": "supports",
+      "the_critical_caveat": "NDCI is a RELATIVE index, not a concentration. Converting it requires local regression against in-situ measurements. That conversion requirement IS our business model. Anyone citing NDCI as if it yields concentrations directly has misread the paper.",
+      "priority": "HIGH"
+    },
+    {
+      "citation_id": "mcfeeters-ndwi-1996",
+      "theme": "uav_remote_sensing",
+      "study_type": "modeling_simulation",
+      "year": 1996,
+      "summary": "Introduces NDWI, a green/NIR band ratio for delineating open water.",
+      "relevance_to_omnidrone": "The first step in our imagery pipeline. Nothing downstream is valid without it — a dike or boat pixel entering a chlorophyll statistic corrupts the statistic silently.",
+      "supports_or_challenges": "supports",
+      "known_pathology": "Dense floating algal mats can be misclassified as vegetation and masked out — meaning the bloom disappears from the map exactly when it is worst. This is a documented NDWI failure mode and it must be explicitly tested for, not discovered in production. See ai-ml-models.json#/models/water-masking."
+    },
+    {
+      "citation_id": "arxiv-uav-path-planning-wq",
+      "theme": "uav_remote_sensing",
+      "study_type": "modeling_simulation",
+      "year": 2025,
+      "title_note": "Safe path planning and observation quality enhancement strategy for UAVs in water quality monitoring tasks",
+      "url": "https://arxiv.org/pdf/2512.21375",
+      "summary": "Path planning for UAV water quality monitoring that jointly optimises flight safety and observation quality.",
+      "relevance_to_omnidrone": "Directly relevant to the adaptive station selection problem in mission profile mp-02 — fly the image, then choose where to drop the probe based on what the image showed. That is an observation-quality-driven planning problem and someone has already formalised it.",
+      "supports_or_challenges": "supports",
+      "verification_status": "cited_from_search_result",
+      "note": "Preprint. Verify publication status.",
+      "action": "Read before implementing adaptive station selection. Version one should let the operator pick stations from the map, but this is the path to automating it."
+    },
+    {
+      "citation_id": "pmc-sentinel-hab-chile-2020",
+      "theme": "uav_remote_sensing",
+      "study_type": "case_study",
+      "geography": "Southern Chile",
+      "year": 2020,
+      "summary": "Sentinel-2 and Sentinel-3 data used to monitor harmful algal blooms during the COVID-19 lockdown, when in-situ sampling was impossible.",
+      "key_findings": [
+        "Satellite imagery allowed daily observation of algal blooms.",
+        "It advised decision-makers in time to prepare for possible mass salmon mortality events."
+      ],
+      "relevance_to_omnidrone": "IMPORTANT AND UNCOMFORTABLE. This is operational, demonstrated, free satellite-based HAB early warning for aquaculture. It is the strongest evidence that part of our value proposition already exists at zero cost.",
+      "supports_or_challenges": "challenges",
+      "the_challenge_stated_plainly": "If free Sentinel data already gives salmon farms actionable bloom warnings, what are we selling? Our honest answers: 10 m pixels cannot resolve individual cages; a multi-day revisit misses processes that move in hours; clouds make optical satellites nearly useless during a Philippine monsoon — which is the season of greatest risk; and satellites never see depth. Those are real answers. But the burden of proof is ours and the incumbent is free.",
+      "the_strategic_read": "This study should push us toward complementarity rather than competition. Ingest Sentinel for baselining and regional context; sell the resolution, the cadence, the cloud-immunity, and the depth. Also note the lockdown framing — it is a reminder that the value of remote observation spikes exactly when humans cannot get to the water, which is also our pre-dawn and post-storm argument."
+    }
+  ],
+
+  "synthesis": {
+    "what_is_established": [
+      "UAV multispectral retrieval of chlorophyll, turbidity, and CDOM in inland water works.",
+      "Red-edge indices are the correct approach for turbid productive water.",
+      "UAV and satellite are complementary, not competing.",
+      "Satellite HAB early warning for aquaculture is operational today, and free."
+    ],
+    "what_is_not_established": [
+      "That the calibration burden can be carried by the aircraft itself.",
+      "That the workflow survives an operational farm rather than a research campaign.",
+      "That any of this is economically viable at smallholder scale."
+    ],
+    "the_gap_we_claim": "Carry your own ground truth. Every study in this collection solves the calibration problem with a boat. Nobody has put the sonde on the aircraft.",
+    "the_honesty_requirement": "'Nobody has done X' is the weakest claim in any literature review and it usually means 'we have not found it yet'. Before this appears in a thesis, run a dedicated systematic search on UAV-tethered sondes, winched sensors from rotorcraft, and adaptive aerial sampling. Somebody has almost certainly tried the pendulum control problem, and their published failure is worth more to us than our own would be.",
+    "priority_action": "That systematic search, before Phase 1."
+  }
+}

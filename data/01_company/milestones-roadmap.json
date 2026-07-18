@@ -1,0 +1,164 @@
+{
+  "id": "milestones-roadmap",
+  "title": "Development Roadmap & Milestones",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "modeled_projection",
+  "confidence": "low",
+  "honest_framing": "This is a plan, not a forecast. Hardware timelines slip; aquaculture hardware timelines slip more, because the validation season is set by the weather and the fish, not by the sprint board. Durations are stated as ranges and the gates are stated as evidence, not as dates. An investor should read the gates, not the calendar.",
+
+  "phases": [
+    {
+      "phase_id": "p0",
+      "name": "Phase 0 — Definition",
+      "duration_months": { "min": 2, "max": 4 },
+      "trl_entry": 2,
+      "trl_exit": 3,
+      "objective": "Convert the concept into a defensible, evidenced specification and prove the science is sound before spending money on hardware.",
+      "workstreams": [
+        "Literature review and research corpus (this repository).",
+        "Requirements baseline with traceability to stakeholder needs.",
+        "Mass, power, and payload budget — the go/no-go arithmetic on whether the vehicle can exist.",
+        "Farmer discovery interviews. Target: 25+ operators across at least three lake or pond systems.",
+        "Regulatory pathway map with CAAP and BFAR.",
+        "Academic partner MOU for validation."
+      ],
+      "exit_gate": {
+        "criteria": [
+          "Payload budget closes with >= 20% margin, or the concept is re-architected. If a quadrotor cannot carry probe plus winch plus imaging plus dispensing on a useful endurance, that must be discovered NOW, on paper, not after tooling.",
+          "At least 25 farmer interviews completed with a written synthesis, including at least five who say they would not buy it and why.",
+          "Named academic partner with a signed validation protocol.",
+          "Regulatory pathway documented, including the honest answer on BVLOS timeline."
+        ],
+        "kill_criteria": [
+          "If the payload budget cannot close on any credible multirotor configuration, stop and reconsider the platform — a tethered buoy network or an uncrewed surface vessel may be the correct answer, and the team must be willing to hear that.",
+          "If farmer discovery reveals that operators will not pay for information they cannot act on — for instance, because they have no aeration capacity to deploy in response to a warning — the value proposition is broken and must be reformulated before hardware."
+        ]
+      },
+      "status": "in_progress"
+    },
+    {
+      "phase_id": "p1",
+      "name": "Phase 1 — Subsystem Prototypes",
+      "duration_months": { "min": 4, "max": 8 },
+      "trl_entry": 3,
+      "trl_exit": 4,
+      "objective": "De-risk the two hardest subsystems independently, before integration hides which one is failing.",
+      "workstreams": [
+        "Winch rig on a static gantry over water: 1,000 deploy/recover cycles, wind-simulated, with fouling introduced deliberately.",
+        "Sensor payload bench: probe accuracy against laboratory reference; multispectral radiometric calibration workflow.",
+        "Dispensing mechanism: dose accuracy and repeatability across granular and liquid loads.",
+        "Airframe hover testbed with mass simulators.",
+        "Data pipeline and telemetry schema against synthetic feeds."
+      ],
+      "exit_gate": {
+        "criteria": [
+          "Winch achieves target cycle reliability with a documented failure analysis on every jam.",
+          "Probe agrees with laboratory reference within stated accuracy across the full range, including at the ugly end — high turbidity, low DO.",
+          "Multispectral calibration workflow produces reproducible reflectance across two different days and illumination conditions. If it cannot, the imaging value proposition does not exist yet.",
+          "Dose accuracy within specification."
+        ]
+      },
+      "status": "not_started"
+    },
+    {
+      "phase_id": "p2",
+      "name": "Phase 2 — Integrated Prototype",
+      "duration_months": { "min": 5, "max": 9 },
+      "trl_entry": 4,
+      "trl_exit": 5,
+      "objective": "One vehicle that flies with everything on it and comes back with data.",
+      "workstreams": [
+        "Full integration. Expect the mass budget to be breached here; plan the descope list in advance rather than in panic.",
+        "Water-aware failsafe logic and ditch-avoidance.",
+        "Tethered-probe flight dynamics — a swinging pendulum mass on a moving hover is a genuine control problem and it is where the schedule will actually go.",
+        "First real profiles over a real pond, VLOS, with a certificated pilot.",
+        "OmniDock v1."
+      ],
+      "exit_gate": {
+        "criteria": [
+          "20 consecutive sorties with probe deployment and recovery, no loss of aircraft.",
+          "Profiles reproducible against a boat-deployed reference sonde at the same station within stated tolerance. This is the moment the core claim is either true or it is not.",
+          "Endurance meets the mission profile with reserve.",
+          "Zero uncommanded discharge events from the dispensing system."
+        ]
+      },
+      "status": "not_started"
+    },
+    {
+      "phase_id": "p3",
+      "name": "Phase 3 — Field Validation & Model Training",
+      "duration_months": { "min": 8, "max": 14 },
+      "trl_entry": 5,
+      "trl_exit": 6,
+      "objective": "Earn the right to make predictive claims. This is the longest phase and the one founders always underestimate, because you cannot rush a season.",
+      "workstreams": [
+        "Instrumented longitudinal deployment at the pilot site, minimum one full annual cycle to capture both the dry-season thermal stress window and the monsoon overturn window.",
+        "Paired reference sampling for every drone profile — the training set is only as good as its ground truth.",
+        "NDCI-to-Chl-a local regression, per site.",
+        "Anomaly detection model training on real, labelled surface imagery.",
+        "Kill-risk model development — and honest evaluation, including on the events it misses.",
+        "Digital twin calibration against observed pond behaviour."
+      ],
+      "exit_gate": {
+        "criteria": [
+          "A validation dataset spanning at least one full seasonal cycle, published or at minimum peer-reviewed by the academic partner.",
+          "Anomaly detection meets target precision and recall on a held-out site — not a held-out split of the same site, which would prove nothing about generalisation.",
+          "Kill-risk model evaluated against real events with an honest confusion matrix. If it cannot beat the farmer's existing intuition, say so and do not ship it.",
+          "At least one documented case where the system produced a warning that led to an intervention that a farmer judged useful."
+        ],
+        "note": "The last criterion is the real one. Everything else is instrumentation."
+      },
+      "status": "not_started"
+    },
+    {
+      "phase_id": "p4",
+      "name": "Phase 4 — Commercial Pilot",
+      "duration_months": { "min": 6, "max": 12 },
+      "trl_entry": 6,
+      "trl_exit": 7,
+      "objective": "Prove someone will pay, and that the service can be delivered by people who are not the founders.",
+      "workstreams": [
+        "Paid pilots with 3-5 operators.",
+        "CAAP BVLOS application and safety case.",
+        "Service operations model — this is where the business either has unit economics or does not.",
+        "Support, training, and maintenance in real conditions.",
+        "Financing structure for smallholder access."
+      ],
+      "exit_gate": {
+        "criteria": [
+          "Paying customers with renewal intent.",
+          "Service delivered by trained operators who did not build the machine.",
+          "Unit economics measured, not modeled.",
+          "BVLOS authorisation obtained, or the business model explicitly re-based on VLOS economics. Do not carry an unresolved BVLOS assumption into a Series A."
+        ]
+      },
+      "status": "not_started"
+    },
+    {
+      "phase_id": "p5",
+      "name": "Phase 5 — Scale",
+      "duration_months": { "min": 12, "max": 24 },
+      "trl_entry": 7,
+      "trl_exit": 8,
+      "objective": "Dock network density in the beachhead lakes, then adjacent geographies.",
+      "status": "not_started"
+    }
+  ],
+
+  "critical_path": {
+    "note": "The things that will actually determine whether this works, ranked. Everything else is schedulable.",
+    "items": [
+      { "rank": 1, "item": "Payload budget closure", "why": "If the vehicle cannot carry the mission, nothing downstream matters. This is a paper exercise available today — do it first." },
+      { "rank": 2, "item": "Winch reliability over water", "why": "The novel mechanism. Highest technical risk with the least prior art to borrow from." },
+      { "rank": 3, "item": "One full seasonal validation cycle", "why": "Irreducible. You cannot buy your way past a year of weather, and every predictive claim depends on it." },
+      { "rank": 4, "item": "BVLOS authorisation", "why": "Long lead, external dependency, gates the margin. Start the conversation in Phase 0, not Phase 4." },
+      { "rank": 5, "item": "Proof a farmer acts on an alert", "why": "The entire thesis assumes information changes behaviour. If a warning arrives and the farmer has no affordable response available, the product informs people about their own losses in real time — which is not a business." }
+    ]
+  },
+
+  "chart_hint": {
+    "chart_file": "data/12_datasets/charts/chart-tech-readiness.json",
+    "note": "Render this roadmap as a TRL progression with gate markers, not as a Gantt chart with dates the team cannot honour."
+  }
+}

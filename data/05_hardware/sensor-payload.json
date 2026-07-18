@@ -1,0 +1,101 @@
+{
+  "id": "sensor-payload",
+  "title": "Sensor Payload — Imaging & Remote Sensing",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "design_target",
+  "confidence": "medium",
+  "note": "Confidence is higher here than elsewhere in hardware because UAV multispectral water sensing is a mature, well-documented literature. We are borrowing established methods rather than inventing them — which is exactly what a startup should do outside its core novelty.",
+
+  "the_payload_thesis": "The camera alone produces indices. Indices are relative numbers that cannot be compared across days, sites, or illumination conditions. The probe converts indices into concentrations. Neither half is a product; together they are.",
+
+  "sensors": [
+    {
+      "sensor_id": "multispectral",
+      "label": "Multispectral Camera",
+      "purpose": "Chlorophyll, turbidity, CDOM, and water masking across the whole water body.",
+      "why_multispectral_not_hyperspectral": "Multispectral is the practical trade point: enough bands for the band-ratio indices the literature validates, low enough data volume to process on board, low enough mass and cost to fly. Hyperspectral gives species-level pigment discrimination at a cost, mass, and data burden this aircraft cannot carry — and we do not need species-level discrimination to tell a farmer their chlorophyll is rising.",
+      "citation_ids": ["sciencedirect-uav-multispectral-ponds-2024", "mdpi-hyperspectral-hab-2025"],
+      "target_bands": [
+        { "band": "Blue", "nm": 475, "use": "CDOM, atmospheric correction reference" },
+        { "band": "Green", "nm": 560, "use": "NDWI numerator; general water clarity" },
+        { "band": "Red", "nm": 668, "use": "NDCI denominator component; turbidity" },
+        { "band": "Red edge", "nm": 717, "use": "NDCI numerator. The critical band — this is why classic ocean chlorophyll algorithms fail in turbid inland water and why red-edge methods work.", "criticality": "existential to the imaging claim" },
+        { "band": "Near infrared", "nm": 840, "use": "NDWI water masking; glint reference" }
+      ],
+      "band_rationale": "This five-band set is the minimum that supports NDCI and NDWI, which are the two indices the literature actually validates for inland water. Adding bands beyond this without a specific validated index to compute would be paying mass for data nobody uses.",
+      "mandatory_companion": {
+        "component": "Downwelling irradiance sensor",
+        "why_mandatory": "Without it, a cloud passing mid-survey changes the illumination and corrupts the mosaic invisibly. The image looks fine. The numbers are wrong. This sensor is 20 grams and it is the difference between a comparable time series and a pile of pretty pictures.",
+        "note": "This is the component most likely to be cut by someone optimising mass who does not understand radiometry. Protect it."
+      },
+      "target_mass_kg": 0.19
+    },
+    {
+      "sensor_id": "rgb",
+      "label": "RGB Camera (gimballed)",
+      "purpose": "Surface anomaly detection — floating mortalities, piping fish, sheen, foam, debris, net damage.",
+      "altitude_driver": "Ground sample distance must resolve a fish. GSD sets the altitude, altitude sets the area coverage, and area coverage sets the mission duration. The whole mortality-scan mission profile falls out of this one requirement.",
+      "gsd_target_mm": 15,
+      "gsd_rationale": "A tilapia at the surface is a few hundred millimetres. At 15 mm GSD it spans ~15-20 pixels, which is enough for a detection model. At 50 mm GSD it is 4 pixels and it is not. Flying higher to cover more area silently destroys the capability the mission exists for — this is a trap and it must be a hard constraint, not a tuning parameter.",
+      "target_mass_kg": 0.24,
+      "note": "Mass includes the gimbal. A gimbal is required: an unstabilised camera on a vibrating multirotor produces motion-blurred imagery in which small-object detection collapses."
+    },
+    {
+      "sensor_id": "thermal",
+      "label": "Thermal Infrared",
+      "purpose": "Surface skin temperature mapping; thermal structure of the surface layer.",
+      "honest_assessment": "The lowest value-per-gram sensor in the set and the first candidate for descope if the mass budget forces a cut.",
+      "why": "It measures skin temperature, which is NOT bulk water temperature — there is a cool-skin effect. The probe measures bulk temperature at depth far more accurately. Thermal adds spatial context to a variable we already measure well, which is a nice-to-have rather than a differentiator.",
+      "where_it_earns_its_mass": "Detecting thermal fronts and inflow plumes that the probe would only find by luck, and locating effluent discharge.",
+      "caveat_for_marketing": "Any claim that the thermal camera 'measures water temperature' is technically wrong. It measures the skin. Say skin temperature or say nothing.",
+      "priority": "could"
+    }
+  ],
+
+  "the_calibration_problem": {
+    "why_this_section_exists": "This is where most UAV water quality projects quietly fail, and where the difference between a research demo and a product lives.",
+    "the_problem": "Raw sensor digital numbers are not reflectance. They depend on illumination, sensor response, viewing geometry, and atmosphere. Two surveys of the same water on two days produce different numbers for identical water. A time series of uncalibrated indices looks like data and is not — and it is worse than no data, because someone will plot it and draw a conclusion.",
+    "citation_ids": ["mdpi-drones-inland-review-2024", "springer-uav-satellite-review-2024"],
+    "our_workflow": [
+      "Image a calibrated reflectance panel at the dock immediately before and after every sortie. The dock holds the panel — this is one of the four reasons the dock matters as much as the drone.",
+      "Log downwelling irradiance continuously through the survey.",
+      "Convert digital numbers to reflectance using both.",
+      "Apply NDWI first to mask every non-water pixel. Dike, vegetation, and boat pixels must never enter a water statistic.",
+      "Compute NDCI on water pixels only.",
+      "Drop the probe at index extremes and fit a local regression of index to in-situ concentration.",
+      "Apply the regression to the whole map, and propagate the regression's uncertainty into the output. A concentration map without an error field is an overclaim."
+    ],
+    "the_gate": "The Phase 1 exit criterion is that this workflow produces reproducible reflectance across two different days and two different illumination conditions. If it cannot, the imaging value proposition does not exist and the product is a probe on a drone — which is still something, but it is a much smaller something and the plan must change.",
+    "sun_glint": {
+      "problem": "Specular reflection of the sun off the water surface saturates the sensor and destroys the water-leaving radiance signal — the only part of the light that carries information about the water.",
+      "mitigations": ["Constrained solar elevation window", "Off-nadir viewing geometry", "Polarising filter", "Flight line orientation relative to the sun"],
+      "the_hard_truth": "This is optics, not software. It cannot be fixed in post-processing and it cannot be engineered away. It restricts the bloom survey mission to a band of a few hours per day, permanently. Any mission planner that ignores glint will produce beautiful, worthless surveys."
+    }
+  },
+
+  "edge_processing": {
+    "why_on_board": "Rural Philippine aquaculture sites have unreliable connectivity. A bloom-detection model that requires backhaul is a model that fails on the day it is needed. Raw multispectral imagery is also far too large to upload over an intermittent cellular link.",
+    "citation_ids": ["ai-aqua-review-2024"],
+    "what_runs_on_board": ["NDWI masking", "NDCI computation", "Anomaly detection inference", "Data reduction and compression"],
+    "what_runs_in_the_cloud": ["Model training", "Digital twin simulation", "Cross-site analytics", "Historical fusion"],
+    "target_mass_kg": 0.12,
+    "power_note": "Edge inference at a few watts is now practical, and 'a few watts' matters when the entire energy budget is a battery that also has to fly. The compute module's power draw comes directly out of endurance."
+  },
+
+  "what_we_deliberately_do_not_carry": [
+    { "sensor": "Hyperspectral imager", "why": "Mass, cost, data volume. We do not need species-level pigment discrimination to tell a farmer their chlorophyll is rising and their phycocyanin is up.", "citation_ids": ["mdpi-hyperspectral-hab-2025"] },
+    { "sensor": "LiDAR", "why": "Bathymetry is a one-time survey, not a recurring measurement. Rent it once." },
+    { "sensor": "Underwater camera", "why": "The aircraft cannot carry it usefully. This is a real capability gap — biomass estimation and feeding-response observation are things we simply cannot do — and it argues for integrating with sonar and underwater-vision vendors rather than competing with them." },
+    { "sensor": "Gas sensors", "why": "No useful aerial measurement of dissolved gases from above the surface." }
+  ],
+
+  "requirements": [
+    { "id": "REQ-SEN-001", "statement": "The multispectral payload shall include a red-edge band suitable for NDCI computation.", "type": "functional", "priority": "must", "verification_method": "inspection", "trace_to": ["uc-02-bloom-mapping"] },
+    { "id": "REQ-SEN-002", "statement": "The system shall log downwelling irradiance synchronously with every multispectral frame.", "type": "functional", "priority": "must", "verification_method": "test", "rationale": "Without it, illumination changes corrupt the mosaic invisibly." },
+    { "id": "REQ-SEN-003", "statement": "The system shall image a calibrated reflectance panel before and after every imaging sortie.", "type": "functional", "priority": "must", "verification_method": "demonstration", "trace_to": ["dock"] },
+    { "id": "REQ-SEN-004", "statement": "RGB ground sample distance shall not exceed 15 mm at the mortality-scan survey altitude.", "type": "performance", "priority": "must", "verification_method": "test", "trace_to": ["uc-04-mortality-scan"] },
+    { "id": "REQ-SEN-005", "statement": "Every derived concentration map shall carry a per-pixel uncertainty field.", "type": "data", "priority": "must", "verification_method": "inspection", "rationale": "A concentration map without an error field is an overclaim, and it will be believed." },
+    { "id": "REQ-SEN-006", "statement": "Imaging missions shall be automatically constrained to the site's computed glint-free solar window.", "type": "functional", "priority": "must", "verification_method": "test", "rationale": "Glint is physics. The scheduler must respect it or the surveys are worthless." }
+  ]
+}

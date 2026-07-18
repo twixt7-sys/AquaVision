@@ -1,0 +1,476 @@
+{
+  "id": "glossary",
+  "title": "Glossary — Aquaculture, Fisheries, Remote Sensing, and Systems Terms",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "description": "Controlled vocabulary for the whole repository and for the thesis. Where a term has a contested definition, both readings are given. Terms are grouped for UI filtering but the flat `terms[]` array is authoritative.",
+  "groups": ["aquaculture", "water_quality", "biology_health", "remote_sensing", "uav_systems", "data_ai", "business", "regulatory"],
+
+  "terms": [
+    {
+      "term": "Aquaculture",
+      "abbrev": null,
+      "group": "aquaculture",
+      "definition": "The farming of aquatic organisms — fish, molluscs, crustaceans, and aquatic plants — involving intervention in the rearing process to enhance production, such as regular stocking, feeding, and protection from predators. Implies individual or corporate ownership of the stock being cultivated, which is the line that separates it from capture fisheries.",
+      "citation_ids": ["fao-sofia-2024"],
+      "note": "The ownership criterion matters legally and statistically: an organism becomes 'aquaculture' the moment someone owns and intervenes in it."
+    },
+    {
+      "term": "Capture Fisheries",
+      "abbrev": null,
+      "group": "aquaculture",
+      "definition": "The harvesting of naturally occurring aquatic organisms from marine or inland waters, without ownership of or intervention in the stock prior to capture.",
+      "citation_ids": ["fao-sofia-2024"]
+    },
+    {
+      "term": "Cage Culture",
+      "group": "aquaculture",
+      "definition": "Rearing of fish in enclosures of net or mesh suspended in an existing water body (lake, reservoir, bay), where water exchanges freely with the surrounding environment. High stocking density, no control of inflow water quality — which is precisely why cage culture is the most exposed to ambient dissolved oxygen crashes and algal blooms.",
+      "note": "The dominant mode in Philippine lake systems such as Taal and Laguna de Bay. Its vulnerability profile is the OmniDrone's core market rationale."
+    },
+    {
+      "term": "Pond Culture",
+      "group": "aquaculture",
+      "definition": "Rearing of fish in constructed earthen or lined impoundments where the operator controls inflow, outflow, and often aeration. Lower ambient risk than cage culture but higher exposure to sediment and effluent management issues."
+    },
+    {
+      "term": "Recirculating Aquaculture System",
+      "abbrev": "RAS",
+      "group": "aquaculture",
+      "definition": "A land-based, largely closed system in which water is mechanically and biologically filtered and reused. Highest capital cost, highest control, lowest environmental exchange.",
+      "note": "RAS is largely OUT of the OmniDrone's addressable market — an indoor tank does not need an aerial vehicle. Stated here so the market sizing does not over-claim."
+    },
+    {
+      "term": "Polyculture",
+      "group": "aquaculture",
+      "definition": "Culturing two or more species together in the same unit, chosen so their feeding niches complement rather than compete — for example milkfish with tilapia and shrimp."
+    },
+    {
+      "term": "Integrated Multi-Trophic Aquaculture",
+      "abbrev": "IMTA",
+      "group": "aquaculture",
+      "definition": "Deliberately co-culturing species from different trophic levels so that the waste of one becomes the input of another — fed finfish alongside filter-feeding shellfish and nutrient-extracting seaweed."
+    },
+    {
+      "term": "Stocking Density",
+      "group": "aquaculture",
+      "definition": "Biomass or number of individuals per unit volume or area of culture water, e.g. kg/m³ or fingerlings/ha. The single most common root cause cited in Philippine fish-kill investigations, because density drives oxygen demand.",
+      "citation_ids": ["pna-tilapia-fishkill", "inquirer-taal-fishkill-2023"]
+    },
+    {
+      "term": "Carrying Capacity",
+      "group": "aquaculture",
+      "definition": "The maximum standing biomass a water body can sustain without breaching water quality thresholds. Distinguish ecological carrying capacity (what the ecosystem tolerates) from production carrying capacity (what maximises yield) — they are not the same number and conflating them is how lakes get over-stocked."
+    },
+    {
+      "term": "Fish Kill",
+      "group": "aquaculture",
+      "definition": "A sudden mass mortality event in a water body. In Philippine inland aquaculture the dominant proximate causes are dissolved oxygen depletion, ammonia and hydrogen sulfide toxicity following water column overturn, and harmful algal blooms — usually with over-stocking as the underlying cause and a weather trigger as the precipitant.",
+      "citation_ids": ["seafdec-laguna-fishkill", "bioflux-lake-buhi-2020", "inquirer-taal-fishkill-2023"]
+    },
+    {
+      "term": "Overturn",
+      "aka": ["Turnover", "Upwelling", "Destratification event"],
+      "group": "water_quality",
+      "definition": "The abrupt vertical mixing of a stratified water body, driven by surface cooling, heavy rain, or strong wind. It drags oxygen-poor, sulfide- and ammonia-rich hypolimnetic water to the surface where the fish are. This is the mechanism behind most catastrophic lake fish kills, and it can complete in hours — which is the entire argument for continuous rather than weekly monitoring.",
+      "note": "Critical concept for the OmniDrone thesis: a weekly grab sample has roughly zero probability of catching the precursor conditions."
+    },
+    {
+      "term": "Thermal Stratification",
+      "group": "water_quality",
+      "definition": "Layering of a water body by temperature and therefore density, into a warm mixed surface epilimnion, a sharp-gradient metalimnion (thermocline), and a cold, often anoxic bottom hypolimnion.",
+      "note": "The reeled probe's core value: a surface sensor cannot see stratification at all. Only a vertical profile can."
+    },
+    {
+      "term": "Epilimnion",
+      "group": "water_quality",
+      "definition": "The upper, warm, wind-mixed, generally oxygenated layer of a stratified water body."
+    },
+    {
+      "term": "Hypolimnion",
+      "group": "water_quality",
+      "definition": "The lower, cold, dense, poorly mixed layer of a stratified water body. Frequently hypoxic or anoxic, and the reservoir of the ammonia and hydrogen sulfide that an overturn delivers to the fish."
+    },
+    {
+      "term": "Thermocline",
+      "group": "water_quality",
+      "definition": "The zone of steep temperature change separating epilimnion from hypolimnion. Its depth and sharpness are the primary state variables for overturn risk."
+    },
+    {
+      "term": "Dissolved Oxygen",
+      "abbrev": "DO",
+      "group": "water_quality",
+      "definition": "The concentration of molecular oxygen dissolved in water, in mg/L or as percent saturation. The master variable of aquaculture: everything else can be wrong slowly, but DO kills in hours.",
+      "operational_thresholds": {
+        "note": "Species- and life-stage-specific. See data/09_compliance/water-quality-standards.json for the sourced table.",
+        "warmwater_finfish_general": ">= 5 mg/L desirable; < 3 mg/L acute stress; < 2 mg/L mortality risk"
+      },
+      "citation_ids": ["igs-do-aquaculture-2026", "boyd-water-quality-2020"]
+    },
+    {
+      "term": "Diel Cycle",
+      "aka": ["Diurnal cycle"],
+      "group": "water_quality",
+      "definition": "The 24-hour oscillation of dissolved oxygen and pH driven by photosynthesis by day and respiration by night. DO peaks in mid-afternoon and reaches its minimum just before dawn.",
+      "note": "The pre-dawn minimum is when fish die and when nobody is on the water. A monitoring regime that samples at 9 a.m. systematically measures the safest moment of the day and concludes the pond is fine."
+    },
+    {
+      "term": "Hypoxia",
+      "group": "water_quality",
+      "definition": "Oxygen concentration low enough to impair normal biological function. In aquaculture practice conventionally below about 3 mg/L for warmwater finfish, though the biologically meaningful threshold is species-specific.",
+      "citation_ids": ["ncbi-takifugu-hypoxia-2022"]
+    },
+    {
+      "term": "Anoxia",
+      "group": "water_quality",
+      "definition": "Effectively complete absence of dissolved oxygen. Drives the chemical reduction reactions that generate hydrogen sulfide in bottom sediments."
+    },
+    {
+      "term": "Biochemical Oxygen Demand",
+      "abbrev": "BOD",
+      "group": "water_quality",
+      "definition": "The mass of oxygen consumed by microorganisms decomposing organic matter in a water sample over a fixed period, conventionally five days at 20 °C. A proxy for organic pollution load — uneaten feed and faeces in an aquaculture context."
+    },
+    {
+      "term": "Chemical Oxygen Demand",
+      "abbrev": "COD",
+      "group": "water_quality",
+      "definition": "Oxygen equivalent of the organic matter oxidisable by a strong chemical oxidant. Faster to measure than BOD and correlated with it, but not interchangeable."
+    },
+    {
+      "term": "Total Ammonia Nitrogen",
+      "abbrev": "TAN",
+      "group": "water_quality",
+      "definition": "The sum of ionised ammonium (NH4+) and un-ionised ammonia (NH3) expressed as nitrogen. Only the un-ionised fraction is acutely toxic, and that fraction rises sharply with pH and temperature — which is why TAN must never be interpreted without simultaneous pH and temperature.",
+      "note": "This coupling is a design driver: the probe must measure pH, temperature, and ammonia in the same instant at the same depth, or the ammonia number is uninterpretable."
+    },
+    {
+      "term": "Un-ionised Ammonia",
+      "abbrev": "NH3",
+      "group": "water_quality",
+      "definition": "The neutral, lipid-soluble, gill-permeable and therefore toxic form of ammonia. Fraction of TAN present as NH3 increases with pH and temperature."
+    },
+    {
+      "term": "Nitrite",
+      "abbrev": "NO2-",
+      "group": "water_quality",
+      "definition": "Intermediate in nitrification. Toxic because it oxidises haemoglobin to methaemoglobin, producing 'brown blood disease' and functional asphyxiation even in fully oxygenated water."
+    },
+    {
+      "term": "Nitrate",
+      "abbrev": "NO3-",
+      "group": "water_quality",
+      "definition": "End product of nitrification. Comparatively low acute toxicity but a driver of eutrophication."
+    },
+    {
+      "term": "Hydrogen Sulfide",
+      "abbrev": "H2S",
+      "group": "water_quality",
+      "definition": "Produced by sulfate-reducing bacteria in anoxic sediment. Extremely toxic to fish at low concentrations, and more toxic at low pH where the un-ionised form dominates. Delivered to the water column by overturn.",
+      "citation_ids": ["seafdec-laguna-fishkill"]
+    },
+    {
+      "term": "pH",
+      "group": "water_quality",
+      "definition": "Negative log of hydrogen ion activity. In aquaculture, pH is a modulator variable more than a direct killer: it controls ammonia and sulfide toxicity, and it swings diurnally with photosynthesis."
+    },
+    {
+      "term": "Alkalinity",
+      "group": "water_quality",
+      "definition": "The buffering capacity of water against pH change, mostly carbonate and bicarbonate, expressed as mg/L CaCO3. Low alkalinity means wild diurnal pH swings; it is the reason liming is a standard intervention."
+    },
+    {
+      "term": "Turbidity",
+      "group": "water_quality",
+      "definition": "Optical cloudiness of water from suspended particles, in NTU or FNU. Confounds every optical sensor on the platform, which is why it must be measured alongside them rather than treated as a nuisance."
+    },
+    {
+      "term": "Secchi Depth",
+      "group": "water_quality",
+      "definition": "The depth at which a standard black-and-white disc disappears from view. The oldest and still most widely used field measure of water transparency and, by proxy, plankton density.",
+      "note": "Worth preserving in the product: farmers trust it, and it gives the OmniDrone a free ground-truth calibration target that every extension worker already understands."
+    },
+    {
+      "term": "Salinity",
+      "group": "water_quality",
+      "definition": "Dissolved salt content, in ppt or PSU. Critical in brackish-water culture such as Philippine milkfish and shrimp ponds; also drives oxygen solubility."
+    },
+    {
+      "term": "Electrical Conductivity",
+      "abbrev": "EC",
+      "group": "water_quality",
+      "definition": "Ability of water to conduct current; the practical proxy from which salinity and total dissolved solids are derived."
+    },
+    {
+      "term": "Oxidation-Reduction Potential",
+      "abbrev": "ORP",
+      "group": "water_quality",
+      "definition": "Millivolt measure of the oxidising or reducing tendency of water. Useful as an early integrative indicator of sediment and organic loading before DO itself collapses."
+    },
+    {
+      "term": "Eutrophication",
+      "group": "water_quality",
+      "definition": "Nutrient enrichment — chiefly nitrogen and phosphorus — driving excessive primary production, whose subsequent decomposition depletes oxygen. In aquaculture the system is frequently the source of its own eutrophication via uneaten feed.",
+      "citation_ids": ["fao-nutrient-dynamics-eutrophic"],
+      "note": "The reflexive quality of this problem is a strong thesis theme: the farm poisons its own water, and cannot see itself doing it."
+    },
+    {
+      "term": "Harmful Algal Bloom",
+      "abbrev": "HAB",
+      "group": "biology_health",
+      "definition": "Proliferation of algae that harms fish or people, whether by producing toxins, by mechanically damaging gills, or by causing oxygen depletion on collapse. Not all blooms are toxic and not all toxic events are visible blooms — a distinction the marketing must not blur.",
+      "citation_ids": ["mdpi-hab-meta-2021", "hab-review-2024"]
+    },
+    {
+      "term": "Chlorophyll-a",
+      "abbrev": "Chl-a",
+      "group": "remote_sensing",
+      "definition": "The dominant photosynthetic pigment in algae and the most widely used optical proxy for algal biomass; used as the HAB indicator in roughly 80 percent of remote sensing studies.",
+      "citation_ids": ["mdpi-hab-meta-2021"],
+      "caveat": "Chl-a indicates algal biomass, not toxicity. A high Chl-a reading is a reason to sample, not a diagnosis."
+    },
+    {
+      "term": "Phycocyanin",
+      "group": "remote_sensing",
+      "definition": "Accessory pigment characteristic of cyanobacteria. More specific to the taxa that produce freshwater toxins than Chl-a is, and therefore a better bloom-risk discriminator where the sensor can resolve it (~620 nm)."
+    },
+    {
+      "term": "Normalized Difference Chlorophyll Index",
+      "abbrev": "NDCI",
+      "group": "remote_sensing",
+      "definition": "A spectral band ratio using red and red-edge reflectance to estimate chlorophyll-a in turbid inland water, where classic blue-green ocean algorithms fail.",
+      "formula": "NDCI = (R_rededge - R_red) / (R_rededge + R_red)",
+      "citation_ids": ["mishra-ndci-2012", "mdpi-hab-meta-2021"]
+    },
+    {
+      "term": "Normalized Difference Water Index",
+      "abbrev": "NDWI",
+      "group": "remote_sensing",
+      "definition": "Band ratio using green and near-infrared reflectance to delineate open water from land. The OmniDrone's first processing step: find the water before analysing it.",
+      "formula": "NDWI = (R_green - R_nir) / (R_green + R_nir)",
+      "citation_ids": ["mcfeeters-ndwi-1996"]
+    },
+    {
+      "term": "Coloured Dissolved Organic Matter",
+      "abbrev": "CDOM",
+      "group": "remote_sensing",
+      "definition": "Optically active dissolved organic compounds that absorb strongly in the blue. A major confounder for chlorophyll retrieval in inland waters and a variable of interest in its own right.",
+      "citation_ids": ["mdpi-drones-inland-review-2024"]
+    },
+    {
+      "term": "Total Suspended Solids",
+      "abbrev": "TSS",
+      "group": "remote_sensing",
+      "definition": "Mass concentration of particles suspended in water. Drives backscatter and therefore dominates the optical signal in shallow, wind-mixed tropical ponds.",
+      "citation_ids": ["mdpi-drones-inland-review-2024"]
+    },
+    {
+      "term": "Multispectral Imaging",
+      "group": "remote_sensing",
+      "definition": "Imaging in a small number (typically 4–10) of discrete, relatively broad spectral bands. The practical trade-off point for UAV water quality work: enough spectral information for band-ratio indices, low enough data volume to process on board.",
+      "citation_ids": ["sciencedirect-uav-multispectral-ponds-2024"]
+    },
+    {
+      "term": "Hyperspectral Imaging",
+      "group": "remote_sensing",
+      "definition": "Imaging in many (often hundreds of) narrow contiguous bands, permitting species-level pigment discrimination. Higher cost, mass, and data burden.",
+      "citation_ids": ["mdpi-hyperspectral-hab-2025"]
+    },
+    {
+      "term": "Radiometric Calibration",
+      "group": "remote_sensing",
+      "definition": "Conversion of raw sensor digital numbers into physical reflectance, correcting for illumination, sensor response, and atmosphere. Without it, indices computed on two different days are not comparable — and a time series of uncalibrated indices is worse than no time series, because it looks like data.",
+      "note": "The reason the specification mandates a downwelling irradiance sensor and a calibrated reflectance panel in the dock."
+    },
+    {
+      "term": "Sun Glint",
+      "group": "remote_sensing",
+      "definition": "Specular reflection of the sun off the water surface into the sensor, saturating the signal and destroying water-leaving radiance. Mitigated by flight geometry, viewing angle, and polarising filters. The dominant reason UAV water surveys are flown at constrained solar angles.",
+      "note": "A physical constraint that directly shapes the mission planner's allowable time windows. Cannot be engineered away in software."
+    },
+    {
+      "term": "Water-Leaving Radiance",
+      "group": "remote_sensing",
+      "definition": "The portion of light that penetrates the water surface, interacts with the water column, and re-emerges — the only part of the signal carrying information about water constituents."
+    },
+    {
+      "term": "Ground Sample Distance",
+      "abbrev": "GSD",
+      "group": "remote_sensing",
+      "definition": "Real-world distance represented by one image pixel. Determines whether a floating dead fish is a detectable object or a single ambiguous pixel.",
+      "formula": "GSD = (sensor_pixel_pitch x altitude) / focal_length"
+    },
+    {
+      "term": "Unmanned Aerial Vehicle",
+      "abbrev": "UAV",
+      "aka": ["Drone", "RPA", "UAS", "RPAS"],
+      "group": "uav_systems",
+      "definition": "An aircraft operated without a pilot on board. Philippine civil aviation regulation uses 'RPAS' (Remotely Piloted Aircraft System) as the governing term, which is the vocabulary the compliance file uses.",
+      "citation_ids": ["caap-rpas-regulations"]
+    },
+    {
+      "term": "Visual Line of Sight",
+      "abbrev": "VLOS",
+      "group": "uav_systems",
+      "definition": "Operation in which the remote pilot maintains direct unaided visual contact with the aircraft. The default permitted mode under CAAP rules.",
+      "citation_ids": ["caap-rpas-regulations"]
+    },
+    {
+      "term": "Beyond Visual Line of Sight",
+      "abbrev": "BVLOS",
+      "group": "uav_systems",
+      "definition": "Operation outside the remote pilot's direct visual contact. Requires specific CAAP authorisation. The economic unlock for autonomous dock-based operation, and the single largest regulatory dependency in this entire business plan.",
+      "citation_ids": ["caap-rpas-regulations", "caap-types-of-operations"]
+    },
+    {
+      "term": "Maximum Take-Off Mass",
+      "abbrev": "MTOM",
+      "aka": ["Gross weight", "MTOW"],
+      "group": "uav_systems",
+      "definition": "Maximum permitted mass of the aircraft at take-off including payload, fuel or battery. The parameter on which Philippine regulatory obligations bracket — the 7 kg boundary is the one that matters here.",
+      "citation_ids": ["caap-rpas-regulations"]
+    },
+    {
+      "term": "Return to Home",
+      "abbrev": "RTH",
+      "group": "uav_systems",
+      "definition": "Automated flight mode returning the aircraft to a stored home position, triggered by link loss, low battery, or command. Over water, a conventional RTH that assumes a land home point is a drowning waiting to happen; the failsafe logic must be water-aware."
+    },
+    {
+      "term": "Geofence",
+      "group": "uav_systems",
+      "definition": "A software-enforced boundary constraining where the aircraft may fly. Both a safety mechanism and, over leased water lots, a property-rights mechanism."
+    },
+    {
+      "term": "Ingress Protection Rating",
+      "abbrev": "IP",
+      "group": "uav_systems",
+      "definition": "IEC 60529 two-digit code for enclosure protection against solids and liquids. For a vehicle whose job description includes hovering over water in the tropics and dipping a wet probe into its own airframe, this is a first-order requirement rather than a nice-to-have.",
+      "citation_ids": ["iec-60529"]
+    },
+    {
+      "term": "Payload Fraction",
+      "group": "uav_systems",
+      "definition": "Useful payload mass divided by maximum take-off mass. The number that decides whether a multirotor concept is viable; for electric multirotors it is characteristically unforgiving."
+    },
+    {
+      "term": "Disc Loading",
+      "group": "uav_systems",
+      "definition": "Thrust per unit rotor disc area. Low disc loading means better hover efficiency and endurance but a physically larger aircraft — the central trade in this airframe.",
+      "formula": "DL = T / (n * pi * r^2)"
+    },
+    {
+      "term": "Digital Twin",
+      "group": "data_ai",
+      "definition": "A dynamic virtual representation of a physical system, kept synchronised with it by live sensor data, and used to simulate, predict, and optimise. The distinction from a dashboard is that a twin runs a model of the system's behaviour and can answer counterfactual questions; a dashboard only shows what happened.",
+      "citation_ids": ["sciencedirect-dt-aiot-2023", "hamzah-dt-water-review-2024", "pmc-dt-rainbow-trout-2023"],
+      "note": "This distinction is worth defending explicitly in the thesis, because 'digital twin' is used loosely enough in industry to mean nothing at all."
+    },
+    {
+      "term": "Precision Aquaculture",
+      "group": "data_ai",
+      "definition": "Applying the control-engineering logic of precision agriculture to fish farming: observe, interpret, decide, act — with instruments rather than intuition, at the resolution of the individual unit rather than the whole farm.",
+      "citation_ids": ["globalseafood-precision-aqua"]
+    },
+    {
+      "term": "Edge Computing",
+      "group": "data_ai",
+      "definition": "Executing computation on or near the sensing device rather than in the cloud. Non-negotiable here: rural Philippine aquaculture sites have unreliable connectivity, and a bloom-detection model that requires backhaul is a model that fails on the day it is needed.",
+      "citation_ids": ["ai-aqua-review-2024"]
+    },
+    {
+      "term": "Sensor Fusion",
+      "group": "data_ai",
+      "definition": "Combining measurements from multiple heterogeneous sensors to produce an estimate better than any single sensor could give. Here: fusing point in-situ probe profiles with area-wide multispectral imagery, so that the probe calibrates the image and the image extrapolates the probe."
+    },
+    {
+      "term": "Ground Truth",
+      "group": "data_ai",
+      "definition": "Directly measured reference data against which a model or a remote-sensing retrieval is validated. The reeled probe is the OmniDrone's on-board ground truth generator, which is architecturally the most interesting thing about the vehicle."
+    },
+    {
+      "term": "Federated Learning",
+      "group": "data_ai",
+      "definition": "Training a shared model across many data holders without centralising their raw data. Relevant because farm production data is commercially sensitive and farmers have sound reasons to refuse to hand it over.",
+      "citation_ids": ["ai-aqua-review-2024"]
+    },
+    {
+      "term": "Explainable AI",
+      "abbrev": "XAI",
+      "group": "data_ai",
+      "definition": "Methods that render a model's reasoning legible to a human decision-maker. Load-bearing in this product: an alert telling a farmer to spend money on emergency aeration will be ignored unless it says why.",
+      "citation_ids": ["ai-aqua-review-2024"]
+    },
+    {
+      "term": "Technology Readiness Level",
+      "abbrev": "TRL",
+      "group": "business",
+      "definition": "A 1–9 scale describing the maturity of a technology from basic principles observed (1) to proven in operational environment (9). Used throughout this repository to prevent the pitch from implying more maturity than exists.",
+      "citation_ids": ["nasa-trl"]
+    },
+    {
+      "term": "Feed Conversion Ratio",
+      "abbrev": "FCR",
+      "group": "aquaculture",
+      "definition": "Mass of feed supplied divided by mass of animal weight gained. Lower is better. Typically 1.0–2.5 in finfish aquaculture.",
+      "formula": "FCR = feed_supplied_kg / biomass_gain_kg",
+      "citation_ids": ["innovasea-fcr-guide", "ussec-fcr-power"],
+      "note": "The economic lever the OmniDrone's feeding function targets. Feed is commonly around 60 percent of operating cost, so an FCR improvement is close to a pure margin improvement."
+    },
+    {
+      "term": "Specific Growth Rate",
+      "abbrev": "SGR",
+      "group": "aquaculture",
+      "definition": "Percentage increase in body mass per day, computed on natural logs.",
+      "formula": "SGR = 100 * (ln(W_final) - ln(W_initial)) / days"
+    },
+    {
+      "term": "Survival Rate",
+      "group": "aquaculture",
+      "definition": "Proportion of stocked individuals harvested alive. The headline KPI a farmer actually cares about, and the one the OmniDrone's value claim ultimately reduces to."
+    },
+    {
+      "term": "Biosecurity",
+      "group": "biology_health",
+      "definition": "The set of practices preventing the introduction and spread of pathogens into and between culture units. Directly constrains the OmniDrone design: a probe dipped in pond A and then pond B is a pathogen vector with rotors.",
+      "citation_ids": ["worldbank-disease-risk-2014"],
+      "note": "This is the most commonly overlooked objection to multi-site probe drones, and the repository treats it as a first-class design driver rather than an afterthought."
+    },
+    {
+      "term": "Total Allowable Catch",
+      "abbrev": "TAC",
+      "group": "regulatory",
+      "definition": "A management-set upper limit on the quantity of a stock that may be landed in a period."
+    },
+    {
+      "term": "Illegal, Unreported and Unregulated Fishing",
+      "abbrev": "IUU",
+      "group": "regulatory",
+      "definition": "Fishing conducted in contravention of applicable rules, or unreported or unregulated. Named here because aerial surveillance is an adjacent capability with real dual-use implications — see ethics-data-privacy.json."
+    },
+    {
+      "term": "Fisheries Management Area",
+      "abbrev": "FMA",
+      "group": "regulatory",
+      "definition": "A spatial management unit delineated under Philippine fisheries policy for science-based, ecosystem-approach management."
+    },
+    {
+      "term": "Ecosystem Approach to Aquaculture",
+      "abbrev": "EAA",
+      "group": "regulatory",
+      "definition": "A management framework integrating aquaculture into the wider ecosystem such that development proceeds within ecological limits and equitably across stakeholders.",
+      "citation_ids": ["fao-eaa-guidelines"]
+    },
+    {
+      "term": "Blue Transformation",
+      "group": "business",
+      "definition": "FAO's strategic framing for expanding aquatic food systems sustainably: intensify aquaculture responsibly, manage fisheries effectively, and upgrade value chains.",
+      "citation_ids": ["fao-sofia-2024"]
+    }
+  ],
+
+  "usage_notes": [
+    "The webpage should render this as a searchable glossary and cross-link terms wherever they appear in prose fields elsewhere in the repository.",
+    "Where a `caveat` or `note` field exists, it usually contains the intellectually important part. Do not hide it in the UI."
+  ]
+}

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Risk Register &amp; FMEA — AquaVision</title>
+<link rel="icon" href="../assets/img/logo-mark.jpg">
+<link rel="stylesheet" href="../assets/style.css">
+<script>try{var t=localStorage.getItem('av-theme');if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+<a class="sidebar-brand" href="../index.html">
+<img src="../assets/img/logo-mark.jpg" alt="AquaVision mark" width="36" height="36">
+<span><strong>AQUAVISION</strong><small>OmniDrone Knowledge Repository</small></span>
+</a>
+<nav class="sidebar-nav" aria-label="Sections"><details class="nav-sec">
+<summary><span class="nav-num">00</span>Meta &amp; Schemas</summary>
+<ul>
+<li><a href="../sections/meta.html">Overview</a></li>
+<li><a href="../files/schema-registry.html">AquaVision Knowledge Repository — Schema Registry <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/glossary.html">Glossary — Aquaculture, Fisheries, Remote Sensing, and Systems Terms</a></li><li><a href="../files/data-dictionary.html">Data Dictionary — Canonical Field and Variable Definitions</a></li><li><a href="../files/changelog.html">Repository Changelog</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">01</span>Company &amp; Identity</summary>
+<ul>
+<li><a href="../sections/company.html">Overview</a></li>
+<li><a href="../files/company-profile.html">AquaVision — Company Profile</a></li><li><a href="../files/brand-identity.html">AquaVision — Brand &amp; Design System</a></li><li><a href="../files/team-structure.html">Team Structure &amp; Capability Map</a></li><li><a href="../files/milestones-roadmap.html">Development Roadmap &amp; Milestones</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">02</span>Problem Space</summary>
+<ul>
+<li><a href="../sections/problem.html">Overview</a></li>
+<li><a href="../files/problem-statement.html">Problem Statement</a></li><li><a href="../files/problem-taxonomy.html">Problem Taxonomy — The Full Space of Aquaculture &amp; Fisheries Problems</a></li><li><a href="../files/stakeholder-pain-points.html">Stakeholder Map &amp; Pain Points</a></li><li><a href="../files/incident-case-studies.html">Documented Incident Case Studies — Evidence Base</a></li><li><a href="../files/cost-of-inaction.html">Cost of Inaction — Loss Model</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">03</span>Market &amp; Competition</summary>
+<ul>
+<li><a href="../sections/market.html">Overview</a></li>
+<li><a href="../files/industry-statistics.html">Industry Statistics — Global &amp; Regional Aquaculture and Fisheries</a></li><li><a href="../files/market-sizing.html">Market Sizing — TAM / SAM / SOM</a></li><li><a href="../files/competitive-landscape.html">Competitive Landscape</a></li><li><a href="../files/customer-personas.html">Customer Segments &amp; Personas</a></li><li><a href="../files/swot-porter.html">Strategic Analysis — SWOT, Porter's Five Forces, PESTEL</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">04</span>Solution &amp; ConOps</summary>
+<ul>
+<li><a href="../sections/solution.html">Overview</a></li>
+<li><a href="../files/solution-overview.html">Solution Overview — The OmniDrone System</a></li><li><a href="../files/value-proposition.html">Value Proposition</a></li><li><a href="../files/use-cases.html">Use Cases</a></li><li><a href="../files/mission-profiles.html">Mission Profiles</a></li><li><a href="../files/concept-of-operations.html">Concept of Operations (ConOps)</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">05</span>Hardware Engineering</summary>
+<ul>
+<li><a href="../sections/hardware.html">Overview</a></li>
+<li><a href="../files/omnidrone-specifications.html">OmniDrone — System Specification</a></li><li><a href="../files/airframe-propulsion.html">Airframe &amp; Propulsion</a></li><li><a href="../files/probe-winch-subsystem.html">Reeled Probe &amp; Winch Subsystem</a></li><li><a href="../files/sensor-payload.html">Sensor Payload — Imaging &amp; Remote Sensing</a></li><li><a href="../files/carriage-ejection-system.html">Carriage &amp; Ejection System</a></li><li><a href="../files/power-energy-budget.html">Power &amp; Energy Budget</a></li><li><a href="../files/docking-station.html">OmniDock — Automated Docking Station</a></li><li><a href="../files/bill-of-materials.html">Indicative Bill of Materials</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">06</span>Software, AI &amp; Digital Twin</summary>
+<ul>
+<li><a href="../sections/software.html">Overview</a></li>
+<li><a href="../files/system-architecture.html">System Architecture</a></li><li><a href="../files/data-pipeline.html">Data Pipeline</a></li><li><a href="../files/ai-ml-models.html">AI / ML Model Cards</a></li><li><a href="../files/digital-twin.html">PondTwin — Digital Twin Specification</a></li><li><a href="../files/telemetry-schema.html">Telemetry &amp; Data Schema</a></li><li><a href="../files/api-specification.html">API Specification</a></li><li><a href="../files/dashboard-spec.html">Dashboard Specification</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">07</span>Research Corpus</summary>
+<ul>
+<li><a href="../sections/research.html">Overview</a></li>
+<li><a href="../files/literature-review.html">Literature Review — Synthesis</a></li><li><a href="../files/references-bibliography.html">Consolidated Bibliography</a></li><li><a href="../files/studies-water-quality-sensing.html">Related Studies — Water Quality, Limnology &amp; Fish Kill Mechanisms</a></li><li><a href="../files/studies-uav-remote-sensing.html">Related Studies — UAV &amp; Satellite Remote Sensing of Water</a></li><li><a href="../files/studies-harmful-algal-blooms.html">Related Studies — Harmful Algal Blooms</a></li><li><a href="../files/studies-ai-ml-aquaculture.html">Related Studies — AI &amp; Machine Learning in Aquaculture</a></li><li><a href="../files/studies-digital-twin.html">Related Studies — Digital Twins in Aquaculture</a></li><li><a href="../files/studies-fish-health-disease.html">Related Studies — Fish Health, Disease &amp; Biosecurity</a></li><li><a href="../files/studies-feeding-nutrition.html">Related Studies — Feeding, Nutrition &amp; Feed Economics</a></li><li><a href="../files/studies-socioeconomic-adoption.html">Related Studies — Socioeconomics &amp; Technology Adoption</a></li><li><a href="../files/research-gaps.html">Research Gaps &amp; Open Questions</a></li><li><a href="../files/theoretical-framework.html">Theoretical &amp; Conceptual Framework</a></li><li><a href="../files/methodology.html">Research Methodology</a></li>
+</ul>
+</details>
+<details class="nav-sec" open>
+<summary><span class="nav-num">08</span>Operations &amp; Safety</summary>
+<ul>
+<li><a href="../sections/operations.html">Overview</a></li>
+<li><a href="../files/deployment-playbook.html">Deployment Playbook</a></li><li><a href="../files/maintenance-schedule.html">Maintenance Schedule</a></li><li><a href="../files/risk-register-fmea.html" aria-current="page" class="current">Risk Register &amp; FMEA</a></li><li><a href="../files/training-certification.html">Training &amp; Certification</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">09</span>Regulatory &amp; Compliance</summary>
+<ul>
+<li><a href="../sections/compliance.html">Overview</a></li>
+<li><a href="../files/regulatory-framework.html">Regulatory Framework</a></li><li><a href="../files/water-quality-standards.html">Water Quality Standards &amp; Thresholds</a></li><li><a href="../files/biosecurity-protocol.html">Biosecurity Protocol</a></li><li><a href="../files/ethics-data-privacy.html">Ethics, Data Privacy &amp; Responsible Use</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">10</span>Business Model</summary>
+<ul>
+<li><a href="../sections/business.html">Overview</a></li>
+<li><a href="../files/business-model-canvas.html">Business Model Canvas</a></li><li><a href="../files/pricing-revenue.html">Pricing &amp; Revenue Model</a></li><li><a href="../files/unit-economics.html">Unit Economics</a></li><li><a href="../files/financial-projections.html">Financial Projections</a></li><li><a href="../files/funding-ask.html">Funding Ask</a></li><li><a href="../files/go-to-market.html">Go-to-Market Strategy</a></li><li><a href="../files/traction.html">Traction</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">11</span>Impact</summary>
+<ul>
+<li><a href="../sections/impact.html">Overview</a></li>
+<li><a href="../files/sdg-alignment.html">UN Sustainable Development Goal Alignment</a></li><li><a href="../files/environmental-impact.html">Environmental Impact Assessment</a></li><li><a href="../files/social-economic-impact.html">Social &amp; Economic Impact</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">12</span>Datasets &amp; Charts</summary>
+<ul>
+<li><a href="../sections/datasets.html">Overview</a></li>
+<li><a href="../files/kpi-definitions.html">KPI Definitions</a></li><li><a href="../files/sample-telemetry.html">Sample Telemetry — ILLUSTRATIVE SYNTHETIC DATA <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/sample-pond-twin-state.html">Sample Digital Twin State — ILLUSTRATIVE SYNTHETIC DATA <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/chart-global-production.html">The Inflection: Aquaculture Overtakes Capture Fisheries</a></li><li><a href="../files/chart-problem-cost-breakdown.html">The Structure of Aquaculture Losses</a></li><li><a href="../files/chart-market-sizing.html">Market Sizing — Method, Not Number</a></li><li><a href="../files/chart-do-diel-cycle.html">Why Sampling Time Decides What You See <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/chart-do-depth-profile.html">The Loaded Gun: What a Vertical Profile Reveals <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/chart-financial-projection.html">Spend Plan by Phase — Not a Revenue Forecast</a></li><li><a href="../files/chart-manual-vs-omnidrone.html">Monitoring Approaches Compared</a></li><li><a href="../files/chart-species-production-mix.html">Where Farmed Aquatic Animals Are Produced</a></li><li><a href="../files/chart-tech-readiness.html">Technology Readiness — Where We Actually Are</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">13</span>Pitch &amp; Thesis Kit</summary>
+<ul>
+<li><a href="../sections/pitch.html">Overview</a></li>
+<li><a href="../files/pitch-deck-outline.html">Pitch Deck Outline</a></li><li><a href="../files/elevator-pitches.html">Elevator Pitches</a></li><li><a href="../files/faq-objections.html">FAQ &amp; Objection Handling</a></li><li><a href="../files/thesis-outline.html">Thesis / Dissertation Outline</a></li>
+</ul>
+</details></nav>
+<div class="sidebar-foot"><small>Fisheries • Aquaculture • Technology</small></div>
+</aside>
+<div class="main">
+<header class="topbar">
+<button class="icon-btn" id="nav-toggle" aria-label="Toggle navigation">☰</button>
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a><span class="crumb-sep">›</span><a href="../sections/operations.html">Operations &amp; Safety</a><span class="crumb-sep">›</span><span class="crumb-here">Risk Register &amp; FMEA</span></nav>
+<button class="search-btn" id="search-btn" aria-label="Search"><span aria-hidden="true">🔍</span> Search <kbd>Ctrl K</kbd></button>
+<button class="icon-btn" id="theme-toggle" aria-label="Toggle light/dark theme" title="Toggle theme">◐</button>
+</header>
+<main class="content">
+<header class="doc-head">
+<h1>Risk Register &amp; FMEA</h1>
+
+<div class="doc-meta">
+<code class="mono">risk-register-fmea</code>
+<span>v1.0.0</span>
+<span>updated 2026-07-17</span>
+<span class="badge badge-assumption" title="Provenance: assumption"><span class="badge-icon">?</span>Assumption</span>
+<span class="chip chip-advisory" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: medium</span>
+<a class="raw-link" href="../../data/08_operations/risk-register-fmea.json">raw JSON ↗</a>
+</div>
+
+</header><section class="doc-sec"><h2>Method</h2><p>FMEA. RPN = Severity x Likelihood x Detectability, each 1-10. Higher RPN = higher priority. Detectability: 1 = certain to be caught before harm, 10 = undetectable until harm occurs.</p></section>
+<section class="doc-sec"><h2>Note</h2><p>Scores are the authors' engineering judgement, not measured failure rates. They are a PRIORITISATION tool, not a probability claim. Recompute after every design change and after every real incident. The value is in the ranking, not the absolute numbers.</p></section>
+<section class="doc-sec"><h2>The Philosophy</h2><p>The risks that kill ventures are rarely the dramatic ones. They are the ones with high SEVERITY and high DETECTABILITY-difficulty — the failures nobody sees coming until the harm is done. This register is sorted to surface those, not the obvious ones.</p></section>
+<section class="doc-sec"><h2>Risks</h2><div class="table-scroll"><table class="risk-table">
+<thead><tr><th>ID</th><th>Risk (sorted by RPN)</th><th title="Severity">S</th><th title="Likelihood">L</th><th title="Detectability">D</th><th>RPN</th><th>Residual</th><th>Status</th><th>Owner</th></tr></thead>
+<tbody><tr>
+<td class="mono">R-01</td>
+<td><div>Sensor fouling produces plausible but wrong readings; a farmer acts on bad data.</div><details><summary>Cause · effect · mitigation</summary><div class="risk-detail"><b>Cause:</b> Biofilm drift on optical/electrode sensors, undetected between reference checks.<br><b>Effect:</b> False 'all clear' or false alarm. A false all-clear that precedes a real kill is the worst outcome the product can produce — we told them they were safe.<br><b>Mitigation:</b> Weekly reference check (the only real control); flat-line and climatology QC tests; drift detection; dry-dock storage that reduces fouling versus a moored buoy.<br><b>Note:</b> HIGHEST RPN in the register, and it is not a dramatic failure — it is a silent one. This is the risk that most deserves attention and least attracts it. A monitoring product's deepest liability is confidently wrong data.</div></details></td>
+<td class="num">9</td><td class="num">6</td><td class="num">8</td>
+<td class="num rpn rpn-critical">432</td>
+<td class="num">168</td>
+<td><span class="chip chip-advisory"><span class="badge-icon">…</span>Mitigating</span></td>
+<td><small>aquaculture_scientist + field_ops</small></td>
+</tr><tr>
+<td class="mono">R-02</td>
+<td><div>Unvalidated kill-risk score produces a false negative; farmer defers action and loses stock.</div><details><summary>Cause · effect · mitigation</summary><div class="risk-detail"><b>Cause:</b> Shipping a predictive model before validation under commercial pressure.<br><b>Effect:</b> We convert the farmer's cautious uncertainty into false confidence, and they act on it. Direct harm caused by us.<br><b>Mitigation:</b> Do not ship the score until validated. Show the mechanism in plain language instead. Hard organisational rule that the scientist has veto over predictive claims.<br><b>Note:</b> The mitigation is organisational discipline, not technology, which makes it fragile — it must survive the commercial pressure documented in <a href="../files/ai-ml-models.html">ai-ml-models.json</a>. Listed at severity 10 because a false negative here can cost a livelihood.</div></details></td>
+<td class="num">10</td><td class="num">5</td><td class="num">7</td>
+<td class="num rpn rpn-critical">350</td>
+<td class="num">60</td>
+<td><span class="chip chip-advisory"><span class="badge-icon">…</span>Mitigating</span></td>
+<td><small>cto + aquaculture_scientist</small></td>
+</tr><tr>
+<td class="mono">R-05</td>
+<td><div>Aircraft with deployed probe snags on cage structure over people.</div><details><summary>Cause · effect · mitigation</summary><div class="risk-detail"><b>Cause:</b> Submerged, invisible netting and mooring lines.<br><b>Effect:</b> Uncontrolled aircraft directly above a working cage where people are present. Potential injury.<br><b>Mitigation:</b> Tension anomaly detection; slack-and-retry; tether cutter; shrouded rotors; station siting away from structure; no-profile zones; operator ground-clearance during sorties.<br><b>Note:</b> The shrouds (which cost mass and endurance) pay for themselves here. This is the risk that justifies not cutting them.</div></details></td>
+<td class="num">9</td><td class="num">5</td><td class="num">5</td>
+<td class="num rpn rpn-warning">225</td>
+<td class="num">90</td>
+<td><span class="chip chip-advisory"><span class="badge-icon">…</span>Mitigating</span></td>
+<td><small>mech_lead + field_ops</small></td>
+</tr><tr>
+<td class="mono">R-14</td>
+<td><div>Unit economics do not close; cost to serve exceeds willingness to pay.</div><details><summary>Cause · effect · mitigation</summary><div class="risk-detail"><b>Cause:</b> Underestimated maintenance labour, per-site sonde cost, dock cost, battery opex, and dispersed geography.<br><b>Effect:</b> Negative contribution margin at scale. Growth accelerates losses.<br><b>Mitigation:</b> Real BOM quotes in Phase 0. Measured (not modeled) unit economics in the Phase 4 pilot. Density-based site qualification. Cooperative amortisation.<br><b>Note:</b> See <a href="../files/unit-economics.html">unit-economics.json</a>, which refuses to state a number precisely because this risk is unquantified. High RPN and it hides inside a spreadsheet that looks fine until the assumptions are tested.</div></details></td>
+<td class="num">9</td><td class="num">5</td><td class="num">5</td>
+<td class="num rpn rpn-warning">225</td>
+<td class="num">108</td>
+<td><span class="chip chip-warning"><span class="badge-icon">!</span>Open</span></td>
+<td><small>ceo + cto</small></td>
+</tr><tr>
+<td class="mono">R-08</td>
+<td><div>Loss of social licence in a lake community.</div><details><summary>Cause · effect · mitigation</summary><div class="risk-detail"><b>Cause:</b> Perceived surveillance, a crash, a wildlife incident, or simply deploying without community engagement.<br><b>Effect:</b> The community makes operation socially impossible. In a lake town, this is decided over months of conversation and is nearly irreversible once lost.<br><b>Mitigation:</b> Community notification at commissioning; no person-detection; no IUU-enforcement use; transparent purpose; benign design language; local hiring.<br><b>Note:</b> High RPN and hard to detect until it is too late. Social licence is not recoverable at the rate it is lost. Under-weighted by technical teams because it is not an engineering problem.</div></details></td>
+<td class="num">7</td><td class="num">5</td><td class="num">6</td>
+<td class="num rpn rpn-warning">210</td>
+<td class="num">84</td>
+<td><span class="chip chip-warning"><span class="badge-icon">!</span>Open</span></td>
+<td><small>ceo + field_ops</small></td>
+</tr><tr>
+<td class="mono">R-12</td>
+<td><div>Technician disengagement degrades data quality.</div><details><summary>Cause · effect · mitigation</summary><div class="risk-detail"><b>Cause:</b> Technician perceives the system as surveillance of their performance; stops charging, cleaning, reporting faithfully.<br><b>Effect:</b> Silent data degradation; the deployment fails and nobody knows why.<br><b>Mitigation:</b> Never surface a technician-performance metric. Frame the system as the technician's instrument. Local hiring and training. Include them in the value story.<br><b>Note:</b> High RPN driven by detectability — a disengaged technician does not file a ticket. This is a design-and-culture control, and it must survive an owner asking for the performance dashboard. See <a href="../files/customer-personas.html">customer-personas.json</a>.</div></details></td>
+<td class="num">6</td><td class="num">5</td><td class="num">7</td>
+<td class="num rpn rpn-warning">210</td>
+<td class="num">84</td>
+<td><span class="chip chip-advisory"><span class="badge-icon">…</span>Mitigating</span></td>
+<td><small>field_ops</small></td>
+</tr><tr>
+<td class="mono">R-04</td>
+<td><div>Target operators will not pay at any price we can offer.</div><details><summary>Cause · effect · mitigation</summary><div class="risk-detail"><b>Cause:</b> Most operators currently spend ~zero on monitoring; we are creating a budget line, not taking share.<br><b>Effect:</b> No revenue. The venture fails regardless of technical success.<br><b>Mitigation:</b> Phase 0 farmer discovery with real willingness-to-pay testing (paid pilots, not survey questions). Lead with the checkable aeration-cost ROI. Cooperative and financing channels for smallholders.<br><b>Note:</b> This is a market risk, not a technical one, and it is the one most likely to actually kill the company. It is detectable early (Phase 0) if the team is honest in discovery — which is why the Phase 0 gate has a kill criterion for it.</div></details></td>
+<td class="num">10</td><td class="num">5</td><td class="num">4</td>
+<td class="num rpn rpn-warning">200</td>
+<td class="num">120</td>
+<td><span class="chip chip-warning"><span class="badge-icon">!</span>Open</span></td>
+<td><small>ceo</small></td>
+</tr><tr>
+<td class="mono">R-15</td>
+<td><div>Enabling over-stocking — the product makes the underlying problem worse.</div><details><summary>Cause · effect · mitigation</summary><div class="risk-detail"><b>Cause:</b> Better instruments let operators push density closer to the edge.<br><b>Effect:</b> Higher stocking, higher systemic risk, and complicity in the very problem we sell against.<br><b>Mitigation:</b> Carrying-capacity analytics that surface the systemic cost; cooperative/regulator framing; not marketing the product as a licence to intensify.<br><b>Note:</b> An ethical risk that is also a real second-order effect. Deserves the thesis ethics chapter. Under-detectable because it manifests as customer 'success' (higher stocking) before it manifests as harm.</div></details></td>
+<td class="num">5</td><td class="num">5</td><td class="num">7</td>
+<td class="num rpn rpn-advisory">175</td>
+<td class="num">105</td>
+<td><span class="chip chip-warning"><span class="badge-icon">!</span>Open</span></td>
+<td><small>ceo + aquaculture_scientist</small></td>
+</tr><tr>
+<td class="mono">R-03</td>
+<td><div>CAAP declines or indefinitely delays BVLOS authorisation.</div><details><summary>Cause · effect · mitigation</summary><div class="risk-detail"><b>Cause:</b> External regulatory decision outside our control.<br><b>Effect:</b> The autonomous dawn-sortie use case — the flagship — becomes illegal or requires a pilot at 04:30, destroying the unit economics.<br><b>Mitigation:</b> Engage CAAP from Phase 0. Build the safety case early. Stress-test the business model against VLOS-only economics so BVLOS is upside, not a load-bearing assumption.<br><b>Note:</b> Detectability is low (3) — we will see this coming, which is the one mercy. But it gates the margin, so it is on the critical path regardless.</div></details></td>
+<td class="num">9</td><td class="num">6</td><td class="num">3</td>
+<td class="num rpn rpn-advisory">162</td>
+<td class="num">90</td>
+<td><span class="chip chip-warning"><span class="badge-icon">!</span>Open</span></td>
+<td><small>regulatory_qa + ceo</small></td>
+</tr><tr>
+<td class="mono">R-06</td>
+<td><div>Aircraft ditches; lithium pack contaminates a food-production water body.</div><details><summary>Cause · effect · mitigation</summary><div class="risk-detail"><b>Cause:</b> Motor failure, severe weather, winch entanglement, or link loss over water.<br><b>Effect:</b> Environmental incident in the water the customer farms. Reputational and regulatory harm beyond the lost asset.<br><b>Mitigation:</b> Positive buoyancy; lithium containment; locator beacon; water-aware failsafe; consider hexarotor for motor-out survivability.</div></details></td>
+<td class="num">8</td><td class="num">5</td><td class="num">4</td>
+<td class="num rpn rpn-advisory">160</td>
+<td class="num">64</td>
+<td><span class="chip chip-advisory"><span class="badge-icon">…</span>Mitigating</span></td>
+<td><small>cto + embedded_lead</small></td>
+</tr><tr>
+<td class="mono">R-09</td>
+<td><div>Tethered-probe pendulum instability makes the aircraft uncontrollable in useful wind.</div><details><summary>Cause · effect · mitigation</summary><div class="risk-detail"><b>Cause:</b> Swinging pendulum mass couples into the flight controller as an unmodeled disturbance; natural frequency shifts with tether length.<br><b>Effect:</b> The real wind limit collapses; mission profiles fail; the platform becomes fair-weather only.<br><b>Mitigation:</b> Pendulum feedforward control; tether damping; flight-test characterisation early; accept a lower wind limit if necessary.<br><b>Note:</b> The single largest technical unknown. Detectable early (Phase 2 flight test) — which is why the winch and pendulum work is on the critical path.</div></details></td>
+<td class="num">8</td><td class="num">6</td><td class="num">3</td>
+<td class="num rpn rpn-advisory">144</td>
+<td class="num">96</td>
+<td><span class="chip chip-warning"><span class="badge-icon">!</span>Open</span></td>
+<td><small>cto + embedded_lead</small></td>
+</tr><tr>
+<td class="mono">R-13</td>
+<td><div>Toxicity overclaim leads to consumption of contaminated product.</div><details><summary>Cause · effect · mitigation</summary><div class="risk-detail"><b>Cause:</b> UI or marketing blurs the pigment-vs-toxin distinction; operator reads low chlorophyll as 'safe to harvest'.<br><b>Effect:</b> Food safety incident. People eat contaminated shellfish or fish.<br><b>Mitigation:</b> Hard rule: never display a toxicity indicator. Chlorophyll and phycocyanin always framed as 'sample the water', never as clearance. Recommend lab assay on elevated readings.<br><b>Note:</b> Low likelihood only because of disciplined framing. The severity is maximal because the harm is to a consumer's health, not a customer's margin.</div></details></td>
+<td class="num">10</td><td class="num">2</td><td class="num">5</td>
+<td class="num rpn rpn-advisory">100</td>
+<td class="num">40</td>
+<td><span class="chip chip-advisory"><span class="badge-icon">…</span>Mitigating</span></td>
+<td><small>aquaculture_scientist + ceo</small></td>
+</tr><tr>
+<td class="mono">R-11</td>
+<td><div>Weather grounds the aircraft exactly when risk peaks.</div><details><summary>Cause · effect · mitigation</summary><div class="risk-detail"><b>Cause:</b> Monsoon storms trigger overturn events AND exceed the flight envelope.<br><b>Effect:</b> The catastrophe-prevention claim is undercut — we cannot fly during the events we sell against.<br><b>Mitigation:</b> Reposition as chronic-management + pre-event measurement (measure the loaded gun before the storm). Fixed-buoy hybrid for continuity through weather. Simulation core to project through the gap.<br><b>Note:</b> High likelihood (8) — this is not a maybe, it is a certainty. The mitigation is honest positioning, not engineering. Trying to sell around it rather than reposition around it is the trap.</div></details></td>
+<td class="num">6</td><td class="num">8</td><td class="num">2</td>
+<td class="num rpn rpn-ok">96</td>
+<td class="num">60</td>
+<td><span class="chip chip-advisory"><span class="badge-icon">…</span>Mitigating</span></td>
+<td><small>cto + ceo</small></td>
+</tr><tr>
+<td class="mono">R-07</td>
+<td><div>Autonomous or erroneous dispensing over-doses a water body.</div><details><summary>Cause · effect · mitigation</summary><div class="risk-detail"><b>Cause:</b> Model error, sensor error, or software fault triggering discharge.<br><b>Effect:</b> Chemical harm to stock. A poisoned pond.<br><b>Mitigation:</b> No autonomous dispensing, ever. Per-mission human authorisation. Firmware dose ceiling not overridable from the dashboard. Mechanical interlock. Load-cell logging.<br><b>Note:</b> Low likelihood BECAUSE of the hard-coded controls. Remove any one of them and the likelihood jumps. The controls are the reason this RPN is low, not an inherent property of the system.</div></details></td>
+<td class="num">10</td><td class="num">2</td><td class="num">4</td>
+<td class="num rpn rpn-ok">80</td>
+<td class="num">24</td>
+<td><span class="chip chip-advisory"><span class="badge-icon">…</span>Mitigating</span></td>
+<td><small>cto</small></td>
+</tr><tr>
+<td class="mono">R-10</td>
+<td><div>Mass budget does not close; the aircraft cannot carry the mission.</div><details><summary>Cause · effect · mitigation</summary><div class="risk-detail"><b>Cause:</b> Component masses exceed the paper targets, especially the sonde and winch.<br><b>Effect:</b> The concept as described is not buildable on a viable multirotor.<br><b>Mitigation:</b> Per-mission payload configuration; reposition dispensing as treatment-only; accept a heavier MTOM bracket; descope thermal. This is Phase 0 paper arithmetic — resolvable before spending on hardware.<br><b>Note:</b> Low detectability difficulty (2) is the good news: it is arithmetic available today. The mass budget in <a href="../files/omnidrone-specifications.html">omnidrone-specifications.json</a> already shows it does not close fully-configured, which is why per-mission configuration is baseline rather than optimisation.</div></details></td>
+<td class="num">8</td><td class="num">5</td><td class="num">2</td>
+<td class="num rpn rpn-ok">80</td>
+<td class="num">32</td>
+<td><span class="chip chip-advisory"><span class="badge-icon">…</span>Mitigating</span></td>
+<td><small>cto</small></td>
+</tr></tbody></table></div></section>
+<section class="doc-sec"><h2>Risk Summary</h2><dl class="kv"><dt>Provenance</dt><dd><span class="badge badge-calculated" title="Provenance: derived_calculation"><span class="badge-icon">ƒ</span>Calculated</span></dd><dt>Top 5 By Residual Rpn</dt><dd><div class="table-scroll"><table><thead><tr><th>Id</th><th>Residual Rpn</th><th>Risk</th></tr></thead><tbody><tr><td>R-01</td><td><span class="num">168</span></td><td>Silent sensor drift → confidently wrong data</td></tr><tr><td>R-04</td><td><span class="num">120</span></td><td>No willingness to pay</td></tr><tr><td>R-14</td><td><span class="num">108</span></td><td>Unit economics do not close</td></tr><tr><td>R-15</td><td><span class="num">105</span></td><td>Enabling over-stocking</td></tr><tr><td>R-09</td><td><span class="num">96</span></td><td>Pendulum instability</td></tr></tbody></table></div></dd><dt>The Pattern</dt><dd><p>The top residual risks are NOT the dramatic ones (crash, poisoning). They are silent data corruption, commercial non-viability, and second-order harms. Dramatic risks attract engineering attention and get mitigated hard; quiet risks do not, so their residual scores stay high. A team that only worries about crashes is worrying about the wrong things.</p></dd><dt>Category Distribution</dt><dd><dl class="kv"><dt>Safety</dt><dd><span class="num">4</span></dd><dt>Commercial</dt><dd><span class="num">2</span></dd><dt>Technical</dt><dd><span class="num">2</span></dd><dt>Operational</dt><dd><span class="num">2</span></dd><dt>Financial</dt><dd><span class="num">1</span></dd><dt>Regulatory</dt><dd><span class="num">1</span></dd><dt>Environmental</dt><dd><span class="num">1</span></dd><dt>Reputational</dt><dd><span class="num">1</span></dd><dt>Data Security</dt><dd><span class="num">1</span></dd></dl></dd></dl></section>
+<section class="doc-sec"><h2>How To Use This Register</h2><ul><li>In the pitch: show R-04, R-14, and R-03 unprompted. Volunteering your top commercial and regulatory risks with mitigations is more convincing than a slide claiming there are none.</li><li>In the thesis: this is the limitations-and-risk chapter, and R-15 anchors the ethics discussion.</li><li>In engineering: the residual RPN ranking is the priority order. Work the top of the list.</li><li>Recompute after every real incident. A register that never changes is a register nobody uses.</li></ul></section>
+</main>
+<footer class="page-footer"><a class="pn pn-prev" href="../files/maintenance-schedule.html">
+<small>← Previous · Operations &amp; Safety</small>
+<span>Maintenance Schedule</span></a><a class="pn pn-next" href="../files/training-certification.html">
+<small>Next → · Operations &amp; Safety</small>
+<span>Training &amp; Certification</span></a></footer>
+</div>
+</div>
+<div class="search-overlay" id="search-overlay" hidden>
+<div class="search-panel" role="dialog" aria-label="Search">
+<input type="search" id="search-input" placeholder="Search the repository… (Esc to close)" autocomplete="off" spellcheck="false">
+<ul class="search-results" id="search-results"></ul>
+<div class="search-hint">↑↓ to navigate · Enter to open · Esc to close</div>
+</div>
+</div>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

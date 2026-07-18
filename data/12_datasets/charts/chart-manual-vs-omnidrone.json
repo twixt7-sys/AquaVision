@@ -1,0 +1,66 @@
+{
+  "id": "chart-manual-vs-omnidrone",
+  "chart_type": "radar",
+  "title": "Monitoring Approaches Compared",
+  "subtitle": "OmniDrone against the real alternatives — honest scoring",
+  "description": "A capability comparison across the approaches a farm actually chooses between. The OmniDrone wins on depth, coverage, and imaging; it LOSES on continuity, weather tolerance, cost, and regulatory simplicity. An honest radar shows the losses. The takeaway is not that we dominate — it is that a fixed-buoy + OmniDrone hybrid dominates either alone, which is where the product roadmap points.",
+  "provenance": "design_target",
+  "citation_ids": [],
+  "honest_note": "Scores are the authors' qualitative judgement on a 1-5 scale, not measured benchmarks. A vendor-scored comparison always flatters the vendor; this one deliberately scores our own weaknesses low so the comparison is credible. See competitive-landscape.json.",
+  "axes_dimensions": ["Depth profiling", "Continuous coverage", "Spatial coverage", "Aerial imaging", "Weather tolerance", "Low cost", "Regulatory simplicity"],
+  "series": [
+    {
+      "name": "OmniDrone (design intent)",
+      "provenance": "design_target",
+      "data": [
+        { "axis": "Depth profiling", "value": 5 },
+        { "axis": "Continuous coverage", "value": 2 },
+        { "axis": "Spatial coverage", "value": 5 },
+        { "axis": "Aerial imaging", "value": 5 },
+        { "axis": "Weather tolerance", "value": 1 },
+        { "axis": "Low cost", "value": 2 },
+        { "axis": "Regulatory simplicity", "value": 1 }
+      ]
+    },
+    {
+      "name": "Fixed sensor buoy",
+      "provenance": "assumption",
+      "data": [
+        { "axis": "Depth profiling", "value": 2 },
+        { "axis": "Continuous coverage", "value": 5 },
+        { "axis": "Spatial coverage", "value": 1 },
+        { "axis": "Aerial imaging", "value": 1 },
+        { "axis": "Weather tolerance", "value": 5 },
+        { "axis": "Low cost", "value": 5 },
+        { "axis": "Regulatory simplicity", "value": 5 }
+      ]
+    },
+    {
+      "name": "Manual sampling",
+      "provenance": "assumption",
+      "data": [
+        { "axis": "Depth profiling", "value": 4 },
+        { "axis": "Continuous coverage", "value": 1 },
+        { "axis": "Spatial coverage", "value": 2 },
+        { "axis": "Aerial imaging", "value": 1 },
+        { "axis": "Weather tolerance", "value": 3 },
+        { "axis": "Low cost", "value": 3 },
+        { "axis": "Regulatory simplicity", "value": 5 }
+      ]
+    },
+    {
+      "name": "USV / robotic boat",
+      "provenance": "assumption",
+      "data": [
+        { "axis": "Depth profiling", "value": 5 },
+        { "axis": "Continuous coverage", "value": 4 },
+        { "axis": "Spatial coverage", "value": 3 },
+        { "axis": "Aerial imaging", "value": 1 },
+        { "axis": "Weather tolerance", "value": 4 },
+        { "axis": "Low cost", "value": 2 },
+        { "axis": "Regulatory simplicity", "value": 4 }
+      ]
+    }
+  ],
+  "the_honest_reading": "OmniDrone and the buoy have nearly complementary shapes — we are strong exactly where the buoy is weak (depth, space, imaging) and weak where it is strong (continuity, weather, cost, regulation). That complementarity is the argument for a hybrid, not for displacement. The USV matches us on depth and beats us on weather and continuity; our answer to it is imaging and topology-independence. This chart should be shown with the conclusion stated, not left for the viewer to misread as domination."
+}

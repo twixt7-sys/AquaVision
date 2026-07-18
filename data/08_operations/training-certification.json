@@ -1,0 +1,83 @@
+{
+  "id": "training-certification",
+  "title": "Training & Certification",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "design_target",
+
+  "the_principle": "Two audiences with completely different needs: the people who OPERATE the system legally, and the people who USE its output daily. Conflating their training is how deployments fail.",
+
+  "certification_the_hard_gate": {
+    "requirement": "Commercial RPAS operation and any aircraft over 7 kg require a CAAP RPA Controller Certificate.",
+    "citation_ids": ["caap-rpas-regulations"],
+    "path": [
+      "Complete a CAAP-approved RPAS course at an Authorised Training Organisation.",
+      "Pass the CAAP knowledge test (air law, meteorology, navigation, flight principles).",
+      "Pass a practical flight demonstration under a CAAP evaluator."
+    ],
+    "validity": "Typically five years, per public summaries — confirm with CAAP.",
+    "why_this_is_a_gate_not_a_task": "No certificate means no legal commercial flight. This is not something to schedule around; it is a precondition for revenue. At least one certificated pilot must exist before the first paid sortie, and BVLOS operation carries additional authorisation requirements on top.",
+    "verification_note": "All certification details here derive from secondary summaries of CAAP rules. Confirm directly with CAAP — this is not legal advice."
+  },
+
+  "training_tracks": [
+    {
+      "track": "Remote Pilot",
+      "audience": "AquaVision field operators",
+      "prerequisite": "CAAP RPA Controller Certificate",
+      "curriculum": [
+        "OmniDrone systems and pre/post-flight procedures.",
+        "The tethered-probe flight regime — this aircraft handles differently from a bare drone, and the pendulum changes the wind envelope.",
+        "Water-aware failsafe behaviour and alternate-landing decision-making.",
+        "Snag recognition and the cutter decision — when to sacrifice the sonde to save the aircraft.",
+        "Weather envelope judgement, including the reduced tethered wind limit.",
+        "Dispensing authorisation procedure and the discipline around it."
+      ]
+    },
+    {
+      "track": "Site Technician",
+      "audience": "Farm staff who handle the hardware daily",
+      "prerequisite": "None — designed for a person who is not an engineer",
+      "why_this_track_is_make_or_break": "The technician charges the batteries, cleans the probe, and reports the faults. If they cannot do these correctly, the deployment degrades into confidently wrong data — worse than no data. This track protects the entire value of the system.",
+      "curriculum": [
+        "Probe cleaning and the WHY — a dirty sensor lies, it does not fail loudly.",
+        "The weekly reference check — the single most important thing they do, because it is the only defence against silent drift.",
+        "pH/ISE electrode calibration.",
+        "Battery handling and the safety around lithium.",
+        "Recognising a fouled-sensor reading — a flat line in a diel curve is physically impossible and is the cheapest fouling detector.",
+        "Basic winch inspection and cutter check.",
+        "Fault reporting, framed as blameless — a hidden near-miss is a future crash."
+      ],
+      "the_framing_requirement": "This track must be delivered as 'here is your instrument and how to keep it honest', NEVER as 'here is how management will monitor your work'. The moment the technician reads it as surveillance, they disengage and the data dies. See risk R-12."
+    },
+    {
+      "track": "Farm Manager / Decision-Maker",
+      "audience": "The person who acts on the output",
+      "curriculum": [
+        "Reading a profile — depth on the vertical axis, and what a shoaling thermocline means.",
+        "Interpreting an alert: what it measured, what it did NOT measure, and what the mechanism is.",
+        "The critical distinction: the system tells you what the water is doing; it does not tell you your fish are safe. Absence of an alert is not a clearance.",
+        "The pigment-vs-toxin boundary — a low chlorophyll reading is not a food-safety clearance.",
+        "The provenance of a number — measured vs interpolated vs the manager's own typed-in estimate.",
+        "When to escalate to lab sampling or a vet — the system's boundaries are the manager's responsibility to respect."
+      ],
+      "the_goal": "A manager who understands the LIMITS of the system as well as its capabilities. An over-trusting user is more dangerous than a sceptical one, because they will act on a reading the system never meant as advice."
+    },
+    {
+      "track": "Cooperative Administrator",
+      "audience": "Co-op staff managing a shared deployment",
+      "curriculum": ["Multi-member data governance and the privacy boundaries", "Shared-asset scheduling and cost allocation", "Using lake-wide data in carrying-capacity discussions", "The member-consent requirements for any cross-farm analysis"]
+    }
+  ],
+
+  "the_recurring_theme": {
+    "statement": "Every track spends significant time on what the system CANNOT do.",
+    "why": "Because the product's core value is trustworthiness of measurement, and trust is destroyed by overclaiming, not by underclaiming. A user who has been taught the boundaries is a user who will not blame the system for a limitation it never hid, and will not act on a number it never vouched for. This inverts the usual product-training instinct, which is to maximise perceived capability. Here, teaching the limits IS the product."
+  },
+
+  "knowledge_transfer_and_exit": {
+    "principle": "The farm must not be helpless if we leave.",
+    "why_it_matters": "Every technology vendor in this sector has left, and the farmers remember. A credible answer to 'what happens when you go' — documented procedures, local trained staff, portable data — is a sales asset, not just an ethics obligation. See the cooperative persona.",
+    "commitments": ["Data is exportable and belongs to the customer.", "Procedures are documented in the local language.", "Trained local technicians, not dependence on a distant specialist."]
+  }
+}

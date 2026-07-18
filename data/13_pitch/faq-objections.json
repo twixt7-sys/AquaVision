@@ -1,0 +1,103 @@
+{
+  "id": "faq-objections",
+  "title": "FAQ & Objection Handling",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "design_target",
+  "note": "The hard questions, with honest answers. An objection-handling document that only contains softballs is useless. These are the questions that actually get asked, ranked roughly by how often and how sharply. The answers concede what is true and defend what is defensible — because a defended overclaim is worse than a conceded weakness.",
+
+  "objections": [
+    {
+      "q": "Why does this need to fly? A robotic boat has better endurance and no aviation regulator.",
+      "difficulty": "highest — this is the sharpest technical objection",
+      "honest_answer": "A USV genuinely beats us on endurance and weather tolerance, and for some customers it's the right answer — we'll say so. Our advantages are three: transit speed across many stations (a boat crawls; we cover a lake array fast), simultaneous aerial imaging a surface craft physically cannot do, and total independence from the water's topology — we ignore dikes, nets, and cage structure that entangle a boat. If a customer values endurance over those three, the USV wins and we won't pretend otherwise. Our Phase 0 gate explicitly requires us to be willing to hear that a USV is the right architecture.",
+      "what_not_to_do": "Don't dismiss the USV. Conceding its strengths is what makes the rest of the answer credible.",
+      "source": "competitive-landscape.json#/competitor_categories (usv-asv)"
+    },
+    {
+      "q": "A fixed sensor buoy is a tenth of the price. Why would anyone buy this?",
+      "difficulty": "high",
+      "honest_answer": "For a single small pond, a buoy IS the right answer and we'll tell you that. Our economics beat a buoy when you need many stations at many depths many times a day — the lake cage array case — because a buoy can't profile the water column without a costly vertical sensor string, and depth is where the killing happens. Also, counterintuitively, our probe fouls LESS than a moored buoy, because it lives in a dry dock and gets rinsed between sorties rather than sitting in warm eutrophic water growing biofilm. But honestly, the strongest configuration is a few buoys for continuity plus a drone for depth and coverage — a hybrid — and that's where our roadmap points.",
+      "source": "competitive-landscape.json#/competitor_categories (fixed-sensor-buoys)"
+    },
+    {
+      "q": "You can't fly in a storm — but storms are what cause the fish kills. So you can't prevent the thing you're selling against.",
+      "difficulty": "high — and it's correct",
+      "honest_answer": "That's true, and it's why we don't lead with kill-prevention. We can't fly in the storm that triggers an overturn. What we CAN do is measure the loaded gun in the days before — the stratification and the oxygen debt building up — so the farmer acts before the trigger arrives. And a fixed buoy that keeps reporting through the storm is a genuine complement here. Our honest positioning is continuous management and pre-event warning, not storm-response. Anyone who sells you storm-response with a small multirotor is lying about physics.",
+      "source": "risk-register-fmea.json (R-11), use-cases.json#/uc-03-stratification-watch"
+    },
+    {
+      "q": "The people who need this most — smallholders — can't afford it. So who actually pays?",
+      "difficulty": "high",
+      "honest_answer": "Correct, and it's the central tension of the business. Our first customer is the commercial farm with aeration and a budget — someone who can act on a warning and verify the aeration savings. Smallholders we reach through cooperatives that amortise one dock across forty members, and through public and development-finance programmes — never through direct capital sales. The long game is insurance and credit: continuous records make an uninsurable asset insurable, which could make monitoring a requirement for finance rather than a discretionary purchase. We're honest that serving smallholders is a sequencing challenge, not a solved problem.",
+      "source": "customer-personas.json, go-to-market.json#/the_smallholder_question"
+    },
+    {
+      "q": "Won't the drone spread disease between farms?",
+      "difficulty": "medium-high",
+      "honest_answer": "Yes, if designed carelessly — a probe dipped in one pond and then another is a pathogen vector. So we engineered against it: each site gets its own dedicated sonde (the drone travels, the probe doesn't), the dock decontaminates the sonde AND the full tether length between sites, and every sonde's movement is logged so an outbreak can be traced. We also disclose the residual risk — we can't fully decontaminate the airframe at operating cadence. We treat this as a first-class hardware requirement, not an operational footnote, because it's the strongest objection to a multi-site probe drone.",
+      "source": "biosecurity-protocol.json"
+    },
+    {
+      "q": "Can you actually predict fish kills?",
+      "difficulty": "medium — and the tempting wrong answer is 'yes'",
+      "honest_answer": "Not yet, and we won't claim it until we've validated it against real events across a full season — which takes at least a year you can't compress. What we do today is show the MECHANISM in plain language: 'the bottom three metres are anoxic and rain is forecast tonight.' An experienced farmer can act on that better than on a black-box score, and it carries no false certainty. A false 'you're safe' from an unvalidated model could cost a harvest, so we'd rather show the measurement and let the expert judge.",
+      "source": "ai-ml-models.json#/models/kill-risk-forecast",
+      "why_this_matters": "This is the question where overclaiming is most tempting and most dangerous. The honest answer is also the safer product."
+    },
+    {
+      "q": "Can it measure algal toxins? Can it tell me the water is safe to harvest?",
+      "difficulty": "medium",
+      "honest_answer": "No. It measures chlorophyll and phycocyanin — pigments that tell you how much algae is present and whether it might be cyanobacteria, which SOMETIMES produce toxins. High readings are a reason to send a sample to a lab, never a diagnosis and never a clearance. People eat this fish, so we hold that line hard: the system never says 'safe'.",
+      "source": "problem-taxonomy.json (bio-toxin), risk-register-fmea.json (R-13)"
+    },
+    {
+      "q": "What's your traction? Any customers?",
+      "difficulty": "medium",
+      "honest_answer": "None. Zero customers, zero revenue, nothing flown — and that's the correct state for a company that has deliberately not spent on hardware before proving the concept can be built and that farmers will pay. Our first traction is a cheap Phase 0: 25+ farmer interviews with real willingness-to-pay, a validation partnership, the payload arithmetic, and a BVLOS pathway. We'd rather show you honest zeros and a rigorous plan than invented LOIs you'd catch in diligence.",
+      "source": "traction.json"
+    },
+    {
+      "q": "Your whole model assumes BVLOS. What if CAAP says no?",
+      "difficulty": "medium-high",
+      "honest_answer": "It's our biggest external dependency and we're engaging CAAP from Phase 0, not when we need something. If BVLOS is delayed or denied, we re-base the model on VLOS economics — which are worse, because a pilot per sortie erodes the labour-cost advantage, but not fatal for the higher-value use cases. What we won't do is carry an unresolved BVLOS assumption silently into a later round. It's on the critical path and we treat it that way.",
+      "source": "regulatory-framework.json, risk-register-fmea.json (R-03)"
+    },
+    {
+      "q": "Isn't there a risk this just helps farmers over-stock, making the problem worse?",
+      "difficulty": "medium — the ethical curveball",
+      "honest_answer": "Yes, that's a real second-order risk. Better instruments can let operators push density closer to the edge, and over-stocking is the root cause of the disaster we sell against. We have a partial answer — carrying-capacity analytics aimed at cooperatives and regulators who care about the whole lake — but we're honest that an individual operator with a profit motive might stock harder regardless. We'd rather name that tension than pretend the technology is purely benign. It's in our ethics chapter.",
+      "source": "ethics-data-privacy.json#/the_overstocking_paradox, risk-register-fmea.json (R-15)"
+    },
+    {
+      "q": "Can you even build this? A winched probe on a hovering drone sounds hard.",
+      "difficulty": "medium",
+      "honest_answer": "It IS the hard part, and it's our biggest technical risk — a swinging probe on a tether is a pendulum that couples into the flight controller, and it'll snag on nets. We de-risk it first, on a static gantry, 1000 cycles, before it ever flies. If it can't be made to work, the honest response is to change the vehicle — not to quietly drop the probe and sell a camera drone, which would have no defensible position. It's also exactly why it's our moat: anyone can fly a camera; calibrated depth chemistry from a hover is genuinely hard.",
+      "source": "probe-winch-subsystem.json"
+    },
+    {
+      "q": "The salmon-farming companies are way ahead of you and well funded.",
+      "difficulty": "medium",
+      "honest_answer": "They are, technically — they have underwater vision and biomass estimation we don't. But their whole cost structure is built for high-value salmon in cold, deep, well-capitalised marine cages, and it doesn't transfer to a tilapia cage worth a fraction as much. We compete on geography and economics, not on out-engineering them: the tropical, distributed, low-value-per-unit, smallholder-dense environment their cost structure can't reach. Our defence is local depth — regulatory relationships, lake-specific chemistry, cooperative channels — not a technical lead we don't have.",
+      "source": "competitive-landscape.json#/competitor_categories (precision-aquaculture-platforms)"
+    },
+    {
+      "q": "What happens when you leave, like every other tech vendor did?",
+      "difficulty": "medium — the farmer's real question",
+      "honest_answer": "Fair — this sector's been burned. Our answers are concrete: your data is yours, exportable, and stays with you. We train local technicians, not fly-in specialists. Procedures are documented in your language. And because we own and maintain the hardware as a service, our incentive is your uptime, not a one-time sale. We'd rather you be able to leave us than be locked in — the lock-in that matters is that the product works, not that you're trapped.",
+      "source": "training-certification.json#/knowledge_transfer_and_exit"
+    },
+    {
+      "q": "Show me the market size.",
+      "difficulty": "medium",
+      "honest_answer": "I can show you the method and the one number I'm missing, not a fabricated TAM. Bottom-up, it's operator counts times what they'll pay — and I don't yet have the BFAR operator counts or a measured willingness-to-pay, so I won't multiply guesses into an authoritative-looking figure. I'd rather show you exactly what Phase 0 resolves. If you want, I'll walk you through why the top-down 'industry-output-times-penetration' number that every agritech deck shows is meaningless.",
+      "source": "market-sizing-tam-sam-som.json"
+    }
+  ],
+
+  "the_meta_objection": {
+    "q": "You're awfully honest about your weaknesses. Is that a strategy or are you just not confident?",
+    "answer": "It's a strategy, and a considered one. Every weakness I've named is discoverable in diligence — the BVLOS dependency, the weather limitation, the affordability paradox, the USV alternative. Handing them to you with the mitigations attached costs me nothing you wouldn't find anyway, and it buys the one thing that actually matters in an early-stage bet: evidence that this team tells the truth about its own company. If the unverifiable claims are going to carry weight later, the verifiable honesty has to come first. Investors who want the hockey-stick will pass, and that's fine — they're not the right investors for a hardware company with a real validation timeline.",
+    "source": "funding-ask.json#/the_counterintuitive_bet"
+  }
+}

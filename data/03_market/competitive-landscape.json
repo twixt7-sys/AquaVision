@@ -1,0 +1,167 @@
+{
+  "id": "competitive-landscape",
+  "title": "Competitive Landscape",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "assumption",
+  "confidence": "low",
+
+  "verification_notice": "This file describes competitor CATEGORIES and the competitive logic. Named vendors are deliberately omitted where we have not verified their current offering, and pricing is marked unknown rather than guessed. A competitive analysis containing invented competitor pricing is worse than no competitive analysis — the one thing an investor can trivially check is whether you described a competitor correctly, and getting it wrong destroys your credibility on everything they cannot check.",
+
+  "the_real_competitor": {
+    "name": "Doing nothing",
+    "market_share_estimate": "the overwhelming majority",
+    "why_it_wins": "It is free, it is what the farmer already does, it requires no training, no charging, no trust in a stranger's algorithm, and it has worked well enough that the farm still exists. Most farms in our target segment currently spend approximately zero on water quality monitoring.",
+    "how_to_beat_it": "Not with features. With a demonstrated peso outcome in the first cycle, on the farmer's own water, that they can verify themselves.",
+    "why_this_block_is_first": "Because founders build competitive matrices against other startups and then lose to inertia. The category-creation problem is the actual problem: we are not fighting for share of a monitoring budget, we are trying to create one. That is a fundamentally harder task than beating a rival, and every strategic decision should be made with it in mind."
+  },
+
+  "competitor_categories": [
+    {
+      "category_id": "fixed-sensor-buoys",
+      "label": "Fixed Water Quality Sensor Buoys / Moored Sondes",
+      "description": "Anchored or floating multiparameter sondes with telemetry, sold into aquaculture as continuous monitoring.",
+      "maturity": "mature, commercially available, widely deployed",
+      "strengths": [
+        "Genuinely continuous — sampling every few minutes, not a few times a day.",
+        "Far cheaper per unit.",
+        "No pilot, no certificate, no airspace regulator.",
+        "No weather grounding. A buoy works in a typhoon; we do not.",
+        "Simple, understood, and low-trust-cost."
+      ],
+      "weaknesses": [
+        "One point. In a heterogeneous water body, one point can be systematically unrepresentative — and the operator has no way to know it is.",
+        "Depth costs a multiple: profiling requires a vertical sensor string, multiplying cost per station.",
+        "Biofouling. A moored optical sensor in a tropical eutrophic lake fouls fast, and a fouled sensor does not fail loudly — it drifts, which produces confidently wrong data. This is their deepest structural weakness and it is under-appreciated.",
+        "No imaging, no anomaly detection, no dispensing.",
+        "Scaling to an array means N buoys to buy, moor, power, and clean."
+      ],
+      "how_we_compete": "We do not, below a certain scale — and we should say so. Above it, our argument is coverage and depth. Our probe lives in a dry dock between sorties and gets rinsed, so it fouls far less than a permanently immersed sensor. That is a real and defensible advantage that nobody expects.",
+      "honest_assessment": "This is our most dangerous competitor because it is CORRECT for a large part of the market. Any pitch that dismisses buoys is a pitch that has not done the arithmetic. The right posture is a clear scale threshold and the discipline to walk away below it.",
+      "the_hybrid_threat": "The strongest configuration is probably a small number of fixed buoys for continuity plus a drone for spatial coverage and depth — which means a buoy vendor adding a drone, or us adding buoys, is the likely end state. We should plan to integrate rather than to displace, and design the platform to ingest third-party buoy telemetry from day one."
+    },
+    {
+      "category_id": "uav-service-providers",
+      "label": "General UAV Survey / Agricultural Drone Operators",
+      "description": "Drone service companies offering aerial imagery, mapping, and agricultural spraying, some of which will take aquaculture jobs.",
+      "maturity": "mature",
+      "strengths": ["Already flying legally", "Already own aircraft and certificates", "Cheap imagery"],
+      "weaknesses": [
+        "No probe. They see the surface only, which means they cannot see the thing that kills the fish.",
+        "No in-situ ground truth, so their indices are uncalibrated and their time series are not comparable across days.",
+        "No domain model. An NDVI map handed to a fish farmer is not information.",
+        "Project-based, not continuous."
+      ],
+      "how_we_compete": "The probe. This is exactly the gap the reeled sonde fills, and it is why the tether — the hardest engineering problem in the project — is also the moat. Anyone can fly a camera over a lake. Getting calibrated depth-resolved chemistry from a hovering aircraft is genuinely hard.",
+      "threat_level": "low as competitors, medium as a commoditising force on the imaging half of our value."
+    },
+    {
+      "category_id": "precision-aquaculture-platforms",
+      "label": "Integrated Precision Aquaculture Platforms",
+      "description": "Software and sensor suites for fish farms — underwater cameras, biomass estimation, feeding control, farm management software. Predominantly built for Norwegian and Chilean salmon.",
+      "maturity": "mature in salmon, immature in tropical smallholder contexts",
+      "citation_ids": ["globalseafood-precision-aqua", "sciencedirect-dt-aiot-2023"],
+      "strengths": [
+        "Deep capital, real deployments, real validation data.",
+        "Underwater vision and biomass estimation — capabilities we simply do not have.",
+        "Direct feeding-response feedback, which is a strictly better feedback loop than our environmental inference.",
+        "Established relationships with the largest producers."
+      ],
+      "weaknesses": [
+        "Built for high-value salmon in cold, deep, well-capitalised marine cages. The economics do not transfer to a tilapia cage worth a fraction as much.",
+        "Priced for salmon margins.",
+        "Fixed infrastructure per cage — the cost scales linearly with cage count, which is fatal in a smallholder array.",
+        "Cold-water assumptions embedded throughout. Tropical stratification, monsoon overturn, and volcanic chemistry are not in their models."
+      ],
+      "how_we_compete": "Geography and economics, not technology. We should not try to out-engineer a well-funded Norwegian incumbent on underwater vision. We should own the tropical, distributed, low-value-per-unit, high-count environment that their cost structure cannot reach.",
+      "threat_level": "low near-term, high long-term. If tropical aquaculture becomes valuable enough, they will come down-market with a stripped product and substantial capital. Our defence is local depth — regulatory relationships, lake-specific models, cooperative channels — not a technical lead."
+    },
+    {
+      "category_id": "usv-asv",
+      "label": "Uncrewed Surface Vessels / Robotic Boats",
+      "description": "Autonomous surface craft carrying sondes across a water body.",
+      "maturity": "emerging",
+      "strengths": [
+        "Vastly better endurance — hours to days versus our tens of minutes. This is a serious advantage and it is not close.",
+        "Can carry a heavier, better sensor suite without a payload fraction crisis.",
+        "No aviation regulator. No BVLOS gate.",
+        "Can hold station and profile continuously.",
+        "Weather tolerance far exceeds a small multirotor."
+      ],
+      "weaknesses": [
+        "Slow transit. Crossing a large lake takes a long time, so temporal resolution across many stations is poor — the exact thing we are good at.",
+        "Fouls and gets entangled in nets, ropes, and cage structure. A lake cage array is a hostile obstacle field for a surface craft.",
+        "Cannot image from above.",
+        "Cannot cross a dike between ponds. In pond geography this is disqualifying; an aircraft ignores the topology entirely."
+      ],
+      "how_we_compete": "Speed, aerial imaging, and topology-independence. Their endurance beats us; our transit speed and our ability to ignore obstacles beats them.",
+      "threat_level": "HIGH — and this is the honest answer to the hardest technical question anyone will ask us: 'why does this need to fly?' The USV is the strongest alternative architecture and it has genuine advantages we cannot match. Our answer must be the specific combination of (a) transit speed across many stations, (b) simultaneous aerial imaging that a surface craft physically cannot do, and (c) the ability to move between ponds and over cage structure without navigating around anything. If that combination is not worth the endurance penalty for a given customer, the USV is the better product for them and we should be intellectually honest about it.",
+      "kill_criterion_note": "The Phase 0 gate explicitly requires the team to be willing to hear that a USV or a buoy network is the correct answer. This entry is why."
+    },
+    {
+      "category_id": "satellite-remote-sensing",
+      "label": "Satellite-Based Water Quality Monitoring",
+      "description": "Sentinel-2/3 and commercial constellations delivering chlorophyll and bloom products.",
+      "maturity": "mature",
+      "citation_ids": ["pmc-sentinel-hab-chile-2020", "springer-uav-satellite-review-2024"],
+      "strengths": [
+        "Free (Copernicus), regional coverage, no hardware, no regulator.",
+        "Demonstrated operational HAB early warning for aquaculture — this is not speculative, it works today.",
+        "Long historical archive for baselining, which we will never have."
+      ],
+      "weaknesses": [
+        "Resolution. Sentinel-2 at 10 m cannot resolve an individual cage — a 10 m pixel may contain several cages and the water between them.",
+        "Revisit interval of days, against processes that move in hours.",
+        "Clouds. In a Philippine monsoon, optical satellite coverage during the season of greatest risk is close to useless. This is a decisive limitation in our geography and it is worth stating plainly.",
+        "Surface only. No depth, ever.",
+        "No ground truth, so retrievals in turbid inland water carry large errors."
+      ],
+      "how_we_compete": "Not as a competitor — as a complement, and the literature already says so. The integrated UAV-satellite pattern is an established research direction: satellite for regional context and history, UAV for local high-precision calibration.",
+      "citation_ids_supporting": ["springer-uav-satellite-review-2024"],
+      "strategic_note": "We should ingest Copernicus data from day one. It is free, it gives every new site an instant historical baseline we could not otherwise afford, and it makes our first sortie at a new farm dramatically more informative. This is close to a free capability and it is not in the current architecture. It should be."
+    },
+    {
+      "category_id": "manual-consultants",
+      "label": "Manual Sampling Services and Aquaculture Consultants",
+      "description": "People with sondes and boats, and extension officers.",
+      "maturity": "the incumbent",
+      "strengths": ["Trusted", "Bring interpretation and judgement, not just numbers", "No technology adoption barrier", "Can act on what they find"],
+      "weaknesses": ["Expensive per visit", "Infrequent", "Not there at 4 a.m.", "Do not accumulate data"],
+      "how_we_compete": "Partner, do not displace. The consultant's judgement is complementary to our coverage, and they are a distribution channel with existing trust. Positioning against them wastes an ally and makes an enemy of the person the farmer actually listens to.",
+      "threat_level": "low as competitor, high as gatekeeper of farmer trust"
+    },
+    {
+      "category_id": "academic-prototypes",
+      "label": "University Research Prototypes",
+      "description": "The UAV water-sampling and drone-sonde concepts in the literature.",
+      "maturity": "TRL 3-5",
+      "citation_ids": ["hamzah-dt-water-review-2024", "mdpi-drones-inland-review-2024"],
+      "relevance": "Not competitors — prior art, and a recruiting ground. Several of these groups have solved subproblems we are about to encounter. Read them before building the winch, not after.",
+      "threat_level": "none",
+      "note": "The existence of many academic drone-sonde prototypes and no dominant commercial product is informative and should be read carefully. Either the market is not there, or the engineering is harder than it looks, or nobody has yet paired it with a business model. Assume all three until proven otherwise. This is the kind of signal founders explain away and should not."
+    }
+  ],
+
+  "competitive_positioning": {
+    "our_defensible_claim": "The only platform that pairs depth-resolved in-situ chemistry with same-sortie aerial imaging, using the former to calibrate the latter — across many stations, at low marginal labour cost, on tropical smallholder-scale water bodies.",
+    "stress_testing_that_claim": [
+      { "challenge": "Is it true?", "answer": "As a design intent, yes. As a demonstrated capability, no — nothing has flown. The claim is currently a specification." },
+      { "challenge": "Is it defensible?", "answer": "Partially. The winch and the calibration workflow are hard, but not patent-hard. The real moat, if there is one, is the accumulated site-specific data and the local relationships — neither of which we have yet." },
+      { "challenge": "Does anyone want it?", "answer": "Unknown. This is the Phase 0 question and it is not rhetorical." }
+    ]
+  },
+
+  "feature_comparison_matrix": {
+    "note": "Chart-ready. Capability presence only — deliberately no scoring, because a scored matrix built by the vendor always shows the vendor winning, and every reader knows it.",
+    "capabilities": ["Depth profiling", "Continuous 24/7", "Spatial coverage", "Aerial imaging", "In-situ ground truth", "Dispensing", "Underwater vision", "Biomass estimation", "Works in typhoon", "No aviation regulator", "Low capital cost", "Historical archive"],
+    "competitors": [
+      { "name": "OmniDrone (design intent)", "has": ["Depth profiling", "Spatial coverage", "Aerial imaging", "In-situ ground truth", "Dispensing"], "lacks": ["Continuous 24/7", "Underwater vision", "Biomass estimation", "Works in typhoon", "No aviation regulator", "Low capital cost", "Historical archive"] },
+      { "name": "Fixed sensor buoy", "has": ["Continuous 24/7", "In-situ ground truth", "Works in typhoon", "No aviation regulator", "Low capital cost"], "lacks": ["Depth profiling", "Spatial coverage", "Aerial imaging", "Dispensing", "Underwater vision", "Biomass estimation", "Historical archive"] },
+      { "name": "USV / robotic boat", "has": ["Depth profiling", "Continuous 24/7", "In-situ ground truth", "No aviation regulator"], "lacks": ["Aerial imaging", "Spatial coverage", "Dispensing", "Underwater vision", "Works in typhoon", "Low capital cost", "Historical archive"] },
+      { "name": "Satellite", "has": ["Spatial coverage", "Aerial imaging", "No aviation regulator", "Low capital cost", "Historical archive"], "lacks": ["Depth profiling", "Continuous 24/7", "In-situ ground truth", "Dispensing", "Underwater vision", "Biomass estimation", "Works in typhoon"] },
+      { "name": "Precision aquaculture platform (salmon)", "has": ["Continuous 24/7", "In-situ ground truth", "Underwater vision", "Biomass estimation", "Works in typhoon", "No aviation regulator", "Historical archive"], "lacks": ["Depth profiling", "Spatial coverage", "Aerial imaging", "Low capital cost"] },
+      { "name": "Manual sampling", "has": ["Depth profiling", "In-situ ground truth", "No aviation regulator"], "lacks": ["Continuous 24/7", "Spatial coverage", "Aerial imaging", "Dispensing", "Underwater vision", "Biomass estimation", "Low capital cost", "Historical archive"] }
+    ],
+    "what_this_matrix_shows": "We lose on continuity, weather, regulation, and cost. We win on the specific combination of depth plus space plus imaging. That is a narrow but real position — and reading our own matrix honestly, the fixed buoy plus OmniDrone hybrid dominates either alone. That conclusion should shape the product roadmap rather than be argued away."
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "id": "cost-of-inaction",
+  "title": "Cost of Inaction — Loss Model",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "modeled_projection",
+  "confidence": "low",
+
+  "READ_THIS_FIRST": "This is a MODEL, not a measurement. Every number below is either a sourced external statistic (tagged) or an assumption the authors invented (tagged). Its purpose is to make the loss structure explicit and attackable — not to prove a market. If you present this as evidence of demand, you will be caught, because the assumptions are visible and several of them are shaky. The correct use is: 'here is our model, here are the assumptions, tell us which one you think is wrong.' That framing wins meetings. 'Our research shows PHP X million' loses them.",
+
+  "loss_categories": [
+    {
+      "category_id": "catastrophic-mortality",
+      "label": "Catastrophic Mortality Events",
+      "description": "Mass fish kills. Sudden, total or near-total loss of standing stock in affected units.",
+      "visibility": "high — these get reported",
+      "evidence": {
+        "anchors": [
+          { "fact": "343 tonnes lost in a single Taal Lake event", "citation_ids": ["inquirer-taal-fishkill-2023"], "provenance": "verified_external" },
+          { "fact": "Over 600 tonnes / PHP 43.13 million in a single tilapia kill", "citation_ids": ["pna-tilapia-fishkill"], "provenance": "verified_external" },
+          { "fact": "Up to PHP 15 million lost by Pangasinan bangus operators in one event", "citation_ids": ["inquirer-pangasinan-fishkill"], "provenance": "verified_external" },
+          { "fact": "PHP 322.1 million estimated recorded national fish kill losses 1998-2018", "citation_ids": ["bioflux-lake-buhi-2020"], "provenance": "verified_external" }
+        ],
+        "the_contradiction_we_must_resolve": "Three single events in this list total roughly PHP 58 million plus 343 tonnes. The twenty-year national recorded total is PHP 322 million. These cannot be reconciled unless the national figure counts only a narrow subset of officially investigated incidents. Either the national figure is a severe undercount, or the event figures are overstated by reporting. We do not know which, and until we do, neither number should anchor a business case. Resolving this by obtaining BFAR's primary records is a Phase 0 task and a genuinely publishable contribution.",
+        "provenance": "derived_calculation"
+      },
+      "addressable_by_omnidrone": "partially",
+      "honest_addressability": "We can shorten detection time. We cannot make a farmer destock, and we cannot manufacture emergency aeration capacity that does not exist. On a farm with aerators and a manager willing to run them, an early warning has real value. On a smallholder cage with neither, the warning converts an unexpected loss into an expected one — which is worth something psychologically and nothing financially. The addressable fraction is therefore a function of the customer's response capacity, not of our detection performance. This is the most important sentence in this file."
+    },
+    {
+      "category_id": "chronic-sublethal",
+      "label": "Chronic Sub-Lethal Production Loss",
+      "description": "Fish that survive but grow slowly, convert feed poorly, and die at elevated background rates because water quality sits chronically at the margin.",
+      "visibility": "near zero — nobody reports this because nobody measures it",
+      "hypothesis": "This category is larger in aggregate than catastrophic mortality, possibly by an order of magnitude, and it is completely invisible in every published loss statistic.",
+      "reasoning": "A kill event is a discrete, reported, dramatic loss. A 12 percent reduction in growth rate across an entire cycle across an entire sector is silent, is absorbed into the expected yield, and is never attributed to anything. Farmers do not experience it as a loss; they experience it as normal.",
+      "provenance": "assumption",
+      "confidence": "speculative",
+      "why_this_matters_enormously": "If this hypothesis is true, the OmniDrone's value proposition is misstated throughout this repository. We are pitching catastrophe insurance, when the real product might be continuous yield optimisation — a different message, a different customer conversation, a different pricing model, and a far better business, because it pays on every cycle rather than on the rare bad one. Catastrophe is a more emotionally compelling pitch; chronic loss may be the more valuable and more defensible one.",
+      "how_to_test_it": "Phase 3's longitudinal deployment can measure it directly: correlate continuous water quality against realised FCR and survival across a full cycle, on farms with no kill events. If the correlation is strong, restructure the whole pitch around it.",
+      "addressable_by_omnidrone": "strongly — this is exactly what continuous profiling is for",
+      "intellectual_note": "This is the most important untested claim in the entire repository. It is flagged as speculative because it is, but it deserves the team's attention far more than another decimal place on the mortality figures."
+    },
+    {
+      "category_id": "feed-waste",
+      "label": "Feed Waste",
+      "description": "Feed dispensed that is not converted to biomass — uneaten, or eaten by fish too stressed to convert it.",
+      "visibility": "low — recorded as cost, never as waste",
+      "evidence": {
+        "anchors": [
+          { "fact": "Feed is approximately 60 percent of total operating cost (NOAA, cited via Innovasea); other sources put it as high as 70 percent, and 50-65 percent of variable cost in prawn culture", "citation_ids": ["innovasea-fcr-guide"], "provenance": "verified_external" },
+          { "fact": "At a feed price of USD 500/t, a 0.1 difference in FCR is worth USD 50 per tonne of production", "citation_ids": ["globalseafood-fcr-primary-indicator"], "provenance": "verified_external" },
+          { "fact": "FCR typically ranges 1.0-2.5 in finfish culture", "citation_ids": ["innovasea-fcr-guide"], "provenance": "verified_external" }
+        ]
+      },
+      "the_leverage": {
+        "provenance": "derived_calculation",
+        "statement": "Because feed is ~60 percent of operating cost, and because the USD 50/tonne figure for a 0.1 FCR improvement is externally sourced, feed is the one loss category where the value of an improvement can be computed from published numbers rather than invented. That makes it the ROI argument to lead with — it is the only one that does not require the customer to accept our assumptions.",
+        "worked_example": {
+          "scenario": "A farm producing 100 tonnes per cycle, feed at USD 500/t.",
+          "fcr_improvement": 0.1,
+          "value": { "amount": 5000, "currency": "USD", "formula": "100 t x USD 50/t" },
+          "caveat": "Whether the OmniDrone actually delivers a 0.1 FCR improvement is completely unproven. The arithmetic is sound; the premise is a hypothesis. State it that way."
+        }
+      },
+      "addressable_by_omnidrone": "plausibly — via condition-aware feeding and even distribution",
+      "honest_note": "We do not observe feeding response directly. An underwater camera or a hydroacoustic sensor sees whether the fish are actually eating; we infer from water condition and distribution. That is a weaker feedback loop than the incumbent underwater feeding systems provide, and a knowledgeable buyer will say so."
+    },
+    {
+      "category_id": "reflexive-water-degradation",
+      "label": "Self-Inflicted Water Degradation",
+      "description": "The uneaten feed from the category above decomposes, consumes oxygen, and releases ammonia — degrading the water that then causes the losses in the categories above.",
+      "citation_ids": ["fao-nutrient-dynamics-eutrophic", "ija-environmental-impacts-ph"],
+      "provenance": "verified_external",
+      "the_structural_insight": "This is a feedback loop, and it is the most intellectually interesting thing in the problem space. Overfeeding costs money AND degrades water AND therefore increases mortality AND stresses fish so they convert feed worse AND therefore requires more feed. The loop is vicious and it closes.",
+      "why_it_matters_for_the_pitch": "It means a single intervention — feeding on evidence rather than on schedule — attacks the largest cost line and the primary kill mechanism simultaneously. That is not a feature list; that is a coherent thesis about the system's dynamics, and it is what elevates this from 'a drone with sensors' to a considered argument. Put this on a slide as a loop diagram. It is the best slide available to this company.",
+      "addressable_by_omnidrone": "this is the core claim"
+    },
+    {
+      "category_id": "disease-losses",
+      "label": "Disease-Related Losses",
+      "evidence": {
+        "anchors": [
+          { "fact": "FAO estimates global aquaculture disease losses at approximately USD 6 billion annually", "citation_ids": ["worldbank-disease-risk-2014"], "provenance": "verified_external" },
+          { "fact": "WSSV losses in Asia estimated at USD 6 billion during the 1992-93 outbreaks and USD 1-2 billion annually thereafter", "citation_ids": ["asian-fisheries-shrimp-disease"], "provenance": "verified_external" },
+          { "fact": "EMS/AHPND in the Mekong Delta costs small-scale producers roughly USD 800 million per year", "citation_ids": ["worldbank-disease-risk-2014"], "provenance": "verified_external" }
+        ]
+      },
+      "addressable_by_omnidrone": "marginally",
+      "brutal_honesty": "Almost none of this is ours. Disease losses are driven by pathogen introduction, broodstock quality, and biosecurity — not by observability. We detect the consequences earlier and we flag stress windows. Those are real but modest contributions. This category belongs in the problem picture because it sizes the sector's pain; it does NOT belong in our revenue model, and putting it there would be the single most dishonest move available in this pitch. Resist it."
+    },
+    {
+      "category_id": "aeration-energy",
+      "label": "Aeration Energy Waste",
+      "description": "Aerators run continuously because nobody knows when they are needed, or run too late because nobody knew they were.",
+      "visibility": "high as a cost, invisible as a waste — it is just 'the electricity bill'",
+      "addressable_by_omnidrone": "strongly and demonstrably",
+      "why_this_is_the_sleeper": "This is the easiest ROI in the entire product and it is buried at position six in this file. Aeration electricity is a large, monthly, already-metered cost. A pilot that shows a farm ran its aerators 30 percent fewer hours with equal or better DO outcomes is a complete, self-contained, verifiable business case that requires no belief in our mortality claims at all. It can be demonstrated in one cycle. It should probably be the lead ROI in the first commercial pitch, precisely because it is boring and checkable.",
+      "provenance": "assumption",
+      "caveat": "The 30 percent figure above is illustrative and unmeasured. The point is the structure of the argument, not the number.",
+      "data_needed": "Baseline aeration hours and kWh from a real farm. This is obtainable in Phase 0 by asking. Do it."
+    },
+    {
+      "category_id": "labour-and-safety",
+      "label": "Monitoring Labour and Occupational Risk",
+      "addressable_by_omnidrone": "strongly",
+      "note": "The monetary value is modest — a technician's hours. The human value is not. Pre-dawn small-boat operation in monsoon weather is a genuine drowning risk that the industry treats as routine. This category should never be reduced to a labour cost line; it is an argument that stands on its own and it lands with cooperatives, LGUs, and development funders in a way that FCR arithmetic does not."
+    },
+    {
+      "category_id": "opportunity-cost-of-ignorance",
+      "label": "The Cost of Never Learning",
+      "description": "Fifteen years of operation producing zero retained knowledge about the farm's own water.",
+      "visibility": "invisible by construction",
+      "addressable_by_omnidrone": "completely",
+      "note": "Unquantifiable and real. Every cycle begins with the same ignorance as the first. The sector cannot build the predictive models that would help it because the training data was never kept. This is the argument for the platform as infrastructure rather than as a gadget — and it is the argument that justifies a subscription rather than a hardware sale, because the value compounds with duration."
+    }
+  ],
+
+  "model_assumptions_register": {
+    "purpose": "Every assumption a reader might otherwise have to reverse-engineer. Attack these.",
+    "assumptions": [
+      { "id": "a1", "assumption": "Earlier detection translates into avoided loss.", "status": "UNTESTED — and it is the load-bearing assumption of the entire venture. If it is false, nothing else matters.", "how_to_test": "Find or create a matched comparison: farms with monitoring vs without, same lake, same season." },
+      { "id": "a2", "assumption": "Farms have the response capacity to act on a warning.", "status": "UNTESTED and probably false for smallholders.", "how_to_test": "Ask, in Phase 0. This is a ten-minute question and it is currently unanswered." },
+      { "id": "a3", "assumption": "Chronic sub-lethal loss exceeds catastrophic loss in aggregate.", "status": "SPECULATIVE. Potentially the most valuable hypothesis in the repository.", "how_to_test": "Phase 3 longitudinal correlation." },
+      { "id": "a4", "assumption": "Published fish kill statistics undercount true losses.", "status": "PLAUSIBLE given the internal contradiction documented above, but unverified.", "how_to_test": "BFAR primary records." },
+      { "id": "a5", "assumption": "Feed cost at ~60 percent of operating cost holds for Philippine tilapia and milkfish specifically.", "status": "The 60 percent figure is sourced to NOAA via a US-oriented publication. It may not transfer to Philippine species and practices.", "how_to_test": "Local farm cost structure data. Do not assume US figures transfer." },
+      { "id": "a6", "assumption": "A 0.1 FCR improvement is achievable through better water management.", "status": "UNPROVEN. Plausible from the physiology — stressed fish convert feed poorly — but we have no evidence of the magnitude." }
+    ]
+  },
+
+  "what_this_file_deliberately_does_not_contain": {
+    "statement": "There is no bottom-line 'total addressable loss' number here, and its absence is intentional.",
+    "why": "Constructing one would require multiplying our sourced figures by our invented assumptions, producing a large, authoritative-looking number whose error bars span an order of magnitude. That number would then be repeated in the deck, in the thesis, and eventually back to us by an investor who had checked it. The temptation to produce it is strong and it should be resisted until the assumptions in the register above have been tested against real farms. When they have been, this file becomes genuinely powerful. Until then, the honest deliverable is the loss STRUCTURE, not a loss total."
+  },
+
+  "chart_hint": {
+    "chart_file": "data/12_datasets/charts/chart-problem-cost-breakdown.json",
+    "rendering_note": "Render as a qualitative structure — visibility on one axis, addressability on the other — NOT as a pie chart of peso values. A pie chart implies we know the proportions. We do not."
+  }
+}

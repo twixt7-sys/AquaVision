@@ -1,0 +1,128 @@
+{
+  "id": "studies-digital-twin",
+  "title": "Related Studies — Digital Twins in Aquaculture",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "theme": "digital_twin",
+  "provenance": "verified_external",
+  "verification_notice": "Records derived from search-result summaries. Open the sources before citing.",
+
+  "the_honest_framing_of_this_theme": "The digital twin is NOT our novelty. Several exist. A thesis claiming to contribute an aquaculture digital twin will be told, correctly, that this ground is taken. Our contribution is the observation architecture that feeds one. This collection exists to establish what already exists so we do not overclaim.",
+
+  "studies": [
+    {
+      "citation_id": "hamzah-dt-water-review-2024",
+      "theme": "digital_twin",
+      "study_type": "systematic_review",
+      "year": 2024,
+      "summary": "A systematic review of drone-based digital twins for water quality monitoring.",
+      "relevance_to_omnidrone": "THE CLOSEST PRIOR ART TO THIS ENTIRE CONCEPT. A systematic review of exactly the intersection we occupy — drones, digital twins, water quality. This must be read carefully before another line of twin code is written, because it is where we find out what has already been tried and what already failed.",
+      "supports_or_challenges": "mixed",
+      "why_mixed": "The existence of a systematic review means the field is populated enough to review. That is simultaneously validation that the idea is sound and evidence that we are not first. Both matter.",
+      "the_question_it_should_answer_for_us": "Has anyone already put a sonde on a winch under a drone and fed it into a twin? If yes, we need to know what happened to them. If no, we need to know why nobody tried — because in a field mature enough to have a systematic review, an obvious idea that nobody has pursued usually has a reason.",
+      "priority": "HIGHEST — read before building"
+    },
+    {
+      "citation_id": "sciencedirect-dt-aiot-2023",
+      "theme": "digital_twin",
+      "study_type": "engineering_prototype",
+      "year": 2023,
+      "summary": "Digital twin-based intelligent fish farming using Artificial Intelligence Internet of Things (AIoT), embedding cloud-based digital twins with machine learning and computer vision.",
+      "key_findings": [
+        "Digital twins enable real-time monitoring and optimisation by leveraging IoT to bridge virtual and physical environments.",
+        "Systems embed cloud-based twins using ML and computer vision with AIoT sensors to monitor feeding behaviour, disease, and growth.",
+        "Enables remote access and management of farms."
+      ],
+      "relevance_to_omnidrone": "Core prior art establishing the IoT-AI-twin fusion architecture our platform follows. We are applying an established pattern, not inventing one — and saying so plainly is better than pretending.",
+      "supports_or_challenges": "supports",
+      "what_they_have_that_we_do_not": "Computer vision monitoring of FEEDING BEHAVIOUR. They watch the fish eat. We infer appetite from water condition. That is a strictly better feedback loop than ours and an honest comparison must concede it.",
+      "what_we_have_that_they_do_not": "Depth. Their observation is fixed-point and surface- or cage-local. Ours is a profile across many stations.",
+      "priority": "HIGH"
+    },
+    {
+      "citation_id": "pmc-dt-rainbow-trout-2023",
+      "theme": "digital_twin",
+      "study_type": "case_study",
+      "year": 2023,
+      "geography": "Land-based RAS",
+      "summary": "A digital twin case study for land-based aquaculture of rainbow trout (Oncorhynchus mykiss).",
+      "relevance_to_omnidrone": "Evidence that the twin concept has moved from proposal to demonstrated case study — which is what makes 'digital twin' a defensible term rather than a buzzword. Read for METHOD, not for transferable findings.",
+      "supports_or_challenges": "context_only",
+      "why_it_does_not_transfer": "Land-based RAS is explicitly outside our market: indoor, controlled, already instrumented, and fixed sensors beat an aerial platform in a tank. Their twin has abundant, continuous, complete observation of a closed system. Ours will have sparse observation of an open one. Those are different modelling problems and their calibration approach may not survive the transition.",
+      "the_useful_lesson": "A RAS twin is the easy case and it still took real work. An open lake with six measurement points, weather, and no control over inflow is a substantially harder modelling problem than the literature's demonstrated cases. Our simulation ambitions should be calibrated against that.",
+      "priority": "MEDIUM"
+    },
+    {
+      "citation_id": "mdpi-dt-ahp-2023",
+      "theme": "digital_twin",
+      "study_type": "modeling_simulation",
+      "year": 2023,
+      "summary": "Digital twin architecture evaluation for intelligent fish farm management using a modified analytic hierarchy process.",
+      "relevance_to_omnidrone": "Methodological — gives a structured basis for evaluating twin architecture choices rather than picking one by instinct. Useful for the thesis's design justification chapter, where 'we chose this architecture' needs to be more than an assertion.",
+      "supports_or_challenges": "context_only",
+      "priority": "LOW"
+    },
+    {
+      "citation_id": "springer-dt-aquaculture-sim",
+      "theme": "digital_twin",
+      "study_type": "modeling_simulation",
+      "year": 2024,
+      "summary": "Digital twin technology for aquaculture systems simulation.",
+      "relevance_to_omnidrone": "The simulation layer — the thing that would make PondTwin an actual twin rather than a 3D dashboard with live numbers on it.",
+      "supports_or_challenges": "supports",
+      "why_this_matters_more_than_it_looks": "The simulation core is also the answer to our worst limitation. We cannot fly in storms, which is exactly when the water column does the thing that kills fish. But a calibrated physical model CAN project the column through a storm from the last profile plus the weather data. The twin's simulation is not a nice-to-have — it is how we cover our own flight envelope gap. That connection is not obvious until you notice that our observation gap and the model's purpose are the same gap.",
+      "priority": "MEDIUM — rises to HIGH once Phase 3 data exists"
+    },
+    {
+      "citation_id": "preprints-dt-fish-feeding-2024",
+      "theme": "digital_twin",
+      "study_type": "engineering_prototype",
+      "year": 2024,
+      "title_note": "A novel process-based digital twin for intelligent fish feeding management using multi-mode sensors and smart feeding machine",
+      "url": "https://www.preprints.org/manuscript/202401.0927",
+      "summary": "A process-based digital twin for fish feeding management combining multi-mode sensors with a smart feeding machine.",
+      "relevance_to_omnidrone": "Directly relevant to our condition-aware feeding use case, and it is more advanced than what we propose. A process-based twin driving a feeding machine closes the loop between observation and action in one system.",
+      "supports_or_challenges": "challenges",
+      "the_honest_comparison": "They observe feeding directly and actuate a fixed feeder. We infer appetite from water chemistry and dispense from an aircraft with a payload measured in kilograms. On the feeding use case specifically, this approach beats ours on both fidelity and throughput. This is corroborating evidence for the conclusion the mass budget and mission economics already reached independently: bulk feeding is not our function. Precision treatment delivery is.",
+      "verification_status": "cited_from_search_result",
+      "note": "Preprint. Verify publication status.",
+      "priority": "MEDIUM"
+    },
+    {
+      "citation_id": "globalseafood-precision-aqua",
+      "theme": "digital_twin",
+      "study_type": "policy_report",
+      "summary": "Industry review framing precision aquaculture as the application of precision-agriculture logic to fish farming.",
+      "key_findings": [
+        "Precision aquaculture deploys multi-mode sensors to build datasets that pre-train data-driven prediction models.",
+        "ML, deep learning, attention mechanisms, and hybrid models are driving gains in water quality monitoring, disease detection, feed optimisation, and behaviour analysis."
+      ],
+      "relevance_to_omnidrone": "The conceptual frame — observe, interpret, decide, act — with instruments rather than intuition, at the resolution of the unit rather than the farm.",
+      "supports_or_challenges": "supports",
+      "limitations": "Industry trade publication. Fine for a pitch, weak for a thesis.",
+      "priority": "LOW"
+    }
+  ],
+
+  "synthesis": {
+    "what_the_field_has_established": [
+      "Digital twins for aquaculture exist, are demonstrated, and are moving toward operational use.",
+      "The IoT-AI-twin architecture pattern is settled enough to be reviewed systematically.",
+      "Drone-based twins for water quality specifically are a recognised research area with their own systematic review.",
+      "Process-based twins can drive actuation, not just visualisation."
+    ],
+    "the_field_wide_limitation": {
+      "statement": "Every twin in this collection is starved of spatial observation.",
+      "explanation": "They are fed by fixed sensors at one point, by manual sampling, or by cage-local cameras. The twin models a volume; the observation is a point. The gap between those is filled by assumption — which is exactly the same honesty problem our own interpolation layer has, just less visible because nobody talks about it.",
+      "our_claim": "A twin fed by depth-resolved profiles across many stations several times daily is a better-observed twin than this literature has had access to.",
+      "the_precision_required": "Our contribution is the OBSERVATION ARCHITECTURE, not the twin. Claiming a novel twin would be both false and easily caught. Claiming a novel way to feed one is defensible and is actually the more interesting contribution."
+    },
+    "what_this_collection_tells_us_to_do": [
+      "Read Hamzah et al. 2024 before writing twin code. It is the closest prior art and it will tell us what failed.",
+      "Do not use the term 'digital twin' in customer-facing material until the simulation layer exists. Until then we have a 3D visualisation with honest interpolation, which is genuinely useful and should be called what it is.",
+      "Prioritise the simulation core higher than it currently sits, because it is also the answer to the storm-grounding problem.",
+      "Concede the feeding use case. Two independent analyses in this repository and one study in this collection all point the same way."
+    ],
+    "the_thesis_positioning": "Chapter 2 should say: aquaculture digital twins are established; their limiting factor is observation density; here is an architecture that raises observation density by an order of magnitude in the vertical and spatial dimensions simultaneously; and here is what that makes possible that was not possible before. That is a real, narrow, defensible claim. 'We built a digital twin' is not."
+  }
+}

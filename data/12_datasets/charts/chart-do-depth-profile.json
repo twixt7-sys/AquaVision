@@ -1,0 +1,49 @@
+{
+  "id": "chart-do-depth-profile",
+  "chart_type": "line",
+  "title": "The Loaded Gun: What a Vertical Profile Reveals",
+  "subtitle": "Dissolved oxygen and temperature versus depth, pre-dawn",
+  "description": "A stratified water column with a survivable surface (3.1 mg/L) hiding anoxic, sulfide-generating bottom water (0.2 mg/L, negative ORP) below the thermocline at ~3.5 m. A surface sensor sees nothing wrong. A cold rain that mixes this column delivers the bottom water to the fish — the exact mechanism in the Laguna de Bay fish-kill literature. Depth is where the killing happens, and only a profile can see it.",
+  "provenance": "illustrative_synthetic",
+  "SYNTHETIC_WARNING": "FABRICATED but physically plausible profile. Describes no real station. Illustrates the stratification mechanism. Webpage MUST badge as illustrative_synthetic.",
+  "citation_ids": ["seafdec-laguna-fishkill", "idso-schmidt-stability-1973"],
+  "axes": {
+    "x": { "label": "Value", "type": "linear" },
+    "y": { "label": "Depth", "unit": "m", "type": "linear", "min": 0, "max": 7 }
+  },
+  "axis_rendering_rule": "DEPTH ON THE Y-AXIS, INCREASING DOWNWARD. Never invert to look like a conventional chart. See dashboard-spec.json#/views (Profile view). The vertical orientation is the whole point — it makes the water column legible.",
+  "series": [
+    {
+      "name": "Dissolved oxygen (mg/L) — SYNTHETIC",
+      "unit": "mg/L",
+      "provenance": "illustrative_synthetic",
+      "data": [
+        [3.1, 0.5], [3.0, 1.0], [2.7, 2.0], [2.0, 3.0], [0.9, 4.0], [0.4, 5.0], [0.2, 6.0]
+      ],
+      "note": "Format is [value, depth] so depth maps to the downward Y-axis."
+    },
+    {
+      "name": "Temperature (°C) — SYNTHETIC",
+      "unit": "degC",
+      "provenance": "illustrative_synthetic",
+      "data": [
+        [29.8, 0.5], [29.7, 1.0], [29.4, 2.0], [28.1, 3.0], [25.3, 4.0], [24.1, 5.0], [23.8, 6.0]
+      ]
+    },
+    {
+      "name": "ORP (mV) — SYNTHETIC",
+      "unit": "mV",
+      "provenance": "illustrative_synthetic",
+      "data": [
+        [180, 0.5], [175, 1.0], [160, 2.0], [90, 3.0], [-40, 4.0], [-120, 5.0], [-180, 6.0]
+      ],
+      "note": "Negative ORP below the thermocline signals sulfide generation — the H2S the platform infers rather than measures directly."
+    }
+  ],
+  "annotations": [
+    { "kind": "band", "value": [3.0, 4.0], "label": "Thermocline ~3.5 m — the boundary the surface cannot see", "severity": "advisory" },
+    { "kind": "point_label", "value": [3.1, 0.5], "label": "Surface: 3.1 mg/L — looks survivable", "severity": "info" },
+    { "kind": "point_label", "value": [0.2, 6.0], "label": "Bottom: 0.2 mg/L, ORP -180 mV — anoxic, sulfide-generating", "severity": "critical" }
+  ],
+  "notes": "This is the chart that justifies the reeled probe over every surface-only competitor. It should sit next to the diel chart in the pitch: one shows time-blindness, the other depth-blindness. Together they are the case for the platform."
+}

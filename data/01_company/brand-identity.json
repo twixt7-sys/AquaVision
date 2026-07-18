@@ -1,0 +1,140 @@
+{
+  "id": "brand-identity",
+  "title": "AquaVision — Brand & Design System",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "verified_external",
+  "note": "Colour values are sampled by eye from the supplied logo assets and should be replaced with the exact values from the original vector source when available. Treat them as close approximations, not the brand standard.",
+
+  "logo": {
+    "full_lockup": {
+      "asset": "photo_2026-07-17_13-51-55.jpg",
+      "description": "Mark above wordmark 'AQUAVISION' with the descriptor line 'FISHERIES • AQUACULTURE • TECHNOLOGY' beneath.",
+      "usage": "Primary lockup. Default for decks, documents, and the site header."
+    },
+    "mark_only": {
+      "asset": "photo_2026-07-17_13-52-22.jpg",
+      "description": "The 'A' monogram formed from a triangular peak, with a stylised fish nested inside and a wave sweeping beneath.",
+      "usage": "Favicon, app icon, drone fuselage badge, and any context under ~48 px where the wordmark would be illegible."
+    },
+    "symbolism": {
+      "triangle": "The 'A' of AquaVision, read simultaneously as an aerial vantage point — the drone's-eye view looking down.",
+      "fish_in_eye_form": "The fish outline doubles as an eye. Vision and the subject of vision are the same shape: the point of the product is seeing the fish.",
+      "wave": "The water surface — the boundary the whole product is about crossing, since everything that matters happens beneath it.",
+      "note_for_pitch": "This is a genuinely good mark for the story: it encodes 'aerial view' and 'seeing beneath the water' in one glyph. Use it as the visual spine of the deck."
+    },
+    "clear_space": "Minimum clear space on all sides equal to the height of the wave element.",
+    "misuse": [
+      "Do not recolour the mark outside the palette.",
+      "Do not place the mark on a mid-tone blue background where the gradient loses contrast.",
+      "Do not stretch, rotate, or add effects.",
+      "Do not separate the fish from the triangle."
+    ]
+  },
+
+  "palette": {
+    "note": "Sampled approximations pending the vector source.",
+    "primary": [
+      { "token": "--av-deep", "hex": "#0F3A5F", "label": "Deep Water", "role": "Primary dark. Headings, dark UI surfaces, the top of the logo gradient." },
+      { "token": "--av-ocean", "hex": "#1B6E8C", "label": "Ocean", "role": "Primary mid. Interactive elements, links, chart series 1." },
+      { "token": "--av-current", "hex": "#2E9BB8", "label": "Current", "role": "Primary bright. Accents, active states, chart series 2." },
+      { "token": "--av-shallow", "hex": "#4FC3D9", "label": "Shallow", "role": "Light accent. The wave highlight, the drone's LED glow, chart series 3." },
+      { "token": "--av-mist", "hex": "#D8EEF4", "label": "Mist", "role": "Tint. Backgrounds, table stripes, disabled states." }
+    ],
+    "neutral": [
+      { "token": "--av-ink", "hex": "#0B1A24", "label": "Ink", "role": "Body text on light." },
+      { "token": "--av-slate", "hex": "#5A6B76", "label": "Slate", "role": "Secondary text, captions." },
+      { "token": "--av-hull", "hex": "#F2F6F8", "label": "Hull", "role": "Page background light. Matches the drone's white shell." },
+      { "token": "--av-white", "hex": "#FFFFFF", "label": "White", "role": "Cards, surfaces." },
+      { "token": "--av-night", "hex": "#0A1620", "label": "Night", "role": "Page background dark. Matches the render's backdrop." }
+    ],
+    "semantic": {
+      "note": "Status colours are deliberately NOT drawn from the brand blues. A water quality alert must never be mistaken for a brand accent — that confusion is a safety problem, not a design preference.",
+      "colors": [
+        { "token": "--av-ok", "hex": "#2E9E6B", "label": "Nominal", "meaning": "Within safe operating band." },
+        { "token": "--av-advisory", "hex": "#E0A82E", "label": "Advisory", "meaning": "Trending toward a threshold. Watch." },
+        { "token": "--av-warning", "hex": "#E2721F", "label": "Warning", "meaning": "Threshold breached. Act." },
+        { "token": "--av-critical", "hex": "#C63B2F", "label": "Critical", "meaning": "Acute risk to stock. Act now." },
+        { "token": "--av-unknown", "hex": "#8A97A0", "label": "No Data", "meaning": "Sensor missing, stale, or QC-failed. NOT the same as safe — and the UI must never let grey read as green." }
+      ],
+      "accessibility_requirement": "Status must never be encoded by colour alone. Every status carries an icon and a text label, because a red/green distinction is invisible to roughly 1 in 12 men — a demographic heavily represented among fish farmers."
+    },
+    "provenance_badges": {
+      "note": "Rendering hint for the provenance discipline described in the manifest.",
+      "verified_external": { "hex": "#2E9E6B", "label": "Sourced" },
+      "derived_calculation": { "hex": "#1B6E8C", "label": "Calculated" },
+      "modeled_projection": { "hex": "#E0A82E", "label": "Projection" },
+      "design_target": { "hex": "#8A6BC4", "label": "Target" },
+      "illustrative_synthetic": { "hex": "#C63B2F", "label": "SAMPLE DATA — NOT REAL" },
+      "assumption": { "hex": "#8A97A0", "label": "Assumption" }
+    }
+  },
+
+  "typography": {
+    "wordmark": "The logo wordmark is a wide-tracked geometric sans in light weight. Match its spirit, do not attempt to recreate it in body copy.",
+    "recommended_stack": {
+      "display": "'Inter Tight', 'Inter', system-ui, sans-serif — tracked wide at large sizes to echo the wordmark.",
+      "body": "'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif",
+      "mono": "'JetBrains Mono', 'SF Mono', Consolas, monospace — for telemetry, coordinates, and any number a person might need to transcribe."
+    },
+    "scale": {
+      "note": "1.25 major-third ratio, 16 px base.",
+      "steps": [
+        { "token": "--fs-xs", "px": 12, "use": "Badges, table meta." },
+        { "token": "--fs-sm", "px": 14, "use": "Captions, secondary." },
+        { "token": "--fs-base", "px": 16, "use": "Body." },
+        { "token": "--fs-lg", "px": 20, "use": "Lead paragraphs." },
+        { "token": "--fs-xl", "px": 25, "use": "Card titles." },
+        { "token": "--fs-2xl", "px": 31, "use": "Section headings." },
+        { "token": "--fs-3xl", "px": 39, "use": "Page titles." },
+        { "token": "--fs-4xl", "px": 49, "use": "Hero." }
+      ]
+    },
+    "numerals": "Use tabular lining figures for all telemetry and financial tables. Proportional figures in a column of numbers make comparison harder and look amateurish in a diligence room."
+  },
+
+  "product_design_language": {
+    "source": "Derived from the supplied render (photo_2026-07-17_13-52-27.jpg).",
+    "observed_cues": [
+      "Ducted rotors in full circular shrouds — reads as safe-to-approach, which matters for a machine that will operate near people on narrow dikes and small boats.",
+      "Soft white shell with pale cyan accents and integrated light strips — marine instrument, not military hardware. Deliberate distance from the black-quadcopter aesthetic.",
+      "Twin ventral pods flanking a centre-line probe — the payload architecture is legible from the outside.",
+      "Sprawled quadrupod landing gear with wide feet — designed for soft mud dikes and boat decks.",
+      "Gimballed sensor head forward of centre.",
+      "Reeled probe deployed on a visible tether beneath the belly — the signature silhouette of the product."
+    ],
+    "design_principles": [
+      "Legibility over stealth. A farmer, a neighbour, and a regulator should all be able to see what this machine is doing and infer that it is benign.",
+      "The shrouds are a functional safety choice first and a brand cue second. Do not let a future weight-saving exercise quietly delete them without re-running the safety case.",
+      "White shell is a thermal decision in a tropical deployment as much as an aesthetic one.",
+      "The tether should read as intentional. It is the product's most distinctive feature and its hardest engineering problem."
+    ],
+    "honest_note": "The render is an industrial design study, not an engineering drawing. Rotor sizing, pod volume, and gear geometry in the image have not been validated against the mass and power budgets in data/05_hardware/. Where the render and the specification disagree, the specification is not automatically right either — both need reconciling before tooling."
+  },
+
+  "voice_and_tone": {
+    "principles": [
+      "Concrete over aspirational. 'Profiles dissolved oxygen every two hours at four depths' beats 'revolutionises aquaculture'.",
+      "Respect the operator's expertise. The farmer has known this water for twenty years. The product supplies instruments, not wisdom.",
+      "Never dramatise a fish kill. Real people lose real money and sometimes their livelihood. Describe it accurately and let the facts carry the weight.",
+      "State uncertainty out loud. The brand's differentiator is trustworthiness of measurement; hedging language used honestly is an asset, not a weakness."
+    ],
+    "avoid": [
+      "'Revolutionary', 'game-changing', 'disruptive' — say what it does instead.",
+      "Implying the system predicts fish kills, until a validated model exists. This is the single most tempting and most dangerous overclaim available to this company.",
+      "Implying the system detects toxins. It detects pigments correlated with taxa that sometimes produce toxins. The gap between those two statements is where lawsuits live.",
+      "Military or surveillance framing. It is corrosive to farmer trust and it invites the IUU-enforcement association the company should keep at arm's length."
+    ]
+  },
+
+  "ui_guidance_for_the_webpage": {
+    "layout": "Data-dense but calm. This is an instrument, not a landing page. Whitespace between sections, tight within tables.",
+    "dark_mode": "Required. Operators check the dashboard before dawn — that is when the DO minimum occurs — and a white screen at 04:30 is genuinely hostile.",
+    "the_water_metaphor": "Depth is the organising spatial idea. Use vertical position to mean depth wherever a profile is shown, and never invert the axis to make a chart look conventional.",
+    "chart_defaults": {
+      "series_colors": ["--av-ocean", "--av-current", "--av-shallow", "--av-deep", "--av-slate"],
+      "threshold_lines": "Always drawn from --av-warning or --av-critical, dashed, labelled with the threshold value and its citation.",
+      "missing_data": "Render gaps as gaps. Never interpolate across a sensor outage — a smooth line through missing data is a lie the eye believes."
+    }
+  }
+}

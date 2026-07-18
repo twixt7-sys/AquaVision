@@ -1,0 +1,108 @@
+{
+  "id": "digital-twin",
+  "title": "PondTwin — Digital Twin Specification",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "design_target",
+  "confidence": "low",
+
+  "the_definition_we_are_holding_ourselves_to": {
+    "statement": "A digital twin is a virtual representation kept synchronised with a physical system by live sensor data, running a model of that system's behaviour, capable of answering counterfactual questions.",
+    "the_distinction_that_matters": "A dashboard shows what happened. A twin runs a model and can answer 'what if'. If our PondTwin cannot answer 'what happens to DO at cage 4 if I run the aerators for six hours', it is a 3D dashboard and we should call it that.",
+    "why_we_are_being_strict": "'Digital twin' is used loosely enough in industry to mean nothing at all — often just a rendered model with live numbers on it. A thesis that adopts the loose usage has conceded its own contribution. Defend the strict definition or drop the term.",
+    "citation_ids": ["sciencedirect-dt-aiot-2023", "hamzah-dt-water-review-2024", "pmc-dt-rainbow-trout-2023"],
+    "our_honest_status": "What is specified below is, in v1, mostly a 3D dashboard with interpolation. The simulation core that would make it a real twin is Phase 3+ work and depends on validation data we do not have. We should say '3D visualisation with a twin roadmap' until the simulation exists, rather than claiming the term now and being caught by a knowledgeable reviewer."
+  },
+
+  "why_a_twin_and_not_a_chart": {
+    "the_real_argument": "The water body is three-dimensional and the farmer's mental model of it is two-dimensional. Every existing tool — a meter reading, a logbook, a dashboard tile — presents water quality as a scalar. The actual system is a stratified volume with horizontal structure, and the whole reason fish die is that the dangerous part is in a dimension nobody looks at.",
+    "the_claim": "The twin's contribution is not visual polish. It is making depth legible to a person who has never been able to see it. A farmer who can rotate a pond and SEE the anoxic layer sitting under their cages understands the risk in a way that '1.1 mg/L at 6 m' does not convey.",
+    "the_test": "If the twin does not change what the farmer understands, it is decoration and the engineering effort belongs elsewhere."
+  },
+
+  "twin_layers": [
+    {
+      "layer": "Geometry",
+      "content": "Bathymetry, shoreline, cage and pen positions, dock location, station positions.",
+      "source": "One-time survey at site commissioning, plus operator-supplied cage layout.",
+      "note": "Bathymetry is a one-time cost, not a recurring measurement. Rent a LiDAR or a survey boat once; do not carry the sensor."
+    },
+    {
+      "layer": "State — measured",
+      "content": "The profiles. DO, temperature, pH, turbidity, chlorophyll, ORP, conductivity at known depths at known stations at known times.",
+      "provenance_rule": "This layer is measurement. It renders differently from every other layer and it is never blended with them."
+    },
+    {
+      "layer": "State — interpolated",
+      "content": "The volume between stations, filled by spatial interpolation and by the calibrated imagery field at the surface.",
+      "the_honesty_problem": {
+        "statement": "This is where a twin becomes a liar, and it does so beautifully.",
+        "explanation": "We measure six stations in a lake with thousands of cubic metres. The rendering fills the volume between them with a smooth, confident, gorgeous gradient. The eye reads that gradient as data. It is not data — it is an assumption about what water does between the places we looked, and it is exactly the assumption that fails when a pocket of bad water sits in the gap.",
+        "the_requirement": "The twin MUST render uncertainty visually. Volume far from any station must look visibly less certain — transparency, noise, explicit confidence banding, something. A smooth interpolation with no uncertainty cue is the single most misleading artefact this company could ship, precisely because it is the most persuasive.",
+        "the_temptation": "The version with the smooth gradient demos better. It will look better in the deck, in the pitch, and on the website. This paragraph exists to be read on the day someone proposes removing the uncertainty rendering because it 'looks noisy'."
+      },
+      "requirement_id": "REQ-TWIN-003"
+    },
+    {
+      "layer": "State — simulated",
+      "content": "A physical model of the water column: heat exchange, oxygen production and consumption, mixing, and their evolution.",
+      "status": "PHASE 3+. Does not exist. This is the layer that would make it an actual twin.",
+      "what_it_would_enable": ["Counterfactual questions — 'what if I aerate'", "Forward projection between sorties", "Filling the gap when weather grounds the aircraft", "Physically-constrained interpolation, which would be far better than the geometric interpolation above"],
+      "the_dependency": "A physical model must be calibrated against observed behaviour of THIS water body. That needs a season of data. There is no shortcut.",
+      "the_interesting_consequence": "Once the simulation exists, it also fills our worst gap: we cannot fly in storms, but a calibrated model CAN project the water column through a storm from the last profile and the weather data. The twin is the answer to our own flight envelope limitation. That is a genuinely strong argument for investing in the simulation core, and it is not obvious until you notice that our observation gap and the model's purpose are the same gap."
+    },
+    {
+      "layer": "Stock",
+      "content": "Species, stocking date, count, estimated biomass, feed history, mortality history.",
+      "source": "OPERATOR-SUPPLIED. We do not measure any of it — no underwater vision, no biomass estimation.",
+      "the_honest_note": "The twin's stock layer is only as good as the farmer's records, and the farmer's records are often a guess. A twin that displays a confident biomass number sourced from a farmer's estimate has laundered a guess into an authoritative-looking figure. Label operator-supplied data distinctly from measured data, always."
+    },
+    {
+      "layer": "Events",
+      "content": "Sorties, alerts, dispensing actions, aeration runs, mortality events, weather.",
+      "why_it_matters": "The event timeline is what turns a state display into a history someone can learn from. It is also the audit record."
+    }
+  ],
+
+  "the_provenance_rendering_requirement": {
+    "statement": "The twin must make it visually obvious which parts are measured, which are interpolated, which are simulated, and which the farmer typed in.",
+    "why_this_is_the_hardest_UX_problem_in_the_product": "A twin's persuasive power comes from looking like a coherent, complete picture of reality. Its honesty requires showing that it is a sparse set of measurements with a lot of inference stretched between them. Those two goals are in direct opposition, and the resolution is a design problem nobody has solved well.",
+    "the_rule": "When in doubt, look less certain. An under-confident twin costs a little persuasion. An over-confident one costs a harvest.",
+    "rendering_guidance": {
+      "measured": "Solid, sharp, at the station location. Visibly a point.",
+      "interpolated": "Progressively more transparent and more visibly uncertain with distance from any station.",
+      "simulated": "Distinct visual treatment — never blended into the measured layer.",
+      "operator_supplied": "Explicitly badged. It is testimony, not measurement.",
+      "stale": "Time-decayed. A profile from six hours ago is not the current state, and after a storm it may be worthless. Data has a half-life and the UI should show it decaying."
+    }
+  },
+
+  "interaction_model": {
+    "primary_view": "A rotatable, sliceable 3D volume of the water body with cages in place.",
+    "the_key_interaction": "Slice vertically through a cage and see the column. This is the interaction that does the work — it makes the invisible dimension visible, and it is the whole point.",
+    "the_second_interaction": "Scrub time. Watch the thermocline move over days. Watch the diel cycle breathe. This is where a farmer's intuition and the data meet, and it is where the twin earns its keep.",
+    "restraint": "Resist the urge to add every metric. The twin's job is to make depth and time legible. Everything else belongs in the dashboard."
+  },
+
+  "requirements": [
+    { "id": "REQ-TWIN-001", "statement": "The twin shall visually distinguish measured, interpolated, simulated, and operator-supplied data.", "type": "data", "priority": "must", "verification_method": "inspection", "rationale": "The core honesty requirement of the product." },
+    { "id": "REQ-TWIN-002", "statement": "The twin shall render a vertical slice through any cage showing the full measured profile.", "type": "functional", "priority": "must", "verification_method": "demonstration" },
+    { "id": "REQ-TWIN-003", "statement": "Interpolated volume shall render with a visual uncertainty cue that increases with distance from the nearest measurement.", "type": "data", "priority": "must", "verification_method": "inspection", "rationale": "A smooth confident gradient over unmeasured water is the most persuasive lie the product could tell." },
+    { "id": "REQ-TWIN-004", "statement": "State shall visually decay with age since last measurement.", "type": "data", "priority": "must", "verification_method": "inspection", "rationale": "A six-hour-old profile after a storm is not the current state." },
+    { "id": "REQ-TWIN-005", "statement": "The twin shall not display a simulated value in the same visual channel as a measured value.", "type": "data", "priority": "must", "verification_method": "inspection" },
+    { "id": "REQ-TWIN-006", "statement": "The term 'digital twin' shall not be used in customer-facing material until the simulation layer exists and is calibrated.", "type": "usability", "priority": "should", "verification_method": "inspection", "rationale": "Claiming the term without the simulation is the industry's standard practice and it is still wrong." }
+  ],
+
+  "prior_art": {
+    "note": "Digital twins for aquaculture moved from proposal to demonstrated case study in 2023-2024. We are not inventing this — we are applying it, and we should cite the people who did the work.",
+    "citation_ids": ["sciencedirect-dt-aiot-2023", "pmc-dt-rainbow-trout-2023", "mdpi-dt-ahp-2023", "hamzah-dt-water-review-2024", "springer-dt-aquaculture-sim"],
+    "what_is_genuinely_novel_here": "Not the twin. The data source. Existing aquaculture twins are fed by fixed sensors in one location or by manual sampling. A twin fed by depth-resolved profiles across many stations several times daily, with the imagery calibrated by the same vehicle, is a better-observed twin than the literature has had access to. The contribution is the observation architecture, not the twin architecture — and a thesis should say so plainly rather than overclaiming novelty in a well-trodden area.",
+    "the_review_that_matters_most": "Hamzah et al. (2024) reviewed drone-based digital twins for water quality specifically. That is the closest prior art to this exact concept and it should be read carefully before another line of twin code is written."
+  },
+
+  "the_gap_analysis": {
+    "what_v1_will_actually_be": "A 3D visualisation of measured profiles with honest interpolation and an event timeline. Genuinely useful. Not a twin.",
+    "what_makes_it_a_twin": "The simulation core, which needs a season of calibration data.",
+    "the_recommendation": "Build v1 honestly and call it what it is. The simulation is Phase 3+ and it is worth doing properly, because it is also the answer to the storm-grounding problem. Do not claim the term early; the reviewer who catches it will discount everything else."
+  }
+}

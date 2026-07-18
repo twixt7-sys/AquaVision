@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(python -c \"import json; json.load\\(open\\('manifest.json',encoding='utf-8'\\)\\); print\\('manifest.json OK'\\)\")",
+      "Bash(node site-generator/build.mjs)",
+      "Bash(node -e \"const b=require\\('./data/07_research/references-bibliography.json'\\); const r=b.references; console.log\\('total',r.length\\); console.log\\('missing apa7:', r.filter\\(x=>!x.apa7\\).map\\(x=>x.citation_id\\)\\); console.log\\('missing citation_id:', r.filter\\(x=>!x.citation_id\\).length\\);\")",
+      "Bash(node --check assets/app.js)",
+      "Bash(node -e \"global.window={}; require\\('./assets/search-index.js'\\); console.log\\(window.AV_SEARCH.length, 'entries'\\); console.log\\('sample:', JSON.stringify\\(window.AV_SEARCH.find\\(e=>e.id==='chart-do-diel-cycle'\\)?.title\\), '| flags:', JSON.stringify\\(window.AV_SEARCH.find\\(e=>e.flags.includes\\('S'\\)\\)?.id\\)\\);\")"
+    ]
+  }
+}

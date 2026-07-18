@@ -1,0 +1,25 @@
+{
+  "id": "chart-problem-cost-breakdown",
+  "chart_type": "table",
+  "title": "The Structure of Aquaculture Losses",
+  "subtitle": "Visibility versus addressability — NOT a peso breakdown",
+  "description": "Deliberately rendered as a structured matrix, NOT a pie chart. A pie of peso values would imply we know the proportions, and we do not. What we DO know is which loss categories are visible versus hidden, and which the OmniDrone addresses versus does not. The most important cell may be the invisible-and-addressable one: chronic sub-lethal loss, which is unmeasured, possibly the largest, and squarely in our capability.",
+  "provenance": "modeled_projection",
+  "citation_ids": ["inquirer-taal-fishkill-2023", "pna-tilapia-fishkill", "innovasea-fcr-guide", "worldbank-disease-risk-2014", "fao-nutrient-dynamics-eutrophic"],
+  "columns": ["Loss category", "Visibility", "Addressable by OmniDrone", "Evidence provenance"],
+  "rows": [
+    { "category": "Catastrophic mortality events", "visibility": "high (reported)", "addressable": "partially — depends on response capacity", "provenance": "verified_external", "note": "343 t Taal 2023; 600+ t / PHP 43.13M tilapia kill" },
+    { "category": "Chronic sub-lethal production loss", "visibility": "near zero (unmeasured)", "addressable": "strongly", "provenance": "assumption", "note": "THE SLEEPER. Possibly larger than catastrophic loss in aggregate, and completely invisible in every published statistic. If real, the whole value proposition should be rebuilt around it." },
+    { "category": "Feed waste", "visibility": "low (recorded as cost)", "addressable": "plausibly", "provenance": "verified_external", "note": "Feed ~60% of operating cost; 0.1 FCR = ~USD 50/t" },
+    { "category": "Self-inflicted water degradation", "visibility": "low", "addressable": "core claim", "provenance": "verified_external", "note": "The feedback loop: overfeeding degrades water, degraded water worsens conversion" },
+    { "category": "Aeration energy waste", "visibility": "high (as cost)", "addressable": "strongly, demonstrably", "provenance": "assumption", "note": "The easiest checkable ROI. Metered, budgeted, one-cycle proof." },
+    { "category": "Disease losses", "visibility": "medium", "addressable": "marginally", "provenance": "verified_external", "note": "~USD 6bn/yr globally, but almost NONE is ours — do not put this in the revenue model" },
+    { "category": "Monitoring labour & occupational risk", "visibility": "low", "addressable": "strongly", "provenance": "assumption", "note": "The pre-dawn boat run — a human safety argument, not just cost" },
+    { "category": "Cost of never learning", "visibility": "invisible", "addressable": "completely", "provenance": "assumption", "note": "Every cycle starts from zero knowledge; the platform accumulates" }
+  ],
+  "rendering_guidance": {
+    "recommended": "A 2x2 matrix — visibility (high/low) on one axis, addressability (high/low) on the other — with categories plotted as cells. The high-value quadrant is invisible-AND-addressable (chronic loss, cost of never learning).",
+    "forbidden": "Do NOT render as a pie chart of peso values. We do not have defensible proportions and a pie would fabricate them. See cost-of-inaction.json#/chart_hint."
+  },
+  "the_deliberate_absence": "There is no total-addressable-loss number, on purpose. Constructing one would multiply sourced figures by invented assumptions into an authoritative-looking number with order-of-magnitude error. See cost-of-inaction.json#/what_this_file_deliberately_does_not_contain."
+}

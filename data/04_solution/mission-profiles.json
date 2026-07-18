@@ -1,0 +1,148 @@
+{
+  "id": "mission-profiles",
+  "title": "Mission Profiles",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "design_target",
+  "confidence": "low",
+
+  "CRITICAL_WARNING": "Every duration, distance, and station count below is a DESIGN TARGET derived from the energy budget in power-energy-budget.json, which is itself a paper model with no flight data behind it. These are the missions we are designing toward, not missions that have been flown. If the energy budget does not close in Phase 0, these profiles change or the concept changes. Do not put these numbers in a customer proposal.",
+
+  "profiles": [
+    {
+      "profile_id": "mp-01-dawn-sweep",
+      "name": "Dawn Sweep",
+      "purpose": "Capture the diel dissolved oxygen minimum across the array. The flagship mission.",
+      "trigger": "Scheduled, ~60-90 minutes before sunrise",
+      "target_stations": 6,
+      "profile_depth_m": 8,
+      "target_duration_min": 22,
+      "payload_config": ["probe", "rgb", "no dispensing load"],
+      "why_no_dispensing_load": "Mass. Dropping the hopper buys endurance, and nothing is dispensed at 04:30 anyway. Configuring the payload per mission rather than carrying everything always is the difference between a viable endurance and a marginal one.",
+      "energy_note": "The most demanding routine mission: many stations, deep profiles, and hovering (the most expensive flight mode) for most of the sortie.",
+      "constraints": ["Requires BVLOS or an on-site pilot", "Requires nav lighting and a night-operations permit", "Wind envelope must hold at dawn — often the calmest window, which helps"],
+      "value": "This mission alone justifies the dock. A human will not do this reliably, ever."
+    },
+    {
+      "profile_id": "mp-02-bloom-survey",
+      "name": "Bloom Survey with Ground Truth",
+      "purpose": "Map chlorophyll across the water body and calibrate the map with in-situ measurements.",
+      "trigger": "Scheduled 2-3x weekly, or on satellite/dashboard trigger",
+      "flow": "Imaging grid first, then adaptive probe stations chosen from the index extremes.",
+      "target_stations": 3,
+      "profile_depth_m": 3,
+      "imaging_area_ha": 12,
+      "target_duration_min": 25,
+      "payload_config": ["probe", "multispectral", "downwelling irradiance sensor"],
+      "hard_constraints": [
+        "Solar elevation window. Too low and the signal is weak; too high and sun glint saturates the sensor. This physically restricts the mission to a band of a few hours, and no software fixes it.",
+        "Calibration panel imaged at the dock before and after the sortie, or the reflectance is not comparable to any other day.",
+        "Cloud cover changes illumination mid-survey and corrupts the mosaic — the downwelling sensor exists to catch this."
+      ],
+      "citation_ids": ["mdpi-drones-inland-review-2024", "sciencedirect-uav-multispectral-ponds-2024"],
+      "note": "The adaptive station selection — fly the image, then choose where to drop based on what the image showed — is the interesting part and the hardest to automate. Version one should let the operator pick the stations from the map."
+    },
+    {
+      "profile_id": "mp-03-station-keeping",
+      "name": "Deep Stratification Profile",
+      "purpose": "High-vertical-resolution profile at a single index station to track thermocline and oxygen debt.",
+      "target_stations": 1,
+      "profile_depth_m": 15,
+      "vertical_resolution_m": 0.25,
+      "target_duration_min": 14,
+      "note": "Deep and slow. Sensor response time governs the descent rate — an optical DO sensor needs time to equilibrate, and descending faster than it responds produces a smeared profile that looks like data and is not. Descent rate is set by the slowest sensor, not by the winch's capability.",
+      "why_one_station": "Depth costs endurance. A 15 m profile is a large fraction of the sortie, so this mission trades coverage for vertical detail. Fly it at the index station where the historical record is deepest."
+    },
+    {
+      "profile_id": "mp-04-mortality-scan",
+      "name": "Surface Anomaly Scan",
+      "purpose": "Detect floating mortalities, piping fish, sheen, and debris.",
+      "trigger": "Scheduled, typically post-dawn and mid-afternoon",
+      "target_stations": 0,
+      "imaging_area_ha": 12,
+      "target_duration_min": 12,
+      "payload_config": ["rgb", "thermal", "no probe", "no dispensing"],
+      "note": "Cheapest mission in the set — pure forward flight, no hovering, minimal payload. Forward flight is substantially more efficient than hover for a multirotor, which is why this mission covers more area in less energy than the profiling missions.",
+      "altitude_driver": "Ground sample distance must resolve a fish. Altitude is set by GSD, not by convenience — and GSD requirements set the area coverage, which sets the mission time."
+    },
+    {
+      "profile_id": "mp-05-feed-run",
+      "name": "Feed Distribution Run",
+      "purpose": "Dispense a metered ration across a pattern.",
+      "target_duration_min": "unknown — governed entirely by payload mass and number of trips",
+      "payload_config": ["hopper loaded", "rgb", "no probe"],
+      "the_honest_problem": {
+        "statement": "This is the mission profile most likely to be economically unviable, and it deserves a hard look before anyone builds the hopper.",
+        "reasoning": "A commercial cage may take tens of kilograms of feed per feeding. A multirotor of this class carries a payload measured in single-digit kilograms. That is many trips, and every trip costs a battery cycle and a turnaround. Meanwhile a person in a boat with a sack of feed moves it in one trip at effectively zero marginal cost.",
+        "where_it_might_still_work": "Small doses of high-value material — medicines, conditioners, probiotics — where precision and placement matter more than mass. Or spreading a starter ration evenly across a pattern that a person cannot achieve by hand. Not bulk grow-out feed.",
+        "the_recommendation": "Run this arithmetic in Phase 0 with real ration sizes from a real farm. If bulk feeding does not close, reposition the dispensing subsystem explicitly as a TREATMENT delivery system rather than a feeding system, and say so plainly. That is still a strong capability — it is the answer to 'information without response capacity' — and it does not depend on beating a man with a sack.",
+        "provenance": "derived_calculation",
+        "confidence": "medium"
+      }
+    },
+    {
+      "profile_id": "mp-06-treatment-run",
+      "name": "Targeted Treatment Application",
+      "purpose": "Deliver conditioner or treatment to a twin-identified hotspot.",
+      "target_duration_min": 10,
+      "payload_config": ["liquid or granular load", "rgb"],
+      "gate": "Human authorisation before launch. Not a soft gate.",
+      "note": "Small mass, high value, precise placement. This is what the dispensing system is actually good at, and probably what it should be sold as."
+    },
+    {
+      "profile_id": "mp-07-emergency-response",
+      "name": "Emergency Assessment",
+      "purpose": "Rapid survey when something has gone wrong.",
+      "trigger": "Operator-initiated",
+      "target_duration_min": 15,
+      "priority_override": "Pre-empts scheduled missions.",
+      "the_limitation": "The emergency that most needs this mission is usually accompanied by the weather that grounds us. This profile is for the aftermath and for non-weather emergencies — a suspected pollution event, a reported kill, a structural failure on a calm day. Presenting it as a storm-response capability would be dishonest."
+    },
+    {
+      "profile_id": "mp-08-post-storm",
+      "name": "Post-Typhoon Assessment",
+      "purpose": "Damage survey and salinity/mixing check after a storm.",
+      "target_duration_min": 20,
+      "payload_config": ["rgb", "probe"],
+      "note": "The one mission where our weather limitation is irrelevant by construction, because we fly after."
+    }
+  ],
+
+  "the_endurance_reality": {
+    "provenance": "derived_calculation",
+    "confidence": "medium",
+    "statement": "Every mission above is bounded by a battery, and hovering is the expensive part.",
+    "the_physics": "A multirotor in hover burns power continuously to hold position. Forward flight is meaningfully more efficient. Our profiling missions are dominated by hover — the drone sits still while the winch works — which means the missions that deliver our unique value are also our least efficient flight mode. This is not a design flaw to engineer around; it is the shape of the problem and it must be accepted and planned for.",
+    "consequences": [
+      "Station count and profile depth trade directly against each other. Six stations at 8 m or one station at 15 m, not both.",
+      "Payload configuration must vary by mission. Carrying the hopper on a dawn sweep would be paying endurance for nothing.",
+      "The dock must support rapid turnaround, because the answer to short endurance is more sorties, not longer ones.",
+      "Battery swap versus recharge is a real architectural decision with real cost implications. Recharge is simpler and slower; swap needs a mechanism and spare packs."
+    ],
+    "the_question_that_decides_the_concept": "Can a sortie profile enough stations to beat a boat? If a person in a boat can profile six stations in ninety minutes and the drone needs three sorties and two recharges to do the same, the drone loses on everything except the 04:30 sortie the person will not do. The 04:30 sortie may be enough to justify the platform on its own — but if it is, we should know that and build the whole business around it rather than pretending to a general-purpose advantage we do not have."
+  },
+
+  "environmental_envelope": {
+    "provenance": "design_target",
+    "note": "Targets, not measured capabilities.",
+    "wind_max_sustained_ms": 8,
+    "wind_max_gust_ms": 12,
+    "the_wind_problem": "A hovering aircraft with a heavy pendulum on a tether is far more wind-sensitive than a bare drone. The tethered mass swings, and the swing couples back into the flight controller as a disturbance it was not designed for. The real wind limit is likely well below the airframe's bare-drone limit, and it is unknown until Phase 2. This is the single most likely place for the mission profiles above to fail.",
+    "rain": "No flight in rain. This is not conservatism — water on optics destroys the imaging and water ingress destroys the aircraft.",
+    "temperature_c": { "min": 5, "max": 40 },
+    "solar_window_for_imaging": "Constrained by glint physics. Roughly mid-morning to mid-afternoon, excluding solar noon at low latitudes. This is a hard constraint from optics, not a preference.",
+    "the_seasonal_truth": "During the monsoon — the season when overturn kills fish — flyable windows shrink substantially. The platform's availability is lowest exactly when the risk is highest. Any availability figure quoted to a customer must be seasonal, not annual, or it is misleading."
+  },
+
+  "mission_scheduling_logic": {
+    "principle": "Schedule against the diel cycle and the solar window, not against convenience.",
+    "daily_pattern_sketch": [
+      { "time": "~04:30", "mission": "mp-01-dawn-sweep", "why": "The DO minimum. The most valuable data of the day." },
+      { "time": "~07:00", "mission": "mp-04-mortality-scan", "why": "Overnight mortality surfaces; light is adequate; glint is low." },
+      { "time": "~10:00", "mission": "mp-02-bloom-survey", "why": "Inside the solar window, before noon glint." },
+      { "time": "~15:00", "mission": "mp-01 variant", "why": "The DO maximum. Pairing it with the dawn minimum gives the diel amplitude, which is itself diagnostic of algal load." },
+      { "time": "as needed", "mission": "mp-05 / mp-06 / mp-07", "why": "Operational" }
+    ],
+    "the_insight": "Measuring both the dawn minimum and the afternoon maximum is worth more than either alone. The amplitude between them reveals the size of the algal standing crop and therefore the magnitude of tonight's oxygen demand — a leading indicator that a single daily reading cannot produce at any frequency. Two well-timed sorties beat four badly-timed ones."
+  }
+}

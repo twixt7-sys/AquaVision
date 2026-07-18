@@ -1,0 +1,52 @@
+{
+  "id": "financial-projections",
+  "title": "Financial Projections",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "modeled_projection",
+  "confidence": "speculative",
+
+  "READ_THIS_FIRST": "This file deliberately contains NO revenue forecast, NO hockey-stick chart, and NO five-year P&L. Producing one at TRL 3, with no price, no cost, no customer, and no validated product, would be an act of creative writing dressed as finance. Every professional investor has seen the fabricated hockey-stick a thousand times and discounts it to zero. What this file provides instead is: the SPEND plan (which we can estimate), the milestones that unlock the next tranche, and the scenario STRUCTURE for revenue once the inputs exist. A credible early-stage financial story is a spend plan tied to de-risking milestones — not a revenue fantasy.",
+
+  "what_can_honestly_be_projected": {
+    "statement": "At this stage, costs are estimable and revenues are not.",
+    "reasoning": "We know roughly what a team costs, what a prototype costs, and what a validation season costs. We do NOT know what a customer pays or how many there are. Therefore the honest financial document is a USE-OF-FUNDS and BURN plan, gated by milestones — not a revenue projection."
+  },
+
+  "phase_spend_plan": {
+    "provenance": "modeled_projection",
+    "confidence": "low",
+    "note": "Order-of-magnitude only. Currency in USD. These are planning envelopes, not budgets.",
+    "phases": [
+      { "phase": "Phase 0 — Definition", "duration_months": "2-4", "primary_costs": ["Small founding team", "Farmer discovery travel", "Vendor sonde survey", "Legal opinion (regulatory + liability)", "Academic MOU"], "spend_envelope": "low — this phase is deliberately cheap and de-risks the most", "unlocks": "The go/no-go arithmetic: does the payload budget close, will farmers pay, what does BVLOS actually take" },
+      { "phase": "Phase 1 — Subsystem prototypes", "duration_months": "4-8", "primary_costs": ["Winch gantry rig", "Sonde procurement/development", "Sensor calibration bench", "First engineering hires"], "spend_envelope": "medium", "unlocks": "Proof the two hardest subsystems work independently" },
+      { "phase": "Phase 2 — Integrated prototype", "duration_months": "5-9", "primary_costs": ["Full aircraft integration", "Flight testing", "Dock v1", "Team growth"], "spend_envelope": "medium-high", "unlocks": "One vehicle that flies with everything and returns with data; the core profile-vs-reference validation" },
+      { "phase": "Phase 3 — Field validation", "duration_months": "8-14", "primary_costs": ["Longitudinal deployment", "Paired reference sampling", "Model development", "Academic collaboration"], "spend_envelope": "high — the longest phase, and the one founders underestimate because you cannot rush a season", "unlocks": "The right to make predictive claims; the first real evidence" },
+      { "phase": "Phase 4 — Commercial pilot", "duration_months": "6-12", "primary_costs": ["Paid pilots", "BVLOS application", "Service ops build-out", "First revenue (small)"], "spend_envelope": "high", "unlocks": "Measured unit economics; proof someone pays; BVLOS decision" }
+    ],
+    "the_honest_note": "No dollar totals are attached to the envelopes because they depend on team size and hardware costs that Phase 0 will determine. Attaching a precise number now would be false precision. The SHAPE — cheap-then-expensive, with the longest and priciest phase being validation — is the honest and useful part."
+  },
+
+  "the_milestone_gated_funding_logic": {
+    "principle": "Raise against de-risking milestones, not against a revenue projection.",
+    "why": "Each phase gate removes a specific risk (payload closes, winch works, profiles validate, farmers pay). An investor funding this is buying de-risking, and the credible ask is 'this tranche gets us from risk A to milestone B'. See funding-ask.json.",
+    "the_kill_gates": "Phase 0 has explicit KILL criteria (payload budget cannot close; farmers have no response capacity). A financial plan that includes the conditions under which the company should STOP is more credible than one that only projects success. See milestones-roadmap.json."
+  },
+
+  "revenue_scenario_structure": {
+    "status": "STRUCTURE ONLY — no numbers until Phase 0/4 inputs exist.",
+    "the_model_when_ready": "Revenue = (docks deployed) x (sites per dock) x (price per site) x (1 - churn), summed across the deployment ramp, minus cost-to-serve per dock.",
+    "the_three_scenarios_to_model": [
+      { "scenario": "Pessimistic", "assumptions": "VLOS-only economics, sparse sites, high maintenance, low price. Contribution margin possibly negative.", "purpose": "This is the scenario that tests whether the company should exist. If it is catastrophic, the model is too fragile." },
+      { "scenario": "Base", "assumptions": "BVLOS achieved, mixed site density, measured maintenance, verifiable-value pricing.", "purpose": "The realistic planning case." },
+      { "scenario": "Optimistic", "assumptions": "BVLOS, dense cooperative clusters, controlled maintenance, plus institutional programme contracts and an insurance-linked adoption driver.", "purpose": "The upside, presented as upside — never as the base case." }
+    ],
+    "the_discipline": "When these are filled in, present the BASE case as the plan and show the pessimistic case unprompted. A three-scenario model where the pessimistic case is survivable is far more fundable than a single-line projection that only goes up."
+  },
+
+  "what_investors_should_take_from_this_file": {
+    "statement": "The absence of a revenue forecast is a signal of seriousness, not a gap.",
+    "the_pitch": "'We could show you a five-year hockey-stick. It would be fiction, and you know it. Instead: here is exactly what each tranche de-risks, here is the arithmetic we can honestly do today, here are the three assumptions the whole model rests on, and here is the cheap first phase that tests all three. Fund Phase 0, watch us either validate or kill those assumptions, and decide from evidence.' A serious investor prefers this to a spreadsheet that assumes its own conclusion.",
+    "the_risk": "Some investors WANT the hockey-stick and will pass without it. That is a filter, not a loss — an investor who needs the fiction is not the right investor for a hardware company with a real validation timeline."
+  }
+}

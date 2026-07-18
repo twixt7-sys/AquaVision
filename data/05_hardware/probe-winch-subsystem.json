@@ -1,0 +1,147 @@
+{
+  "id": "probe-winch-subsystem",
+  "title": "Reeled Probe & Winch Subsystem",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "design_target",
+  "confidence": "low",
+  "criticality": "EXISTENTIAL — if this does not work, the product is a camera and the company has no defensible position.",
+
+  "why_this_file_matters_most": "Every other subsystem on this aircraft can be bought. Airframes, cameras, flight controllers, and dispensers are all commodities. The powered winch delivering a sonde to depth from a hovering aircraft, thousands of times, unattended, in a fouling tropical lake full of nets and ropes, is the thing that does not exist off the shelf. It is simultaneously our only real moat and our highest technical risk. Those two facts are the same fact.",
+
+  "functional_description": "A motorised spool pays out a combined strength/signal tether carrying a multiparameter sonde from the aircraft's ventral centre-line to a commanded depth, samples continuously during descent and ascent, then recovers and stows the sonde against a docking cone for transit.",
+
+  "design_targets": {
+    "max_deployment_depth_m": 15,
+    "nominal_profiling_depth_m": 8,
+    "descent_rate_ms": { "min": 0.1, "max": 0.5, "governed_by": "The response time of the slowest fitted sensor, NOT by winch capability." },
+    "descent_rate_note": "This is the most commonly botched parameter in profiling systems. An optical DO sensor needs time to equilibrate. Descend faster than it responds and you get a hysteretic, smeared profile that looks plausible and is wrong — and the error is systematic, so it will not average out. The winch is capable of far more; it must be deliberately slowed.",
+    "recovery_rate_ms": 0.8,
+    "recovery_rate_note": "Recovery can be faster than descent because no science is being collected on the way up — though ascending profiles are a useful hysteresis check and worth sampling anyway.",
+    "tether_length_m": 18,
+    "tether_working_load_n": 90,
+    "tether_load_rationale": "Must exceed sonde weight plus hydrodynamic drag plus a substantial snag margin. If the tether is the weakest link, a snag drags the aircraft into the water. If the aircraft is the weakest link, a snag tears the winch out of the airframe. Neither is acceptable, which is why the cutter exists.",
+    "cycle_life_target": 1000,
+    "cycle_life_note": "1000 cycles at ~4 sorties/day x 6 stations is roughly 40 days of operation. That is a LOW bar and it is deliberately the Phase 1 gate, not the production target. Production needs 10,000+, and nobody should mistake the gate for the goal.",
+    "mass_target_kg": 0.62,
+    "mass_warning": "This is the least-confident mass in the whole budget. Winches with level-wind, tension sensing, slip ring, and a cutter are not light. If this doubles, the aircraft does not close."
+  },
+
+  "the_hard_problems": [
+    {
+      "problem": "The pendulum",
+      "description": "A sonde on a tether beneath a hovering aircraft is a pendulum, and the aircraft is its pivot. Wind, winch motion, and the aircraft's own control inputs excite it. The swing couples back into the flight controller as an external disturbance that standard multirotor control laws do not model.",
+      "why_it_is_hard": "The pendulum's natural frequency changes continuously as the tether pays out. A control approach tuned for a 2 m tether may be unstable at 8 m. This is a genuinely non-trivial control problem and it is not solved by a better PID loop.",
+      "consequences_if_unsolved": "The aircraft's real wind limit collapses, the mission profiles fail, and the whole platform becomes a fair-weather instrument.",
+      "candidate_mitigations": ["Variable-length pendulum feedforward in the controller", "Damping at the tether attachment", "Descend only in low wind — which concedes availability", "Actively controlled tether tension", "A heavier sonde (raises the natural frequency, costs mass)"],
+      "status": "UNRESOLVED. Requires flight test. This is the single largest technical unknown in the project and it should be the first thing the Phase 2 budget is spent on.",
+      "note": "The related-studies file on UAV sampling should be mined for prior art here. Several academic groups have hit this exact wall; read what they found before rediscovering it at your own expense."
+    },
+    {
+      "problem": "Fouling and snagging",
+      "description": "A lake cage array is a dense obstacle field of nets, ropes, mooring lines, and floats — much of it submerged and invisible from above. The tether will snag.",
+      "why_it_is_hard": "You cannot see the obstacle. The sonde is below the water, the net is below the water, and the aircraft is above it with no sensor that can see either.",
+      "consequences": "A snagged tether with a live aircraft above it is the worst failure mode in the system. The aircraft has minutes of battery, cannot ascend, and is directly above a structure where people work.",
+      "mitigations": [
+        "Winch tension sensing with anomaly detection — detect the snag from the load signature before it becomes a trap.",
+        "Automatic slack-and-retry on a tension excursion.",
+        "The tether cutter. Deliberately dropping the sonde into the lake to save the aircraft is a bad outcome that is much better than the alternatives.",
+        "Station siting away from structure, which costs spatial coverage exactly where the fish are.",
+        "Operator-defined no-profile zones."
+      ],
+      "the_uncomfortable_trade": "The stations we most want to profile are inside the cages, because that is where the fish are. The stations that are safe to profile are between the cages. Every mitigation above buys safety by moving the measurement away from the thing being measured. This tension is not resolvable by engineering and it deserves an honest answer in the specification rather than optimism.",
+      "status": "UNRESOLVED"
+    },
+    {
+      "problem": "Biofouling of the sonde",
+      "description": "A sonde in a warm eutrophic lake grows a biofilm.",
+      "why_it_is_subtle": "Fouling does not make a sensor fail loudly. It makes it drift. A fouled optical DO sensor reports plausible, confidently wrong numbers, and there is no obvious symptom until someone cross-checks against a reference — which nobody will do routinely.",
+      "our_structural_advantage": "This is where we genuinely beat a moored buoy. Our sonde spends its life in a dry dock and gets rinsed after every sortie. It is in the water for minutes per day, not permanently. That is a real, defensible, and non-obvious advantage over the fixed-sensor category and it should be in the pitch.",
+      "mitigations": ["Dock rinse cycle after every sortie", "Wiper on optical windows", "Scheduled reference-check against a laboratory standard", "Drift detection in the QC pipeline — flat-line and climatology tests"],
+      "status": "Mitigated by architecture, not eliminated."
+    },
+    {
+      "problem": "The slip ring",
+      "description": "Signal and power must cross from a rotating spool to a fixed aircraft.",
+      "why_it_is_hard": "Slip rings wear, and they are a wet-environment electrical connection on a spinning part. It is a classic reliability sink.",
+      "alternatives": ["Inductive coupling — no contact, more mass and complexity", "On-sonde logging with a burst upload on recovery — eliminates the slip ring entirely but loses real-time data during descent", "Stationary spool with a moving guide"],
+      "the_interesting_option": "On-sonde logging deserves serious consideration. It removes the slip ring, removes the signal tether (leaving a pure strength member), simplifies everything, and costs only the ability to watch the profile live during descent — which is a nice-to-have, not a requirement. The profile is just as useful thirty seconds later. This may be the single best simplification available to the design and it should be evaluated before defaulting to the obvious architecture.",
+      "status": "OPEN — evaluate on-sonde logging seriously in Phase 1"
+    },
+    {
+      "problem": "Depth measurement",
+      "description": "How deep is the sonde, actually?",
+      "the_naive_answer": "Count winch revolutions.",
+      "why_that_is_wrong": "Payout length is not depth. In any current or wind, the tether streams at an angle and the sonde is shallower than the payout suggests — and the error grows with depth. A profile plotted against payout rather than pressure is a profile with a systematic, condition-dependent depth error, which is precisely the kind of error that survives averaging and corrupts a time series invisibly.",
+      "the_correct_answer": "A pressure transducer on the sonde. Trust the water, not the spool.",
+      "status": "RESOLVED — pressure transducer is mandatory, and payout counting is a cross-check only."
+    }
+  ],
+
+  "sonde_specification": {
+    "note": "Target channels. Whether a sonde with all of these fits the mass budget is an open Phase 0 vendor question — and the honest suspicion is that it does not, which would mean custom development.",
+    "channels": [
+      { "parameter": "Dissolved oxygen", "method": "Optical / luminescent", "why_optical": "Optical DO does not consume oxygen, does not need flow across a membrane, drifts less, and needs less maintenance than a Clark-type electrode. For an unattended system this is not a preference, it is a requirement.", "target_range": "0-20 mg/L", "target_accuracy": "±0.1 mg/L", "response_time": "The parameter that governs descent rate.", "criticality": "existential" },
+      { "parameter": "Temperature", "method": "Thermistor", "target_accuracy": "±0.05 C", "note": "Fast, cheap, and it defines the thermocline. The most reliable channel on the probe." },
+      { "parameter": "pH", "method": "Ion-selective glass electrode", "target_accuracy": "±0.1", "weakness": "Glass electrodes drift and need regular calibration. The least unattended-friendly sensor in the set, and it cannot be omitted because ammonia toxicity is uninterpretable without it." },
+      { "parameter": "Conductivity / salinity", "method": "4-electrode", "target_accuracy": "±1%" },
+      { "parameter": "Turbidity", "method": "Nephelometric, 90-degree", "note": "Both a measurement and the covariate that every optical channel needs." },
+      { "parameter": "Chlorophyll-a", "method": "Fluorometry", "why_it_matters": "This is the channel that calibrates the multispectral camera. Without it the imaging half of the product produces uncalibrated indices.", "criticality": "high" },
+      { "parameter": "Phycocyanin", "method": "Fluorometry", "priority": "should", "why": "Cyanobacterial discrimination. Chlorophyll alone cannot distinguish a harmless diatom bloom from a cyanobacterial one." },
+      { "parameter": "ORP", "method": "Platinum electrode", "why": "Near-bottom ORP going sharply negative is the leading indicator of sediment reduction and sulfide generation — the H2S we cannot measure directly." },
+      { "parameter": "Ammonium", "method": "Ion-selective electrode", "priority": "should", "weakness": "ISEs are the least trustworthy channel here. They drift, they suffer interference, and they need frequent calibration. Treat ISE ammonia as indicative, not quantitative, and say so in the UI." },
+      { "parameter": "Depth", "method": "Pressure transducer", "criticality": "existential", "why": "The independent variable of every profile." }
+    ],
+    "physical_targets": { "mass_kg": 0.55, "diameter_mm": 48, "length_mm": 260, "pressure_rating_m": 30, "ip_rating": "IP68" },
+    "the_mass_problem": "Commercial aquaculture sondes with this channel set are typically heavier than 0.55 kg. Either we find a lighter unit, drop channels, or build our own. Building our own is a serious undertaking that is not currently in the roadmap and would change the funding requirement. This should be resolved by a vendor survey in Phase 0 — it is a week of phone calls, not research, and it may reshape the entire plan."
+  },
+
+  "biosecurity_design": {
+    "why_it_is_here_and_not_in_a_procedure": "A probe dipped in pond A and then pond B is a pathogen vector with rotors. This is the strongest technical objection to the multi-site concept and it is answered in hardware or it is not answered.",
+    "citation_ids": ["worldbank-disease-risk-2014"],
+    "controls": [
+      { "control": "Single-site probe assignment", "description": "Each site has its own dedicated sonde. The drone travels; the probe does not.", "status": "PRIMARY CONTROL", "cost": "A sonde per site is a real capital cost that the business model must carry. It is cheaper than an outbreak." },
+      { "control": "Tool-free 60-second sonde swap", "description": "Makes single-site assignment operationally practical. If swapping is a workshop job, nobody will do it and the control fails.", "requirement_id": "REQ-HW-006" },
+      { "control": "Dock rinse and decontamination cycle", "description": "Freshwater rinse plus a decontaminant appropriate to the pathogens of concern." },
+      { "control": "Tether decontamination", "description": "The tether goes in the water too, and it is the part everyone forgets. Wiping the sonde and reeling in a contaminated tether accomplishes nothing." },
+      { "control": "Movement logging", "description": "Every sonde's site history is recorded, so an epidemiological trace is possible after an outbreak. This matters legally as much as biologically — if a farm has an outbreak and we visited, we will be asked." }
+    ],
+    "residual_risk": "The airframe itself contacts spray and aerosol. Full decontamination of the whole aircraft between sites is not practical at operational cadence. Residual transmission risk is non-zero and should be disclosed to customers rather than discovered by them.",
+    "detail_file": "data/09_compliance/biosecurity-protocol.json"
+  },
+
+  "test_plan": {
+    "phase_1_gantry": {
+      "objective": "Break the winch on the ground before it breaks the aircraft over water.",
+      "setup": "Static gantry over an open water tank or pond edge. No aircraft.",
+      "tests": [
+        "1000 deploy/recover cycles to 8 m. Log every anomaly.",
+        "Deliberate snag introduction on netting. Does tension anomaly detection catch it? Does slack-and-retry clear it? Does the cutter work when it does not?",
+        "Fouled tether cycling — introduce real biofilm and weed rather than testing on a clean line in a clean tank.",
+        "Cutter actuation under full load.",
+        "Descent rate accuracy against pressure reference.",
+        "Sonde accuracy against a laboratory reference across the full range, INCLUDING the ugly end — high turbidity, low DO. A sensor that is accurate in clean water and wrong in a eutrophic pond is worse than useless, because the eutrophic pond is the entire use case."
+      ],
+      "gate": "No progression to flight integration until 1000 cycles pass and every failure has a documented root cause."
+    },
+    "phase_2_flight": {
+      "tests": [
+        "Pendulum characterisation across tether lengths and wind speeds. Find the real wind limit rather than assuming it.",
+        "Profile reproducibility against a boat-deployed reference sonde at the same station. THIS IS THE MOMENT THE CORE CLAIM IS EITHER TRUE OR IT IS NOT.",
+        "Snag recovery in a real cage array.",
+        "Descent rate versus sensor response validation — does a slow profile and a fast profile at the same station agree? If not, the descent rate is too fast."
+      ]
+    }
+  },
+
+  "if_this_subsystem_fails": {
+    "note": "Written now, while thinking is cheap and unclouded by sunk cost.",
+    "fallback_options": [
+      "Surface-only sampling. Kills the depth claim, which kills the differentiation. The product becomes a camera and the company should stop.",
+      "Drop-and-retrieve disposable probes. Loses the vertical profile — gives point samples at unknown depth. Weak.",
+      "Aircraft delivers a probe to a fixed mooring, which does the profiling. Hybrid with the buoy category. Actually interesting, and it is roughly where our own competitive matrix already points.",
+      "Pivot to a USV. The honest answer if the pendulum problem proves intractable. The Phase 0 gate explicitly requires the team to be willing to hear this."
+    ],
+    "the_discipline": "If the winch cannot be made to work, the correct response is to change the vehicle, not to quietly drop the probe and sell a drone with a camera. A camera drone in this market has no defensible position and we would be competing with every survey operator in the country on price. Better to fail the concept than to succeed at building something worthless."
+  }
+}

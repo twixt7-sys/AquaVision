@@ -1,0 +1,136 @@
+{
+  "id": "company-profile",
+  "title": "AquaVision — Company Profile",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "assumption",
+  "note": "Corporate facts below are the founding team's stated intent. Fields marked `awaiting_confirmation` must be filled from registration documents before any external use.",
+
+  "identity": {
+    "legal_name": "awaiting_confirmation",
+    "trading_name": "AquaVision",
+    "descriptor": "Fisheries • Aquaculture • Technology",
+    "entity_type": "awaiting_confirmation",
+    "registration_number": "awaiting_confirmation",
+    "founded": "awaiting_confirmation",
+    "headquarters": "Philippines (specific locality awaiting_confirmation)",
+    "stage": "pre-seed / concept-to-prototype",
+    "website": "awaiting_confirmation",
+    "contact_email": "awaiting_confirmation"
+  },
+
+  "one_liner": "AquaVision builds the OmniDrone — an autonomous aerial platform that flies to fish farms, drops a reeled probe to profile the water column, scans the surface for trouble, delivers feed and treatments, and streams it all into a live digital twin of the pond.",
+
+  "what_we_actually_do": {
+    "plain_language": "Fish farmers are flying blind. They find out their water has gone bad when the fish are already floating. We put a drone over the water that measures what is happening below the surface, several times a day, at every cage — and turns that into a warning early enough to act on.",
+    "for_an_engineer": "A multirotor UAS integrating a tethered CTD-style multiparameter sonde on a powered winch, a calibrated multispectral and thermal imaging payload, and a metered granular/liquid dispensing system, feeding a fusion pipeline that uses in-situ point profiles to calibrate area-wide optical retrievals and drive a physics-informed pond state model.",
+    "for_an_investor": "Aquaculture is now the majority of the world's aquatic animal production, it is intensifying, and the operators have almost no observability of the thing that kills their stock. We sell the observability layer, priced against the losses it prevents, on hardware that also does the feeding — so it earns its keep even on the days nothing goes wrong."
+  },
+
+  "mission": "To give every fish farmer — from a single family cage to a commercial estate — the same quality of information about their water that only industrial operations can currently afford.",
+
+  "vision": "A fisheries and aquaculture sector where mass mortality events are anticipated and prevented rather than counted and mourned, and where intensification does not have to mean environmental degradation.",
+
+  "values": [
+    {
+      "value": "Measure, don't guess",
+      "meaning": "Every claim we make about a pond traces to an instrument reading with an error bar. We would rather show a farmer an honest uncertainty than a confident fiction.",
+      "how_it_binds_us": "It means we cannot ship the fish-kill risk score until it is validated, however much the demo would benefit from it."
+    },
+    {
+      "value": "The farmer decides",
+      "meaning": "The system advises. It does not autonomously medicate a pond or declare a bloom toxic. Consequential actions stay with the person who owns the consequence.",
+      "how_it_binds_us": "It rules out the fully-autonomous-treatment feature that would demo beautifully and would eventually poison someone's harvest."
+    },
+    {
+      "value": "Do no harm to the water",
+      "meaning": "A platform sold on environmental stewardship that leaks lithium, spreads pathogens between farms, or over-doses a lake with conditioner is a net negative. Biosecurity and containment are not compliance chores.",
+      "how_it_binds_us": "It forces cost and mass into the design — decontamination, containment, dose limiting — that a purely commercial reading would cut."
+    },
+    {
+      "value": "Earn the data",
+      "meaning": "Farm production data is commercially sensitive and often personally sensitive. We hold it as custodians, not owners.",
+      "how_it_binds_us": "It constrains the data-monetisation business models that investors will inevitably suggest. See ethics-data-privacy.json."
+    },
+    {
+      "value": "Build for the median farm, not the flagship",
+      "meaning": "The technology that only works on a well-capitalised demonstration site has not solved the problem; it has decorated it.",
+      "how_it_binds_us": "Intermittent connectivity, no mains power at the cage, monsoon weather, and an operator who is not an engineer are the design case — not the edge case."
+    }
+  ],
+
+  "the_honest_position": {
+    "purpose": "This block exists so that no reader of this repository is misled about maturity. It should be reproduced, not hidden, in diligence.",
+    "what_exists_today": [
+      "A clearly specified concept and an industrial design render.",
+      "A researched problem definition grounded in published statistics.",
+      "A system architecture and a requirements baseline.",
+      "This repository."
+    ],
+    "what_does_not_exist_yet": [
+      "A flying prototype.",
+      "Any field-collected water quality data.",
+      "Any trained or validated machine learning model.",
+      "Any paying customer, letter of intent, or pilot agreement.",
+      "CAAP authorisation for the operating mode the business model assumes (BVLOS)."
+    ],
+    "why_we_state_this_plainly": "Because the gap between concept and product is where aquaculture technology ventures usually die, and a team that cannot name the gap cannot cross it. Every investor worth taking money from will find this list anyway. Handing it to them is cheaper than being caught with it.",
+    "current_trl": 3,
+    "trl_justification": "TRL 3 — analytical and experimental proof of concept. The physical principles are established in the literature (see the research corpus); the integration into this specific vehicle is not yet demonstrated in hardware.",
+    "citation_ids": ["nasa-trl"]
+  },
+
+  "product_line": [
+    {
+      "product_id": "omnidrone",
+      "name": "OmniDrone",
+      "status": "concept / in design",
+      "description": "The aerial platform: probe, sensing, dispensing, telemetry.",
+      "detail_file": "data/05_hardware/omnidrone-specifications.json"
+    },
+    {
+      "product_id": "omnidock",
+      "name": "OmniDock",
+      "status": "concept",
+      "description": "Shore-side automated dock: shelter, charge, probe rinse and decontamination, calibration reference, connectivity backhaul. The component that converts the drone from a tool someone operates into infrastructure that runs.",
+      "detail_file": "data/05_hardware/docking-station.json"
+    },
+    {
+      "product_id": "aquavision-platform",
+      "name": "AquaVision Platform",
+      "status": "concept",
+      "description": "The cloud and edge software: ingestion, fusion, AI/ML, digital twin, dashboard, alerting.",
+      "detail_file": "data/06_software/system-architecture.json"
+    },
+    {
+      "product_id": "pondtwin",
+      "name": "PondTwin",
+      "status": "concept",
+      "description": "The digital twin surface presented to the farmer: a live, navigable 3D model of the water body and its stock.",
+      "detail_file": "data/06_software/digital-twin.json"
+    }
+  ],
+
+  "why_this_team_why_now": {
+    "why_now_technology": [
+      "Multispectral sensors light enough for a small multirotor have dropped to a price point that a service business can absorb, and the inland-water retrieval literature matured substantially through 2024-2025.",
+      "Edge inference hardware now runs useful vision models at a few watts, which matters when the whole energy budget is a battery that also has to fly.",
+      "Digital twin methods for aquaculture moved from proposal to demonstrated case studies in the same window."
+    ],
+    "why_now_market": [
+      "Aquaculture passed capture fisheries in aquatic animal production for the first time in 2022 — the sector's centre of gravity has shifted to a farmed system that can, in principle, be instrumented.",
+      "Intensification is raising stocking densities faster than it is raising observability, which widens exactly the gap this product fills.",
+      "Climate volatility is increasing the frequency of the thermal and rainfall triggers behind mass mortality events."
+    ],
+    "citation_ids": ["fao-sofia-2024", "mdpi-drones-inland-review-2024", "sciencedirect-dt-aiot-2023"],
+    "why_us": "awaiting_confirmation — this section must be written by the founders with real biographies. Do not let an AI invent your credentials; investors verify them and the discovery is fatal."
+  },
+
+  "strategic_focus": {
+    "primary_field": "Aquaculture and fisheries",
+    "initial_geography": "Philippine inland and brackish-water aquaculture",
+    "why_this_beachhead": "Philippine lake cage culture concentrates the exact failure mode the platform is built to see — high-density cages in a shared, stratifying, eutrophic water body with documented recurring kill events and quantified peso losses. The problem is acute, the losses are on the record, and the operators are geographically clustered around a small number of lakes, which makes a dock-based service model tractable.",
+    "citation_ids": ["inquirer-taal-fishkill-2023", "pna-tilapia-fishkill", "seafdec-laguna-fishkill"],
+    "expansion_logic": "Lake cage culture → brackish pond culture (milkfish, shrimp) → coastal marine cage → regional Southeast Asia. Each step reuses the sensing core and changes the mission profile, not the platform."
+  }
+}

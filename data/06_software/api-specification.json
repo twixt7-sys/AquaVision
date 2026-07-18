@@ -1,0 +1,74 @@
+{
+  "id": "api-specification",
+  "title": "API Specification",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "design_target",
+  "status": "Design intent. No API is implemented. Paths and shapes are indicative and will change on contact with a real client.",
+
+  "design_principles": [
+    "REST over HTTPS, JSON. Boring on purpose. There is nothing in this domain that justifies a novel protocol.",
+    "Read-heavy. The dashboard and the webpage consuming this repository are the primary clients.",
+    "Every response that contains a number carries its provenance and its QC status. An API that returns bare numbers invites clients to render them as facts.",
+    "Tenant isolation is enforced at the API boundary, not in the client. A client bug must not be able to expose Farm B's data to Farm A.",
+    "Uncertainty is never optional in a response. If a client wants a scalar without an error bar, they can discard the field — but we will not omit it."
+  ],
+
+  "base": "/api/v1",
+
+  "endpoints": [
+    { "method": "GET", "path": "/sites", "returns": "Sites visible to the authenticated tenant.", "notes": "Tenant-scoped by construction." },
+    { "method": "GET", "path": "/sites/{site_id}", "returns": "Site detail: geometry, units, stations, dock, commissioning record." },
+    { "method": "GET", "path": "/sites/{site_id}/units", "returns": "Cages, pens, or ponds with current state summary." },
+    { "method": "GET", "path": "/sites/{site_id}/stations", "returns": "Fixed sampling stations. Profiles are only comparable across time if the station is the same place — this endpoint is what makes that guarantee inspectable." },
+    { "method": "GET", "path": "/sorties", "query": ["site_id", "from", "to", "outcome", "operating_mode"], "returns": "Sortie records including aborts. Aborts are data, not noise — a pattern of weather aborts is the availability story." },
+    { "method": "GET", "path": "/sorties/{sortie_id}", "returns": "Sortie detail with links to its profiles, imagery products, detections, and dispensing actions." },
+    { "method": "GET", "path": "/profiles", "query": ["site_id", "station_id", "from", "to", "include_partial"], "returns": "Profile records.", "notes": "include_partial defaults to FALSE. Partial profiles are excluded from analysis by default because a truncated column silently corrupts any aggregate computed from it. A client must opt in to see them, which forces the client author to think about it." },
+    { "method": "GET", "path": "/profiles/{profile_id}", "returns": "Full profile with all samples and per-channel QC flags." },
+    { "method": "GET", "path": "/profiles/{profile_id}/derived", "returns": "Thermocline depth, stratification index, oxygen debt, with inputs_complete flag." },
+    { "method": "GET", "path": "/timeseries", "query": ["site_id", "station_id", "variable", "depth_band", "from", "to", "qc_min"], "returns": "A time series of one variable at one depth band.", "notes": "qc_min defaults to 1 (good only). A client asking for suspect data must say so explicitly." },
+    { "method": "GET", "path": "/imagery", "query": ["site_id", "product_type", "from", "to"], "returns": "Imagery product metadata including solar elevation, illumination stability, and calibration reference." },
+    { "method": "GET", "path": "/imagery/{product_id}", "returns": "Product with links to the raster and its MANDATORY uncertainty field.", "notes": "A concentration product without an uncertainty field reference is a 500, not a partial response. It should be impossible to consume a concentration map without its errors." },
+    { "method": "GET", "path": "/detections", "query": ["site_id", "class", "min_confidence", "review_status", "from", "to"], "returns": "Model detections with evidence references and human review verdicts." },
+    { "method": "POST", "path": "/detections/{detection_id}/review", "body": "{verdict, notes}", "returns": "Updated detection.", "notes": "Human confirmation or rejection. Rejections are as valuable as confirmations — they are the training signal." },
+    { "method": "GET", "path": "/twin/{site_id}/state", "query": ["at"], "returns": "Twin state at a time, with per-layer provenance and staleness.", "notes": "The response separates measured, interpolated, simulated, and operator-supplied into distinct objects. A client cannot accidentally blend them because the API does not offer a blended field." },
+    { "method": "GET", "path": "/alerts", "query": ["site_id", "severity", "status", "from", "to"], "returns": "Alerts with evidence references and the rule or model that raised them." },
+    { "method": "POST", "path": "/alerts/{alert_id}/acknowledge", "returns": "Acknowledgement record.", "notes": "The acknowledge-to-action rate is a first-class product health metric. If people stop acting, the product has failed regardless of sensor accuracy." },
+    { "method": "GET", "path": "/dispensing", "query": ["site_id", "from", "to", "substance_class"], "returns": "Dispensing action records with commanded vs delivered mass and the human authoriser." },
+    { "method": "POST", "path": "/dispensing/authorise", "body": "{sortie_plan_id, substance, dose_kg, positions}", "returns": "Authorisation token, single-use, mission-scoped.", "notes": "The only write endpoint with real-world consequence. Requires an authenticated human principal — never a service account. The token does not persist beyond the mission it authorises." },
+    { "method": "GET", "path": "/reports/environmental", "query": ["site_id", "from", "to", "format"], "returns": "Audit-ready environmental record with QC flags and provenance visible.", "notes": "The certification audit use case. Deliberately includes the QC flags — an auditor should be able to see which readings we do not trust. Hiding them would make the report look better and be worth less." },
+    { "method": "GET", "path": "/fleet/health", "returns": "Aircraft, dock, and sonde status including calibration due dates and sonde site assignment.", "notes": "Sonde site assignment is a biosecurity control. If a sonde appears at a site it is not assigned to, that is an incident." }
+  ],
+
+  "response_envelope": {
+    "note": "Every data response carries this envelope. It is the API-level expression of the repository's provenance discipline.",
+    "shape": {
+      "data": "the payload",
+      "meta": {
+        "provenance": "verified_external | derived_calculation | modeled_projection | design_target | illustrative_synthetic | assumption",
+        "qc_summary": "counts by flag",
+        "generated_utc": "when this response was computed",
+        "staleness": "age of the newest underlying measurement",
+        "completeness": "what is missing and why"
+      },
+      "warnings": "array of human-readable caveats the client SHOULD render"
+    },
+    "the_warnings_field": "Clients are expected to render warnings, not swallow them. A warning like 'this concentration field was calibrated on 3 points with an R² of 0.41' is more important than the field itself, and an API that makes it easy to ignore is an API that facilitates overclaiming."
+  },
+
+  "auth_and_tenancy": {
+    "model": "Per-tenant. A farm's data is visible only to that farm and to explicitly granted parties.",
+    "the_hard_case": "The lake-scale carrying capacity use case (UC-10) needs cross-farm aggregation. The operator who benefits from the lake-wide picture is the one who least wants their own stocking visible in it.",
+    "position": "Cross-tenant reads are not exposed by this API at all. Aggregated lake-scale products are a separate, explicitly-consented pipeline with their own governance. Building a cross-tenant read endpoint 'just for internal use' is how the boundary erodes.",
+    "status": "UNRESOLVED. See ethics-data-privacy.json. Flagged because it is cheap to design now and impossible to retrofit."
+  },
+
+  "what_this_api_will_not_do": [
+    "Return a concentration without its uncertainty.",
+    "Return a model output in the same field as a measurement.",
+    "Accept a dispensing command without a human authoriser.",
+    "Expose one tenant's data to another, for any reason, including 'research'.",
+    "Silently include partial profiles in an aggregate.",
+    "Provide a person-detection or personnel-tracking endpoint. Not because it is technically hard — because building it would change what this company is."
+  ]
+}

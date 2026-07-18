@@ -1,0 +1,43 @@
+{
+  "id": "chart-tech-readiness",
+  "chart_type": "line",
+  "title": "Technology Readiness — Where We Actually Are",
+  "subtitle": "TRL progression with gate criteria, not calendar dates",
+  "description": "The development roadmap as a TRL progression, gated by evidence rather than dates. The company is at TRL 3 today — analytical proof of concept, nothing flown. Each step up is unlocked by a specific piece of evidence, and two gates carry explicit KILL criteria. Rendering this against evidence-gates rather than a Gantt calendar is deliberate: a hardware timeline stated in dates the team cannot honour destroys credibility.",
+  "provenance": "modeled_projection",
+  "citation_ids": ["nasa-trl"],
+  "axes": {
+    "x": { "label": "Phase", "type": "category" },
+    "y": { "label": "Technology Readiness Level", "unit": "TRL", "type": "linear", "min": 1, "max": 9 }
+  },
+  "series": [
+    {
+      "name": "TRL progression",
+      "provenance": "modeled_projection",
+      "data": [
+        { "x": "Now (Phase 0)", "y": 3, "meta": "Analytical/experimental proof of concept. Physics established in literature; integration not demonstrated. NOTHING HAS FLOWN." },
+        { "x": "Phase 1", "y": 4, "meta": "Subsystems validated in lab — winch 1000 cycles, sensor accuracy" },
+        { "x": "Phase 2", "y": 5, "meta": "Integrated prototype validated in relevant environment — profiles agree with reference sonde" },
+        { "x": "Phase 3", "y": 6, "meta": "Demonstrated over a full seasonal cycle with real data" },
+        { "x": "Phase 4", "y": 7, "meta": "Prototype demonstrated in operational environment — paid pilots" },
+        { "x": "Phase 5", "y": 8, "meta": "System complete and qualified — commercial operation" }
+      ]
+    }
+  ],
+  "annotations": [
+    { "kind": "point_label", "value": ["Now (Phase 0)", 3], "label": "YOU ARE HERE — TRL 3, nothing flown", "severity": "warning" },
+    { "kind": "point_label", "value": ["Phase 2", 5], "label": "The core claim is proven or disproven here", "severity": "info" }
+  ],
+  "the_gate_criteria": {
+    "note": "Render each step with its gate. The gates are the honest content — they are what must be TRUE to advance, not what date it is.",
+    "provenance": "design_target",
+    "gates": [
+      { "from_trl": 3, "to_trl": 4, "gate": "Payload budget closes with margin AND 25+ farmer interviews confirm a payable segment. KILL criteria apply if either fails.", "kill_gate": true },
+      { "from_trl": 4, "to_trl": 5, "gate": "Winch passes 1000 cycles; sensor accuracy validated across the full range including the ugly end" },
+      { "from_trl": 5, "to_trl": 6, "gate": "Drone profiles agree with reference sonde within tolerance — the moment the concept is validated" },
+      { "from_trl": 6, "to_trl": 7, "gate": "A full seasonal validation dataset; anomaly detection generalises to a held-out site; a documented useful intervention" },
+      { "from_trl": 7, "to_trl": 8, "gate": "Paying customers with renewal intent; measured unit economics; BVLOS obtained or model re-based" }
+    ]
+  },
+  "why_this_framing": "Investors and thesis committees both need to know the honest maturity. The render is persuasive and the spec is detailed, which together can imply more readiness than exists. This chart's job is to make TRL 3 unmistakable. See company-profile.json#/the_honest_position and milestones-roadmap.json."
+}

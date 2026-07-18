@@ -1,0 +1,120 @@
+{
+  "id": "omnidrone-specifications",
+  "title": "OmniDrone — System Specification",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "design_target",
+  "confidence": "low",
+
+  "STATUS_BANNER": "NO HARDWARE EXISTS. Every value in this file is a design target or a requirement, not a measurement. Nothing has been built, weighed, or flown. The render in the repository root is an industrial design study and is not dimensionally authoritative. Where the render and this specification disagree, BOTH need reconciling — neither is validated.",
+
+  "design_philosophy": {
+    "principles": [
+      { "principle": "The probe is the product", "implication": "Every trade-off resolves in favour of getting a good sonde to depth reliably. The camera is valuable; the winch is existential." },
+      { "principle": "Mass is the enemy", "implication": "Multirotor payload fraction is brutal and unforgiving. Every gram of feature costs endurance, and endurance is already our weakest axis against every competitor." },
+      { "principle": "Configure per mission", "implication": "Do not carry the hopper on a profiling sortie. Modular payload is not a nice-to-have; it is how the energy budget closes at all." },
+      { "principle": "Assume it goes in the water", "implication": "Float, beacon, contained lithium. Design for the ditching rather than pretending it will not happen." },
+      { "principle": "Fixable by a technician, not an engineer", "implication": "Field-replaceable modules, no special tools, no calibration that needs a laptop." },
+      { "principle": "Legible and benign", "implication": "Shrouded rotors and a marine-instrument aesthetic. This machine works near people on narrow dikes and small boats." }
+    ]
+  },
+
+  "top_level_targets": {
+    "note": "TARGETS. Derived from mission requirements, not from a built aircraft. The MTOM target is the single most consequential number here because it determines the regulatory bracket.",
+    "configuration": "Quadrotor, ducted/shrouded rotors, ventral payload bay with centre-line winch",
+    "mtom_target_kg": 6.8,
+    "mtom_rationale": {
+      "statement": "Targeting under 7 kg is a deliberate REGULATORY decision, not an engineering one.",
+      "reasoning": "CAAP brackets obligations at 7 kg gross weight. At or below 7 kg the regulatory burden is materially lighter; above it, mandatory registration and stricter compliance apply. Since commercial use requires certification regardless, the 7 kg line is less decisive than it first appears — but it still shapes the compliance path and the cost of every future variant.",
+      "citation_ids": ["caap-rpas-regulations"],
+      "the_tension": "6.8 kg is very tight for this payload. There is a real possibility the aircraft cannot do the mission under 7 kg, in which case the honest answer is to accept the heavier bracket and its compliance cost rather than to descope the probe. Do not let a regulatory threshold silently delete the capability that is the entire point of the product.",
+      "verification_status": "The 7 kg threshold is drawn from secondary summaries of CAAP rules. CONFIRM WITH CAAP DIRECTLY before this number drives a design decision. Building an airframe around a misremembered regulatory threshold would be an expensive and embarrassing error."
+    },
+    "empty_mass_target_kg": 3.2,
+    "battery_mass_target_kg": 1.8,
+    "useful_payload_target_kg": 1.8,
+    "payload_fraction_target": 0.26,
+    "payload_fraction_note": "26 percent is optimistic-but-not-absurd for a well-designed electric multirotor. If the real number comes in at 15 percent, the mission profiles do not close and the concept needs re-architecting. This is the Phase 0 go/no-go arithmetic and it is available on paper today.",
+    "endurance_target_min": { "hover_dominant": 22, "cruise_dominant": 35 },
+    "endurance_note": "Two numbers because they are genuinely different missions. Hovering is expensive; our profiling missions are hover-dominated. Quoting a single 'up to 35 minutes' endurance figure derived from cruise, when the flagship mission is hover, would be marketing rather than engineering.",
+    "operating_radius_target_m": 800,
+    "operating_radius_note": "Constrained by the return-with-reserve requirement, not by radio range. The reserve is not negotiable.",
+    "max_wind_target_ms": 8,
+    "max_wind_caveat": "For the bare aircraft. With a deployed probe on a tether, the real limit is unknown and likely substantially lower — a swinging pendulum mass couples into the flight controller as a disturbance it was not designed for. This is the most likely place for the mission profiles to fail and it cannot be resolved without flight testing.",
+    "ip_rating_target": "IP54 airframe minimum; IP68 for the sonde and any wetted component",
+    "ip_rationale": "The airframe does not swim, but it hovers in spray over water in the tropics and periodically brings a wet, dripping probe back into its own belly. IP54 is a floor, not an aspiration.",
+    "citation_ids": ["iec-60529"]
+  },
+
+  "the_mass_budget": {
+    "provenance": "design_target",
+    "confidence": "low",
+    "warning": "This budget is a PAPER MODEL with invented component masses. It exists to demonstrate the method and to show whether the concept is plausible — not to specify an aircraft. Replace every line with a real datasheet mass in Phase 0.",
+    "line_items": [
+      { "item": "Airframe structure, shrouds, landing gear", "mass_kg": 1.35, "note": "Shrouds are heavy. They are also a safety feature we chose deliberately. This is the cost of that choice, and it should be paid knowingly rather than discovered later." },
+      { "item": "Motors, ESCs, propellers (x4)", "mass_kg": 0.85 },
+      { "item": "Flight controller, GNSS, IMU, radio", "mass_kg": 0.18 },
+      { "item": "Edge compute module", "mass_kg": 0.12 },
+      { "item": "Wiring, connectors, sealing", "mass_kg": 0.22 },
+      { "item": "Airframe subtotal (empty)", "mass_kg": 2.72, "type": "subtotal" },
+      { "item": "Winch mechanism (motor, spool, tether, level-wind, tension sensor, cutter)", "mass_kg": 0.62, "note": "The single heaviest payload item and the one with the least design confidence. If this comes in at 1.0 kg, the budget breaks." },
+      { "item": "Multiparameter sonde", "mass_kg": 0.55, "note": "Aquaculture-grade sondes are typically heavier than this. 0.55 kg may require a custom-built probe rather than an off-the-shelf unit — which is cost, risk, and schedule the plan does not currently carry." },
+      { "item": "Multispectral camera + downwelling irradiance sensor", "mass_kg": 0.19 },
+      { "item": "RGB + thermal gimbal head", "mass_kg": 0.24 },
+      { "item": "Dispensing hopper (empty)", "mass_kg": 0.30 },
+      { "item": "Payload subtotal (all fitted)", "mass_kg": 1.90, "type": "subtotal" },
+      { "item": "Battery", "mass_kg": 1.80 },
+      { "item": "Float / ditching provision + beacon", "mass_kg": 0.14 }
+    ],
+    "totals": {
+      "all_payloads_fitted_kg": 6.56,
+      "plus_dispensed_load": "Any actual feed or treatment mass is ON TOP of this.",
+      "the_finding": "With every payload fitted the aircraft is at 6.56 kg empty of consumables — which leaves roughly 0.44 kg to the 7 kg line and effectively no dispensing capacity at all. THE BUDGET DOES NOT CLOSE for a fully-configured aircraft.",
+      "provenance": "derived_calculation"
+    },
+    "what_this_finding_means": {
+      "statement": "This is the most important result in the hardware section and it should not be softened.",
+      "reading": "The concept as described — probe AND imaging AND dispensing on one sub-7 kg airframe — does not appear to close on this paper model. That does not kill the venture. It kills the 'one drone does everything simultaneously' framing.",
+      "the_resolutions": [
+        "Per-mission payload configuration. Fly the probe OR the hopper, never both. This is already in mission-profiles.json and it is the cheapest fix — but it means the marketing must stop implying one flight does all four functions.",
+        "Accept a heavier MTOM bracket and pay the compliance cost. Honest, and possibly correct.",
+        "Descope dispensing to small high-value treatments only, which mission-profiles.json already suspects is where it belongs on economic grounds anyway. Two independent lines of reasoning arriving at the same conclusion is a signal worth taking seriously.",
+        "Descope thermal imaging. Lowest-value sensor per gram in the set."
+      ],
+      "the_recommendation": "Configure per mission, and reposition dispensing as targeted treatment rather than bulk feeding. The mass budget and the mission economics both point there independently. Say this in the pitch before someone else does the arithmetic — a founder who has found their own problem is credible; one who has it found for them is not."
+    }
+  },
+
+  "subsystem_index": [
+    { "subsystem": "Airframe & propulsion", "file": "data/05_hardware/airframe-propulsion.json" },
+    { "subsystem": "Probe & winch", "file": "data/05_hardware/probe-winch-subsystem.json", "criticality": "existential" },
+    { "subsystem": "Sensor payload", "file": "data/05_hardware/sensor-payload.json" },
+    { "subsystem": "Carriage & ejection", "file": "data/05_hardware/carriage-ejection-system.json" },
+    { "subsystem": "Power & energy", "file": "data/05_hardware/power-energy-budget.json" },
+    { "subsystem": "Dock", "file": "data/05_hardware/docking-station.json" },
+    { "subsystem": "Bill of materials", "file": "data/05_hardware/bill-of-materials.json" }
+  ],
+
+  "requirements": [
+    { "id": "REQ-HW-001", "statement": "The aircraft shall deploy and recover the sonde to a depth of at least 10 m from a stable hover.", "type": "functional", "priority": "must", "verification_method": "test", "verification_status": "not_started", "trace_to": ["uc-01-dawn-profile", "prob-blindness-at-depth"] },
+    { "id": "REQ-HW-002", "statement": "The aircraft shall complete a 6-station, 8 m profiling sortie and return to dock with not less than 20 percent battery reserve.", "type": "performance", "priority": "must", "verification_method": "test", "verification_status": "not_started", "trace_to": ["mp-01-dawn-sweep"] },
+    { "id": "REQ-HW-003", "statement": "The winch shall complete 1000 deploy/recover cycles without failure requiring tools.", "type": "performance", "priority": "must", "verification_method": "test", "verification_status": "not_started", "trace_to": ["prob-labour"] },
+    { "id": "REQ-HW-004", "statement": "The aircraft shall float and transmit a locator signal for not less than 4 hours following a water landing.", "type": "safety", "priority": "must", "verification_method": "test", "verification_status": "not_started", "rationale": "Ditching is assumed, not excluded. A sunk aircraft in a food-production water body is an environmental incident." },
+    { "id": "REQ-HW-005", "statement": "The tether shall be severable on command and on a defined automatic condition, releasing the sonde.", "type": "safety", "priority": "must", "verification_method": "demonstration", "verification_status": "not_started", "rationale": "A snagged probe converts the aircraft into a tethered vehicle with a finite battery. Losing the sonde is preferable to losing the aircraft, and both are preferable to an uncontrolled descent onto a cage where people work." },
+    { "id": "REQ-HW-006", "statement": "The sonde shall be removable and replaceable by a trained technician without tools in under 60 seconds.", "type": "usability", "priority": "must", "verification_method": "demonstration", "verification_status": "not_started", "trace_to": ["biosecurity"], "rationale": "Single-site probe assignment is the primary biosecurity control. It only works if swapping is trivial." },
+    { "id": "REQ-HW-007", "statement": "All wetted components shall withstand the specified decontamination protocol for not less than 500 cycles without degradation.", "type": "environmental", "priority": "must", "verification_method": "test", "verification_status": "not_started" },
+    { "id": "REQ-HW-008", "statement": "The aircraft shall not discharge any dispensed material without an explicit human authorisation for that specific mission.", "type": "safety", "priority": "must", "verification_method": "inspection", "verification_status": "not_started", "rationale": "Hard-coded. An uncommanded discharge is a poisoned pond." },
+    { "id": "REQ-HW-009", "statement": "The aircraft shall be operable and maintainable by personnel who did not build it, using no special tools.", "type": "usability", "priority": "must", "verification_method": "demonstration", "verification_status": "not_started" },
+    { "id": "REQ-HW-010", "statement": "Rotors shall be shrouded such that a person cannot contact a blade from any approach direction.", "type": "safety", "priority": "must", "verification_method": "inspection", "verification_status": "not_started", "rationale": "This machine operates near people on narrow dikes and small boats. The shrouds cost mass and endurance; the safety case pays for them." },
+    { "id": "REQ-HW-011", "statement": "Descent rate during profiling shall be settable below the response time of the slowest fitted sensor.", "type": "performance", "priority": "must", "verification_method": "test", "verification_status": "not_started", "rationale": "Descending faster than the sensor responds produces a smeared profile that looks like data and is not." },
+    { "id": "REQ-HW-012", "statement": "Payload modules shall be interchangeable in the field without recalibration of the flight controller.", "type": "interface", "priority": "should", "verification_method": "demonstration", "verification_status": "not_started", "rationale": "Per-mission configuration is how the energy budget closes. If reconfiguring is a workshop job, it will not happen." }
+  ],
+
+  "open_engineering_questions": [
+    { "question": "What is the real wind limit with a deployed pendulum mass on a tether?", "why_it_matters": "It may invalidate the mission profiles entirely. Unknown until flight test.", "resolve_by": "Phase 2" },
+    { "question": "Can a sonde meeting our accuracy requirements be built at 0.55 kg?", "why_it_matters": "If not, custom probe development enters the plan as cost, risk, and schedule.", "resolve_by": "Phase 0 — this is a vendor survey, not research" },
+    { "question": "Does the tether foul on cage netting at a rate that makes unattended operation impossible?", "why_it_matters": "It is the difference between a product and a demonstration.", "resolve_by": "Phase 1 gantry testing with deliberately introduced fouling" },
+    { "question": "Recharge or battery swap at the dock?", "why_it_matters": "Determines sortie cadence, dock complexity, and cost. Short endurance is answered by more sorties, and more sorties need fast turnaround.", "resolve_by": "Phase 2" },
+    { "question": "Is the 7 kg CAAP threshold as summarised actually correct and actually binding for our use case?", "why_it_matters": "It is currently driving the mass target.", "resolve_by": "Phase 0 — one conversation with CAAP" }
+  ]
+}

@@ -1,0 +1,260 @@
+{
+  "$schema": "./data/00_meta/schema-registry.json#/definitions/manifest",
+  "manifest_version": "1.0.0",
+  "repository": {
+    "name": "AquaVision OmniDrone Knowledge Repository",
+    "code_name": "AVKR",
+    "owner": "AquaVision (startup)",
+    "tagline": "Fisheries • Aquaculture • Technology",
+    "purpose": "Single source of truth for the OmniDrone concept: pitch material, thesis material, engineering specification, research corpus, and chart-ready datasets. Designed to be consumed by a static HTML dashboard via fetch() on these JSON files.",
+    "created": "2026-07-17",
+    "last_updated": "2026-07-17",
+    "license_note": "Internal working document. Cited third-party statistics remain the property of their publishers; see data/07_research/references-bibliography.json for attribution."
+  },
+  "READ_THIS_FIRST": {
+    "provenance_warning": "Every quantitative field in this repository carries a `provenance` tag. NEVER cite a figure in a thesis or investor deck without checking that tag first. The tags mean:",
+    "provenance_levels": {
+      "verified_external": "Sourced from a named third-party publication (FAO, World Bank, peer-reviewed journal, government agency). A resolvable citation_id exists in references-bibliography.json. Safe to cite with attribution.",
+      "derived_calculation": "Computed by AquaVision from one or more `verified_external` inputs. The formula is stated in the record. Safe to cite if you also state the assumptions.",
+      "modeled_projection": "AquaVision's forward-looking model (financials, adoption curves, performance targets). This is an ARGUMENT, not a fact. Present as 'we project', never as 'studies show'.",
+      "design_target": "An engineering goal the hardware has not yet been measured against. Present as a specification target, not an achieved result.",
+      "illustrative_synthetic": "Fabricated sample data whose ONLY purpose is to make the dashboard render and to show data SHAPE. It describes no real pond and no real fish. Must never appear in a thesis results chapter or a pitch as evidence.",
+      "assumption": "A stated planning assumption awaiting validation. Listed so reviewers can attack it."
+    },
+    "integrity_rule": "This repository deliberately does NOT contain fabricated field-trial results, fabricated customer counts, or fabricated revenue. Those sections exist as empty, schema-defined placeholders with `status: awaiting_data`. Fill them only from real trials. A pitch that invents traction is fraud; a pitch that shows a rigorous plan and honest zeros is credible."
+  },
+  "consumption_guide": {
+    "intended_client": "Static HTML + vanilla JS or any SPA framework. No build step required.",
+    "load_pattern": "Fetch `manifest.json` first, then lazy-load sections from `index.files[]` by `id`.",
+    "encoding": "UTF-8, LF line endings.",
+    "id_convention": "Every top-level record has a stable `id`. IDs are kebab-case and are treated as permanent primary keys — rename the label, never the id.",
+    "chart_convention": "Any object shaped for direct chart rendering lives under data/12_datasets/charts/ and conforms to schema-registry.json#/definitions/chart_payload. It carries `chart_type`, `series[]`, `axes`, `provenance`, and `citation_ids[]`."
+  },
+  "index": {
+    "sections": [
+      {
+        "id": "meta",
+        "path": "data/00_meta/",
+        "label": "Meta & Schemas",
+        "description": "Schema registry, glossary, data dictionary, changelog. Read this to understand every other file.",
+        "audience": ["engineer", "thesis_committee"]
+      },
+      {
+        "id": "company",
+        "path": "data/01_company/",
+        "label": "Company & Identity",
+        "description": "Who AquaVision is: profile, brand system, mission, team structure, milestone roadmap.",
+        "audience": ["investor", "public"]
+      },
+      {
+        "id": "problem",
+        "path": "data/02_problem/",
+        "label": "Problem Space",
+        "description": "The aquaculture and fisheries problems the OmniDrone addresses, taxonomised, evidenced, and costed.",
+        "audience": ["investor", "thesis_committee", "farmer"]
+      },
+      {
+        "id": "market",
+        "path": "data/03_market/",
+        "label": "Market & Competition",
+        "description": "Industry statistics, TAM/SAM/SOM, competitor teardown, customer personas, SWOT and Porter analysis.",
+        "audience": ["investor"]
+      },
+      {
+        "id": "solution",
+        "path": "data/04_solution/",
+        "label": "Solution & ConOps",
+        "description": "What the OmniDrone does, the value proposition, the use cases, and the concept of operations.",
+        "audience": ["investor", "farmer", "engineer"]
+      },
+      {
+        "id": "hardware",
+        "path": "data/05_hardware/",
+        "label": "Hardware Engineering",
+        "description": "Airframe, propulsion, reeled probe winch, sensor payload, carriage/ejection system, power budget, dock, BOM.",
+        "audience": ["engineer", "thesis_committee"]
+      },
+      {
+        "id": "software",
+        "path": "data/06_software/",
+        "label": "Software, AI & Digital Twin",
+        "description": "System architecture, data pipeline, ML model cards, digital twin spec, API, telemetry schema, dashboard spec.",
+        "audience": ["engineer", "thesis_committee"]
+      },
+      {
+        "id": "research",
+        "path": "data/07_research/",
+        "label": "Research Corpus",
+        "description": "Literature review, thematic related-studies collections, full bibliography with links, research gaps, theoretical framework, methodology.",
+        "audience": ["thesis_committee"]
+      },
+      {
+        "id": "operations",
+        "path": "data/08_operations/",
+        "label": "Operations & Safety",
+        "description": "Deployment playbook, maintenance, risk register (FMEA), training and certification.",
+        "audience": ["engineer", "farmer"]
+      },
+      {
+        "id": "compliance",
+        "path": "data/09_compliance/",
+        "label": "Regulatory & Compliance",
+        "description": "Aviation law, fisheries law, water quality standards, biosecurity, data ethics and privacy.",
+        "audience": ["investor", "thesis_committee", "engineer"]
+      },
+      {
+        "id": "business",
+        "path": "data/10_business/",
+        "label": "Business Model",
+        "description": "Business model canvas, pricing, unit economics, financial projections, funding ask, go-to-market.",
+        "audience": ["investor"]
+      },
+      {
+        "id": "impact",
+        "path": "data/11_impact/",
+        "label": "Impact",
+        "description": "SDG alignment, environmental impact, social and economic impact.",
+        "audience": ["investor", "public", "thesis_committee"]
+      },
+      {
+        "id": "datasets",
+        "path": "data/12_datasets/",
+        "label": "Datasets & Charts",
+        "description": "Chart-ready payloads, KPI definitions, sample telemetry, sample digital twin state.",
+        "audience": ["engineer"]
+      },
+      {
+        "id": "pitch",
+        "path": "data/13_pitch/",
+        "label": "Pitch & Thesis Kit",
+        "description": "Deck outline, elevator pitches at three lengths, objection handling, thesis chapter outline.",
+        "audience": ["investor", "thesis_committee"]
+      }
+    ],
+    "files": [
+      { "id": "schema-registry", "section": "meta", "path": "data/00_meta/schema-registry.json" },
+      { "id": "glossary", "section": "meta", "path": "data/00_meta/glossary.json" },
+      { "id": "data-dictionary", "section": "meta", "path": "data/00_meta/data-dictionary.json" },
+      { "id": "changelog", "section": "meta", "path": "data/00_meta/changelog.json" },
+
+      { "id": "company-profile", "section": "company", "path": "data/01_company/company-profile.json" },
+      { "id": "brand-identity", "section": "company", "path": "data/01_company/brand-identity.json" },
+      { "id": "team-structure", "section": "company", "path": "data/01_company/team-structure.json" },
+      { "id": "milestones-roadmap", "section": "company", "path": "data/01_company/milestones-roadmap.json" },
+
+      { "id": "problem-statement", "section": "problem", "path": "data/02_problem/problem-statement.json" },
+      { "id": "problem-taxonomy", "section": "problem", "path": "data/02_problem/problem-taxonomy.json" },
+      { "id": "stakeholder-pain-points", "section": "problem", "path": "data/02_problem/stakeholder-pain-points.json" },
+      { "id": "incident-case-studies", "section": "problem", "path": "data/02_problem/incident-case-studies.json" },
+      { "id": "cost-of-inaction", "section": "problem", "path": "data/02_problem/cost-of-inaction.json" },
+
+      { "id": "industry-statistics", "section": "market", "path": "data/03_market/industry-statistics.json" },
+      { "id": "market-sizing", "section": "market", "path": "data/03_market/market-sizing-tam-sam-som.json" },
+      { "id": "competitive-landscape", "section": "market", "path": "data/03_market/competitive-landscape.json" },
+      { "id": "customer-personas", "section": "market", "path": "data/03_market/customer-personas.json" },
+      { "id": "swot-porter", "section": "market", "path": "data/03_market/swot-porter.json" },
+
+      { "id": "solution-overview", "section": "solution", "path": "data/04_solution/solution-overview.json" },
+      { "id": "value-proposition", "section": "solution", "path": "data/04_solution/value-proposition.json" },
+      { "id": "use-cases", "section": "solution", "path": "data/04_solution/use-cases.json" },
+      { "id": "mission-profiles", "section": "solution", "path": "data/04_solution/mission-profiles.json" },
+      { "id": "concept-of-operations", "section": "solution", "path": "data/04_solution/concept-of-operations.json" },
+
+      { "id": "omnidrone-specifications", "section": "hardware", "path": "data/05_hardware/omnidrone-specifications.json" },
+      { "id": "airframe-propulsion", "section": "hardware", "path": "data/05_hardware/airframe-propulsion.json" },
+      { "id": "probe-winch-subsystem", "section": "hardware", "path": "data/05_hardware/probe-winch-subsystem.json" },
+      { "id": "sensor-payload", "section": "hardware", "path": "data/05_hardware/sensor-payload.json" },
+      { "id": "carriage-ejection-system", "section": "hardware", "path": "data/05_hardware/carriage-ejection-system.json" },
+      { "id": "power-energy-budget", "section": "hardware", "path": "data/05_hardware/power-energy-budget.json" },
+      { "id": "docking-station", "section": "hardware", "path": "data/05_hardware/docking-station.json" },
+      { "id": "bill-of-materials", "section": "hardware", "path": "data/05_hardware/bill-of-materials.json" },
+
+      { "id": "system-architecture", "section": "software", "path": "data/06_software/system-architecture.json" },
+      { "id": "data-pipeline", "section": "software", "path": "data/06_software/data-pipeline.json" },
+      { "id": "ai-ml-models", "section": "software", "path": "data/06_software/ai-ml-models.json" },
+      { "id": "digital-twin", "section": "software", "path": "data/06_software/digital-twin.json" },
+      { "id": "telemetry-schema", "section": "software", "path": "data/06_software/telemetry-schema.json" },
+      { "id": "api-specification", "section": "software", "path": "data/06_software/api-specification.json" },
+      { "id": "dashboard-spec", "section": "software", "path": "data/06_software/dashboard-spec.json" },
+
+      { "id": "literature-review", "section": "research", "path": "data/07_research/literature-review.json" },
+      { "id": "references-bibliography", "section": "research", "path": "data/07_research/references-bibliography.json" },
+      { "id": "studies-water-quality-sensing", "section": "research", "path": "data/07_research/studies-water-quality-sensing.json" },
+      { "id": "studies-uav-remote-sensing", "section": "research", "path": "data/07_research/studies-uav-remote-sensing.json" },
+      { "id": "studies-harmful-algal-blooms", "section": "research", "path": "data/07_research/studies-harmful-algal-blooms.json" },
+      { "id": "studies-ai-ml-aquaculture", "section": "research", "path": "data/07_research/studies-ai-ml-aquaculture.json" },
+      { "id": "studies-digital-twin", "section": "research", "path": "data/07_research/studies-digital-twin.json" },
+      { "id": "studies-fish-health-disease", "section": "research", "path": "data/07_research/studies-fish-health-disease.json" },
+      { "id": "studies-feeding-nutrition", "section": "research", "path": "data/07_research/studies-feeding-nutrition.json" },
+      { "id": "studies-socioeconomic-adoption", "section": "research", "path": "data/07_research/studies-socioeconomic-adoption.json" },
+      { "id": "research-gaps", "section": "research", "path": "data/07_research/research-gaps.json" },
+      { "id": "theoretical-framework", "section": "research", "path": "data/07_research/theoretical-framework.json" },
+      { "id": "methodology", "section": "research", "path": "data/07_research/methodology.json" },
+
+      { "id": "deployment-playbook", "section": "operations", "path": "data/08_operations/deployment-playbook.json" },
+      { "id": "maintenance-schedule", "section": "operations", "path": "data/08_operations/maintenance-schedule.json" },
+      { "id": "risk-register-fmea", "section": "operations", "path": "data/08_operations/risk-register-fmea.json" },
+      { "id": "training-certification", "section": "operations", "path": "data/08_operations/training-certification.json" },
+
+      { "id": "regulatory-framework", "section": "compliance", "path": "data/09_compliance/regulatory-framework.json" },
+      { "id": "water-quality-standards", "section": "compliance", "path": "data/09_compliance/water-quality-standards.json" },
+      { "id": "biosecurity-protocol", "section": "compliance", "path": "data/09_compliance/biosecurity-protocol.json" },
+      { "id": "ethics-data-privacy", "section": "compliance", "path": "data/09_compliance/ethics-data-privacy.json" },
+
+      { "id": "business-model-canvas", "section": "business", "path": "data/10_business/business-model-canvas.json" },
+      { "id": "pricing-revenue", "section": "business", "path": "data/10_business/pricing-revenue.json" },
+      { "id": "unit-economics", "section": "business", "path": "data/10_business/unit-economics.json" },
+      { "id": "financial-projections", "section": "business", "path": "data/10_business/financial-projections.json" },
+      { "id": "funding-ask", "section": "business", "path": "data/10_business/funding-ask.json" },
+      { "id": "go-to-market", "section": "business", "path": "data/10_business/go-to-market.json" },
+      { "id": "traction", "section": "business", "path": "data/10_business/traction.json" },
+
+      { "id": "sdg-alignment", "section": "impact", "path": "data/11_impact/sdg-alignment.json" },
+      { "id": "environmental-impact", "section": "impact", "path": "data/11_impact/environmental-impact.json" },
+      { "id": "social-economic-impact", "section": "impact", "path": "data/11_impact/social-economic-impact.json" },
+
+      { "id": "kpi-definitions", "section": "datasets", "path": "data/12_datasets/kpi-definitions.json" },
+      { "id": "sample-telemetry", "section": "datasets", "path": "data/12_datasets/sample-telemetry.json" },
+      { "id": "sample-pond-twin-state", "section": "datasets", "path": "data/12_datasets/sample-pond-twin-state.json" },
+      { "id": "chart-global-production", "section": "datasets", "path": "data/12_datasets/charts/chart-global-production.json" },
+      { "id": "chart-problem-cost-breakdown", "section": "datasets", "path": "data/12_datasets/charts/chart-problem-cost-breakdown.json" },
+      { "id": "chart-market-sizing", "section": "datasets", "path": "data/12_datasets/charts/chart-market-sizing.json" },
+      { "id": "chart-do-diel-cycle", "section": "datasets", "path": "data/12_datasets/charts/chart-do-diel-cycle.json" },
+      { "id": "chart-do-depth-profile", "section": "datasets", "path": "data/12_datasets/charts/chart-do-depth-profile.json" },
+      { "id": "chart-financial-projection", "section": "datasets", "path": "data/12_datasets/charts/chart-financial-projection.json" },
+      { "id": "chart-manual-vs-omnidrone", "section": "datasets", "path": "data/12_datasets/charts/chart-manual-vs-omnidrone.json" },
+      { "id": "chart-species-production-mix", "section": "datasets", "path": "data/12_datasets/charts/chart-species-production-mix.json" },
+      { "id": "chart-tech-readiness", "section": "datasets", "path": "data/12_datasets/charts/chart-tech-readiness.json" },
+
+      { "id": "pitch-deck-outline", "section": "pitch", "path": "data/13_pitch/pitch-deck-outline.json" },
+      { "id": "elevator-pitches", "section": "pitch", "path": "data/13_pitch/elevator-pitches.json" },
+      { "id": "faq-objections", "section": "pitch", "path": "data/13_pitch/faq-objections.json" },
+      { "id": "thesis-outline", "section": "pitch", "path": "data/13_pitch/thesis-outline.json" }
+    ]
+  },
+  "assets": {
+    "logo_full": "photo_2026-07-17_13-51-55.jpg",
+    "logo_mark": "photo_2026-07-17_13-52-22.jpg",
+    "product_render": "photo_2026-07-17_13-52-27.jpg",
+    "note": "Original supplied assets left in repository root. A production webpage should move these to assets/images/ and reference them from brand-identity.json."
+  },
+  "statistics": {
+    "total_sections": 14,
+    "total_data_files": 85,
+    "files_awaiting_real_data": [
+      "data/10_business/traction.json",
+      "data/12_datasets/sample-telemetry.json",
+      "data/12_datasets/sample-pond-twin-state.json",
+      "data/09_compliance/water-quality-standards.json",
+      "data/10_business/unit-economics.json",
+      "data/10_business/financial-projections.json"
+    ],
+    "highest_priority_gaps": [
+      "BFAR Philippine Fisheries Profile (operator counts) — blocks market sizing",
+      "Primary-source verification of every bibliography entry — zero currently verified",
+      "Species-specific water quality thresholds — highest-consequence placeholders",
+      "Direct CAAP confirmation of the BVLOS/night-ops pathway and the 7 kg bracket",
+      "Real BOM quotes (starting with the sonde) — blocks unit economics"
+    ]
+  }
+}

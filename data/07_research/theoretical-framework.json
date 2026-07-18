@@ -1,0 +1,111 @@
+{
+  "id": "theoretical-framework",
+  "title": "Theoretical & Conceptual Framework",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "derived_calculation",
+  "purpose": "The theory the study rests on. A thesis needs this chapter to explain WHY the intervention should work, not just what it does. Without it, the work is engineering with citations attached.",
+
+  "the_central_theoretical_claim": {
+    "statement": "Mass mortality in intensive inland aquaculture is not primarily a water quality failure. It is an OBSERVABILITY failure of a system whose dynamics are already understood.",
+    "unpacking_it": "Limnologists have understood stratification and overturn for a century. The sensors exist and are affordable. The mechanism behind Philippine lake kills — hypolimnetic water delivered to the surface, carrying its oxygen deficit, ammonia, and sulfide — is documented. Nothing about the physics is mysterious. What is missing is somebody looking, at the right depth, at the right hour, in the right place, often enough.",
+    "why_this_framing_is_the_contribution": "It relocates the problem from limnology to logistics. If the problem were 'we do not understand why fish die', the solution would be research. Because the problem is 'we understand perfectly and nobody is watching', the solution is an observation architecture — and that is a solvable engineering and economics problem rather than an open scientific one.",
+    "the_falsifiable_form": "If operators given depth-resolved, high-cadence observation do not achieve better outcomes than operators without it, this framework is wrong. That is testable and it is the study's core hypothesis."
+  },
+
+  "theoretical_pillars": [
+    {
+      "pillar": "Limnological process theory",
+      "content": "Density stratification, hypolimnetic oxygen depletion, sediment reduction chemistry, and destratification dynamics. Schmidt stability as the quantitative measure of a water column's resistance to mixing.",
+      "citation_ids": ["idso-schmidt-stability-1973", "boyd-water-quality-2020", "seafdec-laguna-fishkill"],
+      "what_it_gives_the_study": "The causal mechanism, and therefore the variables worth measuring. This is why the probe measures DO, temperature, ORP, and ammonia at depth rather than a generic water quality panel at the surface. The sensor selection is derived from theory, not from a catalogue.",
+      "the_key_derivation": "The Laguna de Bay triad — DO depletion PLUS ammonia PLUS hydrogen sulfide together — is not a list of bad things. It is a signature. Those three co-occurring do not describe surface water degrading; they describe bottom water arriving. That inference is pure theory doing work, and it independently justifies the single most distinctive design decision in the product."
+    },
+    {
+      "pillar": "Bio-optical theory",
+      "content": "Water-leaving radiance carries information about water constituents. Pigment absorption features permit retrieval of chlorophyll-a. In optically complex inland water, red-edge indices succeed where blue-green ocean algorithms fail, because CDOM and suspended solids dominate the blue.",
+      "citation_ids": ["mishra-ndci-2012", "mcfeeters-ndwi-1996", "mdpi-drones-inland-review-2024"],
+      "what_it_gives_the_study": "The basis for the imaging half, AND the reason calibration is unavoidable rather than a convenience. The relationship between reflectance and concentration depends on the water's optical properties, which vary between lakes and between days. That is not an engineering inconvenience — it is a physical fact, and it is why a global index-to-concentration model is theoretically incoherent, not just empirically weak."
+    },
+    {
+      "pillar": "Sampling theory",
+      "content": "A measurement regime is characterised by its spatial and temporal resolution relative to the process being measured. Nyquist logic: a process must be sampled at more than twice its characteristic frequency to be reconstructed. Systematic sampling bias occurs when observation times correlate with the measured variable.",
+      "what_it_gives_the_study": "The intellectual core of the whole argument, and the pillar most often left implicit.",
+      "the_two_derivations": [
+        {
+          "derivation": "The diel bias is a SYSTEMATIC error, not a random one.",
+          "reasoning": "Manual sampling happens during working hours. Dissolved oxygen peaks in mid-afternoon and reaches its minimum before dawn. So the sampling time is correlated with the variable — and correlated in the worst possible direction. The measurement is anti-correlated with the risk it is meant to detect. This is not 'we should sample more'; it is 'the existing measurement is structurally misleading and more of it would not help'."
+        },
+        {
+          "derivation": "Weekly sampling of an hours-timescale process is not undersampling. It is non-sampling.",
+          "reasoning": "An overturn completes in hours. A weekly grab sample has essentially zero probability of catching the precursor conditions. The existing regime does not produce a noisy estimate of the water's state; it produces no information about the events that matter. That is a stronger claim than 'we need better data' and it is theoretically defensible."
+        }
+      ],
+      "note": "This pillar is where the thesis's originality actually sits, and it is the one a committee will engage with most seriously. It reframes an economics problem as a measurement theory problem."
+    },
+    {
+      "pillar": "Economics of information",
+      "content": "Information has value only insofar as it changes a decision. The value of information is bounded by the value of the best decision it can enable, minus the value of the decision that would have been made without it.",
+      "what_it_gives_the_study": "The framework that generates our most important — and most inconvenient — insight.",
+      "the_derivation": "If a farmer has no capacity to respond, the value of a warning is ZERO, regardless of its accuracy or timeliness. Perfect information about an unavoidable loss changes nothing. This is why response capacity, not scale or geography, is the correct segmentation axis in customer-personas.json, and why 'will a farmer act on a warning' is the venture's load-bearing assumption.",
+      "the_uncomfortable_corollary": "It also means the product's value is bounded by the customer's aeration capacity, not by our sensor accuracy. Engineering effort spent on measurement precision beyond the point where it changes a decision is wasted — a genuinely useful discipline for a team that will naturally want to over-engineer the probe."
+    },
+    {
+      "pillar": "Diffusion of innovations",
+      "content": "Adoption rate is determined by relative advantage, compatibility, complexity, trialability, and observability.",
+      "citation_ids": ["rogers-diffusion-2003"],
+      "what_it_gives_the_study": "A diagnostic that scores our product badly on four of five attributes — and, more usefully, tells us what to do about it.",
+      "the_derivations": [
+        "Poor trialability (you cannot try a bit of a dock) argues for a SERVICE model rather than a capital sale.",
+        "Poor observability (the benefit is a kill that did not happen) argues for leading with aeration electricity savings, which appear in a monthly bill, rather than with prevented catastrophes, which appear nowhere."
+      ],
+      "note": "The value hierarchy in value-proposition.json — sell the checkable claim first — was arrived at instinctively and is in fact a direct consequence of this theory. Grounding it properly would strengthen the thesis."
+    },
+    {
+      "pillar": "Common pool resource theory",
+      "content": "In a shared resource with no allocation mechanism, individually rational extraction produces collectively irrational depletion.",
+      "citation_ids": ["ija-environmental-impacts-ph", "fao-nutrient-dynamics-eutrophic"],
+      "what_it_gives_the_study": "The theoretical frame for the lake as a commons. Each operator's stocking decision imposes oxygen demand on every other operator. Without measurement there is no basis for allocating carrying capacity, so regulation is absent or arbitrary, and the lake degrades until it kills everyone's fish at once — which is empirically what happens.",
+      "the_contribution_this_frames": "Monitoring is the precondition for governance. You cannot allocate what you cannot measure. This is the strongest public-good argument for the platform and the theoretical basis for the carrying capacity use case.",
+      "the_tension_it_exposes": "Commons governance requires shared information, but the operator who benefits from the lake-wide picture is the one who least wants their own stocking visible in it. The theory predicts this resistance rather than being surprised by it — which is exactly what a theoretical framework is for."
+    }
+  ],
+
+  "the_conceptual_model": {
+    "note": "The causal chain the study proposes, stated so it can be attacked.",
+    "chain": [
+      { "step": 1, "node": "Intensification", "mechanism": "Rising stocking density raises biological oxygen demand.", "evidence": "verified — over-stocking named as underlying cause in Philippine incident reports" },
+      { "step": 2, "node": "Hypolimnetic depletion", "mechanism": "Under stratification, the isolated bottom layer goes anoxic and accumulates ammonia and sulfide.", "evidence": "verified — the Laguna de Bay triad" },
+      { "step": 3, "node": "Loaded state", "mechanism": "A strongly stratified column with a large oxygen debt is a system primed to fail.", "evidence": "theoretical — measurable via Schmidt stability and the oxygen debt index" },
+      { "step": 4, "node": "Weather trigger", "mechanism": "Cold rain, wind, or a front mixes the column.", "evidence": "verified — weather named as trigger in the majority of incidents" },
+      { "step": 5, "node": "Mortality", "mechanism": "Bottom water reaches the stock. Death within hours.", "evidence": "verified" },
+      { "step": 6, "node": "Observation gap", "mechanism": "Steps 2-3 develop over days, below the surface, and are invisible to the existing measurement regime.", "evidence": "THE WEAKEST LINK — this is structural reasoning, not a cited finding. Nobody has published it." },
+      { "step": 7, "node": "Intervention", "mechanism": "Depth-resolved high-cadence observation makes steps 2-3 visible while there is still time to act.", "evidence": "UNTESTED — this is the study's hypothesis" },
+      { "step": 8, "node": "Outcome", "mechanism": "Earlier detection enables response, which reduces loss.", "evidence": "UNTESTED and CONDITIONAL on response capacity existing" }
+    ],
+    "the_honest_read": "Steps 1-5 are well-evidenced. Steps 6-8 are the study's contribution and they are all unproven. Step 6 is the weakest — it is the reframe the whole project rests on and it has no citation. Step 8 is conditional on a factor outside our control. A thesis should present this chain and be explicit that the first five steps are established literature and the last three are the work."
+  },
+
+  "the_theoretical_tension_worth_writing_about": {
+    "statement": "This project's own theory predicts a way it could make things worse, and that deserves a section rather than a footnote.",
+    "the_argument": "Common pool resource theory says operators over-stock because the cost is externalised to the lake. Economics of information says better instruments let operators optimise closer to constraints. Together they predict that better observability could enable operators to push stocking density CLOSER to the carrying capacity edge — extracting more from the commons with less margin for error, and making the eventual failure larger.",
+    "why_it_matters": "The technology that makes a dangerous practice safer also makes it more attractive. This is a well-known dynamic in safety engineering (risk compensation) and there is no reason aquaculture is exempt.",
+    "the_honest_position": "We do not know whether the OmniDrone's net effect on lake carrying capacity is positive or negative. It could reduce losses per unit stocked while increasing total stocking, with an ambiguous or negative net effect on the commons. The repository flags this in problem-taxonomy.json and incident-case-studies.json; the theory explains WHY it should be expected rather than merely being possible.",
+    "the_thesis_opportunity": "A dissertation that raises this against its own subject is doing real intellectual work. Most technology theses do not. This is the section that would distinguish it."
+  },
+
+  "how_to_use_this_in_the_thesis": {
+    "placement": "Chapter 3, after the literature review and before methodology.",
+    "the_structure": [
+      "3.1 The central claim — observability, not water quality.",
+      "3.2 Limnological process theory — the mechanism and the variables it implies.",
+      "3.3 Bio-optical theory — retrieval and why calibration is physical, not procedural.",
+      "3.4 Sampling theory — the diel bias as systematic error; weekly sampling as non-sampling. THE ORIGINAL CONTRIBUTION.",
+      "3.5 Economics of information — value bounded by response capacity.",
+      "3.6 Diffusion and commons theory — adoption and governance.",
+      "3.7 The conceptual model — the eight-step chain, with the evidenced and unevidenced steps clearly marked.",
+      "3.8 Theoretical tension — the risk compensation argument against our own intervention."
+    ],
+    "the_advice": "Section 3.4 is where the originality is. The sampling-theory reframe — that the existing measurement regime is not merely sparse but systematically anti-correlated with the risk — is a genuinely interesting claim that nobody in this literature has stated plainly. Lead the chapter toward it and let it carry the weight. And do not cut 3.8 for length; a committee will remember it."
+  }
+}

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Power &amp; Energy Budget — AquaVision</title>
+<link rel="icon" href="../assets/img/logo-mark.jpg">
+<link rel="stylesheet" href="../assets/style.css">
+<script>try{var t=localStorage.getItem('av-theme');if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+<a class="sidebar-brand" href="../index.html">
+<img src="../assets/img/logo-mark.jpg" alt="AquaVision mark" width="36" height="36">
+<span><strong>AQUAVISION</strong><small>OmniDrone Knowledge Repository</small></span>
+</a>
+<nav class="sidebar-nav" aria-label="Sections"><details class="nav-sec">
+<summary><span class="nav-num">00</span>Meta &amp; Schemas</summary>
+<ul>
+<li><a href="../sections/meta.html">Overview</a></li>
+<li><a href="../files/schema-registry.html">AquaVision Knowledge Repository — Schema Registry <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/glossary.html">Glossary — Aquaculture, Fisheries, Remote Sensing, and Systems Terms</a></li><li><a href="../files/data-dictionary.html">Data Dictionary — Canonical Field and Variable Definitions</a></li><li><a href="../files/changelog.html">Repository Changelog</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">01</span>Company &amp; Identity</summary>
+<ul>
+<li><a href="../sections/company.html">Overview</a></li>
+<li><a href="../files/company-profile.html">AquaVision — Company Profile</a></li><li><a href="../files/brand-identity.html">AquaVision — Brand &amp; Design System</a></li><li><a href="../files/team-structure.html">Team Structure &amp; Capability Map</a></li><li><a href="../files/milestones-roadmap.html">Development Roadmap &amp; Milestones</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">02</span>Problem Space</summary>
+<ul>
+<li><a href="../sections/problem.html">Overview</a></li>
+<li><a href="../files/problem-statement.html">Problem Statement</a></li><li><a href="../files/problem-taxonomy.html">Problem Taxonomy — The Full Space of Aquaculture &amp; Fisheries Problems</a></li><li><a href="../files/stakeholder-pain-points.html">Stakeholder Map &amp; Pain Points</a></li><li><a href="../files/incident-case-studies.html">Documented Incident Case Studies — Evidence Base</a></li><li><a href="../files/cost-of-inaction.html">Cost of Inaction — Loss Model</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">03</span>Market &amp; Competition</summary>
+<ul>
+<li><a href="../sections/market.html">Overview</a></li>
+<li><a href="../files/industry-statistics.html">Industry Statistics — Global &amp; Regional Aquaculture and Fisheries</a></li><li><a href="../files/market-sizing.html">Market Sizing — TAM / SAM / SOM</a></li><li><a href="../files/competitive-landscape.html">Competitive Landscape</a></li><li><a href="../files/customer-personas.html">Customer Segments &amp; Personas</a></li><li><a href="../files/swot-porter.html">Strategic Analysis — SWOT, Porter's Five Forces, PESTEL</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">04</span>Solution &amp; ConOps</summary>
+<ul>
+<li><a href="../sections/solution.html">Overview</a></li>
+<li><a href="../files/solution-overview.html">Solution Overview — The OmniDrone System</a></li><li><a href="../files/value-proposition.html">Value Proposition</a></li><li><a href="../files/use-cases.html">Use Cases</a></li><li><a href="../files/mission-profiles.html">Mission Profiles</a></li><li><a href="../files/concept-of-operations.html">Concept of Operations (ConOps)</a></li>
+</ul>
+</details>
+<details class="nav-sec" open>
+<summary><span class="nav-num">05</span>Hardware Engineering</summary>
+<ul>
+<li><a href="../sections/hardware.html">Overview</a></li>
+<li><a href="../files/omnidrone-specifications.html">OmniDrone — System Specification</a></li><li><a href="../files/airframe-propulsion.html">Airframe &amp; Propulsion</a></li><li><a href="../files/probe-winch-subsystem.html">Reeled Probe &amp; Winch Subsystem</a></li><li><a href="../files/sensor-payload.html">Sensor Payload — Imaging &amp; Remote Sensing</a></li><li><a href="../files/carriage-ejection-system.html">Carriage &amp; Ejection System</a></li><li><a href="../files/power-energy-budget.html" aria-current="page" class="current">Power &amp; Energy Budget</a></li><li><a href="../files/docking-station.html">OmniDock — Automated Docking Station</a></li><li><a href="../files/bill-of-materials.html">Indicative Bill of Materials</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">06</span>Software, AI &amp; Digital Twin</summary>
+<ul>
+<li><a href="../sections/software.html">Overview</a></li>
+<li><a href="../files/system-architecture.html">System Architecture</a></li><li><a href="../files/data-pipeline.html">Data Pipeline</a></li><li><a href="../files/ai-ml-models.html">AI / ML Model Cards</a></li><li><a href="../files/digital-twin.html">PondTwin — Digital Twin Specification</a></li><li><a href="../files/telemetry-schema.html">Telemetry &amp; Data Schema</a></li><li><a href="../files/api-specification.html">API Specification</a></li><li><a href="../files/dashboard-spec.html">Dashboard Specification</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">07</span>Research Corpus</summary>
+<ul>
+<li><a href="../sections/research.html">Overview</a></li>
+<li><a href="../files/literature-review.html">Literature Review — Synthesis</a></li><li><a href="../files/references-bibliography.html">Consolidated Bibliography</a></li><li><a href="../files/studies-water-quality-sensing.html">Related Studies — Water Quality, Limnology &amp; Fish Kill Mechanisms</a></li><li><a href="../files/studies-uav-remote-sensing.html">Related Studies — UAV &amp; Satellite Remote Sensing of Water</a></li><li><a href="../files/studies-harmful-algal-blooms.html">Related Studies — Harmful Algal Blooms</a></li><li><a href="../files/studies-ai-ml-aquaculture.html">Related Studies — AI &amp; Machine Learning in Aquaculture</a></li><li><a href="../files/studies-digital-twin.html">Related Studies — Digital Twins in Aquaculture</a></li><li><a href="../files/studies-fish-health-disease.html">Related Studies — Fish Health, Disease &amp; Biosecurity</a></li><li><a href="../files/studies-feeding-nutrition.html">Related Studies — Feeding, Nutrition &amp; Feed Economics</a></li><li><a href="../files/studies-socioeconomic-adoption.html">Related Studies — Socioeconomics &amp; Technology Adoption</a></li><li><a href="../files/research-gaps.html">Research Gaps &amp; Open Questions</a></li><li><a href="../files/theoretical-framework.html">Theoretical &amp; Conceptual Framework</a></li><li><a href="../files/methodology.html">Research Methodology</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">08</span>Operations &amp; Safety</summary>
+<ul>
+<li><a href="../sections/operations.html">Overview</a></li>
+<li><a href="../files/deployment-playbook.html">Deployment Playbook</a></li><li><a href="../files/maintenance-schedule.html">Maintenance Schedule</a></li><li><a href="../files/risk-register-fmea.html">Risk Register &amp; FMEA</a></li><li><a href="../files/training-certification.html">Training &amp; Certification</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">09</span>Regulatory &amp; Compliance</summary>
+<ul>
+<li><a href="../sections/compliance.html">Overview</a></li>
+<li><a href="../files/regulatory-framework.html">Regulatory Framework</a></li><li><a href="../files/water-quality-standards.html">Water Quality Standards &amp; Thresholds</a></li><li><a href="../files/biosecurity-protocol.html">Biosecurity Protocol</a></li><li><a href="../files/ethics-data-privacy.html">Ethics, Data Privacy &amp; Responsible Use</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">10</span>Business Model</summary>
+<ul>
+<li><a href="../sections/business.html">Overview</a></li>
+<li><a href="../files/business-model-canvas.html">Business Model Canvas</a></li><li><a href="../files/pricing-revenue.html">Pricing &amp; Revenue Model</a></li><li><a href="../files/unit-economics.html">Unit Economics</a></li><li><a href="../files/financial-projections.html">Financial Projections</a></li><li><a href="../files/funding-ask.html">Funding Ask</a></li><li><a href="../files/go-to-market.html">Go-to-Market Strategy</a></li><li><a href="../files/traction.html">Traction</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">11</span>Impact</summary>
+<ul>
+<li><a href="../sections/impact.html">Overview</a></li>
+<li><a href="../files/sdg-alignment.html">UN Sustainable Development Goal Alignment</a></li><li><a href="../files/environmental-impact.html">Environmental Impact Assessment</a></li><li><a href="../files/social-economic-impact.html">Social &amp; Economic Impact</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">12</span>Datasets &amp; Charts</summary>
+<ul>
+<li><a href="../sections/datasets.html">Overview</a></li>
+<li><a href="../files/kpi-definitions.html">KPI Definitions</a></li><li><a href="../files/sample-telemetry.html">Sample Telemetry — ILLUSTRATIVE SYNTHETIC DATA <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/sample-pond-twin-state.html">Sample Digital Twin State — ILLUSTRATIVE SYNTHETIC DATA <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/chart-global-production.html">The Inflection: Aquaculture Overtakes Capture Fisheries</a></li><li><a href="../files/chart-problem-cost-breakdown.html">The Structure of Aquaculture Losses</a></li><li><a href="../files/chart-market-sizing.html">Market Sizing — Method, Not Number</a></li><li><a href="../files/chart-do-diel-cycle.html">Why Sampling Time Decides What You See <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/chart-do-depth-profile.html">The Loaded Gun: What a Vertical Profile Reveals <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/chart-financial-projection.html">Spend Plan by Phase — Not a Revenue Forecast</a></li><li><a href="../files/chart-manual-vs-omnidrone.html">Monitoring Approaches Compared</a></li><li><a href="../files/chart-species-production-mix.html">Where Farmed Aquatic Animals Are Produced</a></li><li><a href="../files/chart-tech-readiness.html">Technology Readiness — Where We Actually Are</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">13</span>Pitch &amp; Thesis Kit</summary>
+<ul>
+<li><a href="../sections/pitch.html">Overview</a></li>
+<li><a href="../files/pitch-deck-outline.html">Pitch Deck Outline</a></li><li><a href="../files/elevator-pitches.html">Elevator Pitches</a></li><li><a href="../files/faq-objections.html">FAQ &amp; Objection Handling</a></li><li><a href="../files/thesis-outline.html">Thesis / Dissertation Outline</a></li>
+</ul>
+</details></nav>
+<div class="sidebar-foot"><small>Fisheries • Aquaculture • Technology</small></div>
+</aside>
+<div class="main">
+<header class="topbar">
+<button class="icon-btn" id="nav-toggle" aria-label="Toggle navigation">☰</button>
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a><span class="crumb-sep">›</span><a href="../sections/hardware.html">Hardware Engineering</a><span class="crumb-sep">›</span><span class="crumb-here">Power &amp; Energy Budget</span></nav>
+<button class="search-btn" id="search-btn" aria-label="Search"><span aria-hidden="true">🔍</span> Search <kbd>Ctrl K</kbd></button>
+<button class="icon-btn" id="theme-toggle" aria-label="Toggle light/dark theme" title="Toggle theme">◐</button>
+</header>
+<main class="content">
+<header class="doc-head">
+<h1>Power &amp; Energy Budget</h1>
+
+<div class="doc-meta">
+<code class="mono">power-energy-budget</code>
+<span>v1.0.0</span>
+<span>updated 2026-07-17</span>
+<span class="badge badge-target" title="Provenance: design_target"><span class="badge-icon">◎</span>Target</span>
+<span class="chip chip-warning" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: low</span>
+<a class="raw-link" href="../../data/05_hardware/power-energy-budget.json">raw JSON ↗</a>
+</div>
+
+</header><aside class="banner banner-critical">
+<div class="banner-head"><span class="badge-icon">⚠</span>WARNING</div>
+<p>This is a paper model built on assumed efficiencies and assumed component power draws. It has not been validated against any hardware. Its purpose is to show whether the mission profiles are plausible and to identify what must be measured. Treat the METHOD as the deliverable and every NUMBER as a placeholder.</p></aside><section class="doc-sec"><h2>The Governing Physics</h2><dl class="kv"><dt>Statement</dt><dd>Hovering is expensive, and our unique value requires hovering.</dd><dt>Explanation</dt><dd><p>A multirotor in hover burns power continuously just to stay up. Forward flight is meaningfully more efficient because the rotors work in translational lift. Our profiling missions are hover-dominated — the aircraft sits still while the winch does its slow work. So the missions that deliver our only defensible capability are also our least efficient flight mode.</p></dd><dt>Why This Is Not A Solvable Problem</dt><dd><p>It is the shape of the physics, not a design flaw. Every engineering hour spent trying to make hover cheap is better spent accepting the constraint and designing the operation around it: shorter sorties, more of them, fast dock turnaround.</p></dd><dt>The Strategic Consequence</dt><dd><p>Our endurance will always lose to a USV and a buoy. We should stop treating that as a weakness to hide and start treating it as a known trade we made deliberately in exchange for coverage and aerial imaging.</p></dd></dl></section>
+<section class="doc-sec"><h2>Battery</h2><dl class="kv"><dt>Chemistry</dt><dd>Li-ion or LiPo</dd><dt>Mass Target Kg</dt><dd><span class="num">1.8</span></dd><dt>Assumed Specific Energy Whkg</dt><dd><span class="num">220</span></dd><dt>Specific Energy Note</dt><dd><p>220 Wh/kg is a reasonable current-generation assumption for a usable pack including cells, BMS, casing, and connectors — NOT a cell-level datasheet number. Cell-level figures are marketing; pack-level is what flies.</p></dd><dt>Assumed Pack Energy Wh</dt><dd><span class="num">396</span></dd><dt>Usable Fraction</dt><dd><span class="num">0.8</span></dd><dt>Usable Energy Wh</dt><dd><span class="num">317</span></dd><dt>Usable Fraction Rationale</dt><dd><p>Never discharge below ~20 percent. Deep discharge destroys cycle life, and cycle life is an operating cost in a system flying four sorties a day. The reserve is also the safety margin that gets the aircraft home.</p></dd><dt>Provenance</dt><dd><span class="badge badge-assumption" title="Provenance: assumption"><span class="badge-icon">?</span>Assumption</span></dd></dl></section>
+<section class="doc-sec"><h2>Power Draw Estimates</h2><dl class="kv"><dt>Note</dt><dd><p class="note muted">ASSUMED. Every one of these must be measured on real hardware.</p></dd><dt>Items</dt><dd><div class="table-scroll"><table><thead><tr><th>System</th><th>Watts</th><th>Note</th></tr></thead><tbody><tr><td>Propulsion — hover at MTOM</td><td><span class="num">720</span></td><td>Dominates everything. The other line items are rounding errors against this.</td></tr><tr><td>Propulsion — cruise</td><td><span class="num">520</span></td><td>Roughly 70 percent of hover. This ratio is why the mortality-scan mission covers more area for less energy than a profiling mission.</td></tr><tr><td>Winch — paying out</td><td><span class="num">12</span></td><td>Gravity does most of the work. The motor is mostly braking.</td></tr><tr><td>Winch — recovering</td><td><span class="num">45</span></td><td><span class="muted">—</span></td></tr><tr><td>Sonde</td><td><span class="num">3</span></td><td><span class="muted">—</span></td></tr><tr><td>Multispectral + irradiance sensor</td><td><span class="num">6</span></td><td><span class="muted">—</span></td></tr><tr><td>RGB + thermal gimbal</td><td><span class="num">11</span></td><td><span class="muted">—</span></td></tr><tr><td>Edge compute</td><td><span class="num">14</span></td><td>Only matters because it is on for the whole sortie. Fourteen watts for twenty minutes is real energy when the budget is 317 Wh.</td></tr><tr><td>Flight controller, GNSS, radio</td><td><span class="num">8</span></td><td><span class="muted">—</span></td></tr></tbody></table></div></dd><dt>The Observation</dt><dd><p>Propulsion is roughly 92 percent of the draw. Every non-propulsion optimisation is noise. The way to buy endurance is to reduce mass or reduce hover time — nothing else moves the needle, and time spent optimising the compute module's power is time wasted.</p></dd></dl></section>
+<section class="doc-sec"><h2>Mission Energy Analysis</h2><dl class="kv"><dt>Provenance</dt><dd><span class="badge badge-calculated" title="Provenance: derived_calculation"><span class="badge-icon">ƒ</span>Calculated</span></dd><dt>Confidence</dt><dd>low</dd><dt>Method</dt><dd>Sum of (power x time) per mission phase, against 317 Wh usable.</dd><dt>Missions</dt><dd><article class="card"><dl class="kv"><dt>Mission</dt><dd>mp-01-dawn-sweep (6 stations, 8 m profiles)</dd><dt>Phases</dt><dd><div class="table-scroll"><table><thead><tr><th>Phase</th><th>Min</th><th>Mode</th><th>Wh</th><th>Note</th></tr></thead><tbody><tr><td>Launch and transit to station 1</td><td><span class="num">1.5</span></td><td>cruise</td><td><span class="num">13</span></td><td><span class="muted">—</span></td></tr><tr><td>6 x (profile at station)</td><td><span class="num">13.2</span></td><td>hover</td><td><span class="num">158.4</span></td><td>8 m down at 0.3 m/s plus 8 m up at 0.8 m/s plus settling = roughly 132 s per station. This is where the energy goes.</td></tr><tr><td>5 x inter-station transit</td><td><span class="num">2.5</span></td><td>cruise</td><td><span class="num">21.7</span></td><td><span class="muted">—</span></td></tr><tr><td>Return to dock</td><td><span class="num">1.5</span></td><td>cruise</td><td><span class="num">13</span></td><td><span class="muted">—</span></td></tr><tr><td>Payload systems, whole sortie</td><td><span class="num">18.7</span></td><td>n/a</td><td><span class="num">11.5</span></td><td><span class="muted">—</span></td></tr></tbody></table></div></dd><dt>Total Wh</dt><dd><span class="num">217.6</span></dd><dt>Usable Wh</dt><dd><span class="num">317</span></dd><dt>Margin Pct</dt><dd><span class="num">31</span></dd><dt>Verdict</dt><dd>CLOSES, with margin. This is the flagship mission and on this model it is viable.</dd><dt>The Caveat</dt><dd><p>This assumes hover at 720 W. If the real figure is 900 W — entirely plausible for a shrouded aircraft carrying a swinging pendulum in wind — the mission consumes 265 Wh and the margin drops to 16 percent, which is uncomfortably close to the reserve. The single most important measurement in Phase 2 is real hover power with a deployed probe in wind.</p></dd></dl></article><article class="card"><dl class="kv"><dt>Mission</dt><dd>mp-03-station-keeping (1 station, 15 m, 0.25 m resolution)</dd><dt>Estimated Total Wh</dt><dd><span class="num">105</span></dd><dt>Verdict</dt><dd>CLOSES easily. Deep single-station profiling is cheap because there is no transit.</dd><dt>Note</dt><dd><p class="note muted">Suggests deep profiling at an index station could be done more often than currently planned. Worth reconsidering the schedule.</p></dd></dl></article><article class="card"><dl class="kv"><dt>Mission</dt><dd>mp-04-mortality-scan (12 ha survey, no probe)</dd><dt>Estimated Total Wh</dt><dd><span class="num">112</span></dd><dt>Verdict</dt><dd>CLOSES comfortably. Pure cruise, light payload. The cheapest useful mission we fly.</dd><dt>Implication</dt><dd><p>Mortality scans could run more frequently than planned at negligible marginal cost. Currently scheduled twice daily; three or four times would cost little and would tighten mortality detection latency substantially. Worth revisiting.</p></dd></dl></article><article class="card"><dl class="kv"><dt>Mission</dt><dd>mp-02-bloom-survey (12 ha imaging + 3 probe stations)</dd><dt>Estimated Total Wh</dt><dd><span class="num">189</span></dd><dt>Verdict</dt><dd>CLOSES with ~40 percent margin.</dd></dl></article></dd><dt>The Headline Finding</dt><dd><dl class="kv"><dt>Statement</dt><dd><p>On this paper model, the mission set closes. The binding constraint is hover power, and hover power is the number we have the least confidence in.</p></dd><dt>Sensitivity</dt><dd><p>A 25 percent error in hover power turns the flagship mission from comfortable to marginal. Nothing else in the model has that leverage.</p></dd><dt>The Action</dt><dd><p>Measure hover power with a real payload on a real airframe in real wind, as early as possible. It is the number the whole concept hinges on and it is currently a guess.</p></dd></dl></dd></dl></section>
+<section class="doc-sec"><h2>The Sensitivity Table</h2><dl class="kv"><dt>Provenance</dt><dd><span class="badge badge-calculated" title="Provenance: derived_calculation"><span class="badge-icon">ƒ</span>Calculated</span></dd><dt>Note</dt><dd><p class="note muted">Dawn sweep margin against hover power assumption. This table is the honest summary of how much we actually know.</p></dd><dt>Rows</dt><dd><div class="table-scroll"><table><thead><tr><th>Hover Power W</th><th>Mission Wh</th><th>Margin Pct</th><th>Verdict</th></tr></thead><tbody><tr><td><span class="num">620</span></td><td><span class="num">190</span></td><td><span class="num">40</span></td><td>comfortable</td></tr><tr><td><span class="num">720</span></td><td><span class="num">218</span></td><td><span class="num">31</span></td><td>baseline assumption</td></tr><tr><td><span class="num">820</span></td><td><span class="num">245</span></td><td><span class="num">23</span></td><td>acceptable</td></tr><tr><td><span class="num">900</span></td><td><span class="num">266</span></td><td><span class="num">16</span></td><td>marginal — reduce stations to 5</td></tr><tr><td><span class="num">1000</span></td><td><span class="num">293</span></td><td><span class="num">8</span></td><td>FAILS — the mission must be restructured</td></tr></tbody></table></div></dd><dt>How To Read This</dt><dd><p>We do not know which row we are on. That is the honest state of the project's most important number.</p></dd></dl></section>
+<section class="doc-sec"><h2>Dock Energy</h2><dl class="kv"><dt>Recharge vs Swap</dt><dd><dl class="kv"><dt>The Question</dt><dd>Does the dock recharge the pack in place, or swap it for a charged one?</dd><dt>Recharge</dt><dd><dl class="kv"><dt>Pro</dt><dd>Simple, no mechanism, cheap dock</dd><dt>Con</dt><dd>Turnaround is measured in tens of minutes to an hour. That caps sortie cadence hard.</dd></dl></dd><dt>Swap</dt><dd><dl class="kv"><dt>Pro</dt><dd><p>Minutes of turnaround. More sorties per day, which is the correct answer to short endurance.</p></dd><dt>Con</dt><dd>A robotic swap mechanism is its own engineering project, plus spare packs per dock.</dd></dl></dd><dt>The Reasoning</dt><dd><p>Short endurance is answered by MORE SORTIES, not longer ones. Recharge caps sorties per day at roughly the number of hours available divided by the charge time. If we want a dawn sweep, a mortality scan, a bloom survey, and an afternoon profile, recharge may not keep up — especially since the missions cluster in the solar window rather than spreading evenly.</p></dd><dt>The Recommendation</dt><dd><p>Start with recharge for Phase 2 simplicity. Model the sortie cadence honestly against charge time. If cadence binds — and the schedule in <a href="../files/mission-profiles.html">mission-profiles.json</a> suggests it will — swap becomes necessary and it should be planned for, not discovered.</p></dd><dt>Status</dt><dd><span class="chip chip-assumption"><span class="badge-icon">·</span>OPEN</span></dd></dl></dd><dt>Solar Viability</dt><dd><dl class="kv"><dt>Requirement</dt><dd><p>Rural sites have unreliable or absent grid power. Solar is a design condition, not an option.</p></dd><dt>The Arithmetic</dt><dd><p>Four sorties/day at ~220 Wh each is ~880 Wh of flight energy, plus charging losses, plus dock systems. Call it 1.3 kWh/day. In Philippine insolation that is a modest panel — but the monsoon is the problem, not the arithmetic. Extended overcast means the dock must carry days of storage or accept degraded cadence exactly during the season of highest risk.</p></dd><dt>Provenance</dt><dd><span class="badge badge-calculated" title="Provenance: derived_calculation"><span class="badge-icon">ƒ</span>Calculated</span></dd><dt>The Irony</dt><dd><p>Our availability is lowest when the risk is highest, for two independent reasons: we cannot fly in the weather, and we cannot charge in the overcast. Both point the same direction, and both are honest limitations that a fixed buoy does not share.</p></dd></dl></dd></dl></section>
+<section class="doc-sec"><h2>What Must Be Measured</h2><div class="table-scroll"><table><thead><tr><th>Measurement</th><th>Why</th><th>When</th></tr></thead><tbody><tr><td>Hover power at MTOM with full payload</td><td>The number the concept hinges on. Everything else is a rounding error.</td><td>Phase 2, first flight</td></tr><tr><td>Hover power with a deployed probe in 5 m/s wind</td><td>The pendulum's drag and the control effort to hold station against it are not in this model at all.</td><td>Phase 2</td></tr><tr><td>Real pack-level specific energy of the chosen cells</td><td>220 Wh/kg is an assumption.</td><td><span class="muted">—</span></td></tr><tr><td>Cruise power at survey speed</td><td>Sets the imaging missions.</td><td><span class="muted">—</span></td></tr><tr><td>Charge time from 20 percent to 90 percent</td><td>Decides recharge versus swap, which decides the dock.</td><td><span class="muted">—</span></td></tr></tbody></table></div></section>
+</main>
+<footer class="page-footer"><a class="pn pn-prev" href="../files/carriage-ejection-system.html">
+<small>← Previous · Hardware Engineering</small>
+<span>Carriage &amp; Ejection System</span></a><a class="pn pn-next" href="../files/docking-station.html">
+<small>Next → · Hardware Engineering</small>
+<span>OmniDock — Automated Docking Station</span></a></footer>
+</div>
+</div>
+<div class="search-overlay" id="search-overlay" hidden>
+<div class="search-panel" role="dialog" aria-label="Search">
+<input type="search" id="search-input" placeholder="Search the repository… (Esc to close)" autocomplete="off" spellcheck="false">
+<ul class="search-results" id="search-results"></ul>
+<div class="search-hint">↑↓ to navigate · Enter to open · Esc to close</div>
+</div>
+</div>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

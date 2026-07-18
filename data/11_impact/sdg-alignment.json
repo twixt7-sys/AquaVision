@@ -1,0 +1,107 @@
+{
+  "id": "sdg-alignment",
+  "title": "UN Sustainable Development Goal Alignment",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "assumption",
+  "note": "SDG alignment is easy to overclaim — every startup maps itself to half the goals. This file distinguishes goals the product GENUINELY and DIRECTLY serves from ones it touches tangentially, and it flags where the product's second-order effects could run AGAINST a goal. An honest SDG map includes the tensions.",
+
+  "primary_alignment": [
+    {
+      "sdg": 2,
+      "title": "Zero Hunger",
+      "target": "2.4 — sustainable food production systems and resilient agricultural practices",
+      "how_directly": "strong",
+      "mechanism": "Aquatic food is a major and growing protein source; reducing losses and improving yield in aquaculture directly increases food availability. Aquaculture is now the majority of aquatic animal production.",
+      "citation_ids": ["fao-sofia-2024"],
+      "honest_caveat": "The contribution is real but bounded by our addressable fraction of the sector and by whether farms act on the information. Do not claim to 'solve hunger'."
+    },
+    {
+      "sdg": 14,
+      "title": "Life Below Water",
+      "target": "14.2 — sustainably manage and protect marine and coastal ecosystems; 14.1 — reduce marine pollution",
+      "how_directly": "strong",
+      "mechanism": "Measuring aquaculture's effluent load and supporting carrying-capacity management reduces the eutrophication of shared water bodies. Pollution detection supports 14.1.",
+      "honest_caveat": "The strongest environmental claim, BUT it depends on the carrying-capacity use case actually being adopted, which requires cross-farm data-sharing that is unresolved (see ethics-data-privacy.json). And note the over-stocking paradox below — the product could also enable intensification."
+    },
+    {
+      "sdg": 12,
+      "title": "Responsible Consumption and Production",
+      "target": "12.2 — sustainable management and efficient use of natural resources",
+      "how_directly": "moderate-strong",
+      "mechanism": "Reducing feed waste (feed is ~60 percent of operating cost and a major environmental load) improves resource efficiency. Precision dosing reduces chemical and antimicrobial use.",
+      "citation_ids": ["innovasea-fcr-guide"],
+      "honest_caveat": "The antimicrobial claim cuts both ways — easier dosing can mean more dosing. See the tension below."
+    }
+  ],
+
+  "secondary_alignment": [
+    {
+      "sdg": 1,
+      "title": "No Poverty",
+      "how_directly": "moderate",
+      "mechanism": "For smallholders, a single kill event can be financially catastrophic. Preventing or mitigating it protects livelihoods. Continuous records could unlock credit and insurance for the currently uninsurable.",
+      "honest_caveat": "Directly limited by the affordability paradox — the smallholders most exposed to poverty are the ones who cannot pay for the product. The poverty contribution depends entirely on the cooperative and institutional channels succeeding.",
+      "citation_ids": ["worldbank-disease-risk-2014"]
+    },
+    {
+      "sdg": 8,
+      "title": "Decent Work and Economic Growth",
+      "how_directly": "moderate",
+      "mechanism": "Removes the dangerous pre-dawn boat run (a real drowning risk), and stabilises aquaculture incomes. SDG 8.8 — safe working environments.",
+      "honest_note": "The occupational-safety angle is genuine and underused. It is a human argument, not just an efficiency one."
+    },
+    {
+      "sdg": 9,
+      "title": "Industry, Innovation and Infrastructure",
+      "how_directly": "moderate",
+      "mechanism": "Brings precision-agriculture-grade instrumentation to a sector and geography that lacks it."
+    },
+    {
+      "sdg": 13,
+      "title": "Climate Action",
+      "how_directly": "weak-moderate",
+      "mechanism": "Increasing frequency of thermal and rainfall extremes worsens fish kills; the platform shortens reaction time to climate-driven events. Adaptation, not mitigation.",
+      "citation_ids": ["khaleej-heat-fishkill-ph"],
+      "honest_caveat": "We do not reduce emissions. We help farmers adapt to climate volatility's local expression. Claiming climate MITIGATION would be false."
+    }
+  ],
+
+  "the_tensions_an_honest_sdg_map_must_include": {
+    "note": "This section is what separates a real SDG analysis from a marketing exercise. Every one of these is a way the product could work AGAINST a goal it claims to serve.",
+    "tensions": [
+      {
+        "tension": "Over-stocking (against SDG 14)",
+        "detail": "Better instruments may let operators push stocking density higher, worsening the eutrophication and carrying-capacity problems the product claims to help. A tool sold on environmental stewardship could enable environmental degradation.",
+        "our_response": "Carrying-capacity analytics aimed at collective governance; not marketing as a licence to intensify. Partial mitigation only. See risk R-15."
+      },
+      {
+        "tension": "Antimicrobial use (against SDG 3, Good Health)",
+        "detail": "Easier dosing can mean more prophylactic antimicrobial use, contributing to antimicrobial resistance — a serious public health problem.",
+        "our_response": "Dose ceilings, human authorisation, precision placement to reduce total dose. Weak controls against a determined operator. See ethics-data-privacy.json."
+      },
+      {
+        "tension": "Equity (against SDG 10, Reduced Inequalities)",
+        "detail": "If the product only reaches well-capitalised commercial farms, it widens the gap between them and smallholders — the opposite of reducing inequality. Precision technology that only the rich can afford entrenches advantage.",
+        "our_response": "Cooperative and institutional channels are the mechanism for equitable reach, and they must not be allowed to slip. This is an active commitment, not an automatic outcome."
+      },
+      {
+        "tension": "Privacy and surveillance (against multiple goals)",
+        "detail": "Aerial imagery over communities, and the latent surveillance capability, could harm the people the product is meant to serve.",
+        "our_response": "No person-detection, no enforcement use, data-minimisation. See ethics-data-privacy.json."
+      },
+      {
+        "tension": "Environmental footprint of the hardware (against SDG 12)",
+        "detail": "Lithium batteries, electronic waste, and the risk of a ditched drone contaminating a food-production water body are real environmental costs of the solution itself.",
+        "our_response": "Lithium containment, ditching provision, and honest lifecycle accounting. A product sold on stewardship must account for its own footprint. See environmental-impact.json."
+      }
+    ],
+    "why_this_matters": "An SDG map with only benefits is a sustainability-washing exercise, and sophisticated impact investors and thesis committees recognise it instantly. Including the tensions — with honest, sometimes-partial responses — is what makes the alignment credible."
+  },
+
+  "how_to_use_this": {
+    "for_impact_investors": "Lead with SDG 2, 14, and 12 (the genuine primary alignments), then volunteer the tensions. An impact investor who sees you have thought about the over-stocking paradox trusts the rest of your claims.",
+    "for_the_thesis": "This is the significance-of-the-study section. The tensions belong in the discussion chapter as limitations, not hidden.",
+    "the_discipline": "Never map the product to a goal it does not directly serve just to fill the grid. Three strong alignments plus honest tensions beats seventeen weak ones."
+  }
+}

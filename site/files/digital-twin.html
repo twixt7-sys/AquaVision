@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PondTwin — Digital Twin Specification — AquaVision</title>
+<link rel="icon" href="../assets/img/logo-mark.jpg">
+<link rel="stylesheet" href="../assets/style.css">
+<script>try{var t=localStorage.getItem('av-theme');if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+<a class="sidebar-brand" href="../index.html">
+<img src="../assets/img/logo-mark.jpg" alt="AquaVision mark" width="36" height="36">
+<span><strong>AQUAVISION</strong><small>OmniDrone Knowledge Repository</small></span>
+</a>
+<nav class="sidebar-nav" aria-label="Sections"><details class="nav-sec">
+<summary><span class="nav-num">00</span>Meta &amp; Schemas</summary>
+<ul>
+<li><a href="../sections/meta.html">Overview</a></li>
+<li><a href="../files/schema-registry.html">AquaVision Knowledge Repository — Schema Registry <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/glossary.html">Glossary — Aquaculture, Fisheries, Remote Sensing, and Systems Terms</a></li><li><a href="../files/data-dictionary.html">Data Dictionary — Canonical Field and Variable Definitions</a></li><li><a href="../files/changelog.html">Repository Changelog</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">01</span>Company &amp; Identity</summary>
+<ul>
+<li><a href="../sections/company.html">Overview</a></li>
+<li><a href="../files/company-profile.html">AquaVision — Company Profile</a></li><li><a href="../files/brand-identity.html">AquaVision — Brand &amp; Design System</a></li><li><a href="../files/team-structure.html">Team Structure &amp; Capability Map</a></li><li><a href="../files/milestones-roadmap.html">Development Roadmap &amp; Milestones</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">02</span>Problem Space</summary>
+<ul>
+<li><a href="../sections/problem.html">Overview</a></li>
+<li><a href="../files/problem-statement.html">Problem Statement</a></li><li><a href="../files/problem-taxonomy.html">Problem Taxonomy — The Full Space of Aquaculture &amp; Fisheries Problems</a></li><li><a href="../files/stakeholder-pain-points.html">Stakeholder Map &amp; Pain Points</a></li><li><a href="../files/incident-case-studies.html">Documented Incident Case Studies — Evidence Base</a></li><li><a href="../files/cost-of-inaction.html">Cost of Inaction — Loss Model</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">03</span>Market &amp; Competition</summary>
+<ul>
+<li><a href="../sections/market.html">Overview</a></li>
+<li><a href="../files/industry-statistics.html">Industry Statistics — Global &amp; Regional Aquaculture and Fisheries</a></li><li><a href="../files/market-sizing.html">Market Sizing — TAM / SAM / SOM</a></li><li><a href="../files/competitive-landscape.html">Competitive Landscape</a></li><li><a href="../files/customer-personas.html">Customer Segments &amp; Personas</a></li><li><a href="../files/swot-porter.html">Strategic Analysis — SWOT, Porter's Five Forces, PESTEL</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">04</span>Solution &amp; ConOps</summary>
+<ul>
+<li><a href="../sections/solution.html">Overview</a></li>
+<li><a href="../files/solution-overview.html">Solution Overview — The OmniDrone System</a></li><li><a href="../files/value-proposition.html">Value Proposition</a></li><li><a href="../files/use-cases.html">Use Cases</a></li><li><a href="../files/mission-profiles.html">Mission Profiles</a></li><li><a href="../files/concept-of-operations.html">Concept of Operations (ConOps)</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">05</span>Hardware Engineering</summary>
+<ul>
+<li><a href="../sections/hardware.html">Overview</a></li>
+<li><a href="../files/omnidrone-specifications.html">OmniDrone — System Specification</a></li><li><a href="../files/airframe-propulsion.html">Airframe &amp; Propulsion</a></li><li><a href="../files/probe-winch-subsystem.html">Reeled Probe &amp; Winch Subsystem</a></li><li><a href="../files/sensor-payload.html">Sensor Payload — Imaging &amp; Remote Sensing</a></li><li><a href="../files/carriage-ejection-system.html">Carriage &amp; Ejection System</a></li><li><a href="../files/power-energy-budget.html">Power &amp; Energy Budget</a></li><li><a href="../files/docking-station.html">OmniDock — Automated Docking Station</a></li><li><a href="../files/bill-of-materials.html">Indicative Bill of Materials</a></li>
+</ul>
+</details>
+<details class="nav-sec" open>
+<summary><span class="nav-num">06</span>Software, AI &amp; Digital Twin</summary>
+<ul>
+<li><a href="../sections/software.html">Overview</a></li>
+<li><a href="../files/system-architecture.html">System Architecture</a></li><li><a href="../files/data-pipeline.html">Data Pipeline</a></li><li><a href="../files/ai-ml-models.html">AI / ML Model Cards</a></li><li><a href="../files/digital-twin.html" aria-current="page" class="current">PondTwin — Digital Twin Specification</a></li><li><a href="../files/telemetry-schema.html">Telemetry &amp; Data Schema</a></li><li><a href="../files/api-specification.html">API Specification</a></li><li><a href="../files/dashboard-spec.html">Dashboard Specification</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">07</span>Research Corpus</summary>
+<ul>
+<li><a href="../sections/research.html">Overview</a></li>
+<li><a href="../files/literature-review.html">Literature Review — Synthesis</a></li><li><a href="../files/references-bibliography.html">Consolidated Bibliography</a></li><li><a href="../files/studies-water-quality-sensing.html">Related Studies — Water Quality, Limnology &amp; Fish Kill Mechanisms</a></li><li><a href="../files/studies-uav-remote-sensing.html">Related Studies — UAV &amp; Satellite Remote Sensing of Water</a></li><li><a href="../files/studies-harmful-algal-blooms.html">Related Studies — Harmful Algal Blooms</a></li><li><a href="../files/studies-ai-ml-aquaculture.html">Related Studies — AI &amp; Machine Learning in Aquaculture</a></li><li><a href="../files/studies-digital-twin.html">Related Studies — Digital Twins in Aquaculture</a></li><li><a href="../files/studies-fish-health-disease.html">Related Studies — Fish Health, Disease &amp; Biosecurity</a></li><li><a href="../files/studies-feeding-nutrition.html">Related Studies — Feeding, Nutrition &amp; Feed Economics</a></li><li><a href="../files/studies-socioeconomic-adoption.html">Related Studies — Socioeconomics &amp; Technology Adoption</a></li><li><a href="../files/research-gaps.html">Research Gaps &amp; Open Questions</a></li><li><a href="../files/theoretical-framework.html">Theoretical &amp; Conceptual Framework</a></li><li><a href="../files/methodology.html">Research Methodology</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">08</span>Operations &amp; Safety</summary>
+<ul>
+<li><a href="../sections/operations.html">Overview</a></li>
+<li><a href="../files/deployment-playbook.html">Deployment Playbook</a></li><li><a href="../files/maintenance-schedule.html">Maintenance Schedule</a></li><li><a href="../files/risk-register-fmea.html">Risk Register &amp; FMEA</a></li><li><a href="../files/training-certification.html">Training &amp; Certification</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">09</span>Regulatory &amp; Compliance</summary>
+<ul>
+<li><a href="../sections/compliance.html">Overview</a></li>
+<li><a href="../files/regulatory-framework.html">Regulatory Framework</a></li><li><a href="../files/water-quality-standards.html">Water Quality Standards &amp; Thresholds</a></li><li><a href="../files/biosecurity-protocol.html">Biosecurity Protocol</a></li><li><a href="../files/ethics-data-privacy.html">Ethics, Data Privacy &amp; Responsible Use</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">10</span>Business Model</summary>
+<ul>
+<li><a href="../sections/business.html">Overview</a></li>
+<li><a href="../files/business-model-canvas.html">Business Model Canvas</a></li><li><a href="../files/pricing-revenue.html">Pricing &amp; Revenue Model</a></li><li><a href="../files/unit-economics.html">Unit Economics</a></li><li><a href="../files/financial-projections.html">Financial Projections</a></li><li><a href="../files/funding-ask.html">Funding Ask</a></li><li><a href="../files/go-to-market.html">Go-to-Market Strategy</a></li><li><a href="../files/traction.html">Traction</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">11</span>Impact</summary>
+<ul>
+<li><a href="../sections/impact.html">Overview</a></li>
+<li><a href="../files/sdg-alignment.html">UN Sustainable Development Goal Alignment</a></li><li><a href="../files/environmental-impact.html">Environmental Impact Assessment</a></li><li><a href="../files/social-economic-impact.html">Social &amp; Economic Impact</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">12</span>Datasets &amp; Charts</summary>
+<ul>
+<li><a href="../sections/datasets.html">Overview</a></li>
+<li><a href="../files/kpi-definitions.html">KPI Definitions</a></li><li><a href="../files/sample-telemetry.html">Sample Telemetry — ILLUSTRATIVE SYNTHETIC DATA <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/sample-pond-twin-state.html">Sample Digital Twin State — ILLUSTRATIVE SYNTHETIC DATA <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/chart-global-production.html">The Inflection: Aquaculture Overtakes Capture Fisheries</a></li><li><a href="../files/chart-problem-cost-breakdown.html">The Structure of Aquaculture Losses</a></li><li><a href="../files/chart-market-sizing.html">Market Sizing — Method, Not Number</a></li><li><a href="../files/chart-do-diel-cycle.html">Why Sampling Time Decides What You See <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/chart-do-depth-profile.html">The Loaded Gun: What a Vertical Profile Reveals <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/chart-financial-projection.html">Spend Plan by Phase — Not a Revenue Forecast</a></li><li><a href="../files/chart-manual-vs-omnidrone.html">Monitoring Approaches Compared</a></li><li><a href="../files/chart-species-production-mix.html">Where Farmed Aquatic Animals Are Produced</a></li><li><a href="../files/chart-tech-readiness.html">Technology Readiness — Where We Actually Are</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">13</span>Pitch &amp; Thesis Kit</summary>
+<ul>
+<li><a href="../sections/pitch.html">Overview</a></li>
+<li><a href="../files/pitch-deck-outline.html">Pitch Deck Outline</a></li><li><a href="../files/elevator-pitches.html">Elevator Pitches</a></li><li><a href="../files/faq-objections.html">FAQ &amp; Objection Handling</a></li><li><a href="../files/thesis-outline.html">Thesis / Dissertation Outline</a></li>
+</ul>
+</details></nav>
+<div class="sidebar-foot"><small>Fisheries • Aquaculture • Technology</small></div>
+</aside>
+<div class="main">
+<header class="topbar">
+<button class="icon-btn" id="nav-toggle" aria-label="Toggle navigation">☰</button>
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a><span class="crumb-sep">›</span><a href="../sections/software.html">Software, AI &amp; Digital Twin</a><span class="crumb-sep">›</span><span class="crumb-here">PondTwin — Digital Twin Specification</span></nav>
+<button class="search-btn" id="search-btn" aria-label="Search"><span aria-hidden="true">🔍</span> Search <kbd>Ctrl K</kbd></button>
+<button class="icon-btn" id="theme-toggle" aria-label="Toggle light/dark theme" title="Toggle theme">◐</button>
+</header>
+<main class="content">
+<header class="doc-head">
+<h1>PondTwin — Digital Twin Specification</h1>
+
+<div class="doc-meta">
+<code class="mono">digital-twin</code>
+<span>v1.0.0</span>
+<span>updated 2026-07-17</span>
+<span class="badge badge-target" title="Provenance: design_target"><span class="badge-icon">◎</span>Target</span>
+<span class="chip chip-warning" title="Author-assessed confidence"><span class="badge-icon">◆</span>Confidence: low</span>
+<a class="raw-link" href="../../data/06_software/digital-twin.json">raw JSON ↗</a>
+</div>
+
+</header><section class="doc-sec"><h2>The Definition We Are Holding Ourselves To</h2><dl class="kv"><dt>Statement</dt><dd><p>A digital twin is a virtual representation kept synchronised with a physical system by live sensor data, running a model of that system's behaviour, capable of answering counterfactual questions.</p></dd><dt>The Distinction That Matters</dt><dd><p>A dashboard shows what happened. A twin runs a model and can answer 'what if'. If our PondTwin cannot answer 'what happens to DO at cage 4 if I run the aerators for six hours', it is a 3D dashboard and we should call it that.</p></dd><dt>Why We Are Being Strict</dt><dd><p>'Digital twin' is used loosely enough in industry to mean nothing at all — often just a rendered model with live numbers on it. A thesis that adopts the loose usage has conceded its own contribution. Defend the strict definition or drop the term.</p></dd><dt>Citations</dt><dd><div class="cite-row"><a class="cite-chip" href="../files/references-bibliography.html#sciencedirect-dt-aiot-2023" title="(see source) (2023)">sciencedirect-dt-aiot-2023</a> <a class="cite-chip" href="../files/references-bibliography.html#hamzah-dt-water-review-2024" title="Hamzah, (et al.) (2024)">hamzah-dt-water-review-2024</a> <a class="cite-chip" href="../files/references-bibliography.html#pmc-dt-rainbow-trout-2023" title="(see source) (2023)">pmc-dt-rainbow-trout-2023</a></div></dd><dt>Our Honest Status</dt><dd><p>What is specified below is, in v1, mostly a 3D dashboard with interpolation. The simulation core that would make it a real twin is Phase 3+ work and depends on validation data we do not have. We should say '3D visualisation with a twin roadmap' until the simulation exists, rather than claiming the term now and being caught by a knowledgeable reviewer.</p></dd></dl></section>
+<section class="doc-sec"><h2>Why A Twin and Not A Chart</h2><dl class="kv"><dt>The Real Argument</dt><dd><p>The water body is three-dimensional and the farmer's mental model of it is two-dimensional. Every existing tool — a meter reading, a logbook, a dashboard tile — presents water quality as a scalar. The actual system is a stratified volume with horizontal structure, and the whole reason fish die is that the dangerous part is in a dimension nobody looks at.</p></dd><dt>The Claim</dt><dd><p>The twin's contribution is not visual polish. It is making depth legible to a person who has never been able to see it. A farmer who can rotate a pond and SEE the anoxic layer sitting under their cages understands the risk in a way that '1.1 mg/L at 6 m' does not convey.</p></dd><dt>The Test</dt><dd><p>If the twin does not change what the farmer understands, it is decoration and the engineering effort belongs elsewhere.</p></dd></dl></section>
+<section class="doc-sec"><h2>Twin Layers</h2><article class="card"><dl class="kv"><dt>Layer</dt><dd>Geometry</dd><dt>Content</dt><dd>Bathymetry, shoreline, cage and pen positions, dock location, station positions.</dd><dt>Source</dt><dd>One-time survey at site commissioning, plus operator-supplied cage layout.</dd><dt>Note</dt><dd><p class="note muted">Bathymetry is a one-time cost, not a recurring measurement. Rent a LiDAR or a survey boat once; do not carry the sensor.</p></dd></dl></article><article class="card"><dl class="kv"><dt>Layer</dt><dd>State — measured</dd><dt>Content</dt><dd><p>The profiles. DO, temperature, pH, turbidity, chlorophyll, ORP, conductivity at known depths at known stations at known times.</p></dd><dt>Provenance Rule</dt><dd><p>This layer is measurement. It renders differently from every other layer and it is never blended with them.</p></dd></dl></article><article class="card"><dl class="kv"><dt>Layer</dt><dd>State — interpolated</dd><dt>Content</dt><dd><p>The volume between stations, filled by spatial interpolation and by the calibrated imagery field at the surface.</p></dd><dt>The Honesty Problem</dt><dd><dl class="kv"><dt>Statement</dt><dd>This is where a twin becomes a liar, and it does so beautifully.</dd><dt>Explanation</dt><dd><p>We measure six stations in a lake with thousands of cubic metres. The rendering fills the volume between them with a smooth, confident, gorgeous gradient. The eye reads that gradient as data. It is not data — it is an assumption about what water does between the places we looked, and it is exactly the assumption that fails when a pocket of bad water sits in the gap.</p></dd><dt>The Requirement</dt><dd><p>The twin MUST render uncertainty visually. Volume far from any station must look visibly less certain — transparency, noise, explicit confidence banding, something. A smooth interpolation with no uncertainty cue is the single most misleading artefact this company could ship, precisely because it is the most persuasive.</p></dd><dt>The Temptation</dt><dd><p>The version with the smooth gradient demos better. It will look better in the deck, in the pitch, and on the website. This paragraph exists to be read on the day someone proposes removing the uncertainty rendering because it 'looks noisy'.</p></dd></dl></dd><dt>Requirement Id</dt><dd>REQ-TWIN-003</dd></dl></article><article class="card"><dl class="kv"><dt>Layer</dt><dd>State — simulated</dd><dt>Content</dt><dd><p>A physical model of the water column: heat exchange, oxygen production and consumption, mixing, and their evolution.</p></dd><dt>Status</dt><dd><span class="chip chip-assumption"><span class="badge-icon">·</span>PHASE 3+. Does Not Exist. This Is the Layer That Would Make It An Actual Twin.</span></dd><dt>What It Would Enable</dt><dd><ul><li>Counterfactual questions — 'what if I aerate'</li><li>Forward projection between sorties</li><li>Filling the gap when weather grounds the aircraft</li><li>Physically-constrained interpolation, which would be far better than the geometric interpolation above</li></ul></dd><dt>The Dependency</dt><dd><p>A physical model must be calibrated against observed behaviour of THIS water body. That needs a season of data. There is no shortcut.</p></dd><dt>The Interesting Consequence</dt><dd><p>Once the simulation exists, it also fills our worst gap: we cannot fly in storms, but a calibrated model CAN project the water column through a storm from the last profile and the weather data. The twin is the answer to our own flight envelope limitation. That is a genuinely strong argument for investing in the simulation core, and it is not obvious until you notice that our observation gap and the model's purpose are the same gap.</p></dd></dl></article><article class="card"><dl class="kv"><dt>Layer</dt><dd>Stock</dd><dt>Content</dt><dd>Species, stocking date, count, estimated biomass, feed history, mortality history.</dd><dt>Source</dt><dd><p>OPERATOR-SUPPLIED. We do not measure any of it — no underwater vision, no biomass estimation.</p></dd><dt>The Honest Note</dt><dd><p>The twin's stock layer is only as good as the farmer's records, and the farmer's records are often a guess. A twin that displays a confident biomass number sourced from a farmer's estimate has laundered a guess into an authoritative-looking figure. Label operator-supplied data distinctly from measured data, always.</p></dd></dl></article><article class="card"><dl class="kv"><dt>Layer</dt><dd>Events</dd><dt>Content</dt><dd>Sorties, alerts, dispensing actions, aeration runs, mortality events, weather.</dd><dt>Why It Matters</dt><dd><p>The event timeline is what turns a state display into a history someone can learn from. It is also the audit record.</p></dd></dl></article></section>
+<section class="doc-sec"><h2>The Provenance Rendering Requirement</h2><dl class="kv"><dt>Statement</dt><dd><p>The twin must make it visually obvious which parts are measured, which are interpolated, which are simulated, and which the farmer typed in.</p></dd><dt>Why This Is the Hardest UX Problem In the Product</dt><dd><p>A twin's persuasive power comes from looking like a coherent, complete picture of reality. Its honesty requires showing that it is a sparse set of measurements with a lot of inference stretched between them. Those two goals are in direct opposition, and the resolution is a design problem nobody has solved well.</p></dd><dt class="callout-dt">The Rule</dt><dd><div class="callout">When in doubt, look less certain. An under-confident twin costs a little persuasion. An over-confident one costs a harvest.</div></dd><dt>Rendering Guidance</dt><dd><dl class="kv"><dt>Measured</dt><dd>Solid, sharp, at the station location. Visibly a point.</dd><dt>Interpolated</dt><dd>Progressively more transparent and more visibly uncertain with distance from any station.</dd><dt>Simulated</dt><dd>Distinct visual treatment — never blended into the measured layer.</dd><dt>Operator Supplied</dt><dd>Explicitly badged. It is testimony, not measurement.</dd><dt>Stale</dt><dd><p>Time-decayed. A profile from six hours ago is not the current state, and after a storm it may be worthless. Data has a half-life and the UI should show it decaying.</p></dd></dl></dd></dl></section>
+<section class="doc-sec"><h2>Interaction Model</h2><dl class="kv"><dt>Primary View</dt><dd>A rotatable, sliceable 3D volume of the water body with cages in place.</dd><dt>The Key Interaction</dt><dd><p>Slice vertically through a cage and see the column. This is the interaction that does the work — it makes the invisible dimension visible, and it is the whole point.</p></dd><dt>The Second Interaction</dt><dd><p>Scrub time. Watch the thermocline move over days. Watch the diel cycle breathe. This is where a farmer's intuition and the data meet, and it is where the twin earns its keep.</p></dd><dt>Restraint</dt><dd><p>Resist the urge to add every metric. The twin's job is to make depth and time legible. Everything else belongs in the dashboard.</p></dd></dl></section>
+<section class="doc-sec"><h2>Requirements</h2><div class="table-scroll"><table><thead><tr><th>Id</th><th>Statement</th><th>Type</th><th>Priority</th><th>Verification Method</th><th>Rationale</th></tr></thead><tbody><tr><td>REQ-TWIN-001</td><td>The twin shall visually distinguish measured, interpolated, simulated, and operator-supplied data.</td><td>data</td><td>must</td><td>inspection</td><td>The core honesty requirement of the product.</td></tr><tr><td>REQ-TWIN-002</td><td>The twin shall render a vertical slice through any cage showing the full measured profile.</td><td>functional</td><td>must</td><td>demonstration</td><td><span class="muted">—</span></td></tr><tr><td>REQ-TWIN-003</td><td>Interpolated volume shall render with a visual uncertainty cue that increases with distance from the nearest measurement.</td><td>data</td><td>must</td><td>inspection</td><td>A smooth confident gradient over unmeasured water is the most persuasive lie the product could tell.</td></tr><tr><td>REQ-TWIN-004</td><td>State shall visually decay with age since last measurement.</td><td>data</td><td>must</td><td>inspection</td><td>A six-hour-old profile after a storm is not the current state.</td></tr><tr><td>REQ-TWIN-005</td><td>The twin shall not display a simulated value in the same visual channel as a measured value.</td><td>data</td><td>must</td><td>inspection</td><td><span class="muted">—</span></td></tr><tr><td>REQ-TWIN-006</td><td>The term 'digital twin' shall not be used in customer-facing material until the simulation layer exists and is calibrated.</td><td>usability</td><td>should</td><td>inspection</td><td>Claiming the term without the simulation is the industry's standard practice and it is still wrong.</td></tr></tbody></table></div></section>
+<section class="doc-sec"><h2>Prior Art</h2><dl class="kv"><dt>Note</dt><dd><p class="note muted">Digital twins for aquaculture moved from proposal to demonstrated case study in 2023-2024. We are not inventing this — we are applying it, and we should cite the people who did the work.</p></dd><dt>Citations</dt><dd><div class="cite-row"><a class="cite-chip" href="../files/references-bibliography.html#sciencedirect-dt-aiot-2023" title="(see source) (2023)">sciencedirect-dt-aiot-2023</a> <a class="cite-chip" href="../files/references-bibliography.html#pmc-dt-rainbow-trout-2023" title="(see source) (2023)">pmc-dt-rainbow-trout-2023</a> <a class="cite-chip" href="../files/references-bibliography.html#mdpi-dt-ahp-2023" title="(see source) (2023)">mdpi-dt-ahp-2023</a> <a class="cite-chip" href="../files/references-bibliography.html#hamzah-dt-water-review-2024" title="Hamzah, (et al.) (2024)">hamzah-dt-water-review-2024</a> <a class="cite-chip" href="../files/references-bibliography.html#springer-dt-aquaculture-sim" title="(see source) (2024)">springer-dt-aquaculture-sim</a></div></dd><dt>What Is Genuinely Novel Here</dt><dd><p>Not the twin. The data source. Existing aquaculture twins are fed by fixed sensors in one location or by manual sampling. A twin fed by depth-resolved profiles across many stations several times daily, with the imagery calibrated by the same vehicle, is a better-observed twin than the literature has had access to. The contribution is the observation architecture, not the twin architecture — and a thesis should say so plainly rather than overclaiming novelty in a well-trodden area.</p></dd><dt>The Review That Matters Most</dt><dd><p>Hamzah et al. (2024) reviewed drone-based digital twins for water quality specifically. That is the closest prior art to this exact concept and it should be read carefully before another line of twin code is written.</p></dd></dl></section>
+<section class="doc-sec"><h2>The Gap Analysis</h2><dl class="kv"><dt>What V1 Will Actually Be</dt><dd><p>A 3D visualisation of measured profiles with honest interpolation and an event timeline. Genuinely useful. Not a twin.</p></dd><dt>What Makes It A Twin</dt><dd>The simulation core, which needs a season of calibration data.</dd><dt>The Recommendation</dt><dd><p>Build v1 honestly and call it what it is. The simulation is Phase 3+ and it is worth doing properly, because it is also the answer to the storm-grounding problem. Do not claim the term early; the reviewer who catches it will discount everything else.</p></dd></dl></section>
+</main>
+<footer class="page-footer"><a class="pn pn-prev" href="../files/ai-ml-models.html">
+<small>← Previous · Software, AI &amp; Digital Twin</small>
+<span>AI / ML Model Cards</span></a><a class="pn pn-next" href="../files/telemetry-schema.html">
+<small>Next → · Software, AI &amp; Digital Twin</small>
+<span>Telemetry &amp; Data Schema</span></a></footer>
+</div>
+</div>
+<div class="search-overlay" id="search-overlay" hidden>
+<div class="search-panel" role="dialog" aria-label="Search">
+<input type="search" id="search-input" placeholder="Search the repository… (Esc to close)" autocomplete="off" spellcheck="false">
+<ul class="search-results" id="search-results"></ul>
+<div class="search-hint">↑↓ to navigate · Enter to open · Esc to close</div>
+</div>
+</div>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

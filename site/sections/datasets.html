@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Datasets &amp; Charts — AquaVision</title>
+<link rel="icon" href="../assets/img/logo-mark.jpg">
+<link rel="stylesheet" href="../assets/style.css">
+<script>try{var t=localStorage.getItem('av-theme');if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+<a class="sidebar-brand" href="../index.html">
+<img src="../assets/img/logo-mark.jpg" alt="AquaVision mark" width="36" height="36">
+<span><strong>AQUAVISION</strong><small>OmniDrone Knowledge Repository</small></span>
+</a>
+<nav class="sidebar-nav" aria-label="Sections"><details class="nav-sec">
+<summary><span class="nav-num">00</span>Meta &amp; Schemas</summary>
+<ul>
+<li><a href="../sections/meta.html">Overview</a></li>
+<li><a href="../files/schema-registry.html">AquaVision Knowledge Repository — Schema Registry <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/glossary.html">Glossary — Aquaculture, Fisheries, Remote Sensing, and Systems Terms</a></li><li><a href="../files/data-dictionary.html">Data Dictionary — Canonical Field and Variable Definitions</a></li><li><a href="../files/changelog.html">Repository Changelog</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">01</span>Company &amp; Identity</summary>
+<ul>
+<li><a href="../sections/company.html">Overview</a></li>
+<li><a href="../files/company-profile.html">AquaVision — Company Profile</a></li><li><a href="../files/brand-identity.html">AquaVision — Brand &amp; Design System</a></li><li><a href="../files/team-structure.html">Team Structure &amp; Capability Map</a></li><li><a href="../files/milestones-roadmap.html">Development Roadmap &amp; Milestones</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">02</span>Problem Space</summary>
+<ul>
+<li><a href="../sections/problem.html">Overview</a></li>
+<li><a href="../files/problem-statement.html">Problem Statement</a></li><li><a href="../files/problem-taxonomy.html">Problem Taxonomy — The Full Space of Aquaculture &amp; Fisheries Problems</a></li><li><a href="../files/stakeholder-pain-points.html">Stakeholder Map &amp; Pain Points</a></li><li><a href="../files/incident-case-studies.html">Documented Incident Case Studies — Evidence Base</a></li><li><a href="../files/cost-of-inaction.html">Cost of Inaction — Loss Model</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">03</span>Market &amp; Competition</summary>
+<ul>
+<li><a href="../sections/market.html">Overview</a></li>
+<li><a href="../files/industry-statistics.html">Industry Statistics — Global &amp; Regional Aquaculture and Fisheries</a></li><li><a href="../files/market-sizing.html">Market Sizing — TAM / SAM / SOM</a></li><li><a href="../files/competitive-landscape.html">Competitive Landscape</a></li><li><a href="../files/customer-personas.html">Customer Segments &amp; Personas</a></li><li><a href="../files/swot-porter.html">Strategic Analysis — SWOT, Porter's Five Forces, PESTEL</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">04</span>Solution &amp; ConOps</summary>
+<ul>
+<li><a href="../sections/solution.html">Overview</a></li>
+<li><a href="../files/solution-overview.html">Solution Overview — The OmniDrone System</a></li><li><a href="../files/value-proposition.html">Value Proposition</a></li><li><a href="../files/use-cases.html">Use Cases</a></li><li><a href="../files/mission-profiles.html">Mission Profiles</a></li><li><a href="../files/concept-of-operations.html">Concept of Operations (ConOps)</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">05</span>Hardware Engineering</summary>
+<ul>
+<li><a href="../sections/hardware.html">Overview</a></li>
+<li><a href="../files/omnidrone-specifications.html">OmniDrone — System Specification</a></li><li><a href="../files/airframe-propulsion.html">Airframe &amp; Propulsion</a></li><li><a href="../files/probe-winch-subsystem.html">Reeled Probe &amp; Winch Subsystem</a></li><li><a href="../files/sensor-payload.html">Sensor Payload — Imaging &amp; Remote Sensing</a></li><li><a href="../files/carriage-ejection-system.html">Carriage &amp; Ejection System</a></li><li><a href="../files/power-energy-budget.html">Power &amp; Energy Budget</a></li><li><a href="../files/docking-station.html">OmniDock — Automated Docking Station</a></li><li><a href="../files/bill-of-materials.html">Indicative Bill of Materials</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">06</span>Software, AI &amp; Digital Twin</summary>
+<ul>
+<li><a href="../sections/software.html">Overview</a></li>
+<li><a href="../files/system-architecture.html">System Architecture</a></li><li><a href="../files/data-pipeline.html">Data Pipeline</a></li><li><a href="../files/ai-ml-models.html">AI / ML Model Cards</a></li><li><a href="../files/digital-twin.html">PondTwin — Digital Twin Specification</a></li><li><a href="../files/telemetry-schema.html">Telemetry &amp; Data Schema</a></li><li><a href="../files/api-specification.html">API Specification</a></li><li><a href="../files/dashboard-spec.html">Dashboard Specification</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">07</span>Research Corpus</summary>
+<ul>
+<li><a href="../sections/research.html">Overview</a></li>
+<li><a href="../files/literature-review.html">Literature Review — Synthesis</a></li><li><a href="../files/references-bibliography.html">Consolidated Bibliography</a></li><li><a href="../files/studies-water-quality-sensing.html">Related Studies — Water Quality, Limnology &amp; Fish Kill Mechanisms</a></li><li><a href="../files/studies-uav-remote-sensing.html">Related Studies — UAV &amp; Satellite Remote Sensing of Water</a></li><li><a href="../files/studies-harmful-algal-blooms.html">Related Studies — Harmful Algal Blooms</a></li><li><a href="../files/studies-ai-ml-aquaculture.html">Related Studies — AI &amp; Machine Learning in Aquaculture</a></li><li><a href="../files/studies-digital-twin.html">Related Studies — Digital Twins in Aquaculture</a></li><li><a href="../files/studies-fish-health-disease.html">Related Studies — Fish Health, Disease &amp; Biosecurity</a></li><li><a href="../files/studies-feeding-nutrition.html">Related Studies — Feeding, Nutrition &amp; Feed Economics</a></li><li><a href="../files/studies-socioeconomic-adoption.html">Related Studies — Socioeconomics &amp; Technology Adoption</a></li><li><a href="../files/research-gaps.html">Research Gaps &amp; Open Questions</a></li><li><a href="../files/theoretical-framework.html">Theoretical &amp; Conceptual Framework</a></li><li><a href="../files/methodology.html">Research Methodology</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">08</span>Operations &amp; Safety</summary>
+<ul>
+<li><a href="../sections/operations.html">Overview</a></li>
+<li><a href="../files/deployment-playbook.html">Deployment Playbook</a></li><li><a href="../files/maintenance-schedule.html">Maintenance Schedule</a></li><li><a href="../files/risk-register-fmea.html">Risk Register &amp; FMEA</a></li><li><a href="../files/training-certification.html">Training &amp; Certification</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">09</span>Regulatory &amp; Compliance</summary>
+<ul>
+<li><a href="../sections/compliance.html">Overview</a></li>
+<li><a href="../files/regulatory-framework.html">Regulatory Framework</a></li><li><a href="../files/water-quality-standards.html">Water Quality Standards &amp; Thresholds</a></li><li><a href="../files/biosecurity-protocol.html">Biosecurity Protocol</a></li><li><a href="../files/ethics-data-privacy.html">Ethics, Data Privacy &amp; Responsible Use</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">10</span>Business Model</summary>
+<ul>
+<li><a href="../sections/business.html">Overview</a></li>
+<li><a href="../files/business-model-canvas.html">Business Model Canvas</a></li><li><a href="../files/pricing-revenue.html">Pricing &amp; Revenue Model</a></li><li><a href="../files/unit-economics.html">Unit Economics</a></li><li><a href="../files/financial-projections.html">Financial Projections</a></li><li><a href="../files/funding-ask.html">Funding Ask</a></li><li><a href="../files/go-to-market.html">Go-to-Market Strategy</a></li><li><a href="../files/traction.html">Traction</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">11</span>Impact</summary>
+<ul>
+<li><a href="../sections/impact.html">Overview</a></li>
+<li><a href="../files/sdg-alignment.html">UN Sustainable Development Goal Alignment</a></li><li><a href="../files/environmental-impact.html">Environmental Impact Assessment</a></li><li><a href="../files/social-economic-impact.html">Social &amp; Economic Impact</a></li>
+</ul>
+</details>
+<details class="nav-sec" open>
+<summary><span class="nav-num">12</span>Datasets &amp; Charts</summary>
+<ul>
+<li><a href="../sections/datasets.html" aria-current="page" class="current">Overview</a></li>
+<li><a href="../files/kpi-definitions.html">KPI Definitions</a></li><li><a href="../files/sample-telemetry.html">Sample Telemetry — ILLUSTRATIVE SYNTHETIC DATA <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/sample-pond-twin-state.html">Sample Digital Twin State — ILLUSTRATIVE SYNTHETIC DATA <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/chart-global-production.html">The Inflection: Aquaculture Overtakes Capture Fisheries</a></li><li><a href="../files/chart-problem-cost-breakdown.html">The Structure of Aquaculture Losses</a></li><li><a href="../files/chart-market-sizing.html">Market Sizing — Method, Not Number</a></li><li><a href="../files/chart-do-diel-cycle.html">Why Sampling Time Decides What You See <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/chart-do-depth-profile.html">The Loaded Gun: What a Vertical Profile Reveals <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/chart-financial-projection.html">Spend Plan by Phase — Not a Revenue Forecast</a></li><li><a href="../files/chart-manual-vs-omnidrone.html">Monitoring Approaches Compared</a></li><li><a href="../files/chart-species-production-mix.html">Where Farmed Aquatic Animals Are Produced</a></li><li><a href="../files/chart-tech-readiness.html">Technology Readiness — Where We Actually Are</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">13</span>Pitch &amp; Thesis Kit</summary>
+<ul>
+<li><a href="../sections/pitch.html">Overview</a></li>
+<li><a href="../files/pitch-deck-outline.html">Pitch Deck Outline</a></li><li><a href="../files/elevator-pitches.html">Elevator Pitches</a></li><li><a href="../files/faq-objections.html">FAQ &amp; Objection Handling</a></li><li><a href="../files/thesis-outline.html">Thesis / Dissertation Outline</a></li>
+</ul>
+</details></nav>
+<div class="sidebar-foot"><small>Fisheries • Aquaculture • Technology</small></div>
+</aside>
+<div class="main">
+<header class="topbar">
+<button class="icon-btn" id="nav-toggle" aria-label="Toggle navigation">☰</button>
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a><span class="crumb-sep">›</span><span class="crumb-here">Datasets &amp; Charts</span></nav>
+<button class="search-btn" id="search-btn" aria-label="Search"><span aria-hidden="true">🔍</span> Search <kbd>Ctrl K</kbd></button>
+<button class="icon-btn" id="theme-toggle" aria-label="Toggle light/dark theme" title="Toggle theme">◐</button>
+</header>
+<main class="content">
+<header class="doc-head">
+<h1><span class="nav-num" style="font-size:var(--fs-lg)">12</span> Datasets &amp; Charts</h1>
+<p class="lead">Chart-ready payloads, KPI definitions, sample telemetry, sample digital twin state.</p>
+<div class="chip-row"><span class="chip chip-theme">Engineer</span></div>
+</header>
+<div class="file-grid"><a class="file-card" href="../files/kpi-definitions.html">
+<h3>KPI Definitions</h3>
+
+
+<p class="desc">Every KPI the system and the business track, with a PRECISE operational definition. Conforms to schema-registry.json#/definitions/kpi. The definition is the point — if…</p>
+<div class="meta">
+<code class="mono">kpi-definitions</code>
+
+
+<span class="chip chip-unknown"><span class="badge-icon">⌀</span>Awaiting data</span>
+<span>2026-07-17</span>
+</div>
+</a><a class="file-card" href="../files/sample-telemetry.html">
+<h3>Sample Telemetry — ILLUSTRATIVE SYNTHETIC DATA</h3>
+
+
+<p class="desc"></p>
+<div class="meta">
+<code class="mono">sample-telemetry</code>
+<span class="badge badge-synthetic" title="Provenance: illustrative_synthetic"><span class="badge-icon">⚠</span>SAMPLE DATA — NOT REAL</span>
+
+
+<span>2026-07-17</span>
+</div>
+</a><a class="file-card" href="../files/sample-pond-twin-state.html">
+<h3>Sample Digital Twin State — ILLUSTRATIVE SYNTHETIC DATA</h3>
+
+
+<p class="desc"></p>
+<div class="meta">
+<code class="mono">sample-pond-twin-state</code>
+<span class="badge badge-synthetic" title="Provenance: illustrative_synthetic"><span class="badge-icon">⚠</span>SAMPLE DATA — NOT REAL</span>
+
+
+<span>2026-07-17</span>
+</div>
+</a><a class="file-card" href="../files/chart-global-production.html">
+<h3>The Inflection: Aquaculture Overtakes Capture Fisheries</h3>
+<small class="muted">Global aquatic animal production, 2022</small>
+
+<p class="desc">In 2022, for the first time, aquaculture produced more aquatic animals than capture fisheries — 51 percent of the total. This is the structural shift that makes aquacu…</p>
+<div class="meta">
+<code class="mono">chart-global-production</code>
+<span class="badge badge-verified" title="Provenance: verified_external"><span class="badge-icon">✓</span>Sourced</span>
+
+
+
+</div>
+</a><a class="file-card" href="../files/chart-problem-cost-breakdown.html">
+<h3>The Structure of Aquaculture Losses</h3>
+<small class="muted">Visibility versus addressability — NOT a peso breakdown</small>
+
+<p class="desc">Deliberately rendered as a structured matrix, NOT a pie chart. A pie of peso values would imply we know the proportions, and we do not. What we DO know is which loss c…</p>
+<div class="meta">
+<code class="mono">chart-problem-cost-breakdown</code>
+<span class="badge badge-projection" title="Provenance: modeled_projection"><span class="badge-icon">↗</span>Projection</span>
+
+
+
+</div>
+</a><a class="file-card" href="../files/chart-market-sizing.html">
+<h3>Market Sizing — Method, Not Number</h3>
+<small class="muted">The TAM/SAM/SOM funnel and the inputs we are missing</small>
+
+<p class="desc">This is deliberately NOT a set of concentric circles with dollar figures. A defensible market size needs operator counts, size distributions, and willingness-to-pay da…</p>
+<div class="meta">
+<code class="mono">chart-market-sizing</code>
+<span class="badge badge-projection" title="Provenance: modeled_projection"><span class="badge-icon">↗</span>Projection</span>
+
+
+
+</div>
+</a><a class="file-card" href="../files/chart-do-diel-cycle.html">
+<h3>Why Sampling Time Decides What You See</h3>
+<small class="muted">The diel dissolved oxygen cycle over 24 hours</small>
+<svg class="sparkline" viewBox="0 0 120 30" aria-hidden="true"><polyline points="4,19.2 8.9,20.2 13.7,21.5 18.6,22.5 23.5,23.5 28.3,24.2 33.2,23.8 38.1,21.9 43,19.4 47.8,16.7 52.7,13.8 57.6,11 62.4,8.5 67.3,6.7 72.2,5.8 77,6.3 81.9,7.9 86.8,10.4 91.7,13.1 96.5,15 101.4,16.3 106.3,17.3 111.1,18.1 116,18.8" fill="none" stroke="var(--av-current)" stroke-width="1.6"/></svg>
+<p class="desc">Dissolved oxygen peaks in mid-afternoon and bottoms out just before dawn. A manual sample at 9 a.m. reads a safe 6.4 mg/L; the 5 a.m. minimum on the same day is 2.8 mg…</p>
+<div class="meta">
+<code class="mono">chart-do-diel-cycle</code>
+<span class="badge badge-synthetic" title="Provenance: illustrative_synthetic"><span class="badge-icon">⚠</span>SAMPLE DATA — NOT REAL</span>
+
+
+
+</div>
+</a><a class="file-card" href="../files/chart-do-depth-profile.html">
+<h3>The Loaded Gun: What a Vertical Profile Reveals</h3>
+<small class="muted">Dissolved oxygen and temperature versus depth, pre-dawn</small>
+<svg class="sparkline" viewBox="0 0 120 30" aria-hidden="true"><polyline points="116,24.2 112.1,22.5 100.6,19.2 73.5,15.8 31,12.5 11.7,9.2 4,5.8" fill="none" stroke="var(--av-current)" stroke-width="1.6"/></svg>
+<p class="desc">A stratified water column with a survivable surface (3.1 mg/L) hiding anoxic, sulfide-generating bottom water (0.2 mg/L, negative ORP) below the thermocline at ~3.5 m.…</p>
+<div class="meta">
+<code class="mono">chart-do-depth-profile</code>
+<span class="badge badge-synthetic" title="Provenance: illustrative_synthetic"><span class="badge-icon">⚠</span>SAMPLE DATA — NOT REAL</span>
+
+
+
+</div>
+</a><a class="file-card" href="../files/chart-financial-projection.html">
+<h3>Spend Plan by Phase — Not a Revenue Forecast</h3>
+<small class="muted">Milestone-gated use of funds through validation</small>
+
+<p class="desc">This is deliberately a SPEND plan gated by de-risking milestones, NOT a hockey-stick revenue projection. At TRL 3 with no price, no cost, and no customer, a revenue fo…</p>
+<div class="meta">
+<code class="mono">chart-financial-projection</code>
+<span class="badge badge-projection" title="Provenance: modeled_projection"><span class="badge-icon">↗</span>Projection</span>
+
+
+
+</div>
+</a><a class="file-card" href="../files/chart-manual-vs-omnidrone.html">
+<h3>Monitoring Approaches Compared</h3>
+<small class="muted">OmniDrone against the real alternatives — honest scoring</small>
+
+<p class="desc">A capability comparison across the approaches a farm actually chooses between. The OmniDrone wins on depth, coverage, and imaging; it LOSES on continuity, weather tole…</p>
+<div class="meta">
+<code class="mono">chart-manual-vs-omnidrone</code>
+<span class="badge badge-target" title="Provenance: design_target"><span class="badge-icon">◎</span>Target</span>
+
+
+
+</div>
+</a><a class="file-card" href="../files/chart-species-production-mix.html">
+<h3>Where Farmed Aquatic Animals Are Produced</h3>
+<small class="muted">By region and by system, 2022</small>
+
+<p class="desc">Two facts that justify the beachhead: 70 percent of production is in Asia, and 62.6 percent of farmed aquatic animals come from inland systems — precisely the OmniDron…</p>
+<div class="meta">
+<code class="mono">chart-species-production-mix</code>
+<span class="badge badge-verified" title="Provenance: verified_external"><span class="badge-icon">✓</span>Sourced</span>
+
+<span class="chip chip-unknown"><span class="badge-icon">⌀</span>Awaiting data</span>
+
+</div>
+</a><a class="file-card" href="../files/chart-tech-readiness.html">
+<h3>Technology Readiness — Where We Actually Are</h3>
+<small class="muted">TRL progression with gate criteria, not calendar dates</small>
+<svg class="sparkline" viewBox="0 0 120 30" aria-hidden="true"><polyline points="4,24.2 26.4,20.5 48.8,16.8 71.2,13.2 93.6,9.5 116,5.8" fill="none" stroke="var(--av-current)" stroke-width="1.6"/></svg>
+<p class="desc">The development roadmap as a TRL progression, gated by evidence rather than dates. The company is at TRL 3 today — analytical proof of concept, nothing flown. Each ste…</p>
+<div class="meta">
+<code class="mono">chart-tech-readiness</code>
+<span class="badge badge-projection" title="Provenance: modeled_projection"><span class="badge-icon">↗</span>Projection</span>
+
+
+
+</div>
+</a></div>
+</main>
+
+</div>
+</div>
+<div class="search-overlay" id="search-overlay" hidden>
+<div class="search-panel" role="dialog" aria-label="Search">
+<input type="search" id="search-input" placeholder="Search the repository… (Esc to close)" autocomplete="off" spellcheck="false">
+<ul class="search-results" id="search-results"></ul>
+<div class="search-hint">↑↓ to navigate · Enter to open · Esc to close</div>
+</div>
+</div>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+{
+  "id": "team-structure",
+  "title": "Team Structure & Capability Map",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "assumption",
+
+  "IMPORTANT": "This file describes the roles this venture REQUIRES, not people it has. Every `holder` field is deliberately null. Fill them with real names and real, verifiable backgrounds. Do not let generated placeholder biographies reach an investor — fabricated team credentials are the fastest way to destroy a fundraise and, depending on jurisdiction, a securities problem.",
+
+  "capability_requirements": [
+    {
+      "role_id": "ceo",
+      "title": "Chief Executive / Commercial Lead",
+      "holder": null,
+      "why_the_venture_needs_it": "Aquaculture technology does not sell itself. Someone has to sit on a dike at 5 a.m. with a farmer who has been burned by a previous gadget vendor and earn the pilot.",
+      "critical_skills": ["Aquaculture sector relationships", "Fundraising", "Regulatory navigation with CAAP and BFAR", "Pricing against loss avoidance rather than feature lists"],
+      "failure_mode_if_absent": "A technically excellent product that nobody buys, because the team optimised the drone instead of the pilot agreement."
+    },
+    {
+      "role_id": "cto",
+      "title": "Chief Technology Officer / Systems Architect",
+      "holder": null,
+      "why_the_venture_needs_it": "This is a hard systems integration problem — aerial vehicle, wet sensing, dispensing, edge inference, cloud, and a twin — and each subsystem's constraints break the others. Someone must own the whole envelope.",
+      "critical_skills": ["UAS systems engineering", "Mass and power budgeting", "Sensor integration", "The discipline to say no to features that break the payload fraction"],
+      "failure_mode_if_absent": "Four subsystems that each work and a vehicle that cannot fly with all of them attached. This is the single most common way multirotor payload concepts die."
+    },
+    {
+      "role_id": "aquaculture_scientist",
+      "title": "Aquaculture / Limnology Scientist",
+      "holder": null,
+      "why_the_venture_needs_it": "The product's claims are scientific claims. Without domain science in-house, the company will confidently ship a chlorophyll index it believes is a toxin detector.",
+      "critical_skills": ["Limnology and water column dynamics", "Fish physiology and stress response", "Field sampling protocol design", "Validation study design"],
+      "failure_mode_if_absent": "Overclaiming. The company's entire moat is trustworthiness of measurement, and this role is the person who defends it internally against the sales pressure to just say the score predicts kills.",
+      "note": "In the Philippine context, SEAFDEC/AQD, UP Visayas, and state universities with fisheries programmes are the obvious recruiting and collaboration grounds."
+    },
+    {
+      "role_id": "rs_ml_lead",
+      "title": "Remote Sensing / Machine Learning Lead",
+      "holder": null,
+      "why_the_venture_needs_it": "Radiometric calibration, glint handling, and inland-water retrieval are specialist skills. A generalist ML engineer will produce a model that performs beautifully on the training lake and collapses on the next one.",
+      "critical_skills": ["Radiometric calibration", "Inland water optical retrieval", "Computer vision for small-object detection over water", "Model calibration and uncertainty quantification — not just accuracy"],
+      "failure_mode_if_absent": "Uncalibrated indices presented as measurements, which produces a time series that looks like science and is not."
+    },
+    {
+      "role_id": "embedded_lead",
+      "title": "Embedded / Flight Systems Engineer",
+      "holder": null,
+      "critical_skills": ["Flight control integration", "Failsafe logic — especially water-aware failsafes", "Edge compute integration", "Real-time telemetry and link management"],
+      "failure_mode_if_absent": "A vehicle whose link-loss behaviour was designed for land and which therefore ditches in a lake the first time a squall rolls in."
+    },
+    {
+      "role_id": "mech_lead",
+      "title": "Mechanical / Mechatronics Engineer",
+      "holder": null,
+      "why_the_venture_needs_it": "The winch is the hardest mechanism on the vehicle and the most novel. It must pay out and recover a wet, fouling, snagging sensor from a moving hover in wind, thousands of times, without a person present.",
+      "critical_skills": ["Winch and tether mechanism design", "Marine-grade sealing and corrosion", "Metered dispensing mechanisms", "Design for field maintenance by non-engineers"],
+      "failure_mode_if_absent": "A winch that works in the lab and jams over water, which is an unrecoverable failure with a drone on the far side of a lake."
+    },
+    {
+      "role_id": "software_lead",
+      "title": "Platform / Full-Stack Engineer",
+      "holder": null,
+      "critical_skills": ["Time-series data infrastructure", "Offline-tolerant sync", "Dashboard and twin visualisation", "API design"],
+      "failure_mode_if_absent": "A cloud platform that assumes connectivity that rural aquaculture sites do not have."
+    },
+    {
+      "role_id": "field_ops",
+      "title": "Field Operations / Remote Pilot",
+      "holder": null,
+      "critical_skills": ["CAAP RPA Controller Certificate", "Practical fish farm operations", "Local language and community relationships", "Maintenance in the field with limited tooling"],
+      "failure_mode_if_absent": "No pilot certificate means no legal commercial flight. This is a hard gate, not a nice-to-have.",
+      "citation_ids": ["caap-rpas-regulations"]
+    },
+    {
+      "role_id": "regulatory_qa",
+      "title": "Regulatory & Quality Lead",
+      "holder": null,
+      "why_the_venture_needs_it": "The business model depends on a BVLOS authorisation the company does not have. Someone must own that pathway from day one, because it has a long lead time and it gates the unit economics.",
+      "critical_skills": ["CAAP RPAS regulation", "BFAR and DENR requirements", "Safety case construction", "Quality systems"],
+      "failure_mode_if_absent": "A company that discovers in year three that its entire margin assumed an operating mode it is not permitted to use."
+    }
+  ],
+
+  "advisory_needs": [
+    { "domain": "Limnology of Philippine lakes", "rationale": "Site-specific water column behaviour is not generalisable from temperate literature. Taal, Laguna de Bay, Buhi, and Sampaloc each behave differently." },
+    { "domain": "Aquaculture extension and cooperatives", "rationale": "Distribution to smallholders runs through cooperatives and extension networks, not through direct sales." },
+    { "domain": "Civil aviation regulation", "rationale": "The BVLOS pathway." },
+    { "domain": "Veterinary / aquatic animal health", "rationale": "Anything involving medicine dispensing crosses into regulated veterinary territory. See regulatory-framework.json." },
+    { "domain": "Agricultural finance", "rationale": "Smallholders cannot buy capital equipment. The financing structure is as much of a product decision as the hardware." }
+  ],
+
+  "org_evolution": {
+    "note": "Modeled hiring shape, not a commitment.",
+    "provenance": "modeled_projection",
+    "phases": [
+      { "phase": "Concept (now)", "headcount": "2-4 founders", "focus": "Requirements, research, first prototype, first farmer conversations. No sales." },
+      { "phase": "Prototype", "headcount": "5-8", "focus": "Flying integrated vehicle. First real water data. Validation study design with an academic partner." },
+      { "phase": "Pilot", "headcount": "8-14", "focus": "Instrumented pilots on real farms. Model training on real data. CAAP BVLOS application." },
+      { "phase": "Commercial", "headcount": "15-30", "focus": "Service delivery, dock network, support. Field ops becomes the biggest function — this surprises hardware founders every time." }
+    ]
+  },
+
+  "cultural_commitments": [
+    "The scientist has a veto on public claims. If the science lead says the model is not ready, it does not ship, and the commercial lead does not get to overrule that.",
+    "Field time is mandatory for engineers. An engineer who has never stood on a fish cage at dawn will design for a pond that does not exist.",
+    "Post-mortems on lost aircraft are blameless and published internally. A team that hides crashes learns nothing and repeats them."
+  ]
+}

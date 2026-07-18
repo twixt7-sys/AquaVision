@@ -1,0 +1,68 @@
+{
+  "id": "go-to-market",
+  "title": "Go-to-Market Strategy",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "modeled_projection",
+  "confidence": "low",
+  "citation_ids": ["moore-crossing-chasm-1991", "rogers-diffusion-2003"],
+
+  "the_core_gtm_problem": {
+    "statement": "This is not a product sale. It is a coalition assembly.",
+    "reasoning": "For a single deployment, five different constituencies must each say yes for a different reason: the farm manager (ROI), the technician (not surveillance), the LGU (permit), CAAP (airspace), and the person who owns the shore (tenure). See stakeholder-pain-points.json#/the_alignment_problem. A GTM plan that models this as 'generate leads, close deals' has not understood the sector, and it will fail in the way aquaculture technology usually fails.",
+    "the_implication": "Sales cycles are long and relationship-led. The unit of go-to-market is a LAKE — its coalition, its cooperative, its LGU — not a farm. Win a lake's coalition and the individual deployments follow; win a single farm inside a hostile coalition and it collapses."
+  },
+
+  "the_beachhead": {
+    "who": "Commercial lake-cage operators with aeration and a budget, on a small number of dense-cluster lakes (Taal, Laguna de Bay) where the problem is documented and operators are geographically concentrated.",
+    "why": "See market-sizing-tam-sam-som.json#/beachhead_definition. Documented recurring problem, dense clusters (good dock economics), cooperative aggregation layer, and defensible local chemistry knowledge.",
+    "the_landing_move": "Land the checkable ROI (aeration savings, audit records) with one credible commercial operator per lake, publicly and verifiably. The first reference customer on a lake is worth more than the next ten, because this sector buys on 'did it work for someone I know on this water'."
+  },
+
+  "the_sequence": {
+    "note": "Diffusion-of-innovations logic. The early adopters and the mainstream buy differently, and crossing between them is where technology ventures die.",
+    "stages": [
+      { "stage": "Innovators (Phase 3-4)", "who": "Progressive commercial farms and academic partners who will co-develop.", "motion": "High-touch, co-creation, tolerate roughness in exchange for influence and early advantage.", "goal": "Validation evidence and the first reference deployment." },
+      { "stage": "Early adopters (Phase 4-5)", "who": "Commercial managers who saw the reference deployment work on their lake.", "motion": "Reference-led. 'It worked for [named operator] on this water.' Lead with the checkable ROI.", "goal": "A repeatable sale and measured unit economics." },
+      { "stage": "The chasm", "who": "The gap between visionary early adopters and pragmatic mainstream buyers.", "the_risk": "The mainstream operator does not want to be a pioneer. They want a proven, supported, boring utility. If the product is still rough or the support is thin, the venture stalls here — this is where most agritech dies.", "how_to_cross": "A dominant, complete, well-supported solution for ONE narrow segment (dense-cluster commercial tilapia cages on one lake) before broadening. Depth before breadth." },
+      { "stage": "Early majority (Phase 5+)", "who": "Mainstream operators and cooperatives.", "motion": "Proven utility, cooperative channel, possibly insurance/credit-linked adoption.", "goal": "Density within a lake, then adjacent lakes." }
+    ]
+  },
+
+  "the_smallholder_question": {
+    "statement": "The impact mission targets smallholders; the commercial reality cannot start with them.",
+    "the_resolution": "Smallholders are reached in the EARLY MAJORITY phase, through cooperatives (which amortise the dock across members) and institutional programmes (BFAR, LGU, development finance) — NOT through direct sales, ever.",
+    "the_honesty": "This means the people the company was founded to help are served last, after the paying commercial farms establish the product. That sequencing is commercially necessary and it is in tension with the mission. The tension is managed by keeping the cooperative and institutional channels in the plan from the start, and by not letting the company drift into serving only the payers — which is the default failure mode of impact-oriented ventures. See ethics-data-privacy.json#/equity_and_extraction.",
+    "the_accelerant": "If insurance or credit access becomes contingent on monitoring — a real possibility given that continuous records make an uninsurable asset insurable — smallholder adoption stops being a discretionary purchase and becomes a requirement for finance. That would compress the timeline dramatically. It is a long game and it should not be in the Series A story, but it is the mechanism by which the mission and the market could ultimately align."
+  },
+
+  "channel_strategy": {
+    "channels": [
+      { "channel": "Direct field sales", "for": "Commercial beachhead", "note": "High-touch, relationship-led. Not a website sale." },
+      { "channel": "Cooperatives", "for": "Smallholder aggregation and best dock economics", "note": "The unit of sale for the smallholder segment." },
+      { "channel": "Institutional (BFAR/LGU/development finance)", "for": "Programme deployments and smallholder reach", "note": "Long procurement, different motion, aligned with public-good framing." },
+      { "channel": "Academic partners", "for": "Credibility and validation", "note": "Cheap and high-leverage. Pursue immediately." },
+      { "channel": "Feed distributors", "for": "Existing farm reach", "note": "Structural conflict — we reduce their volume. Test whether the premium players who compete on FCR are aligned." },
+      { "channel": "Insurers/lenders", "for": "The long-game adoption driver", "note": "Requires loss history we do not have. Chicken-and-egg." }
+    ]
+  },
+
+  "the_trust_problem_as_gtm": {
+    "statement": "The biggest go-to-market obstacle is not competition or price. It is that this sector has been burned by technology vendors who arrived, promised, and left.",
+    "implications": [
+      "Every claim must be checkable in the first cycle. Lead with metered aeration savings, not with mortality prevention.",
+      "'What happens when you leave' must have a real answer: data ownership, local trained staff, documented procedures.",
+      "The first reference customer on each lake is disproportionately valuable and worth heavy investment.",
+      "Overclaiming is not just an ethics problem here; it is a GTM problem, because one caught overclaim on a small lake travels to every operator on it.",
+      "Hire and train locally. A company staffed by outsiders who visit is read as another vendor who will leave."
+    ]
+  },
+
+  "what_not_to_do": [
+    "Do not launch broadly. Depth on one lake beats presence on ten.",
+    "Do not sell below the scale threshold where a buoy wins — it produces unhappy customers who tell their neighbours.",
+    "Do not lead with the fish-kill-prevention story before it is validated. It is the most compelling and the least defensible claim, and getting caught on it poisons the lake.",
+    "Do not build the surveillance or enforcement capability to win an institutional contract. It would make adversaries of the communities the whole GTM depends on.",
+    "Do not model this as a SaaS funnel. It is coalition-building on a lake, one relationship at a time."
+  ]
+}

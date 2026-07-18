@@ -1,0 +1,71 @@
+{
+  "id": "funding-ask",
+  "title": "Funding Ask",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "modeled_projection",
+  "confidence": "low",
+
+  "note": "No dollar amount appears here because the amount depends on team size and hardware costs that Phase 0 determines. What appears is the STRUCTURE of the ask, the use of funds, and — most importantly — the milestone each tranche unlocks. Fill the amount in after Phase 0.",
+
+  "the_framing": {
+    "principle": "Raise in tranches against de-risking milestones, not a lump against a revenue projection.",
+    "why": "This is a hardware company with a real validation timeline and three untested load-bearing assumptions. The credible structure is: a small first raise to test the cheapest, most fundamental assumptions, then larger raises unlocked by evidence. An investor is buying successive risk reduction.",
+    "the_honest_pitch": "We are not asking you to believe a forecast. We are asking you to fund the removal of a specific risk, watch us either clear it or kill the company on it, and price the next round on what you learn."
+  },
+
+  "the_tranche_structure": [
+    {
+      "tranche": "Pre-seed / Phase 0",
+      "purpose": "Test the three assumptions that could kill the company on paper, cheaply, before any hardware spend.",
+      "use_of_funds": ["Founding team runway", "Farmer discovery (25+ interviews, real WTP)", "Sonde vendor survey (does the mass budget close?)", "Regulatory + liability legal opinion", "Academic validation MOU"],
+      "milestones_that_unlock_the_next_tranche": [
+        "Payload budget closes with margin, OR the concept is re-architected honestly.",
+        "Farmer discovery confirms a segment with response capacity and demonstrated WTP.",
+        "A credible BVLOS pathway with a realistic timeline.",
+        "A signed academic validation protocol."
+      ],
+      "the_kill_criteria": "If the payload cannot close on any credible configuration, or farmers have no response capacity and no willingness to pay, the honest outcome is to stop or pivot — and this tranche is small precisely so that stopping here is cheap. See milestones-roadmap.json#/phases (Phase 0 kill criteria).",
+      "why_this_is_the_smart_first_raise": "It is the cheapest phase and it de-risks the most. An investor who funds only this is exposed to a small amount against the largest uncertainties. That asymmetry should appeal to a good early investor and it demonstrates capital discipline."
+    },
+    {
+      "tranche": "Seed / Phases 1-2",
+      "purpose": "Prove the two hardest subsystems and fly an integrated vehicle that returns validated profiles.",
+      "milestones_that_unlock_the_next_tranche": ["Winch passes 1000-cycle reliability with root-caused failures", "Profiles agree with a reference sonde within tolerance across the full range", "Radiometric calibration reproducible across days", "Pendulum/wind envelope characterised"],
+      "note": "The profile-vs-reference agreement is the moment the core claim is true or false. This tranche buys that answer."
+    },
+    {
+      "tranche": "Series A / Phases 3-4",
+      "purpose": "A full validation season, model training on real data, BVLOS authorisation, and the first paid pilots with measured unit economics.",
+      "milestones": ["A validation dataset across one full seasonal cycle", "Anomaly detection generalising to a held-out site", "Honest kill-risk evaluation against real events", "Paying customers with renewal intent", "Measured unit economics", "BVLOS obtained or model re-based on VLOS"],
+      "note": "By this raise, the company should have evidence, not just a plan. If it does not, the earlier tranches did their job by revealing that."
+    }
+  ],
+
+  "use_of_funds_principles": [
+    "The single most valuable early dollar goes to the sonde vendor survey and the payload arithmetic — because it is cheap and it can save the whole raise from funding an unbuildable concept.",
+    "The second goes to farmer discovery, because the market risk (R-04) is more likely to kill the company than any technical risk.",
+    "The third goes to the BVLOS conversation, because it has the longest lead time.",
+    "Do NOT spend on hardware tooling before Phase 0 closes the payload budget on paper. Tooling an aircraft that cannot carry its mission is the most expensive avoidable mistake available."
+  ],
+
+  "what_we_are_honest_about_with_investors": {
+    "the_things_we_volunteer": [
+      "Nothing has flown. TRL 3.",
+      "The business model assumes a BVLOS authorisation we do not have.",
+      "The customer who needs it most cannot afford it.",
+      "We cannot fly in the weather that causes the worst events.",
+      "A USV is a genuinely strong alternative architecture.",
+      "The unit economics are unproven and density-dependent.",
+      "Zero customers, zero revenue, no team hired."
+    ],
+    "why_volunteer_all_of_this": "Because every one of these is discoverable in diligence, and handing them over with the mitigations attached is cheaper than being caught with them. It also does the most important thing a first meeting can do: it establishes that this team tells the truth about its own weaknesses, which is the single trait that most predicts whether the later, unverifiable claims can be believed. A founder who hides the BVLOS dependency and gets caught has lost the room; one who leads with it has bought credibility for everything else.",
+    "the_counterintuitive_bet": "This entire repository is built on the wager that rigorous honesty is more fundable than polished optimism — for the right investor. It will lose the investors who want the hockey-stick. It is designed to win the ones worth having."
+  },
+
+  "what_the_money_buys_the_investor": {
+    "the_return_thesis": "A defensible position (accumulated site data + local regulatory relationships + hard winch/calibration engineering) in the observability layer of an industry that just became the majority of the world's aquatic animal production and is still growing.",
+    "citation_ids": ["fao-sofia-2024"],
+    "the_honest_risk": "The defensibility is a plan, not an asset, at this stage. The bet is on the team's ability to execute Phase 0-4 and to build the data moat before a better-capitalised entrant does. That is a real risk and it is the risk the investor is actually pricing."
+  }
+}

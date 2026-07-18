@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KPI Definitions — AquaVision</title>
+<link rel="icon" href="../assets/img/logo-mark.jpg">
+<link rel="stylesheet" href="../assets/style.css">
+<script>try{var t=localStorage.getItem('av-theme');if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+<a class="sidebar-brand" href="../index.html">
+<img src="../assets/img/logo-mark.jpg" alt="AquaVision mark" width="36" height="36">
+<span><strong>AQUAVISION</strong><small>OmniDrone Knowledge Repository</small></span>
+</a>
+<nav class="sidebar-nav" aria-label="Sections"><details class="nav-sec">
+<summary><span class="nav-num">00</span>Meta &amp; Schemas</summary>
+<ul>
+<li><a href="../sections/meta.html">Overview</a></li>
+<li><a href="../files/schema-registry.html">AquaVision Knowledge Repository — Schema Registry <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/glossary.html">Glossary — Aquaculture, Fisheries, Remote Sensing, and Systems Terms</a></li><li><a href="../files/data-dictionary.html">Data Dictionary — Canonical Field and Variable Definitions</a></li><li><a href="../files/changelog.html">Repository Changelog</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">01</span>Company &amp; Identity</summary>
+<ul>
+<li><a href="../sections/company.html">Overview</a></li>
+<li><a href="../files/company-profile.html">AquaVision — Company Profile</a></li><li><a href="../files/brand-identity.html">AquaVision — Brand &amp; Design System</a></li><li><a href="../files/team-structure.html">Team Structure &amp; Capability Map</a></li><li><a href="../files/milestones-roadmap.html">Development Roadmap &amp; Milestones</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">02</span>Problem Space</summary>
+<ul>
+<li><a href="../sections/problem.html">Overview</a></li>
+<li><a href="../files/problem-statement.html">Problem Statement</a></li><li><a href="../files/problem-taxonomy.html">Problem Taxonomy — The Full Space of Aquaculture &amp; Fisheries Problems</a></li><li><a href="../files/stakeholder-pain-points.html">Stakeholder Map &amp; Pain Points</a></li><li><a href="../files/incident-case-studies.html">Documented Incident Case Studies — Evidence Base</a></li><li><a href="../files/cost-of-inaction.html">Cost of Inaction — Loss Model</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">03</span>Market &amp; Competition</summary>
+<ul>
+<li><a href="../sections/market.html">Overview</a></li>
+<li><a href="../files/industry-statistics.html">Industry Statistics — Global &amp; Regional Aquaculture and Fisheries</a></li><li><a href="../files/market-sizing.html">Market Sizing — TAM / SAM / SOM</a></li><li><a href="../files/competitive-landscape.html">Competitive Landscape</a></li><li><a href="../files/customer-personas.html">Customer Segments &amp; Personas</a></li><li><a href="../files/swot-porter.html">Strategic Analysis — SWOT, Porter's Five Forces, PESTEL</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">04</span>Solution &amp; ConOps</summary>
+<ul>
+<li><a href="../sections/solution.html">Overview</a></li>
+<li><a href="../files/solution-overview.html">Solution Overview — The OmniDrone System</a></li><li><a href="../files/value-proposition.html">Value Proposition</a></li><li><a href="../files/use-cases.html">Use Cases</a></li><li><a href="../files/mission-profiles.html">Mission Profiles</a></li><li><a href="../files/concept-of-operations.html">Concept of Operations (ConOps)</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">05</span>Hardware Engineering</summary>
+<ul>
+<li><a href="../sections/hardware.html">Overview</a></li>
+<li><a href="../files/omnidrone-specifications.html">OmniDrone — System Specification</a></li><li><a href="../files/airframe-propulsion.html">Airframe &amp; Propulsion</a></li><li><a href="../files/probe-winch-subsystem.html">Reeled Probe &amp; Winch Subsystem</a></li><li><a href="../files/sensor-payload.html">Sensor Payload — Imaging &amp; Remote Sensing</a></li><li><a href="../files/carriage-ejection-system.html">Carriage &amp; Ejection System</a></li><li><a href="../files/power-energy-budget.html">Power &amp; Energy Budget</a></li><li><a href="../files/docking-station.html">OmniDock — Automated Docking Station</a></li><li><a href="../files/bill-of-materials.html">Indicative Bill of Materials</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">06</span>Software, AI &amp; Digital Twin</summary>
+<ul>
+<li><a href="../sections/software.html">Overview</a></li>
+<li><a href="../files/system-architecture.html">System Architecture</a></li><li><a href="../files/data-pipeline.html">Data Pipeline</a></li><li><a href="../files/ai-ml-models.html">AI / ML Model Cards</a></li><li><a href="../files/digital-twin.html">PondTwin — Digital Twin Specification</a></li><li><a href="../files/telemetry-schema.html">Telemetry &amp; Data Schema</a></li><li><a href="../files/api-specification.html">API Specification</a></li><li><a href="../files/dashboard-spec.html">Dashboard Specification</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">07</span>Research Corpus</summary>
+<ul>
+<li><a href="../sections/research.html">Overview</a></li>
+<li><a href="../files/literature-review.html">Literature Review — Synthesis</a></li><li><a href="../files/references-bibliography.html">Consolidated Bibliography</a></li><li><a href="../files/studies-water-quality-sensing.html">Related Studies — Water Quality, Limnology &amp; Fish Kill Mechanisms</a></li><li><a href="../files/studies-uav-remote-sensing.html">Related Studies — UAV &amp; Satellite Remote Sensing of Water</a></li><li><a href="../files/studies-harmful-algal-blooms.html">Related Studies — Harmful Algal Blooms</a></li><li><a href="../files/studies-ai-ml-aquaculture.html">Related Studies — AI &amp; Machine Learning in Aquaculture</a></li><li><a href="../files/studies-digital-twin.html">Related Studies — Digital Twins in Aquaculture</a></li><li><a href="../files/studies-fish-health-disease.html">Related Studies — Fish Health, Disease &amp; Biosecurity</a></li><li><a href="../files/studies-feeding-nutrition.html">Related Studies — Feeding, Nutrition &amp; Feed Economics</a></li><li><a href="../files/studies-socioeconomic-adoption.html">Related Studies — Socioeconomics &amp; Technology Adoption</a></li><li><a href="../files/research-gaps.html">Research Gaps &amp; Open Questions</a></li><li><a href="../files/theoretical-framework.html">Theoretical &amp; Conceptual Framework</a></li><li><a href="../files/methodology.html">Research Methodology</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">08</span>Operations &amp; Safety</summary>
+<ul>
+<li><a href="../sections/operations.html">Overview</a></li>
+<li><a href="../files/deployment-playbook.html">Deployment Playbook</a></li><li><a href="../files/maintenance-schedule.html">Maintenance Schedule</a></li><li><a href="../files/risk-register-fmea.html">Risk Register &amp; FMEA</a></li><li><a href="../files/training-certification.html">Training &amp; Certification</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">09</span>Regulatory &amp; Compliance</summary>
+<ul>
+<li><a href="../sections/compliance.html">Overview</a></li>
+<li><a href="../files/regulatory-framework.html">Regulatory Framework</a></li><li><a href="../files/water-quality-standards.html">Water Quality Standards &amp; Thresholds</a></li><li><a href="../files/biosecurity-protocol.html">Biosecurity Protocol</a></li><li><a href="../files/ethics-data-privacy.html">Ethics, Data Privacy &amp; Responsible Use</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">10</span>Business Model</summary>
+<ul>
+<li><a href="../sections/business.html">Overview</a></li>
+<li><a href="../files/business-model-canvas.html">Business Model Canvas</a></li><li><a href="../files/pricing-revenue.html">Pricing &amp; Revenue Model</a></li><li><a href="../files/unit-economics.html">Unit Economics</a></li><li><a href="../files/financial-projections.html">Financial Projections</a></li><li><a href="../files/funding-ask.html">Funding Ask</a></li><li><a href="../files/go-to-market.html">Go-to-Market Strategy</a></li><li><a href="../files/traction.html">Traction</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">11</span>Impact</summary>
+<ul>
+<li><a href="../sections/impact.html">Overview</a></li>
+<li><a href="../files/sdg-alignment.html">UN Sustainable Development Goal Alignment</a></li><li><a href="../files/environmental-impact.html">Environmental Impact Assessment</a></li><li><a href="../files/social-economic-impact.html">Social &amp; Economic Impact</a></li>
+</ul>
+</details>
+<details class="nav-sec" open>
+<summary><span class="nav-num">12</span>Datasets &amp; Charts</summary>
+<ul>
+<li><a href="../sections/datasets.html">Overview</a></li>
+<li><a href="../files/kpi-definitions.html" aria-current="page" class="current">KPI Definitions</a></li><li><a href="../files/sample-telemetry.html">Sample Telemetry — ILLUSTRATIVE SYNTHETIC DATA <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/sample-pond-twin-state.html">Sample Digital Twin State — ILLUSTRATIVE SYNTHETIC DATA <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/chart-global-production.html">The Inflection: Aquaculture Overtakes Capture Fisheries</a></li><li><a href="../files/chart-problem-cost-breakdown.html">The Structure of Aquaculture Losses</a></li><li><a href="../files/chart-market-sizing.html">Market Sizing — Method, Not Number</a></li><li><a href="../files/chart-do-diel-cycle.html">Why Sampling Time Decides What You See <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/chart-do-depth-profile.html">The Loaded Gun: What a Vertical Profile Reveals <span class="nav-flag" title="Contains sample (synthetic) data">⚠</span></a></li><li><a href="../files/chart-financial-projection.html">Spend Plan by Phase — Not a Revenue Forecast</a></li><li><a href="../files/chart-manual-vs-omnidrone.html">Monitoring Approaches Compared</a></li><li><a href="../files/chart-species-production-mix.html">Where Farmed Aquatic Animals Are Produced</a></li><li><a href="../files/chart-tech-readiness.html">Technology Readiness — Where We Actually Are</a></li>
+</ul>
+</details>
+<details class="nav-sec">
+<summary><span class="nav-num">13</span>Pitch &amp; Thesis Kit</summary>
+<ul>
+<li><a href="../sections/pitch.html">Overview</a></li>
+<li><a href="../files/pitch-deck-outline.html">Pitch Deck Outline</a></li><li><a href="../files/elevator-pitches.html">Elevator Pitches</a></li><li><a href="../files/faq-objections.html">FAQ &amp; Objection Handling</a></li><li><a href="../files/thesis-outline.html">Thesis / Dissertation Outline</a></li>
+</ul>
+</details></nav>
+<div class="sidebar-foot"><small>Fisheries • Aquaculture • Technology</small></div>
+</aside>
+<div class="main">
+<header class="topbar">
+<button class="icon-btn" id="nav-toggle" aria-label="Toggle navigation">☰</button>
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a><span class="crumb-sep">›</span><a href="../sections/datasets.html">Datasets &amp; Charts</a><span class="crumb-sep">›</span><span class="crumb-here">KPI Definitions</span></nav>
+<button class="search-btn" id="search-btn" aria-label="Search"><span aria-hidden="true">🔍</span> Search <kbd>Ctrl K</kbd></button>
+<button class="icon-btn" id="theme-toggle" aria-label="Toggle light/dark theme" title="Toggle theme">◐</button>
+</header>
+<main class="content">
+<header class="doc-head">
+<h1>KPI Definitions</h1>
+
+<div class="doc-meta">
+<code class="mono">kpi-definitions</code>
+<span>v1.0.0</span>
+<span>updated 2026-07-17</span>
+
+
+<a class="raw-link" href="../../data/12_datasets/kpi-definitions.json">raw JSON ↗</a>
+</div>
+
+</header><p class="lead">Every KPI the system and the business track, with a PRECISE operational definition. Conforms to <a href="../files/schema-registry.html">schema-registry.json</a>#/definitions/kpi. The definition is the point — if two people can compute different numbers from it, it is not finished.</p>
+<section class="doc-sec"><h2>The Discipline</h2><p>Each KPI has a `status`: measured (from real data), modeled (from a projection), target_only (a goal with no baseline), or awaiting_data (defined but empty). At TRL 3, almost everything is target_only or awaiting_data — and saying so is the honest thing. A dashboard of confident KPIs with no data behind them is theatre.</p></section>
+<section class="doc-sec"><h2>Operational Kpis</h2><div class="kpi-grid"><div class="kpi">
+<div class="kpi-label">Survival Rate <code class="mono">kpi-survival-rate</code></div>
+<div class="kpi-value"><span class="chip chip-unknown"><span class="badge-icon">⌀</span>Awaiting data</span></div>
+<code class="mono kpi-formula">harvested_count / stocked_count</code>
+<div class="kpi-meta"><small>↑ higher is better · %</small></div>
+<div class="kpi-def">Proportion of stocked individuals harvested alive, per unit per cycle.</div>
+<p class="note muted">The headline outcome a farmer actually cares about. Our value claim ultimately reduces to moving this number. Sourced from operator harvest records, not measured by us.</p>
+
+</div><div class="kpi">
+<div class="kpi-label">Feed Conversion Ratio <code class="mono">kpi-fcr</code></div>
+<div class="kpi-value"><span class="chip chip-unknown"><span class="badge-icon">⌀</span>Awaiting data</span></div>
+<code class="mono kpi-formula">feed_supplied_kg / biomass_gain_kg</code>
+<div class="kpi-meta"><small>↓ lower is better · ratio</small><small class="muted">band 1 – 2.5 ratio</small></div>
+<div class="kpi-def">Mass of feed supplied divided by biomass gain, per unit per cycle.</div>
+
+<div class="cite-row"><a class="cite-chip" href="../files/references-bibliography.html#innovasea-fcr-guide" title="Innovasea (n.d.)">innovasea-fcr-guide</a></div>
+</div><div class="kpi">
+<div class="kpi-label">Diel DO Minimum <code class="mono">kpi-do-minimum</code></div>
+<div class="kpi-value"><span class="chip chip-unknown"><span class="badge-icon">⌀</span>Awaiting data</span></div>
+
+<div class="kpi-meta"><small>↑ higher is better · mg/L</small><small class="muted">band 3 – ∞ mg/L</small></div>
+<div class="kpi-def">The lowest dissolved oxygen recorded at a unit in a 24h period, at the shallowest cage-relevant depth.</div>
+<p class="note muted">The number nobody currently has, because it occurs pre-dawn. THE flagship measurement.</p>
+
+</div><div class="kpi">
+<div class="kpi-label">Diel DO Amplitude <code class="mono">kpi-do-amplitude</code></div>
+<div class="kpi-value"><span class="chip chip-unknown"><span class="badge-icon">⌀</span>Awaiting data</span></div>
+<code class="mono kpi-formula">do_max - do_min over 24h</code>
+<div class="kpi-meta"><small>⇅ band is better · mg/L</small></div>
+<div class="kpi-def">Difference between the daily DO maximum and minimum at a unit.</div>
+<p class="note muted">A large amplitude signals a large algal standing crop and therefore a large nightly oxygen demand — a leading indicator a single daily reading cannot produce.</p>
+
+</div><div class="kpi">
+<div class="kpi-label">Stratification Strength <code class="mono">kpi-stratification-strength</code></div>
+<div class="kpi-value"><span class="chip chip-unknown"><span class="badge-icon">⌀</span>Awaiting data</span></div>
+
+<div class="kpi-meta"><small>⇅ band is better · dimensionless</small></div>
+<div class="kpi-def">Schmidt stability index normalised by column depth.</div>
+
+<div class="cite-row"><a class="cite-chip" href="../files/references-bibliography.html#idso-schmidt-stability-1973" title="Idso, S. B. (1973)">idso-schmidt-stability-1973</a></div>
+</div><div class="kpi">
+<div class="kpi-label">Hypolimnetic Oxygen Debt <code class="mono">kpi-oxygen-debt</code></div>
+<div class="kpi-value"><span class="chip chip-unknown"><span class="badge-icon">⌀</span>Awaiting data</span></div>
+
+<div class="kpi-meta"><small>↓ lower is better · mg/L*m</small></div>
+<div class="kpi-def">Depth-integrated oxygen deficit below the thermocline.</div>
+<p class="note muted">Quantifies the size of the bad-water reservoir waiting to be delivered by mixing.</p>
+
+</div><div class="kpi">
+<div class="kpi-label">Aeration Runtime <code class="mono">kpi-aeration-hours</code></div>
+<div class="kpi-value"><span class="chip chip-unknown"><span class="badge-icon">⌀</span>Awaiting data</span></div>
+
+<div class="kpi-meta"><small>↓ lower is better · hours</small></div>
+<div class="kpi-def">Total aerator operating hours per unit per period.</div>
+<p class="note muted">The VERIFIABLE ROI anchor. Metered, already budgeted, checkable in one cycle. Lead with this. See <a href="../files/value-proposition.html">value-proposition.json</a>#/the_value_hierarchy.</p>
+
+</div></div></section>
+<section class="doc-sec"><h2>System Health Kpis</h2><div class="kpi-grid"><div class="kpi">
+<div class="kpi-label">Sortie Success Rate <code class="mono">kpi-sortie-success</code></div>
+<div class="kpi-value"><span class="kpi-num num">◎ 98<small>%</small></span><small class="muted">target — no baseline</small></div>
+
+<div class="kpi-meta"><small>↑ higher is better · %</small></div>
+<div class="kpi-def">Completed sorties / attempted sorties, excluding weather scrubs.</div>
+
+
+</div><div class="kpi">
+<div class="kpi-label">Seasonal Availability <code class="mono">kpi-availability-seasonal</code></div>
+<div class="kpi-value"><span class="chip chip-target"><span class="badge-icon">◎</span>Target only</span></div>
+
+<div class="kpi-meta"><small>↑ higher is better · %</small></div>
+<div class="kpi-def">Fraction of scheduled sorties actually flown, reported PER SEASON not annually.</div>
+<p class="note muted">MUST be reported seasonally. Availability is lowest in the monsoon, which is when risk is highest. An annual average hides exactly the gap that matters. See <a href="../files/mission-profiles.html">mission-profiles.json</a>#/environmental_envelope.</p>
+
+</div><div class="kpi">
+<div class="kpi-label">Data Completeness <code class="mono">kpi-data-completeness</code></div>
+<div class="kpi-value"><span class="chip chip-target"><span class="badge-icon">◎</span>Target only</span></div>
+
+<div class="kpi-meta"><small>↑ higher is better · %</small></div>
+<div class="kpi-def">Fraction of expected measurements that were captured, QC-passed, and stored.</div>
+
+
+</div><div class="kpi">
+<div class="kpi-label">Sensor Drift <code class="mono">kpi-sensor-drift</code></div>
+<div class="kpi-value"><span class="chip chip-target"><span class="badge-icon">◎</span>Target only</span></div>
+
+<div class="kpi-meta"><small>↓ lower is better · channel-specific</small></div>
+<div class="kpi-def">Deviation of the sonde against the laboratory reference at the weekly check, per channel.</div>
+<p class="note muted">The metric that catches silent fouling. See risk R-01.</p>
+
+</div><div class="kpi">
+<div class="kpi-label">Retrieval Calibration Quality <code class="mono">kpi-calibration-quality</code></div>
+<div class="kpi-value"><span class="chip chip-unknown"><span class="badge-icon">⌀</span>Awaiting data</span></div>
+
+<div class="kpi-meta"><small>↑ higher is better · R² / µg/L</small></div>
+<div class="kpi-def">R² and RMSE of the site-and-day-local NDCI-to-chlorophyll regression.</div>
+<p class="note muted">Often fitted on 3-4 points, so often poor. This KPI exists to make that honesty visible rather than hidden.</p>
+
+</div></div></section>
+<section class="doc-sec"><h2>Product Health Kpis</h2><div class="kpi-grid"><div class="kpi">
+<div class="kpi-label">Alert-to-Action Rate <code class="mono">kpi-alert-action-rate</code></div>
+<div class="kpi-value"><span class="chip chip-unknown"><span class="badge-icon">⌀</span>Awaiting data</span></div>
+
+<div class="kpi-meta"><small>↑ higher is better · %</small></div>
+<div class="kpi-def">Fraction of dispatched alerts that led to a logged operator action within a defined window.</div>
+<p class="note muted">A FIRST-CLASS product health metric. If it falls, people have stopped trusting the alerts and the product has failed regardless of sensor accuracy. This is the alert-fatigue early-warning signal. See <a href="../files/data-pipeline.html">data-pipeline.json</a>.</p>
+
+</div><div class="kpi">
+<div class="kpi-label">False Alarm Rate <code class="mono">kpi-false-alarm-rate</code></div>
+<div class="kpi-value"><span class="chip chip-unknown"><span class="badge-icon">⌀</span>Awaiting data</span></div>
+
+<div class="kpi-meta"><small>↓ lower is better · %</small></div>
+<div class="kpi-def">Fraction of alerts a human reviewer marked as not warranting the alert.</div>
+<p class="note muted">Drives alert fatigue. Tune models for precision to keep this low, accepting lower recall.</p>
+
+</div><div class="kpi">
+<div class="kpi-label">Anomaly Detection Precision <code class="mono">kpi-detection-precision</code></div>
+<div class="kpi-value"><span class="chip chip-unknown"><span class="badge-icon">⌀</span>Awaiting data</span></div>
+
+<div class="kpi-meta"><small>↑ higher is better · %</small></div>
+<div class="kpi-def">True positives / (true positives + false positives), on human-reviewed detections.</div>
+<p class="note muted">Precision is prioritised over recall here. See <a href="../files/ai-ml-models.html">ai-ml-models.json</a>.</p>
+
+</div></div></section>
+<section class="doc-sec"><h2>Business Kpis</h2><div class="kpi-grid"><div class="kpi">
+<div class="kpi-label">Stations per Dock <code class="mono">kpi-stations-per-dock</code></div>
+<div class="kpi-value"><span class="chip chip-unknown"><span class="badge-icon">⌀</span>Awaiting data</span></div>
+
+<div class="kpi-meta"><small>↑ higher is better · count</small></div>
+<div class="kpi-def">Active sampling stations served by one dock.</div>
+<p class="note muted">The dominant driver of unit economics. See <a href="../files/unit-economics.html">unit-economics.json</a>.</p>
+
+</div><div class="kpi">
+<div class="kpi-label">Contribution Margin per Dock <code class="mono">kpi-contribution-margin-dock</code></div>
+<div class="kpi-value"><span class="chip chip-unknown"><span class="badge-icon">⌀</span>Awaiting data</span></div>
+
+<div class="kpi-meta"><small>↑ higher is better · currency</small></div>
+<div class="kpi-def">Revenue per dock minus cost-to-serve per dock, per period.</div>
+<p class="note muted">Cannot be computed until real BOM and maintenance costs and a real price exist. Deliberately empty rather than modeled.</p>
+
+</div><div class="kpi">
+<div class="kpi-label">Maintenance Labour per Dock <code class="mono">kpi-maintenance-labour-dock</code></div>
+<div class="kpi-value"><span class="chip chip-unknown"><span class="badge-icon">⌀</span>Awaiting data</span></div>
+
+<div class="kpi-meta"><small>↓ lower is better · hours</small></div>
+<div class="kpi-def">Field-labour hours per dock per period.</div>
+<p class="note muted">The most-underestimated cost line. See risk R-14.</p>
+
+</div><div class="kpi">
+<div class="kpi-label">Customer Churn <code class="mono">kpi-churn</code></div>
+<div class="kpi-value"><span class="chip chip-unknown"><span class="badge-icon">⌀</span>Awaiting data</span></div>
+
+<div class="kpi-meta"><small>↓ lower is better · %</small></div>
+<div class="kpi-def">Fraction of customers not renewing per period.</div>
+<p class="note muted">Expected low once trust is established (data lock-in, hardware in our docks), but unproven.</p>
+
+</div></div></section>
+<section class="doc-sec"><h2>Impact Kpis</h2><div class="kpi-grid"><div class="kpi">
+<div class="kpi-label">Mortality Events Mitigated <code class="mono">kpi-loss-events-avoided</code></div>
+<div class="kpi-value"><span class="chip chip-unknown"><span class="badge-icon">⌀</span>Awaiting data</span></div>
+
+<div class="kpi-meta"><small>↑ higher is better · count</small></div>
+<div class="kpi-def">Documented cases where a warning led to an intervention that a farmer judged prevented or reduced a loss.</div>
+<p class="note muted">A COUNTERFACTUAL and therefore hard to measure honestly. Requires the methodology in <a href="../files/methodology.html">methodology.json</a>. Never claim a prevented kill without the evidence structure to support it.</p>
+
+</div><div class="kpi">
+<div class="kpi-label">Dangerous Boat Trips Avoided <code class="mono">kpi-dangerous-trips-avoided</code></div>
+<div class="kpi-value"><span class="chip chip-unknown"><span class="badge-icon">⌀</span>Awaiting data</span></div>
+
+<div class="kpi-meta"><small>↑ higher is better · count</small></div>
+<div class="kpi-def">Pre-dawn/bad-weather manual monitoring trips replaced by autonomous sorties.</div>
+<p class="note muted">The occupational-safety impact. Concrete and measurable.</p>
+
+</div><div class="kpi">
+<div class="kpi-label">Smallholder Reach <code class="mono">kpi-smallholder-reach</code></div>
+<div class="kpi-value"><span class="chip chip-unknown"><span class="badge-icon">⌀</span>Awaiting data</span></div>
+
+<div class="kpi-meta"><small>↑ higher is better · %</small></div>
+<div class="kpi-def">Smallholder operators served (via cooperatives/programmes) as a fraction of total served.</div>
+<p class="note muted">The equity metric. Measures whether the mission is being served or quietly abandoned in favour of the payers. See <a href="../files/social-economic-impact.html">social-economic-impact.json</a>.</p>
+
+</div></div></section>
+<section class="doc-sec"><h2>The Meta Point</h2><dl class="kv"><dt>Statement</dt><dd>Almost every KPI here is status awaiting_data or target_only.</dd><dt>Why That Is Correct</dt><dd><p>At TRL 3 there is no real data, so honest KPIs are empty. A dashboard showing confident values for these would be fabricating them. The value of this file today is that it DEFINES each metric precisely, so that the moment real data arrives, everyone computes the same number — and nobody can quietly redefine a KPI to make it look better. Pre-committing the definitions is a discipline, not a limitation.</p></dd></dl></section>
+</main>
+<footer class="page-footer"><a class="pn pn-prev" href="../files/social-economic-impact.html">
+<small>← Previous · Impact</small>
+<span>Social &amp; Economic Impact</span></a><a class="pn pn-next" href="../files/sample-telemetry.html">
+<small>Next → · Datasets &amp; Charts</small>
+<span>Sample Telemetry — ILLUSTRATIVE SYNTHETIC DATA</span></a></footer>
+</div>
+</div>
+<div class="search-overlay" id="search-overlay" hidden>
+<div class="search-panel" role="dialog" aria-label="Search">
+<input type="search" id="search-input" placeholder="Search the repository… (Esc to close)" autocomplete="off" spellcheck="false">
+<ul class="search-results" id="search-results"></ul>
+<div class="search-hint">↑↓ to navigate · Enter to open · Esc to close</div>
+</div>
+</div>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

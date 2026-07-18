@@ -1,0 +1,51 @@
+{
+  "id": "pitch-deck-outline",
+  "title": "Pitch Deck Outline",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "design_target",
+  "note": "A slide-by-slide outline for the investor deck, pulling from across the repository. Built on the wager stated throughout: rigorous honesty is more fundable than polished optimism, for the right investor. Each slide names its source file and the ONE thing it must accomplish.",
+
+  "deck_philosophy": {
+    "principle": "Lead with the inflection, sell the checkable ROI, volunteer the risks, and never overclaim the predictive capability.",
+    "the_arc": "This industry just became the majority of the world's aquatic animal production → its operators are blind to the thing that kills their stock → the blindness is economic, not technical → an aerial platform inverts that economics → here is the one thing we must prove and how we'll prove it cheaply → here is the boring ROI that pays for it meanwhile.",
+    "what_this_deck_refuses_to_do": ["Show a hockey-stick revenue forecast", "Claim we prevent fish kills before validation", "Hide the BVLOS dependency", "Invent traction", "Imply TRL beyond 3"]
+  },
+
+  "slides": [
+    { "n": 1, "title": "Title", "must_accomplish": "Name, the mark, one line: 'We make the water legible to the people who farm it.'", "source": "company-profile.json", "visual": "The logo mark — it encodes aerial-view + seeing-beneath-water in one glyph. Use it." },
+    { "n": 2, "title": "The Inflection", "must_accomplish": "In 2022 aquaculture passed capture fisheries for the first time — 51% of aquatic animal production. The centre of the industry is now a farmed, instrumentable system. Say it once, let it land.", "source": "industry-statistics.json", "chart": "chart-global-production" },
+    { "n": 3, "title": "The Problem", "must_accomplish": "Operators make bet-the-year decisions about a 3D chemical environment they cannot see, using surface readings taken at the safest time of day. Fish die because of a monitoring gap.", "source": "problem-statement.json" },
+    { "n": 4, "title": "It's Real, Recurring, and Costly", "must_accomplish": "Documented Philippine kills: 343 t at Taal, 600+ t / PHP 43M elsewhere, and the mechanism is known — DO depletion plus post-overturn ammonia and sulfide.", "source": "incident-case-studies.json", "chart": "chart-problem-cost-breakdown", "caveat": "Present losses honestly — do not inflate. The recurrence is the argument, not any single tonnage." },
+    { "n": 5, "title": "Why Nobody Sees It Coming", "must_accomplish": "Two blindnesses: TIME (the DO minimum is pre-dawn when nobody's out) and DEPTH (the killer sits below the thermocline). Show both charts side by side.", "source": "problem-statement.json", "chart": ["chart-do-diel-cycle", "chart-do-depth-profile"] },
+    { "n": 6, "title": "The Reframe", "must_accomplish": "The bottleneck isn't sensors — it's the marginal LABOUR cost of an observation. That's a logistics problem with an aerial answer. This is the intellectual core.", "source": "problem-statement.json#/the_reframe" },
+    { "n": 7, "title": "The Solution", "must_accomplish": "OmniDrone: profile at depth, scan the surface, dispense a response, feed it to a twin. Show the render.", "source": "solution-overview.json", "visual": "The product render + the four functions." },
+    { "n": 8, "title": "The Insight That Makes It Defensible", "must_accomplish": "The probe and the camera are one instrument: the drone carries its own ground truth, so it calibrates its own imagery in a single sortie. That's what nobody else does.", "source": "solution-overview.json#/the_architectural_insight" },
+    { "n": 9, "title": "A Day in the Life", "must_accomplish": "The narrative: 04:30 sortie finds the loaded gun, manager acts with a chart instead of a feeling, fish survive. Note it's a storyboard, not a testimonial.", "source": "concept-of-operations.json#/a_day_in_the_life" },
+    { "n": 10, "title": "How We Sell — The Checkable ROI", "must_accomplish": "Lead with aeration-electricity savings: metered, budgeted, verifiable in ONE cycle without believing our modelling. Fish-kill prevention is upside, not the pitch.", "source": "value-proposition.json#/the_value_hierarchy" },
+    { "n": 11, "title": "Market & Beachhead", "must_accomplish": "70% of production is in Asia, 62.6% inland — our exact environment. Beachhead: dense-cluster Philippine lake cages. Show the method for sizing, and name the BFAR data we still need.", "source": ["industry-statistics.json", "market-sizing-tam-sam-som.json"], "chart": "chart-market-sizing", "caveat": "Do NOT show a fabricated TAM. Show the method and the missing input — it's more credible." },
+    { "n": 12, "title": "Competition — Honestly", "must_accomplish": "We win on depth+space+imaging, lose on continuity+weather+cost. The hybrid with a fixed buoy beats either alone, and that's our roadmap. Volunteering this wins trust.", "source": "competitive-landscape.json", "chart": "chart-manual-vs-omnidrone" },
+    { "n": 13, "title": "Where We Actually Are", "must_accomplish": "TRL 3. Nothing has flown. Here's the evidence-gated path up, with kill criteria. Owning this is the credibility move of the whole deck.", "source": ["company-profile.json#/the_honest_position", "milestones-roadmap.json"], "chart": "chart-tech-readiness" },
+    { "n": 14, "title": "The Risks We're Not Hiding", "must_accomplish": "BVLOS dependency, weather grounding, affordability paradox, USV alternative, unproven unit economics — each with a mitigation. This slide is the deck's spine.", "source": ["swot-porter.json", "risk-register-fmea.json"] },
+    { "n": 15, "title": "The Ask", "must_accomplish": "Fund Phase 0 — the cheap phase that de-risks the most and can honestly trigger a stop. Milestone-gated tranches, not a lump against a forecast.", "source": ["funding-ask.json", "financial-projections.json"], "chart": "chart-financial-projection" },
+    { "n": 16, "title": "Why This Team, Why Now", "must_accomplish": "Real founder credentials (must be written by the founders, never invented) + the technology and market timing. Then the mission: mass mortality anticipated, not mourned.", "source": ["company-profile.json", "team-structure.json"], "caveat": "The team slide MUST use real, verifiable biographies. Fabricated credentials end raises." }
+  ],
+
+  "the_appendix_slides": {
+    "note": "Held in reserve for the questions you know are coming.",
+    "slides": [
+      { "topic": "Biosecurity", "for": "The 'won't it spread disease' question", "source": "biosecurity-protocol.json" },
+      { "topic": "The winch", "for": "The 'is that even possible' question", "source": "probe-winch-subsystem.json" },
+      { "topic": "Why not a USV", "for": "The hardest technical question", "source": "competitive-landscape.json#/competitor_categories (usv-asv)" },
+      { "topic": "Unit economics structure", "for": "The 'does it make money' question", "source": "unit-economics.json" },
+      { "topic": "Regulatory pathway", "for": "The BVLOS question", "source": "regulatory-framework.json" },
+      { "topic": "Ethics & data", "for": "The impact investor", "source": "ethics-data-privacy.json" }
+    ]
+  },
+
+  "the_two_versions": {
+    "the_5_minute_version": "Slides 1, 2, 3, 5, 7, 8, 10, 13, 15. The inflection, the two blindnesses, the insight, the checkable ROI, honest TRL, the ask.",
+    "the_owner_version": "For the absentee farm owner (see customer-personas.json): ONE slide — payback period on aeration savings. Different artefact entirely; no water chemistry.",
+    "the_impact_version": "Add the SDG alignment WITH its tensions, the occupational-safety argument, and the equity commitment. See sdg-alignment.json."
+  }
+}

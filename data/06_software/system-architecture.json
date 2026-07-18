@@ -1,0 +1,116 @@
+{
+  "id": "system-architecture",
+  "title": "System Architecture",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "design_target",
+
+  "architectural_principles": [
+    { "principle": "Offline is the normal case, not the exception", "implication": "Rural aquaculture sites lose connectivity routinely. Every layer must function with the link down and reconcile when it returns. A system that assumes the cloud is a system that fails on the day it matters.", "citation_ids": ["ai-aqua-review-2024"] },
+    { "principle": "Measurements and predictions live in separate namespaces", "implication": "The moment a model output can be mistaken for an observation, the dataset is permanently compromised and every downstream analysis is suspect." },
+    { "principle": "Raw data is immutable", "implication": "Corrections are new records referencing the original. Never overwrite a measurement." },
+    { "principle": "The edge decides what matters; the cloud decides what it means", "implication": "Inference and data reduction on board. Training, twin simulation, and cross-site analytics in the cloud." },
+    { "principle": "The farmer's data belongs to the farmer", "implication": "Constrains the architecture: per-tenant isolation, exportability, and deletion must be real capabilities, not policy statements. See ethics-data-privacy.json." }
+  ],
+
+  "layers": [
+    {
+      "layer": "Edge — on aircraft",
+      "responsibilities": ["Flight control and failsafe", "Sensor acquisition and timestamping", "QC flagging at source", "NDWI/NDCI computation", "Anomaly detection inference", "Data reduction and compression", "Local buffering"],
+      "why_here": "Raw multispectral imagery is far too large to upload over an intermittent cellular link, and a bloom detection that requires backhaul fails exactly when the network is congested or down.",
+      "constraint": "Every watt of compute comes directly out of endurance. See power-energy-budget.json."
+    },
+    {
+      "layer": "Edge — dock",
+      "responsibilities": ["Sortie scheduling", "Store-and-forward", "Local dashboard for on-site staff", "Calibration reference management", "Fleet health"],
+      "why_here": "The dock has mains or solar power and no mass constraint. Anything that does not need to be on the aircraft should be here rather than in the cloud — it is closer to the operator and it works when the link does not.",
+      "requirement": "7 days of local retention minimum. The pre-dawn profile must survive a link outage."
+    },
+    {
+      "layer": "Platform — cloud",
+      "responsibilities": ["Ingestion and validation", "Time-series storage", "Sensor fusion — probe calibrating imagery", "Digital twin simulation", "Model training", "Cross-site analytics", "Alerting", "API"],
+      "note": "The cloud is where value compounds across sites and time. It is not on the critical path for any single sortie, and it must not become so."
+    },
+    {
+      "layer": "Presentation",
+      "responsibilities": ["PondTwin visualisation", "Dashboard", "Mobile alerts", "Reports and audit exports"],
+      "detail_file": "data/06_software/dashboard-spec.json"
+    }
+  ],
+
+  "the_fusion_core": {
+    "why_this_is_the_architecture_and_not_a_feature": "The probe-calibrates-the-camera insight from solution-overview.json is not a processing step bolted onto a pipeline. It is the reason the system exists, and the architecture should be shaped around it.",
+    "the_flow": [
+      "Imagery arrives as reflectance (already calibrated at the edge against the dock panel and the irradiance log).",
+      "NDWI masks non-water pixels. Nothing downstream sees a dike or a boat.",
+      "NDCI computed per water pixel — a relative field, not a concentration.",
+      "Probe profiles from the same sortie arrive with in-situ chlorophyll at known positions.",
+      "A local regression fits index to concentration for THIS site, THIS day, THIS illumination.",
+      "The regression is applied across the masked field, producing a concentration map WITH a propagated uncertainty field.",
+      "Both the map and its uncertainty enter the twin."
+    ],
+    "the_critical_design_decision": "The regression is site-and-day-local, never global. A single global index-to-concentration model across sites and conditions is the mistake that makes UAV water quality retrievals fail in production. Turbidity, CDOM, and illumination differ enough between two lakes — and between two days on one lake — that a global fit is confidently wrong.",
+    "citation_ids": ["mishra-ndci-2012", "mdpi-drones-inland-review-2024", "sciencedirect-uav-multispectral-ponds-2024"],
+    "the_failure_mode_to_guard_against": "With few probe stations per sortie, the regression is fitted on three or four points. That is a fragile fit and its confidence interval will often be embarrassingly wide. The honest response is to PROPAGATE that uncertainty into the map and show it, not to hide it behind a smooth colour ramp. A map that looks precise and is not will be believed, and someone will make a decision on it."
+  },
+
+  "data_flow": {
+    "sortie_lifecycle": [
+      { "step": 1, "event": "Dock schedules sortie against the diel cycle and the glint window" },
+      { "step": 2, "event": "Aircraft acquires — timestamped UTC, QC-flagged at source" },
+      { "step": 3, "event": "Edge computes indices and runs inference" },
+      { "step": 4, "event": "Aircraft docks; data transfers to dock over local link" },
+      { "step": 5, "event": "Dock forwards to cloud when connectivity permits; buffers when it does not" },
+      { "step": 6, "event": "Cloud validates against the schema, runs the QARTOD-style QC battery, rejects malformed records rather than storing them" },
+      { "step": 7, "event": "Fusion produces calibrated concentration fields with uncertainty" },
+      { "step": 8, "event": "Twin state updates; derived indices recomputed" },
+      { "step": 9, "event": "Alert rules evaluate; alerts dispatch with evidence attached" },
+      { "step": 10, "event": "Dashboard and twin reflect the new state" }
+    ],
+    "the_latency_requirement": "From dock to alert, under 5 minutes when connected. A dawn-profile alert that arrives at 09:00 has missed the window it exists to open."
+  },
+
+  "storage_model": {
+    "time_series": "Profiles, telemetry, and derived indices. High write volume, append-only.",
+    "spatial": "Imagery mosaics, concentration fields, uncertainty fields. Large objects, low query rate.",
+    "relational": "Sites, units, stations, sondes, sorties, users, tenants, authorisations.",
+    "immutability": "Raw measurements are append-only. A correction is a new record with a reference to the original and a reason. This is not a purity exercise — it is what makes the dataset defensible in an audit, a dispute, or a thesis.",
+    "retention": "Raw data indefinitely. It is the asset. The moat is not the drone; it is three years of profiles on a lake nobody else has measured."
+  },
+
+  "the_offline_design": {
+    "why_it_is_a_first_class_concern": "Most agritech architectures assume connectivity and degrade badly without it. Ours cannot.",
+    "rules": [
+      "The dock schedules and flies with no cloud contact. Indefinitely.",
+      "The local dashboard works with no cloud contact.",
+      "Alerts based on threshold rules fire locally. Only model-based alerts requiring cloud inference are deferred — which is a good reason to keep the safety-critical alerts rule-based rather than model-based.",
+      "Sync is idempotent and resumable. A dock that reconnects after four days uploads four days of data without duplication or loss.",
+      "Clock discipline matters: a dock that has been offline still needs UTC accuracy, or the diel analysis is corrupted on reconnection."
+    ]
+  },
+
+  "multi_tenancy_and_data_boundaries": {
+    "requirement": "Farm A must never see Farm B's data. Not by convention — by construction.",
+    "why_it_is_architectural": "Use case UC-10 (lake-scale carrying capacity) requires cross-farm aggregation, and the operator who benefits from the lake-wide analysis is the one who least wants their own stocking visible in it. That tension is not resolvable by a policy document; it must be resolved in the data model.",
+    "approach": "Strict per-tenant isolation by default. Cross-farm analytics operate only on explicitly consented, aggregated, and — where possible — differentially private outputs. The default is no sharing.",
+    "the_honest_gap": "We have not designed this properly. It is flagged here because it is the kind of thing that is cheap now and impossible later. See ethics-data-privacy.json.",
+    "status": "UNRESOLVED — architectural decision required before the first multi-farm deployment"
+  },
+
+  "security": {
+    "considerations": [
+      "Command-and-control link integrity. An aircraft that accepts a spoofed command is a weapon. Authenticated, encrypted C2 is not optional.",
+      "The dock is a physically accessible computer on a lakeshore. Assume it will be opened.",
+      "Farm production data is commercially sensitive. A breach that reveals a competitor's stocking density is a real commercial harm to a real customer.",
+      "Imagery contains people, houses, and boats. It is personal data whether we intended to collect it or not.",
+      "The dispensing interlock must not be reachable from the network. Ever. An attacker who can dispense is an attacker who can poison a pond."
+    ],
+    "status": "Not designed. Named here so it is not forgotten. A security architecture retrofitted after the first deployment is a security architecture that does not exist."
+  },
+
+  "technology_choices": {
+    "status": "DELIBERATELY UNSPECIFIED",
+    "reasoning": "Naming a database and a cloud vendor at TRL 3 is premature and it is the kind of decision that looks like progress while being irrelevant. The architecture above constrains what is needed: append-only time series at moderate volume, large object storage, offline-tolerant sync, and edge inference at a few watts. Many stacks satisfy those. Choose when there is a real workload to measure, not before.",
+    "the_only_real_constraint": "It must run in the Philippines with Philippine latency and Philippine data residency expectations, and it must not assume the site has internet."
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "id": "swot-porter",
+  "title": "Strategic Analysis — SWOT, Porter's Five Forces, PESTEL",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "assumption",
+  "note": "Three standard frameworks applied honestly. The value of a SWOT is entirely in whether the weaknesses are real; a SWOT with four strengths and one polite weakness is a self-portrait, not an analysis.",
+
+  "swot": {
+    "strengths": [
+      { "item": "The reeled probe is a genuine architectural differentiator", "why": "Depth-resolved chemistry from an aircraft is rare, and depth is where the killing mechanism lives. Nobody else in the accessible market pairs it with same-sortie imaging.", "confidence": "high" },
+      { "item": "Probe-calibrated imagery closes a real scientific gap", "why": "Uncalibrated indices produce time series that are not comparable across days. Carrying the ground truth on the same vehicle is a clean answer to a problem the literature identifies repeatedly.", "citation_ids": ["mdpi-drones-inland-review-2024"], "confidence": "high" },
+      { "item": "Building in the centre of the industry, not the periphery", "why": "70 percent of aquatic animal production is in Asia. Tropical, smallholder-dense, monsoon-exposed conditions are our design case rather than an export afterthought.", "citation_ids": ["fao-sofia-2024"], "confidence": "high" },
+      { "item": "Dry-docked probe fouls far less than a moored sonde", "why": "An unexpected but real advantage over the buoy category. Fouled optical sensors drift rather than fail, producing confidently wrong data. Ours gets rinsed between sorties.", "confidence": "medium" },
+      { "item": "Dispensing turns a warning into an action", "why": "Answers the 'information without capacity' objection in hardware rather than in argument.", "confidence": "medium" },
+      { "item": "The problem is documented and recurring, not speculative", "why": "Published kill events with peso figures and identified mechanisms.", "citation_ids": ["seafdec-laguna-fishkill", "inquirer-taal-fishkill-2023"], "confidence": "high" }
+    ],
+    "weaknesses": [
+      { "item": "Nothing has flown", "why": "TRL 3. Every performance number in this repository is a target. The gap between a render and an integrated aircraft is where most hardware ventures die.", "severity": "critical" },
+      { "item": "Endurance is structurally poor", "why": "Multirotor physics. A USV or a buoy simply beats us on time-on-station and always will. We buy coverage with endurance and there is no engineering escape from that trade.", "severity": "high" },
+      { "item": "The winch is unproven and it is the hardest mechanism in the project", "why": "Deploying and recovering a fouling, snagging, swinging mass from a hover, thousands of times, unattended. Little borrowable prior art.", "severity": "critical" },
+      { "item": "The business model assumes BVLOS, which we do not have", "why": "Dock-based autonomous operation without a pilot present is the entire margin story, and it is contingent on an authorisation with a long lead time and no guarantee.", "citation_ids": ["caap-rpas-regulations"], "severity": "critical" },
+      { "item": "Weather grounds us exactly when the risk peaks", "why": "The monsoon conditions that trigger overturn events are the conditions a small multirotor cannot fly in. This is close to fatal for the catastrophe-prevention pitch and it deserves a direct answer rather than a footnote. It is a strong argument for a buoy hybrid.", "severity": "high" },
+      { "item": "No team, no capital, no customers", "why": "See team-structure.json and traction.json. Both are honestly empty.", "severity": "high" },
+      { "item": "The predictive claim is unvalidated and will remain so for at least a full season", "why": "You cannot compress a year of weather.", "severity": "high" },
+      { "item": "We cannot see the fish", "why": "No underwater vision, no biomass estimation. We infer fish state from water state, which is a weaker feedback loop than the incumbents' direct observation.", "severity": "medium" },
+      { "item": "The customer who needs it most cannot pay", "why": "Structural, not solvable by better pitching.", "severity": "high" }
+    ],
+    "opportunities": [
+      { "item": "Aquaculture crossed 50 percent of aquatic animal production and keeps growing", "citation_ids": ["fao-sofia-2024"], "confidence": "high" },
+      { "item": "Intensification worsens the problem we solve", "why": "Our market grows as the sector's stocking density rises. Uncomfortable but structurally real.", "confidence": "medium" },
+      { "item": "Insurance and credit as a wedge", "why": "Continuous environmental records make an uninsurable asset insurable. If insurance access becomes contingent on monitoring, adoption stops being discretionary. Possibly worth more than the drone.", "confidence": "speculative" },
+      { "item": "Free Copernicus satellite data as an instant historical baseline", "why": "Nearly free capability, not yet in the architecture.", "citation_ids": ["springer-uav-satellite-review-2024"], "confidence": "high" },
+      { "item": "Certification audit burden", "why": "Commercial farms already pay people to compile environmental records by hand.", "confidence": "medium" },
+      { "item": "Post-typhoon damage assessment", "why": "Philippine-specific, opens an insurance-adjacent customer.", "confidence": "medium" },
+      { "item": "Local lake chemistry as a moat", "why": "Taal's volcanic sulfur input is not in any imported product's model.", "confidence": "medium" },
+      { "item": "Occupational safety as a funding argument", "why": "Removing the pre-dawn boat run is a human safety case that lands with LGUs and development funders where FCR arithmetic does not.", "confidence": "medium" }
+    ],
+    "threats": [
+      { "item": "The USV is a better architecture for part of this market", "why": "Better endurance, no aviation regulator, can profile continuously. Our answer is transit speed, aerial imaging, and topology-independence — and for some customers that is not enough.", "severity": "high" },
+      { "item": "Buoy vendors add spatial coverage, or we add buoys", "why": "The hybrid dominates either alone. Whoever gets there first defines the category.", "severity": "high" },
+      { "item": "Salmon incumbents come down-market with capital", "why": "If tropical aquaculture becomes valuable enough, well-funded incumbents with real validation data arrive. Our defence is local depth, not a technical lead.", "severity": "medium" },
+      { "item": "CAAP declines or delays BVLOS", "why": "Directly removes the margin.", "severity": "critical" },
+      { "item": "Willingness to pay simply does not exist", "why": "Most target operators currently spend approximately zero on monitoring. We are creating a budget line, not winning share of one — a fundamentally harder task.", "severity": "critical" },
+      { "item": "A high-profile crash or a wildlife incident", "why": "One drone in a lake, one propeller injury, or one bird strike story, and the social licence goes. Reputational risk in a small lake community compounds fast.", "severity": "medium" },
+      { "item": "We enable over-stocking", "why": "Better instruments may let operators push density closer to the edge. A real risk that the technology makes the underlying problem worse, and it deserves honest treatment rather than silence.", "severity": "medium" },
+      { "item": "Commoditisation of the imaging half", "why": "Any drone service can fly a multispectral camera. Only the probe is hard.", "severity": "medium" }
+    ],
+    "so_what": {
+      "strategy_implied": "The strengths cluster around depth-plus-imaging; the weaknesses cluster around maturity, endurance, and regulation. That combination argues for: (1) prove the probe claim first, because it is the only defensible thing; (2) plan for a buoy hybrid rather than against it, because our own matrix says the hybrid wins; (3) start the BVLOS conversation immediately, because it is the longest pole; (4) sell aeration efficiency before selling catastrophe prevention, because we cannot fly in the weather where catastrophes happen.",
+      "the_uncomfortable_read": "An honest reading of this SWOT says the OmniDrone is a coverage instrument for chronic management, not a catastrophe-prevention system — because we are grounded during the storms that cause catastrophes. That is a smaller, less thrilling story and it is probably the true one. It is also a better business, because chronic management pays every cycle. The pitch should follow the analysis rather than the drama."
+    }
+  },
+
+  "porters_five_forces": {
+    "citation_ids": ["porter-1979"],
+    "forces": [
+      {
+        "force": "Threat of New Entrants",
+        "intensity": "high",
+        "reasoning": "Multirotor airframes are commoditised, sondes are off-the-shelf, and multispectral cameras are purchasable. The barriers are the winch integration, the calibration workflow, and the regulatory certificate — real but not insurmountable, and none of them are patents.",
+        "our_defence": "Accumulated site-specific data, local relationships, and regulatory position. None of which we have yet. Our moat is a plan, not an asset.",
+        "honest_note": "A well-funded team could replicate the hardware in eighteen months. What they could not quickly replicate is three years of Taal Lake profiles. That argues for deploying early and cheaply to start the data clock, even at poor margins."
+      },
+      {
+        "force": "Bargaining Power of Buyers",
+        "intensity": "high",
+        "reasoning": "Buyers have a free alternative: doing nothing, which is what they do now. They have no budget line to defend and no switching cost to overcome, which sounds good and is not — it means there is nothing to displace, so every sale is a fresh act of persuasion.",
+        "our_defence": "Demonstrated peso outcome in the first cycle. Nothing else works."
+      },
+      {
+        "force": "Bargaining Power of Suppliers",
+        "intensity": "medium",
+        "reasoning": "Sensor suppliers for aquaculture-grade sondes are concentrated, and the optical DO and fluorometer market has few credible vendors. Battery and flight controller supply is competitive. Chinese airframe component supply is cheap and abundant but carries geopolitical and export-control exposure.",
+        "our_defence": "Design for sensor interchangeability from the start. A probe architecture locked to one vendor's sonde hands them our margin."
+      },
+      {
+        "force": "Threat of Substitutes",
+        "intensity": "high",
+        "reasoning": "Buoys, USVs, satellites, manual sampling, and the farmer's own experience are all substitutes, and each is better than us on some axis. Experience in particular is free and has kept these farms alive for decades.",
+        "our_defence": "The specific combination. And genuine humility about the scale threshold below which a buoy simply wins."
+      },
+      {
+        "force": "Competitive Rivalry",
+        "intensity": "low today, rising",
+        "reasoning": "No dominant commercial drone-sonde product exists in this market. That is either an opportunity or a signal that the market is not there — and the honest position is that we do not yet know which.",
+        "note": "Many academic prototypes, no commercial winner, is a pattern that rewards careful reading. Founders explain it away; they should not."
+      }
+    ],
+    "overall_industry_attractiveness": "Structurally difficult. High entrant threat, high buyer power, high substitute threat, and a customer base with no existing budget. The attractive part is not the industry structure — it is the growth of the underlying sector and the absence of an incumbent in this specific niche. Enter with clear eyes."
+  },
+
+  "pestel": {
+    "political": ["LGU control of cage permits makes local politics a gating factor on every deployment.", "BFAR and DENR mandates create both a customer and a regulator.", "Fish kills are politically salient events in lake municipalities, which cuts both ways."],
+    "economic": ["Smallholder capital scarcity is the binding commercial constraint.", "Feed price volatility drives the FCR value proposition.", "Aquaculture credit is thin and expensive because risk is unquantified — which is our long-term wedge."],
+    "social": ["Distrust of technology vendors, earned by the sector's history.", "Low digital literacy shapes the dashboard, not just its UX.", "Drone overflight of lakeside communities is a social licence question decided over months of conversation, not by a privacy policy.", "Occupational drowning risk is normalised in a way outsiders find shocking."],
+    "technological": ["Multispectral sensor cost and mass have fallen to viability.", "Edge inference at a few watts is now practical.", "Battery energy density remains the binding endurance constraint and improves slowly.", "Free Copernicus data is available and unexploited."],
+    "environmental": ["Increasing frequency of thermal and rainfall extremes worsens the problem.", "Eutrophication of shared water bodies is a commons tragedy with an information vacuum at its centre.", "Volcanic activity at Taal is a locally distinctive chemistry driver.", "Typhoons are a design condition, not an edge case."],
+    "legal": ["CAAP RPAS rules gate the operating concept; BVLOS requires specific authorisation.", "Medicine dispensing crosses into regulated veterinary territory.", "Data privacy obligations attach to imagery of people and property.", "Liability for a missed warning is genuinely unresolved and needs legal advice, not founder optimism."],
+    "citation_ids": ["caap-rpas-regulations", "fao-sofia-2024", "khaleej-heat-fishkill-ph"]
+  }
+}

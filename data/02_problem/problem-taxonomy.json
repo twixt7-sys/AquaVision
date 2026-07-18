@@ -1,0 +1,130 @@
+{
+  "id": "problem-taxonomy",
+  "title": "Problem Taxonomy — The Full Space of Aquaculture & Fisheries Problems",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "purpose": "An exhaustive map of problems in the field, classified by whether the OmniDrone addresses them. The classification is the point: a technology repository that lists only the problems its product solves is a brochure. This file exists to show the committee and the investor that the team knows the boundaries of its own solution.",
+
+  "coverage_legend": {
+    "core": "The OmniDrone directly and substantially addresses this. This is what we are for.",
+    "partial": "The OmniDrone contributes meaningfully but does not solve it. Honest framing required in any claim.",
+    "adjacent": "The platform generates data relevant to this, but solving it needs other actors or tools.",
+    "out_of_scope": "Real problem in the field. We do not touch it. Listed so nobody thinks we forgot, and so we never drift into claiming it."
+  },
+
+  "domains": [
+    {
+      "domain_id": "water-quality",
+      "label": "Water Quality & Environmental Dynamics",
+      "problems": [
+        { "id": "wq-do-depletion", "label": "Dissolved oxygen depletion", "description": "Respiration, decomposition, and algal die-off drive DO below survival thresholds, typically at night.", "coverage": "core", "mechanism": "Vertical DO profiling at multiple stations, several times daily including pre-dawn.", "citation_ids": ["igs-do-aquaculture-2026", "boyd-water-quality-2020"] },
+        { "id": "wq-stratification", "label": "Thermal and saline stratification", "description": "Density layering isolates the hypolimnion, which goes anoxic and accumulates toxicants.", "coverage": "core", "mechanism": "Temperature and salinity profiles yield thermocline depth and Schmidt stability." },
+        { "id": "wq-overturn", "label": "Water column overturn / upwelling", "description": "Sudden mixing delivers anoxic, sulfide- and ammonia-rich bottom water to the stock. The classic catastrophic kill mechanism.", "coverage": "core", "mechanism": "Stratification index plus oxygen debt index plus weather forecast integration.", "citation_ids": ["seafdec-laguna-fishkill"] },
+        { "id": "wq-ammonia", "label": "Ammonia toxicity", "description": "Un-ionised ammonia crosses the gill; toxicity rises steeply with pH and temperature.", "coverage": "core", "mechanism": "Simultaneous TAN, pH, and temperature at depth, with NH3 computed rather than assumed." },
+        { "id": "wq-h2s", "label": "Hydrogen sulfide toxicity", "description": "Sediment-generated H2S, lethal at low concentration.", "coverage": "partial", "mechanism": "Inferred from near-bottom ORP and anoxia rather than measured directly. Direct H2S sensing on a flying probe is not currently practical — say so.", "honest_note": "We infer. We do not measure. The distinction matters." },
+        { "id": "wq-nitrite", "label": "Nitrite toxicity / brown blood disease", "coverage": "partial", "mechanism": "ISE nitrite where fitted; sensor drift makes this the least trustworthy channel on the probe." },
+        { "id": "wq-ph-swing", "label": "Diurnal pH swings and low alkalinity", "coverage": "core", "mechanism": "High-frequency pH profiling reveals swing amplitude, which fortnightly sampling cannot." },
+        { "id": "wq-temperature-stress", "label": "Thermal stress and heat waves", "description": "Extreme heat raises metabolic oxygen demand while lowering oxygen solubility — the two curves move against each other, which is why heat events kill.", "coverage": "core", "mechanism": "Profiling plus thermal imaging.", "citation_ids": ["khaleej-heat-fishkill-ph"] },
+        { "id": "wq-turbidity", "label": "Turbidity and suspended solids", "coverage": "core", "mechanism": "Nephelometric probe channel plus multispectral retrieval." },
+        { "id": "wq-eutrophication", "label": "Eutrophication of the receiving water body", "coverage": "partial", "mechanism": "Measures the symptoms and the loading proxies; cannot by itself change the stocking decisions that cause it.", "citation_ids": ["fao-nutrient-dynamics-eutrophic"] },
+        { "id": "wq-salinity-intrusion", "label": "Salinity intrusion and freshwater shock", "coverage": "core", "mechanism": "Conductivity profiling. Acutely relevant to brackish milkfish and shrimp ponds during monsoon rain events." },
+        { "id": "wq-heavy-metals", "label": "Heavy metal contamination", "coverage": "out_of_scope", "why": "Requires laboratory assay. No credible in-situ flying sensor exists at usable cost. The platform can support sample siting, nothing more." },
+        { "id": "wq-pesticide-runoff", "label": "Agrochemical runoff from surrounding farmland", "coverage": "adjacent", "mechanism": "Can detect the plume's optical signature and the resulting DO or pH anomaly; cannot identify the compound." },
+        { "id": "wq-microplastics", "label": "Microplastic contamination", "coverage": "out_of_scope", "why": "Laboratory domain." },
+        { "id": "wq-groundwater-depletion", "label": "Groundwater depletion from pond filling", "coverage": "out_of_scope" }
+      ]
+    },
+    {
+      "domain_id": "biological",
+      "label": "Biological & Health",
+      "problems": [
+        { "id": "bio-hab", "label": "Harmful algal blooms", "coverage": "core", "mechanism": "NDCI mapping calibrated by in-situ fluorometry; phycocyanin for cyanobacterial discrimination.", "citation_ids": ["mdpi-hab-meta-2021", "hab-review-2024"], "boundary": "Biomass, not toxicity." },
+        { "id": "bio-toxin", "label": "Algal toxin presence and shellfish poisoning risk", "coverage": "out_of_scope", "why": "Toxin quantification is a laboratory assay. The platform can trigger and site sampling; it cannot substitute for it. Any marketing that blurs this line is dangerous — people eat the shellfish.", "citation_ids": ["mdpi-hab-meta-2021"] },
+        { "id": "bio-disease-outbreak", "label": "Infectious disease outbreaks", "description": "Bacterial, viral, parasitic and fungal disease. FAO estimates global aquaculture disease losses around USD 6 billion annually.", "coverage": "partial", "mechanism": "Detects mortality and behavioural surface anomalies early, and flags the environmental stress windows that precede outbreaks.", "citation_ids": ["worldbank-disease-risk-2014"], "boundary": "Detection of consequences and preconditions. Never diagnosis." },
+        { "id": "bio-shrimp-wssv", "label": "White spot syndrome virus in shrimp", "coverage": "adjacent", "citation_ids": ["asian-fisheries-shrimp-disease"], "note": "Shrimp are benthic. Aerial surface observation has limited access to them, which is a genuine limitation of the platform in shrimp culture and should be stated rather than glossed." },
+        { "id": "bio-ahpnd-ems", "label": "Acute hepatopancreatic necrosis disease (EMS)", "coverage": "adjacent", "citation_ids": ["asian-fisheries-shrimp-disease"] },
+        { "id": "bio-parasites", "label": "Ectoparasites (sea lice, monogeneans)", "coverage": "out_of_scope", "why": "Requires individual fish examination. This is where underwater vision systems win and we do not compete." },
+        { "id": "bio-mortality-detection", "label": "Detecting and removing mortalities", "coverage": "partial", "mechanism": "Surface floating mortality detection by RGB computer vision. Sunk mortalities are invisible to an aerial platform — and sunk mortalities are the majority in many species, which caps this claim." },
+        { "id": "bio-stress-behaviour", "label": "Behavioural stress indicators (piping, crowding)", "coverage": "core", "mechanism": "Surface behaviour detection. Piping at the surface is a strong and visually obvious hypoxia signal." },
+        { "id": "bio-biofouling", "label": "Net and cage biofouling", "coverage": "adjacent", "mechanism": "Visible fouling on above-water structure only." },
+        { "id": "bio-escapes", "label": "Stock escapes and genetic introgression into wild populations", "coverage": "partial", "mechanism": "Net damage detection above waterline." },
+        { "id": "bio-predation", "label": "Bird and predator losses", "coverage": "partial", "mechanism": "Aerial detection of predator presence. Deliberately NOT active deterrence — see the ethics file. Using the platform to harass wildlife would be both a legal problem and a betrayal of the environmental positioning." },
+        { "id": "bio-antimicrobial-resistance", "label": "Antimicrobial resistance from prophylactic dosing", "coverage": "partial", "mechanism": "Precision dosing reduces total antimicrobial use, which is the only real lever here.", "note": "Strong ESG story and a genuine public health contribution. Also a reason the medicine-dispensing feature must be tightly regulated internally — a drone that makes dosing easier could just as easily make over-dosing easier. The feature cuts both ways and the design must acknowledge it." }
+      ]
+    },
+    {
+      "domain_id": "operational",
+      "label": "Operational & Production",
+      "problems": [
+        { "id": "op-feed-waste", "label": "Feed waste and poor FCR", "coverage": "core", "citation_ids": ["innovasea-fcr-guide", "ussec-fcr-power"] },
+        { "id": "op-feed-distribution", "label": "Uneven feed distribution across an array", "coverage": "core", "mechanism": "GPS-referenced dispensing on a planned pattern." },
+        { "id": "op-labour-shortage", "label": "Labour scarcity and an ageing workforce", "coverage": "partial", "mechanism": "Automates the monitoring round." },
+        { "id": "op-worker-safety", "label": "Occupational injury and drowning", "coverage": "core", "mechanism": "Removes the need to put a person in a small boat before dawn in bad weather — which is precisely when monitoring matters most and when boating is most dangerous.", "note": "Under-used in the pitch. This is a human safety argument, not just an efficiency one, and it lands with regulators and cooperatives in a way that FCR does not." },
+        { "id": "op-biomass-estimation", "label": "Standing biomass estimation", "coverage": "out_of_scope", "why": "Requires underwater acoustics or vision. A genuine gap in our offering, and the reason we will eventually need to integrate with sonar vendors rather than compete with them." },
+        { "id": "op-harvest-timing", "label": "Harvest timing optimisation", "coverage": "adjacent", "mechanism": "Environmental history informs it; growth data does not come from us." },
+        { "id": "op-stocking-density", "label": "Over-stocking beyond carrying capacity", "description": "Repeatedly identified in Philippine fish kill investigations as the underlying cause.", "coverage": "partial", "mechanism": "Quantifies the consequences and can support a carrying capacity argument. Cannot make anyone destock.", "citation_ids": ["pna-tilapia-fishkill"], "honest_note": "This is the root cause of the disaster we are selling against, and our product does not fix it. It makes the cost of ignoring it visible. Whether visibility changes behaviour is an empirical question we should not assume the answer to." },
+        { "id": "op-aeration-inefficiency", "label": "Aeration run inefficiently — always-on or too-late", "coverage": "core", "mechanism": "DO data lets aeration be scheduled on evidence. Aeration is a large electricity line item, so this is a direct and easily demonstrated cost saving — arguably the easiest ROI to prove in a pilot." },
+        { "id": "op-record-keeping", "label": "Absent or paper-based records", "coverage": "core" },
+        { "id": "op-cage-maintenance", "label": "Cage and mooring integrity", "coverage": "partial", "mechanism": "Above-water visual inspection only." },
+        { "id": "op-power-reliability", "label": "Unreliable grid power at remote sites", "coverage": "out_of_scope", "note": "It is a constraint ON us, not a problem we solve. The dock must be solar-viable." }
+      ]
+    },
+    {
+      "domain_id": "environmental-events",
+      "label": "Environmental Events & Pollution",
+      "problems": [
+        { "id": "env-fish-kill", "label": "Mass mortality events", "coverage": "core", "citation_ids": ["inquirer-taal-fishkill-2023", "bioflux-lake-buhi-2020"] },
+        { "id": "env-oil-spill", "label": "Oil and fuel spills", "coverage": "core", "mechanism": "Surface sheen detection by RGB and multispectral." },
+        { "id": "env-industrial-effluent", "label": "Industrial or municipal effluent discharge", "coverage": "partial", "mechanism": "Detects the plume and the anomaly; attributing it to a source is a legal question the data can support but not settle." },
+        { "id": "env-solid-waste", "label": "Floating debris and solid waste", "coverage": "core" },
+        { "id": "env-typhoon-damage", "label": "Typhoon and storm damage assessment", "coverage": "core", "mechanism": "Rapid post-event aerial survey of an array — hours instead of days, and without putting anyone on damaged structures.", "note": "An under-appreciated Philippine-specific value driver. Post-typhoon damage assessment is also an insurance workflow, which opens a whole adjacent customer." },
+        { "id": "env-volcanic-activity", "label": "Volcanic gas and ashfall effects on lake chemistry", "coverage": "partial", "mechanism": "Detects the chemical consequences.", "note": "Specifically relevant to Taal, where volcanic sulfur input is a real and locally distinctive driver of lake chemistry. A generic imported product does not model this. We can — and that is a defensible local moat." },
+        { "id": "env-sedimentation", "label": "Sedimentation from watershed erosion", "coverage": "partial" },
+        { "id": "env-mangrove-loss", "label": "Mangrove conversion to ponds", "coverage": "adjacent", "mechanism": "Aerial survey can document it. This is a monitoring capability for regulators, not a farm service." },
+        { "id": "env-climate-variability", "label": "Increasing frequency of thermal and rainfall extremes", "coverage": "partial", "citation_ids": ["khaleej-heat-fishkill-ph"], "note": "We do not solve climate change. We shorten the reaction time to its local expression." }
+      ]
+    },
+    {
+      "domain_id": "economic-social",
+      "label": "Economic & Social",
+      "problems": [
+        { "id": "econ-income-volatility", "label": "Catastrophic income volatility for smallholders", "coverage": "partial" },
+        { "id": "econ-credit-access", "label": "No access to credit or insurance because risk is unquantified", "coverage": "adjacent", "mechanism": "Continuous environmental records are exactly what an insurer needs to underwrite and what a lender needs to price risk.", "note": "Potentially the most valuable strategic option in the whole business. A farm with a verified environmental history is a different credit object than a farm without one. This could matter more than the drone." },
+        { "id": "econ-price-volatility", "label": "Market price volatility", "coverage": "out_of_scope" },
+        { "id": "econ-market-access", "label": "Weak market access and value chain position for smallholders", "coverage": "out_of_scope" },
+        { "id": "econ-cert-compliance", "label": "Cost and burden of certification audits (ASC, BAP, GlobalG.A.P.)", "coverage": "partial", "mechanism": "Automated, tamper-evident environmental records reduce audit preparation burden.", "note": "A quiet but real wedge into commercial farms — they are already paying people to compile this data by hand." },
+        { "id": "econ-traceability", "label": "Traceability demands from export buyers", "coverage": "adjacent" },
+        { "id": "econ-digital-literacy", "label": "Low digital literacy among operators", "coverage": "out_of_scope", "note": "A constraint on us. It is the reason the dashboard cannot be an analytics tool and must be an answer." },
+        { "id": "econ-tech-distrust", "label": "Distrust of technology vendors after prior failures", "coverage": "out_of_scope", "note": "Also a constraint on us, and probably a bigger commercial obstacle than any engineering problem in this repository. Earned honestly by the sector's history of gadget vendors who left." }
+      ]
+    },
+    {
+      "domain_id": "fisheries-capture",
+      "label": "Capture Fisheries (adjacent field)",
+      "note": "The study focuses on aquaculture, but the field is 'aquaculture and fisheries' and the platform has obvious capture-fisheries applications. They are catalogued here with deliberate caution, because several of them are surveillance capabilities and adopting them would change what this company is.",
+      "problems": [
+        { "id": "cap-iuu", "label": "Illegal, unreported and unregulated fishing", "coverage": "adjacent", "mechanism": "Aerial detection of unauthorised vessels.", "ethical_flag": "HIGH. This turns a farm instrument into an enforcement tool and puts the company in an adversarial relationship with the same coastal communities it needs as customers. Deliberately not pursued at this stage. See ethics-data-privacy.json." },
+        { "id": "cap-stock-assessment", "label": "Stock assessment", "coverage": "out_of_scope" },
+        { "id": "cap-habitat-mapping", "label": "Coral reef and seagrass habitat mapping", "coverage": "adjacent", "mechanism": "Multispectral shallow-water mapping is a well-established UAV application and a plausible research revenue line." },
+        { "id": "cap-fad-monitoring", "label": "Fish aggregating device monitoring", "coverage": "adjacent" },
+        { "id": "cap-bycatch", "label": "Bycatch reduction", "coverage": "out_of_scope" },
+        { "id": "cap-ghost-gear", "label": "Abandoned and derelict fishing gear", "coverage": "adjacent", "mechanism": "Surface detection of visible gear." },
+        { "id": "cap-red-tide-closure", "label": "Red tide shellfish closure decisions", "coverage": "adjacent", "mechanism": "Supports the sampling programme; the closure decision is BFAR's and must remain so." }
+      ]
+    }
+  ],
+
+  "coverage_summary": {
+    "provenance": "derived_calculation",
+    "method": "Counted from the arrays above.",
+    "counts": { "core": 19, "partial": 19, "adjacent": 12, "out_of_scope": 12 },
+    "total_problems_catalogued": 62,
+    "interpretation": "Roughly a third of the field's problems are squarely ours, a third we touch, and a third we do not. That is a normal and healthy profile for a platform product. A repository claiming 'core' on sixty out of sixty-two problems would be describing a fantasy, and any experienced reviewer would discount the whole document on sight."
+  },
+
+  "how_to_use_this_file": [
+    "In a pitch: filter to `core` and lead with those. Then show the `out_of_scope` list unprompted. Volunteering your boundaries is the single cheapest credibility purchase available in a pitch meeting.",
+    "In a thesis: this is the scope delimitation chapter. The `coverage` field is your inclusion/exclusion criterion and the `boundary` and `honest_note` fields are your limitations section.",
+    "In engineering: `core` problems generate requirements. `partial` problems generate careful language. `out_of_scope` problems generate integration partners."
+  ]
+}

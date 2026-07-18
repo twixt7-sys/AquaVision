@@ -1,0 +1,39 @@
+{
+  "id": "chart-species-production-mix",
+  "chart_type": "donut",
+  "title": "Where Farmed Aquatic Animals Are Produced",
+  "subtitle": "By region and by system, 2022",
+  "description": "Two facts that justify the beachhead: 70 percent of production is in Asia, and 62.6 percent of farmed aquatic animals come from inland systems — precisely the OmniDrone's environment. Building for tropical inland Asian aquaculture is building for the centre of the industry.",
+  "provenance": "verified_external",
+  "citation_ids": ["fao-sofia-2024"],
+  "series": [
+    {
+      "name": "Regional share of aquatic animal output 2022",
+      "unit": "%",
+      "provenance": "verified_external",
+      "data": [
+        { "x": "Asia", "y": 70 },
+        { "x": "Europe", "y": 9 },
+        { "x": "Latin America & Caribbean", "y": 9 },
+        { "x": "Africa", "y": 7 },
+        { "x": "Northern America", "y": 3 },
+        { "x": "Oceania", "y": 1 }
+      ]
+    }
+  ],
+  "secondary_series": {
+    "name": "Inland vs marine/coastal share of farmed aquatic animals",
+    "provenance": "verified_external",
+    "data": [
+      { "x": "Inland", "y": 62.6 },
+      { "x": "Marine & coastal", "y": 37.4 }
+    ],
+    "note": "Render as a second donut. Inland dominance is the argument for an aerial platform designed for lakes and ponds rather than offshore marine cages."
+  },
+  "notes": "Percentages sum to 99 for the regional series due to FAO rounding. Do not silently normalise to 100 — show the rounding honestly.",
+  "philippine_gap": {
+    "note": "A Philippine species-mix breakdown belongs here but requires the BFAR Philippine Fisheries Profile, which is NOT obtained. The webpage should render this as a labelled 'data pending' placeholder, not a fabricated pie.",
+    "provenance": "assumption",
+    "status": "awaiting_data"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "id": "sample-pond-twin-state",
+  "title": "Sample Digital Twin State — ILLUSTRATIVE SYNTHETIC DATA",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "illustrative_synthetic",
+
+  "DANGER_READ_THIS_FIRST": "EVERY VALUE IN THIS FILE IS FABRICATED. It describes no real pond. It exists solely so the webpage developer can build and test the PondTwin 3D visualisation against correctly-shaped data. It must never appear as evidence of anything. The webpage must render the illustrative_synthetic badge on the entire twin view when fed this file.",
+
+  "synthetic_twin": {
+    "site_id": "SYNTH-LAKE-01",
+    "as_of": "fictional timestamp",
+    "geometry": {
+      "note": "A fabricated simple geometry for rendering. Not a real bathymetry.",
+      "shape": "rectangular demo bay",
+      "extent_m": { "x": 200, "y": 150 },
+      "max_depth_m": 7,
+      "cages": [
+        { "unit_id": "SYNTH-C1", "x": 40, "y": 40, "radius_m": 8, "species": "tilapia", "status_illustrative": "nominal" },
+        { "unit_id": "SYNTH-C2", "x": 40, "y": 90, "radius_m": 8, "species": "tilapia", "status_illustrative": "nominal" },
+        { "unit_id": "SYNTH-C3", "x": 90, "y": 40, "radius_m": 8, "species": "tilapia", "status_illustrative": "advisory" },
+        { "unit_id": "SYNTH-C4", "x": 90, "y": 90, "radius_m": 8, "species": "tilapia", "status_illustrative": "warning" },
+        { "unit_id": "SYNTH-C5", "x": 140, "y": 65, "radius_m": 8, "species": "milkfish", "status_illustrative": "warning" }
+      ],
+      "dock": { "x": 5, "y": 75 },
+      "stations": [
+        { "station_id": "SYNTH-ST-01", "x": 40, "y": 40 },
+        { "station_id": "SYNTH-ST-04", "x": 90, "y": 90 },
+        { "station_id": "SYNTH-ST-05", "x": 140, "y": 65 }
+      ]
+    },
+    "state_layers": {
+      "note": "This block exists to test the twin's PROVENANCE RENDERING — the requirement that measured, interpolated, and stale data look visibly different. See digital-twin.json#/the_provenance_rendering_requirement.",
+      "measured": {
+        "description": "Fabricated measured points at the three stations. In the real twin these render solid and sharp.",
+        "provenance": "illustrative_synthetic",
+        "points": [
+          { "station_id": "SYNTH-ST-01", "surface_do_mgl": 5.8, "bottom_do_mgl": 4.2, "thermocline_depth_m": 5.0, "age_minutes": 12 },
+          { "station_id": "SYNTH-ST-04", "surface_do_mgl": 3.1, "bottom_do_mgl": 0.2, "thermocline_depth_m": 3.5, "age_minutes": 12 },
+          { "station_id": "SYNTH-ST-05", "surface_do_mgl": 3.4, "bottom_do_mgl": 0.6, "thermocline_depth_m": 3.8, "age_minutes": 12 }
+        ]
+      },
+      "interpolated": {
+        "description": "The volume BETWEEN stations. In the real twin this must render with a VISIBLE UNCERTAINTY CUE that grows with distance from a station. This block carries a fabricated per-point confidence so the developer can wire that rendering.",
+        "provenance": "illustrative_synthetic",
+        "the_critical_rendering_requirement": "A smooth confident gradient here is the most persuasive lie the product can tell. Volume far from any station MUST look less certain. See digital-twin.json REQ-TWIN-003.",
+        "sample_grid_points": [
+          { "x": 65, "y": 65, "interpolated_surface_do": 4.4, "confidence": 0.45, "note": "midway between stations — low confidence, render uncertain" },
+          { "x": 90, "y": 90, "interpolated_surface_do": 3.1, "confidence": 0.95, "note": "on a station — high confidence" },
+          { "x": 170, "y": 30, "interpolated_surface_do": 3.9, "confidence": 0.20, "note": "far corner, no nearby station — render VERY uncertain, near-transparent" }
+        ]
+      },
+      "operator_supplied": {
+        "description": "Stock data the farmer typed in. Must be badged distinctly — it is testimony, not measurement.",
+        "provenance": "illustrative_synthetic",
+        "note": "In the real twin, a confident biomass number sourced here launders a guess into a fact. Badge it.",
+        "cages": [
+          { "unit_id": "SYNTH-C1", "stocked_count": 12000, "est_biomass_kg": 2400, "source": "operator estimate" },
+          { "unit_id": "SYNTH-C4", "stocked_count": 15000, "est_biomass_kg": 3100, "source": "operator estimate" }
+        ]
+      },
+      "simulated": {
+        "status": "EMPTY — the simulation layer does not exist yet",
+        "note": "In v1, PondTwin has no simulation core. This block is null on purpose. See digital-twin.json#/twin_layers (State — simulated). When the simulation exists, its output goes here in a VISUALLY DISTINCT channel, never blended with measured."
+      }
+    },
+    "illustrative_alert": {
+      "provenance": "illustrative_synthetic",
+      "severity": "warning",
+      "unit_id": "SYNTH-C4",
+      "message_example": "Bottom water at cage 4 is anoxic (0.2 mg/L at 6 m, measured 12 min ago). Rain forecast tonight. If the column mixes, that water reaches your fish. Consider running aerators at cages 3-5 this evening.",
+      "note": "This is the alert LANGUAGE STYLE from dashboard-spec.json — measured fact plus mechanism plus concrete action, no score. The content is fabricated; the FORMAT is the real specification."
+    }
+  },
+
+  "for_the_webpage_developer": {
+    "what_this_is_for": "Building and testing the 3D twin view — geometry rendering, the vertical slice interaction, and critically the PROVENANCE RENDERING that makes measured, interpolated, operator-supplied, and stale data look different.",
+    "the_non_negotiable": "When this file feeds the twin, the whole view carries the illustrative_synthetic badge. And the interpolated layer must demonstrate the uncertainty-rendering requirement, because that requirement is the twin's core honesty feature and this synthetic data exists partly to let you build it.",
+    "on_real_data": "Delete this file at repository v2.0.0 and remove synthetic badges in the same change."
+  }
+}

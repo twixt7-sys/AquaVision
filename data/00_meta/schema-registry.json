@@ -1,0 +1,266 @@
+{
+  "id": "schema-registry",
+  "title": "AquaVision Knowledge Repository — Schema Registry",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "description": "Defines the shape of every recurring object in this repository so that a consuming webpage can render any file generically. These are JSON Schema (draft 2020-12) fragments plus prose notes.",
+
+  "conventions": {
+    "identifiers": "kebab-case, globally unique within the repository, permanent. Labels may be edited freely; ids may not.",
+    "units": "SI unless the field name states otherwise. Currency fields always carry an explicit ISO-4217 `currency` sibling. Never store a bare number for money.",
+    "dates": "ISO 8601. Full dates as YYYY-MM-DD. Years as integers. Ranges as {start, end}.",
+    "nulls": "Use null for 'known to be absent'. Use the string 'unknown' for 'we have not determined this'. Never use 0 as a stand-in for missing.",
+    "citations": "Any factual claim carries `citation_ids: []` referencing entries in data/07_research/references-bibliography.json.",
+    "provenance": "Mandatory on every quantitative record. See enum below."
+  },
+
+  "definitions": {
+    "provenance": {
+      "type": "string",
+      "enum": [
+        "verified_external",
+        "derived_calculation",
+        "modeled_projection",
+        "design_target",
+        "illustrative_synthetic",
+        "assumption"
+      ],
+      "description": "The epistemic status of the numbers in this record. Consuming UIs SHOULD render a visible badge for anything that is not `verified_external`, and MUST render a warning badge for `illustrative_synthetic`."
+    },
+
+    "confidence": {
+      "type": "string",
+      "enum": ["high", "medium", "low", "speculative"],
+      "description": "How much weight the authors place on this record surviving contact with reality."
+    },
+
+    "citation": {
+      "type": "object",
+      "required": ["citation_id", "type", "title", "year"],
+      "properties": {
+        "citation_id": { "type": "string", "description": "Stable key, e.g. 'fao-sofia-2024'." },
+        "type": { "type": "string", "enum": ["journal_article", "report", "book", "chapter", "standard", "law", "dataset", "news", "web", "thesis", "conference_paper", "preprint"] },
+        "authors": { "type": "array", "items": { "type": "string" }, "description": "Family, Given format. Use the issuing body for institutional authors." },
+        "year": { "type": "integer" },
+        "title": { "type": "string" },
+        "container": { "type": "string", "description": "Journal, publisher, or issuing body." },
+        "volume": { "type": "string" },
+        "issue": { "type": "string" },
+        "pages": { "type": "string" },
+        "doi": { "type": ["string", "null"] },
+        "url": { "type": ["string", "null"] },
+        "accessed": { "type": ["string", "null"], "description": "ISO date the URL was last checked." },
+        "apa7": { "type": "string", "description": "Pre-rendered APA 7th edition string for copy-paste into a manuscript." },
+        "relevance": { "type": "string", "description": "One or two sentences on why this source matters to the OmniDrone argument. This is the field a thesis writer actually needs." },
+        "themes": { "type": "array", "items": { "type": "string" } },
+        "verification_status": {
+          "type": "string",
+          "enum": ["url_checked", "cited_from_search_result", "needs_verification"],
+          "description": "cited_from_search_result means the bibliographic details came from a search engine summary and the authors have NOT opened the source. Verify before submitting a thesis."
+        }
+      }
+    },
+
+    "chart_payload": {
+      "type": "object",
+      "required": ["id", "chart_type", "title", "provenance", "series"],
+      "properties": {
+        "id": { "type": "string" },
+        "chart_type": {
+          "type": "string",
+          "enum": ["line", "bar", "stacked_bar", "grouped_bar", "area", "scatter", "pie", "donut", "radar", "gauge", "heatmap", "waterfall", "funnel", "range_band", "table", "kpi_tile"]
+        },
+        "title": { "type": "string" },
+        "subtitle": { "type": "string" },
+        "description": { "type": "string", "description": "What the reader should take away. Rendered as a caption." },
+        "provenance": { "$ref": "#/definitions/provenance" },
+        "citation_ids": { "type": "array", "items": { "type": "string" } },
+        "axes": {
+          "type": "object",
+          "properties": {
+            "x": { "type": "object", "properties": { "label": {"type":"string"}, "unit": {"type":"string"}, "type": {"type":"string","enum":["category","time","linear","log"]} } },
+            "y": { "type": "object", "properties": { "label": {"type":"string"}, "unit": {"type":"string"}, "type": {"type":"string","enum":["category","time","linear","log"]}, "min": {"type":["number","null"]}, "max": {"type":["number","null"]} } }
+          }
+        },
+        "series": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "data"],
+            "properties": {
+              "name": { "type": "string" },
+              "unit": { "type": "string" },
+              "provenance": { "$ref": "#/definitions/provenance", "description": "Overrides the chart-level provenance for this series. Use when a chart mixes historical fact with projection." },
+              "data": {
+                "type": "array",
+                "description": "Array of [x, y] pairs or {x, y, meta} objects.",
+                "items": {}
+              }
+            }
+          }
+        },
+        "annotations": {
+          "type": "array",
+          "description": "Threshold lines, event markers, shaded regions.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "kind": { "type": "string", "enum": ["hline", "vline", "band", "point_label"] },
+              "value": {},
+              "label": { "type": "string" },
+              "severity": { "type": "string", "enum": ["info", "advisory", "warning", "critical"] }
+            }
+          }
+        },
+        "notes": { "type": "string" }
+      }
+    },
+
+    "kpi": {
+      "type": "object",
+      "required": ["id", "label", "unit", "provenance"],
+      "properties": {
+        "id": { "type": "string" },
+        "label": { "type": "string" },
+        "definition": { "type": "string", "description": "The precise operational definition. If two people can compute different numbers from this, the definition is not finished." },
+        "formula": { "type": "string" },
+        "unit": { "type": "string" },
+        "value": { "type": ["number", "null"] },
+        "target": { "type": ["number", "null"] },
+        "direction": { "type": "string", "enum": ["higher_is_better", "lower_is_better", "band_is_better"] },
+        "acceptable_band": { "type": "object", "properties": { "min": {"type":["number","null"]}, "max": {"type":["number","null"]} } },
+        "provenance": { "$ref": "#/definitions/provenance" },
+        "citation_ids": { "type": "array", "items": { "type": "string" } },
+        "status": { "type": "string", "enum": ["measured", "modeled", "target_only", "awaiting_data"] }
+      }
+    },
+
+    "requirement": {
+      "type": "object",
+      "required": ["id", "statement", "type", "verification_method"],
+      "properties": {
+        "id": { "type": "string", "description": "e.g. 'REQ-HW-014'." },
+        "statement": { "type": "string", "description": "Shall-statement. One requirement per record, testable, unambiguous." },
+        "type": { "type": "string", "enum": ["functional", "performance", "interface", "environmental", "regulatory", "safety", "usability", "data"] },
+        "priority": { "type": "string", "enum": ["must", "should", "could", "wont_this_release"], "description": "MoSCoW." },
+        "rationale": { "type": "string" },
+        "verification_method": { "type": "string", "enum": ["test", "analysis", "inspection", "demonstration"] },
+        "verification_status": { "type": "string", "enum": ["not_started", "planned", "in_progress", "passed", "failed", "waived"] },
+        "trace_to": { "type": "array", "items": { "type": "string" }, "description": "IDs of the problem, use case, or stakeholder need this requirement serves. Every requirement must trace to something or it is scope creep." }
+      }
+    },
+
+    "risk": {
+      "type": "object",
+      "required": ["id", "description", "severity", "likelihood"],
+      "properties": {
+        "id": { "type": "string" },
+        "category": { "type": "string", "enum": ["technical", "operational", "safety", "environmental", "regulatory", "commercial", "financial", "reputational", "data_security"] },
+        "description": { "type": "string" },
+        "cause": { "type": "string" },
+        "effect": { "type": "string" },
+        "severity": { "type": "integer", "minimum": 1, "maximum": 10, "description": "FMEA severity of effect." },
+        "likelihood": { "type": "integer", "minimum": 1, "maximum": 10, "description": "FMEA occurrence." },
+        "detectability": { "type": "integer", "minimum": 1, "maximum": 10, "description": "FMEA detection. 1 = certain to be caught, 10 = undetectable before harm." },
+        "rpn": { "type": "integer", "description": "Risk Priority Number = severity x likelihood x detectability. Recompute on every edit." },
+        "mitigation": { "type": "string" },
+        "residual_rpn": { "type": "integer" },
+        "owner": { "type": "string" },
+        "status": { "type": "string", "enum": ["open", "mitigating", "accepted", "closed", "transferred"] }
+      }
+    },
+
+    "model_card": {
+      "type": "object",
+      "description": "Follows the Mitchell et al. (2019) Model Cards convention. See citation_id 'mitchell-model-cards-2019'.",
+      "required": ["id", "task", "status"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "task": { "type": "string" },
+        "status": { "type": "string", "enum": ["concept", "prototype", "trained_on_public_data", "field_validated", "production"] },
+        "intended_use": { "type": "string" },
+        "out_of_scope_use": { "type": "string", "description": "Explicitly what this model must NOT be used to decide. Required — a model card without this is marketing." },
+        "inputs": { "type": "array", "items": { "type": "string" } },
+        "outputs": { "type": "array", "items": { "type": "string" } },
+        "architecture_candidate": { "type": "string" },
+        "training_data_plan": { "type": "string" },
+        "evaluation_metrics": { "type": "array", "items": { "type": "string" } },
+        "performance": { "type": ["object", "null"], "description": "null until real evaluation has been run. Do not populate with aspirational numbers; use `target_performance` for those." },
+        "target_performance": { "type": "object" },
+        "known_failure_modes": { "type": "array", "items": { "type": "string" } },
+        "fairness_and_harm_considerations": { "type": "string" },
+        "human_oversight": { "type": "string", "description": "Where a human must remain in the loop and why." },
+        "citation_ids": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "study_record": {
+      "type": "object",
+      "description": "One entry in a thematic related-studies collection.",
+      "required": ["citation_id", "theme", "summary"],
+      "properties": {
+        "citation_id": { "type": "string", "description": "Resolves against references-bibliography.json." },
+        "theme": { "type": "string" },
+        "study_type": { "type": "string", "enum": ["systematic_review", "meta_analysis", "empirical_field", "empirical_lab", "modeling_simulation", "case_study", "engineering_prototype", "policy_report", "statistical_yearbook"] },
+        "geography": { "type": "string" },
+        "summary": { "type": "string", "description": "What the study did and found." },
+        "key_findings": { "type": "array", "items": { "type": "string" } },
+        "methods_note": { "type": "string" },
+        "relevance_to_omnidrone": { "type": "string", "description": "The 'so what'. Which OmniDrone design decision or claim does this support or challenge?" },
+        "supports_or_challenges": { "type": "string", "enum": ["supports", "challenges", "mixed", "context_only"], "description": "Intellectual honesty field. A literature review that only contains supporting studies is not a literature review." },
+        "limitations": { "type": "string" }
+      }
+    },
+
+    "persona": {
+      "type": "object",
+      "required": ["id", "label"],
+      "properties": {
+        "id": { "type": "string" },
+        "label": { "type": "string" },
+        "archetype": { "type": "string" },
+        "operation_scale": { "type": "string" },
+        "geography": { "type": "string" },
+        "jobs_to_be_done": { "type": "array", "items": { "type": "string" } },
+        "pains": { "type": "array", "items": { "type": "string" } },
+        "gains": { "type": "array", "items": { "type": "string" } },
+        "current_workflow": { "type": "string" },
+        "willingness_to_pay": { "type": "object" },
+        "adoption_barriers": { "type": "array", "items": { "type": "string" } },
+        "decision_criteria": { "type": "array", "items": { "type": "string" } },
+        "provenance": { "$ref": "#/definitions/provenance" }
+      }
+    },
+
+    "money": {
+      "type": "object",
+      "required": ["amount", "currency"],
+      "properties": {
+        "amount": { "type": "number" },
+        "currency": { "type": "string", "description": "ISO 4217, e.g. PHP, USD." },
+        "basis_year": { "type": "integer", "description": "Real terms base year, for inflation adjustment." },
+        "fx_note": { "type": "string" }
+      }
+    },
+
+    "measurement_range": {
+      "type": "object",
+      "properties": {
+        "min": { "type": "number" },
+        "max": { "type": "number" },
+        "typical": { "type": "number" },
+        "unit": { "type": "string" },
+        "accuracy": { "type": "string" },
+        "resolution": { "type": "string" },
+        "response_time": { "type": "string" }
+      }
+    }
+  },
+
+  "validation_notes": [
+    "This registry is descriptive, not enforced by a build step. If you add a file, add its shape here.",
+    "A consuming webpage should treat any record missing `provenance` as untrusted and render it greyed out.",
+    "The `illustrative_synthetic` badge is a load-bearing safety feature of this repository, not decoration. Do not strip it in the UI."
+  ]
+}

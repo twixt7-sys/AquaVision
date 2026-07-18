@@ -1,0 +1,38 @@
+{
+  "id": "chart-global-production",
+  "chart_type": "grouped_bar",
+  "title": "The Inflection: Aquaculture Overtakes Capture Fisheries",
+  "subtitle": "Global aquatic animal production, 2022",
+  "description": "In 2022, for the first time, aquaculture produced more aquatic animals than capture fisheries — 51 percent of the total. This is the structural shift that makes aquaculture technology a category. Capture fisheries cannot be sensor-optimised; farmed systems can.",
+  "provenance": "verified_external",
+  "citation_ids": ["fao-sofia-2024"],
+  "axes": {
+    "x": { "label": "Source", "type": "category" },
+    "y": { "label": "Production", "unit": "million tonnes", "type": "linear", "min": 0, "max": 100 }
+  },
+  "series": [
+    {
+      "name": "Aquatic animal production 2022",
+      "unit": "million tonnes",
+      "provenance": "verified_external",
+      "data": [
+        { "x": "Aquaculture", "y": 94.4, "meta": "51% of total — first time above capture" },
+        { "x": "Capture fisheries", "y": 91.0, "meta": "approximate; total aquatic animal production 185.4 Mt" }
+      ]
+    }
+  ],
+  "annotations": [
+    { "kind": "point_label", "value": 94.4, "label": "Aquaculture: 94.4 Mt (51%)", "severity": "info" }
+  ],
+  "notes": "Capture figure derived: aquaculture 94.4 Mt at 51% implies total aquatic animals ~185.4 Mt (stated by FAO), so capture ~91.0 Mt. The precise capture split should be confirmed against SOFIA's own breakdown before use. This is the single most important chart in the pitch — use it once, early.",
+  "secondary_data_for_context": {
+    "note": "Additional SOFIA figures the webpage may render as stat tiles alongside this chart.",
+    "provenance": "verified_external",
+    "tiles": [
+      { "label": "Total fisheries + aquaculture production", "value": 223.2, "unit": "Mt", "year": 2022 },
+      { "label": "Total aquaculture (incl. algae)", "value": 130.9, "unit": "Mt", "value_usd": 312800000000 },
+      { "label": "Inland share of farmed aquatic animals", "value": 62.6, "unit": "%" },
+      { "label": "Asia share of global output", "value": 70, "unit": "%" }
+    ]
+  }
+}

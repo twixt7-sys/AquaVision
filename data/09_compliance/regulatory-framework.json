@@ -1,0 +1,97 @@
+{
+  "id": "regulatory-framework",
+  "title": "Regulatory Framework",
+  "version": "1.0.0",
+  "last_updated": "2026-07-17",
+  "provenance": "verified_external",
+  "confidence": "low",
+
+  "CRITICAL_DISCLAIMER": "THIS IS NOT LEGAL ADVICE. Every regulatory statement below derives from SECONDARY, SEARCH-RESULT SUMMARIES of public rules, not from primary regulatory texts read in full. Regulations change. The interpretations here may be wrong. Before ANY regulatory claim enters an investor deck, a contract, or a design decision, obtain a written opinion from a qualified Philippine aviation and fisheries lawyer and confirm current requirements directly with the agencies. Building on this file as if it were authoritative would be a serious error.",
+
+  "the_regulatory_reality": "This product sits at the intersection of THREE regulatory domains — aviation, fisheries, and (for medicine) veterinary — and each has a different agency, a different logic, and a different veto. The BVLOS dependency alone can gate the entire business model. Regulatory work is not a compliance afterthought here; it is on the critical path and it should be resourced from Phase 0.",
+
+  "domains": [
+    {
+      "domain": "Civil Aviation — CAAP",
+      "agency": "Civil Aviation Authority of the Philippines",
+      "citation_ids": ["caap-rpas-regulations", "caap-types-of-operations"],
+      "what_we_understand": [
+        { "point": "Weight brackets", "detail": "Obligations bracket at gross weight. At or below 7 kg: general safety rules, certification for commercial use. Above 7 kg to 150 kg: mandatory registration, stricter compliance, pilot licensing. Above 150 kg: special airworthiness certificates.", "our_exposure": "The airframe targets under 7 kg specifically to sit in the lighter bracket — but commercial use requires certification regardless, so the 7 kg line is less decisive than it looks. See omnidrone-specifications.json#/top_level_targets." },
+        { "point": "Registration and marking", "detail": "Commercial drones and any over 7 kg must be registered; a unique marking number must be affixed.", "our_exposure": "Applies to us as a commercial operator." },
+        { "point": "Pilot certification", "detail": "Commercial or >7 kg operation requires an RPA Controller Certificate via an ATO, knowledge test, and practical demonstration.", "our_exposure": "Hard gate on revenue. See training-certification.json." },
+        { "point": "VLOS default", "detail": "Visual line of sight is the default permitted mode.", "our_exposure": "Our early operations are VLOS and therefore need a pilot on site." },
+        { "point": "BVLOS requires specific authorisation", "detail": "Beyond visual line of sight needs a special permit, as do night operations, flight above 400 ft, flight within 10 km of airports, and flight over populated areas.", "our_exposure": "THE BIG ONE. The autonomous dawn-sortie use case needs BVLOS AND night-operations permission. Both are on the critical path. The unit economics assume BVLOS. If it does not come, the model must be re-based on VLOS." },
+        { "point": "Emerging Remote ID and spraying-drone circulars", "detail": "Discussion of electronic identification and advisory circulars covering agricultural spraying permits (e.g., AC 02-2025 per public summaries).", "our_exposure": "Our dispensing function may fall under a spraying-drone framing. Unconfirmed." }
+      ],
+      "the_night_operations_problem": "The flagship use case flies before dawn. Night operations require a separate permit ON TOP of BVLOS. This compounds the regulatory dependency — two permissions, both non-trivial, both gating the single most valuable sortie. This is not adequately surfaced in most versions of the pitch and it should be.",
+      "verification_status": "cited_from_search_result",
+      "action": "Phase 0: a direct CAAP conversation and a written legal opinion on the BVLOS + night-operations pathway and its realistic timeline."
+    },
+    {
+      "domain": "Fisheries — BFAR",
+      "agency": "Bureau of Fisheries and Aquatic Resources",
+      "what_we_understand": [
+        "BFAR governs aquaculture practice, fish health, and fish-kill response.",
+        "Anything touching aquatic animal health or the introduction of substances into culture water plausibly engages BFAR authority.",
+        "BFAR is simultaneously a potential customer, a data partner, and a regulator — see stakeholder-pain-points.json."
+      ],
+      "our_exposure": "The dispensing function and any health-related claim engage BFAR. Operating over municipal waters may require coordination. And BFAR's own carrying-capacity and fish-kill mandates are an opportunity as much as an obligation.",
+      "verification_status": "needs_verification",
+      "action": "Confirm which BFAR administrative orders apply to (a) monitoring services and (b) substance dispensing in culture water."
+    },
+    {
+      "domain": "Environment — DENR / EMB",
+      "agency": "Department of Environment and Natural Resources / Environmental Management Bureau",
+      "what_we_understand": ["DENR owns the water quality criteria our system reports against and the effluent standards farms are subject to.", "Water quality classification determines the applicable numerical criteria."],
+      "our_exposure": "We report values against DENR criteria, so we must cite them correctly. Misstating a regulatory threshold in an alert is both a compliance and a liability problem.",
+      "citation_ids": [],
+      "verification_status": "needs_verification",
+      "detail_file": "data/09_compliance/water-quality-standards.json"
+    },
+    {
+      "domain": "Veterinary Medicine",
+      "agency": "BAI / FDA / professional veterinary regulation",
+      "what_we_understand": ["Dispensing veterinary medicinal products is a fundamentally different regulated activity from dispensing lime or conditioner.", "It plausibly brings prescription requirements, professional oversight, record-keeping, and withdrawal periods.", "The drone becomes an application device for a regulated substance."],
+      "our_exposure": "The medicine-dispensing feature described in the founding concept may require veterinary supervision and may not be legal for autonomous or semi-autonomous application at all.",
+      "the_recommendation": "Design the dispensing subsystem around conditioners, lime, and probiotics FIRST. Treat veterinary medicine as a separate, later, legally-gated capability. Do not build a medicine dispenser and then discover it needs a vet on site. See carriage-ejection-system.json#/regulatory_gate.",
+      "verification_status": "needs_verification"
+    },
+    {
+      "domain": "Data Protection",
+      "agency": "National Privacy Commission (Data Privacy Act of 2012)",
+      "what_we_understand": ["Aerial imagery of people and property is personal data.", "Farm production data is sensitive commercial data held on behalf of the customer."],
+      "our_exposure": "Imagery over populated shorelines, and custody of farm data, both engage the Data Privacy Act.",
+      "detail_file": "data/09_compliance/ethics-data-privacy.json",
+      "verification_status": "needs_verification"
+    },
+    {
+      "domain": "Local Government",
+      "agency": "LGU / lake authorities (e.g., LLDA for Laguna de Bay, TVPL management for Taal)",
+      "what_we_understand": ["LGUs issue cage permits and are the practical gatekeepers for operating over a municipal water body.", "Lake development authorities have their own regulatory reach."],
+      "our_exposure": "Practical permission to operate at a site runs through the LGU, regardless of what the national agencies say. This is a per-site relationship, not a one-time national approval.",
+      "verification_status": "needs_verification"
+    }
+  ],
+
+  "the_regulatory_critical_path": {
+    "provenance": "assumption",
+    "ranked_dependencies": [
+      { "rank": 1, "item": "BVLOS + night-operations authorisation", "impact": "Gates the flagship use case and the unit economics.", "lead_time": "Long. Start Phase 0.", "owner": "regulatory_qa" },
+      { "rank": 2, "item": "Substance-class legality for dispensing", "impact": "Defines what the dispensing subsystem can legally do.", "lead_time": "Medium — a legal opinion.", "owner": "regulatory_qa" },
+      { "rank": 3, "item": "Confirmation of the 7 kg bracket and its implications", "impact": "Drives the airframe mass target.", "lead_time": "Short — one CAAP conversation.", "owner": "cto + regulatory_qa" },
+      { "rank": 4, "item": "Per-site LGU/lake-authority permission", "impact": "Practical gate on each deployment.", "lead_time": "Per-site, ongoing.", "owner": "ceo + field_ops" }
+    ],
+    "the_honest_summary": "The business model as written assumes a BVLOS authorisation the company does not have, for night operations, dispensing substances whose legal classification is unconfirmed, over waters requiring per-site LGU permission. That is four unresolved regulatory dependencies, and two of them (BVLOS, night ops) gate the single most valuable capability. This is not a reason to abandon the venture — it is a reason to resource regulatory work from day one and to stress-test the model against the pessimistic regulatory outcome."
+  },
+
+  "the_liability_question": {
+    "statement": "If the system fails to warn and fish die, who is liable?",
+    "why_it_is_unresolved": "A monitoring product that customers rely on for high-stakes decisions carries a duty-of-care exposure that is genuinely unclear. A missed warning, a false all-clear from a drifted sensor, or a dispensing error each raises a liability question we cannot answer from engineering intuition.",
+    "our_position_pending_advice": [
+      "The system advises; the human decides and is accountable. This is designed into the human-machine boundary, but whether it holds up legally is a lawyer's question.",
+      "Terms of service must be explicit that the system is decision-SUPPORT, not a guarantee.",
+      "The 'absence of an alert is not a clearance' principle must be legally, not just visually, established."
+    ],
+    "action": "A liability opinion before the first paid deployment. Not after. This is the kind of exposure that does not appear until the first bad outcome, and by then the terms are already set."
+  }
+}
