@@ -3,7 +3,7 @@
   "chart_type": "grouped_bar",
   "title": "The Inflection: Aquaculture Overtakes Capture Fisheries",
   "subtitle": "Global aquatic animal production, 2022",
-  "description": "In 2022, for the first time, aquaculture produced more aquatic animals than capture fisheries — 51 percent of the total. This is the structural shift that makes aquaculture technology a category. Capture fisheries cannot be sensor-optimised; farmed systems can.",
+  "description": "In 2022, for the first time, aquaculture produced more aquatic animals than capture fisheries — 51 percent of the total. This is the structural shift that makes aquaculture technology a category — both the Phase 1/2 software-management layer (a market sized by operator count, not tonnage) and the Phase 3 hardware-monitoring layer. Capture fisheries cannot be sensor-optimised or app-managed; farmed systems can.",
   "provenance": "verified_external",
   "citation_ids": ["fao-sofia-2024"],
   "axes": {

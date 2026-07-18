@@ -5,6 +5,7 @@
   "last_updated": "2026-07-17",
   "provenance": "design_target",
   "confidence": "low",
+  "platform_context": "This is a subsystem of OmniDrone, the aerial component of AquaVision Smart (Phase 3) — the premium hardware upgrade layer of the AquaVision platform for commercial/enterprise customers who have outgrown the app-based Phase 1/2 tiers, not the company's core product.",
   "criticality": "EXISTENTIAL — if this does not work, the product is a camera and the company has no defensible position.",
 
   "why_this_file_matters_most": "Every other subsystem on this aircraft can be bought. Airframes, cameras, flight controllers, and dispensers are all commodities. The powered winch delivering a sonde to depth from a hovering aircraft, thousands of times, unattended, in a fouling tropical lake full of nets and ropes, is the thing that does not exist off the shelf. It is simultaneously our only real moat and our highest technical risk. Those two facts are the same fact.",

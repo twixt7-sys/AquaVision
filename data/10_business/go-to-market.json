@@ -1,68 +1,99 @@
 {
   "id": "go-to-market",
   "title": "Go-to-Market Strategy",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
+  "version": "2.0.0",
+  "last_updated": "2026-07-18",
   "provenance": "modeled_projection",
   "confidence": "low",
   "citation_ids": ["moore-crossing-chasm-1991", "rogers-diffusion-2003"],
 
-  "the_core_gtm_problem": {
-    "statement": "This is not a product sale. It is a coalition assembly.",
-    "reasoning": "For a single deployment, five different constituencies must each say yes for a different reason: the farm manager (ROI), the technician (not surveillance), the LGU (permit), CAAP (airspace), and the person who owns the shore (tenure). See stakeholder-pain-points.json#/the_alignment_problem. A GTM plan that models this as 'generate leads, close deals' has not understood the sector, and it will fail in the way aquaculture technology usually fails.",
-    "the_implication": "Sales cycles are long and relationship-led. The unit of go-to-market is a LAKE — its coalition, its cooperative, its LGU — not a farm. Win a lake's coalition and the individual deployments follow; win a single farm inside a hostile coalition and it collapses."
+  "the_phased_gtm_shape": {
+    "statement": "AquaVision now runs two genuinely different go-to-market motions layered on one product line, sequenced by phase: Phase 1 is organic/community-led consumer-app growth among smallholders; Phase 2 is an in-product conversion funnel from free to paid; Phase 3 is the original coalition-building, consultative hardware sale to commercial and enterprise operators, unchanged in substance from the prior single-phase plan.",
+    "why_this_is_not_a_contradiction": "The original plan was right that a hardware deployment is a coalition sale, not a lead-gen funnel, and that logic is preserved wholesale for Phase 3 below. It does not follow that the software layer in front of it should be sold the same way — a free app download does not require five constituencies to say yes, and modeling it as a coalition sale would be as wrong in the other direction as modeling the hardware sale as a SaaS funnel would be."
   },
 
-  "the_beachhead": {
-    "who": "Commercial lake-cage operators with aeration and a budget, on a small number of dense-cluster lakes (Taal, Laguna de Bay) where the problem is documented and operators are geographically concentrated.",
-    "why": "See market-sizing-tam-sam-som.json#/beachhead_definition. Documented recurring problem, dense clusters (good dock economics), cooperative aggregation layer, and defensible local chemistry knowledge.",
-    "the_landing_move": "Land the checkable ROI (aeration savings, audit records) with one credible commercial operator per lake, publicly and verifiably. The first reference customer on a lake is worth more than the next ten, because this sector buys on 'did it work for someone I know on this water'."
+  "phase_1_foundation_gtm": {
+    "goal": "Acquire and retain free users among beginner and smallholder fish farmers at low CAC, and build the data asset Phase 2 depends on.",
+    "beachhead": {
+      "who": "Beginner and smallholder fish farmers, starting in the Philippines (existing team geography and domain knowledge) and expandable wherever the app is discoverable — this tier is not geographically constrained the way a dock deployment is.",
+      "why": "This is the segment the mission most wants to serve and the one a zero-marginal-cost software product can actually serve directly, resolving the tension the original hardware-first plan had to live with (the greatest need, deferred for affordability)."
+    },
+    "channels": [
+      { "channel": "App store organic discovery", "note": "Search and category ranking; the default channel for a free consumer app with no paid-acquisition budget." },
+      { "channel": "Community-led growth", "note": "Existing fish-farming Facebook groups, forums, and farmer networks — distribution through people who already discuss this exact problem with each other." },
+      { "channel": "Content marketing", "note": "Educational guides, disease-identification examples, and learning modules that double as both product surface and organic search/share content." },
+      { "channel": "Institutional/NGO distribution", "note": "Agricultural extension programmes that can hand the free app to smallholders as a public good, echoing the institutional channel from the original plan but as a distribution partner rather than a paying customer." }
+    ],
+    "the_motion": "This IS a self-serve growth funnel, deliberately: install, activate (complete farm setup, log a water-quality entry), retain (return weekly, keep logging), and become a candidate for Phase 2 conversion. Standard product-led-growth mechanics apply here in a way they explicitly do not for Phase 3.",
+    "assumption_flag": "That organic/community channels can reach meaningful scale without paid marketing spend. UNTESTED — if this fails, Phase 1 either needs a CAC-bearing budget (which changes the whole model's economics) or slower, cheaper growth than the plan assumes."
   },
 
-  "the_sequence": {
-    "note": "Diffusion-of-innovations logic. The early adopters and the mainstream buy differently, and crossing between them is where technology ventures die.",
-    "stages": [
-      { "stage": "Innovators (Phase 3-4)", "who": "Progressive commercial farms and academic partners who will co-develop.", "motion": "High-touch, co-creation, tolerate roughness in exchange for influence and early advantage.", "goal": "Validation evidence and the first reference deployment." },
-      { "stage": "Early adopters (Phase 4-5)", "who": "Commercial managers who saw the reference deployment work on their lake.", "motion": "Reference-led. 'It worked for [named operator] on this water.' Lead with the checkable ROI.", "goal": "A repeatable sale and measured unit economics." },
-      { "stage": "The chasm", "who": "The gap between visionary early adopters and pragmatic mainstream buyers.", "the_risk": "The mainstream operator does not want to be a pioneer. They want a proven, supported, boring utility. If the product is still rough or the support is thin, the venture stalls here — this is where most agritech dies.", "how_to_cross": "A dominant, complete, well-supported solution for ONE narrow segment (dense-cluster commercial tilapia cages on one lake) before broadening. Depth before breadth." },
-      { "stage": "Early majority (Phase 5+)", "who": "Mainstream operators and cooperatives.", "motion": "Proven utility, cooperative channel, possibly insurance/credit-linked adoption.", "goal": "Density within a lake, then adjacent lakes." }
-    ]
+  "phase_2_monetization_gtm": {
+    "goal": "Convert a viable share of retained free users to the premium subscription, marketplace, and consultation revenue lines, once a farm's needs outgrow manual tracking.",
+    "the_motion": "An in-app conversion funnel: usage-triggered upgrade prompts (e.g. a user with weeks of logged data is shown what predictive analytics would reveal), feature gating on premium capabilities, and marketplace/consultation surfaces exposed once a user has demonstrated engagement. This is explicitly a SaaS funnel, and should be measured with SaaS funnel metrics — see unit-economics.json#/phase_2_monetization_economics.",
+    "the_named_uncertainty": "The trigger that actually causes a free user to convert (which feature, which moment, which price point) is unknown and will only be found by instrumenting real usage after Phase 1 launch — this file states the shape of the funnel, not its measured conversion points, following the same discipline as pricing-revenue.json.",
+    "who_this_reaches": "Primarily Phase 1 users who have scaled up (more ponds, more production, outgrown manual tracking), plus some commercial operators who discover and adopt the premium tier directly without a long free-tier history."
+  },
+
+  "phase_3_smart_aquaculture_gtm": {
+    "carried_forward_from_the_original_hardware_plan": "Everything in this section is substantively unchanged from the prior single-phase version of this file. Becoming a software company first does not make the hardware sale a lead-gen funnel — it remains a coalition sale, and the following logic is preserved because it was already correct.",
+    "the_core_gtm_problem": {
+      "statement": "This is not a product sale. It is a coalition assembly.",
+      "reasoning": "For a single hardware deployment, five different constituencies must each say yes for a different reason: the farm manager (ROI), the technician (not surveillance), the LGU (permit), CAAP (airspace), and the person who owns the shore (tenure). See stakeholder-pain-points.json#/the_alignment_problem. A GTM plan that models this as 'generate leads, close deals' has not understood the sector.",
+      "the_implication": "Sales cycles are long and relationship-led. The unit of go-to-market is a LAKE — its coalition, its cooperative, its LGU — not a farm."
+    },
+    "the_beachhead": {
+      "who": "Commercial lake-cage operators with aeration and a budget, on a small number of dense-cluster lakes (Taal, Laguna de Bay) where the problem is documented and operators are geographically concentrated.",
+      "why": "See market-sizing-tam-sam-som.json#/beachhead_definition. Documented recurring problem, dense clusters (good dock economics), cooperative aggregation layer, defensible local chemistry knowledge.",
+      "the_landing_move": "Land the checkable ROI (aeration savings, audit records) with one credible commercial operator per lake, publicly and verifiably."
+    },
+    "the_sequence": {
+      "note": "Diffusion-of-innovations logic still applies to the hardware adoption curve specifically — early adopters and mainstream commercial/enterprise buyers buy hardware differently, and crossing between them is where hardware ventures die.",
+      "stages": [
+        { "stage": "Innovators", "who": "Progressive commercial farms and academic partners who will co-develop.", "motion": "High-touch, co-creation.", "goal": "Validation evidence and the first reference deployment." },
+        { "stage": "Early adopters", "who": "Commercial managers who saw the reference deployment work on their lake.", "motion": "Reference-led. Lead with the checkable ROI.", "goal": "A repeatable sale and measured Phase 3 unit economics." },
+        { "stage": "The chasm", "who": "The gap between visionary early adopters and pragmatic mainstream buyers.", "the_risk": "The mainstream operator does not want to be a pioneer; if support is thin the venture stalls here.", "how_to_cross": "A dominant, complete, well-supported solution for ONE narrow segment before broadening. Depth before breadth." },
+        { "stage": "Early majority", "who": "Mainstream operators and cooperatives.", "motion": "Proven utility, cooperative channel, possibly insurance/credit-linked adoption.", "goal": "Density within a lake, then adjacent lakes." }
+      ]
+    },
+    "channel_strategy": [
+      { "channel": "Direct field sales", "for": "Commercial beachhead", "note": "High-touch, relationship-led. Not a website sale." },
+      { "channel": "Cooperatives", "for": "Smallholder-adjacent aggregation and best dock economics", "note": "The unit of sale for cooperative-served hardware." },
+      { "channel": "Institutional (BFAR/LGU/development finance)", "for": "Programme deployments", "note": "Long procurement, aligned with public-good framing." },
+      { "channel": "Academic partners", "for": "Credibility and validation", "note": "Cheap and high-leverage." },
+      { "channel": "Feed distributors", "for": "Existing farm reach", "note": "Structural conflict — we reduce their volume." },
+      { "channel": "Insurers/lenders", "for": "The long-game adoption driver", "note": "Requires loss history we do not have yet." }
+    ],
+    "the_trust_problem_as_gtm": {
+      "statement": "The biggest Phase 3 go-to-market obstacle is not competition or price. It is that this sector has been burned by technology vendors who arrived, promised, and left.",
+      "implications": [
+        "Every claim must be checkable in the first cycle. Lead with metered aeration savings, not mortality prevention.",
+        "'What happens when you leave' must have a real answer.",
+        "The first reference customer on each lake is disproportionately valuable.",
+        "Hire and train locally."
+      ]
+    },
+    "a_new_mitigant_not_available_to_the_original_plan": "A Phase 3 prospect who has already used the free and premium software tiers arrives at the hardware conversation with existing trust in the AquaVision brand and product, which may partially offset the trust problem above. This is the cross-phase synergy named in unit-economics.json and funding-ask.json, and it carries the same caveat: it is an assumption, not yet a demonstrated effect, and the Phase 3 GTM plan should not be built as if it is guaranteed."
   },
 
   "the_smallholder_question": {
-    "statement": "The impact mission targets smallholders; the commercial reality cannot start with them.",
-    "the_resolution": "Smallholders are reached in the EARLY MAJORITY phase, through cooperatives (which amortise the dock across members) and institutional programmes (BFAR, LGU, development finance) — NOT through direct sales, ever.",
-    "the_honesty": "This means the people the company was founded to help are served last, after the paying commercial farms establish the product. That sequencing is commercially necessary and it is in tension with the mission. The tension is managed by keeping the cooperative and institutional channels in the plan from the start, and by not letting the company drift into serving only the payers — which is the default failure mode of impact-oriented ventures. See ethics-data-privacy.json#/equity_and_extraction.",
-    "the_accelerant": "If insurance or credit access becomes contingent on monitoring — a real possibility given that continuous records make an uninsurable asset insurable — smallholder adoption stops being a discretionary purchase and becomes a requirement for finance. That would compress the timeline dramatically. It is a long game and it should not be in the Series A story, but it is the mechanism by which the mission and the market could ultimately align."
+    "statement": "Under the original hardware-first plan, the impact mission targeted smallholders but the commercial reality could not start with them, so they were served last, through cooperatives and institutional programmes, after paying commercial farms established the product.",
+    "how_this_changes_now": "That tension is substantially resolved for the software layer: smallholders are now the Phase 1 entry point, reached directly and for free, on day one — not deferred. The tension is not fully gone, only moved: smallholders are served first by the free tier, but the PAID layers (Phase 2 subscription, Phase 3 hardware) are still realistically priced for commercial and enterprise operators, not smallholders. A smallholder gets the guide, logging, disease-ID, and community for free; they do not automatically get predictive analytics, a marketplace, or automated drone monitoring unless they scale up or a cooperative/institutional programme extends those paid layers to them, exactly as in the original plan.",
+    "the_honesty": "The company should not claim it has fully solved smallholder equity just because Phase 1 is free. The free tier is real and valuable, but the deeper capabilities remain gated behind ability to pay or collective aggregation, same as before. What has changed is that the free tier itself has genuine, direct value to the segment the mission cares most about, rather than that segment being reached only as a policy afterthought.",
+    "the_accelerant": "Unchanged from the original plan: if insurance or credit access becomes contingent on monitoring, smallholder adoption of the paid layers stops being discretionary and becomes a requirement for finance. Still a long game, still not the near-term story."
   },
 
-  "channel_strategy": {
-    "channels": [
-      { "channel": "Direct field sales", "for": "Commercial beachhead", "note": "High-touch, relationship-led. Not a website sale." },
-      { "channel": "Cooperatives", "for": "Smallholder aggregation and best dock economics", "note": "The unit of sale for the smallholder segment." },
-      { "channel": "Institutional (BFAR/LGU/development finance)", "for": "Programme deployments and smallholder reach", "note": "Long procurement, different motion, aligned with public-good framing." },
-      { "channel": "Academic partners", "for": "Credibility and validation", "note": "Cheap and high-leverage. Pursue immediately." },
-      { "channel": "Feed distributors", "for": "Existing farm reach", "note": "Structural conflict — we reduce their volume. Test whether the premium players who compete on FCR are aligned." },
-      { "channel": "Insurers/lenders", "for": "The long-game adoption driver", "note": "Requires loss history we do not have. Chicken-and-egg." }
-    ]
-  },
-
-  "the_trust_problem_as_gtm": {
-    "statement": "The biggest go-to-market obstacle is not competition or price. It is that this sector has been burned by technology vendors who arrived, promised, and left.",
-    "implications": [
-      "Every claim must be checkable in the first cycle. Lead with metered aeration savings, not with mortality prevention.",
-      "'What happens when you leave' must have a real answer: data ownership, local trained staff, documented procedures.",
-      "The first reference customer on each lake is disproportionately valuable and worth heavy investment.",
-      "Overclaiming is not just an ethics problem here; it is a GTM problem, because one caught overclaim on a small lake travels to every operator on it.",
-      "Hire and train locally. A company staffed by outsiders who visit is read as another vendor who will leave."
-    ]
+  "the_funnel_across_phases": {
+    "statement": "The full customer journey the phased model is betting on: install the free app (Phase 1) -> activate and retain through logged usage -> convert to premium/marketplace/consultation (Phase 2) -> for the subset that scales into commercial/enterprise operation, become a warmer lead for hardware-as-a-service (Phase 3).",
+    "the_honest_caveat": "This funnel is a narrative until Phase 1/2 usage data exists. It is equally plausible that most Phase 1 users never need Phase 3 hardware at all (most smallholders will never operate at a scale where a dock makes sense), and that most Phase 3 buyers arrive cold rather than through the funnel. Both outcomes are fine for the business — Phase 1/2 can be a viable software business on its own, and Phase 3 can be sold the old way if the funnel effect doesn't materialise — but the pitch should not overstate the funnel as proven connective tissue it is not yet."
   },
 
   "what_not_to_do": [
-    "Do not launch broadly. Depth on one lake beats presence on ten.",
-    "Do not sell below the scale threshold where a buoy wins — it produces unhappy customers who tell their neighbours.",
-    "Do not lead with the fish-kill-prevention story before it is validated. It is the most compelling and the least defensible claim, and getting caught on it poisons the lake.",
-    "Do not build the surveillance or enforcement capability to win an institutional contract. It would make adversaries of the communities the whole GTM depends on.",
-    "Do not model this as a SaaS funnel. It is coalition-building on a lake, one relationship at a time."
+    "Do not paid-acquire Phase 1 users at scale before organic/community channels have been genuinely tested — it would mask whether the core low-CAC growth assumption holds.",
+    "Do not model the Phase 3 hardware sale as a SaaS funnel. It is coalition-building on a lake, one relationship at a time, exactly as in the original plan.",
+    "Do not model the Phase 1 free-app growth as a coalition sale. It is a consumer/prosumer product-led funnel, and treating it as a five-constituency sales cycle would slow it to no purpose.",
+    "Do not launch the Phase 3 hardware pilot broadly. Depth on one lake beats presence on ten, unchanged from the original plan.",
+    "Do not lead the Phase 3 sale with the fish-kill-prevention story before it is validated — still the most compelling and least defensible claim.",
+    "Do not assume the Phase 2-to-Phase 3 warm-lead synergy without measuring it. Sell Phase 3 as if it must stand on its own coalition-building merits, and treat any funnel effect as upside."
   ]
 }

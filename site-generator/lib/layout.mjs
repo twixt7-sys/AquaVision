@@ -26,7 +26,7 @@ ${files}
   return `<aside class="sidebar" id="sidebar">
 <a class="sidebar-brand" href="${root}index.html">
 <img src="${root}assets/img/logo-mark.jpg" alt="AquaVision mark" width="36" height="36">
-<span><strong>AQUAVISION</strong><small>OmniDrone Knowledge Repository</small></span>
+<span><strong>AQUAVISION</strong><small>Knowledge Repository</small></span>
 </a>
 <nav class="sidebar-nav" aria-label="Sections">${items}</nav>
 <div class="sidebar-foot"><small>Fisheries • Aquaculture • Technology</small></div>

@@ -1,30 +1,53 @@
 {
   "id": "stakeholder-pain-points",
   "title": "Stakeholder Map & Pain Points",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
+  "version": "2.0.0",
+  "last_updated": "2026-07-18",
   "provenance": "assumption",
   "confidence": "low",
-  "honest_framing": "These pain points are inferred from literature and from the structure of the industry. They are NOT from interviews, because no interviews have been conducted. Every entry is a hypothesis with a question attached that Phase 0 discovery must answer. A stakeholder map built from desk research describes the industry an outsider imagines.",
+  "honest_framing": "These pain points are inferred from literature and from the structure of the industry. They are NOT from interviews, because no interviews have been conducted. Every entry is a hypothesis with a question attached that Phase 0 discovery must answer. A stakeholder map built from desk research describes the industry an outsider imagines. This applies with equal force to the Phase 1/2 software stakeholders added in this revision as it does to the original Phase 3 hardware stakeholders — there are zero registered app users as of this writing (see traction.json), so the beginner-farmer and growing-farm pains below are no less speculative than the smallholder-cage-operator pains always were.",
 
   "stakeholders": [
     {
+      "stakeholder_id": "beginner-pond-farmer",
+      "label": "Beginner / First-Time Farmer",
+      "description": "New to fish farming, typically starting a single pond or a small number of cages, often financed out of savings or a small loan. May not yet know what they don't know. The primary target of the free Phase 1 app.",
+      "power": "low",
+      "interest": "high",
+      "is_customer": "yes — the free Phase 1 acquisition audience",
+      "pains": [
+        { "pain": "No structured guidance on species choice, stocking density, siting, or pond preparation — decisions made on guesswork or whatever the input supplier says.", "severity": "high" },
+        { "pain": "No habit or easy tool for logging water conditions or feeding, so mistakes are never diagnosed and lessons are never retained.", "severity": "medium" },
+        { "pain": "No affordable or immediate way to get a sick fish looked at; waits for symptoms to worsen or for an extension visit that may never come.", "severity": "high" },
+        { "pain": "Works in isolation, with no peer community to ask a question before making an expensive mistake.", "severity": "medium" },
+        { "pain": "Fears that one bad cycle, caused by something they did not know to watch for, ends the venture before it starts.", "severity": "high" }
+      ],
+      "gains_sought": ["Not failing in the first cycle", "Knowing what a normal pond is supposed to look like", "Someone to ask a question without feeling foolish"],
+      "willingness_to_pay": "Effectively zero at this stage — this is deliberately the free tier. The value exchange is engagement, retained data, and eventual candidacy for Phase 2 conversion, not present-day revenue. Treating this as a revenue segment would be dishonest; see traction.json.",
+      "the_hard_truth": "This is the stakeholder the whole funnel strategy depends on, and we have never spoken to one about this product. Whether a free app is actually what a beginner farmer wants — versus a person, a cooperative, or a government extension officer — is unknown. If it turns out beginners do not engage with a digital tool at this stage, Phase 1 fails to acquire anyone and Phases 2 and 3 have no funnel beneath them.",
+      "discovery_questions": [
+        "What made you decide to start farming fish, and who did you ask for help first?",
+        "What was the first thing that went wrong, and how did you find out what to do about it?",
+        "Would you have used a phone app for this, or did you want a person?"
+      ]
+    },
+    {
       "stakeholder_id": "smallholder-cage-operator",
       "label": "Smallholder Cage Operator",
-      "description": "Operates a handful of cages in a lake, often financed by debt against the coming harvest. Frequently the family's sole income.",
+      "description": "Operates a handful of cages in a lake, often financed by debt against the coming harvest. Frequently the family's sole income. Distinct from the beginner-pond-farmer above in that this stakeholder is specifically exposed to the catastrophic, tier-3 mass-mortality risk of shared-lake cage culture, not just the general guidance gap of starting out.",
       "power": "low",
       "interest": "very high",
-      "is_customer": "aspirationally",
+      "is_customer": "aspirationally, and via the free app in the near term",
       "pains": [
         { "pain": "A single kill event destroys a year of income and leaves the debt intact.", "severity": "existential" },
-        { "pain": "Cannot afford monitoring equipment, and would not have time to use it.", "severity": "high" },
+        { "pain": "Cannot afford monitoring hardware, and would not have time to use it even if given some.", "severity": "high" },
         { "pain": "Shares a lake with operators whose stocking decisions they cannot influence but whose consequences they absorb.", "severity": "high" },
         { "pain": "Has no proof of good practice, so cannot access credit or insurance on decent terms.", "severity": "medium" },
         { "pain": "Has been sold technology before that did not survive its first monsoon.", "severity": "medium" }
       ],
       "gains_sought": ["Not losing everything", "Sleeping through the night", "Being believed by a lender"],
-      "willingness_to_pay": "Very low as capital. Possibly meaningful as a per-cycle service fee bundled into inputs or credit, and only if the value is legible in the first cycle.",
-      "the_hard_truth": "This is the stakeholder with the most acute need and the least ability to pay. Every impact-oriented instinct says serve them first, and every commercial instinct says they cannot be the beachhead. The honest resolution is that they are reached through cooperatives, input suppliers, or public programmes — not through direct sales — and pretending otherwise produces a business plan that fails in year two.",
+      "willingness_to_pay": "Very low as capital for hardware. Possibly meaningful as a per-cycle service fee bundled into inputs or credit, and only if the value is legible in the first cycle. The free app costs them nothing and is the only near-term product this stakeholder should actually be offered.",
+      "the_hard_truth": "This is the stakeholder with the most acute catastrophic-tier need and the least ability to pay for hardware. Every impact-oriented instinct says serve them first, and every commercial instinct says they cannot be the Phase 3 beachhead. The honest resolution, and the reason this repository now leads with a free app rather than a drone, is that this stakeholder is served at Phase 1 through free software and reached at Phase 3, if ever, through cooperatives, input suppliers, or public programmes — not through direct hardware sales — and pretending otherwise produces a business plan that fails in year two.",
       "discovery_questions": [
         "What did the last kill actually cost you, including the debt?",
         "If you had known 12 hours earlier, what would you have done — concretely, with what equipment?",
@@ -34,25 +57,30 @@
     {
       "stakeholder_id": "commercial-farm-manager",
       "label": "Commercial Farm Manager",
-      "description": "Runs a larger operation with staff, some existing instrumentation, aeration capacity, and a budget line for inputs.",
+      "description": "Runs a larger operation with staff, some existing instrumentation, aeration capacity, and a budget line for inputs. Sits at the top of the Phase 2 growth tier and is the realistic beachhead for Phase 3 hardware once the analytics case is proven.",
       "power": "medium",
       "interest": "high",
-      "is_customer": "yes — the realistic beachhead",
+      "is_customer": "yes — the realistic beachhead for both Phase 2 premium and Phase 3 hardware",
       "pains": [
         { "pain": "Manages many units and cannot personally observe them all, so relies on staff reports of variable quality.", "severity": "high" },
+        { "pain": "Has outgrown the spreadsheet or notebook that worked at a smaller scale, with no analytics layer to compare units or spot a trend across cycles.", "severity": "high" },
         { "pain": "Feed is the largest cost line and is dispensed with no feedback loop.", "severity": "high" },
         { "pain": "Aeration is either run continuously — an enormous electricity bill — or reactively and too late.", "severity": "high" },
         { "pain": "Certification audits demand environmental records that are compiled by hand from paper.", "severity": "medium" },
+        { "pain": "Wants an aquaculturist or vet's opinion on a marginal case but retaining one is not justified at this scale, and finding one on short notice is hard.", "severity": "medium" },
+        { "pain": "Buys feed and equipment and sells output through personal networks and informal middlemen, with no transparent way to compare prices.", "severity": "medium" },
         { "pain": "Losses are absorbable but they destroy the year's margin.", "severity": "high" },
         { "pain": "Cannot answer the board's question of why survival was 68 percent this cycle and 84 percent last cycle, because nobody measured anything that would explain it.", "severity": "medium" }
       ],
-      "gains_sought": ["Predictable survival rates", "Defensible FCR improvement", "Lower aeration electricity", "Audit-ready records without the clipboard"],
-      "willingness_to_pay": "Real. Has a budget, can compute an ROI, and already spends on inputs and consultants.",
-      "why_they_are_the_beachhead": "They have the three things a first customer must have: money, response capacity — aerators they can actually switch on when warned — and a person whose job it is to care about the number. The smallholder has the greatest need but cannot act on the information; this stakeholder can.",
+      "gains_sought": ["Predictable survival rates", "Defensible FCR improvement", "Lower aeration electricity", "Audit-ready records without the clipboard", "A trend flagged before it becomes a bad cycle", "Affordable, on-demand access to expert judgement"],
+      "willingness_to_pay": "Real. Has a budget, can compute an ROI, and already spends on inputs and consultants. This is the stakeholder Phase 2's subscription and take-rate model is built around.",
+      "why_they_are_the_beachhead": "They have the things a first paying customer must have: money, response capacity — aerators they can actually switch on when warned — and a person whose job it is to care about the number. The smallholder has the greatest catastrophic-tier need but cannot act on the information or afford it; this stakeholder can act on both the Phase 2 analytics and, eventually, the Phase 3 hardware.",
       "discovery_questions": [
         "What does your aeration electricity cost per cycle, and how do you currently decide when to run it?",
         "What would you pay to move FCR by 0.1?",
-        "Who compiles your audit records and how many hours does it take?"
+        "Who compiles your audit records and how many hours does it take?",
+        "At what point did your paper or spreadsheet system stop being enough, and what did you do about it?",
+        "Would you pay a monthly fee for analytics and expert access, or only for hardware you can point to?"
       ]
     },
     {
@@ -190,14 +218,14 @@
     "citation_ids": ["mendelow-1981"],
     "manage_closely": ["bfar", "lgu", "commercial-farm-manager", "caap"],
     "keep_satisfied": ["denr", "caap"],
-    "keep_informed": ["cooperative", "smallholder-cage-operator", "farm-technician", "academic-partner", "lakeside-community"],
+    "keep_informed": ["cooperative", "smallholder-cage-operator", "beginner-pond-farmer", "farm-technician", "academic-partner", "lakeside-community"],
     "monitor": ["consumer", "feed-supplier", "insurer-lender"],
     "caveat": "CAAP appears in two quadrants deliberately. They have very high power and low interest, which is the textbook 'keep satisfied' position — but because they hold a veto on the core operating concept, treating them passively would be a mistake. Where the framework and the situation disagree, follow the situation."
   },
 
   "the_alignment_problem": {
-    "observation": "The stakeholder whose need is greatest (smallholder) is not the stakeholder who can pay (commercial farm), who is not the stakeholder who controls access (LGU/BFAR), who is not the stakeholder who decides if you may fly (CAAP), who is not the stakeholder who will actually operate the machine (technician).",
-    "implication": "Five different constituencies must each say yes for a single deployment, and each says yes for a different reason. This is not a product sale; it is a coalition. Any go-to-market plan that models this as 'find farmers, sell drones' has not understood the sector.",
-    "why_it_is_in_the_problem_section": "Because it is a problem — ours. It is the reason aquaculture technology has a poor adoption record despite good technology, and it deserves as much design attention as the winch."
+    "observation": "The stakeholder whose need is greatest at the acute end (smallholder cage operator) is not the stakeholder who can pay for hardware (commercial farm), who is not the stakeholder who controls access (LGU/BFAR), who is not the stakeholder who decides if you may fly (CAAP), who is not the stakeholder who will actually operate the machine (technician). The phased platform adds a sixth constituency underneath all of them: the beginner pond farmer, who is the easiest to acquire and the hardest to monetise, and who this whole strategy bets will eventually grow into the commercial farm manager above.",
+    "implication": "Six different constituencies must each say yes across the life of a single customer relationship, and each says yes for a different reason, on a different timescale, for a different product. This is not a product sale; it is a coalition stretched across three phases. Any go-to-market plan that models this as 'find farmers, sell drones' — or, equally naively, as 'get free users, they'll convert' — has not understood the sector.",
+    "why_it_is_in_the_problem_section": "Because it is a problem — ours. It is the reason aquaculture technology has a poor adoption record despite good technology, and it deserves as much design attention as the winch, the onboarding flow, and the conversion funnel alike."
   }
 }

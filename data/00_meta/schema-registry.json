@@ -1,9 +1,9 @@
 {
   "id": "schema-registry",
   "title": "AquaVision Knowledge Repository — Schema Registry",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
-  "description": "Defines the shape of every recurring object in this repository so that a consuming webpage can render any file generically. These are JSON Schema (draft 2020-12) fragments plus prose notes.",
+  "version": "1.1.0",
+  "last_updated": "2026-07-18",
+  "description": "Defines the shape of every recurring object in this repository so that a consuming webpage can render any file generically. Covers the whole AquaVision platform across its three phases (free app, premium tier, Phase 3 OmniDrone/IoT hardware), not a single-product schema. These are JSON Schema (draft 2020-12) fragments plus prose notes.",
 
   "conventions": {
     "identifiers": "kebab-case, globally unique within the repository, permanent. Labels may be edited freely; ids may not.",
@@ -51,7 +51,7 @@
         "url": { "type": ["string", "null"] },
         "accessed": { "type": ["string", "null"], "description": "ISO date the URL was last checked." },
         "apa7": { "type": "string", "description": "Pre-rendered APA 7th edition string for copy-paste into a manuscript." },
-        "relevance": { "type": "string", "description": "One or two sentences on why this source matters to the OmniDrone argument. This is the field a thesis writer actually needs." },
+        "relevance": { "type": "string", "description": "One or two sentences on why this source matters to the AquaVision platform argument (whichever phase it supports — free app, premium tier, or the Phase 3 OmniDrone/IoT layer). This is the field a thesis writer actually needs." },
         "themes": { "type": "array", "items": { "type": "string" } },
         "verification_status": {
           "type": "string",
@@ -207,7 +207,7 @@
         "summary": { "type": "string", "description": "What the study did and found." },
         "key_findings": { "type": "array", "items": { "type": "string" } },
         "methods_note": { "type": "string" },
-        "relevance_to_omnidrone": { "type": "string", "description": "The 'so what'. Which OmniDrone design decision or claim does this support or challenge?" },
+        "relevance_to_omnidrone": { "type": "string", "description": "The 'so what'. Which AquaVision platform design decision or claim does this support or challenge — including but not limited to Phase 3 OmniDrone hardware decisions? Field name kept as-is for id/reference stability across the repository; scope is the whole platform, not just the drone." },
         "supports_or_challenges": { "type": "string", "enum": ["supports", "challenges", "mixed", "context_only"], "description": "Intellectual honesty field. A literature review that only contains supporting studies is not a literature review." },
         "limitations": { "type": "string" }
       }

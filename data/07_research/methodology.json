@@ -8,6 +8,8 @@
 
   "why_this_file_is_written_now": "Pre-registering the method is the difference between a study and a rationalisation. Once profiles start arriving, there will be enormous pressure to find the analysis that makes the product look good. This file exists to make that harder.",
 
+  "phased_platform_framing": "The research questions and study design below were written for the OmniDrone specifically and now sit as the validation plan for Phase 3 (the hardware/enterprise upgrade layer) within a three-phase platform (Phase 1 free app, Phase 2 premium tier, Phase 3 hardware). RQ1-RQ3 (instrument agreement, same-sortie calibration, precursor detection) and their phases of study design are Phase 3 validation work unchanged by the repositioning. RQ4 and RQ5 (chronic sub-lethal loss, behaviour change on a warning) generalise beyond the drone specifically to any AquaVision feature that logs water quality and gives farmers information to act on — including Phase 1's manual/photo-based logging and Phase 2's predictive health alerts — and the same pre-registration discipline and control-group ethics apply there with equal force, though this file has not yet been extended to spell out a Phase 1/2-specific method.",
+
   "research_questions": [
     {
       "id": "rq1",

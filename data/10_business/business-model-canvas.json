@@ -1,91 +1,176 @@
 {
   "id": "business-model-canvas",
   "title": "Business Model Canvas",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
+  "version": "2.0.0",
+  "last_updated": "2026-07-18",
   "provenance": "modeled_projection",
   "confidence": "low",
-  "citation_ids": ["osterwalder-bmc-2010"],
-  "note": "The nine-block canvas, filled honestly. Where a block rests on an untested assumption, it says so. A canvas full of confident assertions at TRL 3 is a work of fiction; this one flags its fictions.",
+  "citation_ids": ["osterwalder-bmc-2010", "osterwalder-vpd-2014"],
+  "note": "The nine-block canvas, filled honestly, for a company that is now BOTH a software business (Phase 1/2) and a hardware-plus-field-service business (Phase 3). Where a block rests on an untested assumption, it says so. A canvas full of confident assertions at this stage is a work of fiction; this one flags its fictions.",
+
+  "the_repositioning": {
+    "statement": "AquaVision is no longer 'we build a drone that a farm eventually buys access to'. It is 'we build the aquaculture management platform; the drone and IoT sensors are how the platform sees and acts for farms that have outgrown manual logging'.",
+    "why_this_changes_the_canvas": "Every block below used to assume a single high-touch, high-cost hardware-service customer. That customer still exists, but now sits at the top of a funnel rather than at the front door. The segments, channels, relationships, revenue, and costs are each now genuinely two different businesses layered on one platform brand, and this canvas says so explicitly rather than blending them into one story that fits neither."
+  },
 
   "customer_segments": {
-    "primary": "Commercial lake-cage and pond aquaculture operators with response capacity (aeration) and a budget line.",
-    "secondary": "Cooperatives aggregating smallholders; BFAR/LGU as programme buyers.",
-    "explicitly_deferred": "Individual smallholders — the greatest need, no direct affordability. Reached via cooperatives or public programmes, not direct sales.",
-    "segmentation_axis": "Response capacity, not scale. See customer-personas.json#/segmentation_logic.",
-    "assumption_flag": "That this segment exists in sufficient density on the target lakes and will pay. UNTESTED — Phase 0."
+    "phase_1_foundation": {
+      "who": "Beginner and smallholder fish farmers establishing or running their first ponds — individuals, not institutions.",
+      "role_in_the_model": "The acquisition and data-accumulation engine. Free or near-free access removes the affordability barrier that the old hardware-first model could not solve for this exact group.",
+      "why_they_are_now_primary_not_deferred": "Under the previous model, smallholders were explicitly deferred as unaffordable and reached only indirectly through cooperatives. Under this model they are the top of the funnel: a mobile app has near-zero marginal cost to serve, so the segment the mission most wants to help is also the segment the business can serve first and directly."
+    },
+    "phase_2_monetization": {
+      "who": "Growing commercial farms that have outgrown manual record-keeping and are willing to pay for analytics, predictive health monitoring, a marketplace, and expert access.",
+      "role_in_the_model": "The paying subscriber base. These are Phase 1 users who have scaled, plus commercial operators who enter directly at the premium tier."
+    },
+    "phase_3_smart_aquaculture": {
+      "who": "Large-scale and enterprise aquaculture operators — commercial lake-cage and pond operations, cooperatives, and institutional programme buyers (BFAR/LGU) with response capacity (aeration) and a hardware budget line.",
+      "role_in_the_model": "The hardware-as-a-service and enterprise dashboard audience. This is the segment the original hardware-first plan targeted as its only customer; it is now one of three, reached with a warmer pipeline because Phase 1/2 usage data and trust already exist before the hardware conversation starts.",
+      "detail_file": "data/09_market/customer-personas.json"
+    },
+    "segmentation_axis": "Farm maturity and data sophistication, not just scale — a smallholder with three ponds and a large enterprise operator both start on the same free app; what changes is which layer of the platform they need next.",
+    "assumption_flag": "That Phase 1 free usage converts to Phase 2 paid usage at a viable rate, and that Phase 2 paying farms are a credible warm lead source for Phase 3 hardware. Both UNTESTED. See unit-economics.json#/phase_2_monetization and go-to-market.json#/the_funnel_across_phases."
   },
 
   "value_propositions": {
-    "ranked_by_verifiability": [
-      "Lower aeration electricity at equal or better DO (checkable in one cycle, metered, already budgeted).",
-      "Self-compiling environmental records for certification audits (replaces existing manual labour).",
-      "Measurable FCR improvement via condition-aware feeding (arithmetic sourced, magnitude unproven).",
-      "Earlier detection of deteriorating water quality (core claim, hard to demo on demand).",
-      "Avoided mass mortality (most compelling, least demonstrable, undercut by our own weather limitation)."
+    "phase_1_foundation": [
+      "Free AI-assisted fish farming guide and setup assistant — removes the 'where do I even start' barrier for a first-time farmer.",
+      "Water quality logging by photo/manual entry, feeding schedules, and record keeping that replace a paper notebook at zero cost.",
+      "Photo-based disease identification — a triage tool, not a lab diagnosis, but instant and free.",
+      "A community of other farmers and learning modules — the social/trust layer a solo beginner otherwise has to build alone."
     ],
-    "the_discipline": "Sell top-down this list, not bottom-up. Lead with the checkable ROI. See value-proposition.json#/the_value_hierarchy.",
+    "phase_2_monetization": [
+      "Predictive health monitoring — machine learning trained on the water-quality and production data the farm already logged for free in Phase 1, so the model gets smarter with each cycle the farm stays subscribed.",
+      "Premium analytics and smart recommendations that turn raw logs into decisions (feed adjustment, stocking density, timing).",
+      "A marketplace connecting the farm to feed, equipment, and buyers — solves a real transaction-cost problem, not just an information one.",
+      "Paid access to aquaculturists and vets for consultation — the human expertise a smallholder alone cannot afford, now purchasable per-session."
+    ],
+    "phase_3_smart_aquaculture": [
+      "Automated, continuous water-column and surface monitoring via IoT probes and Omni Drone integration — replaces the impossible manual round across many stations.",
+      "PondTwin digital-twin visualization for enterprise-scale operational awareness.",
+      "Fewer aerator-hours at equal or better dissolved oxygen and other checkable ROI claims — see value-proposition.json for the detailed, verifiability-ranked hierarchy built for this segment.",
+      "An enterprise dashboard rolling up fleet-wide data across sites."
+    ],
+    "the_discipline": "Sell each phase's value on its own terms. Do not pitch Phase 1 users on hardware ROI they cannot afford, and do not pitch Phase 3 enterprise buyers on 'try it free' — they need the checkable, verifiable ROI case exactly as the original hardware plan argued. See value-proposition.json#/the_value_hierarchy for that discipline, which still applies unchanged to the Phase 3 sale.",
     "detail_file": "data/04_solution/value-proposition.json"
   },
 
   "channels": {
-    "direct": "Field sales to commercial farms — high-touch, relationship-led, slow. This sector does not buy from a website.",
-    "cooperative": "The route to smallholders and the best dock economics.",
-    "institutional": "BFAR/LGU programmes and development-finance-backed deployments.",
-    "partner": "Feed distributors (existing farm reach, but a structural conflict — we reduce their volume), aquaculture consultants (trusted gatekeepers), insurers/lenders (long game).",
-    "assumption_flag": "That cooperatives can levy members for a shared service. UNTESTED and load-bearing for the smallholder story."
+    "phase_1_foundation": {
+      "app_store_organic": "App store search and organic discovery — the primary, near-zero-cost channel for a free consumer app.",
+      "community_led": "Existing fish-farming Facebook groups, forums, and farmer networks — word of mouth among people who already talk to each other about this exact problem.",
+      "content_marketing": "Educational content (guides, videos, disease-identification examples) that ranks and gets shared, doubling as the learning-modules product surface.",
+      "institutional_partnership": "Agricultural extension programmes and NGOs that already reach smallholders and can distribute the free app as a public good."
+    },
+    "phase_2_monetization": {
+      "in_app_conversion": "The primary channel is the product itself — usage-triggered upsell prompts once a free user's data and needs outgrow the free tier. No separate sales motion required for most conversions."
+    },
+    "phase_3_smart_aquaculture": {
+      "direct_field_sales": "Field sales to commercial farms — high-touch, relationship-led. This segment does not buy hardware deployment from an app store prompt.",
+      "cooperative": "The route to smallholder-adjacent hardware economics — a shared dock amortised across cooperative members.",
+      "institutional": "BFAR/LGU programmes and development-finance-backed deployments.",
+      "partner": "Feed distributors, aquaculture consultants, insurers/lenders — same partner logic as the original hardware plan, see go-to-market.json."
+    },
+    "assumption_flag": "That organic/community channels can acquire Phase 1 users at low CAC without paid marketing spend, and that cooperatives can still levy members for a shared Phase 3 hardware service. Both UNTESTED."
   },
 
   "customer_relationships": {
-    "model": "High-touch service, not self-serve SaaS. The customer is buying an outcome and a relationship, and the relationship must survive the sector's memory of vendors who left.",
-    "retention_logic": "Value compounds with data duration — each cycle starts smarter. This is the argument for a subscription and for low churn once trust is established.",
-    "the_trust_problem": "Distrust of technology vendors is probably the biggest commercial obstacle in the whole plan, larger than any engineering problem. Earned honestly by the sector's history. Overcome only by demonstrated outcomes and a credible answer to 'what happens when you leave'."
+    "phase_1_2_model": "Self-serve, product-led. The relationship is mediated by the app: onboarding flows, in-app support, community moderation, and usage-triggered upgrade prompts, not a sales rep.",
+    "phase_3_model": "High-touch service, not self-serve — unchanged from the original plan. The enterprise customer is buying an outcome and a relationship, and the relationship must survive the sector's memory of vendors who left.",
+    "retention_logic": "In Phase 1/2, value compounds with logging history — the predictive models get more useful the longer a farm stays, which is the retention argument for a subscription. In Phase 3, value compounds with data duration in the same way, but retention is additionally reinforced by hardware being installed and maintained by AquaVision, not the customer.",
+    "the_trust_problem": "Distrust of technology vendors who over-promise and leave is still the biggest commercial obstacle in the Phase 3 hardware relationship, exactly as in the original plan. It is a smaller obstacle in Phase 1/2 because the ask (download a free app) carries none of the switching cost or capital exposure that made trust so central to a hardware sale."
   },
 
   "revenue_streams": {
     "detail_file": "data/10_business/pricing-revenue.json",
-    "primary_model": "Monitoring-as-a-service subscription, priced against loss avoidance and aeration savings rather than hardware cost.",
-    "why_not_hardware_sales": "Selling a USD 20k+ drone to a fish farm is a non-starter on affordability and on the sector's gadget-fatigue. Service pricing spreads the cost, aligns our incentive with uptime, and keeps the data relationship alive.",
-    "possible_streams": ["Per-cycle or per-month monitoring subscription", "Per-dock deployment fee", "Dispensing service (treatment delivery)", "Data/reporting for certification", "Institutional programme contracts", "NOT data monetisation — deliberately declined, see ethics-data-privacy.json"]
+    "phase_1_foundation": {
+      "model": "None. Free or near-free by design.",
+      "why": "This tier's job is acquisition and data accumulation, not revenue. Monetising it would undercut the affordability promise that makes it the acquisition engine in the first place."
+    },
+    "phase_2_monetization": {
+      "model": "Freemium subscription (premium tier, monthly/annual) + marketplace take-rate on transactions + consultation fees for paid expert access.",
+      "streams": ["Premium subscription (analytics, predictive health, recommendations)", "Marketplace take-rate (feed, equipment, buyer transactions)", "Consultation fees (aquaculturist/vet access, per-session or revenue-share)"]
+    },
+    "phase_3_smart_aquaculture": {
+      "model": "Hardware-as-a-service and deployment fees — AquaVision retains ownership of drones, docks, and probes; the customer pays for the monitoring outcome, not the equipment.",
+      "why_not_hardware_sales": "Unchanged from the original plan: a five-figure capital ask to a fish farm is a non-starter on affordability and gadget-fatigue, and selling the hardware outright transfers maintenance responsibility to a customer who cannot maintain it, which destroys the data quality the whole product depends on.",
+      "streams": ["Per-dock or per-site monitoring subscription", "Deployment/installation fee", "Institutional programme contracts"]
+    },
+    "explicitly_not_a_stream": "Data monetisation — deliberately declined at every phase. See ethics-data-privacy.json.",
+    "the_restructuring": "This is the central change from the prior canvas: revenue is no longer a single hardware-service line. It is a software subscription-and-marketplace business (Phase 2) sitting on top of a free acquisition layer (Phase 1), with a hardware-as-a-service layer (Phase 3) added for the customers who need and can afford automated physical monitoring."
   },
 
   "key_resources": {
-    "the_moat_such_as_it_is": "Accumulated site-specific data (years of profiles on lakes nobody else measures), local regulatory relationships, and the winch/calibration engineering. NONE of which exist yet — the moat is currently a plan.",
-    "physical": "Drones, docks, per-site sondes.",
-    "human": "See team-structure.json — none hired.",
-    "intellectual": "The self-calibrating observation architecture. Not patent-hard; the real defensibility is data and relationships.",
-    "the_honest_note": "At TRL 3 the key resource is the founding team's ability to execute Phase 0-3. Everything else is aspirational."
+    "phase_1_2": {
+      "software": "The mobile/web app, the AI farming assistant, the disease-ID model, the community platform, and — critically — the accumulating corpus of farmer-logged water-quality and production data, which is both the Phase 2 ML training asset and a future Phase 3 sales asset.",
+      "human": "Product/engineering team, community management, aquaculture domain experts contracted for consultations. See team-structure.json — none hired yet."
+    },
+    "phase_3": {
+      "physical": "Drones, docks, per-site sondes.",
+      "intellectual": "The self-calibrating observation architecture (winch/probe engineering) and the digital twin (PondTwin). Not patent-hard; the real defensibility is data and relationships."
+    },
+    "the_moat_such_as_it_is": "Accumulated site-specific and farm-specific data (starting from Phase 1 logging, long before any hardware is sold), local regulatory relationships, and the winch/calibration engineering. Almost none of which exists yet — the moat is currently a plan, and the Phase 1 app is the mechanism that starts building the data half of it cheaply.",
+    "the_honest_note": "At this stage the key resource is the founding team's ability to ship a free app people actually use, then convert a credible fraction of them, then sell hardware into the warmest segment of that base. Everything else is aspirational."
   },
 
-  "key_activities": ["Hardware development (winch is the critical path)", "Field validation over a full season", "Regulatory pathway (BVLOS)", "Building the coalition per site (five constituencies must each say yes)", "Model training on real data", "Service delivery at scale — becomes the biggest activity"],
+  "key_activities": [
+    "Build and ship the Phase 1 app (the critical path — nothing else in this model works without a used product)",
+    "Grow and retain a free user base through community and content, not paid acquisition",
+    "Train and validate ML models (disease ID, predictive health) on farmer-logged data",
+    "Build and iterate the premium conversion funnel and marketplace",
+    "Hardware development and field validation over a full season (Phase 3, unchanged critical path from the original plan)",
+    "Regulatory pathway (BVLOS) for Phase 3 drone operations",
+    "Service delivery at scale for Phase 3 deployments — becomes the biggest activity once hardware customers exist"
+  ],
 
   "key_partnerships": {
-    "essential": [
-      { "partner": "Academic institution", "for": "Validation credibility and historical data. Cheap by startup standards — they want publications, not equity. Pursue immediately." },
-      { "partner": "CAAP", "for": "The operating concept. A regulator relationship, engaged from Phase 0." },
-      { "partner": "Cooperatives", "for": "Smallholder reach and dock economics." },
-      { "partner": "Sensor vendor(s)", "for": "The sonde — with deliberate multi-vendor design to avoid margin capture." }
+    "phase_1_2": [
+      { "partner": "Agricultural extension programmes / NGOs", "for": "Free-app distribution to smallholders as a public good, and credibility with a first-time-user audience." },
+      { "partner": "Aquaculturists and vets", "for": "The paid-consultation supply side of Phase 2 revenue." },
+      { "partner": "Feed and equipment suppliers / buyers", "for": "The marketplace supply and demand sides." }
     ],
-    "strategic_options": [
-      { "partner": "Insurer/lender", "for": "Turning monitoring from discretionary to required. Long game, possibly worth more than the drone." },
-      { "partner": "Buoy vendor", "for": "The hybrid our own competitive matrix points at. Integrate rather than displace." }
-    ]
+    "phase_3": {
+      "essential": [
+        { "partner": "Academic institution", "for": "Validation credibility and historical data." },
+        { "partner": "CAAP", "for": "The drone operating concept; a regulator relationship engaged early." },
+        { "partner": "Cooperatives", "for": "Smallholder-adjacent hardware reach and dock economics." },
+        { "partner": "Sensor vendor(s)", "for": "The sonde, deliberately multi-vendor to avoid margin capture." }
+      ],
+      "strategic_options": [
+        { "partner": "Insurer/lender", "for": "Turning monitoring from discretionary to required. Long game." },
+        { "partner": "Buoy vendor", "for": "Integrate rather than displace, per the competitive matrix." }
+      ]
+    }
   },
 
   "cost_structure": {
     "detail_file": "data/10_business/unit-economics.json",
-    "major_lines": ["Hardware (drone + dock + per-site sonde)", "Field operations and maintenance labour — the biggest line at scale, routinely underestimated", "Battery opex (a consumable, not capital)", "R&D through validation", "Regulatory and certification", "Cloud/platform"],
-    "the_structural_challenge": "This is a hardware + field-service business, not a software business. It does not have software margins and it should not be pitched as if it does. The cost to serve is real, recurring, and geographically distributed.",
-    "assumption_flag": "Every cost line rests on a BOM with zero real quotes and a maintenance burden that is estimated, not measured. See risk R-14."
+    "the_structural_honesty": "AquaVision is now BOTH a software business (Phase 1/2) and a hardware-plus-field-service business (Phase 3) — not purely one or the other, and this canvas will not pretend otherwise in either direction. Phase 1/2 genuinely has software-business economics: low marginal cost per user, cost structure dominated by development, hosting, support, and customer acquisition. Phase 3 genuinely has hardware-business economics: it does not have software margins, and the cost to serve is real, recurring, and geographically distributed, exactly as the original hardware-first plan argued.",
+    "phase_1_2_major_lines": [
+      "Product/engineering development (app, AI models, marketplace, platform)",
+      "Cloud hosting and inference compute — modest per-user, scales with active users",
+      "Customer support and community moderation",
+      "Customer acquisition cost — should be low if organic/community channels work as assumed, but unproven",
+      "Contracted aquaculture experts for the consultation marketplace"
+    ],
+    "phase_3_major_lines": [
+      "Hardware (drone + dock + per-site sonde)",
+      "Field operations and maintenance labour — the biggest line at scale, routinely underestimated",
+      "Battery opex (a consumable, not capital)",
+      "R&D through validation",
+      "Regulatory and certification",
+      "Cloud/platform (shared infrastructure with Phase 1/2, allocated)"
+    ],
+    "assumption_flag": "Phase 1/2 cost assumptions rest on no real hosting/support cost data at scale yet. Phase 3 cost lines rest on a BOM with zero real quotes and a maintenance burden that is estimated, not measured, exactly as before. See risk register."
   },
 
   "the_canvas_verdict": {
-    "coherence": "The blocks fit together: service revenue matches a distributed cost structure, cooperative channels match smallholder economics, and the value hierarchy matches the trust problem.",
-    "the_three_assumptions_the_whole_canvas_rests_on": [
-      "That the target segment will pay (revenue).",
-      "That cooperatives can aggregate demand (channel + smallholder reach).",
-      "That BVLOS comes through (cost structure + flagship value)."
+    "coherence": "The blocks fit together as two connected businesses on one brand: a free, self-serve software layer that generates users, data, and trust; a paid software layer that monetises that data and trust; and a hardware-as-a-service layer that monetises the customers who have outgrown software alone. Each layer's channel, relationship, and cost structure matches its own economics rather than being forced into one template.",
+    "the_assumptions_the_whole_canvas_rests_on": [
+      "That Phase 1 can acquire and retain free users at low cost through organic/community channels alone.",
+      "That a meaningful fraction of those users convert to Phase 2 paid tiers (freemium conversion is the single least-tested number in this model).",
+      "That Phase 2's engaged, trusting user base becomes a genuinely lower-CAC pipeline into Phase 3 hardware sales, rather than two unrelated customer bases sharing a brand."
     ],
-    "the_honest_summary": "This is a coherent business model built on three untested load-bearing assumptions. That is normal for TRL 3. What is not normal — and what this canvas does deliberately — is naming the three assumptions so they can be tested first, before the money is spent. A canvas that hides its assumptions behind confident prose is the more common and more dangerous artefact."
+    "the_honest_summary": "This is a coherent, two-layer business model built on three untested assumptions, the most fragile of which is the free-to-paid conversion rate — a number with no company-specific data behind it yet. That is normal for a pre-launch product. What is not normal, and what this canvas does deliberately, is naming that fragility instead of hiding it behind a confident subscriber-growth chart. A canvas that assumes its funnel converts is the more common and more dangerous artefact."
   }
 }

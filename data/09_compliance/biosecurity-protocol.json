@@ -6,6 +6,8 @@
   "provenance": "design_target",
   "confidence": "medium",
 
+  "phase_framing_note": "Biosecurity as a physical-vector problem is specific to Phase 3 — it only exists once a shared probe or aircraft physically visits multiple sites. Phase 1 and Phase 2 (an app, logged data, a marketplace) carry no equivalent hardware-vector risk; the closest Phase 1/2 analogue is data-quality integrity (see risk-register-fmea.json R-18), which is a different kind of problem with a different protocol. This file remains entirely a Phase 3 document.",
+
   "why_this_is_a_first_class_document": "A drone whose probe visits pond A and then pond B is a pathogen vector with rotors. This is the single strongest technical objection to the multi-site concept, and it is answered here — in a protocol backed by hardware — or it is not answered at all. Aquaculture disease losses run to roughly USD 6 billion annually; a monitoring product that spreads disease between the farms it monitors would be a catastrophic own-goal.",
   "citation_ids": ["worldbank-disease-risk-2014"],
 

@@ -1,16 +1,16 @@
 {
   "id": "financial-projections",
   "title": "Financial Projections",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
+  "version": "2.0.0",
+  "last_updated": "2026-07-18",
   "provenance": "modeled_projection",
   "confidence": "speculative",
 
-  "READ_THIS_FIRST": "This file deliberately contains NO revenue forecast, NO hockey-stick chart, and NO five-year P&L. Producing one at TRL 3, with no price, no cost, no customer, and no validated product, would be an act of creative writing dressed as finance. Every professional investor has seen the fabricated hockey-stick a thousand times and discounts it to zero. What this file provides instead is: the SPEND plan (which we can estimate), the milestones that unlock the next tranche, and the scenario STRUCTURE for revenue once the inputs exist. A credible early-stage financial story is a spend plan tied to de-risking milestones — not a revenue fantasy.",
+  "READ_THIS_FIRST": "This file deliberately contains NO hockey-stick chart and NO five-year P&L. That discipline from the original hardware plan is preserved unchanged and, if anything, matters more now: a software business is exactly the kind of story where it is easiest to fabricate a plausible-looking exponential user-growth curve, and this file refuses to. What follows is a milestone-gated SPEND plan across the three phases (Phase 1 user growth investment, Phase 2 revenue ramp, Phase 3 hardware capex), plus a revenue SCENARIO STRUCTURE for the phases where revenue is even attemptable, not a forecast. A credible early-stage financial story is a spend plan tied to de-risking milestones — not a revenue fantasy, whether the fantasy is drone deployments or app downloads.",
 
   "what_can_honestly_be_projected": {
-    "statement": "At this stage, costs are estimable and revenues are not.",
-    "reasoning": "We know roughly what a team costs, what a prototype costs, and what a validation season costs. We do NOT know what a customer pays or how many there are. Therefore the honest financial document is a USE-OF-FUNDS and BURN plan, gated by milestones — not a revenue projection."
+    "statement": "Costs are estimable in all three phases. Revenue is only plausibly modelable once Phase 2 is live with real conversion data, and Phase 3 revenue remains as unknowable as in the original hardware-only plan until its own discovery work is done.",
+    "reasoning": "We know roughly what a small product team, hosting, and community operations cost (Phase 1). We do NOT yet know Phase 2's conversion rate, ARPU, or churn — see unit-economics.json — so Phase 2 revenue is a scenario, not a projection, until Phase 1 ships and generates real usage data. Phase 3 hardware costs and revenue remain exactly as unknowable as before: no BOM quotes, no price, no customer."
   },
 
   "phase_spend_plan": {
@@ -18,35 +18,59 @@
     "confidence": "low",
     "note": "Order-of-magnitude only. Currency in USD. These are planning envelopes, not budgets.",
     "phases": [
-      { "phase": "Phase 0 — Definition", "duration_months": "2-4", "primary_costs": ["Small founding team", "Farmer discovery travel", "Vendor sonde survey", "Legal opinion (regulatory + liability)", "Academic MOU"], "spend_envelope": "low — this phase is deliberately cheap and de-risks the most", "unlocks": "The go/no-go arithmetic: does the payload budget close, will farmers pay, what does BVLOS actually take" },
-      { "phase": "Phase 1 — Subsystem prototypes", "duration_months": "4-8", "primary_costs": ["Winch gantry rig", "Sonde procurement/development", "Sensor calibration bench", "First engineering hires"], "spend_envelope": "medium", "unlocks": "Proof the two hardest subsystems work independently" },
-      { "phase": "Phase 2 — Integrated prototype", "duration_months": "5-9", "primary_costs": ["Full aircraft integration", "Flight testing", "Dock v1", "Team growth"], "spend_envelope": "medium-high", "unlocks": "One vehicle that flies with everything and returns with data; the core profile-vs-reference validation" },
-      { "phase": "Phase 3 — Field validation", "duration_months": "8-14", "primary_costs": ["Longitudinal deployment", "Paired reference sampling", "Model development", "Academic collaboration"], "spend_envelope": "high — the longest phase, and the one founders underestimate because you cannot rush a season", "unlocks": "The right to make predictive claims; the first real evidence" },
-      { "phase": "Phase 4 — Commercial pilot", "duration_months": "6-12", "primary_costs": ["Paid pilots", "BVLOS application", "Service ops build-out", "First revenue (small)"], "spend_envelope": "high", "unlocks": "Measured unit economics; proof someone pays; BVLOS decision" }
+      {
+        "phase": "Phase 0 — Definition",
+        "duration_months": "1-3",
+        "primary_costs": ["Small founding/product team", "Farmer discovery interviews (Phase 1 feature validation, not just hardware WTP)", "Technical architecture decisions (mobile stack, AI model approach)", "Legal (app store terms, data privacy posture)"],
+        "spend_envelope": "low — deliberately cheap, de-risks product-market direction before a line of app code is written at scale",
+        "unlocks": "Confidence that the free-tier feature set (guide, logging, disease-ID, community) matches what beginner/smallholder farmers actually need, before committing build budget."
+      },
+      {
+        "phase": "Phase 1 — Foundation (build and launch the free app)",
+        "duration_months": "4-8",
+        "primary_costs": ["Mobile/web app development", "AI disease-ID and farming-assistant model development (likely built on existing foundation models plus fine-tuning, not from scratch)", "Cloud hosting and inference infrastructure", "Community management and content/education production", "App store and organic-channel growth operations — deliberately NOT a paid-acquisition budget line, per the go-to-market channel assumption"],
+        "spend_envelope": "low-medium — the cheapest phase that produces a real, used product, and the one this whole model depends on",
+        "unlocks": "A launched free app with measured installs, activation rate, and retention — the first real data this company will have ever had. This is the user-growth investment the phased model is named for: spend here buys users and data, not revenue."
+      },
+      {
+        "phase": "Phase 2 — Monetization (layer in premium, marketplace, consultations)",
+        "duration_months": "4-8, once Phase 1 shows retained, active usage",
+        "primary_costs": ["Premium feature development (predictive analytics, recommendations)", "Marketplace build (supply-side onboarding: feed/equipment/buyer partners)", "Consultation marketplace build (recruiting and paying aquaculturists/vets)", "Payment/subscription infrastructure", "Conversion-funnel design and in-app growth engineering"],
+        "spend_envelope": "medium — funded partly by early Phase 2 revenue if conversion holds, otherwise entirely investment",
+        "unlocks": "The first real revenue the company has ever had, and — critically — the first measured free-to-paid conversion rate, ARPU, and churn, replacing every assumption in unit-economics.json#/phase_2_monetization_economics with a real number. This is the revenue ramp gate: Phase 3 spend should not begin in earnest until this gate produces evidence the software business itself is viable."
+      },
+      {
+        "phase": "Phase 3 — Smart Aquaculture (hardware pilot)",
+        "duration_months": "8-14 for a first field validation season, unchanged in shape from the original hardware-only plan",
+        "primary_costs": ["Drone/dock/sonde BOM and subsystem prototyping (winch, sensor payload)", "Field validation and paired reference sampling", "BVLOS regulatory pathway", "Enterprise/institutional sales capacity"],
+        "spend_envelope": "high — the largest and longest-lead capital outlay in the plan, exactly as it was when hardware was the whole company",
+        "unlocks": "A validated, sellable hardware-as-a-service offering for the commercial/enterprise segment. This phase's cost structure and risks are inherited wholesale from the original single-phase hardware plan; becoming a software company first does not make the drone cheaper or the regulatory pathway faster."
+      }
     ],
-    "the_honest_note": "No dollar totals are attached to the envelopes because they depend on team size and hardware costs that Phase 0 will determine. Attaching a precise number now would be false precision. The SHAPE — cheap-then-expensive, with the longest and priciest phase being validation — is the honest and useful part."
+    "the_honest_note": "No dollar totals are attached to the envelopes. Phase 1/2 totals depend on team size and cloud/AI inference costs that Phase 0 discovery will pin down; Phase 3 totals depend on a hardware BOM that still has zero real quotes. Attaching a precise number now would be false precision in both directions. The SHAPE — cheap product-first phases that generate their own evidence, followed by an expensive hardware phase that only makes sense once that evidence exists — is the honest and useful part."
   },
 
   "the_milestone_gated_funding_logic": {
-    "principle": "Raise against de-risking milestones, not against a revenue projection.",
-    "why": "Each phase gate removes a specific risk (payload closes, winch works, profiles validate, farmers pay). An investor funding this is buying de-risking, and the credible ask is 'this tranche gets us from risk A to milestone B'. See funding-ask.json.",
-    "the_kill_gates": "Phase 0 has explicit KILL criteria (payload budget cannot close; farmers have no response capacity). A financial plan that includes the conditions under which the company should STOP is more credible than one that only projects success. See milestones-roadmap.json."
+    "principle": "Raise against de-risking milestones in each phase, not against a revenue projection — for software milestones exactly as much as for hardware milestones.",
+    "why": "Each phase gate removes a specific risk: Phase 1 removes 'will anyone use this for free'; Phase 2 removes 'will a viable fraction pay'; Phase 3 removes the same hardware risks the original plan named (payload closes, winch works, profiles validate, farmers pay for automated monitoring). An investor funding this is buying successive de-risking across a software business first and a hardware business second. See funding-ask.json.",
+    "the_kill_gates": "Phase 1 has an implicit kill gate: if activation and organic retention are poor even at zero price, the free tier is not solving a real problem and Phase 2/3 should not be funded on top of it. Phase 3 keeps its explicit kill criteria from the original plan (payload budget cannot close; commercial farmers show no response capacity or WTP for automated monitoring). A financial plan that includes the conditions under which each phase should NOT proceed is more credible than one that only projects success."
   },
 
   "revenue_scenario_structure": {
-    "status": "STRUCTURE ONLY — no numbers until Phase 0/4 inputs exist.",
-    "the_model_when_ready": "Revenue = (docks deployed) x (sites per dock) x (price per site) x (1 - churn), summed across the deployment ramp, minus cost-to-serve per dock.",
-    "the_three_scenarios_to_model": [
-      { "scenario": "Pessimistic", "assumptions": "VLOS-only economics, sparse sites, high maintenance, low price. Contribution margin possibly negative.", "purpose": "This is the scenario that tests whether the company should exist. If it is catastrophic, the model is too fragile." },
-      { "scenario": "Base", "assumptions": "BVLOS achieved, mixed site density, measured maintenance, verifiable-value pricing.", "purpose": "The realistic planning case." },
-      { "scenario": "Optimistic", "assumptions": "BVLOS, dense cooperative clusters, controlled maintenance, plus institutional programme contracts and an insurance-linked adoption driver.", "purpose": "The upside, presented as upside — never as the base case." }
+    "status": "STRUCTURE ONLY for Phase 2 — no numbers until Phase 1 supplies real activation/conversion data. Phase 3 remains STRUCTURE ONLY exactly as before, pending its own discovery inputs.",
+    "phase_2_model_when_ready": "Monthly recurring revenue = (active free users) x (free-to-paid conversion rate) x (ARPU, blended across subscription + marketplace + consultation) x (1 - monthly churn), compounding month over month across the growth ramp, minus Phase 1/2 cost to serve.",
+    "phase_3_model_when_ready": "Unchanged from the original plan: Revenue = (docks deployed) x (sites per dock) x (price per site) x (1 - churn), summed across the deployment ramp, minus cost-to-serve per dock.",
+    "the_three_scenarios_to_model_per_phase": [
+      { "scenario": "Pessimistic", "phase_2_assumptions": "Conversion well under the 2-5% generic-software benchmark, high churn, low ARPU attach beyond bare subscription.", "phase_3_assumptions": "VLOS-only economics, sparse sites, high maintenance, low price.", "purpose": "Tests whether either layer of the business should exist as currently shaped. If catastrophic, the model is too fragile." },
+      { "scenario": "Base", "phase_2_assumptions": "Conversion within the modeled 2-5% band, churn and ARPU near the midpoints in unit-economics.json.", "phase_3_assumptions": "BVLOS achieved, mixed site density, measured maintenance, verifiable-value pricing.", "purpose": "The realistic planning case for each phase." },
+      { "scenario": "Optimistic", "phase_2_assumptions": "Conversion above the generic benchmark (plausible if community trust and data-compounding retention work as hoped), strong marketplace/consultation attach.", "phase_3_assumptions": "BVLOS, dense cooperative clusters, controlled maintenance, institutional contracts, and a genuine Phase 2-to-Phase 3 warm-lead effect on CAC.", "purpose": "The upside, presented as upside — never as the base case." }
     ],
-    "the_discipline": "When these are filled in, present the BASE case as the plan and show the pessimistic case unprompted. A three-scenario model where the pessimistic case is survivable is far more fundable than a single-line projection that only goes up."
+    "the_discipline": "When these are filled in, present the BASE case as the plan and show the pessimistic case unprompted, for both phases. A three-scenario model where the pessimistic case is survivable is far more fundable than a single-line projection that only goes up — and this is exactly as true of a freemium user-growth curve as it is of a drone-deployment curve."
   },
 
   "what_investors_should_take_from_this_file": {
-    "statement": "The absence of a revenue forecast is a signal of seriousness, not a gap.",
-    "the_pitch": "'We could show you a five-year hockey-stick. It would be fiction, and you know it. Instead: here is exactly what each tranche de-risks, here is the arithmetic we can honestly do today, here are the three assumptions the whole model rests on, and here is the cheap first phase that tests all three. Fund Phase 0, watch us either validate or kill those assumptions, and decide from evidence.' A serious investor prefers this to a spreadsheet that assumes its own conclusion.",
-    "the_risk": "Some investors WANT the hockey-stick and will pass without it. That is a filter, not a loss — an investor who needs the fiction is not the right investor for a hardware company with a real validation timeline."
+    "statement": "The absence of a revenue forecast is a signal of seriousness, not a gap — and pivoting to software does not change that, because the company still has zero users and zero revenue today.",
+    "the_pitch": "'We could show you a hockey-stick of app downloads and subscribers. It would be fiction, and you know it. Instead: here is exactly what each phase de-risks, here is the arithmetic we can honestly do today, here are the assumptions the whole model rests on — starting with a freemium conversion rate borrowed from generic benchmarks, not measured for this market — and here is the cheap first phase (a free app) that tests the riskiest of them fast and cheaply. Fund Phase 1, watch us either validate or kill those assumptions with real usage data within months, and decide the Phase 3 hardware raise from evidence.'",
+    "the_risk": "Some investors want the hockey-stick and will pass without it. That is a filter, not a loss."
   }
 }

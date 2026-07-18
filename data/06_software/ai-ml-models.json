@@ -1,25 +1,145 @@
 {
   "id": "ai-ml-models",
   "title": "AI / ML Model Cards",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
+  "version": "2.0.0",
+  "last_updated": "2026-07-18",
   "provenance": "design_target",
   "convention": "Follows the Model Cards convention (Mitchell et al., 2019). Every card carries an out_of_scope_use field, because a model card without one is marketing.",
   "citation_ids": ["mitchell-model-cards-2019"],
 
-  "STATUS_BANNER": "NO MODEL HAS BEEN TRAINED. NO MODEL HAS BEEN EVALUATED. Every `performance` field below is null and every `target_performance` field is an aspiration. These are specifications for models we intend to build, written before the data exists, so that the evaluation criteria are fixed before anyone has an incentive to move them.",
+  "STATUS_BANNER": "NO MODEL HAS BEEN TRAINED. NO MODEL HAS BEEN EVALUATED. This is as true of the Phase 1 photo-based disease model and the Phase 2 predictive-health model as it is of the Phase 3 chlorophyll retrieval — AquaVision has no real users yet (see traction.json), so none of these models has real usage data to learn from. Every `performance` field below is null and every `target_performance` field is an aspiration. These are specifications for models we intend to build, written before the data exists, so that the evaluation criteria are fixed before anyone has an incentive to move them.",
 
   "the_governing_principle": {
-    "statement": "The order in which these models ship is a safety decision, not a product decision.",
-    "reasoning": "The models are ordered below from 'safe to be wrong' to 'dangerous to be wrong'. A misclassified piece of debris costs a farmer thirty seconds of annoyance. A false negative from the kill-risk model reads as 'you are safe' and could cost a harvest. The temptation will be to ship the exciting one first because it demos well. Resist it.",
+    "statement": "The order in which these models ship is a safety decision, not a product decision — and that is true within each phase, not just once.",
+    "reasoning": "The models are ordered below from 'safe to be wrong' to 'dangerous to be wrong', separately for the Phase 1/2 app-layer models and the Phase 3 sensor/drone models. A misclassified piece of debris costs a farmer thirty seconds of annoyance. A confidently wrong 'your fish are fine' from a photo, or a false negative from the kill-risk model, reads as permission and could cost a harvest. The temptation will be to ship the exciting one first because it demos well. Resist it.",
     "the_rule": "No model ships until its failure mode has been costed in the customer's currency, not ours."
+  },
+
+  "phase_note": {
+    "statement": "Model cards below are tagged with the product phase whose feature they support. Phase 1/2 models run on data a farmer typed in or photographed with a phone; Phase 3 models run on calibrated sensor and drone telemetry. Where a Phase 1/2 model and a Phase 3 model address a similar question (feeding, health risk), the cards say explicitly how they differ and why both are worth building rather than one replacing the other.",
+    "phase_1": "AquaVision App — free/low-cost tier.",
+    "phase_2": "AquaVision Premium — paid subscription tier, built on Phase 1 data.",
+    "phase_3": "AquaVision Smart — OmniDrone/IoT hardware upgrade tier."
   },
 
   "models": [
     {
+      "id": "disease-identification-photo",
+      "name": "Photo-Based Disease & Stress Identification",
+      "task": "From one or more farmer-submitted photos of fish or shrimp, suggest candidate visible conditions (lesions, fin/tail rot, parasite load, discoloration, abnormal behaviour captured in a short clip) with a confidence per candidate.",
+      "phase": "1",
+      "status": "concept",
+      "architecture_candidate": "Image classification model, likely a fine-tuned convolutional network or a smaller vision-language model, transfer-learned from public aquaculture/veterinary imagery datasets where they exist. Exact architecture deliberately unspecified until a labelled dataset plan is real.",
+      "why_it_is_first_in_the_app_tier": "It is the single feature most likely to convert a skeptical smallholder into a daily user, and it is also the app-tier model with the most direct path to real harm if it is confidently wrong, so it gets the same ordering discipline as the Phase 3 models below.",
+      "intended_use": "Give a smallholder a fast, non-diagnostic first read on a visibly abnormal fish or shrimp, with a suggested next step: keep monitoring, post to the community for peer input, or (Premium) book a paid expert consultation.",
+      "out_of_scope_use": [
+        "NOT a veterinary diagnosis. A model output is a triage suggestion, not a clinical finding.",
+        "NOT a basis for medication dosing or treatment decisions on its own.",
+        "NOT validated across species, regions, or the full range of conditions a farmer may encounter — coverage starts narrow (a handful of common, visually distinct presentations) and is stated as narrow.",
+        "NOT a substitute for mandatory disease reporting obligations where a suspected condition is notifiable to authorities — the product must route those cases to a human, not resolve them silently."
+      ],
+      "inputs": ["Farmer-submitted photo(s) or short video clip", "Self-reported species", "Optional symptom checklist"],
+      "outputs": ["Ranked candidate conditions with calibrated confidence", "Suggested next action", "Automatic flag to expert consultation when confidence is low or the condition is potentially reportable"],
+      "performance": null,
+      "target_performance": { "note": "No labelled photo dataset exists yet. Setting an accuracy target now would be inventing a number. The near-term goal is narrow, honest coverage of the most common presentations, not comprehensive diagnosis, and the model should say 'unclear, consult a human' far more often than a flashy demo would prefer." },
+      "known_failure_modes": [
+        "Poor photo quality — blur, bad lighting, wrong angle — is the normal case on a low-end phone camera, not an edge case",
+        "Visually similar presentations with different underlying causes",
+        "Severe class imbalance: common, mild conditions will vastly outnumber rare, serious ones in any early dataset",
+        "Species and regional variation in how a condition presents",
+        "A confidently wrong 'looks healthy' verdict is more dangerous than an honest 'unclear' — it can delay treatment or a report a farmer would otherwise have filed"
+      ],
+      "fairness_and_harm_considerations": "Photos submitted by farmers may incidentally include people, hands, or property. Training data handling must follow the same imagery privacy discipline as the Phase 3 drone footage. See ethics-data-privacy.json.",
+      "human_oversight": "Always advisory. Every result carries a route to a human — a community post at minimum, a paid expert at the Premium tier — and the model never issues a treatment instruction on its own.",
+      "citation_ids": ["asian-fisheries-shrimp-disease", "worldbank-disease-risk-2014"]
+    },
+    {
+      "id": "ai-farming-assistant",
+      "name": "AI Farming Assistant (Conversational)",
+      "task": "Answer a farmer's natural-language questions about fish farming — species selection, pond setup, water quality basics, feeding, common problems — and help them navigate the app.",
+      "phase": "1",
+      "status": "concept",
+      "architecture_candidate": "Orchestration layer over a third-party large language model, grounded with retrieval over AquaVision's own learning-module content and, where relevant, the farmer's own logged farm data. Provider deliberately unspecified — see system-architecture.json#/technology_choices.",
+      "intended_use": "A conversational front door for the Phase 1 app: answering general aquaculture questions, guiding a new user through farm setup, and pointing an existing user to the right feature (log water quality, check a learning module, post to the forum) rather than trying to be the authority on everything.",
+      "out_of_scope_use": [
+        "NOT a source of specific medication dosing, chemical treatment instructions, or veterinary diagnosis — those questions must be redirected to the disease-identification flow, the community, or a paid expert, not answered directly by the assistant.",
+        "NOT a substitute for the water-quality logging or disease-ID features. If a farmer describes a dying pond in chat, the assistant's job is to route them to the right tool and, where warranted, to an urgent human channel — not to reason it out unaided.",
+        "NOT authoritative on anything the assistant cannot ground in AquaVision's own content or the farmer's own data. An LLM that free-associates plausible-sounding aquaculture advice is a liability, not a feature."
+      ],
+      "inputs": ["Farmer's chat messages", "Retrieved learning-module content", "The farmer's own farm/pond records where the farmer has granted access"],
+      "outputs": ["Conversational responses", "Suggested in-app actions", "Escalation prompts to community, disease-ID, or expert consultation"],
+      "performance": null,
+      "target_performance": { "note": "No usage data exists. The near-term target is behavioural, not accuracy-based: the assistant should decline or redirect out-of-scope questions (dosing, diagnosis) at a very high rate, even at the cost of feeling less 'smart' in a demo." },
+      "known_failure_modes": [
+        "Confident hallucination on aquaculture facts outside its grounded content",
+        "Users treating conversational fluency as domain authority ('it talks like an expert, so it must be one')",
+        "Prompt injection or manipulation attempts via chat",
+        "Silent drift in answer quality when the underlying third-party model is updated by its provider"
+      ],
+      "human_oversight": "Every response involving health, dosing, or treatment carries a visible disclaimer and a link to a human channel. Conversation logs are reviewable so that systematically wrong answers can be caught and the grounding content corrected."
+    },
+    {
+      "id": "feeding-schedule-recommendation",
+      "name": "Feeding Schedule & Ration Recommendation (Logged-Data)",
+      "task": "Suggest a feeding schedule and ration size from a farmer's self-reported species, stocking density, growth stage, and logged feeding history — without any water-quality sensor input.",
+      "phase": "1",
+      "status": "concept",
+      "architecture_candidate": "Rule-based recommendation from published species/stage feeding tables initially, refined by the farmer's own logged feed-to-growth outcomes over time where those outcomes are recorded.",
+      "how_this_differs_from_the_phase_3_feeding_advisor": "This model has no water-condition telemetry at all — it works from what a Phase 1 farmer has actually recorded: species, stocking, and feed logs. The Phase 3 'feeding-advisor' card below answers a different, narrower question (defer or reduce a specific feeding given today's measured oxygen) for farms with sensors. Both can coexist for a farm that upgrades: the schedule recommendation sets the plan, the condition-aware advisor overrides it on a bad-water day.",
+      "why_rules_first": "Species feeding tables are published and interpretable. A learned model needs outcome data (growth, FCR) tied to feeding history, which does not exist yet for any Phase 1 farm.",
+      "citation_ids": ["innovasea-fcr-guide", "boyd-water-quality-2020"],
+      "intended_use": "Populate sensible default feeding schedules and reminders during farm setup, and suggest adjustments as a farmer logs feed and, optionally, growth or mortality observations.",
+      "out_of_scope_use": [
+        "NOT a growth or FCR guarantee.",
+        "NOT a substitute for species-specific expert guidance in unusual conditions.",
+        "NOT aware of water quality unless the farmer also logs it manually — a recommendation made without any water-quality context should say so."
+      ],
+      "inputs": ["Self-reported species and stocking data", "Feeding logs", "Optional manual water-quality entries", "Optional growth/mortality observations"],
+      "outputs": ["Suggested feeding schedule (times, ration)", "Suggested adjustment with plain-language reasoning"],
+      "performance": null,
+      "target_performance": { "note": "Cannot be set responsibly before real logged outcome data exists across at least one growth cycle." },
+      "known_failure_modes": [
+        "Self-reported stocking counts and species are often estimates, and the recommendation is only as good as those inputs",
+        "No signal at all when a farmer stops logging — the model must say 'insufficient recent data' rather than keep repeating a stale schedule with unchanged confidence",
+        "Regional and strain variation in feeding response not captured by generic published tables"
+      ],
+      "human_oversight": "Advisory only. Never assumes silent compliance — the farmer confirms or logs an actual feeding, and a missed confirmation is itself a signal shown back to the farmer, not hidden."
+    },
+    {
+      "id": "predictive-health-anomaly",
+      "name": "Predictive Health / Anomaly Monitoring (Logged-Data)",
+      "task": "Estimate whether a farm's recent pattern of manually logged water-quality readings, feeding, and mortality looks anomalous relative to that farm's own history, as an early-warning signal for the Premium tier.",
+      "phase": "2",
+      "status": "concept — NOT IMPLEMENTED, NOT VALIDATED, MUST NOT SHIP",
+      "the_warning": {
+        "statement": "This is the Phase 2 sibling of the Phase 3 kill-risk-forecast model below, and it inherits the same danger, in a harder form, because its inputs are sparser and noisier.",
+        "why": "A Phase 1/2 farm has no continuous sensor stream — it has whatever the farmer remembered to type in, whenever they remembered to type it. A false 'no anomaly detected' on that thin a data diet reads as reassurance the model has no real basis for. A farmer who skipped logging for two weeks and sees a calm status tile has been given false comfort by an absence of data, not a finding.",
+        "the_asymmetry": "Without this model, a Premium farmer knows their own records are incomplete and stays appropriately uncertain. With a poorly-caveated model, they may substitute the tile's calm colour for their own judgement. The model must make data sparsity itself a visible, first-class output — not a caveat buried in a tooltip."
+      },
+      "architecture_candidate": "Anomaly detection over the farm's own logged time series (statistical baseline per farm initially; a learned model only once enough farms have enough logged history to train and, critically, to validate on held-out farms rather than held-out time windows of the same farm).",
+      "relationship_to_phase_3_kill_risk_forecast": "If a farm upgrades to Phase 3 sensors, this model is superseded by the richer, continuously-observed kill-risk-forecast model, which has an actual physical basis (stratification, oxygen debt) that this logged-data model cannot see. This model exists specifically for farms that have not upgraded, and its outputs should be visibly less confident than the Phase 3 model's for that reason.",
+      "inputs": ["Manually logged water-quality entries", "Feeding logs", "Mortality/observation logs", "Logging frequency and recency itself, as a feature"],
+      "outputs": ["Anomaly flag relative to the farm's own history", "Data-completeness score alongside the flag", "Plain-language description of what changed, not just a score"],
+      "performance": null,
+      "target_performance": {
+        "note": "Cannot be set responsibly before real logged data and real outcomes exist across multiple farms and at least one full cycle.",
+        "the_real_bar": "It must not be shown at all for a farm whose logging is too sparse to support any signal. A model that fills that gap with an interpolated-looking 'all normal' tile is worse than showing nothing.",
+        "required_evidence": "An honest evaluation against farms' real outcomes, including the anomalies it missed, before this graduates past 'concept'."
+      },
+      "known_failure_modes": [
+        "Sparse, irregular logging is the default case for a free-to-premium-converting farmer, not an edge case",
+        "Rare events (real health crises) are rare in any farmer's own history, so a per-farm baseline has very little positive signal to learn from",
+        "A farmer who logs more when things are going badly and less when things are fine will bias the model toward mistaking 'no recent logs' for 'no problem'",
+        "No physical mechanism behind the signal, unlike the Phase 3 model — it is pattern-matching on sparse self-report, and it should never be presented with a false sense of the same rigor"
+      ],
+      "human_oversight": "Until validated: show the underlying logged trend in plain language and let the farmer, or a consulted expert, draw the conclusion — exactly the interim posture the kill-risk-forecast model below takes, and for the same reason.",
+      "the_interim_product": "'You have not logged dissolved oxygen in 11 days, and your last two entries were trending down' is a true, useful statement that requires no model and carries no false certainty. Ship that before any anomaly score."
+    },
+    {
       "id": "water-masking",
       "name": "Water Masking (NDWI threshold)",
       "task": "Separate water pixels from land, vegetation, structure, and boats.",
+      "phase": "3",
       "status": "concept",
       "architecture_candidate": "Threshold on NDWI, with a learned refinement only if thresholding proves inadequate.",
       "why_it_is_first": "Everything downstream depends on it. A dike pixel entering a chlorophyll statistic corrupts the statistic silently.",
@@ -38,6 +158,7 @@
       "id": "chla-retrieval",
       "name": "Chlorophyll-a Retrieval (NDCI + local regression)",
       "task": "Convert per-pixel NDCI into estimated chlorophyll-a concentration with uncertainty.",
+      "phase": "3",
       "status": "concept",
       "architecture_candidate": "Site-and-day-local regression of NDCI against in-situ fluorometric chlorophyll from the same sortie. Start with linear or simple nonlinear; do not reach for a neural network to fit four points.",
       "why_not_a_global_model": "Turbidity, CDOM, and illumination differ enough between lakes — and between two days on the same lake — that a global fit is confidently wrong. The literature is consistent on this and it is the main reason UAV retrievals fail in production.",
@@ -65,6 +186,7 @@
       "id": "surface-anomaly",
       "name": "Surface Anomaly Detection",
       "task": "Detect and classify floating mortalities, surface-piping fish, oil sheen, foam, algal mats, debris, and above-water net damage.",
+      "phase": "3",
       "status": "concept",
       "architecture_candidate": "Small-object detection CNN, quantised for edge inference at a few watts.",
       "intended_use": "Flag surface anomalies for human review, geolocated to a specific cage.",
@@ -92,6 +214,7 @@
       "id": "stratification-state",
       "name": "Stratification State Estimation",
       "task": "Compute thermocline depth, Schmidt stability, and hypolimnetic oxygen debt from a profile.",
+      "phase": "3",
       "status": "concept",
       "architecture_candidate": "Deterministic computation, not machine learning.",
       "why_not_ml": "This is established limnological physics with a century of literature behind it. Using a learned model where a physical formula exists is worse in every dimension: less accurate, less interpretable, needs training data we do not have, and fails unpredictably outside its training distribution. The instinct to apply ML to everything should be resisted precisely here, where the physics is known.",
@@ -107,6 +230,7 @@
       "id": "kill-risk-forecast",
       "name": "Composite Fish Kill Risk Forecast",
       "task": "Estimate the probability of a mass mortality event in a defined forward window.",
+      "phase": "3",
       "status": "concept — NOT IMPLEMENTED, NOT VALIDATED, MUST NOT SHIP",
       "the_warning": {
         "statement": "This is the most dangerous artefact in the entire product, and it is the one everyone will ask for first.",
@@ -135,8 +259,10 @@
       "id": "feeding-advisor",
       "name": "Condition-Aware Feeding Advisor",
       "task": "Recommend whether to feed, defer, or reduce ration based on current water conditions.",
+      "phase": "3",
       "status": "concept",
       "architecture_candidate": "Rule-based initially, from published species thresholds. Learned refinement only once real FCR outcome data exists.",
+      "how_this_differs_from_the_phase_1_schedule_recommendation": "This model reacts to measured water conditions (dissolved oxygen, temperature) on a sensor-equipped farm. The Phase 1 'feeding-schedule-recommendation' card above has no water-condition input at all and instead works from logged history. A farm that upgrades keeps both: the Phase 1 model sets the baseline plan, this model overrides it on a bad-water day.",
       "why_rules_first": "The physiology is known: fish in low DO do not convert feed, and feeding into low oxygen adds organic load to water that is already short. A rule encoding that is interpretable, debuggable, and correct on day one. A learned model would need outcome data we will not have for years and would be less explainable to the person deciding.",
       "citation_ids": ["innovasea-fcr-guide", "boyd-water-quality-2020"],
       "out_of_scope_use": "Not a feed formulation tool. Not a growth model.",
@@ -146,20 +272,23 @@
   ],
 
   "cross_cutting_commitments": [
-    { "commitment": "Calibrated confidence, not raw softmax", "why": "An uncalibrated confidence shown as a percentage is decoration that looks like information. If we cannot calibrate it, we do not show a number." },
+    { "commitment": "Calibrated confidence, not raw softmax", "why": "An uncalibrated confidence shown as a percentage is decoration that looks like information. If we cannot calibrate it, we do not show a number. This applies to a disease-ID photo result exactly as much as to a chlorophyll map." },
     { "commitment": "Explainability is load-bearing, not a nice-to-have", "why": "An alert that tells a farmer to spend money on emergency aeration will be ignored unless it says why. XAI here is a commercial requirement before it is an ethical one.", "citation_ids": ["ai-aqua-review-2024"] },
-    { "commitment": "Evaluate on held-out SITES, not held-out splits", "why": "Random splits of one lake's data measure memorisation, not generalisation, and they will flatter every model in this file." },
+    { "commitment": "Evaluate on held-out FARMS or SITES, not held-out splits of the same one", "why": "Random splits of one lake's data, or one farm's logging history, measure memorisation, not generalisation, and they will flatter every model in this file." },
     { "commitment": "Publish the failures", "why": "The confusion matrix including the misses is the only honest evidence. A model card with only the good numbers is a brochure." },
-    { "commitment": "Federated or on-premise training where farmers require it", "why": "Farm production data is commercially sensitive and farmers have sound reasons to refuse to hand it over. Assuming we get to centralise it is an assumption, not a plan.", "citation_ids": ["ai-aqua-review-2024"] }
+    { "commitment": "Federated or on-premise training where farmers require it", "why": "Farm production data is commercially sensitive and farmers have sound reasons to refuse to hand it over. Assuming we get to centralise it is an assumption, not a plan.", "citation_ids": ["ai-aqua-review-2024"] },
+    { "commitment": "Data sparsity is itself a first-class output", "why": "A Phase 1/2 model built on whatever a farmer remembered to log must say when it does not have enough recent data to say anything, rather than silently reusing a stale, falsely confident state." }
   ],
 
   "the_data_problem": {
-    "statement": "We have no training data, and the most valuable model needs the rarest events.",
-    "the_arithmetic": "Mass kills happen a few times a year per lake. A supervised model needs many examples. Even a multi-year, multi-site deployment yields tens of positive examples at best. This is a fundamental constraint, not an engineering inconvenience.",
+    "statement": "We have no training data at any phase, and the most valuable models in each phase need the data that is hardest to get.",
+    "the_arithmetic": "For Phase 3, mass kills happen a few times a year per lake — a supervised model needs many examples and even a multi-year, multi-site deployment yields tens of positive examples at best. For Phase 1/2, the constraint is different but just as real: there are zero real users today, so the disease-ID, assistant, and predictive-health models have no labelled photos, no conversation logs, and no logged farm histories to learn from until the app actually ships and people actually use it.",
     "implications": [
-      "Physics-informed approaches beat pure data-driven ones for the rare-event problem. We know the mechanism; we should encode it rather than hope to learn it from a handful of examples.",
-      "The chronic sub-lethal hypothesis from cost-of-inaction.json is far more tractable ML — continuous outcomes, abundant data, every cycle a sample. If that hypothesis is right, it is both the better business AND the better machine learning problem. That coincidence is worth noticing.",
-      "Transfer from published datasets and from Copernicus history should be exploited hard. We are data-poor and the world is not."
+      "Physics-informed approaches beat pure data-driven ones for the Phase 3 rare-event problem. We know the mechanism; we should encode it rather than hope to learn it from a handful of examples.",
+      "Rule-based, published-threshold approaches beat premature learned models for the Phase 1 feeding and predictive-health problems too, for the same reason: the physiology and the arithmetic of sparse self-reported data are both known, and pretending a model has learned something from a dozen logged entries is the same overclaiming mistake in a different phase.",
+      "The chronic sub-lethal hypothesis from cost-of-inaction.json is far more tractable ML than a rare-event forecast — continuous outcomes, abundant data, every cycle a sample. If that hypothesis is right, it is both the better business AND the better machine learning problem, for Phase 2's analytics as much as for Phase 3's. That coincidence is worth noticing.",
+      "Phase 1 is, among other things, the mechanism by which Phase 2 and Phase 3 models eventually get real training data. A free tier that nobody uses produces no data flywheel; the acquisition goal and the data goal are the same goal.",
+      "Transfer from published datasets and from Copernicus/veterinary/aquaculture literature should be exploited hard everywhere. We are data-poor and the world is not."
     ],
     "citation_ids": ["ai-aqua-review-2024"]
   }

@@ -5,6 +5,7 @@
   "last_updated": "2026-07-17",
   "provenance": "design_target",
   "confidence": "low",
+  "platform_context": "OmniDock is the shore-side infrastructure component of AquaVision Smart (Phase 3) — the premium hardware upgrade layer of the AquaVision platform for commercial and enterprise farms that have outgrown the app-based Phase 1 (free) and Phase 2 (subscription) tiers. It is not AquaVision's core product; it is the infrastructure that makes the Phase 3 hardware offering operable as an unattended service.",
 
   "why_the_dock_is_a_co_equal_product": {
     "statement": "Four of the system's five distinguishing claims depend on the dock, not the aircraft. It is treated in most drone pitches as an accessory. Here it is the thing that makes the product a product.",

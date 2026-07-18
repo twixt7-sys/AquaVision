@@ -8,6 +8,8 @@
 
   "the_ranking_principle": "Ranked by 'if this answer comes back wrong, how much of the plan dies?' — not by how interesting the question is. The most consequential gaps are usually the most boring ones.",
 
+  "phased_platform_framing": "AquaVision is now a phased platform (Phase 1 free app, Phase 2 premium subscription, Phase 3 hardware/enterprise), with the OmniDrone/IoT/digital-twin content below reframed as the Phase 3 upgrade layer rather than the whole company. Most Tier 1 and Tier 2 gaps here were written against the hardware-first framing and remain squarely Phase 3 risks (payload budget, BVLOS, winch viability). They do not disappear under the new narrative — they are simply no longer existential to the company as a whole, since Phase 1/2 can succeed or fail independently of them. The phasing adds its own untested assumptions — freemium conversion rate, activation, and whether a free Phase 1 user base actually converts to Phase 2 paid or Phase 3 hardware customers — which are not yet gaps tracked in this file and should be, with the same rigor applied below.",
+
   "tier_1_existential": {
     "description": "If any of these resolves badly, the venture as conceived does not work. All are answerable in Phase 0 with phone calls and arithmetic — none require research.",
     "gaps": [

@@ -18,6 +18,30 @@
     ]
   },
 
+  "the_phase_1_scale_shift": {
+    "statement": "The phased platform story changes the shape of this problem, not just its scale. Phase 1 collects farmer-entered personal and farm data from thousands of beginner/smallholder users, from day one, as the deliberate acquisition and data-accumulation engine — years before any drone ever flies. The custodian-not-owner commitment above now has to hold at that scale and that early, not just for a handful of Phase 3 enterprise pilot sites.",
+    "what_is_new": [
+      "Volume and timing: far more individuals' personal and farm data, collected far earlier in the company's life, before the governance and support processes have been proven at scale.",
+      "Sensitivity mix: account/identity data, farm location and production data, and self-reported livelihood-relevant information, all from users with less bargaining power and less digital-privacy literacy than an enterprise Phase 3 customer.",
+      "The custodian principle is unchanged, but it is now load-bearing for a much larger and more vulnerable population from the very first release, not phased in gradually."
+    ],
+    "the_honest_admission": "A data-custody promise made to ten enterprise pilot farms is easy to keep by hand. The same promise made to thousands of smallholders through an app requires it to be true by construction — export, deletion, and per-tenant isolation have to work as shipped features, not as a support-ticket process, because there is no field team to do it manually at this scale."
+  },
+
+  "community_and_marketplace_data_considerations": {
+    "statement": "The Phase 1 community forum and the Phase 2 marketplace each introduce a data-governance question that the original hardware-only story never had to answer.",
+    "community_forum_content_moderation": {
+      "what_it_is": "Farmer-to-farmer discussion, questions, and shared experience — valuable for the community-led, low-CAC growth story, and a genuine source of the qualitative signal the product is otherwise missing at Phase 1.",
+      "the_tension": "Moderation requires reading user-generated content, which sits close to the same surveillance line already drawn in the_surveillance_temptation below — the difference is the data is text a farmer chose to post publicly, not imagery captured incidentally. Still requires a stated moderation policy, a way to report harm, and a clear line against using forum content for anything beyond community health (no repurposing posts as marketing or training data without separate consent).",
+      "status": "Policy not yet drafted — flagged here rather than assumed benign."
+    },
+    "marketplace_transaction_data": {
+      "what_it_is": "Phase 2 marketplace activity (feed/equipment purchases, buyer connections) generates commercially sensitive transaction data distinct from water-quality or farm-log data.",
+      "the_tension": "Transaction data is exactly the kind of dataset that is commercially valuable to aggregate and sell (to feed suppliers, for market intelligence) — which is precisely the data-monetisation model the custodian principle above already declines. The commitment has to extend explicitly to marketplace data, not just farm-log data, or it is a loophole.",
+      "commitment": "Marketplace transaction data is held under the same custodian-not-owner principle as farm data: not sold or shared with counterparties beyond what completing the transaction requires, and exportable/deletable on the same terms."
+    }
+  },
+
   "the_aerial_imagery_problem": {
     "statement": "A drone flying over a lake photographs houses, boats, shorelines, and people who are not our customers and did not consent.",
     "why_it_is_serious": "This is personal data collected incidentally, and in a lake community it is also a social-licence question. The frames most useful for training our models are the ones over the busiest, most populated shorelines — so the scientific value and the privacy risk are maximised in the same place. That tension is real and unresolved.",

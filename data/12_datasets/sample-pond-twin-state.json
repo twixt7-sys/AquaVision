@@ -5,6 +5,8 @@
   "last_updated": "2026-07-17",
   "provenance": "illustrative_synthetic",
 
+  "phase_framing_note": "PondTwin is a Phase 3 (Smart Aquaculture hardware layer) capability, sold with OmniDrone and IoT probes to commercial/enterprise farms. The Phase 1 free app and Phase 2 premium tier have no digital-twin visualisation — they work from farmer-entered logs and photos, not the measured/interpolated station data this file illustrates. Do not use this file to suggest Phase 1/2 has 3D twin functionality.",
+
   "DANGER_READ_THIS_FIRST": "EVERY VALUE IN THIS FILE IS FABRICATED. It describes no real pond. It exists solely so the webpage developer can build and test the PondTwin 3D visualisation against correctly-shaped data. It must never appear as evidence of anything. The webpage must render the illustrative_synthetic badge on the entire twin view when fed this file.",
 
   "synthetic_twin": {

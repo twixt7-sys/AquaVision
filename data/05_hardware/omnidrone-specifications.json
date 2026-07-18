@@ -5,6 +5,7 @@
   "last_updated": "2026-07-17",
   "provenance": "design_target",
   "confidence": "low",
+  "platform_context": "OmniDrone is the flagship hardware component of AquaVision Smart (Phase 3) — the premium, hardware-enabled upgrade layer of the AquaVision platform, sold to commercial and enterprise farms that have outgrown the app-based Phase 1 (free) and Phase 2 (subscription) tiers. It is not AquaVision's core product; the company's foundation is the software platform, and this specification describes an optional, higher-tier extension of it.",
 
   "STATUS_BANNER": "NO HARDWARE EXISTS. Every value in this file is a design target or a requirement, not a measurement. Nothing has been built, weighed, or flown. The render in the repository root is an industrial design study and is not dimensionally authoritative. Where the render and this specification disagree, BOTH need reconciling — neither is validated.",
 

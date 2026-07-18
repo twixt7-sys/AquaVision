@@ -7,6 +7,8 @@
   "provenance": "verified_external",
   "verification_notice": "Records derived from search-result summaries. Open the sources before citing. One entry in this collection (ai-aqua-review-2024) is NOT a verified publication and must be fixed or removed.",
 
+  "phase_relevance": "Primarily grounds Phase 3 (the OmniDrone's edge/federated/transfer-learning constraints below). It also frames the ML approach behind Phase 1's photo-based disease identification and Phase 2's predictive health monitoring — the same field-wide barriers named here (deployment cost, power supply, scarce high-quality training data) apply to any ML feature building on farmer-logged data, not only to aerial sensing. Note the honest limit: none of the studies below are themselves about phone-camera disease diagnosis or app-based farmer decision support specifically (sciencedirect-dt-aiot-2023 is the closest, and it is fixed-camera computer vision on a cage, not a phone). They support the general ML-for-aquaculture case, not a validated claim that this literature tested mobile diagnostic tools.",
+
   "studies": [
     {
       "citation_id": "ai-aqua-review-2024",
@@ -55,7 +57,7 @@
       "study_type": "engineering_prototype",
       "year": 2023,
       "summary": "AIoT fish farming with cloud-based digital twins using ML and computer vision to monitor feeding behaviour, disease, and growth.",
-      "relevance_to_omnidrone": "Demonstrates computer vision for feeding behaviour and disease monitoring — capabilities adjacent to our surface anomaly detection but with underwater access we lack.",
+      "relevance_to_omnidrone": "Demonstrates computer vision for feeding behaviour and disease monitoring — capabilities adjacent to our surface anomaly detection but with underwater access we lack. Also the closest thing in this collection to methodological grounding for Phase 1/2's computer-vision disease features, though it is fixed-camera cage monitoring, not phone-camera farmer diagnosis, so the transfer is analogical rather than direct.",
       "supports_or_challenges": "mixed",
       "priority": "MEDIUM"
     },

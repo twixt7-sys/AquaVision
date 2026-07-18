@@ -1,15 +1,17 @@
 {
   "id": "use-cases",
   "title": "Use Cases",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
+  "version": "1.1.0",
+  "last_updated": "2026-07-18",
   "provenance": "design_target",
   "note": "Each use case traces to a problem id in problem-taxonomy.json and generates requirements in the hardware and software files. A use case that traces to nothing is a feature someone wanted.",
+  "phase_scope_note": "AquaVision is a phased platform. uc-01 through uc-10 below describe the Phase 3 hardware layer (OmniDrone, IoT probes, PondTwin) and predate the phased restructuring, but their content is unchanged and still valid — they are simply now scoped explicitly to Phase 3, sold to commercial and enterprise operators. uc-11 and uc-12 describe Phase 1 and Phase 2 respectively: the free app used by a beginner with no sensors at all, and the premium layer a growing farm subscribes to once it has outgrown manual tracking. Together the twelve use cases span the whole funnel, from a smallholder's first pond to an enterprise deployment.",
 
   "use_cases": [
     {
       "id": "uc-01-dawn-profile",
       "title": "The Pre-Dawn Profile",
+      "phase": 3,
       "priority": "must",
       "traces_to": ["prob-diel-sampling-bias", "prob-blindness-at-depth", "wq-do-depletion"],
       "actor": "System (autonomous), overseen by farm manager",
@@ -34,6 +36,7 @@
     {
       "id": "uc-02-bloom-mapping",
       "title": "Algal Bloom Mapping and Ground-Truthing",
+      "phase": 3,
       "priority": "must",
       "traces_to": ["bio-hab", "prob-hab"],
       "actor": "System, initiated by schedule or by satellite/dashboard trigger",
@@ -55,6 +58,7 @@
     {
       "id": "uc-03-stratification-watch",
       "title": "Stratification and Overturn Watch",
+      "phase": 3,
       "priority": "must",
       "traces_to": ["wq-stratification", "wq-overturn", "prob-blindness-at-depth"],
       "flow": [
@@ -72,6 +76,7 @@
     {
       "id": "uc-04-mortality-scan",
       "title": "Surface Mortality and Distress Scan",
+      "phase": 3,
       "priority": "must",
       "traces_to": ["bio-mortality-detection", "bio-stress-behaviour", "prob-disease-detection"],
       "flow": [
@@ -88,6 +93,7 @@
     {
       "id": "uc-05-precision-feeding",
       "title": "Condition-Aware Feed Dispensing",
+      "phase": 3,
       "priority": "should",
       "traces_to": ["op-feed-waste", "op-feed-distribution", "prob-feed-waste"],
       "flow": [
@@ -104,6 +110,7 @@
     {
       "id": "uc-06-targeted-treatment",
       "title": "Targeted Conditioner or Treatment Application",
+      "phase": 3,
       "priority": "should",
       "traces_to": ["prob-treatment-delivery", "wq-ph-swing"],
       "flow": [
@@ -120,6 +127,7 @@
     {
       "id": "uc-07-post-typhoon",
       "title": "Post-Typhoon Rapid Damage Assessment",
+      "phase": 3,
       "priority": "could",
       "traces_to": ["env-typhoon-damage", "op-cage-maintenance"],
       "flow": [
@@ -134,6 +142,7 @@
     {
       "id": "uc-08-pollution-detection",
       "title": "Pollution Event Detection",
+      "phase": 3,
       "priority": "could",
       "traces_to": ["env-oil-spill", "env-industrial-effluent", "env-solid-waste"],
       "flow": ["Routine survey imagery is screened for oil sheen, foam, unusual colour, and debris.", "Detection triggers a probe drop at the plume edge and centre.", "Operator is notified with imagery and chemistry."],
@@ -142,6 +151,7 @@
     {
       "id": "uc-09-audit-record",
       "title": "Certification Audit Record Generation",
+      "phase": 3,
       "priority": "should",
       "traces_to": ["econ-cert-compliance", "prob-data-fragmentation"],
       "flow": ["Continuous logging accumulates against the site and unit records.", "At audit time, the operator exports a date-ranged environmental report.", "Report includes QC flags and provenance, so an auditor can see which readings are trustworthy."],
@@ -151,6 +161,7 @@
     {
       "id": "uc-10-carrying-capacity",
       "title": "Lake-Scale Carrying Capacity Assessment",
+      "phase": 3,
       "priority": "could",
       "traces_to": ["op-stocking-density", "wq-eutrophication", "env-fish-kill"],
       "actor": "Cooperative, LGU, or BFAR",
@@ -158,13 +169,57 @@
       "value_delivered": "The first quantitative basis for a decision that is currently made politically or not at all.",
       "the_tension": "This use case requires multi-farm data and directly collides with farmer data sensitivity. The operator who benefits from the lake-wide analysis is the one who least wants their own stocking visible in it. Unresolved. See ethics-data-privacy.json.",
       "note": "Potentially the highest public value of the whole platform and the hardest to actually deliver, because it is a governance problem wearing a technology costume."
+    },
+    {
+      "id": "uc-11-beginner-manual-logging",
+      "title": "A Beginner Logs Water Quality by Hand and Gets AI Feeding Advice",
+      "phase": 1,
+      "priority": "must",
+      "traces_to": ["prob-data-fragmentation", "prob-feed-waste", "prob-disease-detection"],
+      "actor": "Smallholder farmer, using the free AquaVision App",
+      "trigger": "Farmer opens the app during or after a pond visit",
+      "preconditions": ["Farmer has a smartphone and the app installed", "No sensors, probes, or drones are involved anywhere in this use case"],
+      "flow": [
+        "Farmer measures what they can — often just observation, sometimes a cheap test strip or kit — and enters readings manually, or takes a photo of the pond and fish for the AI to assess.",
+        "App records the entry against the farm's setup profile: species, stocking density, pond size, days into cycle.",
+        "AI farming guide compares the entry against the feeding schedule and husbandry guidance for this species and stage.",
+        "If the entry or photo suggests a problem — cloudy water, fish at the surface, visible lesions — the app surfaces a disease-ID opinion and a plain-language suggestion.",
+        "Farmer can post the same photo to the community for a second, human opinion.",
+        "Entry is stored, building the farm's own history for future feeding schedule and record-keeping features."
+      ],
+      "postconditions": ["Log entry stored", "Feeding schedule updated or confirmed", "Community post created if the farmer chose to ask"],
+      "value_delivered": "The same discipline of logging that the Phase 3 hardware automates for a commercial operator, made available for free to someone who has never had it at all — without needing a single sensor, probe, or drone.",
+      "why_this_matters_for_the_platform": "This is the data-accumulation engine described in the platform overview. Every manual entry is a data point AquaVision would otherwise have to buy or simulate, and it is also the on-ramp that eventually converts this farmer into a Phase 2 subscriber once the farm outgrows manual tracking.",
+      "honest_note": "The app has not launched. Nobody has entered a real log yet. The AI farming guide and photo-based disease ID are design targets trained toward literature and public data, not yet validated against real farmer photos. Accuracy claims are `assumption` provenance until a real evaluation exists."
+    },
+    {
+      "id": "uc-12-growing-farm-premium-marketplace",
+      "title": "A Growing Farm Subscribes to Premium Analytics and Buys Feed via the Marketplace",
+      "phase": 2,
+      "priority": "must",
+      "traces_to": ["prob-data-fragmentation", "op-feed-waste", "econ-cert-compliance"],
+      "actor": "Owner-operator of a small-commercial farm, upgrading from the free App",
+      "trigger": "Farm has accumulated a season or more of Phase 1 logs and manual tracking is no longer keeping up",
+      "preconditions": ["Farmer has an existing Phase 1 App account with logged history", "Farmer subscribes to AquaVision Premium"],
+      "flow": [
+        "Farmer subscribes; premium analytics dashboard unlocks and processes the farm's existing Phase 1 log history.",
+        "Dashboard surfaces trends the farmer had not noticed by hand — a feeding pattern correlated with slower growth, a recurring dip in a logged parameter before past problems.",
+        "Smart recommendations suggest an adjustment; the farmer decides whether to act on it.",
+        "Farmer browses the marketplace for feed and equipment, compares listed prices against the local supplier, and places an order.",
+        "Farmer books a paid consultation with a vet or aquaculturist through the platform when a question exceeds what the AI guide or community can answer.",
+        "At certification audit time, the farmer exports the accumulated environmental log as a compliance record."
+      ],
+      "postconditions": ["Subscription active", "Marketplace order placed", "Consultation booked or completed", "Audit export generated"],
+      "value_delivered": "A paid layer whose ROI a farmer can check against numbers they already have — a marketplace price against a known local price, a consultation against a known travel cost — rather than a promise that requires trusting AquaVision's modelling.",
+      "why_this_matters_for_the_platform": "This is the Phase 2 monetisation event the whole funnel is built to produce, and it depends entirely on Phase 1 having supplied real logged history first.",
+      "honest_note": "No farm has subscribed yet. The conversion rate from free to paid, the marketplace's seller-side supply, and the predictive-analytics accuracy are all unproven assumptions, not measured figures — the same cold-start dependency named in value-proposition.json's Phase 2 section."
     }
   ],
 
   "use_case_prioritisation": {
-    "method": "MoSCoW, weighted by whether the use case proves the core claim or merely uses it.",
-    "must_have_rationale": "UC-01, UC-02, UC-03, and UC-04 collectively prove the depth-plus-imaging claim. Without all four, the platform is a camera with an expensive accessory.",
-    "the_demo_use_case": "UC-02. It shows the probe calibrating the camera in a single flight, which is the only thing about this product that a competitor cannot trivially copy.",
-    "the_revenue_use_case": "UC-09 and the aeration side of UC-01. Boring, checkable, and they pay for the deployment while the interesting claims are still being proven."
+    "method": "MoSCoW, weighted by whether the use case proves the core claim or merely uses it. Originally scoped to the Phase 3 hardware claim; UC-11 and UC-12 are must-have for Phase 1/2 on the same logic — without them, the app and premium layer are feature lists nobody asked for.",
+    "must_have_rationale": "UC-01, UC-02, UC-03, and UC-04 collectively prove the depth-plus-imaging claim for Phase 3. Without all four, the Phase 3 hardware layer is a camera with an expensive accessory. UC-11 proves the Phase 1 acquisition loop; UC-12 proves the Phase 2 conversion loop. Without those two, the phases above them have nothing to build on.",
+    "the_demo_use_case": "UC-02 for Phase 3 — it shows the probe calibrating the camera in a single flight, which is the only thing about that layer a competitor cannot trivially copy. UC-11 for Phase 1 — it shows a farmer with nothing getting something for free, in one sitting.",
+    "the_revenue_use_case": "UC-09 and the aeration side of UC-01 for Phase 3. UC-12 for Phase 2. All are boring, checkable, and pay for themselves while the more exciting claims in each phase are still being proven."
   }
 }

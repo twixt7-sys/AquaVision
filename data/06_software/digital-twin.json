@@ -1,10 +1,11 @@
 {
   "id": "digital-twin",
   "title": "PondTwin — Digital Twin Specification",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
+  "version": "1.1.0",
+  "last_updated": "2026-07-18",
   "provenance": "design_target",
   "confidence": "low",
+  "phase": "3 (Smart Aquaculture) — with a degraded-fidelity view for Phase 1/2 farms; see the_phase_1_2_view below.",
 
   "the_definition_we_are_holding_ourselves_to": {
     "statement": "A digital twin is a virtual representation kept synchronised with a physical system by live sensor data, running a model of that system's behaviour, capable of answering counterfactual questions.",
@@ -64,6 +65,15 @@
     }
   ],
 
+  "the_phase_1_2_view": {
+    "statement": "PondTwin as specified above is a Phase 3 capability — it requires the drone/probe fusion pipeline and does not exist for a farm that has not upgraded. Most farms on the platform, especially at launch, will not have upgraded. Those farms still get a pond visualisation; it is simply, deliberately, a lesser one.",
+    "what_a_no_sensor_farm_sees": "A simplified pond card, not a 3D volume: the pond's basic geometry from the setup wizard, and whatever the farmer has manually logged — water-quality entries, feeding, mortality — plotted as a plain time series per parameter. There is no depth profile, because there is no profile: a single manually-logged reading is a surface grab-sample or a test-strip result, not a station in a water column.",
+    "the_fidelity_label": "Every such view is explicitly badged 'estimated / farmer-logged — not sensor-calibrated' so it is never mistaken for the Phase 3 twin. This is the same honesty discipline as the operator_supplied rendering rule below, applied to the entire view rather than one layer of it: a hand-drawn sketch of a pond is not a smaller digital twin, it is a different kind of artefact, and the UI must say so.",
+    "no_interpolation_between_logged_readings": "Unlike the Phase 3 interpolated layer, which fills space between stations, the Phase 1/2 view does not fill time between log entries with a smooth line implying continuous knowledge. Gaps between manual entries are rendered as gaps, exactly per REQ-TWIN-004's spirit and the dashboard's 'no interpolation across an outage' rule — the far more common outage here is a farmer who did not log for two weeks, not a sensor fault.",
+    "the_upgrade_path": "The same farm and pond records carry forward unchanged if the farm adds Phase 3 sensors later — the pond does not need to be re-created. What changes is that the badge flips from 'estimated / farmer-logged' to the full measured/interpolated/simulated treatment described above, and the manually-logged history remains visible alongside the new sensor history rather than being discarded.",
+    "the_honest_limit": "This is intentionally not called PondTwin in customer-facing material for these farms, for the same reason the full spec below is careful about the term: it is a logbook with charts, and calling it a twin would be the same overclaim REQ-TWIN-006 already forbids, one tier lower down."
+  },
+
   "the_provenance_rendering_requirement": {
     "statement": "The twin must make it visually obvious which parts are measured, which are interpolated, which are simulated, and which the farmer typed in.",
     "why_this_is_the_hardest_UX_problem_in_the_product": "A twin's persuasive power comes from looking like a coherent, complete picture of reality. Its honesty requires showing that it is a sparse set of measurements with a lot of inference stretched between them. Those two goals are in direct opposition, and the resolution is a design problem nobody has solved well.",
@@ -90,7 +100,8 @@
     { "id": "REQ-TWIN-003", "statement": "Interpolated volume shall render with a visual uncertainty cue that increases with distance from the nearest measurement.", "type": "data", "priority": "must", "verification_method": "inspection", "rationale": "A smooth confident gradient over unmeasured water is the most persuasive lie the product could tell." },
     { "id": "REQ-TWIN-004", "statement": "State shall visually decay with age since last measurement.", "type": "data", "priority": "must", "verification_method": "inspection", "rationale": "A six-hour-old profile after a storm is not the current state." },
     { "id": "REQ-TWIN-005", "statement": "The twin shall not display a simulated value in the same visual channel as a measured value.", "type": "data", "priority": "must", "verification_method": "inspection" },
-    { "id": "REQ-TWIN-006", "statement": "The term 'digital twin' shall not be used in customer-facing material until the simulation layer exists and is calibrated.", "type": "usability", "priority": "should", "verification_method": "inspection", "rationale": "Claiming the term without the simulation is the industry's standard practice and it is still wrong." }
+    { "id": "REQ-TWIN-006", "statement": "The term 'digital twin' shall not be used in customer-facing material until the simulation layer exists and is calibrated.", "type": "usability", "priority": "should", "verification_method": "inspection", "rationale": "Claiming the term without the simulation is the industry's standard practice and it is still wrong." },
+    { "id": "REQ-TWIN-007", "statement": "A Phase 1/2 farm's pond visualisation shall be visually and textually distinct from the Phase 3 PondTwin, and shall never be labelled 'digital twin' or 'PondTwin'.", "type": "usability", "priority": "must", "verification_method": "inspection", "rationale": "A farmer-logged pond card and a sensor-fed twin carry different confidence and must never be presented as the same kind of artefact. See the_phase_1_2_view." }
   ],
 
   "prior_art": {

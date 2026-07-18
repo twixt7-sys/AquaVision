@@ -9,6 +9,8 @@
 
   "why_this_theme_matters_most": "This is the theme where our contribution lives. The literature can map water quality from a drone; it cannot calibrate the map without a boat. That gap is the OmniDrone's reason to exist, and this collection is the evidence that the gap is real.",
 
+  "phase_relevance": "Grounds the Phase 3 (Smart Aquaculture / hardware layer) of the AquaVision platform specifically — the OmniDrone/IoT upgrade sold to commercial and enterprise farms once they have outgrown Phase 1/2's manual and app-based logging. Nothing in this collection speaks to Phase 1 or Phase 2.",
+
   "studies": [
     {
       "citation_id": "mdpi-drones-inland-review-2024",

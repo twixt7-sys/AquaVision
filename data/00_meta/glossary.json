@@ -1,9 +1,9 @@
 {
   "id": "glossary",
   "title": "Glossary — Aquaculture, Fisheries, Remote Sensing, and Systems Terms",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
-  "description": "Controlled vocabulary for the whole repository and for the thesis. Where a term has a contested definition, both readings are given. Terms are grouped for UI filtering but the flat `terms[]` array is authoritative.",
+  "version": "1.1.0",
+  "last_updated": "2026-07-18",
+  "description": "Controlled vocabulary for the whole AquaVision platform repository and for the thesis, spanning the Phase 1 free app, Phase 2 premium tier, and Phase 3 OmniDrone/IoT hardware layer. Where a term has a contested definition, both readings are given. Terms are grouped for UI filtering but the flat `terms[]` array is authoritative.",
   "groups": ["aquaculture", "water_quality", "biology_health", "remote_sensing", "uav_systems", "data_ai", "business", "regulatory"],
 
   "terms": [
@@ -26,7 +26,7 @@
       "term": "Cage Culture",
       "group": "aquaculture",
       "definition": "Rearing of fish in enclosures of net or mesh suspended in an existing water body (lake, reservoir, bay), where water exchanges freely with the surrounding environment. High stocking density, no control of inflow water quality — which is precisely why cage culture is the most exposed to ambient dissolved oxygen crashes and algal blooms.",
-      "note": "The dominant mode in Philippine lake systems such as Taal and Laguna de Bay. Its vulnerability profile is the OmniDrone's core market rationale."
+      "note": "The dominant mode in Philippine lake systems such as Taal and Laguna de Bay. Its vulnerability profile is the core market rationale for AquaVision's Phase 3 OmniDrone/IoT sensing layer, and part of why these lakes are the initial beachhead for the free Phase 1 app as well."
     },
     {
       "term": "Pond Culture",
@@ -38,7 +38,7 @@
       "abbrev": "RAS",
       "group": "aquaculture",
       "definition": "A land-based, largely closed system in which water is mechanically and biologically filtered and reused. Highest capital cost, highest control, lowest environmental exchange.",
-      "note": "RAS is largely OUT of the OmniDrone's addressable market — an indoor tank does not need an aerial vehicle. Stated here so the market sizing does not over-claim."
+      "note": "RAS is largely OUT of the addressable market for AquaVision's Phase 3 hardware — an indoor tank does not need an aerial vehicle or a submerged probe. RAS operators remain addressable by the Phase 1/2 software (record keeping, analytics, marketplace) even though the drone will never fly over their tanks. Stated here so the market sizing does not over-claim."
     },
     {
       "term": "Polyculture",
@@ -73,7 +73,7 @@
       "aka": ["Turnover", "Upwelling", "Destratification event"],
       "group": "water_quality",
       "definition": "The abrupt vertical mixing of a stratified water body, driven by surface cooling, heavy rain, or strong wind. It drags oxygen-poor, sulfide- and ammonia-rich hypolimnetic water to the surface where the fish are. This is the mechanism behind most catastrophic lake fish kills, and it can complete in hours — which is the entire argument for continuous rather than weekly monitoring.",
-      "note": "Critical concept for the OmniDrone thesis: a weekly grab sample has roughly zero probability of catching the precursor conditions."
+      "note": "Critical concept for the AquaVision platform thesis at every phase: a weekly grab sample, or a farmer's manual Phase 1 log entered once a day, has roughly zero probability of catching the precursor conditions — which is the argument for logging discipline in Phase 1/2 and for continuous Phase 3 sensing once a farm can afford it."
     },
     {
       "term": "Thermal Stratification",
@@ -188,7 +188,7 @@
       "term": "Secchi Depth",
       "group": "water_quality",
       "definition": "The depth at which a standard black-and-white disc disappears from view. The oldest and still most widely used field measure of water transparency and, by proxy, plankton density.",
-      "note": "Worth preserving in the product: farmers trust it, and it gives the OmniDrone a free ground-truth calibration target that every extension worker already understands."
+      "note": "Worth preserving in the product at every phase: farmers trust it, it is a fine manual data point for the free Phase 1 app, and it gives the Phase 3 OmniDrone a free ground-truth calibration target that every extension worker already understands."
     },
     {
       "term": "Salinity",
@@ -367,6 +367,12 @@
       "note": "This distinction is worth defending explicitly in the thesis, because 'digital twin' is used loosely enough in industry to mean nothing at all."
     },
     {
+      "term": "PondTwin",
+      "group": "data_ai",
+      "definition": "AquaVision's product name for its digital twin surface: a live, navigable 3D model of a water body and its stock, fed by IoT sensors and OmniDrone sorties. A Phase 3 product component, one step beyond the analytics dashboard available in Phase 2.",
+      "citation_ids": ["sciencedirect-dt-aiot-2023"]
+    },
+    {
       "term": "Precision Aquaculture",
       "group": "data_ai",
       "definition": "Applying the control-engineering logic of precision agriculture to fish farming: observe, interpret, decide, act — with instruments rather than intuition, at the resolution of the individual unit rather than the whole farm.",
@@ -386,7 +392,7 @@
     {
       "term": "Ground Truth",
       "group": "data_ai",
-      "definition": "Directly measured reference data against which a model or a remote-sensing retrieval is validated. The reeled probe is the OmniDrone's on-board ground truth generator, which is architecturally the most interesting thing about the vehicle."
+      "definition": "Directly measured reference data against which a model or a remote-sensing retrieval is validated. The reeled probe is the Phase 3 OmniDrone's on-board ground truth generator, which is architecturally the most interesting thing about the vehicle; in Phase 1/2, a farmer's own logged reading plays the analogous role for calibrating the platform's software-only recommendations."
     },
     {
       "term": "Federated Learning",
@@ -415,7 +421,7 @@
       "definition": "Mass of feed supplied divided by mass of animal weight gained. Lower is better. Typically 1.0–2.5 in finfish aquaculture.",
       "formula": "FCR = feed_supplied_kg / biomass_gain_kg",
       "citation_ids": ["innovasea-fcr-guide", "ussec-fcr-power"],
-      "note": "The economic lever the OmniDrone's feeding function targets. Feed is commonly around 60 percent of operating cost, so an FCR improvement is close to a pure margin improvement."
+      "note": "The economic lever the platform's feeding guidance targets at every phase — the Phase 1/2 AI assistant's feeding-schedule recommendations, and the Phase 3 OmniDrone's automated dispensing. Feed is commonly around 60 percent of operating cost, so an FCR improvement is close to a pure margin improvement."
     },
     {
       "term": "Specific Growth Rate",
@@ -427,12 +433,12 @@
     {
       "term": "Survival Rate",
       "group": "aquaculture",
-      "definition": "Proportion of stocked individuals harvested alive. The headline KPI a farmer actually cares about, and the one the OmniDrone's value claim ultimately reduces to."
+      "definition": "Proportion of stocked individuals harvested alive. The headline KPI a farmer actually cares about, and the one the AquaVision platform's value claim ultimately reduces to at every phase, from a free app's feeding reminder to an OmniDrone sortie."
     },
     {
       "term": "Biosecurity",
       "group": "biology_health",
-      "definition": "The set of practices preventing the introduction and spread of pathogens into and between culture units. Directly constrains the OmniDrone design: a probe dipped in pond A and then pond B is a pathogen vector with rotors.",
+      "definition": "The set of practices preventing the introduction and spread of pathogens into and between culture units. Directly constrains the Phase 3 OmniDrone design: a probe dipped in pond A and then pond B is a pathogen vector with rotors. It also shapes what the Phase 1 disease-identification feature is allowed to claim — a photo-based AI suggestion is not a diagnosis, and treating it as one is its own biosecurity risk.",
       "citation_ids": ["worldbank-disease-risk-2014"],
       "note": "This is the most commonly overlooked objection to multi-site probe drones, and the repository treats it as a first-class design driver rather than an afterthought."
     },
@@ -466,6 +472,30 @@
       "group": "business",
       "definition": "FAO's strategic framing for expanding aquatic food systems sustainably: intensify aquaculture responsibly, manage fisheries effectively, and upgrade value chains.",
       "citation_ids": ["fao-sofia-2024"]
+    },
+    {
+      "term": "Phase 1 (Foundation)",
+      "group": "business",
+      "definition": "The first stage of AquaVision's product roadmap: a free or low-cost app providing guided farm setup, an AI farming assistant, manual/photo-based water quality logging, feeding schedules, photo-based disease identification, community discussions, learning modules, and record keeping. No sensor or drone hardware involved. Functions as the company's user-acquisition and data-accumulation engine.",
+      "note": "Deliberately reaches beginner and smallholder farmers directly, rather than deferring them the way a hardware-first plan would have had to on affordability grounds."
+    },
+    {
+      "term": "Phase 2 (Monetization)",
+      "group": "business",
+      "definition": "The second stage of AquaVision's product roadmap: a paid subscription tier layered on the free Phase 1 app, comprising premium analytics, predictive health monitoring modeled on Phase 1 data, smart recommendations, a marketplace for feed/equipment/buyers, and paid expert consultations with aquaculturists and vets."
+    },
+    {
+      "term": "Phase 3 (Smart Aquaculture)",
+      "group": "business",
+      "definition": "The third stage of AquaVision's product roadmap: an optional hardware upgrade layer for commercial and enterprise farms that have outgrown manual and semi-manual logging, comprising IoT water probes, the OmniDrone, PondTwin digital-twin visualisation, and an enterprise dashboard. Everything in the repository's deep hardware engineering content (05_hardware, most of 06_software) lives here.",
+      "note": "This is where the OmniDrone sits in the current narrative: a Phase 3 component of the platform, not the whole company."
+    },
+    {
+      "term": "Freemium",
+      "abbrev": null,
+      "group": "business",
+      "definition": "A business model offering a free core product to build a user base and up-selling a paid tier to the subset who need more. AquaVision's Phase 1 app is the free layer; Phase 2 is the paid layer.",
+      "note": "The freemium conversion rate — the fraction of free users who ever pay — is the single biggest unproven assumption in the Phase 2 business model, and it is treated as such rather than modeled optimistically. See milestones-roadmap.json and business-model-canvas.json."
     }
   ],
 

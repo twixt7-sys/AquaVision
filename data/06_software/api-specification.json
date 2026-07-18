@@ -1,23 +1,61 @@
 {
   "id": "api-specification",
   "title": "API Specification",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
+  "version": "2.0.0",
+  "last_updated": "2026-07-18",
   "provenance": "design_target",
   "status": "Design intent. No API is implemented. Paths and shapes are indicative and will change on contact with a real client.",
 
   "design_principles": [
     "REST over HTTPS, JSON. Boring on purpose. There is nothing in this domain that justifies a novel protocol.",
-    "Read-heavy. The dashboard and the webpage consuming this repository are the primary clients.",
-    "Every response that contains a number carries its provenance and its QC status. An API that returns bare numbers invites clients to render them as facts.",
-    "Tenant isolation is enforced at the API boundary, not in the client. A client bug must not be able to expose Farm B's data to Farm A.",
+    "One API, three phases. A free Phase 1 farmer and an enterprise Phase 3 operator hit the same base API — tier gates which endpoints return data versus a 402/403, not a different service.",
+    "Read-heavy. The mobile/web app, the dashboard, and the webpage consuming this repository are the primary clients.",
+    "Every response that contains a number carries its provenance and, for water-quality data, whether it is a sensor measurement or a self-report. An API that returns bare numbers invites clients to render them as facts.",
+    "Tenant isolation is enforced at the API boundary, not in the client. A client bug must not be able to expose Farm B's data to Farm A — and, separately, must not be able to leak a private farm record into the public community feed.",
     "Uncertainty is never optional in a response. If a client wants a scalar without an error bar, they can discard the field — but we will not omit it."
   ],
 
   "base": "/api/v1",
 
   "endpoints": [
-    { "method": "GET", "path": "/sites", "returns": "Sites visible to the authenticated tenant.", "notes": "Tenant-scoped by construction." },
+    { "method": "POST", "path": "/auth/register", "body": "{contact, password_or_oauth}", "returns": "New user_account and an auth token.", "notes": "The entry point for the entire platform. No hardware, no sales call — this is the actual front door." },
+    { "method": "POST", "path": "/auth/login", "returns": "Auth token." },
+    { "method": "GET", "path": "/users/me", "returns": "The authenticated user's profile, farm_ids, and tier." },
+
+    { "method": "POST", "path": "/farms", "body": "{name, location}", "returns": "New farm_profile.", "notes": "Created by the Phase 1 setup wizard. Every farm on the platform starts here, including farms that later add Phase 3 hardware." },
+    { "method": "GET", "path": "/farms/{farm_id}", "returns": "Farm detail including ponds, tier, and has_phase_3_hardware." },
+    { "method": "POST", "path": "/farms/{farm_id}/ponds", "body": "{species, stocking_date, estimated_count, ...}", "returns": "New pond_profile.", "notes": "estimated_count is farmer-supplied and is always returned with a provenance of assumption, never rendered as a measured stock count." },
+
+    { "method": "GET", "path": "/farms/{farm_id}/water-quality", "query": ["pond_id", "from", "to", "source_type"], "returns": "Manual entries and/or sensor samples for the farm, per source_type filter.", "notes": "source_type defaults to returning both, but every record in the response is explicitly tagged manual_entry or sensor_probe — the client cannot accidentally render one as the other because the field is mandatory, not inferred." },
+    { "method": "POST", "path": "/farms/{farm_id}/water-quality/manual", "body": "{pond_id, measured_utc, entry_method, parameters, photo_ref}", "returns": "New manual_water_quality_entry.", "notes": "The core Phase 1 logging endpoint. Works from the offline-first client cache and syncs idempotently." },
+
+    { "method": "GET", "path": "/farms/{farm_id}/feeding-schedules", "returns": "Active feeding_schedule records per pond." },
+    { "method": "POST", "path": "/farms/{farm_id}/feeding-schedules", "body": "{pond_id, times_of_day, ration_kg, feed_type}", "returns": "New feeding_schedule." },
+    { "method": "POST", "path": "/farms/{farm_id}/feeding-logs", "body": "{pond_id, fed_utc, quantity_kg, schedule_id, outcome}", "returns": "New feeding_log.", "notes": "Confirms or overrides a reminder. A missed confirmation is itself visible data, not silently dropped." },
+
+    { "method": "POST", "path": "/assistant/chat", "body": "{message, conversation_id}", "returns": "Assistant response plus any suggested in-app actions.", "notes": "See ai-ml-models.json#/models/ai-farming-assistant. Every response touching health, dosing, or treatment carries a mandatory disclaimer field the client must render, not an optional one." },
+
+    { "method": "POST", "path": "/disease-reports", "body": "{pond_id, photo_refs, farmer_description}", "returns": "New disease_report with the model's candidate list attached once inference completes.", "notes": "Candidates are always returned separately from the farmer's own description — see ai-ml-models.json#/models/disease-identification-photo." },
+    { "method": "GET", "path": "/disease-reports/{report_id}", "returns": "Report detail including model candidates, confidence, and any human review or escalation." },
+
+    { "method": "GET", "path": "/community/posts", "query": ["category", "from", "to"], "returns": "Public forum posts.", "notes": "Never includes a farm's private operational data unless the author explicitly attached it to the post." },
+    { "method": "POST", "path": "/community/posts", "body": "{category, body, attachments, reply_to_post_id}", "returns": "New community_post, pending moderation where configured." },
+
+    { "method": "GET", "path": "/learning/modules", "returns": "Available learning/content modules." },
+    { "method": "POST", "path": "/learning/modules/{module_id}/progress", "body": "{status}", "returns": "Updated learning_module_progress." },
+
+    { "method": "GET", "path": "/premium/analytics/{farm_id}", "returns": "Trend analysis over the farm's own logged and/or sensor history.", "notes": "PREMIUM TIER. Returns 403 with an upgrade prompt for free-tier farms. Response must state the data-completeness basis it was computed on — see dashboard-spec.json's sparse-data states." },
+    { "method": "GET", "path": "/premium/predictive-health/{farm_id}", "returns": "Output of the predictive-health-anomaly model (Phase 2) or the kill-risk-forecast model (Phase 3), whichever applies to this farm.", "notes": "PREMIUM TIER. Both underlying models are unvalidated — see ai-ml-models.json. This endpoint must return the mechanism/plain-language explanation alongside any score, never the score alone, and must return null with an explicit reason when the farm's data is too sparse to support a signal." },
+    { "method": "GET", "path": "/premium/recommendations/{farm_id}", "returns": "Feeding, water-management, or marketplace recommendations for the farm." },
+
+    { "method": "GET", "path": "/marketplace/listings", "query": ["category", "seller_type", "status"], "returns": "Active listings." },
+    { "method": "POST", "path": "/marketplace/listings", "body": "{category, price, currency, description}", "returns": "New marketplace_listing." },
+    { "method": "POST", "path": "/marketplace/orders", "body": "{listing_id}", "returns": "New marketplace_order with take_rate_pct applied.", "notes": "PREMIUM/marketplace tier. The only marketplace write endpoint with real money attached; payment handling itself is deliberately unspecified at this design stage — see system-architecture.json#/technology_choices." },
+
+    { "method": "POST", "path": "/consultations", "body": "{farm_id, expert_id, channel, linked_disease_report_id}", "returns": "New consultation_booking request.", "notes": "PREMIUM TIER. A paid, human-in-the-loop escalation path — see ai-ml-models.json's disease-identification and predictive-health cards, both of which route their low-confidence or high-stakes cases here rather than resolving them by model alone." },
+    { "method": "GET", "path": "/consultations/{booking_id}", "returns": "Booking detail and, once completed, any consult notes the expert chose to share back to the farmer." },
+
+    { "method": "GET", "path": "/sites", "returns": "Phase 3 sites visible to the authenticated tenant.", "notes": "A site exists only for a farm with has_phase_3_hardware = true. Tenant-scoped by construction." },
     { "method": "GET", "path": "/sites/{site_id}", "returns": "Site detail: geometry, units, stations, dock, commissioning record." },
     { "method": "GET", "path": "/sites/{site_id}/units", "returns": "Cages, pens, or ponds with current state summary." },
     { "method": "GET", "path": "/sites/{site_id}/stations", "returns": "Fixed sampling stations. Profiles are only comparable across time if the station is the same place — this endpoint is what makes that guarantee inspectable." },
@@ -26,49 +64,53 @@
     { "method": "GET", "path": "/profiles", "query": ["site_id", "station_id", "from", "to", "include_partial"], "returns": "Profile records.", "notes": "include_partial defaults to FALSE. Partial profiles are excluded from analysis by default because a truncated column silently corrupts any aggregate computed from it. A client must opt in to see them, which forces the client author to think about it." },
     { "method": "GET", "path": "/profiles/{profile_id}", "returns": "Full profile with all samples and per-channel QC flags." },
     { "method": "GET", "path": "/profiles/{profile_id}/derived", "returns": "Thermocline depth, stratification index, oxygen debt, with inputs_complete flag." },
-    { "method": "GET", "path": "/timeseries", "query": ["site_id", "station_id", "variable", "depth_band", "from", "to", "qc_min"], "returns": "A time series of one variable at one depth band.", "notes": "qc_min defaults to 1 (good only). A client asking for suspect data must say so explicitly." },
+    { "method": "GET", "path": "/timeseries", "query": ["site_id", "station_id", "variable", "depth_band", "from", "to", "qc_min"], "returns": "A time series of one variable at one depth band, from calibrated sensors only.", "notes": "qc_min defaults to 1 (good only). A client asking for suspect data must say so explicitly. Use /farms/{farm_id}/water-quality for the equivalent manually-logged series." },
     { "method": "GET", "path": "/imagery", "query": ["site_id", "product_type", "from", "to"], "returns": "Imagery product metadata including solar elevation, illumination stability, and calibration reference." },
     { "method": "GET", "path": "/imagery/{product_id}", "returns": "Product with links to the raster and its MANDATORY uncertainty field.", "notes": "A concentration product without an uncertainty field reference is a 500, not a partial response. It should be impossible to consume a concentration map without its errors." },
-    { "method": "GET", "path": "/detections", "query": ["site_id", "class", "min_confidence", "review_status", "from", "to"], "returns": "Model detections with evidence references and human review verdicts." },
+    { "method": "GET", "path": "/detections", "query": ["site_id", "class", "min_confidence", "review_status", "from", "to"], "returns": "Model detections with evidence references and human review verdicts, across every phase's models." },
     { "method": "POST", "path": "/detections/{detection_id}/review", "body": "{verdict, notes}", "returns": "Updated detection.", "notes": "Human confirmation or rejection. Rejections are as valuable as confirmations — they are the training signal." },
-    { "method": "GET", "path": "/twin/{site_id}/state", "query": ["at"], "returns": "Twin state at a time, with per-layer provenance and staleness.", "notes": "The response separates measured, interpolated, simulated, and operator-supplied into distinct objects. A client cannot accidentally blend them because the API does not offer a blended field." },
-    { "method": "GET", "path": "/alerts", "query": ["site_id", "severity", "status", "from", "to"], "returns": "Alerts with evidence references and the rule or model that raised them." },
+    { "method": "GET", "path": "/twin/{farm_id}/state", "query": ["at"], "returns": "For a Phase 3 farm: full PondTwin state with per-layer provenance and staleness. For a Phase 1/2 farm: the degraded pond-card view over logged data.", "notes": "The response shape always separates measured, interpolated, simulated, and operator/farmer-supplied into distinct objects, and always carries a `fidelity` field ('full_twin' or 'estimated_no_sensors') so a client renders the correct view rather than guessing. See digital-twin.json#/the_phase_1_2_view." },
+    { "method": "GET", "path": "/alerts", "query": ["farm_id", "severity", "status", "from", "to"], "returns": "Alerts with evidence references and the rule or model that raised them, from either the sensor pipeline or a rule evaluated against manually logged data." },
     { "method": "POST", "path": "/alerts/{alert_id}/acknowledge", "returns": "Acknowledgement record.", "notes": "The acknowledge-to-action rate is a first-class product health metric. If people stop acting, the product has failed regardless of sensor accuracy." },
     { "method": "GET", "path": "/dispensing", "query": ["site_id", "from", "to", "substance_class"], "returns": "Dispensing action records with commanded vs delivered mass and the human authoriser." },
-    { "method": "POST", "path": "/dispensing/authorise", "body": "{sortie_plan_id, substance, dose_kg, positions}", "returns": "Authorisation token, single-use, mission-scoped.", "notes": "The only write endpoint with real-world consequence. Requires an authenticated human principal — never a service account. The token does not persist beyond the mission it authorises." },
-    { "method": "GET", "path": "/reports/environmental", "query": ["site_id", "from", "to", "format"], "returns": "Audit-ready environmental record with QC flags and provenance visible.", "notes": "The certification audit use case. Deliberately includes the QC flags — an auditor should be able to see which readings we do not trust. Hiding them would make the report look better and be worth less." },
+    { "method": "POST", "path": "/dispensing/authorise", "body": "{sortie_plan_id, substance, dose_kg, positions}", "returns": "Authorisation token, single-use, mission-scoped.", "notes": "The only write endpoint with real-world physical consequence in the Phase 3 stack. Requires an authenticated human principal — never a service account. The token does not persist beyond the mission it authorises." },
+    { "method": "GET", "path": "/reports/environmental", "query": ["farm_id", "from", "to", "format"], "returns": "Audit-ready environmental record with QC flags, source_type, and provenance visible, merging manual and sensor history where both exist for a farm.", "notes": "The certification audit use case. Deliberately includes the QC flags and self-reported labels — an auditor should be able to see which readings we do not trust, and which were never instrument-measured at all." },
     { "method": "GET", "path": "/fleet/health", "returns": "Aircraft, dock, and sonde status including calibration due dates and sonde site assignment.", "notes": "Sonde site assignment is a biosecurity control. If a sonde appears at a site it is not assigned to, that is an incident." }
   ],
 
   "response_envelope": {
-    "note": "Every data response carries this envelope. It is the API-level expression of the repository's provenance discipline.",
+    "note": "Every data response carries this envelope. It is the API-level expression of the repository's provenance discipline, extended to distinguish self-reported app data from calibrated sensor data.",
     "shape": {
       "data": "the payload",
       "meta": {
         "provenance": "verified_external | derived_calculation | modeled_projection | design_target | illustrative_synthetic | assumption",
-        "qc_summary": "counts by flag",
+        "source_type": "sensor_probe | manual_entry | model_inference | farmer_supplied | community_content — present on any response mixing or potentially confusable with water-quality or stock data",
+        "qc_summary": "counts by flag, where applicable",
         "generated_utc": "when this response was computed",
-        "staleness": "age of the newest underlying measurement",
-        "completeness": "what is missing and why"
+        "staleness": "age of the newest underlying measurement or log entry",
+        "completeness": "what is missing and why — for a Premium analytics or predictive response, this includes whether the farm's logging history is sparse enough to undermine the result"
       },
       "warnings": "array of human-readable caveats the client SHOULD render"
     },
-    "the_warnings_field": "Clients are expected to render warnings, not swallow them. A warning like 'this concentration field was calibrated on 3 points with an R² of 0.41' is more important than the field itself, and an API that makes it easy to ignore is an API that facilitates overclaiming."
+    "the_warnings_field": "Clients are expected to render warnings, not swallow them. A warning like 'this concentration field was calibrated on 3 points with an R² of 0.41' or 'this farm has logged water quality twice in 60 days' is more important than the field itself, and an API that makes it easy to ignore is an API that facilitates overclaiming."
   },
 
   "auth_and_tenancy": {
-    "model": "Per-tenant. A farm's data is visible only to that farm and to explicitly granted parties.",
-    "the_hard_case": "The lake-scale carrying capacity use case (UC-10) needs cross-farm aggregation. The operator who benefits from the lake-wide picture is the one who least wants their own stocking visible in it.",
-    "position": "Cross-tenant reads are not exposed by this API at all. Aggregated lake-scale products are a separate, explicitly-consented pipeline with their own governance. Building a cross-tenant read endpoint 'just for internal use' is how the boundary erodes.",
+    "model": "Per-tenant, where a tenant is a farm. A user may belong to multiple farms with different roles; a farm's data is visible only to that farm's authorised users and to explicitly granted parties (e.g. a booked expert, scoped to the relevant records only).",
+    "the_hard_case": "The lake-scale carrying capacity use case (UC-10) needs cross-farm aggregation, and the operator who benefits from the lake-wide picture is the one who least wants their own stocking visible in it. The community forum raises a softer version of the same tension for every tier, not just Phase 3.",
+    "position": "Cross-tenant reads are not exposed by this API at all. Community content is the one deliberately public surface, and it is explicitly opt-in per post, never a farm's operational data by default. Aggregated lake-scale products are a separate, explicitly-consented pipeline with their own governance. Building a cross-tenant read endpoint 'just for internal use' is how the boundary erodes.",
     "status": "UNRESOLVED. See ethics-data-privacy.json. Flagged because it is cheap to design now and impossible to retrofit."
   },
 
   "what_this_api_will_not_do": [
     "Return a concentration without its uncertainty.",
-    "Return a model output in the same field as a measurement.",
+    "Return a model output in the same field as a measurement or a self-report.",
+    "Return a self-reported water-quality entry with the same confidence badge as a calibrated sensor reading.",
     "Accept a dispensing command without a human authoriser.",
     "Expose one tenant's data to another, for any reason, including 'research'.",
     "Silently include partial profiles in an aggregate.",
+    "Return specific medication dosing or treatment instructions from the assistant or disease-identification endpoints without routing through a human channel.",
+    "Move marketplace or consultation money without a traceable order/booking record and its actual applied fee.",
     "Provide a person-detection or personnel-tracking endpoint. Not because it is technically hard — because building it would change what this company is."
   ]
 }

@@ -6,6 +6,8 @@
   "provenance": "derived_calculation",
   "purpose": "The theory the study rests on. A thesis needs this chapter to explain WHY the intervention should work, not just what it does. Without it, the work is engineering with citations attached.",
 
+  "phased_platform_framing": "This chapter's theoretical pillars were built to justify the OmniDrone specifically; under the phased-platform framing they now justify the Phase 3 hardware layer of a three-phase product (Phase 1 free app, Phase 2 premium tier, Phase 3 hardware/enterprise). Limnological process theory, bio-optical theory, and sampling theory remain Phase 3 arguments precisely as written. Diffusion of innovations and economics of information apply more broadly — they are worth re-reading against Phase 1 (a low-cost/free app scores far better on compatibility, complexity, and trialability than a drone-and-dock capital purchase, which is arguably why the phasing works better as a go-to-market theory than the original hardware-first one) as well as against Phase 3.",
+
   "the_central_theoretical_claim": {
     "statement": "Mass mortality in intensive inland aquaculture is not primarily a water quality failure. It is an OBSERVABILITY failure of a system whose dynamics are already understood.",
     "unpacking_it": "Limnologists have understood stratification and overturn for a century. The sensors exist and are affordable. The mechanism behind Philippine lake kills — hypolimnetic water delivered to the surface, carrying its oxygen deficit, ammonia, and sulfide — is documented. Nothing about the physics is mysterious. What is missing is somebody looking, at the right depth, at the right hour, in the right place, often enough.",

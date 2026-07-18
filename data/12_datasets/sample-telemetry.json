@@ -5,6 +5,8 @@
   "last_updated": "2026-07-17",
   "provenance": "illustrative_synthetic",
 
+  "phase_framing_note": "This file illustrates the Phase 3 (Smart Aquaculture hardware layer — IoT sondes, OmniDrone sorties) sensor data pipeline specifically. It has nothing to do with Phase 1 manual/photo water-quality logging, which is farmer-entered text and photos, not multichannel probe telemetry. Do not use this file to imply Phase 1/2 has sensor-grade data — it does not, by design.",
+
   "DANGER_READ_THIS_FIRST": {
     "banner": "EVERY NUMBER IN THIS FILE IS FABRICATED. IT DESCRIBES NO REAL POND, NO REAL FISH, AND NO REAL SORTIE.",
     "purpose": "This data exists for ONE reason: so the webpage developer has correctly-shaped records to build and test the dashboard and twin against, before real data exists. It shows the SHAPE of the data, not any fact about the world.",

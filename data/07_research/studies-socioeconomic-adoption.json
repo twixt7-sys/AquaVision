@@ -15,6 +15,8 @@
     "priority": "This collection deserves a dedicated literature search before Phase 1. It is more likely to change the plan than anything in the sensing literature."
   },
 
+  "phase_relevance": "This collection was written against a drone-and-dock capital purchase, and its diagnostic — Rogers scores that product badly on four of five diffusion attributes — was a genuine problem for that pitch. Read against Phase 1 (a free or low-cost app aimed at smallholders as the acquisition tier of a phased platform) rather than a hardware purchase, the same Rogers framework reads far more favourably: compatibility and complexity improve sharply for a phone app versus a drone-and-dock installation, trialability improves sharply (an app can be tried and abandoned at zero cost, a dock cannot), and observability is still mixed but less lopsided. This is a genuinely more supportive read of the same citation, not a new claim — rogers-diffusion-2003's five attributes are simply being scored against a different product. The moore-crossing-chasm-1991 and worldbank-disease-risk-2014 findings (chasm risk, and the neediest-cannot-pay distributional trap) still apply and still matter for Phase 1: a free tier resolves the affordability half of that trap for acquisition, but conversion to Phase 2 paid tiers reintroduces it, and this collection's honest emptiness on smallholder adoption evidence has not been corrected merely by changing the product being scored against it.",
+
   "studies": [
     {
       "citation_id": "rogers-diffusion-2003",

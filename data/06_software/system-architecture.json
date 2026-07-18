@@ -1,45 +1,83 @@
 {
   "id": "system-architecture",
   "title": "System Architecture",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
+  "version": "2.0.0",
+  "last_updated": "2026-07-18",
   "provenance": "design_target",
 
+  "the_phased_platform": {
+    "statement": "AquaVision is one platform built in three phases, not three products. The app is the foundation; the hardware is an upgrade layer on top of it, not a separate system.",
+    "why_this_ordering": "The old architecture started at the drone and worked outward. That was backwards for a company whose primary asset is data about ponds over time. Most farms in the addressable market cannot afford a drone on day one, and most never will need one. Every farm can use a phone. The platform is therefore designed app-first: an account, a farm profile, and a place to log what a farmer already knows how to observe. The IoT/drone stack described later in this file is a Phase 3 extension that feeds richer, higher-frequency, instrument-grade data into the exact same ingestion, storage, and presentation layers a Phase 1 farmer is already using with a pencil-and-paper replacement.",
+    "phases": [
+      { "phase": "Phase 1 — Foundation", "product": "AquaVision App", "what_it_is": "Free/low-cost mobile and web client: guided farm setup, AI farming assistant, manual/photo water-quality logging, feeding schedules and reminders, photo-based disease identification, community forum, learning modules, record keeping.", "role_in_architecture": "The acquisition engine and the primary data-entry surface. Every entity in this platform's data model (farm, pond, user) is created here, even for farms that later add sensors." },
+      { "phase": "Phase 2 — Monetization", "product": "AquaVision Premium", "what_it_is": "A subscription layer over the same account: analytics engine over logged data, predictive health monitoring, a recommendation engine, a marketplace, and paid expert consultations.", "role_in_architecture": "Adds compute-heavy and human-in-the-loop services on top of the Phase 1 data model. It does not require new hardware — it requires enough logged history to be useful, which is why Phase 1 must ship first and accumulate data before Phase 2 can be honestly valuable." },
+      { "phase": "Phase 3 — Smart Aquaculture", "product": "AquaVision Smart (OmniDrone + IoT probes + PondTwin + Enterprise Dashboard)", "what_it_is": "The full engineering content of this repository's hardware sections: autonomous drone, reeled sonde, docking station, calibrated multispectral imaging, digital twin. Sold as a hardware-as-upgrade add-on to commercial and enterprise farms.", "role_in_architecture": "Replaces manual log entries with continuous instrument telemetry for the same farm and pond records, and unlocks the twin's simulated layer. Nothing about the underlying platform changes shape — a sensor reading and a manual reading describe the same conceptual entity (a water-quality observation at a pond, at a time) but are never confused for each other in the data model. See telemetry-schema.json." }
+    ],
+    "the_test_for_every_new_feature": "Does this feature need to exist for a farmer with no sensors and no drone? If yes, it belongs in the app/backend layer below, not the IoT layer, even if the eventual enterprise customer will also use it."
+  },
+
   "architectural_principles": [
-    { "principle": "Offline is the normal case, not the exception", "implication": "Rural aquaculture sites lose connectivity routinely. Every layer must function with the link down and reconcile when it returns. A system that assumes the cloud is a system that fails on the day it matters.", "citation_ids": ["ai-aqua-review-2024"] },
-    { "principle": "Measurements and predictions live in separate namespaces", "implication": "The moment a model output can be mistaken for an observation, the dataset is permanently compromised and every downstream analysis is suspect." },
-    { "principle": "Raw data is immutable", "implication": "Corrections are new records referencing the original. Never overwrite a measurement." },
-    { "principle": "The edge decides what matters; the cloud decides what it means", "implication": "Inference and data reduction on board. Training, twin simulation, and cross-site analytics in the cloud." },
-    { "principle": "The farmer's data belongs to the farmer", "implication": "Constrains the architecture: per-tenant isolation, exportability, and deletion must be real capabilities, not policy statements. See ethics-data-privacy.json." }
+    { "principle": "The app is the platform; the hardware is an upgrade to it", "implication": "Farm, pond, and user records are created and owned in the Phase 1 data model. Phase 3 sensors and drones attach evidence to those same records; they do not spawn a separate system that has to be reconciled later." },
+    { "principle": "Offline is the normal case, not the exception", "implication": "Rural aquaculture sites lose connectivity routinely, for both a farmer's phone and a Phase 3 dock. Every layer must function with the link down and reconcile when it returns. A system that assumes the cloud is a system that fails on the day it matters.", "citation_ids": ["ai-aqua-review-2024"] },
+    { "principle": "Measurements, self-reports, and predictions live in separate namespaces", "implication": "A farmer's typed-in pH reading, a calibrated sonde's pH reading, and a model's predicted pH trend are three different kinds of fact with three different confidence levels. The moment any of them can be mistaken for another, the dataset is permanently compromised and every downstream analysis — including the Phase 2 analytics a farmer is paying for — is suspect." },
+    { "principle": "Raw data is immutable", "implication": "Corrections are new records referencing the original, whether the original is a sensor sample or a farmer's manual log entry. Never overwrite a measurement or a log." },
+    { "principle": "The edge decides what matters; the cloud decides what it means", "implication": "For Phase 3: inference and data reduction on board the aircraft; training, twin simulation, and cross-site analytics in the cloud. For Phase 1/2: the client app decides what to ask the farmer and when; the backend decides what the accumulated answers mean." },
+    { "principle": "The farmer's data belongs to the farmer", "implication": "Constrains the architecture at every phase: per-tenant isolation, exportability, and deletion must be real capabilities, not policy statements, for a free Phase 1 account exactly as much as for an enterprise Phase 3 contract. See ethics-data-privacy.json." }
   ],
 
   "layers": [
     {
+      "layer": "Client — mobile and web app",
+      "phase": "1",
+      "responsibilities": ["Account creation and farm setup wizard", "AI farming assistant chat interface", "Manual and photo-based water-quality log entry forms", "Feeding schedule reminders and feed logging", "Photo capture for disease identification", "Community forum browsing and posting", "Learning module consumption and progress tracking", "Offline-first local cache of a farmer's own records"],
+      "why_here": "This is the surface almost every prospective customer meets first, on a mid-range Android phone with an intermittent connection. It has to work with the link down for the same reason a lakeshore dock does: a farmer logging a mortality event at a site with no signal must not lose that entry.",
+      "detail_file": "data/06_software/dashboard-spec.json"
+    },
+    {
+      "layer": "Backend platform — application services",
+      "phase": "1-2",
+      "responsibilities": ["User accounts, auth, and farm profiles", "AI assistant / LLM orchestration and guardrails", "Water-quality logging service (manual entries)", "Feeding schedule and reminder service", "Disease identification inference service (photo upload -> model -> human-reviewable result)", "Community/forum service (posts, moderation, replies)", "Content and learning-module service", "Record-keeping and export"],
+      "why_here": "These are the services that make the free tier genuinely useful on day one, independent of any hardware. They are the foundation the rest of the architecture is layered onto.",
+      "note": "This layer is new relative to the original OmniDrone-only architecture and is now the base of the stack, not an accessory to it."
+    },
+    {
+      "layer": "Backend platform — premium services",
+      "phase": "2",
+      "responsibilities": ["Analytics engine over Phase 1 logged data", "Predictive health monitoring model serving", "Recommendation engine", "Marketplace service (listings, orders, take-rate accounting)", "Expert consultation booking and messaging"],
+      "why_here": "These services read the same farm/pond/log records the Phase 1 services write. They are compute- and judgement-heavier, and several (marketplace, consultations) involve real money and a human expert, which is why they are gated behind a paid tier rather than given away for free.",
+      "the_honest_dependency": "This layer is only as good as the Phase 1 logging behind it. An analytics engine over a farmer who logged three readings in six months will honestly say so, not paper over the gap with an interpolated-looking chart. See dashboard-spec.json for how sparse-data states are shown."
+    },
+    {
       "layer": "Edge — on aircraft",
+      "phase": "3",
       "responsibilities": ["Flight control and failsafe", "Sensor acquisition and timestamping", "QC flagging at source", "NDWI/NDCI computation", "Anomaly detection inference", "Data reduction and compression", "Local buffering"],
       "why_here": "Raw multispectral imagery is far too large to upload over an intermittent cellular link, and a bloom detection that requires backhaul fails exactly when the network is congested or down.",
       "constraint": "Every watt of compute comes directly out of endurance. See power-energy-budget.json."
     },
     {
       "layer": "Edge — dock",
+      "phase": "3",
       "responsibilities": ["Sortie scheduling", "Store-and-forward", "Local dashboard for on-site staff", "Calibration reference management", "Fleet health"],
       "why_here": "The dock has mains or solar power and no mass constraint. Anything that does not need to be on the aircraft should be here rather than in the cloud — it is closer to the operator and it works when the link does not.",
       "requirement": "7 days of local retention minimum. The pre-dawn profile must survive a link outage."
     },
     {
       "layer": "Platform — cloud",
-      "responsibilities": ["Ingestion and validation", "Time-series storage", "Sensor fusion — probe calibrating imagery", "Digital twin simulation", "Model training", "Cross-site analytics", "Alerting", "API"],
-      "note": "The cloud is where value compounds across sites and time. It is not on the critical path for any single sortie, and it must not become so."
+      "phase": "1-3, shared",
+      "responsibilities": ["Ingestion and validation for both app-entered records and sensor/drone telemetry", "Time-series and relational storage", "Sensor fusion — probe calibrating imagery (Phase 3)", "Digital twin simulation (Phase 3)", "Model training and serving for every phase's models", "Cross-site analytics", "Alerting", "Unified API"],
+      "note": "The cloud is where value compounds across every phase — a farm's Phase 1 log history does not get thrown away when it upgrades to Phase 3 sensors; the two data sources sit side by side in the same account, distinguished by source type. It is not on the critical path for any single sortie or any single log entry, and it must not become so."
     },
     {
       "layer": "Presentation",
-      "responsibilities": ["PondTwin visualisation", "Dashboard", "Mobile alerts", "Reports and audit exports"],
+      "phase": "1-3, shared",
+      "responsibilities": ["Phase 1/2 app views: assistant, logging forms, feeding, community, learning, records", "Phase 2 premium views: analytics, predictive alerts, recommendations, marketplace, consultations", "Phase 3 views: PondTwin visualisation, enterprise dashboard, mobile alerts, reports and audit exports"],
       "detail_file": "data/06_software/dashboard-spec.json"
     }
   ],
 
   "the_fusion_core": {
-    "why_this_is_the_architecture_and_not_a_feature": "The probe-calibrates-the-camera insight from solution-overview.json is not a processing step bolted onto a pipeline. It is the reason the system exists, and the architecture should be shaped around it.",
+    "status": "Phase 3 subsystem",
+    "why_this_is_the_architecture_and_not_a_feature": "The probe-calibrates-the-camera insight from solution-overview.json is not a processing step bolted onto a pipeline. It is the reason the Phase 3 hardware upgrade exists, and its architecture should be shaped around it. It sits inside the shared cloud layer above and is invoked only for farms with drone imagery to fuse.",
     "the_flow": [
       "Imagery arrives as reflectance (already calibrated at the edge against the dock panel and the irradiance log).",
       "NDWI masks non-water pixels. Nothing downstream sees a dike or a boat.",
@@ -55,7 +93,15 @@
   },
 
   "data_flow": {
-    "sortie_lifecycle": [
+    "app_lifecycle_phase_1_2": [
+      { "step": 1, "event": "Farmer creates an account and completes the farm setup wizard, creating a farm_profile and one or more pond records" },
+      { "step": 2, "event": "Farmer logs water quality manually or by photo, sets a feeding schedule, or opens the AI assistant" },
+      { "step": 3, "event": "Client caches the entry locally and syncs to the backend when connectivity permits" },
+      { "step": 4, "event": "Backend validates and stores the entry as a manual_water_quality_entry (or feeding_log, disease_report, etc.), tagged with its source type" },
+      { "step": 5, "event": "If the farm is on Premium, the analytics and predictive services incorporate the new entry into that farm's trends and recommendations" },
+      { "step": 6, "event": "Dashboard reflects the new state; reminders and community/learning surfaces update independently" }
+    ],
+    "sortie_lifecycle_phase_3": [
       { "step": 1, "event": "Dock schedules sortie against the diel cycle and the glint window" },
       { "step": 2, "event": "Aircraft acquires — timestamped UTC, QC-flagged at source" },
       { "step": 3, "event": "Edge computes indices and runs inference" },
@@ -67,50 +113,54 @@
       { "step": 9, "event": "Alert rules evaluate; alerts dispatch with evidence attached" },
       { "step": 10, "event": "Dashboard and twin reflect the new state" }
     ],
-    "the_latency_requirement": "From dock to alert, under 5 minutes when connected. A dawn-profile alert that arrives at 09:00 has missed the window it exists to open."
+    "the_latency_requirement": "From dock to alert, under 5 minutes when connected (Phase 3). For a Phase 1/2 manual entry there is no equivalent hard latency requirement — the entry is a record, not a triggering event — except where a farmer-logged reading crosses a rule-based threshold, in which case the same alerting service used for sensor data evaluates it."
   },
 
   "storage_model": {
-    "time_series": "Profiles, telemetry, and derived indices. High write volume, append-only.",
-    "spatial": "Imagery mosaics, concentration fields, uncertainty fields. Large objects, low query rate.",
-    "relational": "Sites, units, stations, sondes, sorties, users, tenants, authorisations.",
-    "immutability": "Raw measurements are append-only. A correction is a new record with a reference to the original and a reason. This is not a purity exercise — it is what makes the dataset defensible in an audit, a dispute, or a thesis.",
-    "retention": "Raw data indefinitely. It is the asset. The moat is not the drone; it is three years of profiles on a lake nobody else has measured."
+    "time_series": "Sensor/drone profiles and telemetry, derived indices, AND manually-logged water-quality entries and feeding logs. High write volume for the sensor case, low-and-irregular write volume for the manual case; both append-only.",
+    "spatial": "Imagery mosaics, concentration fields, uncertainty fields (Phase 3 only). Large objects, low query rate.",
+    "relational": "Users, farms, ponds/units, community posts and threads, learning modules and progress, marketplace listings and orders, consultation bookings, and — for Phase 3 — sites, stations, sondes, sorties, tenants, authorisations.",
+    "immutability": "Raw measurements and raw logs are append-only. A correction is a new record with a reference to the original and a reason, whether the original came from a sonde or from a farmer's phone. This is not a purity exercise — it is what makes the dataset defensible in an audit, a dispute, or a customer support conversation.",
+    "retention": "Raw data indefinitely, across every phase. It is the asset. For Phase 3 customers the moat is years of sensor profiles on a lake nobody else has measured; for Phase 1/2 customers the moat is the accumulated history of a farm's own logged cycles, which is exactly the dataset Phase 2's analytics and predictive models are trained to need."
   },
 
   "the_offline_design": {
-    "why_it_is_a_first_class_concern": "Most agritech architectures assume connectivity and degrade badly without it. Ours cannot.",
+    "why_it_is_a_first_class_concern": "Most agritech architectures assume connectivity and degrade badly without it. Ours cannot, at any phase — a smallholder's phone on a spotty rural signal has the same problem as a dock on a lakeshore.",
     "rules": [
+      "The Phase 1 app must let a farmer log water quality, feed, and disease photos with no connection, and sync later without loss or duplication.",
       "The dock schedules and flies with no cloud contact. Indefinitely.",
-      "The local dashboard works with no cloud contact.",
-      "Alerts based on threshold rules fire locally. Only model-based alerts requiring cloud inference are deferred — which is a good reason to keep the safety-critical alerts rule-based rather than model-based.",
-      "Sync is idempotent and resumable. A dock that reconnects after four days uploads four days of data without duplication or loss.",
-      "Clock discipline matters: a dock that has been offline still needs UTC accuracy, or the diel analysis is corrupted on reconnection."
+      "The local dashboard (app or dock) works with no cloud contact.",
+      "Alerts based on threshold rules fire locally where possible. Only model-based alerts requiring cloud inference are deferred — which is a good reason to keep the safety-critical alerts rule-based rather than model-based, at every phase.",
+      "Sync is idempotent and resumable. A phone or a dock that reconnects after four days uploads four days of data without duplication or loss.",
+      "Clock discipline matters: a client that has been offline still needs accurate timestamps, or the diel and trend analyses are corrupted on reconnection."
     ]
   },
 
   "multi_tenancy_and_data_boundaries": {
-    "requirement": "Farm A must never see Farm B's data. Not by convention — by construction.",
-    "why_it_is_architectural": "Use case UC-10 (lake-scale carrying capacity) requires cross-farm aggregation, and the operator who benefits from the lake-wide analysis is the one who least wants their own stocking visible in it. That tension is not resolvable by a policy document; it must be resolved in the data model.",
-    "approach": "Strict per-tenant isolation by default. Cross-farm analytics operate only on explicitly consented, aggregated, and — where possible — differentially private outputs. The default is no sharing.",
+    "requirement": "Farm A must never see Farm B's data. Not by convention — by construction. This applies identically to a free Phase 1 account and an enterprise Phase 3 contract.",
+    "why_it_is_architectural": "Use case UC-10 (lake-scale carrying capacity) requires cross-farm aggregation, and the operator who benefits from the lake-wide analysis is the one who least wants their own stocking visible in it. Community forum posts add a second, softer version of the same tension: farmers want peer advice without exposing their own production numbers. Neither tension is resolvable by a policy document; both must be resolved in the data model.",
+    "approach": "Strict per-tenant isolation by default. Community posts are explicitly opt-in public content, separated in the model from a farm's private operational data. Cross-farm analytics operate only on explicitly consented, aggregated, and — where possible — differentially private outputs. The default is no sharing.",
     "the_honest_gap": "We have not designed this properly. It is flagged here because it is the kind of thing that is cheap now and impossible later. See ethics-data-privacy.json.",
-    "status": "UNRESOLVED — architectural decision required before the first multi-farm deployment"
+    "status": "UNRESOLVED — architectural decision required before the first multi-farm deployment and before community features scale beyond a small closed group"
   },
 
   "security": {
     "considerations": [
-      "Command-and-control link integrity. An aircraft that accepts a spoofed command is a weapon. Authenticated, encrypted C2 is not optional.",
+      "Individual farmer accounts hold personal data (phone numbers, location, farm production data) from the very first Phase 1 signup, not just from enterprise Phase 3 contracts. Account security is not deferred to a later phase.",
+      "The AI assistant and disease-identification pipeline both ingest farmer photos and messages, which may incidentally contain people, houses, or other personal data.",
+      "The marketplace and consultation services move money and personal contact information between farmers, vendors, and experts; payment handling should not be built in-house without a clear reason.",
+      "Command-and-control link integrity for Phase 3 aircraft. An aircraft that accepts a spoofed command is a weapon. Authenticated, encrypted C2 is not optional.",
       "The dock is a physically accessible computer on a lakeshore. Assume it will be opened.",
-      "Farm production data is commercially sensitive. A breach that reveals a competitor's stocking density is a real commercial harm to a real customer.",
+      "Farm production data is commercially sensitive at every phase. A breach that reveals a competitor's stocking density, or a farmer's private forum activity, is a real commercial harm to a real customer.",
       "Imagery contains people, houses, and boats. It is personal data whether we intended to collect it or not.",
       "The dispensing interlock must not be reachable from the network. Ever. An attacker who can dispense is an attacker who can poison a pond."
     ],
-    "status": "Not designed. Named here so it is not forgotten. A security architecture retrofitted after the first deployment is a security architecture that does not exist."
+    "status": "Not designed. Named here so it is not forgotten. A security architecture retrofitted after the first deployment — or the first thousand free-tier signups — is a security architecture that does not exist."
   },
 
   "technology_choices": {
     "status": "DELIBERATELY UNSPECIFIED",
-    "reasoning": "Naming a database and a cloud vendor at TRL 3 is premature and it is the kind of decision that looks like progress while being irrelevant. The architecture above constrains what is needed: append-only time series at moderate volume, large object storage, offline-tolerant sync, and edge inference at a few watts. Many stacks satisfy those. Choose when there is a real workload to measure, not before.",
-    "the_only_real_constraint": "It must run in the Philippines with Philippine latency and Philippine data residency expectations, and it must not assume the site has internet."
+    "reasoning": "Naming a database, a cloud vendor, or a specific LLM provider at this stage is premature and it is the kind of decision that looks like progress while being irrelevant. The architecture above constrains what is needed: a mobile/web client with offline-first sync; conventional relational and object storage for accounts, farms, logs, forum, and marketplace data; an abstracted interface to a third-party LLM for the assistant (so the provider can change without reshaping the product); and, for Phase 3, append-only time series at moderate volume, large object storage, offline-tolerant sync, and edge inference at a few watts. Many stacks satisfy those. Choose when there is a real workload to measure, not before.",
+    "the_only_real_constraint": "It must run for users in the Philippines with Philippine latency and Philippine data residency expectations, on low-end Android devices and patchy rural connectivity, and it must not assume the site — or the farmer's phone — has internet."
   }
 }

@@ -5,6 +5,7 @@
   "last_updated": "2026-07-17",
   "provenance": "assumption",
   "confidence": "speculative",
+  "platform_context": "This BOM covers OmniDrone/OmniDock, the hardware components of AquaVision Smart (Phase 3) — the premium hardware upgrade layer of the AquaVision platform sold to commercial/enterprise farms that have outgrown the app-based Phase 1/2 tiers. It is a cost basis for an optional add-on layer, not for AquaVision's core (software) product.",
 
   "READ_THIS_FIRST": "NO COMPONENT HAS BEEN SOURCED. NO SUPPLIER HAS BEEN CONTACTED. NO PRICE HAS BEEN QUOTED. Every figure below is an order-of-magnitude placeholder based on general knowledge of component categories. The correct use of this file is as a STRUCTURE to fill in during Phase 0 vendor engagement, and as an honest statement of what we do not know. Any BOM cost that reaches an investor deck must come from real quotes. A fabricated BOM is the fastest way to build a financial model that is wrong at the foundation, and every number downstream inherits the error.",
 

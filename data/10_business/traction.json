@@ -1,61 +1,65 @@
 {
   "id": "traction",
   "title": "Traction",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
+  "version": "2.0.0",
+  "last_updated": "2026-07-18",
   "provenance": "verified_external",
   "confidence": "high",
 
   "THE_DELIBERATE_EMPTINESS_OF_THIS_FILE": {
-    "statement": "This file is empty of traction because there is none, and that emptiness is a deliberate act of integrity, not an oversight.",
-    "the_temptation_being_resisted": "It would be trivial to populate this file with invented pilot agreements, fabricated letters of intent, imaginary customer counts, or a 'we are in discussions with' list that overstates a single polite email. Many pitch decks do exactly this.",
-    "why_we_refuse": "A pitch that invents traction is fraud, and it is the specific kind of fraud that diligence is designed to catch. A single fabricated LOI that an investor calls to verify ends the raise and the reputation. A pitch that shows honest zeros against a rigorous plan survives diligence and builds the trust that the unverifiable later claims depend on. See funding-ask.json#/the_counterintuitive_bet.",
-    "the_principle": "Fill this file only from reality. Every field below is a real category of traction, currently and honestly at zero or 'not started'. When real traction arrives, it goes here, dated and verifiable."
+    "statement": "This file is empty of traction because there is none, and that emptiness is a deliberate act of integrity, not an oversight. That discipline does not change just because the business model is now software-first and a free app is, in principle, faster to ship and adopt than a drone.",
+    "the_temptation_being_resisted": "It would be trivial to populate this file with an invented install count, a fabricated waitlist, imaginary letters of intent from cooperatives or commercial farms, or a 'early users love it' quote. Many pitch decks do exactly this, and a phased software story does not make the fabrication less discoverable in diligence.",
+    "why_we_refuse": "A pitch that invents traction is fraud, and it is the specific kind of fraud diligence is designed to catch. A single fabricated install number or LOI that an investor tries to verify ends the raise and the reputation. A pitch that shows honest zeros against a rigorous phased plan survives diligence and builds the trust the unverifiable later claims depend on. See funding-ask.json#/the_counterintuitive_bet.",
+    "the_principle": "Fill this file only from reality. Every field below is a real category of traction, currently and honestly at zero or 'not started', restructured to match the three-phase model. When real traction arrives, it goes here, dated and verifiable."
   },
 
   "current_status": {
-    "as_of": "2026-07-17",
-    "overall": "Pre-seed / concept. TRL 3. No product, no pilot, no revenue, no team hired.",
+    "as_of": "2026-07-18",
+    "overall": "Pre-seed / concept, now repositioned as a phased software-first platform. No app has shipped, no user has installed it, no revenue, no team hired.",
     "what_actually_exists": [
-      "A clearly specified concept and an industrial design render.",
+      "A clearly specified concept for the three-phase platform (free app -> premium subscription/marketplace -> hardware-as-a-service).",
       "A researched, evidenced problem definition.",
-      "A system architecture and requirements baseline.",
+      "A system architecture and requirements baseline, including the Phase 3 hardware design at TRL 3.",
       "This repository."
     ]
   },
 
   "traction_categories": {
-    "note": "All zero/not-started. Structured so real evidence slots in cleanly and dishonest padding has an obvious empty home rather than a tempting blank.",
-    "customers": { "paying": 0, "pilots": 0, "letters_of_intent": 0, "signed_agreements": 0, "status": "none" },
+    "note": "All zero/not-started. Structured around the three-phase model so real evidence slots in cleanly and dishonest padding has an obvious empty home rather than a tempting blank.",
+    "phase_1_app": { "launched": false, "installs": 0, "activated_users": 0, "retained_weekly_active_users": 0, "status": "not built / not launched" },
+    "phase_2_monetization": { "paying_subscribers": 0, "measured_conversion_rate": null, "marketplace_transactions": 0, "consultations_booked": 0, "status": "not built — depends on Phase 1 launch" },
+    "phase_3_hardware": { "flying_prototype": false, "field_data_collected": false, "models_trained": false, "models_validated": false, "pilots": 0, "signed_agreements": 0, "status": "concept only, unchanged from the original hardware plan" },
     "revenue": { "recurring": null, "total_to_date": null, "currency": "PHP", "status": "none" },
-    "product": { "flying_prototype": false, "field_data_collected": false, "models_trained": false, "models_validated": false, "status": "concept only" },
     "team": { "founders": "to be confirmed", "hired": 0, "status": "see team-structure.json — roles specified, none filled" },
-    "partnerships": { "academic_mou": "none — a Phase 0 priority", "regulatory_engagement": "none — CAAP conversation is a Phase 0 priority", "cooperative": "none", "commercial": "none", "status": "none" },
-    "regulatory": { "caap_registration": "not started", "pilot_certification": "not started", "bvlos_authorisation": "not started", "status": "none" },
+    "partnerships": { "app_distribution_ngo_or_extension": "none", "academic_mou": "none", "regulatory_engagement": "none — CAAP conversation is a future Phase 3 priority", "cooperative": "none", "commercial": "none", "status": "none" },
+    "regulatory": { "caap_registration": "not started", "pilot_certification": "not started", "bvlos_authorisation": "not started", "status": "none — applies only to the Phase 3 hardware layer" },
     "funding": { "raised_to_date": null, "grants": "none", "status": "pre-raise" },
     "validation": { "peer_reviewed_output": "none", "field_trials": "none", "reference_deployments": "none", "status": "none" },
-    "intellectual_property": { "patents_filed": 0, "status": "none — and the honest position is that the winch/calibration engineering is hard but not patent-hard; the real moat is data and relationships, neither of which exists yet" }
+    "intellectual_property": { "patents_filed": 0, "status": "none — the honest position is that neither the software (AI models, funnel design) nor the Phase 3 winch/calibration engineering is patent-hard; the real moat, if any, is data and relationships, neither of which exists yet" }
   },
 
   "the_milestones_that_will_constitute_real_traction": {
-    "note": "What to put here as it actually happens. Each is a genuine de-risking event, ordered by the risk it removes.",
+    "note": "What to put here as it actually happens. Each is a genuine de-risking event, ordered by the risk it removes, now sequenced across the three phases rather than a single hardware validation path.",
     "in_order": [
-      "Phase 0: 25+ documented farmer interviews with a written synthesis — including operators who said no and why.",
-      "Phase 0: a signed academic validation MOU.",
-      "Phase 0: a documented BVLOS pathway from CAAP engagement.",
-      "Phase 1: winch 1000-cycle reliability demonstrated.",
-      "Phase 2: profile-vs-reference-sonde agreement demonstrated — the moment the core claim becomes true.",
+      "Phase 0: farmer discovery interviews validating the free-tier feature set.",
+      "Phase 1: app launched publicly on at least one app store.",
+      "Phase 1: a measured activation rate and a real base of weekly-active users.",
+      "Phase 1: evidence that organic/community channels acquire users without paid marketing spend.",
+      "Phase 2: premium tier, marketplace, and consultation features launched.",
+      "Phase 2: a measured free-to-paid conversion rate — the single most important number this file is currently missing.",
+      "Phase 2: the first paying subscriber, and the first marketplace/consultation transaction.",
+      "Phase 3: a signed academic validation MOU and a documented BVLOS pathway from CAAP engagement.",
+      "Phase 3: winch 1000-cycle reliability demonstrated.",
+      "Phase 3: profile-vs-reference-sonde agreement demonstrated — the moment the core hardware claim becomes true.",
       "Phase 3: a full-season validation dataset, peer-reviewed by the academic partner.",
-      "Phase 3: a documented case of a warning leading to a useful intervention.",
-      "Phase 4: the first paying customer with renewal intent.",
-      "Phase 4: measured (not modeled) unit economics.",
-      "Phase 4: BVLOS authorisation obtained."
+      "Phase 3: the first paying hardware customer with renewal intent, and measured (not modeled) Phase 3 unit economics.",
+      "Phase 3: BVLOS authorisation obtained."
     ],
-    "the_most_important_one": "The profile-vs-reference-sonde agreement (Phase 2). Everything before it is preparation; everything after it is building on a proven core. It is the single traction milestone that most changes the company's fundability, because it converts the central technical claim from 'plausible' to 'demonstrated'."
+    "the_most_important_one": "In the near term, the measured Phase 2 free-to-paid conversion rate is the single traction milestone that most changes this company's fundability, because it converts the central commercial claim of the phased pivot — that a free acquisition engine can be monetised — from an assumption borrowed from generic software benchmarks into a demonstrated number. Longer term, the Phase 3 profile-vs-reference-sonde agreement remains the milestone that converts the hardware layer's central technical claim from plausible to demonstrated, unchanged from the original plan."
   },
 
   "how_to_present_no_traction": {
-    "the_pitch": "'We have no traction, and here is why that is the honest and correct state for a company at this stage: we have deliberately not spent on hardware before proving the concept can be built and that farmers will pay. Here is the small, cheap first phase that produces our first real traction — 25 farmer interviews, a validation MOU, and the payload arithmetic — and here are the kill criteria under which we would stop. Fund that, and watch us produce evidence.'",
-    "why_this_works": "It reframes the absence of traction from a weakness into evidence of capital discipline. It is far stronger than a padded traction slide, and it is true. The investors who reject it in favour of a company with fabricated LOIs are selecting for dishonesty, and they are not the investors this company wants."
+    "the_pitch": "'We have no traction yet, and here is why that is the honest and correct state for a company that has just repositioned around a phased plan: we have not spent on hardware or a large team before validating that the free tier is worth building and that farmers will actually use it. Here is the small, cheap first phase that produces our first real traction — a launched free app and its first activation and retention numbers — and here is what would tell us to change course. Fund that, and watch us produce evidence, fast, because a launched app produces usage data in weeks, not seasons.'",
+    "why_this_works": "It reframes the absence of traction from a weakness into evidence of capital discipline, and it is arguably a stronger pitch under the phased model than under the original hardware-only plan, because the first piece of real evidence (app usage) is now genuinely close and cheap to produce rather than a season away. Investors who reject honest zeros in favour of fabricated LOIs or install counts are selecting for dishonesty, and they are not the investors this company wants."
   }
 }

@@ -9,6 +9,8 @@
 
   "the_honest_framing_of_this_theme": "This collection sizes an enormous problem that the OmniDrone barely touches. It is included because disease is a defining feature of the aquaculture landscape and any credible thesis must engage with it — and because the temptation to put a USD 6 billion figure on a slide and imply we address it is the single most dishonest move available to this company. This file exists partly to make that move impossible.",
 
+  "phase_relevance": "This collection was written to bound what the Phase 3 aerial platform contributes to disease outcomes (see 'what_the_omnidrone_actually_contributes_to_this_theme' below) and that bounding still holds for Phase 3. It also motivates, at the scale level, why Phase 1's photo-based disease identification and Phase 2's predictive health monitoring exist as features — disease is the single largest loss category in aquaculture and a credible platform has to engage with it somewhere in the stack. But the same honesty discipline applies: none of the four studies below evaluate mobile/app-based diagnosis, farmer decision support tooling, or aquaculture extension-service delivery — they are disease-loss scale reports (World Bank, Asian Fisheries, WSSV review) and one lab physiology paper. The corpus does not yet contain evidence for or against whether a phone-photo disease classifier or an in-app farmer advisory actually works; that is a gap for a Phase 1-specific literature search, parallel to the adoption-literature gap already flagged in studies-socioeconomic-adoption.json, not a claim this file can currently support.",
+
   "studies": [
     {
       "citation_id": "worldbank-disease-risk-2014",

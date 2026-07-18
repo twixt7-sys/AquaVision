@@ -1,25 +1,102 @@
 {
   "id": "competitive-landscape",
   "title": "Competitive Landscape",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
+  "version": "2.0.0",
+  "last_updated": "2026-07-18",
   "provenance": "assumption",
   "confidence": "low",
 
-  "verification_notice": "This file describes competitor CATEGORIES and the competitive logic. Named vendors are deliberately omitted where we have not verified their current offering, and pricing is marked unknown rather than guessed. A competitive analysis containing invented competitor pricing is worse than no competitive analysis — the one thing an investor can trivially check is whether you described a competitor correctly, and getting it wrong destroys your credibility on everything they cannot check.",
+  "verification_notice": "This file describes competitor CATEGORIES and the competitive logic. Named vendors are deliberately omitted, or flagged as unverified, where we have not confirmed their current offering, and pricing is marked unknown rather than guessed. A competitive analysis containing invented competitor pricing or invented feature claims is worse than no competitive analysis — the one thing an investor can trivially check is whether you described a competitor correctly, and getting it wrong destroys your credibility on everything they cannot check. This applies to the new software-competitor entries in this file exactly as much as it applied to the original hardware ones: naming a plausible aquaculture-tech company from general knowledge is not the same as having verified its current product, pricing, or market presence, and the entries below say so explicitly.",
+
+  "phased_competitive_framing": {
+    "statement": "AquaVision now competes in two different competitive arenas at once, because it is now two things at once.",
+    "phase_1_2_arena": "A software/app competitive landscape — farm-management and record-keeping tools, generic and aquaculture-specific, that a smallholder or commercial operator could choose instead of, or alongside, AquaVision's free and premium tiers.",
+    "phase_3_arena": "The original hardware/monitoring-service competitive landscape — fixed sensor buoys, UAV service providers, precision aquaculture platforms, USVs, satellite remote sensing, and manual consultants — unchanged from the prior analysis and preserved below as the Phase 3 comparison set.",
+    "why_this_split_matters": "A pitch that only shows the hardware competitors would now be misleading by omission: it would let a reader assume AquaVision's day-one competition is a handful of capital-intensive hardware players, when in fact its day-one competition is every free note-taking app, every WhatsApp farming group, and a small number of aquaculture-specific software players who can iterate faster and cheaper than any hardware company. Naming the easier fight honestly is part of the same discipline that names the harder one."
+  },
 
   "the_real_competitor": {
     "name": "Doing nothing",
     "market_share_estimate": "the overwhelming majority",
-    "why_it_wins": "It is free, it is what the farmer already does, it requires no training, no charging, no trust in a stranger's algorithm, and it has worked well enough that the farm still exists. Most farms in our target segment currently spend approximately zero on water quality monitoring.",
-    "how_to_beat_it": "Not with features. With a demonstrated peso outcome in the first cycle, on the farmer's own water, that they can verify themselves.",
-    "why_this_block_is_first": "Because founders build competitive matrices against other startups and then lose to inertia. The category-creation problem is the actual problem: we are not fighting for share of a monitoring budget, we are trying to create one. That is a fundamentally harder task than beating a rival, and every strategic decision should be made with it in mind."
+    "why_it_wins": "It is free, it is what the farmer already does, it requires no training, no charging, no trust in a stranger's algorithm, and it has worked well enough that the farm still exists. Most farms in our target segment currently spend approximately zero on water quality monitoring, and — separately — approximately zero on farm-management software.",
+    "how_to_beat_it": "Not with features. With a demonstrated peso outcome in the first cycle, on the farmer's own water, that they can verify themselves. For the hardware layer that outcome is aeration savings or an averted kill; for the software layer it is smaller but earlier — a beginner successfully getting through their first cycle without a mistake that would have happened without guidance.",
+    "why_this_block_is_first": "Because founders build competitive matrices against other startups and then lose to inertia. The category-creation problem is the actual problem at every phase: for hardware we are trying to create a monitoring budget line; for software we are trying to create a digital record-keeping habit where a paper notebook, memory, or a Facebook group post already does the job well enough for most people, most of the time. Both are harder than beating a named rival, and every strategic decision should be made with that in mind."
+  },
+
+  "the_real_competitor_software": {
+    "name": "The notebook, the memory, and the Facebook group",
+    "market_share_estimate": "the overwhelming majority of smallholder and first-time farmers",
+    "why_it_wins": "It costs nothing, requires no data connection at the moment of use, has zero onboarding, and is embedded in a social structure the farmer already trusts. A farmer already gets free advice from neighbours, a cooperative chat group, or a general farming Facebook page. AquaVision's Phase 1 app is competing with the path of least resistance, not with a rival startup, and 'free' alone does not remove that friction — the app also has to be installed, learned, and trusted.",
+    "how_to_beat_it": "Not by being free — the incumbent is also free. By being obviously and immediately more useful than a group chat: aquaculture-specific AI guidance and photo-based disease identification that a Facebook group cannot reliably give, in the farmer's own language, working with poor connectivity.",
+    "why_this_matters": "This is the software-layer analogue of 'doing nothing' above, and it should be read with the same seriousness. A pitch that treats the free tier's main competitor as 'other apps' rather than 'no app at all' has misdiagnosed its own adoption problem."
   },
 
   "competitor_categories": [
     {
+      "category_id": "generic-farm-management-apps",
+      "label": "Generic (Crop-Agnostic) Farm Management / Record-Keeping Apps",
+      "description": "General-purpose farm bookkeeping, task-tracking, and record-keeping apps built for crop agriculture broadly, sometimes with basic livestock or pond modules bolted on. Not aquaculture-specific.",
+      "maturity": "mature, widely available on app stores globally",
+      "strengths": [
+        "Large existing install bases and marketing budgets far beyond a pre-launch startup's.",
+        "Already solved the basic problems of offline-first data entry, low-bandwidth sync, and multi-language UI, which are non-trivial engineering investments AquaVision has not yet made.",
+        "Free or near-free tiers, matching AquaVience's own Phase 1 price point exactly.",
+        "Zero switching cost to try, because they cost nothing and require no commitment."
+      ],
+      "weaknesses": [
+        "No aquaculture-specific content: no species-specific feeding guidance, no water-quality interpretation, no aquaculture disease identification.",
+        "Generic UI and generic assumptions (planting dates, harvest cycles, livestock headcounts) map poorly onto pond/cage operations.",
+        "No community of fellow fish farmers — the social/peer-support value is diluted across all of agriculture rather than concentrated on aquaculture.",
+        "No natural upgrade path into aquaculture-specific premium features (predictive health monitoring, aquaculture marketplace, aquaculturist/vet consultations)."
+      ],
+      "how_we_compete": "Depth over breadth. A generic app can log 'fed the fish today'; it cannot tell a first-time tilapia farmer whether a given water colour or fish behaviour is a warning sign, or connect them to other tilapia farmers on the same lake. The aquaculture-specific AI assistant, disease identification, and community are the wedge a crop-agnostic incumbent is structurally unlikely to build well, because aquaculture is a minority use case for them.",
+      "threat_level": "medium — low domain depth today, but trivial for a well-resourced generic player to add an aquaculture template if the vertical proves valuable, exactly the same dynamic the precision-aquaculture salmon platforms pose to the hardware layer.",
+      "honest_assessment": "This category is under-analysed risk. It is easy to dismiss a generic to-do-list app as 'not a real competitor,' but for a beginner farmer who just wants somewhere to write down today's feeding amount, it may already be good enough — which puts it in direct competition with AquaVision's free tier for exactly the persona AquaVision most needs to acquire."
+    },
+    {
+      "category_id": "aquaculture-specific-software-platforms",
+      "label": "Aquaculture-Specific Farm Management / Advisory Software",
+      "description": "Software platforms built specifically for fish and shrimp farmers, typically combining farm record-keeping with some mix of feed advisory, water-quality logging, financing, or marketplace features. Several such platforms are known to operate in South and Southeast Asian aquaculture markets.",
+      "maturity": "emerging to established depending on geography and specific player",
+      "unverified_vendor_disclosure": "Named categories of players plausibly exist in this space in South and Southeast Asian aquaculture markets (for example, platforms combining feed/input financing with farm-management software, and platforms offering aquaculture advisory plus marketplace features). We have NOT independently verified any specific vendor's current product scope, pricing, user base, or Philippine market presence as of this file's last-updated date, and no vendor is named here for that reason — naming one from general knowledge without verification would be exactly the kind of unchecked claim this file warns against elsewhere. This category should be filled in with verified names, offerings, and evidence during Phase 0 competitive diligence, not before.",
+      "strengths": [
+        "Domain-specific content and workflows built for fish/shrimp farming from the start, unlike the generic category above.",
+        "In some cases, bundled financing or input-supply relationships that give farmers an immediate practical reason to adopt beyond record-keeping alone.",
+        "Potential first-mover advantage and existing farmer trust in markets where they are already established.",
+        "Likely better funded and further along than a pre-launch AquaVision Phase 1 app."
+      ],
+      "weaknesses": [
+        "Geographic and species focus may not match Philippine tilapia/milkfish/shrimp conditions specifically, mirroring the same cold-water-vs-tropical mismatch problem the salmon-focused precision aquaculture platforms have in the hardware section below.",
+        "Where these platforms monetise primarily through financing or input sales, their incentives may not be neutral advisory — a structural trust question worth raising honestly rather than assuming away.",
+        "Unknown Philippine presence and unknown depth of AI-based diagnostic or predictive capability — cannot be assessed responsibly without verification."
+      ],
+      "how_we_compete": "If and where such a platform is confirmed to operate in the Philippines, the honest comparison points are: tropical species and local condition specificity, a genuinely free entry tier with no financing string attached, and the planned Phase 3 hardware integration path that a pure-software competitor does not have. None of this should be asserted with confidence until the specific competitor is identified and verified.",
+      "threat_level": "unknown pending verification — treated as potentially HIGH by default, because this is the category of competitor best positioned to beat AquaVision on its own chosen ground (aquaculture-specific software) rather than on an adjacent one.",
+      "phase_0_action": "Identify and verify actual aquaculture-specific software competitors operating in or reachable from the Philippine market before finalising Phase 1 go-to-market messaging. This is a blocking gap, not a minor one — see the parallel BFAR-data gap in market-sizing-tam-sam-som.json for the same discipline applied to a different missing input."
+    },
+    {
+      "category_id": "extension-advisory-services",
+      "label": "Government Extension Officers and Aquaculture Advisory Services",
+      "description": "BFAR regional/provincial extension staff, LGU agriculture offices, cooperative technical advisors, and SEAFDEC/AQD outreach — the existing, trusted, human source of farming guidance.",
+      "maturity": "the incumbent, institutionally embedded",
+      "strengths": [
+        "Free to the farmer at point of use (publicly funded).",
+        "High trust — a government or cooperative advisor's word carries social weight an app cannot match on day one.",
+        "Judgement and context a static app cannot provide: an extension officer can see the specific pond, ask follow-up questions, and adapt advice on the spot.",
+        "Already the channel a farmer turns to first when something goes wrong."
+      ],
+      "weaknesses": [
+        "Severely capacity-constrained — a handful of officers cover a large region (see persona-bfar-officer in customer-personas.json), so response is slow and infrequent by construction, not by choice.",
+        "No continuous or digital record-keeping; advice is not accumulated into a queryable history.",
+        "Cannot scale 1:1 human attention to thousands of smallholders, which is precisely the gap a free always-available AI assistant is positioned to fill."
+      ],
+      "how_we_compete": "Complement, not displacement — the same posture the manual-consultants category takes toward the hardware layer. AquaVision's AI assistant should be pitched as extending an extension officer's reach between visits, not replacing the officer's judgement or trust. Positioning against BFAR or LGU advisory services would alienate the same regulator/channel partner identified as a high-value ally in customer-personas.json.",
+      "threat_level": "low as a competitor, high as a trust benchmark — if the AI assistant gives advice that contradicts or embarrasses an extension officer's guidance, the officer becomes an obstacle rather than a channel."
+    },
+    {
       "category_id": "fixed-sensor-buoys",
       "label": "Fixed Water Quality Sensor Buoys / Moored Sondes",
+      "phase": "Phase 3 comparison set",
       "description": "Anchored or floating multiparameter sondes with telemetry, sold into aquaculture as continuous monitoring.",
       "maturity": "mature, commercially available, widely deployed",
       "strengths": [
@@ -37,12 +114,13 @@
         "Scaling to an array means N buoys to buy, moor, power, and clean."
       ],
       "how_we_compete": "We do not, below a certain scale — and we should say so. Above it, our argument is coverage and depth. Our probe lives in a dry dock between sorties and gets rinsed, so it fouls far less than a permanently immersed sensor. That is a real and defensible advantage that nobody expects.",
-      "honest_assessment": "This is our most dangerous competitor because it is CORRECT for a large part of the market. Any pitch that dismisses buoys is a pitch that has not done the arithmetic. The right posture is a clear scale threshold and the discipline to walk away below it.",
+      "honest_assessment": "This is our most dangerous Phase 3 competitor because it is CORRECT for a large part of the market. Any pitch that dismisses buoys is a pitch that has not done the arithmetic. The right posture is a clear scale threshold and the discipline to walk away below it — a farm below that threshold is not a lost Phase 3 sale in the new model, it is a Phase 1/2 software customer instead.",
       "the_hybrid_threat": "The strongest configuration is probably a small number of fixed buoys for continuity plus a drone for spatial coverage and depth — which means a buoy vendor adding a drone, or us adding buoys, is the likely end state. We should plan to integrate rather than to displace, and design the platform to ingest third-party buoy telemetry from day one."
     },
     {
       "category_id": "uav-service-providers",
       "label": "General UAV Survey / Agricultural Drone Operators",
+      "phase": "Phase 3 comparison set",
       "description": "Drone service companies offering aerial imagery, mapping, and agricultural spraying, some of which will take aquaculture jobs.",
       "maturity": "mature",
       "strengths": ["Already flying legally", "Already own aircraft and certificates", "Cheap imagery"],
@@ -58,6 +136,7 @@
     {
       "category_id": "precision-aquaculture-platforms",
       "label": "Integrated Precision Aquaculture Platforms",
+      "phase": "Phase 3 comparison set",
       "description": "Software and sensor suites for fish farms — underwater cameras, biomass estimation, feeding control, farm management software. Predominantly built for Norwegian and Chilean salmon.",
       "maturity": "mature in salmon, immature in tropical smallholder contexts",
       "citation_ids": ["globalseafood-precision-aqua", "sciencedirect-dt-aiot-2023"],
@@ -74,11 +153,12 @@
         "Cold-water assumptions embedded throughout. Tropical stratification, monsoon overturn, and volcanic chemistry are not in their models."
       ],
       "how_we_compete": "Geography and economics, not technology. We should not try to out-engineer a well-funded Norwegian incumbent on underwater vision. We should own the tropical, distributed, low-value-per-unit, high-count environment that their cost structure cannot reach.",
-      "threat_level": "low near-term, high long-term. If tropical aquaculture becomes valuable enough, they will come down-market with a stripped product and substantial capital. Our defence is local depth — regulatory relationships, lake-specific models, cooperative channels — not a technical lead."
+      "threat_level": "low near-term, high long-term. If tropical aquaculture becomes valuable enough, they will come down-market with a stripped product and substantial capital — and, notably, they may come down-market as a SOFTWARE offering (a cheap tropical farm-management module) well before they attempt a hardware deployment, since software is the easier and faster move for a well-capitalised incumbent to make into a new geography. Our defence is local depth — regulatory relationships, lake-specific models, cooperative channels, and an existing Filipino user base from Phase 1 — not a technical lead."
     },
     {
       "category_id": "usv-asv",
       "label": "Uncrewed Surface Vessels / Robotic Boats",
+      "phase": "Phase 3 comparison set",
       "description": "Autonomous surface craft carrying sondes across a water body.",
       "maturity": "emerging",
       "strengths": [
@@ -95,12 +175,13 @@
         "Cannot cross a dike between ponds. In pond geography this is disqualifying; an aircraft ignores the topology entirely."
       ],
       "how_we_compete": "Speed, aerial imaging, and topology-independence. Their endurance beats us; our transit speed and our ability to ignore obstacles beats them.",
-      "threat_level": "HIGH — and this is the honest answer to the hardest technical question anyone will ask us: 'why does this need to fly?' The USV is the strongest alternative architecture and it has genuine advantages we cannot match. Our answer must be the specific combination of (a) transit speed across many stations, (b) simultaneous aerial imaging that a surface craft physically cannot do, and (c) the ability to move between ponds and over cage structure without navigating around anything. If that combination is not worth the endurance penalty for a given customer, the USV is the better product for them and we should be intellectually honest about it.",
-      "kill_criterion_note": "The Phase 0 gate explicitly requires the team to be willing to hear that a USV or a buoy network is the correct answer. This entry is why."
+      "threat_level": "HIGH — and this is the honest answer to the hardest technical question anyone will ask us about the Phase 3 layer: 'why does this need to fly?' The USV is the strongest alternative architecture and it has genuine advantages we cannot match. Our answer must be the specific combination of (a) transit speed across many stations, (b) simultaneous aerial imaging that a surface craft physically cannot do, and (c) the ability to move between ponds and over cage structure without navigating around anything. If that combination is not worth the endurance penalty for a given customer, the USV is the better product for them and we should be intellectually honest about it.",
+      "kill_criterion_note": "The Phase 0 gate explicitly requires the team to be willing to hear that a USV or a buoy network is the correct Phase 3 answer. This entry is why."
     },
     {
       "category_id": "satellite-remote-sensing",
       "label": "Satellite-Based Water Quality Monitoring",
+      "phase": "Phase 3 comparison set",
       "description": "Sentinel-2/3 and commercial constellations delivering chlorophyll and bloom products.",
       "maturity": "mature",
       "citation_ids": ["pmc-sentinel-hab-chile-2020", "springer-uav-satellite-review-2024"],
@@ -123,6 +204,7 @@
     {
       "category_id": "manual-consultants",
       "label": "Manual Sampling Services and Aquaculture Consultants",
+      "phase": "Phase 3 comparison set",
       "description": "People with sondes and boats, and extension officers.",
       "maturity": "the incumbent",
       "strengths": ["Trusted", "Bring interpretation and judgement, not just numbers", "No technology adoption barrier", "Can act on what they find"],
@@ -133,6 +215,7 @@
     {
       "category_id": "academic-prototypes",
       "label": "University Research Prototypes",
+      "phase": "Phase 3 comparison set",
       "description": "The UAV water-sampling and drone-sonde concepts in the literature.",
       "maturity": "TRL 3-5",
       "citation_ids": ["hamzah-dt-water-review-2024", "mdpi-drones-inland-review-2024"],
@@ -143,16 +226,36 @@
   ],
 
   "competitive_positioning": {
-    "our_defensible_claim": "The only platform that pairs depth-resolved in-situ chemistry with same-sortie aerial imaging, using the former to calibrate the latter — across many stations, at low marginal labour cost, on tropical smallholder-scale water bodies.",
-    "stress_testing_that_claim": [
+    "phase_1_2_defensible_claim": "AquaVision aims to be the only aquaculture-specific platform that meets a farmer at the beginning of their journey for free and stays with them — through an AI farming assistant, water quality logging, disease identification, and community — as they scale into paid analytics, a marketplace, and expert consultations, rather than being either a generic crop app with no aquaculture depth or an enterprise platform priced for commercial farms only.",
+    "phase_1_2_stress_testing": [
+      { "challenge": "Is it true today?", "answer": "No — as of this file's date, no Phase 1 app exists with real users. The claim is a product intention, exactly as the Phase 3 claim below is currently a specification rather than a demonstrated capability." },
+      { "challenge": "Is it defensible?", "answer": "Weakly, on current evidence. Content and community features are not patent-hard and are plausibly replicable by a generic farm app adding an aquaculture template, or by an aquaculture-specific competitor we have not yet identified and verified (see aquaculture-specific-software-platforms above). If there is a moat, it is accumulated farmer data, community network effects, and the eventual Phase 3 hardware integration — none of which exist yet." },
+      { "challenge": "Does anyone want the free tier enough to use it regularly?", "answer": "Unknown. This is a Phase 0/Phase 1 launch question, not a rhetorical one, and it is at least as important to answer honestly as the Phase 3 'does anyone want the drone' question was in the original analysis." }
+    ],
+    "phase_3_defensible_claim": "The only platform that pairs depth-resolved in-situ chemistry with same-sortie aerial imaging, using the former to calibrate the latter — across many stations, at low marginal labour cost, on tropical smallholder-scale water bodies.",
+    "phase_3_stress_testing": [
       { "challenge": "Is it true?", "answer": "As a design intent, yes. As a demonstrated capability, no — nothing has flown. The claim is currently a specification." },
-      { "challenge": "Is it defensible?", "answer": "Partially. The winch and the calibration workflow are hard, but not patent-hard. The real moat, if there is one, is the accumulated site-specific data and the local relationships — neither of which we have yet." },
+      { "challenge": "Is it defensible?", "answer": "Partially. The winch and the calibration workflow are hard, but not patent-hard. The real moat, if there is one, is the accumulated site-specific data and the local relationships — neither of which we have yet, though a running Phase 1/2 software base gives a plausible (untested) head start on both by the time Phase 3 is offered." },
       { "challenge": "Does anyone want it?", "answer": "Unknown. This is the Phase 0 question and it is not rhetorical." }
     ]
   },
 
+  "feature_comparison_matrix_software": {
+    "note": "Chart-ready. Phase 1/2 capability presence only, same discipline as the hardware matrix below — no scoring, because a scored matrix built by the vendor always shows the vendor winning.",
+    "capabilities": ["Free tier", "Aquaculture-specific content", "AI photo-based disease ID", "Water quality logging", "Works offline / low-data", "Local language support", "Farmer community", "Marketplace", "Expert consultation access", "Path to hardware/IoT upgrade"],
+    "competitors": [
+      { "name": "AquaVision App (Phase 1/2, design intent)", "has": ["Free tier", "Aquaculture-specific content", "AI photo-based disease ID", "Water quality logging", "Farmer community", "Path to hardware/IoT upgrade"], "lacks": ["Works offline / low-data", "Local language support", "Marketplace", "Expert consultation access"], "status_note": "Lacks list reflects features not yet built or not yet confirmed at MVP, not features ruled out." },
+      { "name": "Generic farm-management app", "has": ["Free tier", "Works offline / low-data"], "lacks": ["Aquaculture-specific content", "AI photo-based disease ID", "Water quality logging", "Local language support", "Farmer community", "Marketplace", "Expert consultation access", "Path to hardware/IoT upgrade"] },
+      { "name": "Aquaculture-specific software platform (unverified category)", "has": ["Aquaculture-specific content"], "lacks": ["Path to hardware/IoT upgrade"], "status_note": "Every other cell is genuinely unknown pending vendor verification — left blank rather than guessed." },
+      { "name": "Extension officer / advisory service", "has": ["Free tier", "Aquaculture-specific content", "Local language support"], "lacks": ["AI photo-based disease ID", "Water quality logging", "Works offline / low-data", "Marketplace", "Path to hardware/IoT upgrade"], "status_note": "\"Works offline\" is not applicable in the digital-product sense — an officer's advice does not require connectivity at all, which is a different and in some ways stronger property than an app being 'offline-capable.'" },
+      { "name": "Notebook / memory / Facebook group", "has": ["Free tier", "Farmer community", "Works offline / low-data"], "lacks": ["Aquaculture-specific content", "AI photo-based disease ID", "Water quality logging", "Marketplace", "Expert consultation access", "Path to hardware/IoT upgrade"] }
+    ],
+    "what_this_matrix_shows": "AquaVision's intended Phase 1/2 differentiation is concentrated in AI-assisted, aquaculture-specific guidance plus the eventual hardware upgrade path — nobody else in this matrix, verified or unverified, plausibly offers both. What it does NOT show is proof that farmers value that combination enough to switch from a free notebook or a free generic app, which remains the open Phase 0 question for the software layer, exactly as the hardware matrix below leaves its own open question about the fixed-buoy-plus-drone hybrid."
+  },
+
   "feature_comparison_matrix": {
-    "note": "Chart-ready. Capability presence only — deliberately no scoring, because a scored matrix built by the vendor always shows the vendor winning, and every reader knows it.",
+    "phase": "Phase 3 comparison set",
+    "note": "Chart-ready. Capability presence only, deliberately no scoring, because a scored matrix built by the vendor always shows the vendor winning, and every reader knows it.",
     "capabilities": ["Depth profiling", "Continuous 24/7", "Spatial coverage", "Aerial imaging", "In-situ ground truth", "Dispensing", "Underwater vision", "Biomass estimation", "Works in typhoon", "No aviation regulator", "Low capital cost", "Historical archive"],
     "competitors": [
       { "name": "OmniDrone (design intent)", "has": ["Depth profiling", "Spatial coverage", "Aerial imaging", "In-situ ground truth", "Dispensing"], "lacks": ["Continuous 24/7", "Underwater vision", "Biomass estimation", "Works in typhoon", "No aviation regulator", "Low capital cost", "Historical archive"] },
@@ -162,6 +265,6 @@
       { "name": "Precision aquaculture platform (salmon)", "has": ["Continuous 24/7", "In-situ ground truth", "Underwater vision", "Biomass estimation", "Works in typhoon", "No aviation regulator", "Historical archive"], "lacks": ["Depth profiling", "Spatial coverage", "Aerial imaging", "Low capital cost"] },
       { "name": "Manual sampling", "has": ["Depth profiling", "In-situ ground truth", "No aviation regulator"], "lacks": ["Continuous 24/7", "Spatial coverage", "Aerial imaging", "Dispensing", "Underwater vision", "Biomass estimation", "Low capital cost", "Historical archive"] }
     ],
-    "what_this_matrix_shows": "We lose on continuity, weather, regulation, and cost. We win on the specific combination of depth plus space plus imaging. That is a narrow but real position — and reading our own matrix honestly, the fixed buoy plus OmniDrone hybrid dominates either alone. That conclusion should shape the product roadmap rather than be argued away."
+    "what_this_matrix_shows": "We lose on continuity, weather, regulation, and cost. We win on the specific combination of depth plus space plus imaging. That is a narrow but real position — and reading our own matrix honestly, the fixed buoy plus OmniDrone hybrid dominates either alone. That conclusion should shape the Phase 3 product roadmap rather than be argued away."
   }
 }

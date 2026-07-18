@@ -1,14 +1,16 @@
 {
   "id": "industry-statistics",
   "title": "Industry Statistics — Global & Regional Aquaculture and Fisheries",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
+  "version": "1.1.0",
+  "last_updated": "2026-07-18",
   "provenance": "verified_external",
   "primary_source": "FAO, The State of World Fisheries and Aquaculture (SOFIA) 2024, reporting 2022 data.",
   "citation_ids": ["fao-sofia-2024"],
 
   "currency_note": "Values in USD as published by FAO. No inflation adjustment applied.",
   "vintage_warning": "SOFIA 2024 reports 2022 data — a two-year lag is normal for this dataset. As of this repository's date (July 2026), SOFIA 2026 may be available and would supersede these figures. Check before using in a submission. Citing a superseded flagship report is a small error that signals a large carelessness.",
+
+  "repositioning_note": "The underlying FAO figures in this file are unchanged from the prior edition — they are real, external, verified statistics and this pivot gives no license to touch them. What has changed is the analysis layered on top: AquaVision is now a phased software-first platform (free/low-cost app -> premium subscription -> hardware upgrade), not a hardware-first drone company, so the 'so what' attached to each statistic now speaks to both the software addressable population (Phase 1/2) and the hardware addressable population (Phase 3) rather than to hardware alone. See phased_strategy_relevance below for the consolidated version of that reasoning.",
 
   "headline_figures": [
     {
@@ -31,7 +33,7 @@
       "year": 2022,
       "citation_ids": ["fao-sofia-2024"],
       "provenance": "verified_external",
-      "why_this_is_the_slide": "This is the single most important statistic available to this company, and it should be slide two. It marks a structural inflection: humanity now gets most of its aquatic animal protein from systems that someone owns, manages, and could in principle instrument. Capture fisheries cannot be sensor-optimised in any meaningful way — you cannot put a dashboard on the open ocean. Farmed systems can. The addressable surface for aquaculture technology crossed 50 percent of the sector in 2022 and it is still growing. Every argument this company makes rests on this number."
+      "why_this_is_the_slide": "This is the single most important statistic available to this company, and it should be slide two. It marks a structural inflection: humanity now gets most of its aquatic animal protein from systems that someone owns, manages, and could in principle log, analyse, and eventually instrument. Capture fisheries cannot be managed or sensor-optimised in any meaningful way — you cannot put a farm-management app, let alone a dashboard, on the open ocean. Farmed systems can. The addressable surface for aquaculture SOFTWARE crossed 50 percent of the sector in 2022, and every one of those managed operations is a potential app user regardless of whether it ever becomes a hardware customer. The addressable surface for aquaculture HARDWARE is a narrower subset of that same 51 percent, gated by scale and capital. Every argument this company makes, at every phase, rests on this number."
     },
     {
       "stat_id": "aquaculture-total-2022",
@@ -52,7 +54,7 @@
       "year": 2022,
       "citation_ids": ["fao-sofia-2024"],
       "provenance": "verified_external",
-      "why_this_matters_to_omnidrone": "Nearly two-thirds of farmed aquatic animals come from inland systems — ponds, lakes, reservoirs. That is precisely the OmniDrone's environment. Inland water is where stratification, eutrophication, and overturn dominate, and it is where a small aerial platform is operationally viable. A marine-cage-first strategy would be fighting for the smaller share in the harder environment. The data says start inland, and our beachhead choice matches it."
+      "why_this_matters_to_aquavision": "Nearly two-thirds of farmed aquatic animals come from inland systems — ponds, lakes, reservoirs. Inland pond and cage farming is disproportionately smallholder and family-operated relative to marine cage culture, which is precisely the population the Phase 1 free app is built to reach first. It is also, unchanged from the prior analysis, the OmniDrone's Phase 3 environment: inland water is where stratification, eutrophication, and overturn dominate, and where a small aerial platform is operationally viable. The same statistic justifies both layers of the strategy — start inland because that is where the software's target users and the hardware's technical fit both point."
     },
     {
       "stat_id": "asia-share",
@@ -70,7 +72,7 @@
       ],
       "citation_ids": ["fao-sofia-2024"],
       "provenance": "verified_external",
-      "why_this_matters_to_omnidrone": "Seventy percent of the world's aquatic animal production is on our doorstep. A Philippine company building for Southeast Asian conditions is building for the centre of the industry, not the periphery — which is an unusual and genuine structural advantage. Most aquaculture technology is built in Norway and Scotland for salmon, then exported to Asia where it fits poorly. Building for tropical, smallholder-dense, monsoon-exposed conditions from the start is a real differentiator, not a consolation."
+      "why_this_matters_to_aquavision": "Seventy percent of the world's aquatic animal production is on our doorstep. A Philippine company building for Southeast Asian conditions is building for the centre of the industry, not the periphery — which is an unusual and genuine structural advantage at every phase. Most aquaculture technology, software and hardware alike, is built in Norway, Scotland, or North America and exported to Asia where it fits poorly: a generic farm app in English with temperate-crop assumptions, or a salmon precision-aquaculture platform, both transfer badly to tropical smallholder tilapia and milkfish. Building the free app, the premium tier, and the eventual hardware for tropical, smallholder-dense, monsoon-exposed conditions from the start is a real differentiator across all three phases, not a consolation for lacking Phase 3 capital on day one."
     },
     {
       "stat_id": "algae-production",
@@ -82,7 +84,7 @@
       "growth_note": "Up 4 percent from 2020, and up from just 12 million tonnes in 2000.",
       "citation_ids": ["fao-sofia-2024"],
       "provenance": "verified_external",
-      "relevance": "Seaweed farming has tripled in two decades. It is adjacent to our core — the sensing needs differ substantially — but the growth trajectory makes it worth watching as an expansion vector."
+      "relevance": "Seaweed farming has tripled in two decades. It is adjacent to our core — the sensing and record-keeping needs differ substantially from finfish — but the growth trajectory makes it worth watching as an expansion vector for the software platform's content coverage before it would ever be worth building hardware for."
     }
   ],
 
@@ -91,59 +93,77 @@
     "observations": [
       {
         "trend": "Aquaculture crossed 50 percent of aquatic animal production in 2022 and continues to grow while capture fisheries are flat.",
-        "implication_for_us": "Our addressable base grows structurally without us doing anything. Rising tide.",
+        "implication_for_us": "Our addressable base grows structurally without us doing anything, for the software layer's population of managed operations just as much as for the hardware layer's population of monitoring-eligible farms. Rising tide.",
         "confidence": "high"
       },
       {
         "trend": "Growth is coming from intensification more than from new water area, because the good sites are taken.",
-        "implication_for_us": "Intensification means higher stocking density means higher oxygen demand means more frequent water quality crises. The trend that drives the industry's growth is the same trend that creates our problem. Our market grows because the problem gets worse — which is uncomfortable to say out loud but is the honest structure of the opportunity.",
+        "implication_for_us": "Intensification means higher stocking density means higher oxygen demand means more frequent water quality crises. The trend that drives the industry's growth is the same trend that creates our problem. Our Phase 3 hardware market grows because the problem gets worse — which is uncomfortable to say out loud but is the honest structure of that opportunity. It is a weaker driver for the Phase 1/2 software layer, whose growth depends more on reach and habit formation than on crisis frequency.",
         "confidence": "medium",
         "caveat": "Inferred from the pattern rather than directly stated in SOFIA. Verify against SOFIA's intensification discussion before citing."
       },
       {
         "trend": "Algae production tripled from 2000 to 2022.",
-        "implication_for_us": "Adjacent expansion option, low priority.",
+        "implication_for_us": "Adjacent expansion option, low priority, and cheaper to pursue as a software content addition than as a hardware sensing capability.",
         "confidence": "high"
+      },
+      {
+        "trend": "A large share of the world's aquaculture operations, especially in the inland and Asian systems this file already establishes as dominant, are understood in general industry literature to be smallholder or family-operated rather than large commercial enterprises — though FAO's global count of INDIVIDUAL OPERATIONS (as opposed to production volume) is not reproduced in the headline figures above and has not been independently verified for this repository.",
+        "implication_for_us": "If broadly correct, this implies a large underlying population of individual farm managers who are, today, overwhelmingly not using any digital farm-management tool — which is the demand-side substrate the Phase 1/2 software market sizing in market-sizing-tam-sam-som.json depends on. This is presented as a directional inference, not a citable count, and should not be used as a market-size input until a real operator count (BFAR or equivalent) is obtained.",
+        "confidence": "low",
+        "caveat": "This observation is closer to informed extrapolation than to a SOFIA finding and is flagged accordingly. Do not cite this bullet as if it were a verified FAO statistic — it is this repository's own reasoning about what the verified statistics plausibly imply."
       }
     ]
   },
 
+  "phased_strategy_relevance": {
+    "provenance": "derived_calculation",
+    "statement": "A consolidated view of how the verified FAO statistics above support the phased software-first strategy, gathered in one place rather than scattered across each stat.",
+    "points": [
+      { "point": "The aquaculture-overtakes-capture figure (51 percent, 2022) establishes that the majority of aquatic-animal protein now comes from MANAGED systems. Management is the substrate for software before it is ever the substrate for hardware — you can log and analyse a managed operation with a phone long before you can justify flying a drone over it.", "citation_ids": ["fao-sofia-2024"] },
+      { "point": "The inland share (62.6 percent) points toward pond and lake-cage systems that are disproportionately smallholder-operated — the exact population the Phase 1 free tier targets first, and the same population the Phase 3 hardware layer eventually serves once individual operations aggregate or scale.", "citation_ids": ["fao-sofia-2024"] },
+      { "point": "The Asia share (70 percent) means the company is building in the world's largest concentration of the target population for BOTH layers, with tropical, smallholder-dense conditions as the design case rather than an afterthought — true of the free app's content and language needs just as much as it was already true of the hardware's environmental design envelope.", "citation_ids": ["fao-sofia-2024"] },
+      { "point": "None of these statistics establish a software or hardware MARKET SIZE on their own — see the 'Do NOT use the USD 312.8 billion aquaculture value as a market size' guidance below, which now applies equally to a software-market sizing exercise. Do not replace a fabricated hardware-penetration-rate slide with an equally fabricated app-penetration-rate slide; see market-sizing-tam-sam-som.json for the honest treatment of both." }
+    ]
+  },
+
   "philippine_context": {
-    "status": "INCOMPLETE — this is the most important gap in this file",
-    "why_it_matters": "Our beachhead is the Philippines. Global FAO figures establish that the sector matters; they say nothing about our actual market. National production by species, number of operators, cage counts by lake, and farm-level cost structures are all required and all currently absent.",
+    "status": "INCOMPLETE — this is the most important gap in this file, and it now blocks BOTH the software and the hardware market sizing, not just the hardware one",
+    "why_it_matters": "Our beachhead is the Philippines. Global FAO figures establish that the sector matters; they say nothing about our actual market at either phase. National production by species, number of operators (ideally split by smallholder/first-time vs established/commercial), cage counts by lake, farm-level cost structures, and — new to this phased strategy — smartphone and mobile internet access among fisherfolk households, are all required and all currently absent.",
     "required_sources": [
-      "BFAR Philippine Fisheries Profile — the annual statistical yearbook. This is the single most important document this repository is missing.",
+      "BFAR Philippine Fisheries Profile — the annual statistical yearbook. This is the single most important document this repository is missing, for the software layer's operator counts just as much as for the hardware layer's.",
       "Philippine Statistics Authority fisheries production data.",
       "LLDA (Laguna Lake Development Authority) cage inventories and water quality monitoring records.",
       "Taal Lake Protected Landscape and Seascape management records for cage counts.",
-      "SEAFDEC/AQD technical publications for species-specific culture practice and cost structures."
+      "SEAFDEC/AQD technical publications for species-specific culture practice and cost structures.",
+      "DICT/PSA household ICT-use surveys, or an equivalent source, for smartphone ownership and mobile data access among Philippine fisherfolk and small-scale aquaculture households — a new requirement introduced by the software layer that did not exist in the hardware-only version of this file."
     ],
     "known_fragments": [
       {
         "fact": "Tilapia and milkfish cage farming in Taal Lake is described as a multimillion-peso industry, and Taal is the country's third-largest freshwater body.",
         "citation_ids": ["inquirer-taal-fishkill-2023"],
         "provenance": "verified_external",
-        "note": "Journalistic characterisation, not a statistic. Insufficient for market sizing."
+        "note": "Journalistic characterisation, not a statistic. Insufficient for market sizing at either phase."
       },
       {
         "fact": "Dissolved oxygen at Taal's surface is considered normal at 6 ppm.",
         "citation_ids": ["pna-tilapia-fishkill"],
         "provenance": "verified_external",
-        "note": "A useful local operational threshold, sourced to a BFAR statement in news reporting. Confirm against BFAR's published criteria."
+        "note": "A useful local operational threshold, sourced to a BFAR statement in news reporting. Confirm against BFAR's published criteria. Primarily relevant to the Phase 3 hardware/monitoring layer and to the water-quality-logging content in the Phase 1 app."
       }
     ],
-    "action": "Obtaining the BFAR Philippine Fisheries Profile is a Phase 0 priority. Until then, every Philippine market number in this repository is a guess, and the market-sizing file says so explicitly."
+    "action": "Obtaining the BFAR Philippine Fisheries Profile remains a Phase 0 priority, and it is now doubly important: it is the blocking input for the hardware sizing AND for the software sizing. Until then, every Philippine market number in this repository is a guess, and both sections of market-sizing-tam-sam-som.json say so explicitly."
   },
 
   "target_species_profiles": {
     "provenance": "assumption",
-    "note": "Species-specific tolerance figures below are indicative ranges from general aquaculture practice and MUST be replaced with sourced, species- and life-stage-specific values from the primary literature before they inform any alert threshold. An incorrect threshold here becomes a false 'all clear' in production. This is the highest-consequence placeholder in the repository.",
+    "note": "Species-specific tolerance figures below are indicative ranges from general aquaculture practice and MUST be replaced with sourced, species- and life-stage-specific values from the primary literature before they inform any alert threshold, whether that threshold surfaces in the Phase 1 app's guidance content or in Phase 3 hardware alerting. An incorrect threshold here becomes a false 'all clear,' in an app notification or in production hardware alike. This is the highest-consequence placeholder in the repository.",
     "species": [
       {
         "common_name": "Nile Tilapia",
         "scientific_name": "Oreochromis niloticus",
         "systems": ["Lake cage", "Freshwater pond"],
-        "philippine_significance": "Dominant freshwater cultured species; the species in most reported lake kill events.",
+        "philippine_significance": "Dominant freshwater cultured species; the species in most reported lake kill events, and very likely the most common species among Phase 1 first-time backyard farmers.",
         "notable_traits": "Relatively hypoxia-tolerant compared with most cultured finfish — which is exactly why a tilapia kill is alarming. If conditions killed tilapia, they were severe.",
         "indicative_do_threshold_mgl": "unknown — populate from primary source",
         "citation_ids": ["pna-tilapia-fishkill"]
@@ -161,7 +181,7 @@
         "common_name": "Whiteleg Shrimp",
         "scientific_name": "Litopenaeus vannamei",
         "systems": ["Brackish pond"],
-        "notable_traits": "Benthic. Aerial observation has poor access to the animals themselves — a structural limitation of our platform in shrimp culture that must be stated honestly rather than glossed.",
+        "notable_traits": "Benthic. Aerial observation has poor access to the animals themselves — a structural limitation of the Phase 3 hardware platform in shrimp culture that must be stated honestly rather than glossed. Not a limitation for the Phase 1/2 software layer, which does not depend on aerial observation.",
         "citation_ids": ["asian-fisheries-shrimp-disease"]
       },
       {
@@ -174,16 +194,16 @@
         "common_name": "Seaweed (Eucheuma / Kappaphycus)",
         "systems": ["Coastal line culture"],
         "philippine_significance": "Major coastal livelihood crop.",
-        "relevance": "Different sensing problem entirely — no oxygen demand, no feeding. Expansion option, not core."
+        "relevance": "Different sensing problem entirely — no oxygen demand, no feeding. A plausible Phase 1 content-expansion vector well before it would ever justify Phase 3 hardware attention."
       }
     ]
   },
 
   "how_to_use_these_statistics": [
-    "The aquaculture-overtakes-capture figure is the opening argument. Use it once, prominently, and let it do its work.",
-    "The 62.6 percent inland figure justifies the platform choice. Use it when challenged on why aerial rather than marine.",
-    "The 70 percent Asia figure justifies the geography. Use it when a foreign investor asks why not start in Norway.",
-    "Do NOT use the USD 312.8 billion aquaculture value as a market size. It is the value of the FISH, not of the technology addressable within it. Conflating industry output with technology TAM is the most common and most transparent error in agritech pitches, and every professional investor is watching for it. See market-sizing-tam-sam-som.json for the defensible construction."
+    "The aquaculture-overtakes-capture figure is the opening argument for the company as a whole, not just for the hardware layer. Use it once, prominently, and let it do its work.",
+    "The 62.6 percent inland figure justifies both the Phase 1/2 software beachhead population (smallholder inland farmers) and the Phase 3 platform choice (aerial rather than marine). Use it when challenged on why start with inland smallholders, and again when challenged on why aerial rather than marine.",
+    "The 70 percent Asia figure justifies the geography for the whole company. Use it when a foreign investor asks why not start in Norway, whether the question is about the app or the drone.",
+    "Do NOT use the USD 312.8 billion aquaculture value as a market size for EITHER layer. It is the value of the FISH, not of the software or the hardware addressable within it. Conflating industry output with technology TAM is the most common and most transparent error in agritech pitches, and every professional investor is watching for it, for a freemium software pitch just as much as for a hardware pitch. See market-sizing-tam-sam-som.json for the defensible, two-layer construction."
   ],
 
   "chart_hints": [

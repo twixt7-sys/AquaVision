@@ -8,7 +8,19 @@
 
   "CRITICAL_DISCLAIMER": "THIS IS NOT LEGAL ADVICE. Every regulatory statement below derives from SECONDARY, SEARCH-RESULT SUMMARIES of public rules, not from primary regulatory texts read in full. Regulations change. The interpretations here may be wrong. Before ANY regulatory claim enters an investor deck, a contract, or a design decision, obtain a written opinion from a qualified Philippine aviation and fisheries lawyer and confirm current requirements directly with the agencies. Building on this file as if it were authoritative would be a serious error.",
 
-  "the_regulatory_reality": "This product sits at the intersection of THREE regulatory domains — aviation, fisheries, and (for medicine) veterinary — and each has a different agency, a different logic, and a different veto. The BVLOS dependency alone can gate the entire business model. Regulatory work is not a compliance afterthought here; it is on the critical path and it should be resourced from Phase 0.",
+  "the_regulatory_reality": "This product sits at the intersection of THREE regulatory domains — aviation, fisheries, and (for medicine) veterinary — and each has a different agency, a different logic, and a different veto. The BVLOS dependency alone can gate the entire business model. Regulatory work is not a compliance afterthought here; it is on the critical path and it should be resourced from Phase 0. This entire regulatory picture, however, belongs to Phase 3.",
+
+  "the_phased_regulatory_burden": {
+    "statement": "The three-domain aviation/fisheries/veterinary regulatory load below is a Phase 3 (hardware) problem. Phase 1 and Phase 2 — the app, the free tier, the premium analytics and marketplace — carry a materially lighter regulatory burden, and that is a genuine competitive advantage worth stating plainly rather than treating as a footnote.",
+    "what_phase_1_2_actually_engages": [
+      "Data Privacy Act of 2012 — the same regime this repo already treats seriously for Phase 3 imagery, applied instead to farmer-entered account and farm data. See ethics-data-privacy.json.",
+      "Standard consumer app-store and consumer-protection terms of service.",
+      "Payment/marketplace transaction handling in Phase 2 (a commerce-law question, not an aviation one).",
+      "No CAAP airspace, registration, or pilot-certification exposure. No BFAR substance-dispensing question. No veterinary-medicine dispensing question."
+    ],
+    "why_this_matters_for_the_narrative": "It means AquaVision can reach real users, generate real revenue signal, and start the CAC/activation/conversion learning loop years before the BVLOS and night-operations dependencies (below) are anywhere near resolved. The regulatory critical path gates Phase 3 revenue, not first revenue. That decoupling is a large part of why the phased structure de-risks the venture relative to the old drone-first story.",
+    "the_honest_caveat": "Lighter is not zero. Data-custody claims made to thousands of Phase 1 users create real exposure if broken, and a content-moderation or marketplace-transaction failure in Phase 2 is a real (if smaller) liability question of its own. See ethics-data-privacy.json."
+  },
 
   "domains": [
     {

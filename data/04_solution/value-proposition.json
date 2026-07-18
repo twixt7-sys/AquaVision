@@ -1,123 +1,295 @@
 {
   "id": "value-proposition",
   "title": "Value Proposition",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
+  "version": "2.0.0",
+  "last_updated": "2026-07-18",
   "provenance": "modeled_projection",
   "confidence": "low",
 
-  "value_proposition_canvas": {
-    "citation_ids": ["osterwalder-vpd-2014"],
-    "note": "Mapped against the beachhead persona (Marissa, commercial farm operations manager). A canvas mapped against 'the customer' in general is mapped against nobody.",
-    "customer_jobs": [
-      { "job": "Hit the survival and FCR targets this cycle", "type": "functional", "importance": "critical" },
-      { "job": "Explain performance variance to the owner", "type": "social", "importance": "high" },
-      { "job": "Keep the electricity bill defensible", "type": "functional", "importance": "high" },
-      { "job": "Pass the certification audit without a fire drill", "type": "functional", "importance": "medium" },
-      { "job": "Not be the manager on duty when the fish die", "type": "emotional", "importance": "high" }
-    ],
-    "pains": [
-      { "pain": "Cannot observe 40 units personally", "severity": "high" },
-      { "pain": "Aeration runs on a schedule nobody can justify", "severity": "high" },
-      { "pain": "Feed is 60 percent of cost with no feedback loop", "severity": "high", "citation_ids": ["innovasea-fcr-guide"] },
-      { "pain": "Finds out about a problem when fish are already piping", "severity": "critical" },
-      { "pain": "Cannot explain why survival moved 16 points between cycles", "severity": "medium" }
-    ],
-    "gains": [
-      { "gain": "A number to put in front of the owner", "type": "required" },
-      { "gain": "Lower kWh at equal or better DO", "type": "expected" },
-      { "gain": "Measurable FCR movement", "type": "desired" },
-      { "gain": "Records that compile themselves", "type": "desired" },
-      { "gain": "Knowing the water is fine, at 4 a.m., without going out", "type": "unexpected" }
-    ],
-    "pain_relievers": [
-      { "reliever": "Multi-station profiling several times daily replaces the impossible manual round", "addresses": "Cannot observe 40 units" },
-      { "reliever": "DO data lets aeration run on evidence rather than on a timer", "addresses": "Aeration runs on a schedule nobody can justify" },
-      { "reliever": "Pre-dawn sorties measure the diel minimum, which is the number that matters and the one nobody has", "addresses": "Finds out when fish are piping" },
-      { "reliever": "Automated logging produces the audit record as a by-product", "addresses": "Audit fire drill" }
-    ],
-    "gain_creators": [
-      { "creator": "Depth-resolved profiles reveal stratification that no surface method can see" },
-      { "creator": "Probe-calibrated imagery maps conditions across the whole array, not one point" },
-      { "creator": "Dispensing converts a finding into an action without a boat" },
-      { "creator": "Accumulated site history means each cycle starts smarter than the last" }
-    ],
-    "fit_assessment": {
-      "verdict": "PLAUSIBLE, UNPROVEN",
-      "reasoning": "The relievers map onto the pains coherently. But every reliever is a design target, not a measured capability, and the customer whose pains these are has not been interviewed. A value proposition canvas built without customer contact demonstrates internal consistency, not fit."
-    }
-  },
+  "how_to_read_this_file": "Value at AquaVision is not one proposition, it is three, layered by phase and audience. Phase 1 sells to beginners on free education, guidance, and organization. Phase 2 sells to growing farms on ROI-positive analytics, marketplace access, and expert time. Phase 3 sells to commercial and enterprise operators on the hardware value prop this repository originally led with: earlier detection, avoided mass mortality, and aeration savings. Each phase keeps its own value hierarchy ranked by how easily a sceptical buyer can verify the claim — the discipline that made the original hardware pitch credible is applied here to the software claims too, not relaxed for them.",
 
-  "the_value_hierarchy": {
-    "note": "Ranked by how easily a sceptical buyer can verify the claim themselves. This ordering is deliberately the inverse of how exciting each claim is — and it is the correct order to sell in.",
-    "tiers": [
-      {
-        "tier": 1,
-        "claim": "Fewer aerator-hours at equal or better dissolved oxygen",
-        "verifiability": "HIGH — electricity is metered monthly, already budgeted, and the farm can check it without trusting us at all",
-        "proof_horizon": "one cycle",
-        "why_lead_with_this": "It is boring, checkable, and requires zero belief in our modelling. A buyer who verifies this claim will extend credit to the others. A buyer who is asked to believe the mortality claim first has nothing to check and will discount everything.",
-        "status": "unproven but testable immediately in a pilot",
-        "provenance": "assumption"
-      },
-      {
-        "tier": 2,
-        "claim": "Environmental records compile themselves for certification audits",
-        "verifiability": "HIGH — the farm currently pays someone hours to do this by hand",
-        "proof_horizon": "immediate",
-        "status": "a straightforward consequence of logging; the lowest-risk claim in the product"
-      },
-      {
-        "tier": 3,
-        "claim": "Measurable FCR improvement through condition-aware feeding",
-        "verifiability": "MEDIUM — FCR is measurable but noisy, and attribution to us requires a controlled comparison",
-        "proof_horizon": "one to two cycles with a control",
-        "economic_anchor": "At USD 500/t feed, a 0.1 FCR improvement is worth USD 50 per tonne produced",
-        "citation_ids": ["globalseafood-fcr-primary-indicator"],
-        "honest_note": "The arithmetic is externally sourced and solid. Whether we move FCR by 0.1 is entirely unproven, and our feedback loop (water condition) is weaker than the incumbents' (watching the fish eat). Do not lead with this against a buyer who knows the sector.",
-        "provenance": "assumption"
-      },
-      {
-        "tier": 4,
-        "claim": "Earlier detection of deteriorating water quality",
-        "verifiability": "MEDIUM — requires the farm to trust that what we detected mattered",
-        "proof_horizon": "opportunistic; depends on something going wrong",
-        "status": "the core technical claim, and the hardest to demonstrate on demand"
-      },
-      {
-        "tier": 5,
-        "claim": "Avoided mass mortality",
-        "verifiability": "LOW — it is a counterfactual. Nobody can prove the kill that did not happen.",
-        "proof_horizon": "years, and only statistically across many farms",
-        "why_it_is_last": "It is the most emotionally compelling claim and the least demonstrable. It is also undermined by our own weather limitation: we cannot fly in the storms that trigger the worst events. Selling on catastrophe prevention writes a cheque the platform's flight envelope cannot cash.",
-        "status": "should not be the headline claim until validated",
-        "provenance": "assumption"
+  "phase_1_foundation_value": {
+    "product_id": "aquavision-app",
+    "audience": "Beginners and smallholders establishing their first ponds, most of whom have never used any farm-management tool before, digital or paper.",
+    "headline_value": "Free education, guidance, and organization for people who currently have none of the three.",
+
+    "value_proposition_canvas": {
+      "note": "Mapped against a beginner persona, not 'the customer' in general. No beginner farmer has been interviewed for this canvas; it is drawn from the problem taxonomy and should be treated as a hypothesis, not a finding.",
+      "customer_jobs": [
+        { "job": "Learn how to set up and run a pond without an apprenticeship", "type": "functional", "importance": "critical" },
+        { "job": "Know what to feed, when, and how much", "type": "functional", "importance": "high" },
+        { "job": "Recognise a sick or dying fish before the whole pond is lost", "type": "functional", "importance": "high" },
+        { "job": "Ask someone who has done this before", "type": "social", "importance": "medium" },
+        { "job": "Keep some record of what happened, for their own sake and for any buyer who asks", "type": "functional", "importance": "medium" }
+      ],
+      "pains": [
+        { "pain": "No formal training and no affordable expert to ask", "severity": "high" },
+        { "pain": "Water quality is invisible without equipment they cannot afford", "severity": "high" },
+        { "pain": "Feeding and stocking decisions are guesswork copied from a neighbour", "severity": "medium" },
+        { "pain": "A disease outbreak is often identified too late to act on", "severity": "critical" },
+        { "pain": "Nothing is written down, so nothing this cycle informs the next one", "severity": "medium" }
+      ],
+      "gains": [
+        { "gain": "A guide that answers a question at 9 p.m. when no extension officer is reachable", "type": "required" },
+        { "gain": "A feeding schedule instead of a guess", "type": "expected" },
+        { "gain": "An early photo-based opinion on a sick fish", "type": "desired" },
+        { "gain": "A community of people who have the same problems", "type": "desired" },
+        { "gain": "A record they can actually find again next season", "type": "unexpected" }
+      ],
+      "pain_relievers": [
+        { "reliever": "AI farming guide answers common setup and husbandry questions on demand", "addresses": "No formal training and no affordable expert" },
+        { "reliever": "Manual/photo water quality logging turns invisible conditions into a written trend, even without sensors", "addresses": "Water quality is invisible without equipment" },
+        { "reliever": "Photo-based disease ID gives a first opinion faster than travelling to find one", "addresses": "Disease outbreak identified too late" },
+        { "reliever": "Record keeping accumulates automatically as a by-product of using the app", "addresses": "Nothing is written down" }
+      ],
+      "gain_creators": [
+        { "creator": "Learning modules structure knowledge a beginner would otherwise assemble from scattered, inconsistent sources" },
+        { "creator": "Community discussion supplies the social proof and troubleshooting a solo smallholder has no other access to" },
+        { "creator": "Being free removes the single largest adoption barrier this segment has for any of it" }
+      ],
+      "fit_assessment": {
+        "verdict": "PLAUSIBLE, UNPROVEN",
+        "reasoning": "The relievers map onto plausible pains for a segment nobody currently serves well. But the app has not launched, no beginner farmer has used it, and 'AI farming guide' and 'photo-based disease ID' are design targets, not measured capabilities. A canvas this early is a hypothesis about a persona, not evidence about a customer."
       }
-    ],
-    "the_strategic_conclusion": "Sell tier 1 and 2. Earn tier 3. Prove tier 4. Never promise tier 5 before the data exists. This inverts the instinct of every founder in this category — everyone leads with the dead fish — and it is why most of them do not survive diligence."
+    },
+
+    "the_value_hierarchy": {
+      "note": "Ranked by how easily a beginner farmer with no budget and no technical background can verify the claim themselves, cheapest and most checkable first.",
+      "tiers": [
+        {
+          "tier": 1,
+          "claim": "Structured record keeping, in place of a notebook or nothing at all",
+          "verifiability": "HIGH — the farmer can see their own logs accumulate from day one; there is nothing to take on faith",
+          "proof_horizon": "immediate",
+          "provenance": "design_target"
+        },
+        {
+          "tier": 2,
+          "claim": "A feeding schedule and a farm setup checklist instead of copying a neighbour",
+          "verifiability": "HIGH — the schedule is visible and the farmer can compare it against what they were already doing",
+          "proof_horizon": "immediate",
+          "provenance": "design_target"
+        },
+        {
+          "tier": 3,
+          "claim": "A faster first opinion on a sick or distressed fish via photo-based disease ID",
+          "verifiability": "MEDIUM — the farmer can check the AI's opinion against what a vet or experienced neighbour later says, when one is reachable",
+          "proof_horizon": "days to weeks, opportunistic",
+          "honest_note": "No model has been trained or validated yet. Until there is a held-out test set and real farmer photos, this claim is a design target, not an accuracy figure.",
+          "provenance": "assumption"
+        },
+        {
+          "tier": 4,
+          "claim": "The AI farming guide answers a real husbandry question correctly",
+          "verifiability": "LOW-MEDIUM — correctness depends on the question and is hard for a beginner to check against anything but outcomes weeks later",
+          "proof_horizon": "a full growout cycle",
+          "provenance": "assumption"
+        }
+      ],
+      "the_strategic_conclusion": "Lead with the boring, checkable tier 1 and 2 claims — organization and structure — exactly as the hardware pitch led with the electricity bill. Do not oversell the AI guidance tiers to a beginner who has no way to verify them until a season has passed."
+    },
+
+    "honest_note": "Phase 1 has no users yet. Every claim above is a design target or an assumption; none is measured. `traction.json` stays at honest zero until real farmers are using the app."
   },
 
-  "differentiation": {
-    "against_doing_nothing": "A metered reduction in an existing electricity bill. Not a story about fish kills.",
-    "against_a_fixed_buoy": "Depth and coverage. And the honest admission that below a scale threshold, the buoy wins and we will say so.",
-    "against_a_USV": "Transit speed across many stations, simultaneous aerial imaging, and the ability to ignore dikes, nets, and cage structure entirely. Their endurance beats us and always will.",
-    "against_satellite": "Resolution, revisit rate, cloud immunity, and depth. And we should ingest their data rather than compete with it.",
-    "against_salmon_platforms": "Cost structure and tropical design case. Not technology — we would lose that fight.",
-    "against_a_generic_drone_service": "The probe. Anyone can fly a camera over a lake; calibrated depth-resolved chemistry from a hover is genuinely hard."
+  "phase_2_monetization_value": {
+    "product_id": "aquavision-premium",
+    "audience": "Farms that have grown past what free, manual tracking supports and are willing to pay for an edge — the conversion point from Phase 1.",
+    "headline_value": "ROI-positive analytics, marketplace access, and expert time that a growing farm can check against its own numbers.",
+
+    "value_proposition_canvas": {
+      "note": "Mapped against a growing small-commercial farm owner deciding whether to upgrade from the free app. No such farmer has been interviewed; this is drawn from the problem taxonomy, same caveat as Phase 1.",
+      "customer_jobs": [
+        { "job": "Turn a season of logged data into a decision, not just an archive", "type": "functional", "importance": "high" },
+        { "job": "Buy feed and equipment without a middleman markup", "type": "functional", "importance": "medium" },
+        { "job": "Reach a real vet or aquaculturist without travelling", "type": "functional", "importance": "high" },
+        { "job": "Justify the subscription cost to themselves or a co-owner", "type": "social", "importance": "medium" }
+      ],
+      "pains": [
+        { "pain": "A season of logs sits unused because nobody has time to analyse it by hand", "severity": "high" },
+        { "pain": "Feed and equipment sourcing is fragmented and locally price-gouged", "severity": "medium" },
+        { "pain": "Expert advice means a long trip or an expensive one-off visit", "severity": "medium" },
+        { "pain": "No way to tell whether a recommendation actually helped", "severity": "medium" }
+      ],
+      "gains": [
+        { "gain": "A dashboard that turns logged history into a trend and a recommendation", "type": "expected" },
+        { "gain": "Marketplace prices they can compare against the local supplier", "type": "expected" },
+        { "gain": "A consultation booked in minutes instead of a day's travel", "type": "desired" },
+        { "gain": "Evidence the subscription paid for itself this cycle", "type": "required" }
+      ],
+      "pain_relievers": [
+        { "reliever": "Premium analytics surfaces trends in the farmer's own Phase 1 data without manual analysis", "addresses": "Logs sit unused" },
+        { "reliever": "Marketplace aggregates feed/equipment/buyer listings for price comparison", "addresses": "Fragmented, locally price-gouged sourcing" },
+        { "reliever": "Paid expert consultations connect a farmer to a vet or aquaculturist remotely", "addresses": "Expert advice means a long trip" }
+      ],
+      "gain_creators": [
+        { "creator": "Predictive health monitoring flags a developing problem before it is obvious, if the underlying model holds up" },
+        { "creator": "Smart recommendations turn accumulated history into a suggestion tailored to this farm rather than generic advice" }
+      ],
+      "fit_assessment": {
+        "verdict": "PLAUSIBLE, UNPROVEN",
+        "reasoning": "The relievers are coherent on paper, but this whole tier is contingent on Phase 1 first accumulating real data at scale, and on the marketplace clearing its two-sided cold start. Neither has happened. This canvas demonstrates internal consistency, not customer fit."
+      }
+    },
+
+    "the_value_hierarchy": {
+      "note": "Ranked by how easily a paying, growing farm can verify the claim without trusting AquaVision's modelling.",
+      "tiers": [
+        {
+          "tier": 1,
+          "claim": "Marketplace prices are visibly competitive against the farmer's current supplier",
+          "verifiability": "HIGH — the farmer already knows their current price and can compare line by line",
+          "proof_horizon": "immediate, per purchase",
+          "provenance": "assumption",
+          "honest_note": "Depends on the marketplace having enough sellers listed to be competitive at all — the two-sided bootstrap problem is unresolved."
+        },
+        {
+          "tier": 2,
+          "claim": "An expert consultation is faster and cheaper than the farmer's current alternative",
+          "verifiability": "HIGH — travel time and current consultation cost are both things the farmer already knows",
+          "proof_horizon": "immediate, per consultation",
+          "provenance": "assumption"
+        },
+        {
+          "tier": 3,
+          "claim": "Premium analytics surfaces a trend the farmer had not noticed in their own logged data",
+          "verifiability": "MEDIUM — checkable by the farmer looking back at their own numbers, but requires them to have logged consistently in Phase 1 first",
+          "proof_horizon": "one season with consistent Phase 1 logging",
+          "provenance": "modeled_projection"
+        },
+        {
+          "tier": 4,
+          "claim": "Predictive health monitoring and smart recommendations improve outcomes measurably",
+          "verifiability": "LOW-MEDIUM — attribution is hard without a controlled comparison, the same problem the hardware FCR claim has",
+          "proof_horizon": "multiple cycles with a control",
+          "honest_note": "No model has been trained on real farm data yet, because Phase 1 has not accumulated any. This is the most exciting Phase 2 claim and the least demonstrable today — do not lead with it.",
+          "provenance": "assumption"
+        }
+      ],
+      "the_strategic_conclusion": "Sell the marketplace and consultations first — they are checkable against a price and a calendar the farmer already has. Earn the analytics claim once there is a season of real logs behind it. Do not promise predictive accuracy before a trained model exists to measure."
+    },
+
+    "honest_note": "Phase 2 has no subscribers yet and cannot have any until Phase 1 exists and has run long enough to produce data worth analysing. The conversion-funnel assumption (free users upgrade at some rate) is itself unproven and should be named as an assumption in financial projections, not treated as a given."
   },
 
-  "value_by_stakeholder": [
-    { "stakeholder": "Commercial farm manager", "primary_value": "Lower aeration cost, defensible numbers, audit records", "pays": "yes" },
-    { "stakeholder": "Cooperative", "primary_value": "Collective bargaining power in lake management, member protection, group insurability", "pays": "plausibly, amortised across members" },
-    { "stakeholder": "Smallholder", "primary_value": "Warning — but only if response capacity exists", "pays": "no, directly" },
-    { "stakeholder": "Technician", "primary_value": "Not making the pre-dawn boat run; evidence it was not his fault", "pays": "no, but can veto by neglect" },
-    { "stakeholder": "BFAR / LGU", "primary_value": "Continuous data for carrying capacity decisions they currently make blind", "pays": "possibly, as programme" },
-    { "stakeholder": "Insurer / lender", "primary_value": "An uninsurable asset becomes insurable", "pays": "not yet — needs loss history we do not have" }
-  ],
+  "phase_3_smart_aquaculture_value": {
+    "product_ids": ["omnidrone", "omnidock", "pondtwin", "aquavision-platform"],
+    "audience": "Commercial and enterprise operators whose scale justifies automated sensing.",
+    "headline_value": "Earlier detection, avoided mass mortality, and aeration savings — the value proposition this repository originally led with, now scoped explicitly to the Phase 3 hardware layer rather than presented as the whole company.",
+
+    "value_proposition_canvas": {
+      "citation_ids": ["osterwalder-vpd-2014"],
+      "note": "Mapped against the Phase 3 beachhead persona (Marissa, commercial farm operations manager). A canvas mapped against 'the customer' in general is mapped against nobody.",
+      "customer_jobs": [
+        { "job": "Hit the survival and FCR targets this cycle", "type": "functional", "importance": "critical" },
+        { "job": "Explain performance variance to the owner", "type": "social", "importance": "high" },
+        { "job": "Keep the electricity bill defensible", "type": "functional", "importance": "high" },
+        { "job": "Pass the certification audit without a fire drill", "type": "functional", "importance": "medium" },
+        { "job": "Not be the manager on duty when the fish die", "type": "emotional", "importance": "high" }
+      ],
+      "pains": [
+        { "pain": "Cannot observe 40 units personally", "severity": "high" },
+        { "pain": "Aeration runs on a schedule nobody can justify", "severity": "high" },
+        { "pain": "Feed is 60 percent of cost with no feedback loop", "severity": "high", "citation_ids": ["innovasea-fcr-guide"] },
+        { "pain": "Finds out about a problem when fish are already piping", "severity": "critical" },
+        { "pain": "Cannot explain why survival moved 16 points between cycles", "severity": "medium" }
+      ],
+      "gains": [
+        { "gain": "A number to put in front of the owner", "type": "required" },
+        { "gain": "Lower kWh at equal or better DO", "type": "expected" },
+        { "gain": "Measurable FCR movement", "type": "desired" },
+        { "gain": "Records that compile themselves", "type": "desired" },
+        { "gain": "Knowing the water is fine, at 4 a.m., without going out", "type": "unexpected" }
+      ],
+      "pain_relievers": [
+        { "reliever": "Multi-station profiling several times daily replaces the impossible manual round", "addresses": "Cannot observe 40 units" },
+        { "reliever": "DO data lets aeration run on evidence rather than on a timer", "addresses": "Aeration runs on a schedule nobody can justify" },
+        { "reliever": "Pre-dawn sorties measure the diel minimum, which is the number that matters and the one nobody has", "addresses": "Finds out when fish are piping" },
+        { "reliever": "Automated logging produces the audit record as a by-product", "addresses": "Audit fire drill" }
+      ],
+      "gain_creators": [
+        { "creator": "Depth-resolved profiles reveal stratification that no surface method can see" },
+        { "creator": "Probe-calibrated imagery maps conditions across the whole array, not one point" },
+        { "creator": "Dispensing converts a finding into an action without a boat" },
+        { "creator": "Accumulated site history means each cycle starts smarter than the last" }
+      ],
+      "fit_assessment": {
+        "verdict": "PLAUSIBLE, UNPROVEN",
+        "reasoning": "The relievers map onto the pains coherently. But every reliever is a design target, not a measured capability, and the customer whose pains these are has not been interviewed. A value proposition canvas built without customer contact demonstrates internal consistency, not fit."
+      }
+    },
+
+    "the_value_hierarchy": {
+      "note": "Ranked by how easily a sceptical buyer can verify the claim themselves. This ordering is deliberately the inverse of how exciting each claim is — and it is the correct order to sell in.",
+      "tiers": [
+        {
+          "tier": 1,
+          "claim": "Fewer aerator-hours at equal or better dissolved oxygen",
+          "verifiability": "HIGH — electricity is metered monthly, already budgeted, and the farm can check it without trusting us at all",
+          "proof_horizon": "one cycle",
+          "why_lead_with_this": "It is boring, checkable, and requires zero belief in our modelling. A buyer who verifies this claim will extend credit to the others. A buyer who is asked to believe the mortality claim first has nothing to check and will discount everything.",
+          "status": "unproven but testable immediately in a pilot",
+          "provenance": "assumption"
+        },
+        {
+          "tier": 2,
+          "claim": "Environmental records compile themselves for certification audits",
+          "verifiability": "HIGH — the farm currently pays someone hours to do this by hand",
+          "proof_horizon": "immediate",
+          "status": "a straightforward consequence of logging; the lowest-risk claim in the product"
+        },
+        {
+          "tier": 3,
+          "claim": "Measurable FCR improvement through condition-aware feeding",
+          "verifiability": "MEDIUM — FCR is measurable but noisy, and attribution to us requires a controlled comparison",
+          "proof_horizon": "one to two cycles with a control",
+          "economic_anchor": "At USD 500/t feed, a 0.1 FCR improvement is worth USD 50 per tonne produced",
+          "citation_ids": ["globalseafood-fcr-primary-indicator"],
+          "honest_note": "The arithmetic is externally sourced and solid. Whether we move FCR by 0.1 is entirely unproven, and our feedback loop (water condition) is weaker than the incumbents' (watching the fish eat). Do not lead with this against a buyer who knows the sector.",
+          "provenance": "assumption"
+        },
+        {
+          "tier": 4,
+          "claim": "Earlier detection of deteriorating water quality",
+          "verifiability": "MEDIUM — requires the farm to trust that what we detected mattered",
+          "proof_horizon": "opportunistic; depends on something going wrong",
+          "status": "the core technical claim, and the hardest to demonstrate on demand"
+        },
+        {
+          "tier": 5,
+          "claim": "Avoided mass mortality",
+          "verifiability": "LOW — it is a counterfactual. Nobody can prove the kill that did not happen.",
+          "proof_horizon": "years, and only statistically across many farms",
+          "why_it_is_last": "It is the most emotionally compelling claim and the least demonstrable. It is also undermined by our own weather limitation: we cannot fly in the storms that trigger the worst events. Selling on catastrophe prevention writes a cheque the platform's flight envelope cannot cash.",
+          "status": "should not be the headline claim until validated",
+          "provenance": "assumption"
+        }
+      ],
+      "the_strategic_conclusion": "Sell tier 1 and 2. Earn tier 3. Prove tier 4. Never promise tier 5 before the data exists. This inverts the instinct of every founder in this category — everyone leads with the dead fish — and it is why most of them do not survive diligence."
+    },
+
+    "differentiation": {
+      "against_doing_nothing": "A metered reduction in an existing electricity bill. Not a story about fish kills.",
+      "against_a_fixed_buoy": "Depth and coverage. And the honest admission that below a scale threshold, the buoy wins and we will say so.",
+      "against_a_USV": "Transit speed across many stations, simultaneous aerial imaging, and the ability to ignore dikes, nets, and cage structure entirely. Their endurance beats us and always will.",
+      "against_satellite": "Resolution, revisit rate, cloud immunity, and depth. And we should ingest their data rather than compete with it.",
+      "against_salmon_platforms": "Cost structure and tropical design case. Not technology — we would lose that fight.",
+      "against_a_generic_drone_service": "The probe. Anyone can fly a camera over a lake; calibrated depth-resolved chemistry from a hover is genuinely hard."
+    },
+
+    "value_by_stakeholder": [
+      { "stakeholder": "Commercial farm manager", "primary_value": "Lower aeration cost, defensible numbers, audit records", "pays": "yes" },
+      { "stakeholder": "Cooperative", "primary_value": "Collective bargaining power in lake management, member protection, group insurability", "pays": "plausibly, amortised across members" },
+      { "stakeholder": "Smallholder", "primary_value": "Warning — but only if response capacity exists; the smallholder's primary AquaVision relationship is Phase 1, not this layer", "pays": "no, directly" },
+      { "stakeholder": "Technician", "primary_value": "Not making the pre-dawn boat run; evidence it was not his fault", "pays": "no, but can veto by neglect" },
+      { "stakeholder": "BFAR / LGU", "primary_value": "Continuous data for carrying capacity decisions they currently make blind", "pays": "possibly, as programme" },
+      { "stakeholder": "Insurer / lender", "primary_value": "An uninsurable asset becomes insurable", "pays": "not yet — needs loss history we do not have" }
+    ]
+  },
 
   "the_honest_summary": {
-    "what_we_can_defensibly_say_today": "A platform designed to profile water at depth across many stations at low marginal labour cost, with its own calibration ground truth on board, in an industry where nobody currently measures anything and fish die because of it.",
-    "what_we_cannot_say": "That it works. Nothing has flown.",
-    "the_pitch_that_survives_diligence": "Not 'we prevent fish kills'. Rather: 'here is a documented, recurring, expensive failure mode caused by a monitoring gap that is economically rather than technically insurmountable; here is why an aerial platform inverts that economics; here is the one thing we have to prove and how we will prove it; and here is the boring, checkable ROI that pays for the deployment while we prove it.'"
+    "what_we_can_defensibly_say_today": "A phased platform where Phase 1 is a free app with no users yet, Phase 2 is a monetisation layer that cannot exist meaningfully before Phase 1 does, and Phase 3 is a hardware upgrade designed to profile water at depth across many stations at low marginal labour cost, with its own calibration ground truth on board, in an industry where nobody currently measures anything and fish die because of it.",
+    "what_we_cannot_say": "That any of the three phases works yet. Phase 1 has not launched. Phase 2 has no data to run on. Phase 3 has not flown.",
+    "the_pitch_that_survives_diligence": "Not 'we prevent fish kills' and not 'we have thousands of users.' Rather: three honestly-staged claims — free tools that should be checkably useful to a beginner from day one; a paid layer whose ROI a growing farm can verify against its own numbers once it exists; and a documented, recurring, expensive hardware-solvable failure mode at the top of the market, with the one thing we have to prove about each layer named plainly, and the boring, checkable value in each phase that pays its own way while the exciting claims are still being proven."
   }
 }

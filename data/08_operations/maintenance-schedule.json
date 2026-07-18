@@ -6,6 +6,14 @@
   "provenance": "design_target",
   "note": "Intervals are design targets, not field-validated. A tropical, brackish, biologically active environment is harsh on hardware, and real intervals will likely be shorter than these until proven otherwise. Corrosion and fouling do not respect the maintenance manual.",
 
+  "the_three_phase_scope": {
+    "statement": "This entire schedule is Phase 3 — the hardware/IoT maintenance burden that arrives once a farm adopts OmniDrone, docks, and probes. Phase 1 and Phase 2 carry a real but structurally different maintenance burden: no field technician, no corrosion, no lithium logistics.",
+    "phase_1_2_software_maintenance": {
+      "tasks": ["App release cadence and bug fixes", "Server/uptime and database maintenance", "Photo-based disease-ID model retraining as new labelled data accumulates", "Community forum moderation queue (see ethics-data-privacy.json)", "Marketplace listing and payment-integration upkeep (Phase 2)"],
+      "the_honest_comparison": "This is engineering and ops overhead, not field-labour overhead — cheaper per user, but it does not go to zero, and moderation/model-retraining in particular scale with user count the way sensor calibration scales with site count in Phase 3."
+    }
+  },
+
   "the_maintenance_philosophy": {
     "principle": "Maintainable by a technician with hand tools, or it will not be maintained.",
     "reasoning": "A distributed network of docks on remote lakeshores cannot each have an engineer. If a task needs a laptop, a calibration rig, or a specialist, it will be deferred until it becomes a failure. Design maintenance for the person who is actually there.",

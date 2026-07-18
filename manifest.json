@@ -2,13 +2,13 @@
   "$schema": "./data/00_meta/schema-registry.json#/definitions/manifest",
   "manifest_version": "1.0.0",
   "repository": {
-    "name": "AquaVision OmniDrone Knowledge Repository",
+    "name": "AquaVision Knowledge Repository",
     "code_name": "AVKR",
     "owner": "AquaVision (startup)",
-    "tagline": "Fisheries • Aquaculture • Technology",
-    "purpose": "Single source of truth for the OmniDrone concept: pitch material, thesis material, engineering specification, research corpus, and chart-ready datasets. Designed to be consumed by a static HTML dashboard via fetch() on these JSON files.",
+    "tagline": "AI-powered aquaculture management, from first pond to smart farm",
+    "purpose": "Single source of truth for the AquaVision platform: a phased product story (Phase 1 free farming app, Phase 2 premium analytics/marketplace, Phase 3 IoT + OmniDrone hardware), pitch material, thesis material, engineering specification, research corpus, and chart-ready datasets. Designed to be consumed by a static HTML dashboard via fetch() on these JSON files.",
     "created": "2026-07-17",
-    "last_updated": "2026-07-17",
+    "last_updated": "2026-07-18",
     "license_note": "Internal working document. Cited third-party statistics remain the property of their publishers; see data/07_research/references-bibliography.json for attribution."
   },
   "READ_THIS_FIRST": {
@@ -64,14 +64,14 @@
         "id": "solution",
         "path": "data/04_solution/",
         "label": "Solution & ConOps",
-        "description": "What the OmniDrone does, the value proposition, the use cases, and the concept of operations.",
+        "description": "What AquaVision does across its three phases (free app, premium tier, OmniDrone/IoT hardware), the value proposition, the use cases, and the concept of operations.",
         "audience": ["investor", "farmer", "engineer"]
       },
       {
         "id": "hardware",
         "path": "data/05_hardware/",
-        "label": "Hardware Engineering",
-        "description": "Airframe, propulsion, reeled probe winch, sensor payload, carriage/ejection system, power budget, dock, BOM.",
+        "label": "Hardware Engineering (Phase 3)",
+        "description": "Airframe, propulsion, reeled probe winch, sensor payload, carriage/ejection system, power budget, dock, BOM — the Phase 3 smart-aquaculture upgrade layer.",
         "audience": ["engineer", "thesis_committee"]
       },
       {

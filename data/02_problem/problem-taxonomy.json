@@ -1,15 +1,22 @@
 {
   "id": "problem-taxonomy",
   "title": "Problem Taxonomy — The Full Space of Aquaculture & Fisheries Problems",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
-  "purpose": "An exhaustive map of problems in the field, classified by whether the OmniDrone addresses them. The classification is the point: a technology repository that lists only the problems its product solves is a brochure. This file exists to show the committee and the investor that the team knows the boundaries of its own solution.",
+  "version": "2.0.0",
+  "last_updated": "2026-07-18",
+  "purpose": "An exhaustive map of problems in the field, classified by whether the AquaVision platform addresses them, and at which phase. The classification is the point: a technology repository that lists only the problems its product solves is a brochure. This file exists to show the committee and the investor that the team knows the boundaries of its own solution — across the free app, the premium tier, and the hardware upgrade layer alike.",
+
+  "phase_legend": {
+    "note": "Most entries below predate the phased rewrite and describe capabilities of the Phase 3 hardware layer (IoT sensors, OmniDrone, PondTwin) unless a `phase` field says otherwise. The new 'platform-guidance-and-growth' domain at the end of this file catalogues the Phase 1 and Phase 2 software problems explicitly.",
+    "1": "AquaVision App — free/low-cost guidance, logging, and education layer.",
+    "2": "AquaVision Premium — paid analytics, predictive health, marketplace, consultations.",
+    "3": "AquaVision Smart — IoT sensors, OmniDrone, PondTwin, enterprise dashboard. Default assumption for entries with no `phase` field."
+  },
 
   "coverage_legend": {
-    "core": "The OmniDrone directly and substantially addresses this. This is what we are for.",
-    "partial": "The OmniDrone contributes meaningfully but does not solve it. Honest framing required in any claim.",
+    "core": "The platform (at the phase indicated, or Phase 3 by default) directly and substantially addresses this. This is what that layer is for.",
+    "partial": "The platform contributes meaningfully but does not solve it. Honest framing required in any claim.",
     "adjacent": "The platform generates data relevant to this, but solving it needs other actors or tools.",
-    "out_of_scope": "Real problem in the field. We do not touch it. Listed so nobody thinks we forgot, and so we never drift into claiming it."
+    "out_of_scope": "Real problem in the field. We do not touch it at any phase. Listed so nobody thinks we forgot, and so we never drift into claiming it."
   },
 
   "domains": [
@@ -64,7 +71,7 @@
         { "id": "op-harvest-timing", "label": "Harvest timing optimisation", "coverage": "adjacent", "mechanism": "Environmental history informs it; growth data does not come from us." },
         { "id": "op-stocking-density", "label": "Over-stocking beyond carrying capacity", "description": "Repeatedly identified in Philippine fish kill investigations as the underlying cause.", "coverage": "partial", "mechanism": "Quantifies the consequences and can support a carrying capacity argument. Cannot make anyone destock.", "citation_ids": ["pna-tilapia-fishkill"], "honest_note": "This is the root cause of the disaster we are selling against, and our product does not fix it. It makes the cost of ignoring it visible. Whether visibility changes behaviour is an empirical question we should not assume the answer to." },
         { "id": "op-aeration-inefficiency", "label": "Aeration run inefficiently — always-on or too-late", "coverage": "core", "mechanism": "DO data lets aeration be scheduled on evidence. Aeration is a large electricity line item, so this is a direct and easily demonstrated cost saving — arguably the easiest ROI to prove in a pilot." },
-        { "id": "op-record-keeping", "label": "Absent or paper-based records", "coverage": "core" },
+        { "id": "op-record-keeping", "label": "Absent or paper-based records", "coverage": "core", "phase": "1_and_3", "mechanism": "Phase 1's digital record keeping is the entry-level fix available to any farmer regardless of scale; Phase 3's automated logging and digital twin are the high-resolution version for farms large enough to need it." },
         { "id": "op-cage-maintenance", "label": "Cage and mooring integrity", "coverage": "partial", "mechanism": "Above-water visual inspection only." },
         { "id": "op-power-reliability", "label": "Unreliable grid power at remote sites", "coverage": "out_of_scope", "note": "It is a constraint ON us, not a problem we solve. The dock must be solar-viable." }
       ]
@@ -111,15 +118,33 @@
         { "id": "cap-ghost-gear", "label": "Abandoned and derelict fishing gear", "coverage": "adjacent", "mechanism": "Surface detection of visible gear." },
         { "id": "cap-red-tide-closure", "label": "Red tide shellfish closure decisions", "coverage": "adjacent", "mechanism": "Supports the sampling programme; the closure decision is BFAR's and must remain so." }
       ]
+    },
+    {
+      "domain_id": "platform-guidance-and-growth",
+      "label": "Farmer Guidance, Growth & Business Support (Phase 1 / Phase 2 software layer)",
+      "note": "This domain exists because the pre-2026 version of this file catalogued only the hardware layer's problem space, which described a company that starts with a drone. It does not. These problems are what the free app and the premium tier exist to solve, and they are listed with the same discipline as the hardware domains above: honest coverage ratings, honest boundaries, no invented statistics. Every entry below is provenance 'assumption' unless stated otherwise, because there are zero real users yet — see traction.json.",
+      "problems": [
+        { "id": "plat-onboarding-guidance", "label": "No structured farm setup guidance for beginners", "description": "First-time farmers choose species, siting, and stocking with no calibrated onboarding.", "coverage": "core", "phase": 1, "mechanism": "AI-assisted farm setup assistant and guided species/stocking recommendations.", "provenance": "assumption" },
+        { "id": "plat-water-logging-manual", "label": "No low-friction way to log water quality below sensor-economical scale", "description": "Manual/photo entry logging, not a sensor substitute — a different problem from wq-* above, solved without hardware.", "coverage": "core", "phase": 1, "mechanism": "Manual and photo-based water quality logging in the app.", "provenance": "assumption" },
+        { "id": "plat-feeding-schedules", "label": "No feeding schedule tool for smallholders", "coverage": "core", "phase": 1, "mechanism": "App-based feeding schedules, a blunter instrument than Phase 3's condition-aware dispensing but usable at any scale.", "provenance": "assumption" },
+        { "id": "plat-disease-id-photo", "label": "No accessible disease screening for individual smallholder farmers", "description": "Distinct from bio-disease-outbreak above, which is commercial-array environmental-precursor detection. This is one farmer, one sick fish, no expert nearby.", "coverage": "core", "phase": 1, "mechanism": "Photo-based AI disease identification.", "boundary": "Screening, not diagnosis. Same honesty boundary as bio-disease-outbreak.", "provenance": "assumption" },
+        { "id": "plat-community-knowledge", "label": "Isolation from peer and expert knowledge", "coverage": "core", "phase": 1, "mechanism": "Community discussions and learning modules.", "provenance": "assumption" },
+        { "id": "plat-learning-modules", "label": "No accessible structured aquaculture education", "coverage": "core", "phase": 1, "mechanism": "In-app learning modules.", "provenance": "assumption" },
+        { "id": "plat-analytics-at-scale", "label": "No analytics once a farm outgrows manual tracking", "description": "The notebook or spreadsheet that worked for one pond does not surface cross-unit or cross-cycle patterns for fifteen.", "coverage": "core", "phase": 2, "mechanism": "Premium analytics dashboards.", "provenance": "assumption" },
+        { "id": "plat-predictive-health-ml", "label": "No predictive signal before decline becomes loss", "coverage": "partial", "phase": 2, "mechanism": "Predictive health monitoring — ML trained on Phase 1 logged data.", "honest_note": "Contingent on Phase 1 first accumulating real training data, which does not yet exist. Rated partial rather than core specifically because the capability is unbuilt and unvalidated, not merely unproven in the field.", "provenance": "assumption" },
+        { "id": "plat-marketplace", "label": "Inefficient, informal input and output markets", "coverage": "core", "phase": 2, "mechanism": "Feed/equipment/buyer marketplace.", "honest_note": "A two-sided marketplace is a structurally harder business than the guidance or analytics pieces and should not be assumed to arrive on the same timeline.", "provenance": "assumption" },
+        { "id": "plat-expert-consultation-access", "label": "No affordable or convenient expert access", "coverage": "core", "phase": 2, "mechanism": "Paid consultations with aquaculturists and vets.", "provenance": "assumption" },
+        { "id": "plat-credit-insurance-onramp", "label": "Smallholders unable to access credit or insurance because risk is unmeasured", "coverage": "adjacent", "phase": 2, "mechanism": "Logged Phase 1/2 history could eventually support a credit or insurance case, but underwriting and lending decisions belong to third parties, not to us. Same structural note as econ-credit-access above, one tier down the market.", "provenance": "assumption" }
+      ]
     }
   ],
 
   "coverage_summary": {
     "provenance": "derived_calculation",
-    "method": "Counted from the arrays above.",
-    "counts": { "core": 19, "partial": 19, "adjacent": 12, "out_of_scope": 12 },
-    "total_problems_catalogued": 62,
-    "interpretation": "Roughly a third of the field's problems are squarely ours, a third we touch, and a third we do not. That is a normal and healthy profile for a platform product. A repository claiming 'core' on sixty out of sixty-two problems would be describing a fantasy, and any experienced reviewer would discount the whole document on sight."
+    "method": "Counted from the arrays above, including the new platform-guidance-and-growth domain.",
+    "counts": { "core": 28, "partial": 18, "adjacent": 14, "out_of_scope": 13 },
+    "total_problems_catalogued": 73,
+    "interpretation": "The core count rose with the addition of the Phase 1/2 software domain, which is expected — a platform with three phases legitimately covers more ground than a single hardware product did. The proportions still matter: a large majority of the catalogued space remains partial, adjacent, or out of scope, and the hardware-layer domains above are unchanged from the original hardware-first analysis. A repository claiming 'core' on nearly everything would still be describing a fantasy; this one does not."
   },
 
   "how_to_use_this_file": [

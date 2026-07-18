@@ -1,71 +1,82 @@
 {
   "id": "funding-ask",
   "title": "Funding Ask",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
+  "version": "2.0.0",
+  "last_updated": "2026-07-18",
   "provenance": "modeled_projection",
   "confidence": "low",
 
-  "note": "No dollar amount appears here because the amount depends on team size and hardware costs that Phase 0 determines. What appears is the STRUCTURE of the ask, the use of funds, and — most importantly — the milestone each tranche unlocks. Fill the amount in after Phase 0.",
+  "note": "No dollar amount appears here because the amount depends on team size and cloud/AI costs (Phase 1/2) and hardware costs (Phase 3) that discovery work in each phase determines. What appears is the STRUCTURE of the ask, the use of funds, and the milestone each tranche unlocks — now organised around building and launching the free app first, layering premium monetisation, and only then piloting hardware. Fill amounts in as each phase's discovery work completes.",
 
   "the_framing": {
-    "principle": "Raise in tranches against de-risking milestones, not a lump against a revenue projection.",
-    "why": "This is a hardware company with a real validation timeline and three untested load-bearing assumptions. The credible structure is: a small first raise to test the cheapest, most fundamental assumptions, then larger raises unlocked by evidence. An investor is buying successive risk reduction.",
-    "the_honest_pitch": "We are not asking you to believe a forecast. We are asking you to fund the removal of a specific risk, watch us either clear it or kill the company on it, and price the next round on what you learn."
+    "principle": "Raise in tranches against de-risking milestones, phase by phase, not a lump sum against a revenue projection.",
+    "why": "This is now a software company first (with a real, fast path to a launched product and usage data) and a hardware company second (with the same long validation timeline the original plan described). The credible structure is: a small first raise to build and launch the free app and observe real user behaviour, a second raise to prove the monetisation layer converts, and a third to fund the hardware pilot once the software business has either funded itself partially or proven the customer relationship the hardware sale depends on.",
+    "the_honest_pitch": "We are not asking you to believe a subscriber-growth forecast or a drone-deployment forecast. We are asking you to fund the removal of a specific risk at each stage, watch us either clear it or kill that layer of the company on it, and price the next round on what you learn."
   },
 
   "the_tranche_structure": [
     {
-      "tranche": "Pre-seed / Phase 0",
-      "purpose": "Test the three assumptions that could kill the company on paper, cheaply, before any hardware spend.",
-      "use_of_funds": ["Founding team runway", "Farmer discovery (25+ interviews, real WTP)", "Sonde vendor survey (does the mass budget close?)", "Regulatory + liability legal opinion", "Academic validation MOU"],
+      "tranche": "Pre-seed",
+      "purpose": "Build and launch the Phase 1 free app, and observe whether beginner/smallholder farmers actually use it.",
+      "use_of_funds": ["Founding product/engineering team runway", "Mobile/web app development (guide, setup assistant, water-quality logging, feeding schedules, disease-ID, community, learning modules)", "Cloud hosting and AI inference infrastructure, sized for a free tier", "Community management and content/education production for organic growth", "Farmer discovery to validate the free-tier feature set before and during build"],
       "milestones_that_unlock_the_next_tranche": [
-        "Payload budget closes with margin, OR the concept is re-architected honestly.",
-        "Farmer discovery confirms a segment with response capacity and demonstrated WTP.",
-        "A credible BVLOS pathway with a realistic timeline.",
-        "A signed academic validation protocol."
+        "App launched publicly on at least one app store.",
+        "A measured activation rate (farm setup completed, at least one log entered) at a credible level — see unit-economics.json#/phase_1_foundation_economics for the design target.",
+        "Evidence that organic/community channels can acquire users without paid marketing at meaningful volume.",
+        "A real, if small, base of retained weekly-active users generating logged water-quality and production data."
       ],
-      "the_kill_criteria": "If the payload cannot close on any credible configuration, or farmers have no response capacity and no willingness to pay, the honest outcome is to stop or pivot — and this tranche is small precisely so that stopping here is cheap. See milestones-roadmap.json#/phases (Phase 0 kill criteria).",
-      "why_this_is_the_smart_first_raise": "It is the cheapest phase and it de-risks the most. An investor who funds only this is exposed to a small amount against the largest uncertainties. That asymmetry should appeal to a good early investor and it demonstrates capital discipline."
+      "the_kill_criteria": "If, after a genuine organic-growth effort, activation and retention are poor even at zero price, the honest conclusion is that the free tier is not solving a real problem for this audience as designed, and the company should re-scope the product before raising further — not proceed to build a paid tier or a hardware pilot on top of an unused base.",
+      "why_this_is_the_smart_first_raise": "It is the cheapest phase in the entire three-phase plan and it produces the company's first real data of any kind — the first users, the first retention numbers, the first evidence for or against the freemium thesis. An investor who funds only this is exposed to a small amount against the single largest and fastest-testable uncertainty in the model: will anyone use this."
     },
     {
-      "tranche": "Seed / Phases 1-2",
-      "purpose": "Prove the two hardest subsystems and fly an integrated vehicle that returns validated profiles.",
-      "milestones_that_unlock_the_next_tranche": ["Winch passes 1000-cycle reliability with root-caused failures", "Profiles agree with a reference sonde within tolerance across the full range", "Radiometric calibration reproducible across days", "Pendulum/wind envelope characterised"],
-      "note": "The profile-vs-reference agreement is the moment the core claim is true or false. This tranche buys that answer."
+      "tranche": "Seed",
+      "purpose": "Layer in the Phase 2 premium subscription, marketplace, and consultation features, and prove the free-to-paid conversion funnel converts at a viable rate.",
+      "use_of_funds": ["Premium analytics and predictive-health feature development, trained on Phase 1 logged data", "Marketplace build and supply-side partner onboarding (feed, equipment, buyers)", "Consultation marketplace build and expert recruitment", "Payment/subscription infrastructure", "Conversion-funnel and in-app growth engineering"],
+      "milestones_that_unlock_the_next_tranche": [
+        "A measured free-to-paid conversion rate, replacing the generic 2-5% assumption in unit-economics.json with a real number.",
+        "Measured ARPU, churn, and gross margin on the paying subscriber base.",
+        "Evidence (or disconfirmation) of the assumed synergy that Phase 2 subscribers convert into Phase 3 hardware leads at lower CAC than cold enterprise sales — see unit-economics.json#/the_cross_phase_synergy_and_its_risk.",
+        "At least early marketplace and/or consultation transaction volume, even if small."
+      ],
+      "note": "This is the tranche that answers whether AquaVision is a viable subscription-and-marketplace software business at all, independent of whether the Phase 3 hardware layer ever ships. If conversion and retention do not hold up here, the honest move is to fix or re-scope the software business before funding hardware capex on top of it."
     },
     {
-      "tranche": "Series A / Phases 3-4",
-      "purpose": "A full validation season, model training on real data, BVLOS authorisation, and the first paid pilots with measured unit economics.",
-      "milestones": ["A validation dataset across one full seasonal cycle", "Anomaly detection generalising to a held-out site", "Honest kill-risk evaluation against real events", "Paying customers with renewal intent", "Measured unit economics", "BVLOS obtained or model re-based on VLOS"],
-      "note": "By this raise, the company should have evidence, not just a plan. If it does not, the earlier tranches did their job by revealing that."
+      "tranche": "Series A",
+      "purpose": "Fund the Phase 3 hardware pilot — drone, dock, IoT probes, PondTwin digital twin, and enterprise dashboard — for commercial and enterprise operators, once the software layer has either proven itself or shown a credible warm-lead pipeline into this segment.",
+      "use_of_funds": ["Drone/dock/sonde BOM finalisation and subsystem prototyping (winch, sensor payload)", "Field validation over a full seasonal cycle", "BVLOS regulatory pathway", "Enterprise/institutional sales and field-operations capacity"],
+      "milestones": [
+        "A validated payload and mass budget closing with margin (unchanged kill criterion from the original hardware plan).",
+        "Winch reliability and profile-vs-reference-sonde agreement demonstrated (unchanged from the original plan — the moment the core hardware claim becomes true or false).",
+        "A validation dataset across one full seasonal cycle, with academic partner review.",
+        "The first paying Phase 3 hardware customers with renewal intent, and measured (not modeled) Phase 3 unit economics.",
+        "BVLOS obtained, or the model honestly re-based on VLOS economics."
+      ],
+      "note": "By this raise, the company should have evidence on BOTH layers — real software usage/revenue metrics from Phase 1/2, and real hardware validation data from Phase 3 field work — not just a plan for either. If it does not, the earlier tranches did their job by revealing that."
     }
   ],
 
   "use_of_funds_principles": [
-    "The single most valuable early dollar goes to the sonde vendor survey and the payload arithmetic — because it is cheap and it can save the whole raise from funding an unbuildable concept.",
-    "The second goes to farmer discovery, because the market risk (R-04) is more likely to kill the company than any technical risk.",
-    "The third goes to the BVLOS conversation, because it has the longest lead time.",
-    "Do NOT spend on hardware tooling before Phase 0 closes the payload budget on paper. Tooling an aircraft that cannot carry its mission is the most expensive avoidable mistake available."
+    "The single most valuable early dollar goes to shipping and launching the free app, because it is the cheapest possible way to learn whether the core premise — free, low-friction access converts beginner farmers into engaged users — holds at all.",
+    "The second goes to instrumenting and measuring the free-to-paid conversion funnel honestly, because freemium conversion (not hardware engineering) is now the single most load-bearing untested number in the whole model.",
+    "Do NOT spend meaningfully on hardware tooling or BOM commitments before the Phase 2 gate shows the software business has real traction, or at minimum before Phase 0-equivalent hardware discovery (payload arithmetic, farmer WTP for automated monitoring) closes on paper — tooling an aircraft, or funding an enterprise sales team, ahead of either kind of evidence is the most expensive avoidable mistake available.",
+    "Community and content spend in Phase 1 should be weighted toward earning organic distribution, not paid acquisition — paid acquisition working around the stated channel assumption would itself be a signal that assumption failed, not a fix for it."
   ],
 
   "what_we_are_honest_about_with_investors": {
     "the_things_we_volunteer": [
-      "Nothing has flown. TRL 3.",
-      "The business model assumes a BVLOS authorisation we do not have.",
-      "The customer who needs it most cannot afford it.",
-      "We cannot fly in the weather that causes the worst events.",
-      "A USV is a genuinely strong alternative architecture.",
-      "The unit economics are unproven and density-dependent.",
-      "Zero customers, zero revenue, no team hired."
+      "Zero app users, zero revenue, no team hired, as of today.",
+      "The freemium conversion rate used in every downstream model is a generic software-industry heuristic, not a measured number for this product or market.",
+      "The Phase 2-to-Phase 3 'warm lead' synergy the phased story depends on is an assumption, not a demonstrated mechanism — see unit-economics.json#/the_cross_phase_synergy_and_its_risk.",
+      "The Phase 3 hardware layer carries every open risk the original hardware-first plan named: nothing has flown, TRL 3, no BVLOS authorisation, unit economics unproven and density-dependent.",
+      "The customer who needs the platform most (the smallholder) is also the one least able to pay for anything beyond the free tier — Phase 1 solves the access problem, not the revenue problem, for that segment."
     ],
-    "why_volunteer_all_of_this": "Because every one of these is discoverable in diligence, and handing them over with the mitigations attached is cheaper than being caught with them. It also does the most important thing a first meeting can do: it establishes that this team tells the truth about its own weaknesses, which is the single trait that most predicts whether the later, unverifiable claims can be believed. A founder who hides the BVLOS dependency and gets caught has lost the room; one who leads with it has bought credibility for everything else.",
-    "the_counterintuitive_bet": "This entire repository is built on the wager that rigorous honesty is more fundable than polished optimism — for the right investor. It will lose the investors who want the hockey-stick. It is designed to win the ones worth having."
+    "why_volunteer_all_of_this": "Because every one of these is discoverable in diligence, and handing them over with the mitigations attached is cheaper than being caught with them. A team that leads with 'here is the number we borrowed from a generic benchmark and here is why it might be wrong for this market' has more credibility than one that presents a confident subscriber-growth model built on the same borrowed number without saying so.",
+    "the_counterintuitive_bet": "This repository is built on the wager that rigorous honesty is more fundable than polished optimism, for the right investor — a wager that applies exactly as much to a freemium conversion assumption as it did to a hardware BOM. It will lose the investors who want the hockey-stick, software or hardware. It is designed to win the ones worth having."
   },
 
   "what_the_money_buys_the_investor": {
-    "the_return_thesis": "A defensible position (accumulated site data + local regulatory relationships + hard winch/calibration engineering) in the observability layer of an industry that just became the majority of the world's aquatic animal production and is still growing.",
+    "the_return_thesis": "A phased position in the aquaculture-management category: first, a low-cost-to-build software platform with a genuine acquisition advantage among an underserved smallholder segment; second, a subscription-and-marketplace revenue layer on top of that base; third, a defensible hardware-as-a-service position (accumulated site data, local regulatory relationships, and the winch/calibration engineering) in the observability layer of an industry that just became the majority of the world's aquatic animal production and is still growing.",
     "citation_ids": ["fao-sofia-2024"],
-    "the_honest_risk": "The defensibility is a plan, not an asset, at this stage. The bet is on the team's ability to execute Phase 0-4 and to build the data moat before a better-capitalised entrant does. That is a real risk and it is the risk the investor is actually pricing."
+    "the_honest_risk": "Each layer of this thesis is a plan, not an asset, at this stage, and the layers are only as connected as the untested cross-phase synergy assumption holds. The bet is on the team's ability to execute all three phases in sequence, converting real usage data into real revenue into a real hardware business, faster than a better-capitalised entrant in either the software or hardware category. That is a real risk and it is the risk the investor is actually pricing."
   }
 }

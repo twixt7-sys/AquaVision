@@ -1,12 +1,12 @@
 {
   "id": "cost-of-inaction",
   "title": "Cost of Inaction — Loss Model",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
+  "version": "2.0.0",
+  "last_updated": "2026-07-18",
   "provenance": "modeled_projection",
   "confidence": "low",
 
-  "READ_THIS_FIRST": "This is a MODEL, not a measurement. Every number below is either a sourced external statistic (tagged) or an assumption the authors invented (tagged). Its purpose is to make the loss structure explicit and attackable — not to prove a market. If you present this as evidence of demand, you will be caught, because the assumptions are visible and several of them are shaky. The correct use is: 'here is our model, here are the assumptions, tell us which one you think is wrong.' That framing wins meetings. 'Our research shows PHP X million' loses them.",
+  "READ_THIS_FIRST": "This is a MODEL, not a measurement. Every number below is either a sourced external statistic (tagged) or an assumption the authors invented (tagged). Its purpose is to make the loss structure explicit and attackable — not to prove a market. If you present this as evidence of demand, you will be caught, because the assumptions are visible and several of them are shaky. The correct use is: 'here is our model, here are the assumptions, tell us which one you think is wrong.' That framing wins meetings. 'Our research shows PHP X million' loses them. This revision extends the model across all three phases of the platform: the original categories below (catastrophic mortality, feed waste, aeration, disease, and so on) sit at the Phase 3 hardware tier and carry whatever external evidence they always did. The new categories added at the end of this list — beginner attrition, scaling blindness, expert-access gap, and market inefficiency — sit at the Phase 1/2 software tiers and carry NO external evidence at all, because no incident-reporting mechanism exists for them. They are labelled 'assumption' or 'modeled_projection' precisely because that is all they are, and they should be read, and attacked, accordingly.",
 
   "loss_categories": [
     {
@@ -113,6 +113,53 @@
       "visibility": "invisible by construction",
       "addressable_by_omnidrone": "completely",
       "note": "Unquantifiable and real. Every cycle begins with the same ignorance as the first. The sector cannot build the predictive models that would help it because the training data was never kept. This is the argument for the platform as infrastructure rather than as a gadget — and it is the argument that justifies a subscription rather than a hardware sale, because the value compounds with duration."
+    },
+    {
+      "category_id": "beginner-attrition-and-preventable-loss",
+      "label": "Beginner Attrition and Preventable First-Cycle Loss (Phase 1 tier)",
+      "description": "First-time and smallholder farmers who lose money, or give up entirely, because of mistakes a structured onboarding, basic logging habit, or accessible disease screening would have caught — over-stocking a pond past its carrying capacity, missing an early disease sign, or simply not knowing what a healthy cycle is supposed to look like.",
+      "visibility": "near zero — nobody surveys farmer attrition, and a farmer who quietly stops farming does not file a report with anyone",
+      "hypothesis": "Given that small-scale producers make up the large majority of aquaculture operators globally, and that extension services are thin and unevenly distributed, it is plausible that preventable beginner-tier losses and dropouts outnumber every catastrophic mortality event in this repository combined, simply on population size. This is a hypothesis about scale, not a measurement of it.",
+      "citation_ids": ["fao-sofia-2024"],
+      "reasoning": "fao-sofia-2024 establishes that small-scale and inland producers dominate global aquaculture by headcount; it does NOT establish an attrition rate, a loss magnitude, or anything about the Philippines specifically. The citation supports only the premise that this population is large, not the size of its losses.",
+      "provenance": "assumption",
+      "confidence": "speculative",
+      "why_this_matters_enormously": "If beginner attrition is the sector's largest source of preventable loss by sheer volume of affected people, then Phase 1's free app is not merely a funnel for Phase 2 and 3 — it may be addressing the single largest problem in this entire repository, just one that is individually small, unreported, and invisible to every other loss category here. This is exactly the kind of claim that must not be presented as established, because it currently rests on population statistics and inference, not on any measured attrition data.",
+      "how_to_test_it": "Phase 0/1 discovery: track how many first-time users of the free app abandon farming within their first cycle, and ask departing users why, however informally that can be done before there is a real user base to study.",
+      "addressable_by_omnidrone": "not applicable — this is a Phase 1 software category, addressed by the free app's guidance, logging, disease-ID, and community features, not by hardware",
+      "intellectual_note": "This is the Phase 1 analogue of the chronic-sublethal hypothesis above: both claim that the quiet, unreported version of a problem outweighs the dramatic, reported version. Neither claim has been tested. Both should be treated with equal suspicion and equal interest."
+    },
+    {
+      "category_id": "scaling-blindness-and-missed-optimization",
+      "label": "Scaling Blindness and Missed Optimisation (Phase 2 tier)",
+      "description": "Farms that have grown past a size a notebook or spreadsheet can meaningfully track, and therefore miss cross-unit comparisons, early trend signals, and the compounding value of expert input, because no analytics layer exists between 'too big to track by hand' and 'big enough to justify Phase 3 hardware.'",
+      "visibility": "invisible — shows up only as an unexplained gap between a farm's best and worst cycles, never attributed to the absence of a tool",
+      "hypothesis": "A farm operating a dozen units with no cross-unit analytics is very likely leaving some avoidable underperformance on the table every cycle, in the same reflexive way that unmeasured feed waste degrades water quality elsewhere in this file. No magnitude is claimed here because none has been measured.",
+      "provenance": "assumption",
+      "confidence": "speculative",
+      "addressable_by_omnidrone": "not applicable — this is the Phase 2 premium analytics and predictive-health category",
+      "note": "This category and 'expert-access-gap' below are two faces of the same underlying gap: a growing farm has neither the internal analytical capacity nor the affordable external expertise to catch what a notebook cannot show it. Splitting them into two entries reflects that they are addressed by two different Phase 2 features (analytics dashboards versus paid consultations), not that they are two different problems.",
+      "how_to_test_it": "Requires real Phase 2 users with logged history over multiple cycles — cannot be tested before Phase 1 has produced that data. This is a multi-year dependency, not a Phase 0 question."
+    },
+    {
+      "category_id": "expert-access-gap",
+      "label": "Cost of No Affordable Expert Access (Phase 2 tier)",
+      "description": "Decisions a farm manager would make differently with an aquaculturist's or vet's input, made instead alone, because retaining expertise directly is not justified at this scale and finding it on short notice is hard.",
+      "visibility": "invisible — shows up as a decision that was 'probably fine' rather than as a counted loss",
+      "provenance": "assumption",
+      "confidence": "speculative",
+      "addressable_by_omnidrone": "not applicable — this is the Phase 2 paid-consultation marketplace category",
+      "honest_note": "No attempt is made here to price this gap. Doing so would require knowing how often a consultation would have changed the outcome and by how much, which is unknown and would be invented if stated as a number."
+    },
+    {
+      "category_id": "market-inefficiency",
+      "label": "Cost of Informal, Opaque Input and Output Markets (Phase 2 tier)",
+      "description": "Value lost to price opacity and weak negotiating position when farms buy feed and equipment or sell harvest through personal networks and informal middlemen rather than a transparent marketplace.",
+      "visibility": "invisible — absorbed into 'that is just the price' on both sides of the transaction",
+      "provenance": "assumption",
+      "confidence": "speculative",
+      "addressable_by_omnidrone": "not applicable — this is the Phase 2 marketplace category, and also the source of Phase 2's take-rate revenue line",
+      "honest_note": "This category doubles as a revenue opportunity for the company (marketplace take-rate) and a claimed benefit to the farmer (better prices). Those two framings are in some tension — a take-rate is itself a cost extracted from the transaction — and the pitch should not claim we make the market free of friction when what we actually do is replace informal friction with a transparent, priced one. State it that way rather than papering over it."
     }
   ],
 
@@ -124,13 +171,17 @@
       { "id": "a3", "assumption": "Chronic sub-lethal loss exceeds catastrophic loss in aggregate.", "status": "SPECULATIVE. Potentially the most valuable hypothesis in the repository.", "how_to_test": "Phase 3 longitudinal correlation." },
       { "id": "a4", "assumption": "Published fish kill statistics undercount true losses.", "status": "PLAUSIBLE given the internal contradiction documented above, but unverified.", "how_to_test": "BFAR primary records." },
       { "id": "a5", "assumption": "Feed cost at ~60 percent of operating cost holds for Philippine tilapia and milkfish specifically.", "status": "The 60 percent figure is sourced to NOAA via a US-oriented publication. It may not transfer to Philippine species and practices.", "how_to_test": "Local farm cost structure data. Do not assume US figures transfer." },
-      { "id": "a6", "assumption": "A 0.1 FCR improvement is achievable through better water management.", "status": "UNPROVEN. Plausible from the physiology — stressed fish convert feed poorly — but we have no evidence of the magnitude." }
+      { "id": "a6", "assumption": "A 0.1 FCR improvement is achievable through better water management.", "status": "UNPROVEN. Plausible from the physiology — stressed fish convert feed poorly — but we have no evidence of the magnitude." },
+      { "id": "a7", "assumption": "Beginner-tier attrition and preventable first-cycle loss is large in aggregate, potentially exceeding catastrophic mortality by headcount of affected people.", "status": "SPECULATIVE. Rests on population statistics (small-scale producers dominate the sector) plus inference, not on any measured attrition or dropout rate.", "how_to_test": "Instrument the free app from day one to track first-cycle abandonment and ask departing users why. Cannot be tested until there are real users." },
+      { "id": "a8", "assumption": "A meaningful fraction of free Phase 1 users convert into paying Phase 2 customers.", "status": "UNTESTED and load-bearing for the entire phased revenue model. If the conversion rate is near zero, Phase 1 is a cost centre with no funnel beneath it.", "how_to_test": "Cannot be tested before Phase 1 has a real user base and enough elapsed time for farms to grow. This is a multi-cycle, multi-year question, not a Phase 0 one." },
+      { "id": "a9", "assumption": "Growing farms without analytics or predictive tools are leaving meaningful, avoidable performance on the table (scaling blindness).", "status": "SPECULATIVE. Plausible by analogy to the feed-waste reflexivity argument, but no magnitude has been estimated and none should be invented.", "how_to_test": "Requires Phase 2 users with multi-cycle logged history to compare against farms without analytics access." },
+      { "id": "a10", "assumption": "Farmers will pay for expert consultation and marketplace access at a price that supports a viable take-rate business.", "status": "UNTESTED. No pricing signal exists yet from any real farmer.", "how_to_test": "Phase 0/2 discovery: ask growing-farm managers directly what they currently pay informal consultants or middlemen, and whether a transparent alternative would command a premium or a discount." }
     ]
   },
 
   "what_this_file_deliberately_does_not_contain": {
-    "statement": "There is no bottom-line 'total addressable loss' number here, and its absence is intentional.",
-    "why": "Constructing one would require multiplying our sourced figures by our invented assumptions, producing a large, authoritative-looking number whose error bars span an order of magnitude. That number would then be repeated in the deck, in the thesis, and eventually back to us by an investor who had checked it. The temptation to produce it is strong and it should be resisted until the assumptions in the register above have been tested against real farms. When they have been, this file becomes genuinely powerful. Until then, the honest deliverable is the loss STRUCTURE, not a loss total."
+    "statement": "There is no bottom-line 'total addressable loss' number here, and its absence is intentional. This applies across all three phases: there is no single peso or dollar figure anywhere in this file that purports to size the beginner-attrition, scaling-blindness, expert-access, or market-inefficiency categories, because none of the inputs needed to compute one exist yet.",
+    "why": "Constructing one would require multiplying our sourced figures by our invented assumptions, producing a large, authoritative-looking number whose error bars span an order of magnitude. That number would then be repeated in the deck, in the thesis, and eventually back to us by an investor who had checked it. The temptation to produce it is strong and it should be resisted until the assumptions in the register above have been tested against real farms — and, for the Phase 1/2 categories, until there are real users to test them against at all. When they have been, this file becomes genuinely powerful. Until then, the honest deliverable is the loss STRUCTURE, not a loss total."
   },
 
   "chart_hint": {

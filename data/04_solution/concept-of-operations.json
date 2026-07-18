@@ -1,10 +1,11 @@
 {
   "id": "concept-of-operations",
   "title": "Concept of Operations (ConOps)",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
+  "version": "1.1.0",
+  "last_updated": "2026-07-18",
   "provenance": "design_target",
   "note": "Follows the spirit of IEEE 1362 ConOps structure. Describes how the system is used in the field, by whom, under what authority.",
+  "phase_scope_note": "AquaVision is now a phased platform (see solution-overview.json): a free Phase 1 app, a paid Phase 2 analytics/marketplace layer, and a Phase 3 hardware upgrade (IoT sensors, water probes, OmniDrone, PondTwin) sold to commercial and enterprise operators. This entire ConOps — docks, sorties, remote pilots, BVLOS — describes the Phase 3 hardware layer specifically. Phases 1 and 2 are a mobile/web app and a subscription service; neither has a flight operations concept.",
   "citation_ids": ["ieee-1362"],
 
   "operational_context": {

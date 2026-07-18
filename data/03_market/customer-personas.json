@@ -1,17 +1,40 @@
 {
   "id": "customer-personas",
   "title": "Customer Segments & Personas",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
+  "version": "2.0.0",
+  "last_updated": "2026-07-18",
   "provenance": "assumption",
   "confidence": "speculative",
   "honest_framing": "These personas are constructed from industry literature and structural reasoning. They are NOT derived from interviews, because none have been conducted. They are hypotheses to falsify in Phase 0, and they are named as fictional composites so nobody mistakes them for research subjects. Personas built without fieldwork tend to describe the customer the founders wish existed.",
 
+  "repositioning_note": {
+    "statement": "This file previously organised personas entirely around the hardware/monitoring-service business, using response capacity (does this operator have aeration to act on a warning?) as the single segmentation axis. AquaVision is now a phased software-first platform, and the persona set has been restructured accordingly: a new first-time/beginner persona is foregrounded as the PRIMARY Phase 1 acquisition target, the existing commercial-operator persona (Marissa) is kept as the Phase 2/3 paying persona, and the smallholder persona (Mang Tonio) is reframed rather than dropped.",
+    "why_mang_tonio_changes": "Under the old hardware-first model, individual smallholders were explicitly deferred in business-model-canvas.json as a segment the company could not affordably serve directly. That deferral was a hardware-economics conclusion, not a permanent judgment about smallholders as customers. A free or near-free Phase 1 app has no capital gate, so Mang Tonio — and smallholders like him — are no longer excluded from the product; they are simply not the Phase 3 hardware beachhead, which is a narrower and later claim. His persona below is updated to reflect this: he is a plausible Phase 1 app user today, and remains an unlikely direct Phase 3 hardware buyer for the same response-capacity reasons as before."
+  },
+
   "personas": [
     {
+      "id": "persona-first-time-farmer",
+      "label": "Rowena — First-Time / Beginner Pond Owner",
+      "archetype": "The primary Phase 1 acquisition persona — the reason the free tier exists",
+      "operation_scale": "A single backyard pond or a converted rice paddy corner, first or second production cycle ever, tilapia or a mix of tilapia and vegetables (integrated backyard aquaculture), financed from savings or a small informal loan",
+      "geography": "Anywhere with a smallholder aquaculture tradition and mobile connectivity — not limited to the lake-cage beachhead geography of the hardware layer",
+      "profile": "New to fish farming, drawn in by a relative's success story, a cooperative orientation session, or a Facebook post promising supplemental income. Has a smartphone and is comfortable with Facebook and messaging apps, but has never used a farm-management app before. Learning everything for the first time: stocking density, feeding rate, what the water is supposed to look like. Has not yet had a kill event, and is quietly afraid of having one before she even understands what caused it.",
+      "jobs_to_be_done": ["Get through the first cycle without a beginner mistake that wipes out the stock", "Learn what 'normal' looks like, since she has no personal baseline yet", "Feel less alone and less guessing", "Build enough of a track record to justify expanding to a second pond later"],
+      "pains": ["Advice from Facebook groups is abundant but contradictory and unsourced", "No prior experience to judge whether today's water colour or fish behaviour is fine or a warning sign", "Cannot afford to lose an entire cycle's investment on a mistake a more experienced farmer would have caught immediately", "Does not yet have a relationship with an extension officer or a cooperative technical advisor", "Has seen relatives get sold agricultural gadgets and inputs that overpromised"],
+      "gains_sought": ["Confidence that she is doing the basic things right", "A simple, specific answer when something looks wrong, in her own language", "A record of what she did each cycle, so the next cycle is better than the last", "A sense of community with other beginners going through the same thing"],
+      "current_workflow": "No formal record-keeping. Notes on a phone or a notebook if anything, mostly memory and asking around. Occasionally reads a Facebook group post before making a decision.",
+      "willingness_to_pay": { "as_capital": "effectively zero, same constraint that excluded this persona from the old hardware-first model", "as_free_app_user": "high potential adoption if the free tier is genuinely useful and low-friction, because the price is not the barrier — trust, usefulness, and habit are", "as_future_paid_upgrader": "unknown, and likely years away for most individuals in this persona — the more realistic monetisation path is that a FRACTION of this population grows into something closer to Marissa's operation and converts then, not that this persona pays directly any time soon", "provenance": "assumption" },
+      "adoption_barriers": ["Needs to trust an app's advice as much as a neighbour's, which takes repeated good outcomes to earn", "Intermittent connectivity and data costs, even if the app itself is free", "Low familiarity with formal aquaculture concepts makes some AI guidance land as jargon unless it is deliberately written for a first-timer", "Has been disappointed by an agricultural product or promise before, and is primed to expect the same from an app"],
+      "decision_criteria": ["Is it actually free, with no hidden cost or data-selling catch?", "Do people I know use it and vouch for it?", "Does it work in Filipino or my local language?", "Does it help me right now, in my first cycle, not just theoretically?"],
+      "why_she_is_the_new_beachhead_for_phase_1": "She has zero of the response-capacity or budget constraints that made Mang Tonio 'not the beachhead' for hardware — because the free app asks nothing of her wallet. What she has instead is an acute, immediate, well-timed need for guidance, which is exactly the moment a free educational and AI-assistant product earns trust most easily. She is not expected to be a source of revenue in Phase 1; she is the acquisition engine and the data-accumulation engine the rest of the phased model depends on.",
+      "the_uncomfortable_truth": "Most people in this persona will likely never become paying customers. Most first-time backyard fish farmers stay small, some stop farming entirely after a bad cycle, and only a minority scale into something resembling Marissa's operation. If the plan quietly assumes a large fraction of free users convert to paid, that assumption should be named and tested, not smuggled into a financial model as an implied given — see market-sizing-tam-sam-som.json's software layer, where this exact conversion rate is listed as an unmeasured, blocking input.",
+      "verdict": "The beachhead for Phase 1 acquisition, explicitly not for Phase 1/2/3 revenue. Success with this persona is measured in activation, retention, and word-of-mouth, not in payments — and the business plan should say so plainly rather than treating a large free user base as revenue-equivalent."
+    },
+    {
       "id": "persona-mang-tonio",
-      "label": "Mang Tonio — Smallholder Cage Operator",
-      "archetype": "The one who needs it most and can afford it least",
+      "label": "Mang Tonio — Established Smallholder Cage Operator",
+      "archetype": "Experienced, capital-constrained — a plausible Phase 1 app user, still not the Phase 3 hardware beachhead",
       "operation_scale": "6-10 tilapia cages in a lake, ~1 cycle per 5-6 months, financed on credit against harvest",
       "geography": "Taal Lake or Laguna de Bay",
       "profile": "Twenty years on this water. Reads the wind, the colour, and the way the fish come up better than any instrument. Lost most of a cycle two years ago and is still paying it back. Has a smartphone. Does not have a boat motor he trusts at 4 a.m.",
@@ -19,16 +42,16 @@
       "pains": ["A kill event is existential, not inconvenient", "Shares the lake with operators who overstock", "No proof of good practice for the lender", "Has been sold a gadget before that broke and nobody came back"],
       "gains_sought": ["Certainty enough to sleep", "Evidence for the lender", "A warning he can actually act on"],
       "current_workflow": "Visual inspection morning and evening. Occasional Secchi disc. Judgement.",
-      "willingness_to_pay": { "as_capital": "effectively zero", "as_service_per_cycle": "unknown — plausibly a small amount if bundled into an input or credit package he already pays", "provenance": "assumption" },
-      "adoption_barriers": ["Cost", "No emergency aeration to deploy even if warned", "Distrust of vendors", "Cannot fix it when it breaks"],
+      "willingness_to_pay": { "as_capital_for_hardware": "effectively zero, unchanged from the prior analysis", "as_free_app_user": "plausible — twenty years of judgement plus a free record-keeping and disease-ID tool could be a genuinely useful combination, and unlike the hardware case there is no affordability gate blocking him from trying it", "as_service_per_cycle_for_hardware": "unknown — plausibly a small amount if bundled into an input or credit package he already pays", "provenance": "assumption" },
+      "adoption_barriers": ["Cost, for hardware specifically — not a barrier for the free app", "No emergency aeration to deploy even if warned, for hardware specifically", "Distrust of vendors, applies to both layers", "Cannot fix it when it breaks, applies to hardware"],
       "decision_criteria": ["Did it work for someone I know on this lake?", "What happens when it breaks?", "Can I stop paying if it does not help?"],
-      "the_uncomfortable_truth": "If we warn Mang Tonio at 3 a.m. that his DO is collapsing, he has no aerator. The warning tells him what he is about to lose. Selling him a monitoring subscription in that circumstance is close to selling him a countdown clock. Either the product includes a response capability he can afford, or he is reached through a cooperative that owns shared emergency aeration, or he is not our customer yet — and we should say the third thing out loud rather than build a business plan on a dignified fiction.",
-      "verdict": "Not the beachhead. The reason the company exists, and the reason the cooperative channel matters."
+      "the_uncomfortable_truth": "If we warn Mang Tonio at 3 a.m. that his DO is collapsing, he has no aerator. The warning tells him what he is about to lose. Selling him a Phase 3 monitoring subscription in that circumstance is close to selling him a countdown clock. Either the hardware product includes a response capability he can afford, or he is reached through a cooperative that owns shared emergency aeration, or he is not our Phase 3 customer yet — and we should say the third thing out loud rather than build a hardware business plan on a dignified fiction. None of this applies to the free Phase 1 app, which costs him nothing and asks nothing of his response capacity — it can help him log conditions and get disease guidance regardless of whether he can act on a 3 a.m. warning.",
+      "verdict": "Not the Phase 3 hardware beachhead — that reasoning is unchanged. A plausible Phase 1 free-tier user, and the reason a cooperative-mediated Phase 3 channel still matters for reaching operators like him if and when his cooperative aggregates shared response capacity."
     },
     {
       "id": "persona-marissa",
       "label": "Marissa — Commercial Farm Operations Manager",
-      "archetype": "The realistic first customer",
+      "archetype": "The realistic Phase 2/3 paying customer",
       "operation_scale": "40+ cages or 20+ ha of ponds, staff of 12, aeration installed, feed purchased by the tonne",
       "geography": "Commercial operation, lake or brackish",
       "profile": "Agriculture degree, runs the farm on a budget she defends to an owner quarterly. Has a paper logbook system that works and that she knows is inadequate. Buys inputs on ROI. Has been to a trade show. Sceptical but not closed.",
@@ -36,74 +59,95 @@
       "pains": ["Cannot personally observe 40 units", "Aeration runs on a schedule nobody can justify", "Feed is 60 percent of cost with no feedback loop", "Cannot explain why survival was 68 percent this cycle and 84 percent last", "Audit records compiled by hand"],
       "gains_sought": ["A number she can put in front of the owner", "Lower kWh", "Measurable FCR movement", "Records that compile themselves"],
       "current_workflow": "Staff take readings at set times, record on paper, escalate by phone when something looks wrong. Escalation is usually too late.",
-      "willingness_to_pay": { "as_service": "real — has a budget line for inputs and consultants", "requires": "a computable ROI in one cycle", "provenance": "assumption" },
+      "willingness_to_pay": { "as_phase1_free_user": "likely starts here, since the free tier's record-keeping and analytics on-ramp is low-risk for her to try before committing budget", "as_phase2_subscriber": "real — has a budget line for inputs and consultants, and premium analytics/predictive health monitoring is a natural upsell once Phase 1 usage shows her staff will actually use a digital tool", "as_phase3_hardware_buyer": "real, further out — requires a computable ROI in one cycle for the hardware layer specifically", "provenance": "assumption" },
       "adoption_barriers": ["Needs to see it work on a comparable farm first", "Will not be the guinea pig without a discount or a guarantee", "Owner approval for anything above a threshold"],
-      "decision_criteria": ["What is the payback period?", "Who else runs it?", "What happens on the day it does not fly?", "Does it integrate with what I already have?"],
-      "why_she_is_the_beachhead": "She has money, she has response capacity — aerators she can switch on when warned — and she has a person (herself) whose job is to care about the number. All three are required for the value proposition to close. Mang Tonio has one of the three.",
-      "the_pitch_to_her": "Lead with aeration electricity, not with fish kills. Aeration is a metered, monthly, already-budgeted cost, and a pilot showing fewer aerator-hours at equal DO is a self-contained business case she can verify herself in one cycle without believing a word of our mortality modelling. Fish kill avoidance is the emotional pitch; aeration efficiency is the checkable one. She buys the checkable one."
+      "decision_criteria": ["What is the payback period?", "Who else runs it?", "What happens on the day it does not fly (for hardware) or the app is down (for software)?", "Does it integrate with what I already have?"],
+      "why_she_is_the_phase_2_3_beachhead": "She has money, she has response capacity — aerators she can switch on when warned — and she has a person (herself) whose job is to care about the number. All three are required for the Phase 3 hardware value proposition to close, and the first two are enough for the Phase 2 software subscription to close on its own, well before any hardware conversation. Rowena, the Phase 1 persona, has none of the three yet; Mang Tonio has one.",
+      "the_pitch_to_her": "For Phase 2, lead with records that compile themselves and measurable FCR movement — a self-contained, checkable case built from her own Phase 1 usage data. For Phase 3, lead with aeration electricity, not with fish kills, exactly as before: aeration is a metered, monthly, already-budgeted cost, and a pilot showing fewer aerator-hours at equal DO is a business case she can verify herself in one cycle without believing a word of our mortality modelling. Fish kill avoidance is the emotional pitch; aeration efficiency is the checkable one. She buys the checkable one, at whichever phase it is offered."
     },
     {
       "id": "persona-coop-chair",
       "label": "Ka Dolores — Cooperative Chairperson",
-      "archetype": "The aggregator who makes smallholder economics work",
+      "archetype": "The aggregator who makes smallholder economics work, across all three phases",
       "operation_scale": "Represents 40-80 member operators on one lake",
       "profile": "Elected. Answers to members. Negotiates with the LGU over cage permits and with traders over price. Has seen technology projects arrive with a donor and leave with the donor.",
       "jobs_to_be_done": ["Protect members from correlated losses", "Represent members credibly in lake management disputes", "Secure group credit or insurance", "Demonstrate the co-op earns its dues"],
       "pains": ["Members suffer the same kill on the same night", "No data to argue carrying capacity against the big operators", "Cannot get group insurance because the risk is unquantified", "Every vendor promises and leaves"],
-      "willingness_to_pay": { "structure": "one platform amortised across members via dues or a per-cycle levy", "why_this_works": "converts an impossible per-farm capital cost into a viable per-member fee", "provenance": "assumption" },
-      "adoption_barriers": ["Must justify it to a members' assembly", "Will not commit before seeing it survive a monsoon", "Burned before"],
-      "why_she_matters": "She is the only realistic route to the smallholder, and she also solves the shared-lake commons problem: the co-op has a legitimate collective interest in lake-wide data that no individual member has. A co-op with its own environmental record becomes a party to lake management rather than a subject of it. That is a political value, not just a technical one, and it may be worth more to her than the fish.",
-      "the_pitch_to_her": "Not ROI. Collective bargaining power and member protection. And a very concrete answer to 'what happens when you leave'."
+      "willingness_to_pay": { "for_phase1_rollout": "zero cost to encourage — she can promote the free app to members at no financial risk to the co-op, which is a much easier ask than the old model's request for a shared hardware levy", "for_phase3_structure": "one hardware platform amortised across members via dues or a per-cycle levy, unchanged from the prior analysis", "why_this_works": "converts an impossible per-farm capital cost into a viable per-member fee for the hardware layer, while the software layer needs no such structure at all", "provenance": "assumption" },
+      "adoption_barriers": ["Must justify a hardware levy to a members' assembly (software promotion carries no such barrier)", "Will not commit to hardware before seeing it survive a monsoon", "Burned before"],
+      "why_she_matters": "She is the only realistic route to aggregating smallholders for the Phase 3 hardware model, and she also solves the shared-lake commons problem: the co-op has a legitimate collective interest in lake-wide data that no individual member has. She is now ALSO a low-cost Phase 1 distribution channel — recommending a free app to her members costs her nothing and builds exactly the kind of collective data and trust that later makes a Phase 3 hardware levy an easier conversation.",
+      "the_pitch_to_her": "For Phase 1: help your members do better with something that costs them nothing. For Phase 3: not ROI, but collective bargaining power, member protection, and a very concrete answer to 'what happens when you leave'."
     },
     {
       "id": "persona-bfar-officer",
       "label": "Engr. Reyes — BFAR Regional Officer",
-      "archetype": "The regulator who is also a potential customer",
+      "archetype": "The regulator who is also a potential customer and a potential Phase 1 distribution partner",
       "profile": "Mandated to manage fish kills and carrying capacity across a region, with a handful of staff, a boat, and a sonde. Gets called after the fish are dead and asked why he did not prevent it.",
       "jobs_to_be_done": ["Prevent kills, or at least explain them", "Set defensible carrying capacity limits", "Respond to incidents credibly"],
-      "pains": ["Responds after the fact, always", "Cannot enforce limits without measurements to justify them", "No continuous data on any water body he is responsible for"],
-      "willingness_to_pay": { "structure": "programme funding, data subscription, or procurement — not a farm service contract", "provenance": "assumption" },
-      "why_he_matters": "Both a channel into every lake in a region and a veto holder. Aligned early, he is the most powerful distribution partner available. Approached only when we need something, he is an obstacle.",
-      "strategic_note": "Engage in Phase 0 with nothing to sell. Regulators remember who showed up before they had an ask, and the memory is long."
+      "pains": ["Responds after the fact, always", "Cannot enforce limits without measurements to justify them", "No continuous data on any water body he is responsible for", "Vastly outnumbered by the farmers he is meant to reach with guidance"],
+      "willingness_to_pay": { "structure": "programme funding, data subscription, or procurement for the Phase 3 hardware/data layer — not a farm service contract", "phase_1_role": "not a payer at all here — a free farmer app that reduces basic-mistake kill events and produces aggregate, anonymised regional water-quality trend data could be pitched to him as a public-good tool worth endorsing or distributing, at zero cost to his office", "provenance": "assumption" },
+      "why_he_matters": "Both a channel into every lake in a region and a veto holder. Aligned early, he is the most powerful distribution partner available — and endorsement of a free Phase 1 app costs him nothing politically or financially, which makes it a much easier early ask than the original Phase 3 pitch.",
+      "strategic_note": "Engage in Phase 0 with nothing to sell, exactly as before — but now there is something low-stakes to offer him first (a free tool for his farmers) ahead of any future institutional data or hardware conversation. Regulators remember who showed up before they had an ask, and the memory is long."
     },
     {
       "id": "persona-technician",
       "label": "Jun — Farm Technician",
-      "archetype": "Not the buyer. Can kill the deal anyway.",
+      "archetype": "Not the buyer at any phase. Can kill the deal anyway.",
       "profile": "Lives on site. Takes the boat out before dawn. Finds the dead fish first and gets asked why he did not see it coming. Twenty-six, good with a phone, has never been asked his opinion about a purchase.",
       "pains": ["The pre-dawn boat run is genuinely dangerous and everyone treats it as routine", "Blamed when fish die despite having no instrument", "Fills a logbook nobody reads"],
       "gains_sought": ["Not drowning", "Evidence it was not his fault", "Less pointless clipboard work"],
-      "why_he_matters_more_than_the_org_chart_suggests": "He charges the batteries, cleans the probe, and reports the faults. If he perceives the drone as management's surveillance of his performance, it will be broken every time it matters and nobody will ever prove why. Technology deployments die here, quietly, and the vendor never finds out.",
-      "design_implication": "Never surface a technician-performance metric. Frame the product as HIS instrument — the thing that proves he was right — not as management's monitor of him. This is a product design constraint derived from a persona, which is what personas are actually for."
+      "why_he_matters_more_than_the_org_chart_suggests": "He is likely the one actually entering data into the Phase 1/2 app on a commercial farm like Marissa's, and he charges the batteries, cleans the probe, and reports the faults on Phase 3 hardware. If he perceives either the app or the drone as management's surveillance of his performance, it will be abandoned or broken every time it matters and nobody will ever prove why. Technology deployments die here, quietly, and the vendor never finds out.",
+      "design_implication": "Never surface a technician-performance metric, in the app or in the hardware dashboard. Frame the product as HIS instrument — the thing that proves he was right — not as management's monitor of him. This is a product design constraint derived from a persona, which is what personas are actually for, and it now applies to the software layer as much as it always applied to the hardware layer."
     },
     {
       "id": "persona-owner-investor",
       "label": "Mr. Chua — Farm Owner / Absentee Investor",
-      "archetype": "Signs the cheque, never visits",
+      "archetype": "Signs the cheque for Phase 2/3, never visits",
       "profile": "Owns the farm as one asset among several. Sees a P&L quarterly. Does not know what a thermocline is and does not need to.",
       "jobs_to_be_done": ["Predictable returns", "Know the asset is not being mismanaged"],
       "decision_criteria": ["Payback period", "What does it save"],
-      "why_he_matters": "Above a threshold, Marissa needs his approval. The pitch to him is one slide with a payback period, not a water chemistry lecture. Different artefact entirely — see pitch-deck-outline.json.",
-      "risk": "He is also the person most likely to want the technician-performance dashboard. Say no."
+      "why_he_matters": "Above a threshold, Marissa needs his approval for Phase 2 subscription spend and, later, Phase 3 hardware spend. The pitch to him is one slide with a payback period, not a water chemistry lecture, at either phase. Different artefact entirely — see pitch-deck-outline.json.",
+      "risk": "He is also the person most likely to want the technician-performance dashboard, in software or hardware form. Say no."
     }
   ],
 
+  "phase_funnel_logic": {
+    "provenance": "assumption",
+    "statement": "The clearest way to read this persona set is as a funnel across the three phases, not as a flat list of unrelated customer types.",
+    "funnel": [
+      { "phase": "Phase 1 — acquisition (free app)", "primary_persona": "persona-first-time-farmer (Rowena)", "secondary_personas": ["persona-mang-tonio", "persona-technician (as end-user, not buyer)"], "channel_personas": ["persona-coop-chair", "persona-bfar-officer"] },
+      { "phase": "Phase 2 — monetisation (premium subscription, marketplace, consultations)", "primary_persona": "persona-marissa (Marissa)", "secondary_personas": ["persona-mang-tonio (via cooperative aggregation, unproven)"], "approval_persona": "persona-owner-investor" },
+      { "phase": "Phase 3 — hardware upgrade (IoT, OmniDrone, PondTwin, enterprise dashboard)", "primary_persona": "persona-marissa (Marissa)", "channel_personas": ["persona-coop-chair", "persona-bfar-officer"], "approval_persona": "persona-owner-investor" }
+    ],
+    "the_honest_caveat": "This funnel is a plan, not a measurement. Nothing in this repository demonstrates that a Rowena-type user ever becomes a Marissa-type customer, or that a free-tier population converts at any particular rate. Treat every arrow in this funnel as a hypothesis, exactly as segmentation_logic below treats the response-capacity axis as a hypothesis about the Phase 3 layer specifically."
+  },
+
   "segmentation_logic": {
-    "primary_axis": "Response capacity — does this operator have the means to act on a warning?",
-    "why_this_axis": "Not scale, not geography, not species. Response capacity is the variable that determines whether our information has any value at all. A large farm with no aeration is a worse prospect than a mid-size farm with it. This is a non-obvious segmentation and it falls directly out of the loss model in cost-of-inaction.json.",
-    "segments": [
-      { "segment": "Has capacity + has budget", "example": "Marissa", "verdict": "Beachhead. Sell now." },
+    "primary_axis_phase_3_hardware": "Response capacity — does this operator have the means to act on a warning? Unchanged from the prior analysis and still the right axis for the Phase 3 hardware/monitoring sale specifically.",
+    "why_this_axis_for_hardware": "Not scale, not geography, not species. Response capacity is the variable that determines whether our Phase 3 information has any value at all. A large farm with no aeration is a worse Phase 3 prospect than a mid-size farm with it. This is a non-obvious segmentation and it falls directly out of the loss model in cost-of-inaction.json.",
+    "primary_axis_phase_1_2_software": "Digital access and existing habit friction — does this person have a smartphone and enough connectivity to use an app, and how strong is their existing free alternative (memory, notebook, Facebook group, extension officer)? Response capacity is close to irrelevant here, because the free tier does not ask the farmer to act on anything beyond what they were already going to try to do.",
+    "why_this_axis_for_software": "The binding constraint on the software layer is not money, it is reach and habit-formation. A subsistence farmer with a smartphone and no aerator is a poor Phase 3 prospect and a perfectly fine Phase 1 prospect — which is precisely the segment the old model had no way to serve and the new model is built to serve first.",
+    "segments_phase_3_hardware": [
+      { "segment": "Has capacity + has budget", "example": "Marissa", "verdict": "Phase 3 beachhead. Sell now, once Phase 3 is offered." },
       { "segment": "Has capacity + no budget", "example": "Struggling mid-size farm", "verdict": "Financing problem. Solvable later." },
       { "segment": "No capacity + has budget", "example": "Extensive pond operation with no aerators", "verdict": "Sell the response capability first, or partner with an aeration vendor. Monitoring alone is a countdown clock." },
-      { "segment": "No capacity + no budget", "example": "Mang Tonio", "verdict": "Not addressable directly. Reach via cooperative or public programme, or not at all — and be honest about which." }
+      { "segment": "No capacity + no budget", "example": "Mang Tonio", "verdict": "Not addressable directly for Phase 3. Reach via cooperative or public programme for hardware — but directly addressable NOW for Phase 1, which is the point of the new model." }
+    ],
+    "segments_phase_1_2_software": [
+      { "segment": "Has smartphone + weak existing alternative", "example": "Rowena, a genuine first-timer with no established workflow to displace", "verdict": "Primary Phase 1 target. Easiest activation, because there is little habit to break." },
+      { "segment": "Has smartphone + strong existing alternative", "example": "Mang Tonio, twenty years of working judgement", "verdict": "Reachable, but the app must prove itself against real experience, not against nothing." },
+      { "segment": "Has smartphone + commercial-scale record-keeping already", "example": "Marissa's paper logbook system that 'works and that she knows is inadequate'", "verdict": "Reachable and the clearest Phase 2 upgrade path, since she already feels the pain of her current system." },
+      { "segment": "No reliable smartphone/connectivity", "example": "The least-connected smallholders", "verdict": "Not directly addressable by the app at all. Reachable only via a cooperative or extension officer relaying guidance — the software-layer version of the same 'not addressable directly, reach via an intermediary' conclusion the hardware axis reaches for Mang Tonio." }
     ]
   },
 
   "what_would_falsify_these_personas": [
-    "If commercial managers say aeration already runs on a DO meter they own, the aeration ROI evaporates and Marissa is not the beachhead.",
-    "If cooperatives have no mechanism to levy members for a shared service, the smallholder route closes entirely and the impact story collapses.",
-    "If technicians are enthusiastic rather than threatened, the surveillance concern is over-engineered and we have added a constraint for nothing.",
-    "If BFAR has continuous monitoring already deployed on the target lakes, the entire public-good argument needs rebuilding.",
+    "If commercial managers say aeration already runs on a DO meter they own, the aeration ROI evaporates and Marissa is not the Phase 3 beachhead.",
+    "If cooperatives have no mechanism to levy members for a shared Phase 3 service, the smallholder hardware route closes entirely and the impact story collapses — though the Phase 1 software route to the same members remains open regardless.",
+    "If technicians are enthusiastic rather than threatened, the surveillance concern is over-engineered and we have added a constraint for nothing, in software or hardware.",
+    "If BFAR has continuous monitoring already deployed on the target lakes, the entire Phase 3 public-good argument needs rebuilding.",
+    "If first-time farmers like Rowena do not actually open or return to a free app more than once or twice, the entire Phase 1 acquisition-engine premise fails regardless of price, and the plan should treat 'free' as necessary but not sufficient for adoption.",
+    "If almost none of the Phase 1 free-tier population ever reaches Marissa-like scale or budget, the Phase 1-to-Phase 2 funnel logic above is not a funnel, it is two unrelated products sharing a brand, and the business model should be re-examined rather than defended.",
     "Each of these is a question, not a speculation. Ask them in Phase 0. Any one of them coming back the wrong way should change the plan, and the plan should be built so that it can."
   ]
 }

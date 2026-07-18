@@ -1,9 +1,9 @@
 {
   "id": "data-dictionary",
   "title": "Data Dictionary — Canonical Field and Variable Definitions",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
-  "description": "Defines every measured variable the OmniDrone produces, its units, its valid range, its storage type, and its interpretation rules. This is the contract between the flight hardware, the ingestion pipeline, the digital twin, and the dashboard. If a variable is not in this file, it does not exist.",
+  "version": "1.1.0",
+  "last_updated": "2026-07-18",
+  "description": "Defines every measured variable produced by AquaVision's Phase 3 sensing hardware (IoT water probes and the OmniDrone's tethered sonde and multispectral payload), its units, its valid range, its storage type, and its interpretation rules. This is the contract between the flight hardware, the ingestion pipeline, the digital twin, and the dashboard. The Phase 1/2 app logs a simpler, manually- or photo-entered subset of these same variables (dissolved oxygen, temperature, pH, and similar farmer-observable readings) without the sensor-specific metadata below; where the keys overlap, the definitions in this file are still the canonical ones. If a variable is not in this file, it does not exist.",
 
   "measured_variables": [
     {
@@ -221,7 +221,7 @@
       "label": "Stratification Strength Index",
       "unit": "dimensionless",
       "formula": "Schmidt stability, normalised by water column depth",
-      "interpretation": "High stability plus a hypoxic hypolimnion plus an incoming cold front equals the classic Philippine lake fish kill setup. This composite is the OmniDrone's flagship predictive feature.",
+      "interpretation": "High stability plus a hypoxic hypolimnion plus an incoming cold front equals the classic Philippine lake fish kill setup. This composite is the flagship predictive feature of the Phase 3 sensing layer.",
       "provenance": "derived_calculation",
       "citation_ids": ["idso-schmidt-stability-1973"]
     },

@@ -3,7 +3,7 @@
   "chart_type": "table",
   "title": "The Structure of Aquaculture Losses",
   "subtitle": "Visibility versus addressability — NOT a peso breakdown",
-  "description": "Deliberately rendered as a structured matrix, NOT a pie chart. A pie of peso values would imply we know the proportions, and we do not. What we DO know is which loss categories are visible versus hidden, and which the OmniDrone addresses versus does not. The most important cell may be the invisible-and-addressable one: chronic sub-lethal loss, which is unmeasured, possibly the largest, and squarely in our capability.",
+  "description": "Deliberately rendered as a structured matrix, NOT a pie chart. A pie of peso values would imply we know the proportions, and we do not. What we DO know is which loss categories are visible versus hidden, and which the platform addresses versus does not — noting that 'addressable by OmniDrone' below describes Phase 3 hardware capability specifically; several rows (feed waste, monitoring labour, cost of never learning) are also partially addressable earlier, through Phase 1/2 logging and AI guidance, before any hardware is involved. The most important cell may be the invisible-and-addressable one: chronic sub-lethal loss, which is unmeasured, possibly the largest, and squarely in the platform's capability.",
   "provenance": "modeled_projection",
   "citation_ids": ["inquirer-taal-fishkill-2023", "pna-tilapia-fishkill", "innovasea-fcr-guide", "worldbank-disease-risk-2014", "fao-nutrient-dynamics-eutrophic"],
   "columns": ["Loss category", "Visibility", "Addressable by OmniDrone", "Evidence provenance"],

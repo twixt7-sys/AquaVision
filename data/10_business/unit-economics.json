@@ -1,67 +1,143 @@
 {
   "id": "unit-economics",
   "title": "Unit Economics",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
+  "version": "2.0.0",
+  "last_updated": "2026-07-18",
   "provenance": "modeled_projection",
   "confidence": "speculative",
 
-  "READ_THIS_FIRST": "This file contains NO unit economics numbers. It contains the MODEL and the drivers. The reason is stated bluntly: the cost side rests on a BOM with zero real supplier quotes and a maintenance burden that is estimated rather than measured, and the revenue side rests on a price that cannot be set until Phase 0. Multiplying two unknowns produces a confident-looking contribution margin that is wrong at the root, and every downstream financial figure inherits the error. What follows is the STRUCTURE, so that real numbers slot in cleanly and so a reviewer can see exactly which inputs are missing. This honesty is itself the deliverable at TRL 3.",
+  "READ_THIS_FIRST": "This file restructures unit economics around SaaS metrics — CAC, free-to-paid conversion, LTV, churn, gross margin — as the PRIMARY lens, because Phase 1/2 is now the near-term business and it is a software business with software metrics. The Phase 3 hardware unit economics from the original plan are kept in full underneath, unchanged in substance, as the layer that applies once a customer needs automated physical monitoring. Every number below is a named, tagged assumption or a modeled projection anchored to comparable businesses, not a measured value — there are zero users today, so there cannot yet be a measured conversion rate, churn rate, or CAC. Multiplying unmeasured inputs together produces a confident-looking LTV that is wrong at the root; this file shows the formula and flags every input, so a real number slots in the moment Phase 1 has usage data.",
 
-  "the_unit": {
-    "chosen_unit": "One dock serving its cluster of stations.",
-    "why_the_dock_not_the_drone": "Coverage, cost, and revenue all scale with docks, not aircraft. A dock is what a customer installs and what a lake needs several of. See docking-station.json#/dock_network_economics.",
-    "the_implication": "Unit economics are DENSITY-driven. A dock over a dense cage cluster and a dock over a sparse lake have the same cost and very different revenue. Site density is therefore a hard qualification criterion, not a preference."
+  "the_saas_unit": {
+    "chosen_unit": "One registered farmer account (Phase 1/2). A second unit, one dock, governs Phase 3 and is described below unchanged from the original hardware model.",
+    "why_the_account": "Phase 1/2 cost and revenue both scale with accounts, not with hardware. An account is what a person creates when they download the app, and it is the unit CAC, conversion, and churn are measured against in any comparable freemium business."
   },
 
-  "the_cost_to_serve_model": {
-    "structure": "Per-dock, per-period cost = amortised capital + consumables + field labour + platform + regulatory allocation.",
-    "line_items": [
-      { "line": "Capital amortisation", "components": ["Drone (USD 15-40k, unquoted — see BOM)", "Dock (separate BOM, does not exist)", "Per-site sonde (a biosecurity requirement, and the most expensive single component)"], "note": "The per-site sonde is easy to forget and it is large. Single-site biosecurity assignment means every dock carries at least one dedicated sonde at the sonde's full price." },
-      { "line": "Battery opex", "note": "A CONSUMABLE. Packs degrade with cycling and with dock heat, and get replaced. Founders routinely capitalise this and understate opex. At four sorties/day, cycle accumulation is fast." },
-      { "line": "Field labour and maintenance", "note": "THE LINE THAT KILLS DISTRIBUTED HARDWARE BUSINESSES. Weekly sensor calibration and reference checks, corrosion inspection, a novel high-cycle winch, and a solar dock in a harsh environment. This is recurring, distributed, skilled labour. The honest estimate is larger than a hardware founder's first instinct. See maintenance-schedule.json." },
-      { "line": "Pilot cost (pre-BVLOS)", "note": "Under VLOS, a pilot per sortie. This alone can make early unit economics negative, which is why the model must be run under both VLOS and BVLOS assumptions." },
-      { "line": "Platform/cloud", "note": "Modest and scalable — the one software-like line." },
-      { "line": "Regulatory and insurance allocation", "note": "Certification, permits, liability cover." }
-    ],
-    "status": "Every line is a placeholder. Not one has a real quote or a measured value."
+  "phase_1_foundation_economics": {
+    "role": "Cost centre, not a profit centre. Its job is cheap acquisition and data accumulation, not margin.",
+    "cac": {
+      "target": { "value": "sub-USD 1", "provenance": "design_target", "confidence": "low" },
+      "why_this_target": "Organic app-store discovery, community/content channels, and institutional/NGO distribution should carry near-zero marginal acquisition cost per install if the channel assumption in go-to-market.json holds. This is a TARGET, not a measured figure — no install has happened yet.",
+      "assumption_flag": "That paid marketing is not required to hit meaningful Phase 1 scale. If organic channels underperform, CAC rises and the whole funnel's economics change, because Phase 1 has no revenue to recover acquisition spend against."
+    },
+    "cost_to_serve_per_free_user": {
+      "modeled_range": { "min": 0.02, "max": 0.50, "currency": "USD", "period": "month", "provenance": "modeled_projection", "confidence": "low" },
+      "drivers": ["Hosting/database load", "AI inference cost (disease-ID photo analysis is the heaviest free feature)", "Community moderation and support amortised across users"],
+      "status": "Not measured. Modeled from typical consumer-app cloud cost per MAU plus an inference-cost allowance."
+    },
+    "activation_rate": {
+      "definition": "Share of installs that complete farm setup and log at least one water-quality entry within 14 days.",
+      "target": { "value": "40-60%", "provenance": "design_target", "confidence": "low" },
+      "why_it_matters": "Activation, not install count, is the real top-of-funnel number — an installed-but-unused app produces neither data nor a future conversion candidate."
+    }
   },
 
-  "the_revenue_per_unit_model": {
-    "structure": "Per-dock revenue = subscription per site (or per cage) x sites per dock, plus ancillary dispensing and reporting.",
-    "the_density_leverage": "Because cost per dock is roughly fixed but revenue scales with stations served, contribution margin per dock rises steeply with cluster density. A cooperative-served bay of forty members' cages on one dock is the best economics in the plan; a single farm on one dock is the worst.",
-    "status": "Blocked on price (Phase 0) and station density (Phase 0)."
+  "phase_2_monetization_economics": {
+    "role": "The first real profit centre, and the one the whole software story depends on.",
+    "free_to_paid_conversion_rate": {
+      "assumption": { "value": "2-5%", "provenance": "assumption", "confidence": "low" },
+      "why_this_range": "This is a widely cited rule-of-thumb range for consumer/prosumer freemium conversion in general software markets. It is NOT derived from any aquaculture- or emerging-market-specific data, and it should be treated as a placeholder to be replaced by measured data within the first few months of Phase 1/2 launch, not as an established benchmark for this product.",
+      "the_named_risk": "Freemium conversion in a low-and-middle-income, price-sensitive smallholder market may be structurally lower than in software markets the 2-5% heuristic is usually drawn from. If true conversion lands well under 2%, the Phase 2 revenue case does not close on the modeled subscriber counts in financial-projections.json, and pricing, tiering, or the target segment for premium would need to change."
+    },
+    "arpu": {
+      "modeled_value": { "value": 15, "currency": "USD", "period": "month", "provenance": "modeled_projection", "confidence": "low" },
+      "basis": "Midpoint of the premium subscription band in pricing-revenue.json (USD 5-25/month). Excludes marketplace and consultation revenue, which are modeled separately below because their per-user incidence is even less certain than subscription attach."
+    },
+    "monthly_churn": {
+      "assumption": { "value": "3-7%", "provenance": "assumption", "confidence": "low" },
+      "why_this_range": "Modeled from typical small-business SaaS churn benchmarks. Not measured. The retention logic in business-model-canvas.json (data compounds with logging history) argues for the low end over time, but that compounding effect is itself unproven before a farm has stayed subscribed long enough to feel it."
+    },
+    "gross_margin": {
+      "assumption": { "value": "70-85%", "unit": "percent of subscription revenue", "provenance": "modeled_projection", "confidence": "low" },
+      "basis": "Typical range for a hosted software subscription after hosting, inference, payment processing, and support cost. Marketplace and consultation revenue carry separate, likely lower, margins (see below) because they involve a supply-side payout.",
+      "marketplace_margin": { "note": "Margin equals the take-rate itself (8-15%, see pricing-revenue.json) minus payment processing and any logistics cost AquaVision absorbs. Effectively a thin-margin, high-volume-dependent line, not a high-margin software line.", "provenance": "assumption" },
+      "consultation_margin": { "note": "Margin equals the platform's share of the session fee (modeled 15-30%) minus payment processing. Also volume-dependent and gated on recruiting paid experts, which is a supply problem, not a pricing problem.", "provenance": "assumption" }
+    },
+    "cac_phase_2": {
+      "assumption": { "value": "USD 10-40", "provenance": "assumption", "confidence": "low" },
+      "basis": "Modeled as the cost of in-app conversion engineering and prompts amortised across converting users, not paid acquisition — most Phase 2 customers are assumed to be converted Phase 1 users, not separately acquired. If a meaningful share of Phase 2 customers instead enter directly (skipping Phase 1), CAC for that sub-segment is unmodeled and likely much higher."
+    },
+    "ltv": {
+      "formula": "LTV = ARPU x gross_margin / monthly_churn",
+      "illustrative_calculation": {
+        "inputs_used": { "arpu_usd": 15, "gross_margin": 0.775, "monthly_churn": 0.05 },
+        "result_usd": 232.5,
+        "provenance": "derived_calculation",
+        "confidence": "speculative",
+        "the_honest_caveat": "This number is arithmetically correct given its inputs and epistemically meaningless given how unmeasured those inputs are. It exists to show the shape of the formula and its sensitivity, not as a plan-of-record figure. It should be deleted and replaced the moment real ARPU, margin, and churn exist."
+      }
+    },
+    "ltv_cac_ratio_illustrative": {
+      "value": "roughly 6-23x across the modeled CAC band (USD 10-40) against the illustrative LTV above",
+      "provenance": "derived_calculation",
+      "confidence": "speculative",
+      "the_honest_caveat": "A ratio this wide is itself the finding: the model is not precise enough yet to say whether this is a good or a marginal business, only that it is plausible across a wide range of outcomes. The conversion rate and churn assumptions are doing almost all the work here and are the least tested inputs in the whole file."
+    }
   },
 
-  "the_drivers_that_actually_matter": {
-    "note": "Ranked by leverage on the contribution margin. This ranking is the useful output of this file.",
+  "the_saas_drivers_that_actually_matter": {
+    "note": "Ranked by leverage on Phase 2 viability. This ranking is the useful output of the software half of this file.",
     "drivers": [
-      { "rank": 1, "driver": "Stations per dock (density)", "why": "Cost is roughly fixed per dock; revenue scales with stations. Density is the single largest lever and it is set at site-qualification time, not by anything we build." },
-      { "rank": 2, "driver": "Maintenance labour per dock", "why": "The largest recurring cost and the most underestimated. A 2x error here flips the sign of the margin." },
-      { "rank": 3, "driver": "BVLOS vs VLOS", "why": "A pilot per sortie under VLOS may make the margin negative. BVLOS is not just a nice-to-have; it may be the difference between a viable and an unviable unit." },
-      { "rank": 4, "driver": "Sonde cost and lifetime", "why": "Most expensive component, one per site, and drift-limited lifetime on the electrodes." },
-      { "rank": 5, "driver": "Sorties per day achievable", "why": "Battery turnaround (recharge vs swap) caps this and drives both battery opex and the value delivered." },
-      { "rank": 6, "driver": "Price realised", "why": "Bounded below by verifiable value (aeration savings) and above by WTP. Both unknown." }
+      { "rank": 1, "driver": "Free-to-paid conversion rate", "why": "The least tested number in the model and the one with the widest plausible range (a market-appropriate rate could be well below the generic 2-5% heuristic). Everything downstream scales with it." },
+      { "rank": 2, "driver": "Phase 1 activation and retention", "why": "A user who never logs data never generates the trust or the ML training signal that makes Phase 2 upgrade prompts credible." },
+      { "rank": 3, "driver": "Monthly churn", "why": "At the low end of the assumed range the model looks attractive; at the high end LTV falls sharply and CAC payback lengthens." },
+      { "rank": 4, "driver": "ARPU / tier pricing fit to local purchasing power", "why": "A USD-anchored price that is correctly set for a commercial farm may be badly overpriced for an aspirational smallholder who converts too early and immediately churns." },
+      { "rank": 5, "driver": "Marketplace and consultation attach rate", "why": "Both are thin-margin, volume-dependent lines layered on subscription revenue, not a second engine on their own — unproven whether farmers transact enough through the app to matter." }
     ]
   },
 
-  "the_sensitivity_the_founders_must_run": {
-    "task": "Once Phase 0 supplies real BOM quotes, real maintenance-labour estimates, and a real aeration-spend anchor, run the contribution margin per dock across: {VLOS vs BVLOS} x {sparse vs dense site} x {low vs high maintenance burden}.",
-    "the_likely_finding": "The plausible outcome is that dense + BVLOS + controlled-maintenance is comfortably positive, and sparse + VLOS + high-maintenance is comfortably negative — and that the business's viability is therefore a QUALIFICATION and OPERATING-MODE question as much as a pricing question. If that is the finding, the strategic conclusion is: only deploy to dense clusters, get BVLOS on the critical path, and treat maintenance as a first-class engineering-for-serviceability problem from day one.",
-    "provenance": "assumption",
-    "confidence": "medium",
-    "why_state_it_before_the_numbers": "Because the SHAPE of the answer is knowable now even though the magnitude is not, and the shape already dictates strategy: chase density, chase BVLOS, engineer for maintainability. Those three imperatives do not need the exact numbers to be correct."
+  "phase_3_smart_aquaculture_economics": {
+    "carried_forward_from_the_original_hardware_plan": "The structure below is substantively unchanged from the prior single-phase version of this file. It remains the correct model for the Phase 3 hardware-as-a-service layer, and it should NOT be blended with the Phase 1/2 SaaS metrics above — a dock and a free-tier account are different units with different cost drivers.",
+    "the_unit": {
+      "chosen_unit": "One dock serving its cluster of stations.",
+      "why_the_dock_not_the_drone": "Coverage, cost, and revenue all scale with docks, not aircraft. See docking-station.json#/dock_network_economics.",
+      "the_implication": "Unit economics are DENSITY-driven. A dock over a dense cage cluster and a dock over a sparse lake have the same cost and very different revenue. Site density is a hard qualification criterion, not a preference."
+    },
+    "the_cost_to_serve_model": {
+      "structure": "Per-dock, per-period cost = amortised capital + consumables + field labour + platform + regulatory allocation.",
+      "line_items": [
+        { "line": "Capital amortisation", "components": ["Drone (USD 15-40k, unquoted)", "Dock (separate BOM, does not exist)", "Per-site sonde (a biosecurity requirement and the most expensive single component)"] },
+        { "line": "Battery opex", "note": "A CONSUMABLE. Packs degrade with cycling and dock heat. Routinely understated by founders." },
+        { "line": "Field labour and maintenance", "note": "THE LINE THAT KILLS DISTRIBUTED HARDWARE BUSINESSES. Weekly calibration and reference checks, corrosion inspection, a novel high-cycle winch, a solar dock in a harsh environment. Recurring, distributed, skilled labour, and the honest estimate is larger than a hardware founder's first instinct." },
+        { "line": "Pilot cost (pre-BVLOS)", "note": "Under VLOS, a pilot per sortie. Can make early unit economics negative — model under both VLOS and BVLOS." },
+        { "line": "Platform/cloud", "note": "Shared infrastructure with Phase 1/2, allocated. The one line that genuinely behaves like a software cost." },
+        { "line": "Regulatory and insurance allocation", "note": "Certification, permits, liability cover." }
+      ],
+      "status": "Every line is a placeholder. Not one has a real quote or a measured value."
+    },
+    "the_revenue_per_unit_model": {
+      "structure": "Per-dock revenue = subscription per site (or per cage) x sites per dock, plus deployment fees and ancillary reporting.",
+      "the_density_leverage": "Because cost per dock is roughly fixed but revenue scales with stations served, contribution margin per dock rises steeply with cluster density. A cooperative-served bay of many members' cages on one dock is the best economics in the plan; a single farm on one dock is the worst.",
+      "status": "Blocked on price and station density — see pricing-revenue.json#/phase_3_smart_aquaculture_pricing."
+    },
+    "the_drivers_that_actually_matter": {
+      "drivers": [
+        { "rank": 1, "driver": "Stations per dock (density)", "why": "Cost is roughly fixed per dock; revenue scales with stations. Set at site-qualification time, not by anything we build." },
+        { "rank": 2, "driver": "Maintenance labour per dock", "why": "The largest recurring cost and the most underestimated. A 2x error here flips the sign of the margin." },
+        { "rank": 3, "driver": "BVLOS vs VLOS", "why": "A pilot per sortie under VLOS may make the margin negative." },
+        { "rank": 4, "driver": "Sonde cost and lifetime", "why": "Most expensive component, one per site, drift-limited electrode lifetime." },
+        { "rank": 5, "driver": "Sorties per day achievable", "why": "Battery turnaround caps this and drives both battery opex and value delivered." },
+        { "rank": 6, "driver": "Price realised", "why": "Bounded below by verifiable value (aeration savings) and above by WTP. Both unknown." },
+        { "rank": 7, "driver": "Warm-lead conversion from Phase 2", "why": "New in this version of the model: if Phase 2 subscribers who scale up genuinely convert to Phase 3 hardware at lower CAC than cold enterprise sales, Phase 3 economics improve materially. This synergy is ASSUMED, not demonstrated — see the cross-phase note below." }
+      ]
+    },
+    "ltv_cac_note": {
+      "statement": "Phase 3 LTV/CAC cannot be computed and should not be faked, exactly as in the original plan.",
+      "why": "LTV needs a price, a margin, and a churn rate; CAC needs a sales cost per closed deal. We have none. Two structural observations still hold: (1) high-touch relationship sales into a distrustful sector means HIGH CAC — not a low-touch SaaS motion; (2) data-compounding value and hardware-in-our-docks lock-in should mean LOW churn once trust is established. High-CAC/low-churn favours a small number of deep, long relationships over broad thin adoption.",
+      "provenance": "assumption"
+    }
   },
 
-  "ltv_cac_note": {
-    "statement": "LTV/CAC cannot be computed and should not be faked.",
-    "why": "LTV needs a price, a margin, and a churn rate; CAC needs a sales cost per closed deal. We have none. But two structural observations hold: (1) high-touch relationship sales into a distrustful sector means HIGH CAC — this is not a low-touch SaaS motion; (2) data-compounding value and hardware-in-our-docks lock-in should mean LOW churn once trust is established. So the shape is high-CAC/low-churn, which favours a small number of deep, long relationships over broad thin adoption — reinforcing the dense-cluster, cooperative strategy.",
-    "provenance": "assumption"
+  "the_cross_phase_synergy_and_its_risk": {
+    "the_thesis": "Phase 1/2 is meant to make Phase 3 sales cheaper and warmer: a commercial farm that has used the app for a year, trusts the brand, and has an engagement history is a fundamentally easier hardware sale than a cold enterprise lead — solving part of the trust problem before the sales conversation starts.",
+    "the_named_risk": "This synergy is the single most important UNTESTED assumption added by the phased model. It is entirely plausible that Phase 1/2 users and Phase 3 hardware buyers are simply two different populations (a smallholder using the free app rarely becomes the enterprise operator who buys a dock), in which case Phase 3 must be sold and CAC'd exactly as in the original hardware-only plan, and the 'funnel' framing is more narrative than mechanism.",
+    "provenance": "assumption",
+    "confidence": "low"
   },
 
   "the_honest_bottom_line": {
-    "statement": "We do not know if the unit economics close, and we have said so at every layer rather than manufacturing a number that says they do.",
-    "what_we_do_know": "The economics are density-driven, maintenance-sensitive, and BVLOS-dependent. Those three facts are enough to shape the entire go-to-market before a single real number exists.",
-    "the_phase_0_deliverable": "Replace this file's structure with measured numbers. It is days of vendor calls and farmer conversations, not research, and it converts the largest financial uncertainty in the venture into a decision. Do it first."
+    "statement": "We do not know if either layer's unit economics close, and we have said so at every layer rather than manufacturing numbers that say they do.",
+    "what_we_do_know": "Phase 1/2 economics hinge almost entirely on a conversion rate borrowed from generic software benchmarks, not measured for this market. Phase 3 economics are density-driven, maintenance-sensitive, and BVLOS-dependent, unchanged from the original hardware plan. The bridge between the two phases is an assumed synergy, not a demonstrated one.",
+    "the_immediate_deliverable": "Ship Phase 1, measure activation and conversion for real, and replace the SaaS assumptions above with measured numbers before they flow into any funding narrative. This is weeks of product usage, not a research programme — the cheapest and fastest de-risking step available in the whole plan."
   }
 }

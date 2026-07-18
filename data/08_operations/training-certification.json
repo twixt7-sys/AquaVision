@@ -7,6 +7,16 @@
 
   "the_principle": "Two audiences with completely different needs: the people who OPERATE the system legally, and the people who USE its output daily. Conflating their training is how deployments fail.",
 
+  "the_three_phase_scope": {
+    "statement": "Everything below — the CAAP certification gate and the four training tracks — is Phase 3: the training burden that arrives with hardware, legal flight, and biosecurity. Phase 1 and Phase 2 have no certification requirement at all, and a much lighter training equivalent.",
+    "phase_1_2_in_app_learning": {
+      "what_replaces_training_here": "In-app tutorials, guided farm-setup walkthroughs, and short learning modules (feeding basics, water-quality fundamentals, disease-ID literacy) delivered as content, not as a course with a test at the end.",
+      "why_no_certification": "There is no aircraft, no field hazard, and no biosecurity vector at Phase 1 — the hard-gate logic that makes CAAP certification non-negotiable for Phase 3 simply does not apply. The equivalent risk is a farmer misreading their own data, which is addressed by in-product framing (see the_recurring_theme below) rather than a test.",
+      "phase_2_addition": "Phase 2 adds paid expert consultations (aquaculturists/vets) — closer to the Farm Manager track's spirit than a certification, since the farmer is buying judgement, not being tested on it.",
+      "the_shared_principle": "Even without a certificate, the same discipline applies: teach the limits, not just the capability. A Phase 1 tutorial that oversells what a photo-based disease-ID model can tell a beginner is the same mistake as an undertrained Farm Manager overtrusting an alert — see the_recurring_theme."
+    }
+  },
+
   "certification_the_hard_gate": {
     "requirement": "Commercial RPAS operation and any aircraft over 7 kg require a CAAP RPA Controller Certificate.",
     "citation_ids": ["caap-rpas-regulations"],

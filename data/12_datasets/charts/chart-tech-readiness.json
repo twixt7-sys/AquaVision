@@ -2,8 +2,8 @@
   "id": "chart-tech-readiness",
   "chart_type": "line",
   "title": "Technology Readiness — Where We Actually Are",
-  "subtitle": "TRL progression with gate criteria, not calendar dates",
-  "description": "The development roadmap as a TRL progression, gated by evidence rather than dates. The company is at TRL 3 today — analytical proof of concept, nothing flown. Each step up is unlocked by a specific piece of evidence, and two gates carry explicit KILL criteria. Rendering this against evidence-gates rather than a Gantt calendar is deliberate: a hardware timeline stated in dates the team cannot honour destroys credibility.",
+  "subtitle": "TRL progression with gate criteria, not calendar dates — this chart describes the Phase 3 (Smart Aquaculture / OmniDrone hardware) layer specifically, not the Phase 1 app or Phase 2 subscription, which ship independently of TRL and are not hardware-readiness gated.",
+  "description": "The development roadmap as a TRL progression, gated by evidence rather than dates, for the Phase 3 hardware layer (OmniDrone, docks, IoT sondes, PondTwin). The company is at TRL 3 today on that layer — analytical proof of concept, nothing flown. Each step up is unlocked by a specific piece of evidence, and two gates carry explicit KILL criteria. Rendering this against evidence-gates rather than a Gantt calendar is deliberate: a hardware timeline stated in dates the team cannot honour destroys credibility. Note: the Phase 1 free app and Phase 2 premium tier are software products, not TRL-gated hardware — they have their own launch and adoption milestones, tracked separately (see kpi-definitions.json#/phase_1_2_saas_kpis), and TRL 3 does not describe their readiness.",
   "provenance": "modeled_projection",
   "citation_ids": ["nasa-trl"],
   "axes": {

@@ -8,30 +8,67 @@
 
   "note": "Impact claims are hypotheses until measured. This file states the mechanisms and, for each, what evidence would be needed to substantiate it. An impact claim without a measurement plan is aspiration.",
 
+  "phase_context": {
+    "statement": "The phased pivot changes WHO this file's impacts reach first. Phase 1 (free app) is the acquisition and equity mechanism: it is aimed squarely at beginner and smallholder farmers who previously had no access to any farm-management guidance, sensor-based or otherwise. Phase 2 (premium, marketplace, consultations) is where those same farmers, or the subset that has grown, start paying for deeper analytics. Phase 3 (OmniDrone/IoT/PondTwin) is where the ORIGINAL impact analysis below was written and remains valid, but it is now explicitly the enterprise/commercial layer, reached by fewer, better-capitalised operators. Each impact below is tagged with the phase(s) it belongs to."
+  },
+
+  "phase_1_2_impacts_new_to_the_pivot": {
+    "note": "These impacts did not exist in the hardware-first story because the hardware-first product could not reach this population affordably. They are the direct product of making Phase 1 free.",
+    "impacts": [
+      {
+        "impact": "First-ever access to structured farming guidance for previously unreached smallholders",
+        "phase": "phase_1",
+        "mechanism": "An AI-assisted farming guide, farm-setup assistant, learning modules, and photo-based disease identification, delivered free, reach beginner and smallholder farmers who currently operate on inherited practice and guesswork with no extension-agent or sensor access at all.",
+        "who_benefits": "Beginner and smallholder operators — the population the old hardware-first model explicitly deferred on affordability grounds (see the old business-model-canvas tension this file previously inherited).",
+        "evidence_needed": "Signups, activation, and retained usage among self-identified smallholders (kpi-mau, kpi-activation-rate in kpi-definitions.json), and, longer-run, a measured change in practice or outcome versus a comparable unreached group — not just usage counts. Usage is activity, not impact; see measuring_impact_honestly below.",
+        "honest_caveat": "This resolves the OLD affordability paradox for the guidance/education mechanism specifically. It does NOT resolve it for the depth-monitoring/early-warning mechanism, which still requires Phase 3 hardware or Phase 2 subscription spend smallholders mostly cannot afford. Free access is also not the same as effective learning — an unused or ignored app produces zero impact despite zero cost."
+      },
+      {
+        "impact": "Smallholder livelihood support via marketplace and expert consultation access (Phase 2)",
+        "phase": "phase_2",
+        "mechanism": "A feed/equipment/buyer marketplace and paid access to aquaculturists/vets give smallholders and small commercial farms input-price transparency and professional advice they previously could not reach individually.",
+        "who_benefits": "Farms that have grown past the free tier but are still small relative to enterprise operators.",
+        "evidence_needed": "Marketplace GMV and transaction counts, consultation bookings, and — critically — evidence that marketplace prices or advice actually improved a farmer's margin versus their prior channel. See kpi-marketplace-gmv in kpi-definitions.json, currently awaiting_data.",
+        "honest_caveat": "This is a Phase 2 (paid) mechanism, so it inherits the free-to-paid conversion funnel's own equity question: it only reaches farmers who converted, which is itself unproven and likely correlated with being better-capitalised to begin with."
+      },
+      {
+        "impact": "Data-driven farm record continuity from day one, not just from the point of hardware adoption",
+        "phase": "phase_1_2",
+        "mechanism": "Because Phase 1 logging (manual/photo entry) starts the moment a farmer signs up rather than the moment they can afford a sensor, the 'knowledge retention' impact below (previously a Phase-3-only benefit) now begins years earlier in a farm's life, for a much larger population.",
+        "who_benefits": "All operators, but proportionally most valuable to smallholders and first-time farmers who previously kept no records whatsoever.",
+        "evidence_needed": "Same as knowledge retention below — measured value of accumulated records is not yet demonstrated."
+      }
+    ]
+  },
+
   "economic_impacts": [
     {
       "impact": "Reduced catastrophic income volatility for aquaculture households",
+      "phase": "phase_3",
       "mechanism": "Earlier warning and response capacity reduce the frequency or severity of harvest-destroying kill events.",
       "who_benefits": "Operators — most acutely smallholders, for whom a kill is existential.",
       "citation_ids": ["inquirer-taal-fishkill-2023", "pna-tilapia-fishkill"],
       "evidence_needed": "A matched comparison of income volatility between monitored and unmonitored farms across multiple cycles. See methodology.json — this is the load-bearing RQ5.",
-      "honest_caveat": "Directly limited by the affordability paradox and by whether farms can act on warnings."
+      "honest_caveat": "This specific depth-monitoring mechanism is still Phase 3 and still limited by the affordability paradox and by whether farms can act on warnings — the Phase 1 free tier does not deliver early-warning depth monitoring, only logging and guidance. See phase_1_2_impacts_new_to_the_pivot above for what the free tier DOES reach."
     },
     {
       "impact": "Improved production efficiency (FCR, survival, yield)",
-      "mechanism": "Condition-aware feeding and earlier intervention improve the production metrics that determine profitability.",
+      "phase": "phase_1_2_and_3",
+      "mechanism": "Condition-aware feeding and earlier intervention improve the production metrics that determine profitability. At Phase 1/2 this runs through AI-guided feeding schedules and logged-data recommendations; at Phase 3 it is reinforced by sensor-verified conditions.",
       "citation_ids": ["innovasea-fcr-guide", "globalseafood-fcr-primary-indicator"],
-      "evidence_needed": "Measured FCR and survival differences, controlled for confounders. The chronic sub-lethal hypothesis (cost-of-inaction.json) is the key untested driver here."
+      "evidence_needed": "Measured FCR and survival differences, controlled for confounders. The chronic sub-lethal hypothesis (cost-of-inaction.json) is the key untested driver here for Phase 3; for Phase 1/2 the untested driver is simply whether farmers act on free-tier recommendations at all."
     },
     {
       "impact": "Access to credit and insurance",
-      "mechanism": "Continuous, verifiable environmental records turn an unquantified, uninsurable asset into an insurable one, potentially unlocking finance for the currently excluded.",
+      "phase": "phase_1_2_and_3",
+      "mechanism": "Continuous, verifiable records — starting with Phase 1 manual/photo logs and strengthening with Phase 3 sensor data — turn an unquantified, uninsurable asset into an insurable one, potentially unlocking finance for the currently excluded.",
       "who_benefits": "Smallholders and cooperatives most, because they are the most credit-excluded.",
-      "evidence_needed": "An insurer or lender actually pricing against the data. Requires loss history we do not have. Chicken-and-egg.",
+      "evidence_needed": "An insurer or lender actually pricing against the data. Requires loss history we do not have. Chicken-and-egg. Phase 1 logs are weaker evidence than Phase 3 sensor data, but they exist for orders of magnitude more farms.",
       "honest_note": "Potentially the largest long-run economic impact — possibly larger than the direct loss prevention — but the most speculative and the slowest to materialise."
     },
     {
       "impact": "Reduced monitoring labour cost",
+      "phase": "phase_3",
       "mechanism": "Automates the manual monitoring round.",
       "magnitude": "Modest monetarily; the labour is cheap. The safety benefit (below) matters more."
     }
@@ -40,34 +77,38 @@
   "social_impacts": [
     {
       "impact": "Occupational safety — removing the pre-dawn boat run",
+      "phase": "phase_3",
       "mechanism": "The most valuable monitoring happens before dawn in conditions when putting a person in a small boat is most dangerous. Drowning is a real, normalised occupational hazard in this sector. The drone removes the need.",
       "who_benefits": "Farm technicians and caretakers — the people at the sharp end.",
-      "why_it_is_underused": "This is a human-safety argument, not an efficiency one, and it lands with cooperatives, LGUs, and development funders in a way that FCR arithmetic does not. It is genuine and it should be prominent, not buried.",
+      "why_it_is_underused": "This is a human-safety argument, not an efficiency one, and it lands with cooperatives, LGUs, and development funders in a way that FCR arithmetic does not. It is genuine and it should be prominent, not buried. It remains a Phase 3 hardware benefit only.",
       "evidence_needed": "Documented reduction in dangerous boat trips; ideally sector injury/drowning statistics as context."
     },
     {
       "impact": "Protecting the technician from blame",
+      "phase": "phase_3",
       "mechanism": "When fish die, the caretaker is blamed despite having no instrument that would have shown it coming. The system provides evidence that supports their judgement.",
       "who_benefits": "Technicians. This is also why the system must be framed as THEIR instrument, not management's monitor. See customer-personas.json and risk R-12."
     },
     {
       "impact": "Institutional capacity for lake management",
+      "phase": "phase_3",
       "mechanism": "Gives BFAR, LGUs, and cooperatives the continuous data they currently lack to make carrying-capacity and stocking decisions.",
       "who_benefits": "The whole lake community, via better governance of a shared resource.",
       "honest_caveat": "Depends on the cross-farm data governance problem being solved. Unresolved."
     },
     {
       "impact": "Knowledge retention",
-      "mechanism": "A farm that has operated for fifteen years currently retains almost no data about its own water. The platform accumulates it, so each cycle starts smarter.",
+      "phase": "phase_1_2_and_3",
+      "mechanism": "A farm that has operated for fifteen years currently retains almost no data about its own water. The platform accumulates it — now starting from Phase 1 sign-up rather than Phase 3 hardware purchase — so each cycle starts smarter.",
       "who_benefits": "Operators, and the sector's collective ability to build predictive models."
     }
   ],
 
   "the_distributional_question": {
     "statement": "Who actually captures the benefit determines whether the impact is positive or regressive.",
-    "the_risk": "If the product primarily serves well-capitalised commercial farms, it improves their competitive position against smallholders — a regressive outcome that widens inequality in the sector. Precision technology defaults to entrenching the advantage of those who can afford it.",
-    "the_commitment": "The cooperative and institutional channels are the mechanism for equitable distribution, and they are in the plan from the start precisely to counter this default. Whether they succeed is the difference between a product that reduces inequality and one that deepens it.",
-    "the_honest_admission": "We cannot guarantee the equitable outcome. We can commit to pursuing it actively and to measuring who actually benefits, rather than assuming the benefit is evenly distributed. See ethics-data-privacy.json#/equity_and_extraction.",
+    "the_risk": "The phased model changes the shape of this risk without eliminating it. Under the old hardware-only story, the product simply did not reach smallholders. Under the phased story, smallholders get real value at Phase 1 (free), but the deeper value — predictive analytics, marketplace leverage, expert consultation, depth-resolved early warning — sits behind Phase 2 payment and Phase 3 capital cost. A three-tier funnel can still produce a regressive outcome: well-capitalised farms convert and compound advantage while smallholders stay permanently in the free tier, generating usage data and community content that make the product better for paying customers without a comparable return to themselves.",
+    "the_commitment": "Making Phase 1 free and mission-designed for smallholder acquisition is a stronger, earlier equity commitment than the old cooperative-and-institutional-channel plan alone, because it does not wait for a channel partner to exist. But it must be paired with the same commitment as before for Phase 2/3: cooperative and institutional channels as the mechanism for equitable access to the paid layers, so the free tier does not become a permanent ceiling dressed up as inclusion.",
+    "the_honest_admission": "We cannot guarantee the equitable outcome at any phase. We can commit to pursuing it actively and to measuring who actually benefits — including tracking what fraction of Phase 1 smallholders ever reach Phase 2/3 value, not just how many sign up for free. See kpi-smallholder-reach in kpi-definitions.json and ethics-data-privacy.json#/equity_and_extraction.",
     "citation_ids": ["worldbank-disease-risk-2014"]
   },
 
@@ -79,6 +120,6 @@
   },
 
   "the_impact_thesis_in_one_paragraph": {
-    "statement": "In a sector where a single night can destroy a family's year of income, where the people most exposed are the least equipped to see it coming, and where the dangerous work of watching the water falls on someone in a small boat before dawn — a platform that makes the water legible, at depth, at scale, at low marginal labour cost, has the potential for genuine social and economic good. That potential is real, it is bounded by affordability and by adoption, it carries second-order risks of intensification and inequality, and it is entirely unproven. Stated that way, it is both honest and, for the right impact investor or thesis committee, compelling."
+    "statement": "In a sector where a single night can destroy a family's year of income, where the people most exposed are the least equipped to see it coming, and where the dangerous work of watching the water falls on someone in a small boat before dawn — a phased platform that first gives every farmer, regardless of what they can pay, structured guidance, disease-prevention insight, and a place to keep records they never had before, and then extends into premium analytics and, for those who need it, drone-and-sensor depth monitoring at scale — has the potential for genuine social and economic good, reaching far further down-market than the hardware-first version ever could. That potential is real, it is bounded now mainly by adoption and conversion rather than affordability alone, it carries second-order risks of intensification, inequality between free and paying tiers, and unproven learning effects, and it is entirely unproven at every phase. Stated that way, it is both honest and, for the right impact investor or thesis committee, compelling."
   }
 }

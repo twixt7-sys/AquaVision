@@ -6,6 +6,8 @@
   "provenance": "assumption",
   "confidence": "low",
 
+  "phase_framing_note": "These thresholds matter across all three phases, but with rising stakes: Phase 1 uses them loosely, as plain-language guidance behind a farmer's self-reported reading; Phase 2's predictive analytics reason over them at the model level; Phase 3's continuous sensor telemetry and automated alerting (the primary audience for this file) is where an incorrect threshold becomes an operational incident. The warning below was written for that Phase 3 stakes level and should be read that way.",
+
   "THE_MOST_IMPORTANT_WARNING_IN_THE_REPOSITORY": "The numerical thresholds below are INDICATIVE PLACEHOLDERS drawn from general aquaculture practice. They have NOT been sourced to primary DENR administrative orders or to species-specific primary literature. THESE NUMBERS DRIVE ALERT THRESHOLDS. An incorrect threshold here becomes a false 'all clear' or a false alarm in production, and a false all-clear can cost a harvest. This is the single highest-consequence set of placeholders in the entire repository. Do not wire these into any alerting logic until they are replaced with sourced, species- and life-stage-specific values verified by an aquaculture scientist.",
 
   "why_thresholds_are_harder_than_they_look": {

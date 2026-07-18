@@ -1,8 +1,8 @@
 {
   "id": "team-structure",
   "title": "Team Structure & Capability Map",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
+  "version": "2.0.0",
+  "last_updated": "2026-07-18",
   "provenance": "assumption",
 
   "IMPORTANT": "This file describes the roles this venture REQUIRES, not people it has. Every `holder` field is deliberately null. Fill them with real names and real, verifiable backgrounds. Do not let generated placeholder biographies reach an investor — fabricated team credentials are the fastest way to destroy a fundraise and, depending on jurisdiction, a securities problem.",
@@ -12,17 +12,17 @@
       "role_id": "ceo",
       "title": "Chief Executive / Commercial Lead",
       "holder": null,
-      "why_the_venture_needs_it": "Aquaculture technology does not sell itself. Someone has to sit on a dike at 5 a.m. with a farmer who has been burned by a previous gadget vendor and earn the pilot.",
-      "critical_skills": ["Aquaculture sector relationships", "Fundraising", "Regulatory navigation with CAAP and BFAR", "Pricing against loss avoidance rather than feature lists"],
-      "failure_mode_if_absent": "A technically excellent product that nobody buys, because the team optimised the drone instead of the pilot agreement."
+      "why_the_venture_needs_it": "Aquaculture technology does not sell itself, at any phase. Someone has to earn a beginner farmer's trust in a free app with no track record in Phase 1, earn a paid subscription in Phase 2, and later sit on a dike at 5 a.m. with a commercial operator who has been burned by a previous gadget vendor to sell Phase 3 hardware.",
+      "critical_skills": ["Aquaculture sector relationships", "Fundraising", "Regulatory navigation with CAAP and BFAR", "Pricing against loss avoidance and farmer outcomes rather than feature lists across all three phases"],
+      "failure_mode_if_absent": "A technically excellent product that nobody uses or buys, because the team optimised the OmniDrone instead of app adoption and the conversion funnel."
     },
     {
       "role_id": "cto",
       "title": "Chief Technology Officer / Systems Architect",
       "holder": null,
-      "why_the_venture_needs_it": "This is a hard systems integration problem — aerial vehicle, wet sensing, dispensing, edge inference, cloud, and a twin — and each subsystem's constraints break the others. Someone must own the whole envelope.",
-      "critical_skills": ["UAS systems engineering", "Mass and power budgeting", "Sensor integration", "The discipline to say no to features that break the payload fraction"],
-      "failure_mode_if_absent": "Four subsystems that each work and a vehicle that cannot fly with all of them attached. This is the single most common way multirotor payload concepts die."
+      "why_the_venture_needs_it": "This is a hard systems integration problem across three phases that must share one data model — a mobile app that works offline for smallholders, an ML/subscription layer built on the data that app produces, and eventually an aerial vehicle, wet sensing, dispensing, edge inference, and a digital twin. Someone must own the whole envelope so Phase 3 doesn't require rebuilding what Phase 1 already shipped.",
+      "critical_skills": ["Software and mobile systems architecture", "UAS systems engineering (for Phase 3)", "Mass and power budgeting (for Phase 3)", "Sensor integration", "The discipline to say no to features that break either the app's offline-first constraints or the drone's payload fraction"],
+      "failure_mode_if_absent": "A Phase 1 app whose data model has to be thrown away to support Phase 3 hardware, or — the classic hardware-first failure — four drone subsystems that each work and a vehicle that cannot fly with all of them attached."
     },
     {
       "role_id": "aquaculture_scientist",
@@ -36,6 +36,7 @@
     {
       "role_id": "rs_ml_lead",
       "title": "Remote Sensing / Machine Learning Lead",
+      "phase": "Phase 2 (predictive health models on Phase 1 data) through Phase 3 (remote sensing retrieval)",
       "holder": null,
       "why_the_venture_needs_it": "Radiometric calibration, glint handling, and inland-water retrieval are specialist skills. A generalist ML engineer will produce a model that performs beautifully on the training lake and collapses on the next one.",
       "critical_skills": ["Radiometric calibration", "Inland water optical retrieval", "Computer vision for small-object detection over water", "Model calibration and uncertainty quantification — not just accuracy"],
@@ -44,6 +45,7 @@
     {
       "role_id": "embedded_lead",
       "title": "Embedded / Flight Systems Engineer",
+      "phase": "Phase 3",
       "holder": null,
       "critical_skills": ["Flight control integration", "Failsafe logic — especially water-aware failsafes", "Edge compute integration", "Real-time telemetry and link management"],
       "failure_mode_if_absent": "A vehicle whose link-loss behaviour was designed for land and which therefore ditches in a lake the first time a squall rolls in."
@@ -51,6 +53,7 @@
     {
       "role_id": "mech_lead",
       "title": "Mechanical / Mechatronics Engineer",
+      "phase": "Phase 3",
       "holder": null,
       "why_the_venture_needs_it": "The winch is the hardest mechanism on the vehicle and the most novel. It must pay out and recover a wet, fouling, snagging sensor from a moving hover in wind, thousands of times, without a person present.",
       "critical_skills": ["Winch and tether mechanism design", "Marine-grade sealing and corrosion", "Metered dispensing mechanisms", "Design for field maintenance by non-engineers"],
@@ -60,12 +63,30 @@
       "role_id": "software_lead",
       "title": "Platform / Full-Stack Engineer",
       "holder": null,
-      "critical_skills": ["Time-series data infrastructure", "Offline-tolerant sync", "Dashboard and twin visualisation", "API design"],
-      "failure_mode_if_absent": "A cloud platform that assumes connectivity that rural aquaculture sites do not have."
+      "why_the_venture_needs_it": "The Phase 1 app is the whole company until it isn't. Someone must ship and operate it — offline-tolerant, low-end-Android-friendly, cheap to run at thousands of free users — before there is any Phase 2 revenue to fund a bigger team.",
+      "critical_skills": ["Mobile and web app engineering for low-connectivity, low-end-device conditions", "Time-series data infrastructure", "Offline-tolerant sync", "Dashboard and twin visualisation (Phase 3)", "API design"],
+      "failure_mode_if_absent": "A cloud platform that assumes connectivity and devices that rural smallholder farmers do not have, which quietly caps Phase 1 acquisition regardless of how good the content and AI assistant are."
+    },
+    {
+      "role_id": "product_lead",
+      "title": "Head of Product — App & Premium Tier",
+      "holder": null,
+      "why_the_venture_needs_it": "Phase 1 succeeds or fails on whether a beginner farmer with no prior app experience can set up a pond, log water quality, and come back tomorrow. That is a product design problem, not a features list, and it is a different discipline from the systems engineering the CTO owns.",
+      "critical_skills": ["Mobile product design for low-literacy and low-connectivity users", "Onboarding and activation design", "Freemium-to-paid funnel design for Phase 2", "Usability research with smallholder farmers, not just commercial operators"],
+      "failure_mode_if_absent": "An app that is technically correct and that beginner farmers abandon after one session, which starves the whole platform of the Phase 1 data that Phase 2 and Phase 3 both depend on."
+    },
+    {
+      "role_id": "growth_marketing_lead",
+      "title": "Growth & Community Marketing Lead",
+      "holder": null,
+      "why_the_venture_needs_it": "A free app does not acquire thousands of smallholder users by existing. Someone must own organic, community-led distribution through fish-farming groups, cooperatives, and extension networks, at a CAC low enough that the free tier is actually a funnel and not just a cost centre.",
+      "critical_skills": ["Community and content-led growth", "Relationships with farmer cooperatives and extension networks", "Basic funnel analytics (activation, retention, free-to-paid conversion)", "Local-language content production"],
+      "failure_mode_if_absent": "A well-built app with no users, which makes the entire phased thesis moot — there is no Phase 1 data to build Phase 2 models on, and no acquisition funnel to convert into Phase 2 subscribers."
     },
     {
       "role_id": "field_ops",
       "title": "Field Operations / Remote Pilot",
+      "phase": "Phase 3",
       "holder": null,
       "critical_skills": ["CAAP RPA Controller Certificate", "Practical fish farm operations", "Local language and community relationships", "Maintenance in the field with limited tooling"],
       "failure_mode_if_absent": "No pilot certificate means no legal commercial flight. This is a hard gate, not a nice-to-have.",
@@ -74,6 +95,7 @@
     {
       "role_id": "regulatory_qa",
       "title": "Regulatory & Quality Lead",
+      "phase": "Phase 3, though data-privacy and disease-ID advisory-claim review start in Phase 1",
       "holder": null,
       "why_the_venture_needs_it": "The business model depends on a BVLOS authorisation the company does not have. Someone must own that pathway from day one, because it has a long lead time and it gates the unit economics.",
       "critical_skills": ["CAAP RPAS regulation", "BFAR and DENR requirements", "Safety case construction", "Quality systems"],
@@ -82,27 +104,28 @@
   ],
 
   "advisory_needs": [
-    { "domain": "Limnology of Philippine lakes", "rationale": "Site-specific water column behaviour is not generalisable from temperate literature. Taal, Laguna de Bay, Buhi, and Sampaloc each behave differently." },
-    { "domain": "Aquaculture extension and cooperatives", "rationale": "Distribution to smallholders runs through cooperatives and extension networks, not through direct sales." },
-    { "domain": "Civil aviation regulation", "rationale": "The BVLOS pathway." },
-    { "domain": "Veterinary / aquatic animal health", "rationale": "Anything involving medicine dispensing crosses into regulated veterinary territory. See regulatory-framework.json." },
-    { "domain": "Agricultural finance", "rationale": "Smallholders cannot buy capital equipment. The financing structure is as much of a product decision as the hardware." }
+    { "domain": "Limnology of Philippine lakes", "rationale": "Site-specific water column behaviour is not generalisable from temperate literature. Taal, Laguna de Bay, Buhi, and Sampaloc each behave differently. Matters most once Phase 3 sensing exists, but informs what Phase 1 asks farmers to log." },
+    { "domain": "Aquaculture extension and cooperatives", "rationale": "Phase 1 distribution to smallholders runs through cooperatives and extension networks, not through paid acquisition channels." },
+    { "domain": "Civil aviation regulation", "rationale": "The Phase 3 BVLOS pathway." },
+    { "domain": "Veterinary / aquatic animal health", "rationale": "Disease-identification guidance in the Phase 1 app and anything involving medicine dispensing in Phase 3 both cross into regulated veterinary territory. See regulatory-framework.json." },
+    { "domain": "Agricultural finance", "rationale": "Smallholders cannot buy capital equipment outright. The Phase 3 financing structure is as much of a product decision as the hardware, and it is worth designing early even though it is years out." },
+    { "domain": "Mobile growth and freemium SaaS", "rationale": "The Phase 1-to-Phase 2 conversion funnel is a standard freemium problem this team has not solved before; an advisor who has run one elsewhere is cheaper than learning it by trial and error on real farmers." }
   ],
 
   "org_evolution": {
-    "note": "Modeled hiring shape, not a commitment.",
+    "note": "Modeled hiring shape, tied to the three product phases, not a commitment.",
     "provenance": "modeled_projection",
     "phases": [
-      { "phase": "Concept (now)", "headcount": "2-4 founders", "focus": "Requirements, research, first prototype, first farmer conversations. No sales." },
-      { "phase": "Prototype", "headcount": "5-8", "focus": "Flying integrated vehicle. First real water data. Validation study design with an academic partner." },
-      { "phase": "Pilot", "headcount": "8-14", "focus": "Instrumented pilots on real farms. Model training on real data. CAAP BVLOS application." },
-      { "phase": "Commercial", "headcount": "15-30", "focus": "Service delivery, dock network, support. Field ops becomes the biggest function — this surprises hardware founders every time." }
+      { "phase": "Phase 0 — Concept (now)", "headcount": "2-4 founders", "focus": "Product spec for the free app, research, first farmer conversations. No app shipped, no sales." },
+      { "phase": "Phase 1 — App Build & Launch", "headcount": "5-9", "focus": "Ship the free app, acquire the first cohorts of smallholder and lake-cage farmers, start accumulating logged water-quality and stock data. Product and growth/community roles stood up alongside engineering." },
+      { "phase": "Phase 2 — Monetization", "headcount": "10-18", "focus": "Premium tier, marketplace, expert-consultation matching, and the first ML models trained on Phase 1 data. Conversion-funnel and subscription operations become real functions." },
+      { "phase": "Phase 3 — Smart Aquaculture", "headcount": "20-35", "focus": "IoT sensors, OmniDrone hardware, dock network, PondTwin, enterprise dashboard, and field operations — which becomes the biggest function once physical hardware exists. This surprises software-only founders every time, the same way it used to surprise hardware-only ones." }
     ]
   },
 
   "cultural_commitments": [
     "The scientist has a veto on public claims. If the science lead says the model is not ready, it does not ship, and the commercial lead does not get to overrule that.",
-    "Field time is mandatory for engineers. An engineer who has never stood on a fish cage at dawn will design for a pond that does not exist.",
-    "Post-mortems on lost aircraft are blameless and published internally. A team that hides crashes learns nothing and repeats them."
+    "Field time is mandatory for engineers, at every phase. An engineer who has never watched a beginner farmer struggle through app onboarding will design a Phase 1 flow nobody finishes, and one who has never stood on a fish cage at dawn will design a Phase 3 pond that does not exist.",
+    "Post-mortems on lost aircraft, and on failed app releases or growth experiments, are blameless and published internally. A team that hides its failures learns nothing and repeats them."
   ]
 }

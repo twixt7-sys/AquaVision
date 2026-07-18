@@ -8,6 +8,18 @@
 
   "the_principle": "A product sold on environmental stewardship must account for its OWN footprint, honestly, including the harms. An environmental impact section that lists only benefits is not an assessment; it is an advertisement.",
 
+  "phase_framing": {
+    "statement": "AquaVision is now three layers, and the ENVIRONMENTAL footprint and impact story below belongs almost entirely to Phase 3 (the OmniDrone/IoT/PondTwin hardware layer) — it is unchanged from the original hardware-first assessment and is reproduced as-is under that label.",
+    "phase_1_2_environmental_footprint": {
+      "statement": "The Phase 1/2 software layer (free app, premium analytics, marketplace) has a materially different and much smaller direct footprint: mobile/web compute and data storage, not batteries, airframes, or sondes deployed on the water. Its environmental relevance is indirect — better feeding decisions and disease-prevention guidance logged and surfaced to farmers who previously kept no records at all could reduce feed waste and antimicrobial overuse at the behavioural level, before any sensor is involved.",
+      "the_honest_caveat": "This is a hypothesis about behaviour change, not a measured effect, and it is weaker and slower than the sensor-driven Phase 3 mechanism below because it depends entirely on farmers acting on free-tier guidance with no verification loop. It also inherits the same over-stocking-style tension: better production guidance could as easily support intensification as restraint. No lifecycle assessment of the compute/hosting footprint has been done and is not a near-term priority relative to the Phase 3 hardware assessment below.",
+      "status": "not measured, not modeled — noted for completeness only"
+    }
+  },
+
+  "phase_3_hardware_environmental_impact": {
+    "note": "Everything below this point is the ORIGINAL hardware-layer environmental assessment, unchanged in substance, now explicitly scoped to Phase 3 (OmniDrone, docks, IoT sondes, PondTwin) rather than to the company as a whole.",
+
   "positive_impacts": [
     {
       "impact": "Reduced eutrophication of shared water bodies",
@@ -76,5 +88,7 @@
   "lifecycle_thinking": {
     "commitment": "Before scale, conduct a real lifecycle assessment of the hardware, not a hand-wave. A distributed network of hundreds of drones, docks, and sondes has a material footprint that a single-unit intuition misses.",
     "status": "not done — flagged as a pre-scale requirement"
+  }
+
   }
 }

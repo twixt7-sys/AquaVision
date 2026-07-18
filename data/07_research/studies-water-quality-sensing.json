@@ -9,6 +9,8 @@
 
   "why_this_theme_is_the_scientific_foundation": "This collection contains the evidence that the problem is real, recurring, mechanistically understood, and specifically vertical. Everything the OmniDrone does at depth is justified from here.",
 
+  "phase_relevance": "Grounds the Phase 3 (Smart Aquaculture / hardware layer) of the AquaVision platform — the depth-resolved probe/winch/OmniDrone case for commercial and enterprise farms. The failure mechanism it documents (stratification, hypolimnetic depletion, overturn) also motivates why Phase 1's manual/photo water-quality logging is worth doing at all even before a farm reaches Phase 3, though the vertical-profiling argument specifically is a Phase 3 claim.",
+
   "studies": [
     {
       "citation_id": "seafdec-laguna-fishkill",

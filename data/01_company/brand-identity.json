@@ -1,8 +1,8 @@
 {
   "id": "brand-identity",
   "title": "AquaVision — Brand & Design System",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
+  "version": "1.1.0",
+  "last_updated": "2026-07-18",
   "provenance": "verified_external",
   "note": "Colour values are sampled by eye from the supplied logo assets and should be replaced with the exact values from the original vector source when available. Treat them as close approximations, not the brand standard.",
 
@@ -21,7 +21,7 @@
       "triangle": "The 'A' of AquaVision, read simultaneously as an aerial vantage point — the drone's-eye view looking down.",
       "fish_in_eye_form": "The fish outline doubles as an eye. Vision and the subject of vision are the same shape: the point of the product is seeing the fish.",
       "wave": "The water surface — the boundary the whole product is about crossing, since everything that matters happens beneath it.",
-      "note_for_pitch": "This is a genuinely good mark for the story: it encodes 'aerial view' and 'seeing beneath the water' in one glyph. Use it as the visual spine of the deck."
+      "note_for_pitch": "This is a genuinely good mark for the story at every phase, not just Phase 3: it encodes 'seeing beneath the water' whether that seeing comes from a farmer's own logged photo in the free app or from an OmniDrone sortie later. Use it as the visual spine of the deck."
     },
     "clear_space": "Minimum clear space on all sides equal to the height of the wave element.",
     "misuse": [
@@ -94,6 +94,7 @@
   },
 
   "product_design_language": {
+    "scope_note": "This section describes the Phase 3 OmniDrone hardware specifically — the smart-aquaculture upgrade layer, not the company's core product. The Phase 1 app and Phase 2 premium tier are screens, not hardware, and should be designed against the same palette and typography below rather than against this section.",
     "source": "Derived from the supplied render (photo_2026-07-17_13-52-27.jpg).",
     "observed_cues": [
       "Ducted rotors in full circular shrouds — reads as safe-to-approach, which matters for a machine that will operate near people on narrow dikes and small boats.",
@@ -123,7 +124,8 @@
       "'Revolutionary', 'game-changing', 'disruptive' — say what it does instead.",
       "Implying the system predicts fish kills, until a validated model exists. This is the single most tempting and most dangerous overclaim available to this company.",
       "Implying the system detects toxins. It detects pigments correlated with taxa that sometimes produce toxins. The gap between those two statements is where lawsuits live.",
-      "Military or surveillance framing. It is corrosive to farmer trust and it invites the IUU-enforcement association the company should keep at arm's length."
+      "Military or surveillance framing. It is corrosive to farmer trust and it invites the IUU-enforcement association the company should keep at arm's length.",
+      "Claiming the free app already has farmers, downloads, or traction before that data exists. See traction.json — the same honesty discipline that applies to the OmniDrone's TRL applies to the app's user count."
     ]
   },
 

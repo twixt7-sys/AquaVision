@@ -8,6 +8,10 @@
 
   "verification_notice": "Every claim here traces to references-bibliography.json, where ZERO sources have been opened and verified. This synthesis is built on search-result summaries. It is a credible MAP of the literature and a plan for reading it — it is not yet a literature review. Read the sources before submitting this.",
 
+  "phased_platform_framing": {
+    "note": "AquaVision is now positioned as a three-phase platform (Phase 1: free/low-cost app — farm setup, water quality logging, feeding schedules, photo-based disease ID, community; Phase 2: premium analytics, predictive health, marketplace; Phase 3: IoT sensors, OmniDrone, digital twin, enterprise). This corpus was assembled around the original hardware-first framing, so most of it grounds Phase 3 directly. The water quality sensing, UAV remote sensing, digital twin, and harmful algal bloom collections remain the evidentiary base for the Phase 3 hardware layer exactly as argued in the moves below. The AI/ML and fish health collections also inform the Phase 1/2 disease-identification and predictive-health features, though the reader should note where the cited studies are about aerial/IoT sensing rather than mobile-app-based diagnosis (see studies-ai-ml-aquaculture.json and studies-fish-health-disease.json for the honest boundary). The feeding-nutrition collection grounds the Phase 1 feeding-schedule feature's ROI logic directly. The socioeconomic-adoption collection, read against a free/low-cost app rather than a drone-and-dock capital purchase, argues considerably more favourably for Phase 1 than it did for the original hardware pitch."
+  },
+
   "the_argument_in_five_moves": {
     "note": "A literature review should build an argument, not list papers. This is the argument.",
     "moves": [
@@ -54,14 +58,14 @@
   },
 
   "thematic_collections": [
-    { "theme": "Water quality and limnological sensing", "file": "data/07_research/studies-water-quality-sensing.json" },
-    { "theme": "UAV and satellite remote sensing", "file": "data/07_research/studies-uav-remote-sensing.json" },
-    { "theme": "Harmful algal blooms", "file": "data/07_research/studies-harmful-algal-blooms.json" },
-    { "theme": "AI and machine learning in aquaculture", "file": "data/07_research/studies-ai-ml-aquaculture.json" },
-    { "theme": "Digital twins", "file": "data/07_research/studies-digital-twin.json" },
-    { "theme": "Fish health and disease", "file": "data/07_research/studies-fish-health-disease.json" },
-    { "theme": "Feeding and nutrition economics", "file": "data/07_research/studies-feeding-nutrition.json" },
-    { "theme": "Socioeconomics and technology adoption", "file": "data/07_research/studies-socioeconomic-adoption.json" }
+    { "theme": "Water quality and limnological sensing", "file": "data/07_research/studies-water-quality-sensing.json", "grounds": "Phase 3 (hardware layer)" },
+    { "theme": "UAV and satellite remote sensing", "file": "data/07_research/studies-uav-remote-sensing.json", "grounds": "Phase 3 (hardware layer)" },
+    { "theme": "Harmful algal blooms", "file": "data/07_research/studies-harmful-algal-blooms.json", "grounds": "Phase 3 (hardware layer)" },
+    { "theme": "AI and machine learning in aquaculture", "file": "data/07_research/studies-ai-ml-aquaculture.json", "grounds": "Phase 3 primarily; also informs the Phase 1/2 disease-ID and predictive-health ML approach" },
+    { "theme": "Digital twins", "file": "data/07_research/studies-digital-twin.json", "grounds": "Phase 3 (PondTwin)" },
+    { "theme": "Fish health and disease", "file": "data/07_research/studies-fish-health-disease.json", "grounds": "Cross-cutting; scale/motivation for Phase 1 disease-ID and Phase 2 predictive health, with honest limits stated in-file" },
+    { "theme": "Feeding and nutrition economics", "file": "data/07_research/studies-feeding-nutrition.json", "grounds": "Phase 1 feeding-schedule feature" },
+    { "theme": "Socioeconomics and technology adoption", "file": "data/07_research/studies-socioeconomic-adoption.json", "grounds": "Phase 1 low-cost-app adoption argument" }
   ],
 
   "what_the_literature_says_that_is_inconvenient_for_us": {

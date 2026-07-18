@@ -5,6 +5,7 @@
   "last_updated": "2026-07-17",
   "provenance": "design_target",
   "confidence": "low",
+  "platform_context": "This is a subsystem of OmniDrone, the aerial component of AquaVision Smart (Phase 3) — the premium hardware upgrade layer of the AquaVision platform for commercial/enterprise customers who have outgrown the app-based Phase 1/2 tiers, not the company's core product.",
   "status_note": "Design targets only. No airframe exists. Component masses are placeholders pending a real vendor survey.",
 
   "configuration": {

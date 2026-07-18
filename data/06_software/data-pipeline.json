@@ -1,16 +1,31 @@
 {
   "id": "data-pipeline",
   "title": "Data Pipeline",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
+  "version": "2.0.0",
+  "last_updated": "2026-07-18",
   "provenance": "design_target",
-  "description": "The processing path from sensor to decision. Stages are ordered; each stage's failure behaviour is specified, because in a monitoring system a silent pipeline failure is worse than a loud one.",
+  "description": "The processing path from observation to decision, across every phase. A Phase 1/2 farm's path runs from a farmer's thumb to a logging service; a Phase 3 farm's path runs from a sonde to a fusion engine. Both converge on the same shared cloud stages — ingestion validation, alerting, presentation — because they are, underneath, the same platform. Stages are ordered; each stage's failure behaviour is specified, because in a monitoring system a silent pipeline failure is worse than a loud one.",
 
-  "the_governing_rule": "A monitoring system that fails silently is worse than no monitoring system, because someone is relying on it. Every stage below must fail loudly or degrade visibly. There is no acceptable silent failure anywhere in this pipeline.",
+  "the_governing_rule": "A monitoring system that fails silently is worse than no monitoring system, because someone is relying on it. Every stage below must fail loudly or degrade visibly. There is no acceptable silent failure anywhere in this pipeline — and 'the farmer stopped logging and the app didn't say anything about it' is exactly as much a silent failure as a fouled sensor reporting plausible numbers.",
+
+  "app_layer_pipeline": {
+    "note": "Phase 1/2. This is the pipeline behind the free app and the Premium tier, and it exists independently of any hardware.",
+    "stages": [
+      { "stage": "A1", "name": "Capture", "location": "client — phone/web app", "does": "Farmer enters a manual water-quality reading, logs a feeding, submits a disease photo, or chats with the assistant.", "fails_by": "Entry is cached locally the instant it is made. Nothing is lost to a dropped connection or a closed app." },
+      { "stage": "A2", "name": "Local cache and offline queue", "location": "client", "does": "Holds unsynced entries indefinitely until connectivity returns.", "why_it_is_not_optional": "The rural connectivity problem is not unique to a lakeshore dock — a smallholder's phone has the same problem, and the entry that matters most (a mortality event, a sudden bad reading) is exactly as likely to happen with no signal as a pre-dawn sortie is." },
+      { "stage": "A3", "name": "Sync", "location": "client to backend", "does": "Idempotent, resumable upload of queued entries when connectivity permits.", "clock_note": "A phone offline for days still needs accurate timestamps on `measured_utc`, or trend and reminder logic is corrupted on reconnection — the same clock-discipline requirement as the Phase 3 dock, applied to a phone." },
+      { "stage": "A4", "name": "Ingestion validation", "location": "cloud — shared with Phase 3", "does": "Schema conformance, farm/pond resolution, mandatory-field checks. REJECTS malformed entries rather than repairing them.", "detail": "See telemetry-schema.json#/ingestion_validation. The same rejection discipline applies to a manual entry as to a sensor sample; a dataset with quietly repaired self-reports is exactly as indefensible as one with quietly repaired sensor data." },
+      { "stage": "A5", "name": "Model inference (where applicable)", "location": "cloud", "does": "Disease-identification-photo runs against a submitted photo; the assistant grounds and responds to a chat message.", "fails_by": "A model failure returns an honest 'unable to analyse this photo' rather than a guess. See ai-ml-models.json." },
+      { "stage": "A6", "name": "Premium analytics and predictive scoring", "location": "cloud", "does": "For Premium farms, the analytics engine and the predictive-health-anomaly model read the farm's accumulated logged (and/or sensor) history.", "fails_by": "Below a data-completeness threshold, the service returns 'insufficient logged history' rather than a thin-looking trend or score. See ai-ml-models.json#/models/predictive-health-anomaly." },
+      { "stage": "A7", "name": "Alerting", "location": "cloud — shared with Phase 3", "does": "Evaluate rule-based thresholds against manually logged values exactly as against sensor values.", "why": "A farmer who logs a dangerously low DO reading deserves the same threshold alert a sensor farm gets, using the same alerting service, not a second-class notification path." },
+      { "stage": "A8", "name": "Presentation", "location": "client + cloud", "does": "Home view, water-quality log, feeding reminders, community, learning, and (Premium) analytics/recommendations/marketplace/consultations." }
+    ]
+  },
 
   "stages": [
     {
       "stage": 1,
+      "phase": "3",
       "name": "Acquisition",
       "location": "edge — aircraft",
       "does": "Read sensors, timestamp UTC, tag with depth from the pressure transducer, tag with position and accuracy.",
@@ -19,6 +34,7 @@
     },
     {
       "stage": 2,
+      "phase": "3",
       "name": "QC at source",
       "location": "edge — aircraft",
       "does": "Gross range, spike, rate-of-change, flat-line, and partner-presence tests. Flags applied per QARTOD codes.",
@@ -28,6 +44,7 @@
     },
     {
       "stage": 3,
+      "phase": "3",
       "name": "Edge inference and reduction",
       "location": "edge — aircraft",
       "does": "NDWI mask, NDCI field, anomaly detection, compression.",
@@ -36,6 +53,7 @@
     },
     {
       "stage": 4,
+      "phase": "3",
       "name": "Transfer to dock",
       "location": "edge",
       "does": "Local high-bandwidth link on docking. Full raw imagery moves here; only reduced products go further.",
@@ -43,6 +61,7 @@
     },
     {
       "stage": 5,
+      "phase": "3",
       "name": "Store and forward",
       "location": "edge — dock",
       "does": "Buffer 7+ days locally. Forward when connectivity permits. Idempotent, resumable sync.",
@@ -52,14 +71,16 @@
     },
     {
       "stage": 6,
+      "phase": "1-3, shared",
       "name": "Ingestion validation",
       "location": "cloud",
-      "does": "Schema conformance, partner presence, monotonicity, mandatory-field checks. REJECTS rather than repairs.",
-      "why_reject": "A dataset containing quietly repaired records cannot be defended in an audit, a dispute, or a thesis. Rejected records go to the dock's error queue where a human sees them.",
+      "does": "Schema conformance, partner presence, monotonicity, mandatory-field checks, farm/pond resolution. REJECTS rather than repairs.",
+      "why_reject": "A dataset containing quietly repaired records cannot be defended in an audit, a dispute, or a support conversation. Rejected sensor records go to the dock's error queue; rejected app-layer records go to the client's sync error queue. Either way, a human sees them.",
       "detail": "See telemetry-schema.json#/ingestion_validation"
     },
     {
       "stage": 7,
+      "phase": "3",
       "name": "Climatology QC",
       "location": "cloud",
       "does": "Compare against this site's historical distribution for this season and this hour.",
@@ -68,15 +89,17 @@
     },
     {
       "stage": 8,
+      "phase": "3",
       "name": "Fusion",
       "location": "cloud",
       "does": "Fit the site-and-day-local NDCI-to-chlorophyll regression from same-sortie probe points. Apply across the masked field. Propagate uncertainty.",
-      "why_this_is_the_core": "This stage is the product. See system-architecture.json#/the_fusion_core.",
+      "why_this_is_the_core": "This stage is the product's Phase 3 core. See system-architecture.json#/the_fusion_core.",
       "fails_by": "If fewer than the minimum probe points exist, or the regression's confidence interval exceeds a threshold, the concentration field is NOT produced. The NDCI field is published as a relative index instead, clearly labelled as such. Refusing to produce a bad map is a feature.",
       "the_normal_case": "Fitting on 3-4 points. The confidence interval will often be wide. Show it."
     },
     {
       "stage": 9,
+      "phase": "3",
       "name": "Derived indices",
       "location": "cloud",
       "does": "Thermocline depth, Schmidt stability, oxygen debt, diel amplitude.",
@@ -84,49 +107,55 @@
     },
     {
       "stage": 10,
-      "name": "Twin update",
+      "phase": "1-3, shared",
+      "name": "Analytics, prediction, and twin update",
       "location": "cloud",
-      "does": "Update measured state, recompute interpolation with its uncertainty field, decay stale state."
+      "does": "For Phase 3 farms: update measured twin state, recompute interpolation with its uncertainty field, decay stale state. For Phase 1/2 Premium farms: update the analytics and predictive-health views over logged history, with the same staleness/sparsity decay logic applied to log entries instead of sensor state."
     },
     {
       "stage": 11,
+      "phase": "1-3, shared",
       "name": "Alerting",
-      "location": "cloud primary, dock fallback",
-      "does": "Evaluate rules. Dispatch with evidence attached.",
-      "the_critical_design_decision": "Safety-critical alerts are RULE-BASED, not model-based. A threshold on measured DO fires locally at the dock with no cloud and no model. Model-based alerts are advisory and degrade gracefully when the cloud is unreachable.",
-      "why": "The alert that matters most must have the fewest dependencies. A DO-below-threshold alert should survive a cloud outage, a model regression, and a bad deploy. Coupling it to an ML inference service is an architecture that fails at 04:30.",
-      "suspect_data_rule": "QC flag 3 data is shown to humans but does NOT fire automated alerts. A false alarm from a fouled sensor at 04:30 costs more trust than a delayed alert costs fish — because after the third false alarm, the tenth alert is ignored, and the tenth may be real."
+      "location": "cloud primary, dock fallback for Phase 3",
+      "does": "Evaluate rules against sensor data or manually logged data. Dispatch with evidence attached.",
+      "the_critical_design_decision": "Safety-critical alerts are RULE-BASED, not model-based, at every phase. A threshold on measured or logged DO fires with no model in the loop. Model-based alerts (predictive-health-anomaly, kill-risk-forecast) are advisory and degrade gracefully when the cloud or the model is unreachable or under-confident.",
+      "why": "The alert that matters most must have the fewest dependencies. A DO-below-threshold alert should survive a cloud outage, a model regression, and a bad deploy — whether the DO reading came from a sonde or a test strip. Coupling it to an ML inference service is an architecture that fails at 04:30.",
+      "suspect_data_rule": "QC flag 3 sensor data is shown to humans but does NOT fire automated alerts. Self-reported (manual) data is never QC-flagged in the QARTOD sense, but obviously implausible manual entries (e.g. a pH of 25) are similarly excluded from automated triggers and flagged for the farmer to confirm or correct. A false alarm from a fouled sensor, or a fat-fingered log entry, at 04:30 costs more trust than a delayed alert costs fish — because after the third false alarm, the tenth alert is ignored, and the tenth may be real."
     },
     {
       "stage": 12,
+      "phase": "1-3, shared",
       "name": "Presentation",
-      "location": "cloud + local dashboard",
-      "does": "Twin, dashboard, mobile, reports."
+      "location": "cloud + client app + local dashboard",
+      "does": "App home view, logging forms, community/learning, Premium analytics/recommendations/marketplace/consultations, and — for Phase 3 — twin, enterprise dashboard, mobile, reports."
     }
   ],
 
   "the_alert_fatigue_problem": {
-    "statement": "This is a safety issue disguised as a UX issue, and it will kill the product's value long before it kills a fish.",
-    "mechanism": "Every false alarm spends trust. Trust is not renewable at the rate we spend it. After the third 04:30 alert that turns out to be a fouled sensor or a floating coconut, the manager mutes notifications. Then the real one arrives and nobody sees it.",
+    "statement": "This is a safety issue disguised as a UX issue, and it will kill the product's value long before it kills a fish — at any tier.",
+    "mechanism": "Every false alarm spends trust. Trust is not renewable at the rate we spend it. After the third 04:30 alert that turns out to be a fouled sensor or a floating coconut, the manager mutes notifications. A parallel version exists in the app tier: after the third feeding reminder or logging nudge that feels irrelevant or nagging, the farmer mutes those too, and the data flywheel Phase 2/3 depend on stalls.",
     "the_design_response": [
-      "Tune the anomaly model for PRECISION over recall, deliberately accepting misses. A missed dead fish is found two hours later; a false alarm at 04:30 is unrecoverable trust damage.",
-      "Suspect-flagged data never auto-alerts.",
-      "Every alert carries its evidence — the image crop, the profile chart, the threshold it crossed. An alert that cannot explain itself will be ignored the third time.",
-      "Escalate by severity, not by volume. Three advisories should not produce three notifications.",
-      "Track the alert-to-action rate as a first-class product metric. If people stop acting on alerts, the product has failed regardless of how accurate the sensors are."
+      "Tune the anomaly and disease-ID models for PRECISION over recall, deliberately accepting misses. A missed dead fish is found two hours later; a false alarm at 04:30 is unrecoverable trust damage.",
+      "Suspect-flagged or implausible-value data never auto-alerts.",
+      "Every alert or reminder carries its evidence or its reason — the image crop, the profile chart, the threshold it crossed, or the schedule it is following. An alert that cannot explain itself will be ignored the third time.",
+      "Escalate by severity, not by volume. Three advisories should not produce three notifications, and a feeding reminder should not compete for attention with a genuine water-quality warning.",
+      "Track the alert-to-action rate AND the reminder-to-log rate as first-class product metrics. If people stop acting on either, the product has failed regardless of how accurate the sensors or models are."
     ]
   },
 
   "data_retention": {
-    "raw": "Indefinite. It is the asset and the moat — three years of profiles on a lake nobody else has measured is worth more than the aircraft.",
-    "imagery": "Reduced products indefinite. Raw frames tiered to cold storage after processing; deleted only under the imagery privacy policy.",
-    "the_privacy_exception": "Raw imagery containing identifiable people must be handled under the retention limits in ethics-data-privacy.json, regardless of its scientific value. This is a genuine tension: the frames most useful for training are the ones over the busiest, most populated shorelines."
+    "raw": "Indefinite, across every phase. It is the asset and the moat — for a Phase 3 farm, three years of sensor profiles on a lake nobody else has measured; for a Phase 1/2 farm, the accumulated history of its own logged cycles, which is the exact dataset Phase 2's analytics and predictive models are built to need.",
+    "imagery": "Reduced products indefinite (Phase 3). Raw frames tiered to cold storage after processing; deleted only under the imagery privacy policy.",
+    "photos": "Disease-identification and community-post photos retained per the same imagery/personal-data privacy discipline as drone footage, regardless of the fact that a farmer, not a drone, captured them.",
+    "the_privacy_exception": "Raw imagery or photos containing identifiable people must be handled under the retention limits in ethics-data-privacy.json, regardless of scientific value or product usefulness. This is a genuine tension at both ends of the platform: the drone frames most useful for training are the ones over the busiest shorelines, and the disease photos most useful for training are the ones that most often also capture a farmer's hands or face."
   },
 
   "what_is_deliberately_not_automated": [
-    "Dispensing. Human authorisation per mission, always.",
-    "Declaring water safe. The system reports what it measured and what it did not measure. Absence of a detection is not a clearance.",
-    "Overriding a QC flag. If a human decides a suspect reading is good, that is a new record with an author, not an edit.",
-    "Changing a customer's alert thresholds. We do not tune someone else's risk tolerance from our side of the network."
+    "Dispensing. Human authorisation per mission, always (Phase 3).",
+    "Declaring water safe, at any tier. The system reports what it measured or what a farmer logged, and what it did not. Absence of a reading is not a clearance.",
+    "Diagnosing a disease. The photo-ID model suggests candidates; a vet or expert diagnoses.",
+    "Overriding a QC flag or a self-reported value. If a human decides a suspect or implausible reading is good, that is a new record with an author, not an edit.",
+    "Changing a customer's alert thresholds. We do not tune someone else's risk tolerance from our side of the network.",
+    "Settling a marketplace dispute or a consultation fee disagreement without a human in the loop."
   ]
 }

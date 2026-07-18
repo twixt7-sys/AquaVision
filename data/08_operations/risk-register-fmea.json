@@ -10,6 +10,8 @@
 
   "the_philosophy": "The risks that kill ventures are rarely the dramatic ones. They are the ones with high SEVERITY and high DETECTABILITY-difficulty — the failures nobody sees coming until the harm is done. This register is sorted to surface those, not the obvious ones.",
 
+  "the_phased_scope": "This register now spans all three phases. R-01 through R-15 are the Phase 3 hardware/field FMEA and are unchanged. R-16 through R-18 are Phase 1/2 software and business risks, scored with the same method and the same discipline — an untested freemium funnel gets named as bluntly as an untested winch.",
+
   "risks": [
     {
       "id": "R-01",
@@ -249,20 +251,68 @@
       "owner": "ceo + aquaculture_scientist",
       "status": "open",
       "note": "An ethical risk that is also a real second-order effect. Deserves the thesis ethics chapter. Under-detectable because it manifests as customer 'success' (higher stocking) before it manifests as harm."
+    },
+    {
+      "id": "R-16",
+      "category": "commercial",
+      "description": "Phase 1 app activation rate is too low — installs do not convert into a completed farm profile or a first logged reading.",
+      "cause": "Onboarding friction, unclear value before enough data has accumulated to show anything back to the user, uneven digital literacy and connectivity among smallholder segments.",
+      "effect": "The acquisition engine fills the top of the funnel but not the middle; CAC is spent without an activated base, and there is no user base to feed the Phase 2 conversion funnel or the Phase 2 ML models.",
+      "severity": 7,
+      "likelihood": 6,
+      "detectability": 2,
+      "rpn": 84,
+      "mitigation": "Guided, short farm-setup wizard; show a useful result (even a generic one) before asking for the first real log; community-led onboarding through existing fish-farming groups rather than cold acquisition; track activation as a first-class metric from day one.",
+      "residual_rpn": 54,
+      "owner": "product + ceo",
+      "status": "open",
+      "note": "Low detectability difficulty (2) is the good news — activation is a directly measured funnel metric, visible immediately, unlike the silent hardware failures above. The risk is real but at least it cannot hide."
+    },
+    {
+      "id": "R-17",
+      "category": "commercial",
+      "description": "Free-tier farmers churn before converting to Phase 2 paid tiers or before enough longitudinal data accumulates to make the free tier itself useful.",
+      "cause": "No sustained logging habit forms; a farm's production cycle runs months, which is longer than most consumer apps' engagement window; free substitutes (a notebook, a group chat) are 'good enough' for a beginner.",
+      "effect": "Undercuts both revenue (no conversion to Premium/marketplace/consultations) and the Phase 2 data asset — predictive health models need the longitudinal logs that churned users never produced.",
+      "severity": 8,
+      "likelihood": 6,
+      "detectability": 3,
+      "rpn": 144,
+      "mitigation": "Habit-forming cadence (feeding/logging reminders tied to real husbandry tasks, not notifications for their own sake); visible personal value (trend charts on the farmer's own data) before any upsell; community features that create a reason to return independent of the core logging task.",
+      "residual_rpn": 90,
+      "owner": "product + ceo",
+      "status": "open",
+      "note": "This is the freemium-model equivalent of R-04 — untested willingness to stay, not just willingness to pay. Detectable via cohort retention curves early, which is why instrumenting retention from the first Phase 1 release matters."
+    },
+    {
+      "id": "R-18",
+      "category": "data_security",
+      "description": "Self-reported Phase 1 water-quality and farm logs (manual/photo entry, no sensor verification) are inaccurate, inconsistent, rounded, or gamed, and Phase 2 predictive models are trained on this base.",
+      "cause": "No hardware verification exists at Phase 1; farmers may mis-measure, estimate, forget entries, or enter optimistic values, and there is no reference check analogous to the weekly sonde calibration that catches drift in Phase 3.",
+      "effect": "Phase 2 predictive health and analytics models inherit noisy or biased training data. This is the software-era version of R-01: a plausible but wrong number that someone acts on, except here there is no dedicated sonde and no reference-check control to catch it.",
+      "severity": 8,
+      "likelihood": 7,
+      "detectability": 6,
+      "rpn": 336,
+      "mitigation": "Plausibility and range checks on entry; gentle prompts rather than blocking; cross-reference against community/regional benchmarks to flag outliers; photo-based entries verified where possible by the same disease-ID computer vision already in the product; when a farm graduates to Phase 3 sensors, use the overlap period to calibrate and score the reliability of that farm's prior self-reports rather than trusting them uniformly.",
+      "residual_rpn": 180,
+      "owner": "product + aquaculture_scientist",
+      "status": "open",
+      "note": "SECOND-HIGHEST raw RPN in the register, and it is R-01's direct software analogue — the philosophy above (silent data corruption over dramatic failure) applies just as much to a self-reported log as to a fouled sensor. There is no equivalent of the reference check here yet; this is an open control gap, not a solved one."
     }
   ],
 
   "risk_summary": {
     "provenance": "derived_calculation",
     "top_5_by_residual_rpn": [
+      { "id": "R-18", "residual_rpn": 180, "risk": "Self-reported Phase 1 logs → confidently wrong training data" },
       { "id": "R-01", "residual_rpn": 168, "risk": "Silent sensor drift → confidently wrong data" },
       { "id": "R-04", "residual_rpn": 120, "risk": "No willingness to pay" },
       { "id": "R-14", "residual_rpn": 108, "risk": "Unit economics do not close" },
-      { "id": "R-15", "residual_rpn": 105, "risk": "Enabling over-stocking" },
-      { "id": "R-09", "residual_rpn": 96, "risk": "Pendulum instability" }
+      { "id": "R-15", "residual_rpn": 105, "risk": "Enabling over-stocking" }
     ],
-    "the_pattern": "The top residual risks are NOT the dramatic ones (crash, poisoning). They are silent data corruption, commercial non-viability, and second-order harms. Dramatic risks attract engineering attention and get mitigated hard; quiet risks do not, so their residual scores stay high. A team that only worries about crashes is worrying about the wrong things.",
-    "category_distribution": { "safety": 4, "commercial": 2, "technical": 2, "operational": 2, "financial": 1, "regulatory": 1, "environmental": 1, "reputational": 1, "data_security": 1 }
+    "the_pattern": "The top residual risks are NOT the dramatic ones (crash, poisoning). They are silent data corruption, commercial non-viability, and second-order harms — and the pattern now holds across the whole platform, not just the hardware: R-18 (unverified self-reported farm logs) is the Phase 1/2 software mirror of R-01 (drifted sensors), and it now outranks it. Dramatic risks attract engineering attention and get mitigated hard; quiet risks do not, so their residual scores stay high. A team that only worries about crashes — or only about churn — is worrying about the wrong things.",
+    "category_distribution": { "safety": 4, "commercial": 4, "technical": 2, "operational": 2, "financial": 1, "regulatory": 1, "environmental": 1, "reputational": 1, "data_security": 2 }
   },
 
   "how_to_use_this_register": [

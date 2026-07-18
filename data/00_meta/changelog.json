@@ -1,12 +1,33 @@
 {
   "id": "changelog",
   "title": "Repository Changelog",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
+  "version": "1.1.0",
+  "last_updated": "2026-07-18",
   "format": "Keep a Changelog 1.1.0 conventions, expressed as JSON.",
   "citation_ids": ["keep-a-changelog"],
 
   "entries": [
+    {
+      "version": "1.0.1",
+      "date": "2026-07-18",
+      "author": "AquaVision founding team (drafted with AI assistance)",
+      "summary": "Repositioned the repository narrative from a hardware-first drone company to a software-first, three-phase aquaculture platform: Phase 1 free app (acquisition) -> Phase 2 premium tier and marketplace (monetization) -> Phase 3 IoT sensors and OmniDrone (smart aquaculture, enterprise). The Phase 3 content is the same hardware engineering programme the repository already contained; it is reframed as an upgrade layer rather than the company's core product. No ids, provenance tags, or real data were changed — this is a narrative and framing rewrite, and traction.json remains honestly empty.",
+      "added": [
+        "Phase-based framing across company-profile.json, milestones-roadmap.json, team-structure.json, and brand-identity.json.",
+        "Two new product-line entries: AquaVision App (Phase 1) and AquaVision Premium (Phase 2), alongside the existing OmniDrone/OmniDock/PondTwin/Platform entries now labeled by phase.",
+        "New glossary terms: Phase 1 (Foundation), Phase 2 (Monetization), Phase 3 (Smart Aquaculture), Freemium, PondTwin.",
+        "Two new team roles: Head of Product (app & premium tier) and Growth & Community Marketing Lead, reflecting the Phase 1 acquisition focus."
+      ],
+      "known_gaps": [
+        "This pass covered data/00_meta and data/01_company only. Other sections (market sizing, business model, financials, go-to-market, hardware/software detail files) still read as hardware-first as of this entry and need the same phased reframing for the repository to be fully internally consistent.",
+        "No real user, farmer, or financial data exists for any phase. Every Phase 1/2 metric in the roadmap is a design target or illustrative planning figure, tagged as such, not a measured result."
+      ],
+      "decisions_recorded": [
+        "Chose to keep all four original product ids (omnidrone, omnidock, pondtwin, aquavision-platform) unchanged and add two new ids (aquavision-app, aquavision-premium) rather than renumber anything, since ids are treated as permanent keys elsewhere in the repository.",
+        "Chose to nest the original six-stage hardware development plan (TRL 2 through 8) inside Phase 3 as sub-stages, rather than delete or compress it, because that engineering rigor is still valid — only its position in the company's story changed.",
+        "Chose not to invent specific user, revenue, or conversion numbers for Phase 1/2 milestones; used order-of-magnitude illustrative targets tagged design_target instead, consistent with the existing rule that traction.json stays honestly empty until real."
+      ]
+    },
     {
       "version": "1.0.0",
       "date": "2026-07-17",

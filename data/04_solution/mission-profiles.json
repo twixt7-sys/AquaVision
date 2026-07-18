@@ -1,10 +1,12 @@
 {
   "id": "mission-profiles",
   "title": "Mission Profiles",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
+  "version": "1.1.0",
+  "last_updated": "2026-07-18",
   "provenance": "design_target",
   "confidence": "low",
+
+  "phase_scope_note": "AquaVision is now a phased platform (see solution-overview.json): a free Phase 1 app, a paid Phase 2 analytics/marketplace layer, and a Phase 3 hardware upgrade (IoT sensors, water probes, OmniDrone, PondTwin) for commercial and enterprise operators. Everything in this file — every sortie, station count, and duration below — describes the Phase 3 hardware layer specifically. Phases 1 and 2 have no flight operations at all; this document does not apply to them.",
 
   "CRITICAL_WARNING": "Every duration, distance, and station count below is a DESIGN TARGET derived from the energy budget in power-energy-budget.json, which is itself a paper model with no flight data behind it. These are the missions we are designing toward, not missions that have been flown. If the energy budget does not close in Phase 0, these profiles change or the concept changes. Do not put these numbers in a customer proposal.",
 

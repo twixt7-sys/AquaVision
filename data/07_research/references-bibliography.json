@@ -3,7 +3,7 @@
   "title": "Consolidated Bibliography",
   "version": "1.0.0",
   "last_updated": "2026-07-17",
-  "description": "Every citation_id used anywhere in this repository resolves here. Entries carry a verification_status that MUST be read before use.",
+  "description": "Every citation_id used anywhere in this repository resolves here. Entries carry a verification_status that MUST be read before use. The corpus now underpins a phased platform (Phase 1 app, Phase 2 premium tier, Phase 3 hardware) rather than a hardware-only pitch — see literature-review.json for how each thematic collection maps to a phase. No entries below were altered, added, or removed for that reframing.",
 
   "CRITICAL_WARNING_READ_BEFORE_CITING": {
     "statement": "Most entries below carry verification_status: cited_from_search_result. That means the bibliographic details came from a search engine's summary and NOBODY HAS OPENED THE SOURCE.",

@@ -1,80 +1,96 @@
 {
   "id": "pricing-revenue",
   "title": "Pricing & Revenue Model",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
+  "version": "2.0.0",
+  "last_updated": "2026-07-18",
   "provenance": "modeled_projection",
   "confidence": "speculative",
 
-  "READ_THIS_FIRST": "There are NO prices in this file, and that is deliberate. Pricing requires knowing the cost to serve (a BOM with zero real quotes), the value delivered (unproven), and willingness to pay (unmeasured). Inventing a subscription price now would produce a number that flows into the financial model and the funding ask and is wrong at the root. This file gives the pricing LOGIC and the inputs required, so a real price can be set the moment Phase 0 supplies them. A founder who says 'here is how we will price and here is what we need to know first' is more credible than one who presents a confident price built on nothing.",
+  "READ_THIS_FIRST": "This file gives modeled price BANDS and revenue-model LOGIC for each of the three phases, not confirmed prices. None of the numbers below are 'verified_external' — every one is tagged 'modeled_projection' or 'assumption' and is a planning anchor, not a committed price list. The Phase 3 hardware layer keeps the prior discipline exactly: no price appears there until Phase 0 discovery supplies a real cost-to-serve and a measured willingness to pay. The Phase 1/2 software layer is new, and its bands are modeled against comparable freemium/agri-SaaS pricing patterns, not against this company's own data, because none exists yet. A founder who says 'here is our pricing logic and the bands we are testing toward' is more credible than one who presents a confident price list built on zero users.",
 
-  "pricing_philosophy": {
-    "principle": "Price against value delivered, not cost incurred — but anchor on the value the customer can VERIFY, not the value we claim.",
-    "why": "The verifiable value (aeration savings, audit-labour savings) is a floor the customer will accept because they can check it. The claimed value (avoided mortality) is a ceiling we cannot prove. Price near the verifiable floor to win the deal, and let the unverifiable upside be the reason they renew once they have seen it.",
-    "the_anti_pattern": "Pricing against avoided-mortality value would produce a high number justified by a claim we cannot substantiate, which collapses the first time a sophisticated buyer asks for evidence."
+  "the_three_phase_pricing_structure": {
+    "phase_1": "Free / near-free — the acquisition tier. No monetisation.",
+    "phase_2": "Freemium premium subscription + marketplace take-rate + consultation fees — the monetisation tier.",
+    "phase_3": "Hardware-as-a-service deployment pricing — the enterprise tier, priced against loss avoidance and aeration savings rather than hardware cost, exactly as in the original hardware-first plan."
   },
 
-  "the_pricing_inputs_required": [
-    { "input": "Cost to serve per site per period", "source": "Real BOM + measured maintenance labour + dock amortisation + battery opex + field ops", "status": "NOT KNOWN", "criticality": "blocking" },
-    { "input": "Aeration electricity spend per operator", "source": "Phase 0 farmer discovery", "status": "NOT KNOWN", "note": "This is the verifiable-value anchor. It may be the single most important pricing input." },
-    { "input": "Feed spend and current FCR per operator", "source": "Phase 0", "status": "NOT KNOWN" },
-    { "input": "Measured willingness to pay", "source": "Paid pilots, not surveys", "status": "NOT KNOWN", "note": "Stated WTP in agri surveys is inflated. Only a paid invoice is evidence." },
-    { "input": "Number of cages/stations per site", "source": "Phase 0", "status": "NOT KNOWN", "note": "Drives per-cage pricing and the buoy crossover threshold." }
-  ],
+  "phase_1_foundation_pricing": {
+    "tier": "Free",
+    "price": { "amount": 0, "currency": "PHP" },
+    "provenance": "design_target",
+    "confidence": "high",
+    "what_it_includes": ["AI-assisted fish farming guide and setup assistant", "Water quality logging (manual/photo entry)", "Feeding schedules and record keeping", "Photo-based disease identification (basic)", "Community discussions and learning modules"],
+    "why_free_not_near_free": "Any price, however small, reintroduces the affordability barrier this tier exists to remove, and adds payment-friction cost (processing, support tickets, churn at the paywall) that a true free tier avoids. 'Near-free' is kept in the model name only as a fallback if Phase 0-equivalent app discovery finds a reason a token price improves retention (e.g. loss-aversion effects reported in some freemium literature) — but the default plan is USD/PHP 0.",
+    "cost_to_serve_this_tier": "Hosting and inference cost per free user, modeled at a few US cents to roughly USD 0.50 per active user per month depending on AI feature usage (disease-ID inference is the most compute-intensive free feature). NOT MEASURED — no real usage data exists yet.",
+    "provenance_of_cost_estimate": "assumption"
+  },
 
-  "candidate_pricing_structures": [
-    {
-      "structure": "Per-site monitoring subscription (monthly or per-cycle)",
-      "pro": "Predictable revenue, aligns our incentive with uptime, keeps the data relationship alive, spreads cost so no capital barrier.",
-      "con": "Requires the customer to value ongoing service, not a one-time fix.",
-      "verdict": "Most likely primary model."
+  "phase_2_monetization_pricing": {
+    "premium_subscription": {
+      "candidate_price_band": { "min": 5, "max": 25, "currency": "USD", "period": "month", "per": "farm account" },
+      "provenance": "modeled_projection",
+      "confidence": "low",
+      "how_this_band_was_modeled": "Anchored against two reference points, neither of which is company data: (1) comparable freemium farm-management / agri-SaaS apps globally typically price premium tiers in the low-tens-of-dollars-per-month range; (2) the pricing philosophy carried over from the original plan — price near value the farmer can VERIFY (time saved vs. manual logging, feed-cost savings from better FCR) rather than against the harder-to-prove predictive-health upside. The band is wide because neither anchor is measured for this specific product or market.",
+      "what_it_includes": ["Premium analytics and predictive health monitoring", "Smart feeding/stocking recommendations", "Priority support"],
+      "the_pricing_inputs_still_required": [
+        { "input": "Measured willingness to pay among Phase 1 free users who hit the upgrade prompt", "status": "NOT KNOWN", "criticality": "blocking" },
+        { "input": "Actual conversion-triggering feature (which premium feature people upgrade FOR)", "status": "NOT KNOWN" },
+        { "input": "Local purchasing power in the primary launch geography (Philippines) vs. a USD-denominated price", "status": "NOT KNOWN", "note": "A USD 5-25/month band may be correctly priced for a 'growing commercial farm' and badly overpriced for an aspirational smallholder who upgraded too early. Tiering or PPP-adjusted local pricing may be required." }
+      ]
     },
-    {
-      "structure": "Per-cage or per-station pricing",
-      "pro": "Scales with the customer's operation and with our cost to serve.",
-      "con": "Complex to explain; may penalise the dense clusters that are our best economics.",
-      "verdict": "Possible modifier on the subscription."
+    "marketplace_take_rate": {
+      "candidate_rate_band": { "min_pct": 8, "max_pct": 15, "unit": "percent of transaction value" },
+      "provenance": "modeled_projection",
+      "confidence": "low",
+      "how_this_band_was_modeled": "Anchored against typical agri/e-commerce marketplace commission rates (commonly 5-20 percent depending on category and logistics involvement). No AquaVision-specific transaction data exists.",
+      "applies_to": "Feed, equipment, and buyer-side transactions conducted through the in-app marketplace.",
+      "open_question": "Whether AquaVision handles payment/logistics (justifies the higher end) or is purely a lead-referral layer (justifies the lower end). NOT DECIDED."
     },
-    {
-      "structure": "Cooperative group subscription",
-      "pro": "Amortises one dock across many members — converts an impossible per-farm cost into a viable per-member fee. The smallholder route.",
-      "con": "Requires the co-op to have a levy mechanism (unconfirmed).",
-      "verdict": "Essential for the smallholder segment."
-    },
-    {
-      "structure": "Dispensing/treatment delivery as a metered service",
-      "pro": "Pay-per-use for a discrete valuable action.",
-      "con": "Small revenue if dispensing is repositioned as treatment-only (which the engineering suggests it should be).",
-      "verdict": "Ancillary."
-    },
-    {
-      "structure": "Institutional/programme contract (BFAR, LGU, development finance)",
-      "pro": "Larger, more stable, aligned with the public-good framing. Funds smallholder reach.",
-      "con": "Procurement cycles are long; different sales motion entirely.",
-      "verdict": "A distinct and important stream, not a substitute for commercial revenue."
-    },
-    {
-      "structure": "Outcome-based / risk-share pricing",
-      "pro": "Maximally aligned; addresses the trust problem by putting our fee at risk.",
-      "con": "We cannot bear that risk before validation, and attributing outcomes is a measurement nightmare (see the control-group problem in methodology.json).",
-      "verdict": "Aspirational. Interesting once validated; dangerous before."
+    "consultation_fees": {
+      "candidate_model": "Per-session fee paid by the farmer, split between AquaVision and the consulting aquaculturist/vet.",
+      "candidate_price_band": { "min": 3, "max": 20, "currency": "USD", "per": "session" },
+      "candidate_platform_share_band": { "min_pct": 15, "max_pct": 30, "unit": "percent of session fee" },
+      "provenance": "modeled_projection",
+      "confidence": "speculative",
+      "how_this_band_was_modeled": "Anchored against typical telehealth/expert-marketplace session pricing and platform take-rates in adjacent gig-expert marketplaces. No aquaculture-specific comparable was found and none of this is measured against actual willingness to pay for aquaculture consultation specifically.",
+      "the_supply_side_risk": "This stream requires recruiting and retaining paid aquaculturists/vets willing to work through the platform — an unvalidated two-sided marketplace problem, not just a pricing problem."
     }
-  ],
-
-  "the_hardware_question": {
-    "should_we_sell_the_drone": "Almost certainly not, at least initially.",
-    "reasoning": [
-      "A USD 20k+ capital ask to a fish farm is a non-starter on affordability and on gadget-fatigue.",
-      "Selling the hardware transfers maintenance and calibration responsibility to a customer who cannot do it, which destroys the data quality the whole product depends on.",
-      "Service retention keeps the data relationship, which is the moat.",
-      "We WANT the drones back in our docks being maintained by our people, because a fouled sensor in a customer's hands produces confidently wrong data that damages our reputation, not just theirs."
-    ],
-    "model": "AquaVision owns the hardware; the customer buys the service. Monitoring-as-infrastructure, not equipment sales."
   },
 
-  "revenue_projection_status": {
-    "statement": "No revenue projection appears here.",
-    "why": "It would require a price (unknown), a customer count (unknown), and a conversion rate (unknown), multiplied together into a number that would look authoritative and be meaningless. See financial-projections.json, which builds a SCENARIO STRUCTURE rather than a forecast, precisely so the assumptions are visible and attackable.",
-    "when_this_gets_filled_in": "After Phase 0 supplies the cost, the aeration-spend anchor, and at least one paid-pilot WTP data point. Not before."
+  "phase_3_smart_aquaculture_pricing": {
+    "carried_forward_from_the_original_hardware_plan": "The logic below is unchanged from the prior single-phase version of this file — it was already disciplined and remains correct for the Phase 3 hardware-as-a-service layer.",
+    "pricing_philosophy": {
+      "principle": "Price against value delivered, not cost incurred — anchor on the value the customer can VERIFY, not the value we claim.",
+      "why": "Verifiable value (aeration savings, audit-labour savings) is a floor the customer will accept because they can check it. Claimed value (avoided mortality) is a ceiling we cannot prove. Price near the verifiable floor to win the deal, and let the unverifiable upside be the reason they renew once they have seen it."
+    },
+    "should_we_sell_the_hardware_outright": {
+      "answer": "Almost certainly not.",
+      "reasoning": ["A five-figure-USD capital ask to a fish farm is a non-starter on affordability and gadget-fatigue.", "Selling the hardware transfers maintenance and calibration responsibility to a customer who cannot do it, which destroys the data quality the whole product depends on.", "Service retention keeps the data relationship, which is the moat."],
+      "model": "AquaVision owns the hardware; the customer buys the monitoring service — hardware-as-a-service, not equipment sales."
+    },
+    "the_pricing_inputs_required": [
+      { "input": "Cost to serve per site per period", "source": "Real BOM + measured maintenance labour + dock amortisation + battery opex + field ops", "status": "NOT KNOWN", "criticality": "blocking" },
+      { "input": "Aeration electricity spend per operator", "source": "Farmer discovery", "status": "NOT KNOWN", "note": "The verifiable-value anchor; possibly the single most important pricing input." },
+      { "input": "Feed spend and current FCR per operator", "source": "Farmer discovery", "status": "NOT KNOWN" },
+      { "input": "Measured willingness to pay", "source": "Paid pilots, not surveys", "status": "NOT KNOWN" },
+      { "input": "Number of cages/stations per site", "source": "Farmer discovery", "status": "NOT KNOWN", "note": "Drives per-cage pricing and the buoy-crossover threshold." }
+    ],
+    "candidate_pricing_structures": [
+      { "structure": "Per-site monitoring subscription (monthly or per-cycle)", "verdict": "Most likely primary model." },
+      { "structure": "Per-cage or per-station pricing", "verdict": "Possible modifier on the subscription." },
+      { "structure": "Cooperative group subscription", "verdict": "Essential for the smallholder-adjacent hardware segment (co-op amortises one dock across members)." },
+      { "structure": "Deployment/installation fee (one-time)", "verdict": "Covers dock siting and setup cost distinct from ongoing subscription." },
+      { "structure": "Institutional/programme contract (BFAR, LGU, development finance)", "verdict": "A distinct and important stream, not a substitute for commercial revenue." },
+      { "structure": "Outcome-based / risk-share pricing", "verdict": "Aspirational. Interesting once validated; dangerous before." }
+    ],
+    "revenue_projection_status": {
+      "statement": "No hardware revenue projection appears here.",
+      "why": "It would require a price (unknown), a customer count (unknown), and a conversion rate (unknown), multiplied into a number that would look authoritative and be meaningless. See financial-projections.json."
+    }
+  },
+
+  "cross_phase_notes": {
+    "why_no_single_price_list": "Three genuinely different pricing problems sit under one brand: a zero-price acquisition tier, a freemium conversion problem with an unmeasured willingness-to-pay, and a hardware-as-a-service problem that requires a real BOM before any number is honest. Collapsing them into one pricing page would hide which numbers are guessable now (Phase 1/2, against comparable software businesses) and which are genuinely unknowable before physical-world discovery (Phase 3).",
+    "when_this_gets_filled_in": "Phase 1/2 bands tighten as soon as real conversion and usage data exist post-launch — weeks, not seasons. Phase 3 numbers fill in only after farmer discovery and a real sonde/drone BOM, exactly as before — this has not gotten easier just because the company also has a software product now."
   }
 }

@@ -9,6 +9,8 @@
 
   "why_this_theme_carries_the_ROI_argument": "Feed is the only loss category in this repository where the value of an improvement can be computed from EXTERNALLY SOURCED numbers rather than from our own assumptions. That makes it the ROI argument a sceptical buyer can check without trusting us — which is worth more than a bigger number they have to take on faith.",
 
+  "phase_relevance": "This collection now grounds the Phase 1 feeding-schedule feature (the free/low-cost app's evidence-based feeding guidance) as much as it grounds any Phase 3 dispensing hardware — arguably more so, since the synthesis below already concludes bulk/precision feed dispensing from an aircraft is not viable and that a software feeding schedule driven by logged water conditions is the more defensible intervention. The FCR economics, the reflexive feed-quality/water-quality loop, and the caution against naive feed-cost-per-gain arithmetic apply directly to a Phase 1 feature that recommends feeding timing/amount from farmer-logged data, with the same 'the loop is well-supported, our ability to break it is not' caveat carried forward.",
+
   "studies": [
     {
       "citation_id": "innovasea-fcr-guide",

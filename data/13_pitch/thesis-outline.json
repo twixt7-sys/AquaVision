@@ -1,68 +1,68 @@
 {
   "id": "thesis-outline",
   "title": "Thesis / Dissertation Outline",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
+  "version": "2.0.0",
+  "last_updated": "2026-07-18",
   "provenance": "design_target",
-  "note": "A chapter structure for an engineering/technology thesis on the OmniDrone concept, mapped to the repository files that supply each chapter. Written for a DESIGN-AND-FEASIBILITY thesis (which is what TRL 3 supports), with a clear path to a results-bearing thesis once validation data exists.",
+  "note": "A chapter structure for an engineering/technology thesis, situated within AquaVision's phased software-to-hardware aquaculture platform, mapped to the repository files that supply each chapter. The engineering deep-dive remains the Phase 3 autonomous aerial subsystem — the OmniDrone concept — since that is what the design-and-feasibility thesis format (TRL 3) actually supports; the Phase 1 free app and Phase 2 premium tier are described as the business and data context the Phase 3 subsystem is built into, not as this thesis's own engineering contribution. Written for a DESIGN-AND-FEASIBILITY thesis, with a clear path to a results-bearing thesis once validation data exists on either layer.",
 
   "the_honest_framing": {
-    "what_kind_of_thesis_this_can_be_now": "A design, specification, and feasibility study with a pre-registered validation methodology. It contributes a problem analysis, a system architecture, an identified research gap, and a testable plan. It does NOT contribute empirical results, because none exist.",
-    "what_it_becomes_after_validation": "An empirical thesis once Phase 2-3 data exists — the profile-vs-reference agreement, the calibration-uncertainty curve, and the stratification-precursor analysis are all publishable results.",
-    "the_discipline": "Write in proposal/design tense now. Do not use results language until there are results. A committee will forgive an honest feasibility study; it will fail a study that claims validation it does not have.",
-    "the_tempting_error": "Presenting the synthetic sample data as results. The illustrative_synthetic data exists ONLY to build the webpage. It must never appear in a results chapter. See sample-telemetry.json."
+    "what_kind_of_thesis_this_can_be_now": "A design, specification, and feasibility study of AquaVision's Phase 3 autonomous aerial subsystem, situated within the phased platform it belongs to. It contributes a problem analysis spanning the whole platform, a Phase 3 system architecture, an identified engineering research gap, and a testable Phase 3 validation plan. It does NOT contribute empirical results for either the software funnel or the hardware, because neither has been built, launched, or flown.",
+    "what_it_becomes_after_validation": "An empirical thesis once Phase 1-2 usage data and Phase 3 field data both exist — the app's activation and conversion behaviour is one empirical track (a separate, software-adoption study), and the drone's profile-vs-reference agreement, calibration-uncertainty curve, and stratification-precursor analysis are another (this thesis's own empirical track). They are publishable on different timelines and, most likely, in different papers.",
+    "the_discipline": "Write in proposal/design tense now for the hardware, and in an equally cautious tense for any claim about the software platform's users or business performance, since neither exists yet. A committee will forgive an honest feasibility study; it will fail a study that claims hardware validation, software traction, or user behaviour it does not have.",
+    "the_tempting_error": "Presenting the synthetic sample data as results, or presenting a hypothetical user-adoption or conversion curve as if it were observed. The illustrative_synthetic data exists ONLY to build the webpage; no app has shipped and no user has used it. Neither may appear in a results chapter. See sample-telemetry.json."
   },
 
   "chapters": [
     {
       "n": 1,
       "title": "Introduction",
-      "contents": ["Background: the aquaculture inflection and its significance", "Problem statement", "The reframe: monitoring as a labour-economics problem", "Research questions and objectives", "Scope and delimitation (what the system does NOT do)", "Significance of the study", "Thesis structure"],
-      "source_files": ["problem-statement.json", "problem-taxonomy.json#/coverage_legend", "solution-overview.json#/what_the_system_is_not"],
-      "note": "Use the problem taxonomy's coverage classification as the scope delimitation — it's already structured as inclusion/exclusion criteria."
+      "contents": ["Background: the aquaculture inflection, and why almost none of the resulting industry is digitally managed at any price point", "AquaVision's phased platform, briefly: a free software layer (Phase 1) and a premium software layer (Phase 2) that build an engaged user base and a longitudinal farm-data record, ahead of the autonomous aerial hardware layer (Phase 3) this thesis studies in depth", "Problem statement", "The reframe: monitoring as a labour-economics problem, and customer acquisition as a sequencing problem that a hardware-first company cannot solve cheaply", "Research questions and objectives (scoped to the Phase 3 subsystem)", "Scope and delimitation: the Phase 1/2 software layers are described as business and data context only, not as an engineering contribution of this thesis; what the Phase 3 system does NOT do", "Significance of the study", "Thesis structure"],
+      "source_files": ["problem-statement.json", "problem-taxonomy.json#/coverage_legend", "solution-overview.json#/what_the_system_is_not", "business-model-canvas.json"],
+      "note": "Use the problem taxonomy's coverage classification as the scope delimitation — it's already structured as inclusion/exclusion criteria. Keep the Phase 1/2 material to a few paragraphs; it motivates the Phase 3 design, it isn't a parallel subject of study here."
     },
     {
       "n": 2,
       "title": "Review of Related Literature and Studies",
-      "contents": ["The five-move argument (aquaculture context → failure mechanism → monitoring gap → remote-sensing calibration problem → digital-twin observation famine)", "Thematic synthesis across the eight study collections", "The identified research gap", "Counter-evidence and inconvenient findings", "Theoretical framework"],
+      "contents": ["The five-move argument (aquaculture context → failure mechanism → monitoring gap → remote-sensing calibration problem → digital-twin observation famine)", "Thematic synthesis across the eight study collections", "The identified research gap", "Counter-evidence and inconvenient findings", "Theoretical framework", "A brief situating note on why a software-first acquisition layer precedes the hardware in this platform's go-to-market, cited only to establish context for the Phase 3 data pipeline, not reviewed in the same depth as the UAV/water-quality literature"],
       "source_files": ["literature-review.json", "studies-water-quality-sensing.json", "studies-uav-remote-sensing.json", "studies-harmful-algal-blooms.json", "studies-ai-ml-aquaculture.json", "studies-digital-twin.json", "studies-fish-health-disease.json", "studies-feeding-nutrition.json", "studies-socioeconomic-adoption.json", "research-gaps.json", "theoretical-framework.json", "references-bibliography.json"],
       "the_advice": "Lead with the Laguna de Bay triad (DO + ammonia + H2S) — it's a published, mechanistic, Philippine finding that independently justifies the vertical-profiling design. Don't bury your best evidence. AND: verify every citation before submission — the bibliography currently has ZERO opened sources.",
       "critical_warning": "The bibliography is a scaffold, not a finished reference list. Every source must be retrieved and confirmed before this chapter is submitted. See references-bibliography.json#/CRITICAL_WARNING_READ_BEFORE_CITING."
     },
     {
       "n": 3,
-      "title": "System Design and Specification",
-      "contents": ["Concept of operations", "Requirements baseline with traceability", "Hardware architecture (airframe, winch, sensors, dispensing, power, dock)", "Software architecture (pipeline, fusion, models, twin, telemetry, API)", "The core architectural contribution: self-calibrating observation", "Design trade-offs and the mass-budget finding"],
+      "title": "Phase 3 System Design and Specification",
+      "contents": ["Where this subsystem sits in the platform: the hardware layer sold as an upgrade into farms already using Phases 1-2, not the company's first product", "Concept of operations", "Requirements baseline with traceability", "Hardware architecture (airframe, winch, sensors, dispensing, power, dock)", "Software architecture (pipeline, fusion, models, twin, telemetry, API)", "The core architectural contribution: self-calibrating observation", "Design trade-offs and the mass-budget finding"],
       "source_files": ["concept-of-operations.json", "omnidrone-specifications.json", "probe-winch-subsystem.json", "sensor-payload.json", "airframe-propulsion.json", "carriage-ejection-system.json", "power-energy-budget.json", "docking-station.json", "system-architecture.json", "data-pipeline.json", "ai-ml-models.json", "digital-twin.json", "telemetry-schema.json"],
       "note": "The mass-budget analysis (which does NOT close fully-configured) is a genuine engineering finding and belongs here honestly, not hidden. It demonstrates rigorous feasibility analysis — a strength, not a weakness."
     },
     {
       "n": 4,
       "title": "Methodology",
-      "contents": ["Research design (mixed-methods, sequential)", "The validation study design", "The control-group problem and its ethical resolution", "Data quality protocol", "Analysis plan (Bland-Altman for agreement, calibration-uncertainty curves, mixed-effects for chronic loss)", "Ethics", "Validity threats", "Falsification conditions"],
+      "contents": ["Research design (mixed-methods, sequential)", "The Phase 3 validation study design", "The control-group problem and its ethical resolution", "Data quality protocol", "Analysis plan (Bland-Altman for agreement, calibration-uncertainty curves, mixed-effects for chronic loss)", "Ethics", "Validity threats", "Falsification conditions"],
       "source_files": ["methodology.json"],
-      "note": "This chapter is unusually strong for a feasibility thesis because the methodology is pre-registered. The control-group ethical analysis and the explicit falsification conditions are genuine scholarly contributions. Foreground them."
+      "note": "This chapter is unusually strong for a feasibility thesis because the methodology is pre-registered. The control-group ethical analysis and the explicit falsification conditions are genuine scholarly contributions. Foreground them. A companion methodology for validating the Phase 1/2 software (activation, retention, conversion) is out of scope for this thesis and belongs to a separate empirical study once the app exists."
     },
     {
       "n": 5,
       "title": "Results",
       "status": "AWAITING DATA",
       "contents_when_available": ["Profile-vs-reference agreement (RQ1)", "Calibration-uncertainty-vs-N curve (RQ2)", "Stratification precursor analysis (RQ3)", "Chronic-loss correlation (RQ4)", "Adoption/behaviour-change findings (RQ5)"],
-      "current_state": "EMPTY. No results exist. In the feasibility version of the thesis, this chapter is replaced by 'Feasibility Analysis' — the payload budget, the energy budget, and the risk analysis, which ARE completable now and constitute an analytical feasibility result.",
+      "current_state": "EMPTY. No results exist for the Phase 3 hardware, and no software-adoption data exists either. In the feasibility version of the thesis, this chapter is replaced by 'Feasibility Analysis' — the payload budget, the energy budget, and the risk analysis, which ARE completable now and constitute an analytical feasibility result.",
       "source_files_for_feasibility_version": ["power-energy-budget.json#/mission_energy_analysis", "omnidrone-specifications.json#/the_mass_budget", "risk-register-fmea.json"],
-      "the_hard_rule": "Do NOT populate this with synthetic sample data. Ever."
+      "the_hard_rule": "Do NOT populate this with synthetic sample data, and do NOT populate it with a hypothetical app-usage or conversion curve. Ever."
     },
     {
       "n": 6,
       "title": "Discussion",
-      "contents": ["Interpretation of the feasibility analysis", "The system's contribution to the identified gap", "Limitations (weather, benthic blind spot, affordability, unvalidated prediction)", "The ethical tensions (over-stocking, antimicrobial use, equity, surveillance)", "Comparison with alternatives (USV, buoy, satellite)"],
+      "contents": ["Interpretation of the feasibility analysis", "The system's contribution to the identified gap", "Limitations (weather, benthic blind spot, affordability, unvalidated prediction)", "A brief note on the business-model limitation this thesis does not resolve: Phase 3 customers only exist if Phase 1/2 acquisition and monetization work, which is itself unproven", "The ethical tensions (over-stocking, antimicrobial use, equity, surveillance)", "Comparison with alternatives (USV, buoy, satellite)"],
       "source_files": ["swot-porter.json", "competitive-landscape.json", "ethics-data-privacy.json", "risk-register-fmea.json"],
       "note": "The limitations and ethical-tensions sections are where an honest thesis distinguishes itself. Include the over-stocking paradox and the affordability barrier as first-class discussion points, not buried caveats."
     },
     {
       "n": 7,
       "title": "Conclusion and Recommendations",
-      "contents": ["Summary of contributions", "Answers to the research questions (to the extent the feasibility study can answer them)", "Recommendations for the next development phase", "Future work (the validation programme)"],
+      "contents": ["Summary of contributions", "Answers to the research questions (to the extent the feasibility study can answer them)", "Recommendations for the next development phase, including sequencing Phase 3 field validation against Phase 2 customer emergence rather than a fixed calendar date", "Future work (the Phase 3 validation programme, and, separately, a software-adoption study once the app has real users)"],
       "source_files": ["milestones-roadmap.json", "methodology.json#/what_would_falsify_the_whole_thesis"]
     }
   ],
@@ -76,12 +76,12 @@
   "the_contribution_statement": {
     "what_this_thesis_genuinely_contributes": [
       "A structured problem analysis grounding a documented, recurring, mechanistically-understood failure mode in published evidence.",
-      "A reframing of the monitoring problem as labour-economics rather than instrumentation.",
-      "A system architecture whose central novelty is self-generated calibration ground truth, addressing a gap the UAV water-quality literature repeatedly identifies.",
-      "A feasibility analysis (mass, energy, risk) that honestly reports where the concept does and does not close.",
+      "A reframing of the monitoring problem as labour-economics rather than instrumentation, and of customer acquisition as a sequencing problem a hardware-first company cannot solve cheaply.",
+      "A system architecture whose central novelty is self-generated calibration ground truth, addressing a gap the UAV water-quality literature repeatedly identifies — specified as the Phase 3 layer of a phased software-to-hardware platform.",
+      "A feasibility analysis (mass, energy, risk) that honestly reports where the Phase 3 concept does and does not close.",
       "A pre-registered validation methodology including an ethical resolution to the control-group problem and explicit falsification conditions."
     ],
-    "what_it_does_not_claim": "Empirical validation of any performance or predictive capability. That is future work, and the thesis says so plainly.",
-    "why_this_is_a_legitimate_thesis": "A design-and-feasibility study with a rigorous problem analysis, an identified gap, a specified system, and a pre-registered method is a complete and defensible scholarly contribution at this stage. It becomes a stronger, results-bearing thesis after the validation season — but it does not need to overclaim to be worth defending now."
+    "what_it_does_not_claim": "Empirical validation of any performance or predictive capability for the hardware, and no claim whatsoever about software user adoption, retention, or conversion — none of that data exists. Both are future work, and the thesis says so plainly.",
+    "why_this_is_a_legitimate_thesis": "A design-and-feasibility study with a rigorous problem analysis, an identified gap, a specified system, and a pre-registered method is a complete and defensible scholarly contribution at this stage. Situating that Phase 3 system honestly within the company's phased go-to-market strengthens the significance argument without expanding the thesis's empirical claims beyond what it has actually built. It becomes a stronger, results-bearing thesis after the validation season — but it does not need to overclaim, on either layer, to be worth defending now."
   }
 }

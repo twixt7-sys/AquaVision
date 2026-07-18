@@ -6,6 +6,11 @@
   "provenance": "assumption",
   "note": "SDG alignment is easy to overclaim — every startup maps itself to half the goals. This file distinguishes goals the product GENUINELY and DIRECTLY serves from ones it touches tangentially, and it flags where the product's second-order effects could run AGAINST a goal. An honest SDG map includes the tensions.",
 
+  "phase_context": {
+    "statement": "AquaVision is now three layers, and the SDG story differs by layer. Phase 1 (free app: guided setup, AI assistant, water-quality logging, disease ID, learning modules, community) is the mechanism that reaches smallholders who previously had NO guidance at all — this is where SDG 1, 2, and 4 land hardest, and it does so without the affordability paradox that constrains the hardware layer. Phase 2 (premium subscription, marketplace, expert consultations) is where SDG 8/9 livelihood effects strengthen as farms convert to paid tools. Phase 3 (OmniDrone/IoT/PondTwin, enterprise) is the layer this file's ORIGINAL analysis was written for — SDG 14 (depth-resolved water monitoring) and the environmental tensions below still apply there, but Phase 3 is priced for commercial/enterprise operators, so its equity contribution is weaker than Phase 1's.",
+    "honest_caveat": "Do not let the free Phase 1 tier launder the Phase 3 equity problem. A smallholder using the free app for water-quality logging is not the same as a smallholder benefiting from drone-based depth monitoring — those remain two different products with two different reach profiles."
+  },
+
   "primary_alignment": [
     {
       "sdg": 2,
@@ -31,7 +36,15 @@
       "how_directly": "moderate-strong",
       "mechanism": "Reducing feed waste (feed is ~60 percent of operating cost and a major environmental load) improves resource efficiency. Precision dosing reduces chemical and antimicrobial use.",
       "citation_ids": ["innovasea-fcr-guide"],
-      "honest_caveat": "The antimicrobial claim cuts both ways — easier dosing can mean more dosing. See the tension below."
+      "honest_caveat": "The antimicrobial claim cuts both ways — easier dosing can mean more dosing. See the tension below. Note: at Phase 1/2 this mechanism runs through farmer behaviour change (better feeding decisions from logged data and AI guidance), not sensor precision — a softer but much more widely reachable version of the same claim."
+    },
+    {
+      "sdg": 4,
+      "title": "Quality Education",
+      "target": "4.4 — increase the number of people with relevant skills for decent work and entrepreneurship; 4.7 — knowledge and skills needed to promote sustainable development",
+      "how_directly": "strong (Phase 1/2 specifically)",
+      "mechanism": "The Phase 1 free app is, functionally, an extension service delivered as software: an AI-assisted fish-farming guide, structured learning modules, photo-based disease identification, and a farmer community — reaching beginners and smallholders who had no prior access to aquaculture agronomy guidance at all. This is a NEW primary alignment created by the phased pivot, not present in the old hardware-only story.",
+      "honest_caveat": "Educational reach is not the same as educational EFFECT. An AI assistant answering questions is not equivalent to extension-agent contact, and 'learning module completed' is an activity metric, not a competency or outcome metric. See measuring_impact_honestly in social-economic-impact.json — this claim needs the same counterfactual discipline as the others, not an exemption because it feels more benign."
     }
   ],
 
@@ -39,23 +52,24 @@
     {
       "sdg": 1,
       "title": "No Poverty",
-      "how_directly": "moderate",
-      "mechanism": "For smallholders, a single kill event can be financially catastrophic. Preventing or mitigating it protects livelihoods. Continuous records could unlock credit and insurance for the currently uninsurable.",
-      "honest_caveat": "Directly limited by the affordability paradox — the smallholders most exposed to poverty are the ones who cannot pay for the product. The poverty contribution depends entirely on the cooperative and institutional channels succeeding.",
+      "how_directly": "moderate (strong at Phase 1/2)",
+      "mechanism": "For smallholders, a single kill event can be financially catastrophic. Preventing or mitigating it protects livelihoods. Continuous records could unlock credit and insurance for the currently uninsurable. Critically, the Phase 1 free tier now gives this population basic record-keeping, feeding guidance, and disease-ID alerting even before any hardware or paid tier is involved — resolving, for this specific mechanism, the affordability barrier the old hardware-only story could not.",
+      "honest_caveat": "The credit/insurance upside and the catastrophic-kill-prevention upside from Phase 3 depth monitoring still depend entirely on cooperative/institutional channels and remain unresolved by affordability. The Phase 1 free-tier contribution is real but narrower: better everyday decisions and record continuity, not depth-resolved early warning. Don't conflate the two.",
       "citation_ids": ["worldbank-disease-risk-2014"]
     },
     {
       "sdg": 8,
       "title": "Decent Work and Economic Growth",
       "how_directly": "moderate",
-      "mechanism": "Removes the dangerous pre-dawn boat run (a real drowning risk), and stabilises aquaculture incomes. SDG 8.8 — safe working environments.",
-      "honest_note": "The occupational-safety angle is genuine and underused. It is a human argument, not just an efficiency one."
+      "mechanism": "Removes the dangerous pre-dawn boat run (a real drowning risk), and stabilises aquaculture incomes (SDG 8.8 — safe working environments). At Phase 2, the marketplace and paid expert consultations create a more direct livelihood channel: better input prices/access via the marketplace, and professional advice smallholders previously could not reach or afford individually.",
+      "honest_note": "The occupational-safety angle is genuine and underused, and it is specifically a Phase 3 hardware benefit. It is a human argument, not just an efficiency one. The marketplace/consultation livelihood angle is Phase 2 and unproven — no transaction volume exists yet (see kpi-definitions.json phase_1_2_saas_kpis, all awaiting_data)."
     },
     {
       "sdg": 9,
       "title": "Industry, Innovation and Infrastructure",
       "how_directly": "moderate",
-      "mechanism": "Brings precision-agriculture-grade instrumentation to a sector and geography that lacks it."
+      "mechanism": "Brings precision-agriculture-grade instrumentation to a sector and geography that lacks it (Phase 3), and, earlier and more broadly, brings basic digital record-keeping and data-driven farm management tools to smallholders who currently run entirely on paper or memory (Phase 1/2).",
+      "honest_caveat": "The Phase 1/2 infrastructure contribution is software adoption, which is a much lower bar than the Phase 3 instrumentation claim — worth stating plainly rather than letting the two blur together."
     },
     {
       "sdg": 13,
@@ -82,8 +96,8 @@
       },
       {
         "tension": "Equity (against SDG 10, Reduced Inequalities)",
-        "detail": "If the product only reaches well-capitalised commercial farms, it widens the gap between them and smallholders — the opposite of reducing inequality. Precision technology that only the rich can afford entrenches advantage.",
-        "our_response": "Cooperative and institutional channels are the mechanism for equitable reach, and they must not be allowed to slip. This is an active commitment, not an automatic outcome."
+        "detail": "The phased model changes but does not resolve this tension. Phase 1 (free) genuinely opens the door to smallholders who could never afford the old hardware-first product. But Phase 2's premium tier and Phase 3's enterprise hardware are still priced for farms that have already outgrown manual tracking — so the platform could still stratify: smallholders permanently on the free tier while capitalised farms buy their way to predictive analytics, marketplace leverage, and drone-based monitoring. A three-tier product can encode inequality just as easily as a single expensive product can, only with a free layer as cover.",
+        "our_response": "Cooperative and institutional channels remain the mechanism for equitable reach INTO Phase 2/3, and the free Phase 1 tier is itself a genuine, if partial, equity mechanism it did not have before. Neither is automatic. Whether Phase 1 usage among smallholders actually converts into better outcomes — not just into a large free user base that subsidises paid customers — is unmeasured. See kpi-smallholder-reach in kpi-definitions.json."
       },
       {
         "tension": "Privacy and surveillance (against multiple goals)",
@@ -100,8 +114,8 @@
   },
 
   "how_to_use_this": {
-    "for_impact_investors": "Lead with SDG 2, 14, and 12 (the genuine primary alignments), then volunteer the tensions. An impact investor who sees you have thought about the over-stocking paradox trusts the rest of your claims.",
+    "for_impact_investors": "Lead with SDG 2, 14, 12, and now 4 (the genuine primary alignments — 4 specifically for the Phase 1/2 free-education story), then volunteer the tensions. An impact investor who sees you have thought about the over-stocking paradox AND the free-tier-as-cover-for-stratification risk trusts the rest of your claims.",
     "for_the_thesis": "This is the significance-of-the-study section. The tensions belong in the discussion chapter as limitations, not hidden.",
-    "the_discipline": "Never map the product to a goal it does not directly serve just to fill the grid. Three strong alignments plus honest tensions beats seventeen weak ones."
+    "the_discipline": "Never map the product to a goal it does not directly serve just to fill the grid. Four strong alignments plus honest tensions beats seventeen weak ones. Adding SDG 4 because Phase 1 genuinely does deliver education-shaped value is legitimate; do not let the phased pivot become an excuse to add SDGs 10, 5, or others the product does not directly serve."
   }
 }

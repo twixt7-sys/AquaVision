@@ -2,30 +2,41 @@
   "id": "chart-market-sizing",
   "chart_type": "funnel",
   "title": "Market Sizing — Method, Not Number",
-  "subtitle": "The TAM/SAM/SOM funnel and the inputs we are missing",
-  "description": "This is deliberately NOT a set of concentric circles with dollar figures. A defensible market size needs operator counts, size distributions, and willingness-to-pay data we do not yet have. This funnel shows the METHOD and marks each stage with the specific input required to fill it. A founder who shows the method and names the missing input is more credible than one who presents a fabricated number.",
+  "subtitle": "Two TAM/SAM/SOM funnels — Phase 1/2 software market and Phase 3 hardware market — and the inputs we are missing for each",
+  "description": "This is deliberately NOT a set of concentric circles with dollar figures. A defensible market size needs operator counts, size distributions, and willingness-to-pay data we do not yet have. Because AquaVision is now two markets layered on top of each other — a broad Phase 1/2 SaaS/farm-management software market, and a narrower Phase 3 hardware-monitoring market nested inside a subset of it — this chart shows TWO funnels side by side, each marked with the specific input required to fill it. A founder who shows the method and names the missing input for BOTH markets is more credible than one who presents a fabricated number for either.",
   "provenance": "modeled_projection",
   "citation_ids": ["fao-sofia-2024"],
   "series": [
     {
-      "name": "Market definition funnel",
+      "name": "Phase 1/2 — Software/SaaS market definition funnel (farm-management app, addressable by anyone with a smartphone and a pond)",
       "provenance": "modeled_projection",
       "data": [
-        { "stage": "TAM — all aquaculture operations", "value": null, "unit": "operators", "required_input": "Global operator counts by system type", "status": "not computed", "note": "Do NOT use the USD 312.8bn industry output as TAM — that is the value of the FISH, not the addressable technology market. See industry-statistics.json#/how_to_use_these_statistics." },
-        { "stage": "SAM — reachable geography, suitable systems, above scale threshold", "value": null, "unit": "operators", "required_input": "Philippine + SEA operator counts; the buoy-crossover scale threshold", "status": "not computed", "note": "Excludes RAS, deep offshore, and single small ponds below the threshold where a buoy wins. See market-sizing-tam-sam-som.json#/market_definition." },
+        { "stage": "TAM — all aquaculture operators globally (any scale, any system)", "value": null, "unit": "operators", "required_input": "Global smallholder + commercial aquaculture operator counts, not production volume", "status": "not computed", "note": "Do NOT use the USD 312.8bn industry output as TAM — that is the value of the FISH, not the addressable software market. See industry-statistics.json#/how_to_use_these_statistics." },
+        { "stage": "SAM — reachable geography, smartphone/data access, target language and species", "value": null, "unit": "operators", "required_input": "Philippine + SEA smartphone-penetration-adjusted operator counts; species and language coverage of the initial app", "status": "not computed", "note": "Much larger than the Phase 3 SAM below because there is no capital-equipment threshold — a smallholder with a phone qualifies." },
+        { "stage": "SOM — realistic near-term free-tier signups and paid conversions", "value": null, "unit": "MAU / paying subscribers", "required_input": "Organic/community-led acquisition rate, activation rate, free-to-paid conversion rate — see kpi-definitions.json#/phase_1_2_saas_kpis, all currently awaiting_data", "status": "not computed", "note": "Constrained by acquisition and conversion funnel performance, not by a capital or regulatory barrier — this is the fundamental difference from the Phase 3 funnel below." }
+      ]
+    },
+    {
+      "name": "Phase 3 — Hardware/monitoring market definition funnel (OmniDrone + IoT + PondTwin, commercial/enterprise)",
+      "provenance": "modeled_projection",
+      "data": [
+        { "stage": "TAM — all aquaculture operations above the sensor-affordability threshold", "value": null, "unit": "operators", "required_input": "Global operator counts by system type and scale", "status": "not computed", "note": "This is the original hardware-era TAM stage, unchanged, now explicitly scoped to Phase 3 rather than to the whole company." },
+        { "stage": "SAM — reachable geography, suitable systems, above scale threshold", "value": null, "unit": "operators", "required_input": "Philippine + SEA operator counts; the buoy-crossover scale threshold", "status": "not computed", "note": "Excludes RAS, deep offshore, and single small ponds below the threshold where a buoy wins. See market-sizing-tam-sam-som.json#/market_definition. A SUBSET of the Phase 1/2 SAM above, not a separate population — the Phase 3 customer is a Phase 1/2 user who has outgrown manual tracking." },
         { "stage": "SOM — realistic near-term share", "value": null, "unit": "operators / docks", "required_input": "Dock network capacity, service capacity, regulatory permission, adoption rate", "status": "not computed", "note": "Constrained by dock coverage and BVLOS, not by demand." }
       ]
     }
   ],
   "the_blocking_inputs": {
     "provenance": "assumption",
-    "note": "Render these prominently — the missing inputs ARE the content of this chart.",
+    "note": "Render these prominently — the missing inputs ARE the content of this chart, for both funnels.",
     "inputs": [
-      { "input": "Number of aquaculture operations in the Philippines by system and scale", "source": "BFAR Philippine Fisheries Profile", "status": "NOT OBTAINED — the single most important missing datum in the repository" },
-      { "input": "Cage counts per lake (Taal, Laguna de Bay, etc.)", "source": "LGU permits, LLDA, TVPL", "status": "NOT OBTAINED" },
-      { "input": "The buoy-crossover scale threshold", "source": "Real costs + farm layouts", "status": "NOT COMPUTED — sets the SAM" },
-      { "input": "Measured willingness to pay", "source": "Paid pilots", "status": "NOT MEASURED" }
+      { "input": "Number of aquaculture operations in the Philippines by system and scale", "source": "BFAR Philippine Fisheries Profile", "status": "NOT OBTAINED — the single most important missing datum in the repository; blocks both funnels" },
+      { "input": "Smartphone/data penetration among Philippine smallholder aquaculture operators", "source": "DICT / telecom industry data", "status": "NOT OBTAINED — blocks the Phase 1/2 SAM specifically" },
+      { "input": "Organic acquisition, activation, and free-to-paid conversion rates", "source": "Live app usage once Phase 1 launches", "status": "NOT MEASURED — blocks the Phase 1/2 SOM; cannot exist before launch" },
+      { "input": "Cage counts per lake (Taal, Laguna de Bay, etc.)", "source": "LGU permits, LLDA, TVPL", "status": "NOT OBTAINED — blocks the Phase 3 SAM" },
+      { "input": "The buoy-crossover scale threshold", "source": "Real costs + farm layouts", "status": "NOT COMPUTED — sets the Phase 3 SAM" },
+      { "input": "Measured willingness to pay (subscription price and hardware-service price)", "source": "Paid pilots for Phase 3; conversion data for Phase 2", "status": "NOT MEASURED for either" }
     ]
   },
-  "rendering_guidance": "Render the funnel with the value cells EMPTY and the required-input labels filled. The honesty of the empty cells is the point. If a viewer asks 'where are the numbers', the answer — 'we need the BFAR operator counts and here is exactly why we will not guess them' — is stronger than a fabricated figure."
+  "rendering_guidance": "Render both funnels with the value cells EMPTY and the required-input labels filled. The honesty of the empty cells is the point. If a viewer asks 'where are the numbers', the answer — 'we need the BFAR operator counts and here is exactly why we will not guess them, for both the software and hardware markets' — is stronger than a fabricated figure. Render the two funnels side by side so the nesting relationship (Phase 3 SAM is a subset of Phase 1/2 SAM) is visually obvious."
 }

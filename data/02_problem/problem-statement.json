@@ -1,29 +1,158 @@
 {
   "id": "problem-statement",
   "title": "Problem Statement",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
+  "version": "2.0.0",
+  "last_updated": "2026-07-18",
 
   "the_core_problem": {
-    "one_sentence": "Aquaculture operators make decisions worth their entire annual income about a three-dimensional, fast-changing chemical environment they cannot see, using a handful of surface observations taken at the safest time of day.",
+    "one_sentence": "Fish farmers at every scale are making decisions worth their livelihood with less information than the decision deserves — beginners because nobody ever taught them what to look for, growing farms because nobody built them a tool that scales past a notebook, and large operators because the water itself changes faster than any human can watch it.",
 
-    "expanded": "A fish farmer's stock lives in a water column that stratifies, deoxygenates, blooms, and overturns on timescales of hours. The farmer's instruments — where they exist at all — measure one point, at the surface, when someone happens to be there. The gap between the resolution at which the water actually behaves and the resolution at which it is observed is where mass mortality events live. Every documented fish kill is, at bottom, a monitoring failure as much as a water quality failure: the conditions developed over days, and nobody saw them.",
+    "expanded": "The problem is not one gap, it is a hierarchy of three. At the bottom, a first-time or smallholder farmer starts a pond or a cage with no structured guidance, no habit of logging anything, no easy way to identify a disease from a photo, and no community to ask before it is too late — so they learn by losing money. One tier up, a farm that survives its first few cycles and grows past a handful of units hits a different wall: the notebook that worked for one pond does not work for fifteen, there is no analytics layer to show which unit is underperforming and why, no predictive signal before a slow decline becomes a bad cycle, and no affordable way to reach an aquaculturist or vet who could look at the data and say something useful. At the top, the largest and most exposed operators — dense cage arrays in shared lakes — face the sharpest version of the same underlying problem: a water column that stratifies, deoxygenates, blooms, and overturns on timescales of hours, observed (where it is observed at all) at one point, at the surface, when someone happens to be there. Every documented mass mortality event sits at this top tier, and it is real and catastrophic. But it is the tip of a much larger iceberg — most farmers never reach the scale where that failure mode is even their biggest risk, because they fail earlier and more quietly, for lack of basic guidance.",
 
-    "why_it_persists": "Not because the science is missing. Limnologists have understood stratification and overturn for a century, and the sensors exist and are affordable. It persists because the observation is expensive in labour, not in capital: profiling a lake cage array properly means a boat, a person, a sonde, and two hours, repeated several times a day including before dawn, at every cage, forever. Nobody does that. So the data that would prevent the loss is technically available and practically unobtainable, and the industry has quietly settled into managing by intuition and absorbing the losses."
+    "why_it_persists": "At the top tier, it persists because observation is expensive in labour, not in capital: profiling a lake cage array properly means a boat, a person, a sonde, and two hours, repeated several times a day including before dawn, at every cage, forever. Nobody does that. Further down the hierarchy it persists for a plainer reason: aquaculture extension services are thin and unevenly distributed, generic farm-management software is built for row-crop agriculture and does not know what a thermocline or an FCR is, and the knowledge that experienced farmers hold rarely gets written down, let alone digitised, in a form a beginner two provinces away can use. The industry has quietly settled into two different failure modes depending on where a farm sits on this hierarchy — beginners drop out or absorb repeated small losses they never diagnose, and large operators absorb the occasional catastrophic one — and almost nobody has built a single tool that meets a farmer where they are and grows with them."
+  },
+
+  "the_problem_hierarchy": {
+    "note": "This is the organising structure of the whole pitch and the direct rationale for a phased product rather than a single product. Each tier is a distinct problem with a distinct customer, a distinct willingness to pay, and a distinct feasible solution shape — conflating them is what the old, hardware-only framing did, and it is the mistake this rewrite exists to fix.",
+    "tiers": [
+      {
+        "tier": 1,
+        "label": "The Guidance Gap — beginners and smallholders going in blind",
+        "who": "First-time and smallholder farmers, often financing a single pond or a handful of cages against a season's income, with no formal training and no digital tool built for their situation.",
+        "the_gap": "No structured onboarding for farm setup and species/stocking decisions, no habit or easy method of logging water conditions or feeding, no accessible way to get a disease flagged from a phone photo, no peer community to ask a question before making an expensive mistake, and no record of any of it afterward to learn from.",
+        "why_it_matters": "This is the largest population of farmers in the sector by headcount and the group the old hardware-first pitch had to explicitly defer on affordability grounds. They cannot pay for hardware and should not be sold it. What they need first is free or near-free software that replaces 'ask an experienced neighbour and hope' with structured guidance.",
+        "addressed_by": "AquaVision App (Phase 1) — farm setup assistant, AI farming guidance, manual/photo water quality logging, feeding schedules, photo-based disease identification, community discussions, learning modules, digital record keeping.",
+        "provenance": "assumption",
+        "confidence": "low",
+        "honest_note": "That this is farmers' actual top-of-mind problem, that a free app is the right form for the guidance, and that free users are reachable and will engage, are all untested. See stakeholder-pain-points.json and cost-of-inaction.json for the specific assumptions and how Phase 0/1 field data should test them."
+      },
+      {
+        "tier": 2,
+        "label": "The Scaling Gap — farms that outgrow manual tracking",
+        "who": "Farms that have survived their early cycles and grown into multiple ponds or cages, often with hired staff, that are still run on paper or spreadsheets.",
+        "the_gap": "No analytics layer to compare units against each other or against the farm's own history, no predictive signal that flags a slow decline before it becomes a bad cycle, no affordable or geographically convenient access to an aquaculturist or vet, and no efficient marketplace to buy feed and equipment or find buyers — all of it done through personal networks and informal, often opaque, middlemen pricing.",
+        "why_it_matters": "This is the tier where a farm has outgrown the tool that got it started but has not yet grown into the tier below, where automated hardware monitoring becomes economical. Left unserved, growth stalls on operational blindness rather than on capital or market demand.",
+        "addressed_by": "AquaVision Premium (Phase 2) — analytics on the data logged in Phase 1, predictive health monitoring, smart recommendations, a feed/equipment/buyer marketplace, and paid expert consultations.",
+        "provenance": "assumption",
+        "confidence": "low",
+        "honest_note": "The entire premise of Phase 2 depends on Phase 1 having produced enough logged data to analyse, and on farms actually converting from free to paid once they feel this pain. Neither has happened yet — there are no users. This is a conversion-funnel hypothesis, not a measured behaviour."
+      },
+      {
+        "tier": 3,
+        "label": "The Coverage Gap — large operators who cannot see the water at the resolution it demands",
+        "who": "Commercial and enterprise cage/pond operations, typically dense arrays in shared lakes, for whom a mass mortality event is a real and recurring risk.",
+        "the_gap": "Water quality is monitored at a spatial and temporal resolution orders of magnitude coarser than the processes that kill fish. This tier is where the pre-pivot problem statement lived in full, and it still holds — see 'the_reframe' below.",
+        "why_it_matters": "This is the sharpest, most catastrophic expression of the observability problem, and the only tier where the economics of real-time automated monitoring hardware currently make sense — which is exactly why only the largest operators can afford it today, and why it is positioned as an upgrade layer rather than the entry point.",
+        "addressed_by": "AquaVision Smart (Phase 3) — IoT sensors and water probes, Omni Drone integration, the PondTwin digital twin, and an enterprise dashboard.",
+        "provenance": "literature_validated_field_unvalidated",
+        "confidence": "medium",
+        "honest_note": "This tier carries the most external evidence of the three (see incident-case-studies.json) because it produces dramatic, reported events. That is a property of what gets reported, not proof that it is the sector's largest problem in aggregate — see cost-of-inaction.json's chronic-sublethal-loss and beginner-attrition categories for why the quieter tiers may matter more in total, even though they are harder to evidence."
+      }
+    ],
+    "why_a_single_hierarchy_and_not_three_separate_pitches": "The tiers are not three unrelated markets; they are one farmer's likely path, and the platform's argument for existing at all is that it can follow a farmer up that path — acquire them for free at tier 1, earn revenue as they grow into tier 2, and sell hardware once they reach tier 3 — rather than forcing them to find three different vendors. Whether that path is actually walked by real farmers, at what rate, and over what timescale, is the single biggest unproven assumption in this repository and is treated as such throughout."
   },
 
   "the_reframe": {
-    "note": "This is the intellectual centre of the pitch. It is worth getting right.",
+    "note": "This is the intellectual centre of the tier-3 pitch specifically — the argument for why hardware, once a farm can afford it, should be a drone rather than more fixed sensors. It is not an argument for why hardware should be the company's starting point, which is the mistake the old framing made.",
     "conventional_framing": "Fish farms need better sensors.",
     "why_that_framing_is_wrong": "Sensors are not the bottleneck. A multiparameter sonde is a commodity. Fixed sensor buoys already exist and are already sold into aquaculture. The bottleneck is that a fixed sensor measures one point in a system whose defining property is spatial and vertical heterogeneity — and covering an array of thirty cages with fixed sondes at every relevant depth is an absurd capital and maintenance proposition.",
-    "our_framing": "The problem is not sensing. It is COVERAGE — moving a good sensor to many places, at many depths, many times a day, at near-zero marginal labour cost. That is a logistics problem with an aerial answer.",
-    "the_consequence": "This reframe is what makes an aerial platform the right shape of solution rather than an expensive novelty. If the problem were 'we need a DO reading', a $200 buoy wins and the drone is theatre. Because the problem is 'we need forty DO profiles a day across a lake without putting a person in a boat before dawn', the economics invert."
+    "our_framing": "The problem at this tier is not sensing. It is COVERAGE — moving a good sensor to many places, at many depths, many times a day, at near-zero marginal labour cost. That is a logistics problem with an aerial answer.",
+    "the_consequence": "This reframe is what makes an aerial platform the right shape of solution rather than an expensive novelty, for the farms that have reached this tier. If the problem were 'we need a DO reading', a $200 buoy wins and the drone is theatre. Because the problem is 'we need forty DO profiles a day across a lake without putting a person in a boat before dawn', the economics invert — for an operator large enough for that arithmetic to apply. That is a minority of farmers, which is precisely why this cannot be the whole company."
   },
 
   "problem_decomposition": [
     {
+      "id": "prob-no-farm-setup-guidance",
+      "label": "No Structured Farm Setup Guidance",
+      "phase": 1,
+      "statement": "First-time farmers choose species, stocking density, pond or cage siting, and initial water preparation with no structured guidance, relying on informal advice, guesswork, or whatever the input supplier selling them stock happens to say.",
+      "expanded": "The decisions made in the first weeks of a farm's life set the ceiling on everything that follows — an over-stocked pond or a badly sited cage is fighting its own carrying capacity from day one. A beginner has no equivalent of an onboarding checklist calibrated to their species, region, and pond type.",
+      "severity": "high",
+      "addressed_by": ["AI-assisted farm setup assistant", "guided species and stocking recommendations"],
+      "provenance": "assumption",
+      "confidence": "low"
+    },
+    {
+      "id": "prob-no-basic-logging-habit",
+      "label": "No Habit or Tool for Basic Water Quality and Feeding Logs",
+      "phase": 1,
+      "statement": "Below the tier where automated sensors make economic sense, farmers who want to track their own water quality and feeding have no purpose-built, low-friction way to do it, so almost none do it consistently.",
+      "expanded": "This is not the same problem as the tier-3 sensor coverage gap. It requires no sensor at all — a manual or photo-based entry logged consistently over a season already beats no record at every scale. The gap is a tool that makes logging easy enough that a busy, non-technical farmer actually keeps doing it.",
+      "severity": "medium",
+      "addressed_by": ["manual and photo-based water quality logging", "feeding schedule tools"],
+      "provenance": "assumption",
+      "confidence": "low"
+    },
+    {
+      "id": "prob-beginner-disease-id-access",
+      "label": "No Accessible Disease Identification for Non-Expert Farmers",
+      "phase": 1,
+      "statement": "A smallholder who notices something wrong with their fish has no affordable, immediate way to get even a preliminary read on what it might be, and typically waits for symptoms to worsen or for a visit from an extension officer who may never come.",
+      "expanded": "This is distinct from the tier-3 problem of a drone flagging an environmental stress precursor across a commercial array (see prob-disease-detection below). This is the simpler, earlier-stage problem of a single farmer with a single sick fish and no expert within reach.",
+      "severity": "high",
+      "addressed_by": ["photo-based AI disease identification (screening, not diagnosis)"],
+      "caveat": "Photo-based screening is not a veterinary diagnosis and must never be presented as one. The honest claim is faster triage toward 'this looks concerning, seek help' versus 'this looks normal' — the same diagnostic boundary drawn elsewhere in this repository for the drone's disease-adjacent claims applies here too.",
+      "provenance": "assumption",
+      "confidence": "low"
+    },
+    {
+      "id": "prob-no-peer-knowledge-sharing",
+      "label": "Isolation From Peer and Expert Knowledge",
+      "phase": 1,
+      "statement": "Farmers, especially smallholders, often work in isolation from other farmers facing the same conditions and have no digital forum to ask a question, share a photo, or learn from someone else's mistake before repeating it.",
+      "severity": "medium",
+      "addressed_by": ["community discussions", "learning modules"],
+      "provenance": "assumption",
+      "confidence": "low",
+      "honest_note": "Whether farmers will actually participate in an online community, versus preferring existing in-person and cooperative channels, is untested and is exactly the kind of assumption Phase 0 discovery should probe rather than assume."
+    },
+    {
+      "id": "prob-scaling-blindness",
+      "label": "No Analytics Once a Farm Outgrows Manual Tracking",
+      "phase": 2,
+      "statement": "A farm that grows from one or two units into a dozen or more loses the ability to compare units, spot an underperforming pond, or see a trend across cycles, because the tool that worked at small scale — a notebook or a simple spreadsheet — does not surface patterns across many units and many months.",
+      "expanded": "The farm manager can no longer personally observe every unit, and staff reports of variable quality fill the gap. The board-level question of 'why was survival 68 percent this cycle and 84 percent last cycle' has no answer, because nobody measured anything that would explain it.",
+      "severity": "high",
+      "addressed_by": ["premium analytics dashboards", "cross-unit and cross-cycle comparison"],
+      "provenance": "assumption",
+      "confidence": "low"
+    },
+    {
+      "id": "prob-no-predictive-health-tools",
+      "label": "No Predictive Signal Before Decline Becomes Loss",
+      "phase": 2,
+      "statement": "Without a model trained on a farm's own logged history, a growing farm has no early warning of a slow decline in health or productivity until it shows up as a bad harvest.",
+      "severity": "high",
+      "addressed_by": ["predictive health monitoring (ML on Phase 1 logged data)"],
+      "caveat": "This entire capability is contingent on Phase 1 first accumulating enough real, structured farm data to train on. Right now there is none. Any predictive-health claim ahead of that data existing is aspirational, not a product description, and must be labelled as such.",
+      "provenance": "assumption",
+      "confidence": "low"
+    },
+    {
+      "id": "prob-no-affordable-expert-access",
+      "label": "No Affordable or Convenient Access to Expert Consultation",
+      "phase": 2,
+      "statement": "Aquaculturists and veterinarians with real expertise are scarce relative to the number of farms, unevenly distributed geographically, and expensive to reach for a farm too small to retain one directly.",
+      "severity": "medium",
+      "addressed_by": ["paid expert consultation marketplace"],
+      "provenance": "assumption",
+      "confidence": "low"
+    },
+    {
+      "id": "prob-no-marketplace-efficiency",
+      "label": "Inefficient, Informal Input and Output Markets",
+      "phase": 2,
+      "statement": "Farms buy feed and equipment and sell their harvest through personal networks and informal middlemen, with little price transparency and no efficient way to compare suppliers or reach buyers directly.",
+      "severity": "medium",
+      "addressed_by": ["feed/equipment/buyer marketplace"],
+      "provenance": "assumption",
+      "confidence": "low",
+      "honest_note": "This is a two-sided marketplace problem, which is a different and generally harder business to build than the guidance or analytics pieces. It should not be assumed to arrive on the same timeline just because it shares a roadmap slide."
+    },
+    {
       "id": "prob-observability",
       "label": "The Observability Gap",
+      "phase": 3,
       "statement": "Water quality is monitored at a spatial and temporal resolution orders of magnitude coarser than the processes that kill fish.",
       "evidence_summary": "Fish kill investigations in Philippine lakes repeatedly attribute mortality to dissolved oxygen depletion and to ammonia and hydrogen sulfide following water column mixing — processes that develop over hours to days and are invisible to periodic surface sampling.",
       "citation_ids": ["seafdec-laguna-fishkill", "bioflux-lake-buhi-2020", "inquirer-taal-fishkill-2023"],
@@ -33,15 +162,17 @@
     {
       "id": "prob-blindness-at-depth",
       "label": "Vertical Blindness",
+      "phase": 3,
       "statement": "Surface measurements cannot detect stratification, and stratification is the precondition for the most catastrophic failure mode.",
       "expanded": "A stratified lake in the hours before an overturn can present a perfectly reassuring surface: warm, oxygenated, clear. The killing agent is sitting three metres down, anoxic and sulfide-laden, waiting for a cold rain to bring it up. A surface sensor will report 'nominal' right up to the moment of the kill, and then report the kill.",
       "severity": "critical",
       "addressed_by": ["reeled probe vertical profiling", "stratification index", "oxygen debt index"],
-      "note": "This is the strongest single technical argument for the reeled probe over every fixed-surface or imagery-only competitor. Lead with it."
+      "note": "This is the strongest single technical argument for the reeled probe over every fixed-surface or imagery-only competitor at the tier-3 scale. Lead with it once a prospect has qualified into that tier."
     },
     {
       "id": "prob-diel-sampling-bias",
       "label": "Diel Sampling Bias",
+      "phase": 3,
       "statement": "Manual sampling happens during working hours, which systematically measures the daily oxygen maximum and misses the pre-dawn minimum where mortality occurs.",
       "expanded": "This is not a small error. It is a structural bias that makes the measurement anti-correlated with the risk it is supposed to detect. A farm sampling at 09:00 and finding 7 mg/L may be hours away from a 2 mg/L pre-dawn crash — and the data says everything is fine.",
       "severity": "high",
@@ -51,14 +182,16 @@
     {
       "id": "prob-labour",
       "label": "Monitoring Labour Cost",
+      "phase": 3,
       "statement": "Adequate monitoring requires labour that no commercially rational operator will spend.",
-      "expanded": "The economics are the whole story. Proper coverage is not withheld from farmers by ignorance; it is withheld by arithmetic. Any solution that does not attack the marginal labour cost of an observation has not addressed the problem.",
+      "expanded": "The economics are the whole story at this tier. Proper coverage is not withheld from farmers by ignorance; it is withheld by arithmetic. Any solution that does not attack the marginal labour cost of an observation has not addressed the problem.",
       "severity": "high",
       "addressed_by": ["autonomy", "dock-based operation", "multi-unit coverage per sortie"]
     },
     {
       "id": "prob-reactive-response",
       "label": "Reaction Instead of Anticipation",
+      "phase": 3,
       "statement": "Interventions are triggered by visible symptoms — fish gasping at the surface — by which point the intervention window has largely closed.",
       "expanded": "By the time fish pipe at the surface, DO has already fallen through the stress threshold and the physiological damage is done; survivors carry stress-induced immunosuppression into a disease window that follows weeks later. The mortality invoice arrives twice.",
       "severity": "high",
@@ -68,16 +201,18 @@
     {
       "id": "prob-feed-waste",
       "label": "Feed Applied Without Feedback",
+      "phase": 3,
       "statement": "Feed is the dominant operating cost and is dispensed on schedule rather than on evidence, so overfeeding both wastes money and degrades the water that the feeding is meant to grow fish in.",
       "evidence_summary": "Feed commonly represents around 60 percent of aquaculture operating cost, and uneaten feed is a direct driver of the organic loading that depletes oxygen.",
       "citation_ids": ["innovasea-fcr-guide", "ussec-fcr-power", "globalseafood-fcr-primary-indicator"],
       "severity": "high",
       "addressed_by": ["carriage and ejection system", "condition-aware feeding logic"],
-      "note": "The reflexivity here is the interesting part and a strong thesis theme: overfeeding is simultaneously the largest cost line AND a cause of the water quality problem. One intervention attacks both. That is a rare structure and it should be made explicit."
+      "note": "The reflexivity here is the interesting part and a strong thesis theme: overfeeding is simultaneously the largest cost line AND a cause of the water quality problem. One intervention attacks both. That is a rare structure and it should be made explicit. At smaller scale, the Phase 1 app's feeding schedule feature addresses the same waste with a much blunter instrument: a schedule instead of a bespoke dispensing system."
     },
     {
       "id": "prob-treatment-delivery",
       "label": "Treatment Delivery Latency and Precision",
+      "phase": 3,
       "statement": "When a response is needed — aeration, lime, conditioner, treatment — delivery is manual, slow, spatially imprecise, and dangerous in the exact conditions that require it.",
       "expanded": "The moment a farm most needs someone to distribute conditioner across an array is a pre-dawn emergency in bad weather. That is also the moment it is most dangerous to put a person in a small boat. Drowning is a real occupational hazard in this sector and it is not hypothetical.",
       "severity": "high",
@@ -85,17 +220,19 @@
     },
     {
       "id": "prob-disease-detection",
-      "label": "Late Disease Detection",
-      "statement": "Disease outbreaks are detected by mortality rather than by behavioural or environmental precursors.",
+      "label": "Late Disease Detection at Commercial Scale",
+      "phase": 3,
+      "statement": "Disease outbreaks across a commercial array are detected by mortality rather than by behavioural or environmental precursors.",
       "evidence_summary": "Aquaculture disease losses are estimated by FAO at roughly USD 6 billion annually, and single pathogens such as white spot syndrome virus impose losses on the scale of billions of dollars a year in shrimp alone.",
       "citation_ids": ["worldbank-disease-risk-2014", "asian-fisheries-shrimp-disease"],
       "severity": "high",
       "addressed_by": ["surface anomaly detection", "environmental stress-window flagging"],
-      "caveat": "The OmniDrone does not diagnose disease. It detects surface anomalies and adverse environmental conditions that warrant human investigation. Claiming diagnosis would be both false and, given that treatment decisions follow, harmful."
+      "caveat": "The OmniDrone does not diagnose disease. It detects surface anomalies and adverse environmental conditions that warrant human investigation. Claiming diagnosis would be both false and, given that treatment decisions follow, harmful. This is the commercial-scale, environmental-precursor version of the problem; prob-beginner-disease-id-access above is the individual-farmer, photo-based version, and the two should not be conflated in a pitch."
     },
     {
       "id": "prob-hab",
       "label": "Harmful Algal Bloom Blindness",
+      "phase": 3,
       "statement": "Blooms are detected when they are visible or when fish die, and their spatial structure — which determines where the danger actually is — is essentially never mapped.",
       "evidence_summary": "Chlorophyll-a is the dominant remote-sensing proxy for HAB detection, used in about 80 percent of studies, and satellite-based systems have demonstrated operational early warning for aquaculture mortality events.",
       "citation_ids": ["mdpi-hab-meta-2021", "pmc-sentinel-hab-chile-2020"],
@@ -106,14 +243,16 @@
     {
       "id": "prob-data-fragmentation",
       "label": "Data Fragmentation and Loss",
+      "phase": "1_and_3",
       "statement": "Where data is collected, it lives in paper logbooks and personal memory, is not analysed, does not accumulate, and dies with the notebook.",
-      "expanded": "A farm that has operated for fifteen years should have fifteen years of priors on its own water. Almost none do. Every season starts epistemically from zero, and the sector-level consequence is that nobody can build the models that would help, because the training data was never retained.",
+      "expanded": "A farm that has operated for fifteen years should have fifteen years of priors on its own water. Almost none do. Every season starts epistemically from zero, and the sector-level consequence is that nobody can build the models that would help, because the training data was never retained. Phase 1's digital record keeping is the entry-level fix for this at any scale; Phase 3's automated telemetry is the high-resolution version of the same fix for farms large enough to need it.",
       "severity": "medium",
-      "addressed_by": ["automated logging", "digital twin", "longitudinal analytics"]
+      "addressed_by": ["digital record keeping (Phase 1)", "automated logging", "digital twin", "longitudinal analytics (Phase 3)"]
     },
     {
       "id": "prob-environmental-externality",
       "label": "Unmeasured Environmental Externality",
+      "phase": 3,
       "statement": "Aquaculture effluent drives eutrophication of the shared water body, which harms the next farm and eventually the farm that caused it — but nobody measures it, so nobody manages it.",
       "expanded": "This is a commons problem with an information vacuum at its centre. In a shared lake, each operator's stocking decision imposes oxygen demand on everyone. Without measurement there is no basis for allocating carrying capacity, so regulation is either absent or arbitrary, and the lake degrades until it kills everyone's fish at once — which is, empirically, what happens.",
       "citation_ids": ["fao-nutrient-dynamics-eutrophic", "ija-environmental-impacts-ph"],
@@ -124,8 +263,10 @@
   ],
 
   "who_bears_the_cost": [
-    { "party": "Smallholder cage operators", "burden": "Most exposed, least equipped. A single kill event can wipe out a year of income and the debt taken to finance the cycle. They are also the least able to buy any solution — which is the central commercial tension of this venture and must not be papered over." },
-    { "party": "Commercial farms", "burden": "Larger absolute losses, more capacity to absorb, more capacity to pay. The realistic first customer." },
+    { "party": "Beginner and first-time farmers", "burden": "The largest population by headcount and the primary casualty of the guidance gap. Their losses are individually small and rarely reported, but they are frequent enough, and discouraging enough, that they plausibly represent the sector's single largest source of attrition — nobody has measured this, which is itself part of the problem. See cost-of-inaction.json." },
+    { "party": "Smallholder cage operators", "burden": "Most exposed to the catastrophic tier, least equipped to absorb it. A single kill event can wipe out a year of income and the debt taken to finance the cycle. They are also the least able to buy a hardware solution — which is why they are served by the free Phase 1 tier, not sold Phase 3 equipment, and that resolution must not be papered over." },
+    { "party": "Growing / mid-scale farms", "burden": "Have outgrown manual tracking but have not reached the scale where automated sensor hardware is economical. Their losses are the quiet, uncounted cost of decisions made without analytics, predictive signal, or expert input — real, but invisible in any published statistic." },
+    { "party": "Commercial farms", "burden": "Larger absolute losses at the catastrophic tier, more capacity to absorb, more capacity to pay. The realistic first paying customer for Phase 3 hardware." },
     { "party": "Feed and fingerling suppliers", "burden": "Demand collapses after a regional kill event; carry credit exposure to farms that fail." },
     { "party": "Local economies", "burden": "Fish kills in lake economies are employment shocks, not just business losses." },
     { "party": "Consumers", "burden": "Supply shocks and price volatility." },
@@ -135,12 +276,12 @@
   "counterarguments_we_take_seriously": [
     {
       "objection": "Farmers already know when their water is bad. They have decades of experience.",
-      "our_response": "Largely true, and the product must respect it. Experienced operators read weather, wind, and fish behaviour well. But intuition cannot see a thermocline shoaling three metres down, and it cannot be awake at every cage at 04:00. The claim is not that instruments beat experience — it is that instruments extend it into the depths and hours where experience has no access.",
-      "residual_risk": "If experienced operators judge the information redundant, willingness to pay collapses. This is a genuine risk and it is what farmer discovery in Phase 0 must test honestly, including by actively seeking farmers who say no."
+      "our_response": "Largely true of experienced operators, and the product must respect it. Experienced operators read weather, wind, and fish behaviour well. But intuition cannot see a thermocline shoaling three metres down, cannot be awake at every cage at 04:00, and does not exist yet in a farmer on their first cycle. The claim is not that instruments beat experience — it is that instruments extend it into the depths and hours where experience has no access, and that guided software can compress the years it normally takes to build that experience in the first place.",
+      "residual_risk": "If experienced operators judge the information redundant, willingness to pay collapses at tier 3. If beginners judge an app redundant to asking a neighbour, acquisition collapses at tier 1. Both are genuine risks and it is what farmer discovery in Phase 0 must test honestly, including by actively seeking farmers who say no."
     },
     {
       "objection": "Information is useless without the capacity to respond. A warning at 3 a.m. to a farmer with no emergency aeration just tells them what they are about to lose.",
-      "our_response": "This is the most serious objection to the entire venture and we do not have a complete answer. It is why the dispensing subsystem matters: the platform must be able to deliver a response, not only a warning. It is also why the value proposition must be tested against farms that HAVE response capacity first.",
+      "our_response": "This is the most serious objection to the tier-3 hardware business and we do not have a complete answer. It is why the dispensing subsystem matters: the platform must be able to deliver a response, not only a warning. It is also why the value proposition must be tested against farms that HAVE response capacity first.",
       "residual_risk": "High. Listed as a kill criterion in the Phase 0 gate for exactly this reason."
     },
     {
@@ -152,13 +293,23 @@
       "objection": "The drone will spread disease between farms.",
       "our_response": "Correct, if designed carelessly. This is why decontamination is a hardware requirement rather than a procedure, and why single-site probe assignment is the default operating posture. See biosecurity-protocol.json.",
       "residual_risk": "Medium and manageable, but it must be engineered, and it costs mass and cycle time."
+    },
+    {
+      "objection": "A free app is not a business. This is repositioning as a hardware company that couldn't raise money for hardware, dressed up as 'software-first.'",
+      "our_response": "The honest version of this objection has real force and should not be waved away. The response is not that the app is secretly lucrative on its own — it plainly is not, and traction.json says so honestly with real zeros — but that it is the only credible way to reach the beginner tier at all, and it produces the logged farm data that Phase 2's analytics and Phase 3's models both need and do not currently have. If the funnel from free to paid does not work, this is a weaker business than the pitch claims, and that should be said plainly rather than discovered later.",
+      "residual_risk": "High. This is the load-bearing assumption of the entire phased strategy and it is currently untested — see the freemium conversion assumptions in cost-of-inaction.json and business-model-canvas.json."
+    },
+    {
+      "objection": "Beginners who cannot pay today will never become farms that pay tomorrow; a free tier just accumulates users who cost support time and never convert.",
+      "our_response": "Also plausible, and we do not have evidence against it. The counter-hypothesis is that some meaningful fraction of Phase 1 users grow into Phase 2 farms over multiple cycles, and that the ones who do not still generate community content and data that make the product better for those who do. Both halves of that sentence are hopes, not findings.",
+      "residual_risk": "High. Conversion rate, timescale, and support cost per free user are all unmeasured. This should be one of the first things instrumented once there are any real users at all."
     }
   ],
 
   "problem_validation_status": {
     "status": "literature_validated_field_unvalidated",
-    "what_is_established": "That fish kills occur, that they cost real money, that the mechanisms are DO depletion and post-overturn toxicity, and that monitoring is inadequate — all supported by published sources.",
-    "what_is_not_established": "That the specific operators we intend to sell to experience this as their top problem, that they would pay our price, and that they have the response capacity to act on our output. None of these are library questions. They require Phase 0 field discovery.",
-    "intellectual_honesty_note": "A problem statement built only from literature is a hypothesis about a market, not evidence of one. This one is currently a hypothesis."
+    "what_is_established": "That fish kills occur, that they cost real money, that the mechanisms are DO depletion and post-overturn toxicity, and that monitoring is inadequate at commercial scale — all supported by published sources, and all specific to the tier-3 problem. That extension services are thin and generic farm software does not serve aquaculture is a reasonable inference from the structure of the sector, not a cited finding.",
+    "what_is_not_established": "Everything about tiers 1 and 2 beyond plausibility: that beginners experience the guidance gap as their top problem, that a free app is the right form for closing it, that any meaningful fraction of free users convert to paying Phase 2 customers, and — at tier 3 — that the specific operators we intend to sell hardware to experience observability as their top problem, that they would pay our price, and that they have the response capacity to act on our output. None of these are library questions. They require Phase 0 field discovery across all three tiers, not just the top one.",
+    "intellectual_honesty_note": "A problem statement built only from literature and inference is a hypothesis about a market, not evidence of one. All three tiers of this one are currently a hypothesis, and the top tier is only somewhat less so — it has more citations, not more field validation."
   }
 }

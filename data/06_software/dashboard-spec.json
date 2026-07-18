@@ -1,97 +1,210 @@
 {
   "id": "dashboard-spec",
   "title": "Dashboard Specification",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
+  "version": "2.0.0",
+  "last_updated": "2026-07-18",
   "provenance": "design_target",
 
+  "one_shell_three_tiers": {
+    "statement": "There is one app shell, not three separate products. What a user sees is gated by tier (free / Premium / enterprise), which usually — but not always — lines up with phase (1 / 2 / 3).",
+    "tiers": [
+      { "tier": "Free — Phase 1", "audience": "Beginner and smallholder farmers, the acquisition base.", "views": ["AI assistant chat", "Farm setup wizard", "Water quality log (manual/photo entry)", "Feeding schedule & reminders", "Disease identification (photo)", "Community forum", "Learning modules", "Records / history"] },
+      { "tier": "Premium — Phase 2", "audience": "Farms that have outgrown manual tracking and want more from the same logged data, no new hardware required.", "views": ["Everything in Free, plus:", "Analytics", "Predictive health (advisory)", "Recommendations", "Marketplace", "Expert consultation booking & messaging"] },
+      { "tier": "Enterprise — Phase 3", "audience": "Commercial and large operators who have added OmniDrone/IoT hardware.", "views": ["Everything in Premium, plus:", "Site overview", "Profile view (depth-resolved)", "PondTwin", "Map", "Fleet health"] }
+    ],
+    "the_rule": "A farm can be on Premium without ever touching Phase 3 hardware — the marketplace, consultations, and analytics do not require a sensor. A farm cannot reach the Enterprise views without the hardware, because those views render data that does not exist without it."
+  },
+
   "the_governing_insight": {
-    "statement": "The dashboard must be an ANSWER, not an analytics tool.",
-    "reasoning": "The user is a farm manager at 05:30 who has forty other things to do today. She does not want to explore a dataset. She wants to know whether her fish are in danger and what to do about it. Every analytics feature we add is a question we have failed to answer for her.",
-    "the_test": "Can she get the answer in under five seconds, on a phone, in sunlight, half awake? If not, we have built a tool for ourselves and called it a product.",
-    "the_second_screen": "Everything else — the profiles, the maps, the history — lives one level down, for the days when she wants to understand rather than decide. That layer is genuinely valuable and it must not be the front door."
+    "statement": "The dashboard must be an ANSWER, not an analytics tool — and 'the answer' is a different thing depending on who is asking.",
+    "reasoning": "A free-tier beginner opening the app most days wants to know what to do today: log the water, feed on schedule, ask the assistant a question. An enterprise farm manager at 05:30 wants to know whether her fish are in danger right now. Both are the same principle — minimise the distance between opening the app and knowing what to do — applied to very different stakes and very different data richness.",
+    "the_test": "Can she get the answer in under five seconds, on a phone, in sunlight, half awake? If not, we have built a tool for ourselves and called it a product. This test applies to the Phase 1 home screen exactly as much as to the Phase 3 site overview.",
+    "the_second_screen": "Everything else — the profiles, the maps, the history, the forum, the learning library — lives one level down, for the moments a user wants to explore or learn rather than decide. That layer is genuinely valuable and it must not be the front door."
+  },
+
+  "the_phase_1_2_home_view": {
+    "content": "A single home screen: the assistant entry point, today's feeding reminder, a prompt to log water quality if it has been a while, and a status strip showing the farm's own logged trend — never dressed up as more certain than it is.",
+    "the_sparse_data_problem": "Most free-tier farms will log irregularly. The home view must say so plainly — 'last logged 9 days ago' reads the same way the Phase 3 staleness rule does, and for the same reason: a stale or sparse log must never quietly read as 'fine'.",
+    "empty_states_are_not_failure_states": "A brand-new account with nothing logged yet should feel like an invitation (finish setup, log your first reading, ask the assistant a question), not a broken dashboard. This is the single highest-traffic screen in the product and the one most likely to be seen by a skeptical first-time user."
   },
 
   "the_top_level_view": {
-    "content": "One line per site: is anything wrong, and how sure are we?",
+    "content": "One line per site or farm: is anything wrong, and how sure are we? Applies to a Phase 3 enterprise site exactly as specified below; for a Phase 1/2 farm the same five states apply to the farm's manually logged trend rather than continuous sensor telemetry.",
     "states": [
-      { "state": "Nominal", "meaning": "Everything measured is within band, and we measured recently.", "colour": "--av-ok" },
+      { "state": "Nominal", "meaning": "Everything measured (or logged) is within band, and we measured/logged recently.", "colour": "--av-ok" },
       { "state": "Advisory", "meaning": "Something is trending toward a threshold. Watch it.", "colour": "--av-advisory" },
       { "state": "Warning", "meaning": "A threshold is breached. Act.", "colour": "--av-warning" },
       { "state": "Critical", "meaning": "Acute risk to stock. Act now.", "colour": "--av-critical" },
-      { "state": "No Data", "meaning": "We did not measure, the sensor failed, or the data is stale.", "colour": "--av-unknown", "the_critical_rule": "NO DATA MUST NEVER READ AS SAFE. This is the single most important rule in the UI. A grey tile that a tired person glances at and reads as 'not red, therefore fine' is how a monitoring system kills someone's harvest. Grey must feel like an absence, not a reassurance — and it must be visually distinct from green in a way that survives sunlight, colour blindness, and a two-second glance." }
+      { "state": "No Data", "meaning": "We did not measure, the sensor failed, the data is stale, OR — for a Phase 1/2 farm — the farmer simply has not logged recently.", "colour": "--av-unknown", "the_critical_rule": "NO DATA MUST NEVER READ AS SAFE. This is the single most important rule in the UI, at every tier. A grey tile that a tired person glances at and reads as 'not red, therefore fine' is how a monitoring system kills someone's harvest — and a free-tier farmer who has not logged in two weeks deserves the same grey-not-green honesty as an enterprise site with a dead sensor. Grey must feel like an absence, not a reassurance — and it must be visually distinct from green in a way that survives sunlight, colour blindness, and a two-second glance." }
     ],
-    "the_staleness_rule": "Every state carries its age. 'Nominal, measured 14 minutes ago' and 'Nominal, measured 9 hours ago' are radically different statements, and the second one after a storm is worthless. Data has a half-life; the UI must show it decaying."
+    "the_staleness_rule": "Every state carries its age. 'Nominal, measured 14 minutes ago' and 'Nominal, logged 9 days ago' are radically different statements, and the app must never present them with the same visual confidence. Data has a half-life; the UI must show it decaying, whether the data came from a sonde or a farmer's thumb."
   },
 
   "accessibility_as_safety": {
-    "statement": "This is not a compliance checkbox. It is a safety requirement.",
+    "statement": "This is not a compliance checkbox. It is a safety requirement, and it applies to the smallholder's low-end Android phone as much as to the enterprise operator's tablet.",
     "rules": [
       "Status is NEVER encoded by colour alone. Every status carries an icon and a text label. Roughly 1 in 12 men has a red/green colour vision deficiency, and that demographic is heavily represented among fish farmers.",
-      "Dark mode is mandatory, not a preference. Operators check this before dawn, and a white screen at 04:30 is genuinely hostile — it destroys night vision on a person who may be about to walk onto a dike in the dark.",
+      "Dark mode is mandatory, not a preference. Operators and farmers alike check this before dawn, and a white screen at 04:30 is genuinely hostile — it destroys night vision on a person who may be about to walk onto a dike in the dark.",
       "Readable in direct tropical sunlight on a phone. Test it outside, not in the office.",
       "Tap targets sized for wet hands.",
-      "The critical path must work on a slow connection. A manager on a lakeshore with one bar must be able to see whether her fish are dying."
+      "The critical path must work on a slow connection and a low-end device. A free-tier farmer on a budget Android phone with one bar of signal is the median user, not an edge case.",
+      "The app's core Phase 1 flows (log water quality, log feeding, view the assistant) must work fully offline and sync later — this is the same offline-first requirement as the Phase 3 dock, applied to a phone."
     ]
   },
 
   "alert_design": {
-    "the_principle": "An alert that cannot explain itself will be ignored the third time, and the third time may be the real one.",
+    "the_principle": "An alert that cannot explain itself will be ignored the third time, and the third time may be the real one. This holds whether the alert came from a calibrated sensor or from a rule evaluated against a farmer's own logged numbers.",
     "every_alert_carries": [
-      "What was measured, where, and when.",
+      "What was measured or logged, where, and when — and which of the two it was.",
       "What threshold it crossed, and where that threshold came from — cite the source.",
-      "The evidence: the profile chart, or the image crop.",
-      "What we do NOT know. If the ammonia channel was QC-failed, say so.",
+      "The evidence: the profile chart, the image crop, or the logged entry.",
+      "What we do NOT know. If the ammonia channel was QC-failed, or a Phase 1/2 farm hasn't logged ammonia at all, say so.",
       "A concrete suggested action, or an honest 'we do not have a recommendation'."
     ],
     "the_language_rule": {
       "bad": "Risk score: 78/100",
       "good": "Bottom 3 m at cages 3-5 is anoxic (1.1 mg/L at 6 m, measured 04:52). Heavy rain forecast tonight. If the column mixes, that water reaches your fish.",
-      "why": "The score is unvalidated and it hides its reasoning. The sentence is measured fact plus a stated mechanism, and it lets an experienced operator apply twenty years of judgement to it. Given their expertise, that is not a compromise — it is a better product."
+      "good_phase_1_2_example": "You logged low dissolved oxygen twice this week and haven't logged since. Consider a fresh reading before your next feeding.",
+      "why": "The score is unvalidated and it hides its reasoning. The sentence is measured (or logged) fact plus a stated mechanism, and it lets a farmer — experienced or novice — apply their own judgement to it. Given that, it is not a compromise — it is a better product, at every tier."
     },
-    "alert_fatigue": "Track the acknowledge-to-action rate as a first-class product metric. If people stop acting on alerts, the product has failed no matter how accurate the sensors are. See data-pipeline.json#/the_alert_fatigue_problem."
+    "alert_fatigue": "Track the acknowledge-to-action rate as a first-class product metric, per tier. If people stop acting on alerts, the product has failed no matter how accurate the sensors — or how well-designed the logging reminders — are. See data-pipeline.json#/the_alert_fatigue_problem."
   },
 
   "views": [
     {
+      "view": "AI assistant chat",
+      "audience": "All Phase 1/2 users",
+      "tier": "free",
+      "content": "Conversational entry point for general questions, setup guidance, and routing to the right feature.",
+      "the_hard_requirement": "Every response touching health, dosing, or treatment carries a visible disclaimer and a path to a human channel — see ai-ml-models.json#/models/ai-farming-assistant."
+    },
+    {
+      "view": "Farm setup wizard",
+      "audience": "New users",
+      "tier": "free",
+      "content": "Guided creation of the farm_profile and pond_profile records: location, species, stocking, pond geometry as the farmer describes it.",
+      "note": "This is the one wizard every farm on the platform goes through, including farms that later add Phase 3 hardware — see system-architecture.json#/the_phased_platform."
+    },
+    {
+      "view": "Water quality log",
+      "audience": "All Phase 1/2 users",
+      "tier": "free",
+      "content": "Manual/photo entry form plus a simple time-series chart of the farm's own logged readings.",
+      "the_honesty_requirement": "Charted logged readings are visually distinct from Phase 3 sensor charts — a dashed or lighter line style, an explicit 'farmer-logged' label — and gaps between entries render as gaps, never as an interpolated line implying continuous knowledge. See digital-twin.json#/the_phase_1_2_view."
+    },
+    {
+      "view": "Feeding schedule & reminders",
+      "audience": "All Phase 1/2 users",
+      "tier": "free",
+      "content": "Schedule setup, push reminders, and a one-tap confirm/skip/adjust log action."
+    },
+    {
+      "view": "Disease identification",
+      "audience": "All Phase 1/2 users",
+      "tier": "free",
+      "content": "Photo capture, model candidates with confidence, and a suggested next step.",
+      "the_hard_requirement": "Candidates are always shown as suggestions with a route to the community or (Premium) an expert — never as a diagnosis. See ai-ml-models.json#/models/disease-identification-photo."
+    },
+    {
+      "view": "Community forum",
+      "audience": "All Phase 1/2 users",
+      "tier": "free",
+      "content": "Browse and post by category; reply threads.",
+      "note": "A post is explicitly opt-in public content. The composer never auto-attaches a farm's private logs or numbers — a farmer has to choose to paste something in."
+    },
+    {
+      "view": "Learning modules",
+      "audience": "All Phase 1/2 users",
+      "tier": "free",
+      "content": "Structured content library with progress tracking, surfaced contextually (e.g. after a disease report, suggest the relevant module)."
+    },
+    {
+      "view": "Records / history",
+      "audience": "All Phase 1/2 users",
+      "tier": "free",
+      "content": "Exportable log of everything the farmer has entered: water quality, feeding, disease reports.",
+      "why_it_matters": "For a free-tier farmer this is the whole value of 'record keeping' as its own advertised feature, and it is also the raw material Premium's analytics will eventually read."
+    },
+    {
+      "view": "Analytics",
+      "audience": "Premium farms",
+      "tier": "premium",
+      "content": "Trend analysis over the farm's own logged and/or sensor history: cycle-over-cycle comparisons, FCR-adjacent views where feeding and growth are both logged.",
+      "the_sparse_data_rule": "The view must state the data-completeness basis of every chart. A farm with three logged entries in two months gets an honest 'not enough data yet' state, never a smoothed-looking trend line built from almost nothing."
+    },
+    {
+      "view": "Predictive health (advisory)",
+      "audience": "Premium farms",
+      "tier": "premium",
+      "content": "Output of the predictive-health-anomaly model (Phase 2, logged-data farms) or the kill-risk-forecast model (Phase 3, sensor farms).",
+      "the_hard_requirement": "Both underlying models are unvalidated. This view shows the mechanism in plain language ('you haven't logged DO in 11 days and your last two readings were falling') rather than a bare score, exactly per ai-ml-models.json's interim-product guidance for both models. See also 'what the dashboard will not show' below."
+    },
+    {
+      "view": "Recommendations",
+      "audience": "Premium farms",
+      "tier": "premium",
+      "content": "Feeding, water-management, and marketplace suggestions generated from the farm's own data.",
+      "note": "Advisory only, every recommendation states the data it was based on."
+    },
+    {
+      "view": "Marketplace",
+      "audience": "Premium farms (browsing may be open to free tier; transactions are a Premium/monetized surface)",
+      "tier": "premium",
+      "content": "Listings for feed, equipment, livestock, and buyer requests; order flow with a visible take rate."
+    },
+    {
+      "view": "Expert consultation",
+      "audience": "Premium farms",
+      "tier": "premium",
+      "content": "Booking and messaging with a human aquaculturist or vet, often initiated from a disease report or a predictive-health alert.",
+      "why_it_matters": "This is the human-in-the-loop backstop every unvalidated Phase 1/2 model routes to when it is not confident — the product's honesty discipline needs a real human at the end of that route, not just a disclaimer."
+    },
+    {
       "view": "Site overview",
-      "audience": "Everyone",
+      "audience": "Enterprise (Phase 3)",
+      "tier": "enterprise",
       "content": "The five-second answer. Status per unit, staleness, active alerts, next sortie."
     },
     {
       "view": "Profile view",
-      "audience": "Manager, technician",
+      "audience": "Enterprise (Phase 3) manager, technician",
+      "tier": "enterprise",
       "content": "The vertical profile chart. Depth on the Y axis, DOWNWARD.",
       "the_axis_rule": "Depth increases downward. Always. Never invert it to make the chart look like a conventional line graph. The whole point is to make the water column legible, and a depth axis that runs upward breaks the one intuition the user has.",
       "features": ["Overlay yesterday's profile", "Overlay the dawn and afternoon profiles to show diel amplitude", "Threshold lines drawn with their citations", "QC flags visible per point — a suspect reading must look suspect"]
     },
     {
       "view": "Twin",
-      "audience": "Manager, owner",
+      "audience": "Enterprise (Phase 3) manager, owner",
+      "tier": "enterprise",
       "content": "The 3D water body. See digital-twin.json.",
       "the_hard_requirement": "Interpolated volume must look less certain than measured points. A smooth confident gradient over unmeasured water is the most persuasive lie this product could tell, and it is the version that demos best."
     },
     {
       "view": "Map",
-      "audience": "Manager",
+      "audience": "Enterprise (Phase 3) manager",
+      "tier": "enterprise",
       "content": "The calibrated concentration field over the site.",
       "requirement": "The uncertainty field must be viewable, and the calibration quality (n points, R²) must be visible on the map itself — not buried in metadata. A map fitted on 3 points with an R² of 0.41 should look different from one fitted on 8 points with an R² of 0.92."
     },
     {
       "view": "History",
-      "audience": "Manager, owner, auditor",
-      "content": "Time series with events overlaid: sorties, alerts, aeration runs, dispensing, weather, mortality.",
-      "why_it_matters": "This is where the farmer's intuition and the data meet. A manager who sees the profile shape from the week before her last kill, and recognises it, has learned something no alert could teach her. It is also the view that makes the case for the subscription — the value compounds with duration."
+      "audience": "Manager, owner, auditor (any tier, scoped to what that tier has logged)",
+      "tier": "free/premium/enterprise",
+      "content": "Time series with events overlaid: log entries or sorties, alerts, feeding, aeration runs, dispensing, weather, mortality — whichever apply to the farm's tier.",
+      "why_it_matters": "This is where the farmer's intuition and the data meet, at any tier. A manager who sees the shape from the week before her last kill, and recognises it, has learned something no alert could teach her. It is also the view that makes the case for staying subscribed — the value compounds with duration, whether that duration is measured in sensor-days or logged entries."
     },
     {
       "view": "Reports",
       "audience": "Manager, auditor",
-      "content": "Date-ranged environmental export with QC flags and provenance intact.",
-      "the_discipline": "Include the QC flags. An auditor should see which readings we do not trust. Hiding them makes the report look better and be worth less — and an auditor who later discovers we filtered silently will disbelieve everything."
+      "tier": "premium/enterprise",
+      "content": "Date-ranged environmental export with QC flags, source_type, and provenance intact.",
+      "the_discipline": "Include the QC flags and the self-reported labels. An auditor should see which readings we do not trust, and which were never instrument-measured at all. Hiding either makes the report look better and be worth less — and an auditor who later discovers we filtered silently will disbelieve everything."
     },
     {
       "view": "Fleet health",
       "audience": "Technician, AquaVision ops",
+      "tier": "enterprise",
       "content": "Aircraft, dock, sonde status. Calibration due dates. Sonde site assignment.",
       "note": "Sonde site assignment appears here because it is a biosecurity control. A sonde at the wrong site is an incident, not a logistics detail."
     }
@@ -99,18 +212,20 @@
 
   "what_the_dashboard_will_not_show": [
     { "item": "A technician performance metric", "why": "The moment we surface 'response time by staff member', the technician becomes the adversary of the system. They charge the batteries and clean the probe. If they perceive it as surveillance of them, it will be broken every time it matters and we will never find out why. This is a product decision derived directly from the technician persona and it must survive the owner asking for it." },
-    { "item": "An unvalidated fish kill risk score", "why": "A false negative reads as 'you are safe'. Until validated, show the mechanism and let the farmer conclude. See ai-ml-models.json#/models/kill-risk-forecast." },
+    { "item": "An unvalidated fish kill risk score, or its Phase 1/2 predictive-health equivalent, shown as a bare number", "why": "A false negative reads as 'you are safe'. Until validated, show the mechanism and let the farmer conclude. See ai-ml-models.json#/models/kill-risk-forecast and #/models/predictive-health-anomaly." },
     { "item": "A toxicity indicator", "why": "We measure pigments, not toxins. People eat the fish." },
-    { "item": "A confident biomass number", "why": "We do not measure biomass. Displaying the farmer's own estimate back to them in an authoritative font launders a guess into a fact." },
-    { "item": "Interpolation across a sensor outage", "why": "A smooth line through missing data is a lie the eye believes. Render gaps as gaps." }
+    { "item": "A confident biomass or stock count", "why": "We do not measure biomass at any tier. Displaying the farmer's own estimate back to them in an authoritative font launders a guess into a fact." },
+    { "item": "Interpolation across a sensor outage or a logging gap", "why": "A smooth line through missing data is a lie the eye believes, whether the gap is a dead sensor or two weeks a farmer forgot to log. Render gaps as gaps." },
+    { "item": "A manually-logged reading styled with the same visual confidence as a calibrated sensor reading", "why": "The whole point of the source_type discriminator in the data model is defeated if the UI erases the distinction it exists to preserve." },
+    { "item": "Specific medication dosing from the assistant or disease-ID flow", "why": "That is a veterinary decision. The product routes to a human; it does not make the call." }
   ],
 
   "the_webpage_consuming_this_repository": {
-    "note": "This repository is designed to be read by a custom HTML page. That page is a different artefact from the operational dashboard above, and conflating them would produce something that serves neither.",
+    "note": "This repository is designed to be read by a custom HTML page. That page is a different artefact from the operational/app dashboard above, and conflating them would produce something that serves neither.",
     "guidance": [
       "Fetch manifest.json first; lazy-load sections from index.files[] by id.",
       "Render the provenance badge on EVERY quantitative claim. The badge palette is in brand-identity.json#/palette/provenance_badges. This is a load-bearing safety feature of the repository, not decoration — do not strip it for visual cleanliness.",
-      "The `illustrative_synthetic` badge must be impossible to miss. That data describes no real pond.",
+      "The `illustrative_synthetic` badge must be impossible to miss. That data describes no real pond and no real farmer.",
       "Chart payloads under data/12_datasets/charts/ conform to schema-registry.json#/definitions/chart_payload and can be rendered generically.",
       "Where a record has an `honest_note`, `caveat`, or `the_hard_truth` field, that is usually the intellectually important part. Do not collapse it behind a 'read more'.",
       "Cross-link glossary terms wherever they appear in prose."

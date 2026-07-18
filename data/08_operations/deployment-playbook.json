@@ -8,6 +8,21 @@
 
   "the_operating_reality": "A working fish farm is not a research site. The drone is the least important thing happening there on any given day. If an operation requires attention it will not get, it fails. Every procedure below is written for a person with other jobs to do.",
 
+  "the_three_phase_scope": {
+    "statement": "This file is the Phase 3 deployment playbook — the hardware/IoT operations layer for commercial and enterprise farms adopting OmniDrone, probes, and PondTwin. The company's actual first 'deployment' happens much earlier and much more lightly, in Phase 1.",
+    "phase_1_2_deployment_app_onboarding": {
+      "what_deployment_means_here": "There is no site visit, no airspace check, no commissioning gate. 'Deployment' is a farmer downloading the app, completing the guided farm-setup wizard, and logging their first water reading or feeding event.",
+      "the_equivalent_checklist": [
+        "Account creation and farm profile (species, pond count, rough size).",
+        "Guided setup assistant — the software equivalent of site commissioning, but self-serve and instant rather than a technician visit.",
+        "First manual water-quality log entry (photo or typed) — the equivalent of a baseline profile, except unvalidated and self-reported (see risk-register-fmea.json R-18).",
+        "Prompted enrolment in a learning module and the community forum — the Phase 1 substitute for onboarding/training (see training-certification.json)."
+      ],
+      "the_honest_difference": "None of the qualification, permission-chain, or baseline-before-any-claim discipline that governs Phase 3 applies here. That is the point — Phase 1 deployment is deliberately frictionless because it is the acquisition engine, not a safety-critical rollout. The trade-off is that Phase 1 data quality has no equivalent of the reference-check gate below; it is trusted less for exactly that reason.",
+      "phase_2_note": "Phase 2 'deployment' is a conversion event, not a new install: an existing free-tier farm upgrades to premium analytics, predictive health monitoring, marketplace access, or paid expert consultation. No commissioning gate applies there either — it is a billing and feature-entitlement change."
+    }
+  },
+
   "phases": [
     {
       "phase": "Prospecting and qualification",

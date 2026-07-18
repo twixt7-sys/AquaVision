@@ -1,8 +1,8 @@
 {
   "id": "company-profile",
   "title": "AquaVision — Company Profile",
-  "version": "1.0.0",
-  "last_updated": "2026-07-17",
+  "version": "2.0.0",
+  "last_updated": "2026-07-18",
   "provenance": "assumption",
   "note": "Corporate facts below are the founding team's stated intent. Fields marked `awaiting_confirmation` must be filled from registration documents before any external use.",
 
@@ -19,108 +19,130 @@
     "contact_email": "awaiting_confirmation"
   },
 
-  "one_liner": "AquaVision builds the OmniDrone — an autonomous aerial platform that flies to fish farms, drops a reeled probe to profile the water column, scans the surface for trouble, delivers feed and treatments, and streams it all into a live digital twin of the pond.",
+  "one_liner": "AquaVision is an AI-powered aquaculture management platform designed to help fish farmers at every stage of their journey — from beginners establishing their first ponds to commercial operators managing large-scale farms. It combines guided farm setup, an AI farming assistant, water quality logging, disease prevention insights, production analytics, and a farmer community, and as farms grow it extends into smart aquaculture via IoT sensors and OmniDrone integration for automated monitoring and digital-twin visualization.",
 
   "what_we_actually_do": {
-    "plain_language": "Fish farmers are flying blind. They find out their water has gone bad when the fish are already floating. We put a drone over the water that measures what is happening below the surface, several times a day, at every cage — and turns that into a warning early enough to act on.",
-    "for_an_engineer": "A multirotor UAS integrating a tethered CTD-style multiparameter sonde on a powered winch, a calibrated multispectral and thermal imaging payload, and a metered granular/liquid dispensing system, feeding a fusion pipeline that uses in-situ point profiles to calibrate area-wide optical retrievals and drive a physics-informed pond state model.",
-    "for_an_investor": "Aquaculture is now the majority of the world's aquatic animal production, it is intensifying, and the operators have almost no observability of the thing that kills their stock. We sell the observability layer, priced against the losses it prevents, on hardware that also does the feeding — so it earns its keep even on the days nothing goes wrong."
+    "plain_language": "Fish farmers are flying blind, and beginners most of all — they find out their water has gone bad when the fish are already floating, and they often don't have the money for hardware or the experience to know what a healthy pond even looks like. We start with a free app that teaches new farmers to set up and run a pond correctly and logs their water quality and stock data from day one. As a farm grows and outgrows manual tracking, our premium tier turns that accumulated data into predictive health warnings, smart recommendations, and access to a marketplace and paid expert advice. And once a farm has real scale to defend, IoT sensors and the OmniDrone extend the same platform into automated, continuous monitoring and a live digital twin of the pond.",
+    "for_an_engineer": "A three-layer platform. Layer 1 (Phase 1, mobile/web app): guided farm setup, an AI farming assistant, manual and photo-based water quality logging, feeding schedules, photo-based disease identification, community discussions, learning modules, and record keeping — no sensor hardware required. Layer 2 (Phase 2, subscription add-on): ML models trained on the data logged in Phase 1 to produce predictive health monitoring and smart recommendations, plus a marketplace and expert-consultation matching engine. Layer 3 (Phase 3, hardware upgrade): IoT water probes and an autonomous OmniDrone — a tethered CTD-style multiparameter sonde on a powered winch, calibrated multispectral and thermal imaging, and a metered dispensing system — feeding a fusion pipeline that calibrates area-wide optical retrievals against in-situ point profiles and drives a physics-informed digital twin (PondTwin).",
+    "for_an_investor": "Aquaculture is now the majority of the world's aquatic animal production, it is intensifying, and most operators — smallholders especially — have no software standing between them and the next fish kill, let alone hardware. We start free to win the smallholder base that a hardware-first plan would otherwise have had to defer on affordability grounds, monetise the operators who outgrow spreadsheets and guesswork with a subscription and marketplace, and reserve IoT sensors and the OmniDrone as a premium, high-margin upgrade for the commercial and enterprise farms that need automated, continuous monitoring. The free tier is the acquisition and data-accumulation engine that makes the paid tiers possible."
   },
 
-  "mission": "To give every fish farmer — from a single family cage to a commercial estate — the same quality of information about their water that only industrial operations can currently afford.",
+  "mission": "To give every fish farmer — from a beginner setting up a first backyard pond to a commercial operator running a large-scale estate — the same quality of information about their water and their stock that only industrial operations or expensive consultants can currently afford, starting with a free app on day one and growing in step with the farm.",
 
-  "vision": "A fisheries and aquaculture sector where mass mortality events are anticipated and prevented rather than counted and mourned, and where intensification does not have to mean environmental degradation.",
+  "vision": "A fisheries and aquaculture sector where mass mortality events are anticipated and prevented rather than counted and mourned, where that capability starts as software any farmer can open on a phone rather than equipment only a well-capitalised operator can buy, and where intensification does not have to mean environmental degradation.",
 
   "values": [
     {
       "value": "Measure, don't guess",
-      "meaning": "Every claim we make about a pond traces to an instrument reading with an error bar. We would rather show a farmer an honest uncertainty than a confident fiction.",
-      "how_it_binds_us": "It means we cannot ship the fish-kill risk score until it is validated, however much the demo would benefit from it."
+      "meaning": "Every claim we make about a pond traces to a logged reading, a sensor, or a validated model with a stated error bar. We would rather show a farmer an honest uncertainty than a confident fiction.",
+      "how_it_binds_us": "It means we cannot ship the Phase 2 predictive health score or the Phase 3 fish-kill risk score until each is validated against real farmer data, however much the demo would benefit from it."
     },
     {
       "value": "The farmer decides",
-      "meaning": "The system advises. It does not autonomously medicate a pond or declare a bloom toxic. Consequential actions stay with the person who owns the consequence.",
-      "how_it_binds_us": "It rules out the fully-autonomous-treatment feature that would demo beautifully and would eventually poison someone's harvest."
+      "meaning": "The app and the platform advise. Neither the AI assistant nor the Phase 3 hardware autonomously medicates a pond or declares a bloom toxic. Consequential actions stay with the person who owns the consequence.",
+      "how_it_binds_us": "It rules out the fully-autonomous-treatment feature — whether recommended by software or dispensed by a drone — that would demo beautifully and would eventually harm someone's harvest."
     },
     {
       "value": "Do no harm to the water",
-      "meaning": "A platform sold on environmental stewardship that leaks lithium, spreads pathogens between farms, or over-doses a lake with conditioner is a net negative. Biosecurity and containment are not compliance chores.",
-      "how_it_binds_us": "It forces cost and mass into the design — decontamination, containment, dose limiting — that a purely commercial reading would cut."
+      "meaning": "A platform sold on environmental stewardship that leaks lithium, spreads pathogens between farms, or over-doses a lake with conditioner is a net negative. This mostly binds the Phase 3 hardware layer, but the principle starts on day one: even the free app's advice must never recommend a treatment we haven't checked is safe.",
+      "how_it_binds_us": "It forces cost and mass into the eventual Phase 3 hardware design — decontamination, containment, dose limiting — that a purely commercial reading would cut, and it forces the Phase 1/2 AI assistant to stay conservative rather than prescriptive."
     },
     {
       "value": "Earn the data",
-      "meaning": "Farm production data is commercially sensitive and often personally sensitive. We hold it as custodians, not owners.",
+      "meaning": "Farm production data — logged from the very first free sign-up in Phase 1 — is commercially sensitive and often personally sensitive. We hold it as custodians, not owners, even though it is also the raw material for every paid feature we plan to build.",
       "how_it_binds_us": "It constrains the data-monetisation business models that investors will inevitably suggest. See ethics-data-privacy.json."
     },
     {
       "value": "Build for the median farm, not the flagship",
-      "meaning": "The technology that only works on a well-capitalised demonstration site has not solved the problem; it has decorated it.",
-      "how_it_binds_us": "Intermittent connectivity, no mains power at the cage, monsoon weather, and an operator who is not an engineer are the design case — not the edge case."
+      "meaning": "Technology that only works for a well-capitalised demonstration site, or for a farmer with a flagship smartphone and always-on connectivity, has not solved the problem — it has decorated it.",
+      "how_it_binds_us": "Cheap Android phones, patchy or metered rural data, intermittent connectivity, no mains power at the cage, monsoon weather, and an operator who is not an engineer are the design case for every phase of this platform, from the free app to the OmniDrone — not the edge case."
     }
   ],
 
   "the_honest_position": {
     "purpose": "This block exists so that no reader of this repository is misled about maturity. It should be reproduced, not hidden, in diligence.",
     "what_exists_today": [
-      "A clearly specified concept and an industrial design render.",
-      "A researched problem definition grounded in published statistics.",
-      "A system architecture and a requirements baseline.",
+      "A repositioned, phased product narrative and a researched problem definition grounded in published statistics.",
+      "A system architecture and requirements baseline for the eventual Phase 3 hardware layer, and an industrial design render for the OmniDrone.",
+      "A specification for the Phase 1 app and the Phase 2 premium tier, not yet built.",
       "This repository."
     ],
     "what_does_not_exist_yet": [
-      "A flying prototype.",
-      "Any field-collected water quality data.",
-      "Any trained or validated machine learning model.",
-      "Any paying customer, letter of intent, or pilot agreement.",
-      "CAAP authorisation for the operating mode the business model assumes (BVLOS)."
+      "No app has been built yet. Phase 1 is a specification, not a product a farmer can download today.",
+      "No registered users, farms, or logged water quality data of any kind — manual, photo, or sensor-based.",
+      "Any flying OmniDrone prototype or field-collected IoT sensor data (Phase 3).",
+      "Any trained or validated machine learning model — disease identification, predictive health monitoring, or fish-kill risk scoring.",
+      "Any paying customer, subscriber, marketplace transaction, letter of intent, or pilot agreement, at any phase.",
+      "CAAP authorisation for the operating mode the eventual Phase 3 hardware business model assumes (BVLOS)."
     ],
-    "why_we_state_this_plainly": "Because the gap between concept and product is where aquaculture technology ventures usually die, and a team that cannot name the gap cannot cross it. Every investor worth taking money from will find this list anyway. Handing it to them is cheaper than being caught with it.",
+    "why_we_state_this_plainly": "Because the gap between concept and product is where aquaculture technology ventures usually die — software ventures included, not just hardware ones — and a team that cannot name the gap cannot cross it. Every investor worth taking money from will find this list anyway. Handing it to them is cheaper than being caught with it.",
     "current_trl": 3,
-    "trl_justification": "TRL 3 — analytical and experimental proof of concept. The physical principles are established in the literature (see the research corpus); the integration into this specific vehicle is not yet demonstrated in hardware.",
+    "trl_justification": "TRL 3 describes the Phase 3 hardware/sensing layer specifically (analytical and experimental proof of concept: the physical principles are established in the literature — see the research corpus — but integration into this specific vehicle is not yet demonstrated in hardware). The Phase 1 app and Phase 2 premium tier are software products with no equivalent TRL rating: they are at concept/specification stage, with no code written and no users, which is a more basic starting point than TRL 3 in engineering terms but a faster and cheaper one to advance from.",
     "citation_ids": ["nasa-trl"]
   },
 
   "product_line": [
     {
+      "product_id": "aquavision-app",
+      "name": "AquaVision App",
+      "phase": "Phase 1 — Foundation",
+      "status": "concept / not yet built",
+      "description": "Free or low-cost mobile and web app: guided farm setup, an AI farming assistant, manual and photo-based water quality logging, feeding schedules, photo-based disease identification, learning modules, record keeping, and a farmer community. This is the user-acquisition and data-accumulation engine for the whole platform, and it is designed to reach beginner and smallholder farmers directly rather than defer them.",
+      "detail_file": "data/04_solution/solution-overview.json"
+    },
+    {
+      "product_id": "aquavision-premium",
+      "name": "AquaVision Premium",
+      "phase": "Phase 2 — Monetization",
+      "status": "concept",
+      "description": "Paid subscription layer on top of the free app: premium analytics, predictive health monitoring modeled on the water-quality and stock data farmers log in Phase 1, smart recommendations, a marketplace connecting farmers to feed, equipment, and buyers, and paid consultations with aquaculturists and vets. This is where AquaVision becomes a subscription and take-rate business on top of the free base.",
+      "detail_file": "data/10_business/pricing-revenue.json"
+    },
+    {
+      "product_id": "aquavision-platform",
+      "name": "AquaVision Platform",
+      "phase": "Umbrella — spans Phases 1 through 3",
+      "status": "concept",
+      "description": "The underlying cloud and edge software shared across every phase: ingestion, the farmer-facing app and premium services, AI/ML, and — once a farm adopts Phase 3 hardware — sensor fusion, digital twin, and enterprise dashboarding. Not a separate product a customer buys; the substrate the other products run on.",
+      "detail_file": "data/06_software/system-architecture.json"
+    },
+    {
       "product_id": "omnidrone",
       "name": "OmniDrone",
+      "phase": "Phase 3 — Smart Aquaculture",
       "status": "concept / in design",
-      "description": "The aerial platform: probe, sensing, dispensing, telemetry.",
+      "description": "Phase 3 hardware upgrade layer: an autonomous aerial platform that flies to a farm, drops a reeled probe to profile the water column, scans the surface for trouble, and can deliver feed and treatments. Sold as an add-on for commercial and enterprise farms that have outgrown manual logging and Phase 1/2 software alone — not as the company's core product.",
       "detail_file": "data/05_hardware/omnidrone-specifications.json"
     },
     {
       "product_id": "omnidock",
       "name": "OmniDock",
+      "phase": "Phase 3 — Smart Aquaculture",
       "status": "concept",
-      "description": "Shore-side automated dock: shelter, charge, probe rinse and decontamination, calibration reference, connectivity backhaul. The component that converts the drone from a tool someone operates into infrastructure that runs.",
+      "description": "Phase 3 shore-side automated dock for the OmniDrone: shelter, charge, probe rinse and decontamination, calibration reference, connectivity backhaul. The component that converts the drone from a tool someone operates into infrastructure that runs.",
       "detail_file": "data/05_hardware/docking-station.json"
-    },
-    {
-      "product_id": "aquavision-platform",
-      "name": "AquaVision Platform",
-      "status": "concept",
-      "description": "The cloud and edge software: ingestion, fusion, AI/ML, digital twin, dashboard, alerting.",
-      "detail_file": "data/06_software/system-architecture.json"
     },
     {
       "product_id": "pondtwin",
       "name": "PondTwin",
+      "phase": "Phase 3 — Smart Aquaculture",
       "status": "concept",
-      "description": "The digital twin surface presented to the farmer: a live, navigable 3D model of the water body and its stock.",
+      "description": "The digital twin surface presented to farms running Phase 3 hardware: a live, navigable 3D model of the water body and its stock, fed by IoT sensors and OmniDrone sorties. A step beyond the analytics dashboard available in Phase 2.",
       "detail_file": "data/06_software/digital-twin.json"
     }
   ],
 
   "why_this_team_why_now": {
     "why_now_technology": [
-      "Multispectral sensors light enough for a small multirotor have dropped to a price point that a service business can absorb, and the inland-water retrieval literature matured substantially through 2024-2025.",
-      "Edge inference hardware now runs useful vision models at a few watts, which matters when the whole energy budget is a battery that also has to fly.",
+      "Smartphone penetration and mobile data affordability among Philippine smallholder farmers have reached the point where a free app, not a capital-intensive drone, is the fastest and cheapest way to reach them first and start accumulating farm data.",
+      "Multispectral sensors light enough for a small multirotor have dropped to a price point that a Phase 3 add-on business can absorb, and the inland-water retrieval literature matured substantially through 2024-2025.",
+      "Edge inference hardware now runs useful vision models at a few watts, which matters both for a phone running photo-based disease ID offline and for a drone whose whole energy budget is a battery that also has to fly.",
       "Digital twin methods for aquaculture moved from proposal to demonstrated case studies in the same window."
     ],
     "why_now_market": [
-      "Aquaculture passed capture fisheries in aquatic animal production for the first time in 2022 — the sector's centre of gravity has shifted to a farmed system that can, in principle, be instrumented.",
-      "Intensification is raising stocking densities faster than it is raising observability, which widens exactly the gap this product fills.",
-      "Climate volatility is increasing the frequency of the thermal and rainfall triggers behind mass mortality events."
+      "Aquaculture passed capture fisheries in aquatic animal production for the first time in 2022 — the sector's centre of gravity has shifted to a farmed system that can, in principle, be logged, tracked, and eventually instrumented.",
+      "Intensification is raising stocking densities faster than it is raising observability, which widens exactly the gap a phased platform — software first, hardware later — is built to close.",
+      "Climate volatility is increasing the frequency of the thermal and rainfall triggers behind mass mortality events, which raises the value of even basic logging and alerting for farmers who cannot yet afford sensors."
     ],
     "citation_ids": ["fao-sofia-2024", "mdpi-drones-inland-review-2024", "sciencedirect-dt-aiot-2023"],
     "why_us": "awaiting_confirmation — this section must be written by the founders with real biographies. Do not let an AI invent your credentials; investors verify them and the discovery is fatal."
@@ -129,8 +151,8 @@
   "strategic_focus": {
     "primary_field": "Aquaculture and fisheries",
     "initial_geography": "Philippine inland and brackish-water aquaculture",
-    "why_this_beachhead": "Philippine lake cage culture concentrates the exact failure mode the platform is built to see — high-density cages in a shared, stratifying, eutrophic water body with documented recurring kill events and quantified peso losses. The problem is acute, the losses are on the record, and the operators are geographically clustered around a small number of lakes, which makes a dock-based service model tractable.",
+    "why_this_beachhead": "Philippine lake cage culture concentrates the exact failure mode the platform is built to see — high-density cages in a shared, stratifying, eutrophic water body with documented recurring kill events and quantified peso losses. The problem is acute, the losses are on the record, and the operators are geographically clustered around a small number of lakes. Unlike the earlier hardware-first plan, the app now reaches these farmers — including smallholders — directly in Phase 1, rather than deferring them until a dock-based service model is tractable; the clustering matters most later, for Phase 3 sales efficiency.",
     "citation_ids": ["inquirer-taal-fishkill-2023", "pna-tilapia-fishkill", "seafdec-laguna-fishkill"],
-    "expansion_logic": "Lake cage culture → brackish pond culture (milkfish, shrimp) → coastal marine cage → regional Southeast Asia. Each step reuses the sensing core and changes the mission profile, not the platform."
+    "expansion_logic": "Phase 1: free app to Philippine smallholders and lake-cage operators, wherever they are, at near-zero marginal cost of reach. Phase 2: premium conversion concentrated among commercial pond and cage operators in the same beachhead lakes who have outgrown manual tracking. Phase 3: OmniDrone/IoT hardware sales to large lake-cage and enterprise operators, starting with the same clustered lakes that make a dock-based service model tractable, then brackish pond culture (milkfish, shrimp), coastal marine cage, and regional Southeast Asia."
   }
 }
