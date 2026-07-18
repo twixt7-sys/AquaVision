@@ -222,6 +222,7 @@
       { "id": "chart-do-diel-cycle", "section": "datasets", "path": "data/12_datasets/charts/chart-do-diel-cycle.json" },
       { "id": "chart-do-depth-profile", "section": "datasets", "path": "data/12_datasets/charts/chart-do-depth-profile.json" },
       { "id": "chart-financial-projection", "section": "datasets", "path": "data/12_datasets/charts/chart-financial-projection.json" },
+      { "id": "chart-assumed-revenue-projection", "section": "datasets", "path": "data/12_datasets/charts/chart-assumed-revenue-projection.json" },
       { "id": "chart-manual-vs-omnidrone", "section": "datasets", "path": "data/12_datasets/charts/chart-manual-vs-omnidrone.json" },
       { "id": "chart-species-production-mix", "section": "datasets", "path": "data/12_datasets/charts/chart-species-production-mix.json" },
       { "id": "chart-tech-readiness", "section": "datasets", "path": "data/12_datasets/charts/chart-tech-readiness.json" },

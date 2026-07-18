@@ -1,12 +1,12 @@
 {
   "id": "financial-projections",
   "title": "Financial Projections",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "last_updated": "2026-07-18",
   "provenance": "modeled_projection",
   "confidence": "speculative",
 
-  "READ_THIS_FIRST": "This file deliberately contains NO hockey-stick chart and NO five-year P&L. That discipline from the original hardware plan is preserved unchanged and, if anything, matters more now: a software business is exactly the kind of story where it is easiest to fabricate a plausible-looking exponential user-growth curve, and this file refuses to. What follows is a milestone-gated SPEND plan across the three phases (Phase 1 user growth investment, Phase 2 revenue ramp, Phase 3 hardware capex), plus a revenue SCENARIO STRUCTURE for the phases where revenue is even attemptable, not a forecast. A credible early-stage financial story is a spend plan tied to de-risking milestones — not a revenue fantasy, whether the fantasy is drone deployments or app downloads.",
+  "READ_THIS_FIRST": "This file has two layers. The first — phase spend plan, milestone-gated funding logic, and scenario structure — describes HOW to think about AquaVision finance without pretending measured traction exists. The second — assumed_financial_projection below — fills in a five-year illustrative model with dollar figures, subscriber counts, and three scenarios (pessimistic / base / optimistic). Every number in that section is tagged assumption or modeled_projection, derived from the inputs in unit-economics.json and pricing-revenue.json, not from company data, because there are zero users and zero revenue today. Use the assumed model to stress-test the plan and show sensitivity; do NOT cite it as forecast, traction, or 'our projections show'. Present the BASE case as the planning case and the pessimistic case unprompted. When Phase 1 launches, replace assumed rows with measured rows — do not amend assumptions in place without updating provenance.",
 
   "what_can_honestly_be_projected": {
     "statement": "Costs are estimable in all three phases. Revenue is only plausibly modelable once Phase 2 is live with real conversion data, and Phase 3 revenue remains as unknowable as in the original hardware-only plan until its own discovery work is done.",
@@ -23,6 +23,7 @@
         "duration_months": "1-3",
         "primary_costs": ["Small founding/product team", "Farmer discovery interviews (Phase 1 feature validation, not just hardware WTP)", "Technical architecture decisions (mobile stack, AI model approach)", "Legal (app store terms, data privacy posture)"],
         "spend_envelope": "low — deliberately cheap, de-risks product-market direction before a line of app code is written at scale",
+        "spend_envelope_usd": { "min": 40000, "max": 80000, "currency": "USD", "provenance": "modeled_projection", "confidence": "low", "note": "2-3 person founding team, discovery travel, legal — see assumed_financial_projection#/annual_opex_model" },
         "unlocks": "Confidence that the free-tier feature set (guide, logging, disease-ID, community) matches what beginner/smallholder farmers actually need, before committing build budget."
       },
       {
@@ -30,6 +31,7 @@
         "duration_months": "4-8",
         "primary_costs": ["Mobile/web app development", "AI disease-ID and farming-assistant model development (likely built on existing foundation models plus fine-tuning, not from scratch)", "Cloud hosting and inference infrastructure", "Community management and content/education production", "App store and organic-channel growth operations — deliberately NOT a paid-acquisition budget line, per the go-to-market channel assumption"],
         "spend_envelope": "low-medium — the cheapest phase that produces a real, used product, and the one this whole model depends on",
+        "spend_envelope_usd": { "min": 180000, "max": 350000, "currency": "USD", "provenance": "modeled_projection", "confidence": "low" },
         "unlocks": "A launched free app with measured installs, activation rate, and retention — the first real data this company will have ever had. This is the user-growth investment the phased model is named for: spend here buys users and data, not revenue."
       },
       {
@@ -37,6 +39,7 @@
         "duration_months": "4-8, once Phase 1 shows retained, active usage",
         "primary_costs": ["Premium feature development (predictive analytics, recommendations)", "Marketplace build (supply-side onboarding: feed/equipment/buyer partners)", "Consultation marketplace build (recruiting and paying aquaculturists/vets)", "Payment/subscription infrastructure", "Conversion-funnel design and in-app growth engineering"],
         "spend_envelope": "medium — funded partly by early Phase 2 revenue if conversion holds, otherwise entirely investment",
+        "spend_envelope_usd": { "min": 350000, "max": 650000, "currency": "USD", "provenance": "modeled_projection", "confidence": "low" },
         "unlocks": "The first real revenue the company has ever had, and — critically — the first measured free-to-paid conversion rate, ARPU, and churn, replacing every assumption in unit-economics.json#/phase_2_monetization_economics with a real number. This is the revenue ramp gate: Phase 3 spend should not begin in earnest until this gate produces evidence the software business itself is viable."
       },
       {
@@ -44,10 +47,11 @@
         "duration_months": "8-14 for a first field validation season, unchanged in shape from the original hardware-only plan",
         "primary_costs": ["Drone/dock/sonde BOM and subsystem prototyping (winch, sensor payload)", "Field validation and paired reference sampling", "BVLOS regulatory pathway", "Enterprise/institutional sales capacity"],
         "spend_envelope": "high — the largest and longest-lead capital outlay in the plan, exactly as it was when hardware was the whole company",
+        "spend_envelope_usd": { "min": 800000, "max": 2500000, "currency": "USD", "provenance": "modeled_projection", "confidence": "speculative", "note": "Per first validation season; BOM still unquoted — upper bound is a planning ceiling, not a quote." },
         "unlocks": "A validated, sellable hardware-as-a-service offering for the commercial/enterprise segment. This phase's cost structure and risks are inherited wholesale from the original single-phase hardware plan; becoming a software company first does not make the drone cheaper or the regulatory pathway faster."
       }
     ],
-    "the_honest_note": "No dollar totals are attached to the envelopes. Phase 1/2 totals depend on team size and cloud/AI inference costs that Phase 0 discovery will pin down; Phase 3 totals depend on a hardware BOM that still has zero real quotes. Attaching a precise number now would be false precision in both directions. The SHAPE — cheap product-first phases that generate their own evidence, followed by an expensive hardware phase that only makes sense once that evidence exists — is the honest and useful part."
+    "the_honest_note": "Dollar envelopes above are order-of-magnitude planning bands (modeled_projection), not signed budgets. Phase 1/2 totals depend on team size and cloud/AI inference costs that Phase 0 discovery will pin down; Phase 3 totals depend on a hardware BOM that still has zero real quotes. The SHAPE — cheap product-first phases that generate their own evidence, followed by an expensive hardware phase that only makes sense once that evidence exists — is the honest and useful part. See assumed_financial_projection for a year-by-year roll-up of these envelopes."
   },
 
   "the_milestone_gated_funding_logic": {
@@ -57,7 +61,7 @@
   },
 
   "revenue_scenario_structure": {
-    "status": "STRUCTURE ONLY for Phase 2 — no numbers until Phase 1 supplies real activation/conversion data. Phase 3 remains STRUCTURE ONLY exactly as before, pending its own discovery inputs.",
+    "status": "FILLED with ASSUMED numbers in assumed_financial_projection below — replace with measured data post-launch. Phase 3 hardware revenue in that section uses a placeholder site price pending farmer discovery.",
     "phase_2_model_when_ready": "Monthly recurring revenue = (active free users) x (free-to-paid conversion rate) x (ARPU, blended across subscription + marketplace + consultation) x (1 - monthly churn), compounding month over month across the growth ramp, minus Phase 1/2 cost to serve.",
     "phase_3_model_when_ready": "Unchanged from the original plan: Revenue = (docks deployed) x (sites per dock) x (price per site) x (1 - churn), summed across the deployment ramp, minus cost-to-serve per dock.",
     "the_three_scenarios_to_model_per_phase": [
@@ -68,9 +72,128 @@
     "the_discipline": "When these are filled in, present the BASE case as the plan and show the pessimistic case unprompted, for both phases. A three-scenario model where the pessimistic case is survivable is far more fundable than a single-line projection that only goes up — and this is exactly as true of a freemium user-growth curve as it is of a drone-deployment curve."
   },
 
+  "assumed_financial_projection": {
+    "status": "ASSUMED — NOT MEASURED",
+    "provenance": "modeled_projection",
+    "confidence": "speculative",
+    "label": "Illustrative five-year model for planning and sensitivity analysis only",
+    "horizon": {
+      "start_year": 2026,
+      "end_year": 2030,
+      "years": 5,
+      "base_date": "2026-07-18",
+      "currency": "USD"
+    },
+    "model_inputs": {
+      "provenance": "assumption",
+      "confidence": "speculative",
+      "note": "Every input below is borrowed from unit-economics.json and pricing-revenue.json or invented for scenario spread. None is measured for AquaVision.",
+      "shared_growth_assumptions": {
+        "geography": "Philippines-first organic launch, expandable",
+        "activation_rate": { "pessimistic": 0.40, "base": 0.50, "optimistic": 0.55, "provenance": "design_target", "source": "unit-economics.json#/phase_1_foundation_economics/activation_rate" },
+        "organic_cumulative_installs_end_of_year_2": { "pessimistic": 2500, "base": 8000, "optimistic": 22000, "provenance": "assumption" },
+        "mau_as_pct_of_cumulative_activated_users_end_of_year": { "year_2": 0.35, "year_3": 0.45, "year_4": 0.50, "year_5": 0.55, "provenance": "assumption", "note": "Simplified retention funnel — not a cohort model." }
+      },
+      "phase_2_saas_assumptions": {
+        "free_to_paid_conversion_of_mau": { "pessimistic": 0.01, "base": 0.03, "optimistic": 0.05, "provenance": "assumption", "source": "unit-economics.json#/phase_2_monetization_economics/free_to_paid_conversion_rate" },
+        "blended_subscription_arpu_usd_month": { "pessimistic": 8, "base": 15, "optimistic": 22, "provenance": "modeled_projection", "source": "pricing-revenue.json#/phase_2_monetization_pricing/premium_subscription/candidate_price_band" },
+        "monthly_churn_paying_subscribers": { "pessimistic": 0.07, "base": 0.05, "optimistic": 0.03, "provenance": "assumption" },
+        "marketplace_revenue_as_pct_of_subscription_revenue": { "pessimistic": 0.05, "base": 0.12, "optimistic": 0.20, "provenance": "assumption" },
+        "consultation_revenue_as_pct_of_subscription_revenue": { "pessimistic": 0.02, "base": 0.05, "optimistic": 0.10, "provenance": "assumption" }
+      },
+      "phase_3_hardware_assumptions": {
+        "first_paying_docks_end_of_year_5": { "pessimistic": 0, "base": 2, "optimistic": 5, "provenance": "assumption" },
+        "sites_per_dock": { "pessimistic": 4, "base": 6, "optimistic": 10, "provenance": "assumption" },
+        "assumed_site_monitoring_price_usd_month": { "pessimistic": 250, "base": 350, "optimistic": 500, "provenance": "modeled_projection", "confidence": "speculative", "note": "Placeholder until farmer WTP discovery — NOT a committed price. Anchored below verifiable aeration-savings logic in pricing-revenue.json." },
+        "months_of_hardware_revenue_in_year_5": { "pessimistic": 0, "base": 6, "optimistic": 9, "provenance": "assumption", "note": "Pilot ramp — not a full deployment year." }
+      }
+    },
+    "annual_opex_model": {
+      "provenance": "modeled_projection",
+      "confidence": "low",
+      "note": "All-in operating spend (team, cloud, community, field ops allocation). Excludes one-time capex write-offs beyond normal prototype spend.",
+      "by_year": [
+        { "year": 2026, "phase": "Phase 0 + Phase 1 build", "opex_usd": { "min": 150000, "max": 250000, "base": 200000, "currency": "USD" } },
+        { "year": 2027, "phase": "Phase 1 launch and organic growth", "opex_usd": { "min": 250000, "max": 400000, "base": 320000, "currency": "USD" } },
+        { "year": 2028, "phase": "Phase 2 build and first monetization", "opex_usd": { "min": 400000, "max": 550000, "base": 480000, "currency": "USD" } },
+        { "year": 2029, "phase": "Phase 2 scale + Phase 3 definition", "opex_usd": { "min": 600000, "max": 850000, "base": 720000, "currency": "USD" } },
+        { "year": 2030, "phase": "Phase 3 prototype and pilot season", "opex_usd": { "min": 850000, "max": 1400000, "base": 1050000, "currency": "USD" } }
+      ],
+      "five_year_opex_base_total_usd": { "amount": 2770000, "currency": "USD", "provenance": "derived_calculation" }
+    },
+    "scenarios": {
+      "pessimistic": {
+        "label": "Pessimistic — low conversion, high churn, no hardware revenue in horizon",
+        "provenance": "modeled_projection",
+        "confidence": "speculative",
+        "annual": [
+          { "year": 2026, "mau_end": 0, "paying_subscribers_end": 0, "revenue": { "subscription_usd": 0, "marketplace_usd": 0, "consultation_usd": 0, "hardware_usd": 0, "total_usd": 0, "currency": "USD", "provenance": "derived_calculation" }, "opex_usd": { "amount": 200000, "currency": "USD" }, "net_burn_usd": { "amount": 200000, "currency": "USD", "provenance": "derived_calculation" } },
+          { "year": 2027, "mau_end": 350, "paying_subscribers_end": 0, "revenue": { "subscription_usd": 0, "marketplace_usd": 0, "consultation_usd": 0, "hardware_usd": 0, "total_usd": 0, "currency": "USD", "provenance": "derived_calculation" }, "opex_usd": { "amount": 320000, "currency": "USD" }, "net_burn_usd": { "amount": 320000, "currency": "USD", "provenance": "derived_calculation" } },
+          { "year": 2028, "mau_end": 1400, "paying_subscribers_end": 14, "revenue": { "subscription_usd": 1100, "marketplace_usd": 55, "consultation_usd": 22, "hardware_usd": 0, "total_usd": 1177, "currency": "USD", "provenance": "derived_calculation" }, "opex_usd": { "amount": 480000, "currency": "USD" }, "net_burn_usd": { "amount": 478823, "currency": "USD", "provenance": "derived_calculation" } },
+          { "year": 2029, "mau_end": 4000, "paying_subscribers_end": 40, "revenue": { "subscription_usd": 4200, "marketplace_usd": 210, "consultation_usd": 84, "hardware_usd": 0, "total_usd": 4494, "currency": "USD", "provenance": "derived_calculation" }, "opex_usd": { "amount": 720000, "currency": "USD" }, "net_burn_usd": { "amount": 715506, "currency": "USD", "provenance": "derived_calculation" } },
+          { "year": 2030, "mau_end": 8000, "paying_subscribers_end": 80, "revenue": { "subscription_usd": 9600, "marketplace_usd": 480, "consultation_usd": 192, "hardware_usd": 0, "total_usd": 10272, "currency": "USD", "provenance": "derived_calculation" }, "opex_usd": { "amount": 1050000, "currency": "USD" }, "net_burn_usd": { "amount": 1039728, "currency": "USD", "provenance": "derived_calculation" } }
+        ],
+        "five_year_revenue_total_usd": { "amount": 15943, "currency": "USD", "provenance": "derived_calculation" },
+        "five_year_net_burn_total_usd": { "amount": 2755057, "currency": "USD", "provenance": "derived_calculation" },
+        "interpretation": "Software layer barely registers; Phase 3 should not be funded on this trajectory. Tests whether the company should exist as currently shaped."
+      },
+      "base": {
+        "label": "Base — mid-range SaaS assumptions, small Phase 3 pilot in year 5",
+        "provenance": "modeled_projection",
+        "confidence": "speculative",
+        "annual": [
+          { "year": 2026, "mau_end": 0, "paying_subscribers_end": 0, "revenue": { "subscription_usd": 0, "marketplace_usd": 0, "consultation_usd": 0, "hardware_usd": 0, "total_usd": 0, "currency": "USD", "provenance": "derived_calculation" }, "opex_usd": { "amount": 200000, "currency": "USD" }, "net_burn_usd": { "amount": 200000, "currency": "USD", "provenance": "derived_calculation" } },
+          { "year": 2027, "mau_end": 2000, "paying_subscribers_end": 0, "revenue": { "subscription_usd": 0, "marketplace_usd": 0, "consultation_usd": 0, "hardware_usd": 0, "total_usd": 0, "currency": "USD", "provenance": "derived_calculation" }, "opex_usd": { "amount": 320000, "currency": "USD" }, "net_burn_usd": { "amount": 320000, "currency": "USD", "provenance": "derived_calculation" } },
+          { "year": 2028, "mau_end": 10000, "paying_subscribers_end": 300, "revenue": { "subscription_usd": 32000, "marketplace_usd": 3800, "consultation_usd": 1600, "hardware_usd": 0, "total_usd": 37400, "currency": "USD", "provenance": "derived_calculation" }, "opex_usd": { "amount": 480000, "currency": "USD" }, "net_burn_usd": { "amount": 442600, "currency": "USD", "provenance": "derived_calculation" } },
+          { "year": 2029, "mau_end": 28000, "paying_subscribers_end": 840, "revenue": { "subscription_usd": 96000, "marketplace_usd": 11500, "consultation_usd": 4800, "hardware_usd": 0, "total_usd": 112300, "currency": "USD", "provenance": "derived_calculation" }, "opex_usd": { "amount": 720000, "currency": "USD" }, "net_burn_usd": { "amount": 607700, "currency": "USD", "provenance": "derived_calculation" } },
+          { "year": 2030, "mau_end": 50000, "paying_subscribers_end": 1500, "revenue": { "subscription_usd": 192000, "marketplace_usd": 23000, "consultation_usd": 9600, "hardware_usd": 25200, "total_usd": 249800, "currency": "USD", "provenance": "derived_calculation", "hardware_note": "2 docks x 6 sites x USD 350/site/mo x 6 months" }, "opex_usd": { "amount": 1050000, "currency": "USD" }, "net_burn_usd": { "amount": 800200, "currency": "USD", "provenance": "derived_calculation" } }
+        ],
+        "five_year_revenue_total_usd": { "amount": 399500, "currency": "USD", "provenance": "derived_calculation" },
+        "five_year_net_burn_total_usd": { "amount": 2370500, "currency": "USD", "provenance": "derived_calculation" },
+        "end_of_horizon_run_rate": {
+          "mrr_subscription_usd": { "amount": 22500, "currency": "USD", "formula": "1500 subscribers x USD 15 ARPU", "provenance": "derived_calculation" },
+          "arr_subscription_usd": { "amount": 270000, "currency": "USD", "provenance": "derived_calculation" },
+          "note": "Still loss-making at base-case opex in 2030 — software revenue alone does not fund Phase 3 pilot without further raise."
+        },
+        "interpretation": "Realistic planning case: modest SaaS traction, hardware pilot late and small. Use for milestone-gated tranche sizing in funding-ask.json."
+      },
+      "optimistic": {
+        "label": "Optimistic — strong conversion and community-led growth, earlier hardware attach",
+        "provenance": "modeled_projection",
+        "confidence": "speculative",
+        "annual": [
+          { "year": 2026, "mau_end": 0, "paying_subscribers_end": 0, "revenue": { "subscription_usd": 0, "marketplace_usd": 0, "consultation_usd": 0, "hardware_usd": 0, "total_usd": 0, "currency": "USD", "provenance": "derived_calculation" }, "opex_usd": { "amount": 200000, "currency": "USD" }, "net_burn_usd": { "amount": 200000, "currency": "USD", "provenance": "derived_calculation" } },
+          { "year": 2027, "mau_end": 6000, "paying_subscribers_end": 0, "revenue": { "subscription_usd": 0, "marketplace_usd": 0, "consultation_usd": 0, "hardware_usd": 0, "total_usd": 0, "currency": "USD", "provenance": "derived_calculation" }, "opex_usd": { "amount": 320000, "currency": "USD" }, "net_burn_usd": { "amount": 320000, "currency": "USD", "provenance": "derived_calculation" } },
+          { "year": 2028, "mau_end": 45000, "paying_subscribers_end": 2250, "revenue": { "subscription_usd": 420000, "marketplace_usd": 84000, "consultation_usd": 42000, "hardware_usd": 0, "total_usd": 546000, "currency": "USD", "provenance": "derived_calculation" }, "opex_usd": { "amount": 480000, "currency": "USD" }, "net_burn_usd": { "amount": -66000, "currency": "USD", "provenance": "derived_calculation", "note": "Illustrative cash-flow-positive year on aggressive conversion — treat as upside, not plan." } },
+          { "year": 2029, "mau_end": 90000, "paying_subscribers_end": 4500, "revenue": { "subscription_usd": 950000, "marketplace_usd": 190000, "consultation_usd": 95000, "hardware_usd": 0, "total_usd": 1235000, "currency": "USD", "provenance": "derived_calculation" }, "opex_usd": { "amount": 720000, "currency": "USD" }, "net_burn_usd": { "amount": -515000, "currency": "USD", "provenance": "derived_calculation" } },
+          { "year": 2030, "mau_end": 150000, "paying_subscribers_end": 7500, "revenue": { "subscription_usd": 1650000, "marketplace_usd": 330000, "consultation_usd": 165000, "hardware_usd": 225000, "total_usd": 2370000, "currency": "USD", "provenance": "derived_calculation", "hardware_note": "5 docks x 10 sites x USD 500/site/mo x 9 months" }, "opex_usd": { "amount": 1050000, "currency": "USD" }, "net_burn_usd": { "amount": -1320000, "currency": "USD", "provenance": "derived_calculation" } }
+        ],
+        "five_year_revenue_total_usd": { "amount": 4151000, "currency": "USD", "provenance": "derived_calculation" },
+        "five_year_net_surplus_total_usd": { "amount": 1781000, "currency": "USD", "provenance": "derived_calculation", "note": "Cumulative surplus only under optimistic inputs — not the planning case." },
+        "interpretation": "Upside case if community trust, conversion, and cooperative hardware density all exceed generic benchmarks. Present as upside only."
+      }
+    },
+    "funding_implied_by_base_case": {
+      "provenance": "derived_calculation",
+      "confidence": "low",
+      "tranches": [
+        { "tranche": "Pre-seed", "covers_years": [2026, 2027], "cumulative_net_burn_usd": { "amount": 520000, "currency": "USD" }, "suggested_raise_usd": { "min": 350000, "max": 600000, "currency": "USD", "provenance": "modeled_projection" }, "maps_to": "funding-ask.json#/the_tranche_structure/0" },
+        { "tranche": "Seed", "covers_years": [2028, 2029], "cumulative_incremental_net_burn_usd": { "amount": 1050300, "currency": "USD" }, "suggested_raise_usd": { "min": 800000, "max": 1200000, "currency": "USD", "provenance": "modeled_projection" }, "maps_to": "funding-ask.json#/the_tranche_structure/1" },
+        { "tranche": "Series A", "covers_years": [2030], "incremental_net_burn_usd": { "amount": 800200, "currency": "USD" }, "suggested_raise_usd": { "min": 1500000, "max": 3000000, "currency": "USD", "provenance": "modeled_projection", "note": "Phase 3 pilot capex dominates; raise sized above one-year burn to cover validation season length." }, "maps_to": "funding-ask.json#/the_tranche_structure/2" }
+      ]
+    },
+    "how_to_use_this_section": [
+      "Present base scenario as the internal planning case; show pessimistic unprompted in any investor conversation.",
+      "Replace mau_end and paying_subscribers_end with traction.json values the moment real data exists — do not let assumed rows become stale 'facts'.",
+      "Attack the conversion and ARPU assumptions first — they move revenue more than any other input.",
+      "Phase 3 hardware lines are the least trustworthy rows in the table; treat them as order-of-magnitude placeholders."
+    ],
+    "chart_reference": "data/12_datasets/charts/chart-assumed-revenue-projection.json"
+  },
+
   "what_investors_should_take_from_this_file": {
-    "statement": "The absence of a revenue forecast is a signal of seriousness, not a gap — and pivoting to software does not change that, because the company still has zero users and zero revenue today.",
-    "the_pitch": "'We could show you a hockey-stick of app downloads and subscribers. It would be fiction, and you know it. Instead: here is exactly what each phase de-risks, here is the arithmetic we can honestly do today, here are the assumptions the whole model rests on — starting with a freemium conversion rate borrowed from generic benchmarks, not measured for this market — and here is the cheap first phase (a free app) that tests the riskiest of them fast and cheaply. Fund Phase 1, watch us either validate or kill those assumptions with real usage data within months, and decide the Phase 3 hardware raise from evidence.'",
-    "the_risk": "Some investors want the hockey-stick and will pass without it. That is a filter, not a loss."
+    "statement": "The assumed_financial_projection section exists so reviewers can stress-test the plan — not so the founders can pretend traction exists. Zero users and zero revenue remain the factual starting point.",
+    "the_pitch": "'Here is our milestone-gated spend plan, here are the assumptions the model rests on — starting with a freemium conversion rate borrowed from generic benchmarks — and here is a three-scenario sensitivity model showing what happens if those assumptions are wrong. Fund Phase 1, watch us replace the assumed rows with measured ones within months, and decide the Phase 3 hardware raise from evidence.'",
+    "the_risk": "Some investors want a single hockey-stick line and will pass without it. Showing pessimistic/base/optimistic with every input tagged is a filter for investors who diligence assumptions — which is the point."
   }
 }

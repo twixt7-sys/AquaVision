@@ -1,0 +1,57 @@
+{
+  "id": "chart-assumed-revenue-projection",
+  "chart_type": "line",
+  "title": "Assumed Revenue by Scenario — Five-Year Illustrative Model",
+  "subtitle": "Pessimistic / base / optimistic total revenue (USD, annual) — NOT measured traction",
+  "description": "Derived from financial-projections.json#/assumed_financial_projection. Every point is a modeled_projection built on stated assumptions (conversion rate, ARPU, organic MAU growth, placeholder hardware pricing). Zero revenue today; zero users today. Render with a prominent assumption badge. The base case is the planning case; pessimistic should be shown unprompted alongside it.",
+  "provenance": "modeled_projection",
+  "confidence": "speculative",
+  "citation_ids": [],
+  "axes": {
+    "x": { "label": "Year", "type": "category" },
+    "y": { "label": "Total revenue", "unit": "USD (thousands, annual)", "type": "linear" }
+  },
+  "series": [
+    {
+      "name": "Pessimistic",
+      "provenance": "modeled_projection",
+      "unit": "USD k (annual total)",
+      "data": [
+        { "x": "2026", "y": 0 },
+        { "x": "2027", "y": 0 },
+        { "x": "2028", "y": 1.2 },
+        { "x": "2029", "y": 4.5 },
+        { "x": "2030", "y": 10.3 }
+      ]
+    },
+    {
+      "name": "Base",
+      "provenance": "modeled_projection",
+      "unit": "USD k (annual total)",
+      "data": [
+        { "x": "2026", "y": 0 },
+        { "x": "2027", "y": 0 },
+        { "x": "2028", "y": 37.4 },
+        { "x": "2029", "y": 112.3 },
+        { "x": "2030", "y": 249.8 }
+      ]
+    },
+    {
+      "name": "Optimistic",
+      "provenance": "modeled_projection",
+      "unit": "USD k (annual total)",
+      "data": [
+        { "x": "2026", "y": 0 },
+        { "x": "2027", "y": 0 },
+        { "x": "2028", "y": 546 },
+        { "x": "2029", "y": 1235 },
+        { "x": "2030", "y": 2370 }
+      ]
+    }
+  ],
+  "annotations": [
+    { "kind": "point_label", "value": "2028", "label": "Phase 2 monetization begins (assumed)", "severity": "advisory" },
+    { "kind": "point_label", "value": "2030", "label": "Base case adds small Phase 3 pilot revenue", "severity": "info" }
+  ],
+  "the_message": "This is sensitivity analysis, not a forecast. Inputs live in financial-projections.json#/assumed_financial_projection/model_inputs. Replace the entire chart when traction.json has real revenue."
+}

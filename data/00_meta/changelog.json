@@ -8,6 +8,24 @@
 
   "entries": [
     {
+      "version": "1.0.2",
+      "date": "2026-07-18",
+      "author": "AquaVision founding team (drafted with AI assistance)",
+      "summary": "Added assumed five-year financial projection (pessimistic / base / optimistic) to financial-projections.json with subscriber counts, annual revenue, opex, and net burn — all tagged modeled_projection or assumption. Added chart-assumed-revenue-projection.json. traction.json remains honestly empty.",
+      "added": [
+        "financial-projections.json#/assumed_financial_projection — three-scenario 2026–2030 model tied to unit-economics.json inputs.",
+        "Phase spend envelope USD bands on financial-projections.json#/phase_spend_plan.",
+        "chart-assumed-revenue-projection.json — line chart of assumed annual revenue by scenario."
+      ],
+      "changed": [
+        "financial-projections.json READ_THIS_FIRST and revenue_scenario_structure status to reflect assumed numbers exist but are not measured.",
+        "chart-financial-projection.json revenue_projection_status and cross-references."
+      ],
+      "decisions_recorded": [
+        "Assumed subscriber and revenue figures live only in financial-projections.json with explicit provenance — not copied into traction.json, which stays empty until earned."
+      ]
+    },
+    {
       "version": "1.0.1",
       "date": "2026-07-18",
       "author": "AquaVision founding team (drafted with AI assistance)",
