@@ -7,6 +7,7 @@ import AppPageBackground from '../shared/components/AppPageBackground.jsx';
 import BottomNav from '../shared/components/BottomNav.jsx';
 import FloatingActionButton from '../shared/components/FloatingActionButton.jsx';
 import Sidebar from '../shared/components/Sidebar.jsx';
+import NotificationBell from '../shared/components/NotificationBell.jsx';
 import UpgradeTeaser from '../shared/components/UpgradeTeaser.jsx';
 import DemoTopNav from '../shared/components/DemoTopNav.jsx';
 import PhoneFrame, { DesktopFrame, useFrameSize } from '../shared/components/PhoneFrame.jsx';
@@ -18,6 +19,7 @@ import { Pad } from './screens/_kit.jsx';
 import { cn } from '../shared/components/ui/utils.js';
 
 import Home from './screens/Home.jsx';
+import PondDetail from './screens/PondDetail.jsx';
 import AssistantChat from './screens/AssistantChat.jsx';
 import SetupWizard from './screens/SetupWizard.jsx';
 import WaterLog from './screens/WaterLog.jsx';
@@ -104,6 +106,8 @@ function DemoChrome({ tier, screen, pageTitle, setSidebarOpen, children, fab, si
             </div>
           </button>
 
+          <NotificationBell />
+
           <Button
             variant="ghost"
             size="icon"
@@ -169,9 +173,12 @@ export default function DemoMode({ parts }) {
     );
   }
 
+  const isPondDetail = tier === 'free' && screen === 'pond';
+  const pondId = isPondDetail ? parts[3] : null;
   const isPremiumScreen = Object.keys(SCREENS.premium).includes(screen);
-  const Screen =
-    tier === 'free' && isPremiumScreen
+  const Screen = isPondDetail
+    ? () => <PondDetail pondId={pondId} />
+    : tier === 'free' && isPremiumScreen
       ? () => (
           <Pad>
             <UpgradeTeaser tier="Premium">
@@ -182,7 +189,9 @@ export default function DemoMode({ parts }) {
         )
       : SCREENS[tier]?.[screen] || SCREENS[tier]?.[t.screens[0].id];
 
-  const pageTitle = t.screens.find((s) => s.id === screen)?.label || t.label;
+  const pageTitle = isPondDetail
+    ? `Pond ${pondId}`
+    : t.screens.find((s) => s.id === screen)?.label || t.label;
 
   return (
     <TierContext.Provider value={ctx}>
@@ -202,7 +211,7 @@ export default function DemoMode({ parts }) {
       >
         <AnimatePresence mode="wait">
           <motion.div
-            key={`${tier}-${screen}`}
+            key={`${tier}-${screen}${pondId ? `-${pondId}` : ''}`}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}

@@ -76,6 +76,180 @@ export const farmerWaterLog = {
 
 export const lastLoggedDaysAgo = 9;
 
+// --- pond roster (Home carousel + detail pages) · varied species + statuses ---
+// Each pond carries the metadata the detail page renders. All illustrative_synthetic.
+export const ponds = [
+  {
+    id: 'A',
+    label: 'Pond A',
+    species: 'tilapia',
+    speciesLabel: 'Nile tilapia',
+    status: 'no_data',
+    caption: `${lastLoggedDaysAgo}d since log`,
+    areaM2: 1200,
+    depthM: 1.6,
+    stock: 4800,
+    stockedDaysAgo: 74,
+    lastReadingMinutes: lastLoggedDaysAgo * 24 * 60,
+    water: { do: null, temp: null, ph: null, salinity: 0 },
+    feed: { type: 'Floating pellet 32%', dailyKg: 3.2 },
+    doTrend: [6.1, 5.8, null, null, 5.4, 4.9, null],
+    note: 'Nothing logged in over a week. Grey means unknown, not safe — a reading is overdue here.',
+  },
+  {
+    id: 'B',
+    label: 'Pond B',
+    species: 'milkfish',
+    speciesLabel: 'Milkfish (bangus)',
+    status: 'ok',
+    caption: '6.1 mg/L DO',
+    areaM2: 1800,
+    depthM: 2.0,
+    stock: 6200,
+    stockedDaysAgo: 96,
+    lastReadingMinutes: 42,
+    water: { do: 6.1, temp: 28.4, ph: 7.8, salinity: 18 },
+    feed: { type: 'Floating pellet 28%', dailyKg: 2.4 },
+    doTrend: [5.9, 6.0, 6.2, 6.1, 6.3, 6.1, 6.1],
+    note: 'Holding in a healthy band. Morning DO is steady and feeding is on schedule.',
+  },
+  {
+    id: 'C',
+    label: 'Pond C',
+    species: 'crawfish',
+    speciesLabel: 'Freshwater prawn',
+    status: 'advisory',
+    caption: 'DO trending down',
+    areaM2: 900,
+    depthM: 1.2,
+    stock: 15000,
+    stockedDaysAgo: 51,
+    lastReadingMinutes: 130,
+    water: { do: 4.7, temp: 29.6, ph: 7.4, salinity: 2 },
+    feed: { type: 'Sinking crumble 35%', dailyKg: 1.1 },
+    doTrend: [5.6, 5.4, 5.1, 5.0, 4.9, 4.8, 4.7],
+    note: 'Oxygen has slipped for five mornings running. Trending toward the low band — worth watching tonight.',
+  },
+  {
+    id: 'D',
+    label: 'Pond D',
+    species: 'crab',
+    speciesLabel: 'Mud crab',
+    status: 'ok',
+    caption: '5.8 mg/L DO',
+    areaM2: 700,
+    depthM: 1.0,
+    stock: 2400,
+    stockedDaysAgo: 63,
+    lastReadingMinutes: 88,
+    water: { do: 5.8, temp: 28.9, ph: 7.9, salinity: 24 },
+    feed: { type: 'Trash fish + pellet', dailyKg: 1.6 },
+    doTrend: [5.7, 5.9, 5.8, 6.0, 5.8, 5.9, 5.8],
+    note: 'Brackish pen is stable. Salinity and oxygen both sitting comfortably for mud crab.',
+  },
+  {
+    id: 'E',
+    label: 'Pond E',
+    species: 'catfish',
+    speciesLabel: 'African catfish',
+    status: 'warning',
+    caption: 'Low DO overnight',
+    areaM2: 1000,
+    depthM: 1.4,
+    stock: 9000,
+    stockedDaysAgo: 38,
+    lastReadingMinutes: 25,
+    water: { do: 3.4, temp: 30.2, ph: 7.1, salinity: 0 },
+    feed: { type: 'Floating pellet 32%', dailyKg: 4.5 },
+    doTrend: [4.8, 4.4, 4.1, 3.9, 3.7, 3.5, 3.4],
+    note: 'Overnight oxygen dropped below the safe band. Catfish tolerate it, but keep aeration on before dawn.',
+  },
+  {
+    id: 'F',
+    label: 'Pond F',
+    species: 'fry',
+    speciesLabel: 'Tilapia fingerlings',
+    status: 'ok',
+    caption: 'Tilapia fingerlings',
+    areaM2: 300,
+    depthM: 0.8,
+    stock: 22000,
+    stockedDaysAgo: 16,
+    lastReadingMinutes: 60,
+    water: { do: 6.4, temp: 27.8, ph: 7.6, salinity: 0 },
+    feed: { type: 'Fry mash / starter', dailyKg: 0.6 },
+    doTrend: [6.2, 6.3, 6.5, 6.4, 6.5, 6.4, 6.4],
+    note: 'Nursery pond for the next tilapia cycle. Fingerlings are grading well; keep the fine starter feed going.',
+  },
+];
+
+export function pondById(id) {
+  return ponds.find((p) => p.id === id) || null;
+}
+
+// --- weather / tide snapshot (Home conditions strip) ---
+export const environmentSnapshot = {
+  condition: 'partly_cloudy',
+  conditionLabel: 'Partly cloudy',
+  tempC: 29,
+  feelsLikeC: 32,
+  humidityPct: 74,
+  windKph: 12,
+  location: 'Taal Lake · Batangas',
+  tide: { label: 'High tide', time: '2:14 PM' },
+};
+
+// --- in-app notifications (top-nav bell) ---
+export const notifications = [
+  {
+    id: 'n1',
+    tone: 'warning',
+    icon: 'do',
+    title: 'Pond E — low oxygen overnight',
+    body: 'Dissolved oxygen dipped to 3.4 mg/L before dawn. Keep aerators running.',
+    when: '18 min ago',
+    unread: true,
+  },
+  {
+    id: 'n2',
+    tone: 'advisory',
+    icon: 'trend',
+    title: 'Pond C — DO trending down',
+    body: 'Five mornings of falling oxygen. Consider a pre-dawn reading tonight.',
+    when: '1 h ago',
+    unread: true,
+  },
+  {
+    id: 'n3',
+    tone: 'nodata',
+    icon: 'clock',
+    title: 'Pond A — no reading in 9 days',
+    body: 'This pond has gone quiet. Log DO or temperature when you can.',
+    when: '3 h ago',
+    unread: true,
+  },
+  {
+    id: 'n4',
+    tone: 'nominal',
+    icon: 'feed',
+    title: 'Feeding logged — Pond B',
+    body: '2.4 kg floating pellet recorded for the 06:30 feed.',
+    when: 'Yesterday',
+    unread: false,
+  },
+  {
+    id: 'n5',
+    tone: 'community',
+    icon: 'community',
+    title: 'New reply in Community',
+    body: 'Coop San Isidro answered your aeration schedule thread.',
+    when: 'Yesterday',
+    unread: false,
+  },
+];
+
+export const unreadNotificationCount = notifications.filter((n) => n.unread).length;
+
 // --- community forum ---
 export const forumPosts = [
   { author: 'Marissa L.', when: '2 h ago', title: 'Best time to feed during hot weather?', replies: 7, tag: 'Feeding' },
