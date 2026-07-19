@@ -53,6 +53,8 @@ export default function BottomNav({ tier, screen, wide = false }) {
   const items = tier === 'premium' ? PREMIUM_NAV : FREE_NAV;
   const isPremium = tier === 'premium';
   const center = items.find((i) => i.center) || items[2];
+  const centerActive = screen === center.id;
+  const isLogo = center.id === 'home' || center.id === 'recommendations';
   const left = items.filter((i) => !i.center).slice(0, 2);
   const right = items.filter((i) => !i.center).slice(2);
   const go = (id) => navigate(`/demo/${tier}/${id}`);
@@ -79,42 +81,61 @@ export default function BottomNav({ tier, screen, wide = false }) {
           </div>
 
           <div
-            className="relative flex shrink-0 flex-col items-center px-2 transition-all duration-300 ease-out"
+            className="group/center relative flex shrink-0 flex-col items-center px-2 transition-all duration-300 ease-out"
             style={{
-              transform: screen === center.id ? 'translateY(-1.35rem) scale(1.08)' : 'translateY(0)',
+              transform: centerActive ? 'translateY(-1.4rem)' : 'translateY(-0.5rem)',
             }}
           >
-            <button
+            {/* ambient glow halo — brighter when active */}
+            <div
+              className={cn(
+                'pointer-events-none absolute left-1/2 top-0 h-16 w-16 -translate-x-1/2 rounded-full blur-xl transition-opacity duration-300',
+                isPremium ? 'bg-[#8A6BC4]/50' : 'bg-accent/50',
+                centerActive ? 'opacity-100' : 'opacity-0 group-hover/center:opacity-60',
+              )}
+            />
+            <motion.button
               type="button"
               onClick={() => go(center.id)}
+              whileTap={{ scale: 0.92 }}
+              animate={{ scale: centerActive ? 1.06 : 1 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 18 }}
               className={cn(
-                'group relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-2xl border p-0 shadow-sm transition-all duration-300',
+                'relative flex h-16 w-16 items-center justify-center rounded-full p-[2.5px] shadow-[0_12px_26px_-8px_rgba(4,59,102,0.75)]',
                 isPremium
-                  ? 'border-[#8A6BC4]/50 bg-gradient-to-br from-[#2A3F7A] to-[#4A3A8A]'
-                  : 'border-white/20 bg-[#1C507A]',
-                screen === center.id
-                  ? isPremium
-                    ? 'scale-110 border-[#C4B0E8]/70 shadow-[0_0_0_3px_rgba(138,107,196,0.35)]'
-                    : 'scale-110 border-accent/60 shadow-[0_0_0_3px_rgba(68,167,210,0.25)]'
-                  : 'text-white/70 hover:scale-105',
+                  ? 'bg-gradient-to-br from-[#C4B0E8] via-[#8A6BC4] to-[#4A3A8A]'
+                  : 'bg-gradient-to-br from-[#8ED6F2] via-accent to-[#0B608F]',
               )}
               aria-label={center.label}
+              aria-current={centerActive ? 'page' : undefined}
             >
-              {screen === center.id && <span className="droplet-ripple rounded-2xl" />}
-              {center.id === 'home' || center.id === 'recommendations' ? (
-                <AquaVisionLogoMark size="md" className="relative z-10 h-14 w-14" />
-              ) : (
-                <center.icon size={22} strokeWidth={2.25} className="relative z-10" />
-              )}
-            </button>
-            {screen === center.id && (
-              <div
+              <span
                 className={cn(
-                  'absolute -bottom-2 h-4 w-14 animate-pulse rounded-full blur-lg',
-                  isPremium ? 'bg-[#8A6BC4]/40' : 'bg-accent/30',
+                  'relative flex h-full w-full items-center justify-center overflow-hidden rounded-full',
+                  isPremium
+                    ? 'bg-gradient-to-br from-[#3A2E6E] to-[#1A1340]'
+                    : 'bg-gradient-to-br from-[#0B608F] via-[#063F63] to-[#031C2E]',
                 )}
-              />
-            )}
+              >
+                {/* glossy top highlight */}
+                <span className="pointer-events-none absolute inset-x-2 top-1 h-3.5 rounded-full bg-white/25 blur-[2px]" />
+                {/* slow water-shimmer sweep */}
+                <motion.span
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent"
+                  animate={{ x: ['-130%', '130%'] }}
+                  transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', repeatDelay: 2.2 }}
+                />
+                {centerActive && <span className="droplet-ripple rounded-full" />}
+                {isLogo ? (
+                  <AquaVisionLogoMark
+                    size="md"
+                    className="relative z-10 h-11 w-11 drop-shadow-[0_1px_3px_rgba(0,0,0,0.55)]"
+                  />
+                ) : (
+                  <center.icon size={24} strokeWidth={2.25} className="relative z-10 text-white" />
+                )}
+              </span>
+            </motion.button>
           </div>
 
           <div className="mb-2 flex max-w-md flex-1 items-center justify-around">
