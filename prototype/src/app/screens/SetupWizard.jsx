@@ -52,7 +52,7 @@ export default function SetupWizard() {
         <div className="card" style={{ textAlign: 'center', borderColor: 'var(--av-ok)' }}>
           <div style={{ fontSize: 30, color: 'var(--av-ok)' }}>✓</div>
           <p style={{ margin: '6px 0 0', fontSize: 'var(--fs-sm)' }}>
-            Your farm and first pond are ready. You can start logging readings and feeding right away — for free.
+            Your farm and first pond are ready. You can start logging readings and feeding right away  -  for free.
           </p>
         </div>
       ) : (

@@ -2,13 +2,13 @@ import { Pad, ScreenHead } from './_kit.jsx';
 import SampleDataBanner from '../../shared/components/SampleDataBanner.jsx';
 import { farmerWaterLog, feedingSchedule } from '../../data/demoFixtures.js';
 
-// Records — everything the farmer logged, exportable. Data ownership is explicit
+// Records  -  everything the farmer logged, exportable. Data ownership is explicit
 // from the first screen (faq: "your data is yours, exportable").
 export default function Records() {
   const readings = farmerWaterLog.series[0].data.filter(([, v]) => v != null);
   return (
     <Pad>
-      <ScreenHead title="Records" sub="Your data — yours, and exportable" />
+      <ScreenHead title="Records" sub="Your data  -  yours, and exportable" />
       <SampleDataBanner compact />
 
       <div className="row" style={{ gap: 8 }}>

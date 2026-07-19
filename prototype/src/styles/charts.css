@@ -1,7 +1,15 @@
-/* Chart CSS — recreated for dark mode from site/assets/style.css.
+/* Chart CSS  -  recreated for dark mode from site/assets/style.css.
    The ported SVG chart components depend on these class names. */
 
-.chart { margin: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 18px; }
+.chart {
+  margin: 0;
+  background: var(--card);
+  border: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+  border-radius: 1rem;
+  padding: 16px;
+  color: var(--card-foreground);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+}
 .chart-bare { background: none; border: none; padding: 0; }
 .chart-prov { margin-bottom: 8px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 .chart-title { font-family: var(--font-display); color: var(--heading); font-size: var(--fs-lg); margin: 0 0 2px; }
@@ -35,7 +43,7 @@
 .donut svg { width: 190px; height: 190px; flex-shrink: 0; }
 .donut h4 { margin: 0 0 8px; }
 
-/* funnel — honest-empty stages */
+/* funnel  -  honest-empty stages */
 .funnel { display: flex; flex-direction: column; gap: 14px; margin: 0; }
 .funnel-cols { display: flex; gap: 24px; flex-wrap: wrap; }
 .funnel-col { flex: 1 1 300px; }

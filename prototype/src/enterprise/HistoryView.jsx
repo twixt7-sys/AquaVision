@@ -1,14 +1,14 @@
 import ChartFigure from '../shared/charts/ChartFigure.jsx';
 import { telemetry } from '../data/index.js';
 
-// History — a time series with event pins (sorties, alerts, feeding). Built from
+// History  -  a time series with event pins (sorties, alerts, feeding). Built from
 // the synthetic diel DO series with vline annotations for events.
 const diel = telemetry.synthetic_diel_do_profile;
 
 const historyChart = {
   id: 'history-do',
   chart_type: 'line',
-  title: 'Surface DO — last 24 hours, with events',
+  title: 'Surface DO  -  last 24 hours, with events',
   provenance: 'illustrative_synthetic',
   axes: {
     x: { label: 'Hour of day', unit: 'h', type: 'linear', min: 0, max: 23 },
@@ -16,7 +16,7 @@ const historyChart = {
   },
   series: [
     {
-      name: 'Surface DO (0.5 m) — SYNTHETIC',
+      name: 'Surface DO (0.5 m)  -  SYNTHETIC',
       unit: 'mg/L',
       provenance: 'illustrative_synthetic',
       data: diel.series.map((d) => [d.hour, d.do_mgl]),

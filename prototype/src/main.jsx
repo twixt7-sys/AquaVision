@@ -1,15 +1,13 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import '@fontsource-variable/inter';
-import '@fontsource-variable/inter-tight';
-import '@fontsource-variable/jetbrains-mono';
-import './styles/tokens.css';
-import './styles/global.css';
+import { Toaster } from 'sonner';
+import './shared/styles/index.css';
 import './styles/charts.css';
 import App from './App.jsx';
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>
+    <Toaster theme="light" position="top-center" richColors closeButton />
+  </React.StrictMode>,
 );

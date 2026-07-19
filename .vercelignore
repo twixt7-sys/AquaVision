@@ -1,0 +1,8 @@
+theria-FinanceApp
+site
+site-generator
+.claude
+prototype/node_modules
+prototype/dist
+**/node_modules
+**/.git

@@ -36,7 +36,7 @@ export function stationStateAt(hour) {
   return measuredStations.map((m) => ({
     station_id: m.station_id,
     surface_do_mgl: Math.round(m.surface_do_mgl * factor * 10) / 10,
-    // bottom water is stratified — far weaker diel response
+    // bottom water is stratified  -  far weaker diel response
     bottom_do_mgl: Math.round(m.bottom_do_mgl * (1 + (factor - 1) * 0.15) * 10) / 10,
     thermocline_depth_m: m.thermocline_depth_m,
     ageMinutes,
@@ -82,7 +82,7 @@ export function depthProfileChart(stationId, hour) {
   return {
     id: `profile-${stationId}`,
     chart_type: 'line',
-    title: `Vertical profile — ${stationId}`,
+    title: `Vertical profile  -  ${stationId}`,
     provenance: 'illustrative_synthetic',
     axes: {
       x: { label: 'Dissolved oxygen', unit: 'mg/L', type: 'linear' },
@@ -90,13 +90,13 @@ export function depthProfileChart(stationId, hour) {
     },
     series: [
       {
-        name: `DO by depth — ${stationId} — SYNTHETIC`,
+        name: `DO by depth  -  ${stationId}  -  SYNTHETIC`,
         unit: 'mg/L',
         provenance: 'illustrative_synthetic',
         data: rows.map((r) => [r.do_mgl, r.depth_m]),
       },
       {
-        name: 'Temperature — SYNTHETIC',
+        name: 'Temperature  -  SYNTHETIC',
         unit: '°C',
         provenance: 'illustrative_synthetic',
         data: rows.map((r) => [r.temp_c, r.depth_m]),

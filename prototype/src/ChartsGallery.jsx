@@ -2,7 +2,7 @@ import { navigate } from './router.js';
 import { allChartIds, getChart } from './data/charts.js';
 import ChartFigure from './shared/charts/ChartFigure.jsx';
 
-// Hidden gallery — renders every chart payload. This is the regression net for the
+// Hidden gallery  -  renders every chart payload. This is the regression net for the
 // ported chart engine (compare against the generated site/). Not linked from the
 // main flows except the landing footer.
 export default function ChartsGallery() {

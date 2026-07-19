@@ -1,13 +1,13 @@
 import StatusBadge from '../shared/components/StatusBadge.jsx';
 import StalenessTag from '../shared/components/StalenessTag.jsx';
 
-// Fleet health — aircraft / dock / sonde status, calibration due dates, and the
+// Fleet health  -  aircraft / dock / sonde status, calibration due dates, and the
 // per-site sonde assignment (biosecurity: the drone travels, the probe doesn't).
 const fleet = [
   { id: 'OmniDrone A-01', kind: 'Aircraft', status: 'nominal', note: 'Charged, ready for the 11:00 sortie.', age: 66 },
   { id: 'OmniDock D-01', kind: 'Dock', status: 'nominal', note: 'Rinse + decontamination cycle complete.', age: 66 },
   { id: 'Sonde S-01', kind: 'Sonde', status: 'advisory', note: 'Calibration due in 2 days. Dedicated to SYNTH-LAKE-01.', age: 66 },
-  { id: 'Sonde S-02', kind: 'Sonde', status: 'no_data', note: 'Not reporting since last swap — treat as unknown, not idle.', age: null },
+  { id: 'Sonde S-02', kind: 'Sonde', status: 'no_data', note: 'Not reporting since last swap  -  treat as unknown, not idle.', age: null },
 ];
 
 export default function FleetHealth() {
@@ -37,7 +37,7 @@ export default function FleetHealth() {
       <div className="card" style={{ borderLeft: '3px solid var(--av-current)' }}>
         <div className="section-title">Biosecurity</div>
         <p style={{ margin: 0, fontSize: 'var(--fs-sm)' }}>
-          Each site gets its own dedicated sonde — the drone travels, the probe does not. The dock decontaminates the sonde
+          Each site gets its own dedicated sonde  -  the drone travels, the probe does not. The dock decontaminates the sonde
           and the full tether length between sorties, and every sonde's movement is logged so an outbreak can be traced.
         </p>
       </div>

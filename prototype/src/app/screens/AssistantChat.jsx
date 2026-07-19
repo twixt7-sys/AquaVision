@@ -3,12 +3,12 @@ import SampleDataBanner from '../../shared/components/SampleDataBanner.jsx';
 import { assistantChat } from '../../data/demoFixtures.js';
 
 // Scripted AI assistant. Every health reply carries a disclaimer and a route to a
-// human — never a diagnosis, never a claim that the water is "safe"
+// human  -  never a diagnosis, never a claim that the water is "safe"
 // (ai-ml-models.json rules; brand voice).
 export default function AssistantChat() {
   return (
     <Pad>
-      <ScreenHead title="AI assistant" sub="General guidance — not a diagnosis" />
+      <ScreenHead title="AI assistant" sub="General guidance  -  not a diagnosis" />
       <SampleDataBanner compact />
       <div className="stack" style={{ gap: 10 }}>
         {assistantChat.map((m, i) => (

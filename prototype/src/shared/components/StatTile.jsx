@@ -1,9 +1,10 @@
+import { motion } from 'motion/react';
 import StatusBadge from './StatusBadge.jsx';
 import StalenessTag from './StalenessTag.jsx';
 import ProvenanceBadge from './ProvenanceBadge.jsx';
+import { Card, CardContent } from './ui/card.jsx';
+import { cn } from './ui/utils.js';
 
-// KPI / reading tile. Value in tabular mono. Status is icon+label. Staleness is
-// always shown when present. Provenance badge optional.
 export default function StatTile({
   label,
   value,
@@ -14,32 +15,37 @@ export default function StatTile({
   provenance,
   awaiting = false,
   footnote,
+  className,
 }) {
   return (
-    <div className="card" style={{ padding: '14px 16px', display: 'flex', flexDirection: 'column', gap: 6 }}>
-      <div className="row" style={{ justifyContent: 'space-between', gap: 8, alignItems: 'baseline' }}>
-        <span style={{ fontWeight: 600, fontFamily: 'var(--font-display)', color: 'var(--heading)', fontSize: 'var(--fs-sm)' }}>
-          {label}
-        </span>
-        {status && <StatusBadge status={status} />}
-      </div>
-      <div>
-        {awaiting ? (
-          <span className="tag-mono" style={{ color: 'var(--av-unknown)', fontSize: 'var(--fs-base)' }}>
-            awaiting data
-          </span>
-        ) : (
-          <span className="num" style={{ fontSize: 'var(--fs-2xl)', color: 'var(--av-current)' }}>
-            {value}
-            {unit && <span style={{ fontSize: 'var(--fs-sm)', color: 'var(--text-2)', marginLeft: 4 }}>{unit}</span>}
-          </span>
-        )}
-      </div>
-      <div className="row wrap" style={{ gap: 8 }}>
-        {ageMinutes != null && <StalenessTag minutes={ageMinutes} verb={ageVerb} />}
-        {provenance && <ProvenanceBadge type={provenance} />}
-      </div>
-      {footnote && <p className="muted" style={{ margin: 0, fontSize: 'var(--fs-xs)' }}>{footnote}</p>}
-    </div>
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.25, ease: 'easeOut' }}
+    >
+      <Card className={cn('gap-0', className)}>
+        <CardContent className="flex flex-col gap-1.5 px-4 py-3.5">
+          <div className="flex items-baseline justify-between gap-2">
+            <span className="text-sm font-semibold text-foreground">{label}</span>
+            {status && <StatusBadge status={status} />}
+          </div>
+          <div>
+            {awaiting ? (
+              <span className="font-mono text-base text-[var(--status-nodata)]">awaiting data</span>
+            ) : (
+              <span className="num text-2xl text-accent" data-telemetry>
+                {value}
+                {unit && <span className="ml-1 text-sm text-muted-foreground">{unit}</span>}
+              </span>
+            )}
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            {ageMinutes != null && <StalenessTag minutes={ageMinutes} verb={ageVerb} />}
+            {provenance && <ProvenanceBadge type={provenance} />}
+          </div>
+          {footnote && <p className="m-0 text-xs text-muted-foreground">{footnote}</p>}
+        </CardContent>
+      </Card>
+    </motion.div>
   );
 }

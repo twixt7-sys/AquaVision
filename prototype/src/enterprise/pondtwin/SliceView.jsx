@@ -26,7 +26,7 @@ export default function SliceView({ hour, selectedCage }) {
   return (
     <div>
       <svg viewBox={`0 0 ${W} ${H}`} style={{ width: '100%', height: 'auto', display: 'block' }}>
-        {/* water column background — shaded by DO at each depth band */}
+        {/* water column background  -  shaded by DO at each depth band */}
         {profile.map((p, i) => {
           const next = profile[i + 1];
           const y0 = Yd(p.depth_m);
@@ -63,7 +63,7 @@ export default function SliceView({ hour, selectedCage }) {
           return (
             <>
               <rect x={PAD.l} y={top} width={iw} height={PAD.t + ih - top} fill="var(--av-critical)" opacity="0.14" />
-              <text x={PAD.l + 6} y={top + 14} fontSize="9" fill="var(--av-critical)">anoxic — the loaded gun</text>
+              <text x={PAD.l + 6} y={top + 14} fontSize="9" fill="var(--av-critical)">anoxic  -  the loaded gun</text>
             </>
           );
         })()}
@@ -97,7 +97,7 @@ export default function SliceView({ hour, selectedCage }) {
 
       <div className="row wrap" style={{ gap: 10, fontSize: 'var(--fs-xs)', color: 'var(--text-2)', marginTop: 4 }}>
         <span>Dissolved oxygen (mg/L) across depth</span>
-        {isDerived && <span style={{ color: 'var(--av-advisory)' }}>derived column — less certain than a station</span>}
+        {isDerived && <span style={{ color: 'var(--av-advisory)' }}>derived column  -  less certain than a station</span>}
       </div>
     </div>
   );

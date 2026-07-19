@@ -14,16 +14,16 @@ const esc = (s) =>
     .replace(/"/g, '&quot;');
 const escAttr = esc;
 
-const SERIES_COLORS = ['var(--av-current)', 'var(--av-ocean)', 'var(--av-shallow)', 'var(--av-mist)', 'var(--av-slate)'];
+const SERIES_COLORS = ['var(--chart-1)', 'var(--chart-2)', 'var(--chart-3)', 'var(--chart-4)', 'var(--chart-5)'];
 const SEVERITY = {
-  info: 'var(--av-slate)',
-  advisory: 'var(--av-advisory)',
-  warning: 'var(--av-warning)',
-  critical: 'var(--av-critical)',
+  info: 'var(--chart-5)',
+  advisory: 'var(--status-advisory)',
+  warning: 'var(--status-warning)',
+  critical: 'var(--status-critical)',
 };
 
 const fmt = (n) => {
-  if (n === null || n === undefined || Number.isNaN(n)) return '—';
+  if (n === null || n === undefined || Number.isNaN(n)) return '-';
   const r = Math.round(n * 100) / 100;
   return Math.abs(r) >= 1000 ? r.toLocaleString('en-US') : String(r);
 };
@@ -230,7 +230,7 @@ function depthPanels(doc, seriesList) {
     for (const t of dticks) out += `<line class="grid" x1="${x0}" y1="${Yd(t)}" x2="${x0 + panelW}" y2="${Yd(t)}"/>`;
     out += `<rect x="${x0}" y="${m.t}" width="${panelW}" height="${ih}" class="panel-frame" fill="none"/>`;
 
-    const name = String(s.name).replace(/\s*—\s*SYNTHETIC\s*$/i, '');
+    const name = String(s.name).replace(/\s* - \s*SYNTHETIC\s*$/i, '');
     out += `<text class="panel-title" x="${x0 + panelW / 2}" y="${m.t - 22}" text-anchor="middle" fill="${color}">${tspans(wrapText(name, 26).slice(0, 2), x0 + panelW / 2, 0, 12)}<title>${escAttr(s.name)}</title></text>`;
 
     const vticks = niceTicks(vmin, vmax, 3);
@@ -446,7 +446,7 @@ function waterfallChart(doc) {
   out += `<line class="axis" x1="${m.l}" y1="${m.t + ih}" x2="${m.l + iw}" y2="${m.t + ih}"/>`;
 
   const unlocks = `<details class="chart-data" open><summary>What each phase unlocks</summary><div class="table-scroll"><table><thead><tr><th>Phase</th><th>Envelope</th><th>Unlocks</th></tr></thead><tbody>${data
-    .map((d) => `<tr><td>${esc(String(d.phase || ''))}${d.kill_gate ? ' — ⚠ Kill gate' : ''}</td><td>${esc(String(d.envelope || ''))}</td><td>${esc(String(d.unlocks || ''))}</td></tr>`)
+    .map((d) => `<tr><td>${esc(String(d.phase || ''))}${d.kill_gate ? '  -  ⚠ Kill gate' : ''}</td><td>${esc(String(d.envelope || ''))}</td><td>${esc(String(d.unlocks || ''))}</td></tr>`)
     .join('')}</tbody></table></div></details>`;
 
   return svgWrap(W, H, out) + annotationList(doc.annotations) + unlocks;
@@ -477,7 +477,7 @@ ${d.note ? `<div class="muted">${esc(d.note)}</div>` : ''}
   }).join('');
   let out = `<div class="funnel-cols">${cols}</div>`;
   if (doc.the_blocking_inputs?.inputs) {
-    out += `<div class="blocking-inputs"><h4>The blocking inputs — the missing data is the content</h4><div class="table-scroll"><table><thead><tr><th>Input</th><th>Source</th><th>Status</th></tr></thead><tbody>${doc.the_blocking_inputs.inputs
+    out += `<div class="blocking-inputs"><h4>The blocking inputs  -  the missing data is the content</h4><div class="table-scroll"><table><thead><tr><th>Input</th><th>Source</th><th>Status</th></tr></thead><tbody>${doc.the_blocking_inputs.inputs
       .map((r) => `<tr><td>${esc(r.input)}</td><td>${esc(r.source)}</td><td>${esc(r.status)}</td></tr>`)
       .join('')}</tbody></table></div></div>`;
   }
@@ -536,7 +536,7 @@ export function renderChartBody(doc) {
 }
 
 /* Tiny sparkline. */
-export function sparklineSvg(doc, stroke = 'var(--av-current)') {
+export function sparklineSvg(doc, stroke = 'var(--chart-1)') {
   try {
     if (!doc?.series?.length) return '';
     const { points, categorical } = parsePoints(doc.series[0].data);
