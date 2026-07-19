@@ -12,6 +12,9 @@ from openpyxl.utils import get_column_letter
 OUT_DIR = Path(__file__).resolve().parent.parent / "exports"
 OUT_DIR.mkdir(exist_ok=True)
 
+PREMIUM_MONTHLY_PRICE = 299
+ANNUAL_PREPAY_PRICE = 2_990
+
 # Row structure: (label, col_b, y1, y2_condition, y2_pct, y3_condition, y3_pct)
 # y2_pct and y3_pct are decimals; y2/y3 values computed from prior year row values
 
@@ -41,8 +44,8 @@ ROWS = [
         1_800_000,
         "Phase 2 features — not a full MVP rebuild",
         -0.55,
-        "Phase 2 complete; maintenance & API integrations",
-        -0.30,
+        "Maintenance mode; incremental improvements only",
+        -0.55,
     ),
     (
         "Office & workspace setup",
@@ -105,8 +108,8 @@ ROWS = [
         360_000,
         "MAU roughly triples as free app scales",
         1.20,
-        "MAU doubles to ~8,000 active users",
-        0.70,
+        "~25,000 MAU; reserved instances offset scale costs",
+        0.40,
     ),
     (
         "AI & API costs",
@@ -114,8 +117,8 @@ ROWS = [
         300_000,
         "More usage across free + paid users",
         1.00,
-        "Predictive health models in production",
-        0.50,
+        "Model optimization lowers per-inference cost",
+        0.30,
     ),
     (
         "Software subscriptions",
@@ -132,8 +135,8 @@ ROWS = [
         400_000,
         "Double BFAR partnerships and community growth",
         0.75,
-        "Scale proven channels; lower cost per install",
-        0.35,
+        "Referral-driven growth lowers acquisition cost",
+        0.20,
     ),
     (
         "Insurance & admin",
@@ -166,20 +169,20 @@ ROWS = [
     (
         "Payment processing fees",
         "~3% of subscription & marketplace revenue",
-        8_000,
+        4_000,
         "More subscription and marketplace transactions",
-        3.50,
-        "Transaction volume triples",
-        1.80,
+        8.00,
+        "Approximately 3% of paid transaction revenue",
+        5.94,
     ),
     (
         "Per-user serving costs",
-        "Cloud + support for free & paid users",
-        240_000,
-        "~4× monthly active users vs Year 1",
+        "Messaging, storage & user-specific services (excl. cloud/AI)",
+        120_000,
+        "Usage scales; core cloud and AI tracked separately",
         2.50,
-        "Double MAU + heavier premium analytics load",
-        0.90,
+        "Unit serving cost falls through volume optimization",
+        0.50,
     ),
     (
         "Customer support",
@@ -193,21 +196,21 @@ ROWS = [
     ("REVENUE", None, None, None, None, None, None, True),
     (
         "Subscription — Premium (monthly)",
-        "₱799/month per farm; premium tier",
-        192_000,
-        "Premium live all 12 months; farms 100 → 400",
+        f"₱{PREMIUM_MONTHLY_PRICE}/month per farm; premium tier",
+        PREMIUM_MONTHLY_PRICE * 12 * 20,
+        "Average 200 monthly farms; ~400 by year-end",
         9.00,
-        "~850 avg paying farms; improved retention",
-        2.00,
+        "Average 1,950 monthly farms; ~3,500 by year-end",
+        8.75,
     ),
     (
         "Subscription — Annual prepay",
-        "₱7,990/year for commercial farms",
-        120_000,
-        "Offer annual plan for better retention",
+        f"₱{ANNUAL_PREPAY_PRICE:,}/year (two months free)",
+        ANNUAL_PREPAY_PRICE * 15,
+        "100 farms choose discounted annual plan",
+        (100 / 15) - 1,
+        "250 farms choose annual plan as retention improves",
         1.50,
-        "Push annual plans to commercial segment",
-        0.80,
     ),
     (
         "Marketplace commission",
@@ -216,7 +219,7 @@ ROWS = [
         "Launch feed/equipment marketplace in Q2",
         4.00,
         "Nationwide feed/equipment partners onboarded",
-        2.60,
+        6.00,
     ),
     (
         "Consultation platform fees",
@@ -225,7 +228,7 @@ ROWS = [
         "Expand expert consultation network",
         3.00,
         "Expert network grows to 20+ aquaculturists",
-        2.75,
+        3.50,
     ),
     ("SUMMARY", None, None, None, None, None, None, True),
     ("Total Revenue", "All revenue streams combined", None, "", None, "", None),
@@ -376,7 +379,7 @@ def build_excel(data, totals):
     sub = ws["A2"]
     sub.value = (
         "Venture: AI-powered aquaculture subscription platform (PHP) | "
-        "Model: Freemium → Premium ₱799/month"
+        f"Model: Freemium → Premium ₱{PREMIUM_MONTHLY_PRICE}/month"
     )
     sub.font = Font(italic=True, size=10, color="333333")
     sub.alignment = Alignment(horizontal="center")
@@ -478,7 +481,13 @@ def build_excel(data, totals):
         ws2.column_dimensions[col].width = 16
 
     xlsx_path = OUT_DIR / "AquaVision-BOE-Assumptions-3Year.xlsx"
-    wb.save(xlsx_path)
+    try:
+        wb.save(xlsx_path)
+    except PermissionError:
+        # Excel locks open workbooks on Windows; preserve the updated export
+        # under a clear fallback name instead of aborting all image exports.
+        xlsx_path = OUT_DIR / "AquaVision-BOE-Assumptions-3Year-Updated.xlsx"
+        wb.save(xlsx_path)
     return xlsx_path
 
 
@@ -501,7 +510,8 @@ def build_png(data, totals):
     ax.text(
         0.5,
         0.972,
-        "Assumptions Screen  |  3-Year Projection  |  Currency: Philippine Peso (₱)  |  Model: Subscription (Freemium → Premium)",
+        f"Assumptions Screen  |  3-Year Projection  |  Currency: Philippine Peso (₱)  |  "
+        f"Model: Freemium → Premium ₱{PREMIUM_MONTHLY_PRICE}/month",
         ha="center",
         va="top",
         fontsize=10,
@@ -631,10 +641,108 @@ def build_png(data, totals):
     return png_path
 
 
+def build_chart_png(totals):
+    years = ["Year 1", "Year 2", "Year 3"]
+    revenue = [totals[y]["revenue"] for y in ("y1", "y2", "y3")]
+    expenses = [totals[y]["expense"] for y in ("y1", "y2", "y3")]
+    profit = [totals[y]["profit"] for y in ("y1", "y2", "y3")]
+
+    fig, (ax1, ax2) = plt.subplots(
+        1, 2, figsize=(16, 7), dpi=120, gridspec_kw={"width_ratios": [1.2, 1]}
+    )
+    fig.patch.set_facecolor("#F8FAFC")
+    fig.suptitle(
+        "AquaVision — 3-Year Financial Projection",
+        fontsize=17,
+        fontweight="bold",
+        color="#1B4965",
+    )
+    fig.text(
+        0.5,
+        0.925,
+        f"Premium plan: ₱{PREMIUM_MONTHLY_PRICE}/month | "
+        f"Annual prepay: ₱{ANNUAL_PREPAY_PRICE:,}/year",
+        ha="center",
+        fontsize=10,
+        color="#555555",
+    )
+
+    x = range(len(years))
+    width = 0.35
+    bars_rev = ax1.bar(
+        [i - width / 2 for i in x], revenue, width, label="Total Revenue", color="#2E86AB"
+    )
+    bars_exp = ax1.bar(
+        [i + width / 2 for i in x], expenses, width, label="Total Expenses", color="#E07A5F"
+    )
+    for bars in (bars_rev, bars_exp):
+        for bar in bars:
+            ax1.annotate(
+                f"₱{bar.get_height() / 1e6:.2f}M",
+                (bar.get_x() + bar.get_width() / 2, bar.get_height()),
+                ha="center",
+                va="bottom",
+                fontsize=9,
+                fontweight="bold",
+                color="#333333",
+            )
+    ax1.set_title("Revenue vs Expenses", fontsize=12, color="#1B4965")
+    ax1.set_xticks(list(x))
+    ax1.set_xticklabels(years, fontsize=11)
+    ax1.set_ylabel("Philippine Peso (₱)")
+    ax1.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _: f"₱{v / 1e6:.0f}M"))
+    ax1.legend(loc="upper left")
+    ax1.grid(axis="y", linestyle="--", alpha=0.4)
+    ax1.set_facecolor("#FFFFFF")
+
+    colors = ["#C0392B" if p < 0 else "#2E7D32" for p in profit]
+    bars_p = ax2.bar(years, profit, 0.5, color=colors)
+    for bar, p in zip(bars_p, profit):
+        offset = 0.02 * max(abs(v) for v in profit)
+        ax2.annotate(
+            f"₱{p / 1e6:+.2f}M",
+            (bar.get_x() + bar.get_width() / 2, p + (offset if p >= 0 else -offset)),
+            ha="center",
+            va="bottom" if p >= 0 else "top",
+            fontsize=10,
+            fontweight="bold",
+            color=colors[list(profit).index(p)],
+        )
+    ax2.axhline(0, color="#333333", linewidth=1)
+    ax2.set_title("Net Profit / (Loss) — Path to Profitability", fontsize=12, color="#1B4965")
+    ax2.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _: f"₱{v / 1e6:.0f}M"))
+    ax2.grid(axis="y", linestyle="--", alpha=0.4)
+    ax2.set_facecolor("#FFFFFF")
+
+    line_ax = ax2.twinx()
+    line_ax.plot(years, profit, color="#1B4965", marker="o", linewidth=2, alpha=0.6)
+    line_ax.set_yticks([])
+    line_ax.set_ylim(ax2.get_ylim())
+
+    fig.text(
+        0.5,
+        0.015,
+        "Base-case assumption: Year 3 averages 1,950 monthly and 250 annual-plan farms "
+        "(~3,750 paid farms by year-end), reaching a narrow break-even result.",
+        ha="center",
+        fontsize=9,
+        style="italic",
+        color="#555555",
+    )
+
+    fig.tight_layout(rect=[0, 0.04, 1, 0.88])
+    chart_path = OUT_DIR / "AquaVision-3Year-Projection-Chart.png"
+    plt.savefig(chart_path, bbox_inches="tight", facecolor=fig.get_facecolor(), dpi=120)
+    plt.close()
+    return chart_path
+
+
 def main():
     data, totals = compute_values()
     xlsx = build_excel(data, totals)
     png = build_png(data, totals)
+    chart = build_chart_png(totals)
+    print(f"Chart: {chart}")
     png_size = png.stat().st_size
     print(f"Excel: {xlsx}")
     print(f"PNG:   {png} ({png_size / 1024:.1f} KB)")
