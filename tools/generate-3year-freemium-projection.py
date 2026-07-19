@@ -250,6 +250,288 @@ def make_charts(pl):
     return path
 
 
+def build_unit_economics(pl):
+    """Derive per-account metrics from projection assumptions."""
+    MONTHLY_CHURN = 0.05  # modeled midpoint (unit-economics.json)
+    rows = []
+    for i, r in enumerate(pl):
+        prev = pl[i - 1] if i > 0 else None
+        paying_avg = r["premium_avg"] + r["enterprise_avg"]
+        paying_eoy = r["premium_eoy"] + r["enterprise_eoy"]
+        c = r["costs"]
+        blended_arpu_mo = (
+            (r["premium_avg"] * PREMIUM_PRICE + r["enterprise_avg"] * ENTERPRISE_PRICE) / paying_avg
+            if paying_avg
+            else 0
+        )
+        sub_rev = r["prem_rev"] + r["ent_rev"]
+        gross_margin = (sub_rev - c["variable_cogs"]) / sub_rev if sub_rev else 0
+        prev_paying = (prev["premium_eoy"] + prev["enterprise_eoy"]) if prev else 0
+        net_new_paying = max(paying_eoy - prev_paying, 1)
+        cac = c["marketing"] / net_new_paying
+        ltv = blended_arpu_mo * gross_margin / MONTHLY_CHURN
+        cost_serve_free_mo = (c["cloud_ai"] + c["variable_cogs"] * 0.55) / 12 / max(r["free_eoy"], 1)
+        contrib_mo = blended_arpu_mo * gross_margin
+        payback_mo = cac / contrib_mo if contrib_mo else 0
+        conversion = paying_eoy / max(r["free_eoy"], 1) * 100
+        rows.append(
+            {
+                "year": r["year"],
+                "prem_arpu_mo": PREMIUM_PRICE,
+                "ent_arpu_mo": ENTERPRISE_PRICE,
+                "blended_arpu_mo": blended_arpu_mo,
+                "gross_margin": gross_margin,
+                "cac": cac,
+                "ltv": ltv,
+                "ltv_cac": ltv / cac if cac else 0,
+                "cost_serve_free_mo": cost_serve_free_mo,
+                "payback_mo": payback_mo,
+                "conversion_pct": conversion,
+            }
+        )
+    return rows
+
+
+def make_unit_economics_chart(pl):
+    """Unit Economics chart for the Assumptions screen (course upload)."""
+    ue = build_unit_economics(pl)
+    years = [f"Year {u['year']}" for u in ue]
+
+    fig, axes = plt.subplots(2, 2, figsize=(14, 10), dpi=140)
+    fig.patch.set_facecolor("#F8FAFC")
+    fig.suptitle(
+        "AquaVision — Unit Economics (Assumptions Screen)\n"
+        f"Premium P{PREMIUM_PRICE}/mo  |  Enterprise P{ENTERPRISE_PRICE}/mo  |  "
+        "Modeled 5% monthly churn  |  Currency: PHP",
+        fontsize=13,
+        fontweight="bold",
+        color="#1B4965",
+    )
+
+    # 1) ARPU by tier
+    ax = axes[0, 0]
+    x = range(len(years))
+    w = 0.25
+    prem = [u["prem_arpu_mo"] for u in ue]
+    ent = [u["ent_arpu_mo"] for u in ue]
+    blended = [u["blended_arpu_mo"] for u in ue]
+    ax.bar([i - w for i in x], prem, w, label=f"Premium P{PREMIUM_PRICE}", color="#457B9D")
+    ax.bar(x, ent, w, label=f"Enterprise P{ENTERPRISE_PRICE}", color="#1D3557")
+    ax.bar([i + w for i in x], blended, w, label="Blended (weighted)", color="#2A9D8F")
+    ax.set_xticks(list(x))
+    ax.set_xticklabels(years)
+    ax.set_ylabel("PHP / account / month")
+    ax.set_title("Average Revenue Per Paying Account (ARPU)")
+    ax.legend(fontsize=7)
+    ax.grid(axis="y", alpha=0.3)
+
+    # 2) LTV vs CAC
+    ax = axes[0, 1]
+    ltv = [u["ltv"] for u in ue]
+    cac = [u["cac"] for u in ue]
+    ax.bar([i - w / 2 for i in x], ltv, w, label="LTV (modeled)", color="#2A9D8F")
+    ax.bar([i + w / 2 for i in x], cac, w, label="CAC (marketing / net-new paying)", color="#E76F51")
+    for i, u in enumerate(ue):
+        ax.annotate(
+            f"{u['ltv_cac']:.1f}x",
+            (i, max(ltv[i], cac[i]) + 200),
+            ha="center",
+            fontsize=8,
+            color="#1B4965",
+            fontweight="bold",
+        )
+    ax.set_xticks(list(x))
+    ax.set_xticklabels(years)
+    ax.set_ylabel("PHP per paying account")
+    ax.set_title("Lifetime Value vs Customer Acquisition Cost")
+    ax.legend(fontsize=7)
+    ax.grid(axis="y", alpha=0.3)
+
+    # 3) Cost to serve free user + gross margin
+    ax = axes[1, 0]
+    free_cost = [u["cost_serve_free_mo"] for u in ue]
+    margin = [u["gross_margin"] * 100 for u in ue]
+    ax.bar(years, free_cost, color="#A8DADC", label="Cost to serve / free user / mo")
+    ax.set_ylabel("PHP / free user / month", color="#1B4965")
+    ax2 = ax.twinx()
+    ax2.plot(years, margin, "o-", color="#E76F51", linewidth=2, label="Subscription gross margin %")
+    ax2.set_ylabel("Gross margin on subscriptions (%)", color="#E76F51")
+    ax.set_title("Free-Tier Serve Cost & Paying Gross Margin")
+    lines1, labels1 = ax.get_legend_handles_labels()
+    lines2, labels2 = ax2.get_legend_handles_labels()
+    ax.legend(lines1 + lines2, labels1 + labels2, fontsize=7, loc="upper right")
+    ax.grid(axis="y", alpha=0.3)
+
+    # 4) Summary metrics table
+    ax = axes[1, 1]
+    ax.axis("off")
+    table_data = [
+        ["Metric", "Year 1", "Year 2 (BE)", "Year 3"],
+        ["Blended ARPU / mo", *[f"P{u['blended_arpu_mo']:,.0f}" for u in ue]],
+        ["Gross margin (sub)", *[f"{u['gross_margin']*100:.0f}%" for u in ue]],
+        ["CAC (per new paying)", *[f"P{u['cac']:,.0f}" for u in ue]],
+        ["LTV (5% churn)", *[f"P{u['ltv']:,.0f}" for u in ue]],
+        ["LTV : CAC", *[f"{u['ltv_cac']:.1f}x" for u in ue]],
+        ["Payback (months)", *[f"{u['payback_mo']:.1f}" for u in ue]],
+        ["Paying / free EOY", *[f"{u['conversion_pct']:.1f}%" for u in ue]],
+    ]
+    table = ax.table(
+        cellText=table_data,
+        loc="center",
+        bbox=[0.02, 0.08, 0.96, 0.82],
+        cellLoc="center",
+    )
+    table.auto_set_font_size(False)
+    table.set_fontsize(8.5)
+    for (r, c), cell in table.get_celld().items():
+        cell.set_edgecolor("#CCCCCC")
+        cell.set_linewidth(0.5)
+        if r == 0:
+            cell.set_facecolor("#1B4965")
+            cell.set_text_props(color="white", fontweight="bold")
+        elif r % 2 == 0:
+            cell.set_facecolor("#FAFAFA")
+        if c == 0:
+            cell.set_text_props(ha="left", fontweight="bold")
+    ax.set_title("Unit Economics Summary", fontsize=11, color="#1B4965", pad=12)
+
+    plt.tight_layout(rect=[0, 0.02, 1, 0.90])
+    path = OUT / "AquaVision-3Year-Freemium-Unit-Economics.png"
+    fig.savefig(path, bbox_inches="tight", facecolor=fig.get_facecolor())
+    plt.close()
+    return path
+
+
+def make_revenue_net_income_chart(pl):
+    """Revenue vs Net Income chart for the Assumptions screen (course upload)."""
+    years = [f"Year {r['year']}" for r in pl]
+    revenue = [r["total_rev"] for r in pl]
+    net_income = [r["profit"] for r in pl]
+
+    fig, ax = plt.subplots(figsize=(12, 7), dpi=140)
+    fig.patch.set_facecolor("#F8FAFC")
+
+    fig.suptitle(
+        "AquaVision — Revenue vs. Net Income (Assumptions Screen)",
+        fontsize=16,
+        fontweight="bold",
+        color="#1B4965",
+        y=0.98,
+    )
+    fig.text(
+        0.5,
+        0.915,
+        f"3-Year Freemium Projection  |  Premium P{PREMIUM_PRICE}/mo  |  Enterprise P{ENTERPRISE_PRICE}/mo  |  "
+        "Target: Year 2 Breakeven  |  Currency: PHP",
+        ha="center",
+        fontsize=9,
+        color="#555555",
+    )
+
+    x = range(len(years))
+    width = 0.35
+    bars_rev = ax.bar(
+        [i - width / 2 for i in x],
+        revenue,
+        width,
+        label="Total Revenue",
+        color="#2A9D8F",
+    )
+    colors = ["#C0392B" if p < 0 else "#2E7D32" for p in net_income]
+    bars_ni = ax.bar(
+        [i + width / 2 for i in x],
+        net_income,
+        width,
+        label="Net Income / (Loss)",
+        color=colors,
+    )
+
+    for bar in bars_rev:
+        h = bar.get_height()
+        ax.annotate(
+            f"P{h / 1e6:.2f}M",
+            (bar.get_x() + bar.get_width() / 2, h),
+            ha="center",
+            va="bottom",
+            fontsize=9,
+            fontweight="bold",
+            color="#1B4965",
+        )
+    for bar, p in zip(bars_ni, net_income):
+        offset = max(abs(v) for v in net_income) * 0.03
+        ax.annotate(
+            f"P{p / 1e6:+.2f}M",
+            (bar.get_x() + bar.get_width() / 2, p + (offset if p >= 0 else -offset)),
+            ha="center",
+            va="bottom" if p >= 0 else "top",
+            fontsize=9,
+            fontweight="bold",
+            color="#C0392B" if p < 0 else "#2E7D32",
+        )
+
+    ax.axhline(0, color="#333333", linewidth=1)
+    ax.set_xticks(list(x))
+    ax.set_xticklabels(years, fontsize=11)
+    ax.set_ylabel("Philippine Peso (PHP)")
+    ax.yaxis.set_major_formatter(mtick.FuncFormatter(lambda v, _: f"P{v / 1e6:.0f}M"))
+    ax.set_title("Revenue vs. Net Income — Path to Year 2 Breakeven", fontsize=12, color="#1B4965")
+    ax.legend(loc="upper left", fontsize=9)
+    ax.grid(axis="y", linestyle="--", alpha=0.35)
+    ax.set_facecolor("#FFFFFF")
+
+    line_ax = ax.twinx()
+    line_ax.plot(
+        list(x),
+        [r / 1e6 for r in revenue],
+        color="#2A9D8F",
+        marker="o",
+        linewidth=2,
+        alpha=0.35,
+        label="_nolegend_",
+    )
+    line_ax.plot(
+        list(x),
+        [r / 1e6 for r in net_income],
+        color="#1B4965",
+        marker="s",
+        linewidth=2,
+        alpha=0.5,
+        label="_nolegend_",
+    )
+    line_ax.set_yticks([])
+    line_ax.set_ylim(ax.get_ylim())
+
+    ax.annotate(
+        "Breakeven",
+        xy=(1, net_income[1]),
+        xytext=(1.35, net_income[1] + max(revenue) * 0.12),
+        fontsize=9,
+        color="#2E7D32",
+        fontweight="bold",
+        arrowprops=dict(arrowstyle="->", color="#2E7D32"),
+    )
+
+    footer = "  |  ".join(
+        f"Y{r['year']}: Rev {peso(r['total_rev'])} · Net {peso(r['profit'])}"
+        for r in pl
+    )
+    fig.text(
+        0.5,
+        0.02,
+        footer,
+        ha="center",
+        fontsize=8,
+        color="#555555",
+        bbox=dict(boxstyle="round,pad=0.35", facecolor="#E8F4FD", edgecolor="#1B4965"),
+    )
+
+    plt.tight_layout(rect=[0, 0.05, 1, 0.88])
+    path = OUT / "AquaVision-3Year-Freemium-Revenue-vs-Net-Income.png"
+    fig.savefig(path, bbox_inches="tight", facecolor=fig.get_facecolor())
+    plt.close()
+    return path
+
+
 def make_summary_png(pl):
     """Single Assumptions-style summary image for course upload."""
     fig, ax = plt.subplots(figsize=(16, 11), dpi=130)
@@ -435,6 +717,151 @@ def make_summary_png(pl):
     return path
 
 
+def make_pl_summary_png(pl):
+    """Formatted PNG of the P&L Summary sheet (matches Excel tab)."""
+    fig, ax = plt.subplots(figsize=(16, 12), dpi=130)
+    ax.axis("off")
+    fig.patch.set_facecolor("#F8FAFC")
+
+    ax.text(
+        0.5,
+        0.97,
+        "3-Year Profit & Loss (PHP)",
+        ha="center",
+        va="top",
+        fontsize=16,
+        fontweight="bold",
+        color="#1B4965",
+        transform=ax.transAxes,
+    )
+    ax.text(
+        0.5,
+        0.935,
+        "AquaVision Freemium Model  |  Premium P299/mo  |  Enterprise P1,499/mo  |  Target: Year 2 Breakeven",
+        ha="center",
+        va="top",
+        fontsize=9,
+        color="#555",
+        transform=ax.transAxes,
+    )
+
+    headers = ["Line Item", "Year 1", "Year 2", "Year 3"]
+    pl_table = [headers]
+    pl_lines = [
+        ("Premium subscription revenue", "prem_rev", "money"),
+        ("Enterprise subscription revenue", "ent_rev", "money"),
+        ("Marketplace commission", "marketplace", "money"),
+        ("Consultation fees", "consultation", "money"),
+        ("Total Revenue", "total_rev", "total"),
+        ("Total Expenses", "total_exp", "total"),
+        ("Net Profit / (Loss)", "profit", "profit"),
+        ("Profit Margin %", "margin_pct", "pct"),
+        ("Paying accounts EOY", None, "count"),
+        ("Paying as % of PH SAM", "sam_paying_pct", "sam_pct"),
+    ]
+    for label, key, fmt in pl_lines:
+        row = [label]
+        for r in pl:
+            if fmt == "money":
+                row.append(peso(r[key]))
+            elif fmt == "total":
+                row.append(peso(r[key]))
+            elif fmt == "profit":
+                row.append(peso(r[key]))
+            elif fmt == "pct":
+                row.append(f"{r[key]:.1f}%")
+            elif fmt == "count":
+                row.append(f"{r['premium_eoy'] + r['enterprise_eoy']:,}")
+            elif fmt == "sam_pct":
+                row.append(f"{r[key]:.2f}%")
+        pl_table.append(row)
+
+    table = ax.table(
+        cellText=pl_table,
+        loc="upper center",
+        bbox=[0.05, 0.52, 0.9, 0.36],
+        cellLoc="center",
+    )
+    table.auto_set_font_size(False)
+    table.set_fontsize(9)
+
+    for (r, c), cell in table.get_celld().items():
+        cell.set_edgecolor("#CCCCCC")
+        cell.set_linewidth(0.5)
+        if r == 0:
+            cell.set_facecolor("#1B4965")
+            cell.set_text_props(color="white", fontweight="bold")
+        elif pl_table[r][0] in ("Total Revenue", "Total Expenses"):
+            cell.set_facecolor("#FFF3CD")
+            cell.set_text_props(fontweight="bold")
+        elif pl_table[r][0] == "Net Profit / (Loss)":
+            val = pl[c - 1]["profit"] if c > 0 else 0
+            if c > 0:
+                cell.set_facecolor("#E8F5E9" if val >= 0 else "#FFEBEE")
+            cell.set_text_props(fontweight="bold")
+        elif r % 2 == 0:
+            cell.set_facecolor("#FAFAFA")
+        if c == 0:
+            cell.set_text_props(ha="left", fontweight="bold" if r > 0 else "bold")
+
+    ax.text(
+        0.05,
+        0.48,
+        "EXPENSE DETAIL",
+        ha="left",
+        va="top",
+        fontsize=11,
+        fontweight="bold",
+        color="#1B4965",
+        transform=ax.transAxes,
+    )
+
+    cost_keys = list(costs[1].keys())
+    exp_headers = ["Cost line"] + [f"Year {y}" for y in YEARS]
+    exp_table = [exp_headers]
+    for key in cost_keys:
+        row = [key.replace("_", " ").title()]
+        for y in YEARS:
+            row.append(peso(costs[y][key]))
+        exp_table.append(row)
+
+    exp_tbl = ax.table(
+        cellText=exp_table,
+        loc="center",
+        bbox=[0.05, 0.12, 0.9, 0.34],
+        cellLoc="center",
+    )
+    exp_tbl.auto_set_font_size(False)
+    exp_tbl.set_fontsize(8.5)
+
+    for (r, c), cell in exp_tbl.get_celld().items():
+        cell.set_edgecolor("#CCCCCC")
+        cell.set_linewidth(0.5)
+        if r == 0:
+            cell.set_facecolor("#1B4965")
+            cell.set_text_props(color="white", fontweight="bold")
+        elif r % 2 == 0:
+            cell.set_facecolor("#FAFAFA")
+        if c == 0:
+            cell.set_text_props(ha="left", fontweight="bold" if r > 0 else "bold")
+
+    ax.text(
+        0.5,
+        0.02,
+        "Modeled projection · PH SAM ~70,000 aquafarmers · Y2 breakeven via lean opex + enterprise ARPU mix",
+        ha="center",
+        va="bottom",
+        fontsize=7,
+        color="#777",
+        transform=ax.transAxes,
+    )
+
+    path = OUT / "AquaVision-3Year-Freemium-PL-Summary.png"
+    fig.savefig(path, bbox_inches="tight", facecolor=fig.get_facecolor())
+    plt.close()
+    return path
+
+
 def make_excel(pl):
     wb = Workbook()
     thin = Side(style="thin", color="CCCCCC")
@@ -606,7 +1033,10 @@ def make_excel(pl):
 def main():
     pl = build_pl()
     charts = make_charts(pl)
+    unit_econ = make_unit_economics_chart(pl)
+    rev_ni = make_revenue_net_income_chart(pl)
     summary = make_summary_png(pl)
+    pl_summary = make_pl_summary_png(pl)
     xlsx = make_excel(pl)
 
     print("=== AquaVision 3-Year Freemium Projection ===")
@@ -621,9 +1051,12 @@ def main():
             f"({r['sam_paying_pct']:.2f}% SAM)"
         )
     print()
-    print(f"Charts:  {charts} ({charts.stat().st_size/1024:.0f} KB)")
-    print(f"Summary: {summary} ({summary.stat().st_size/1024:.0f} KB)")
-    print(f"Excel:   {xlsx}")
+    print(f"Charts:     {charts} ({charts.stat().st_size/1024:.0f} KB)")
+    print(f"Unit Econ:  {unit_econ} ({unit_econ.stat().st_size/1024:.0f} KB)")
+    print(f"Rev vs NI:  {rev_ni} ({rev_ni.stat().st_size/1024:.0f} KB)")
+    print(f"Summary:    {summary} ({summary.stat().st_size/1024:.0f} KB)")
+    print(f"P&L Summary:{pl_summary} ({pl_summary.stat().st_size/1024:.0f} KB)")
+    print(f"Excel:      {xlsx}")
     return pl
 
 
