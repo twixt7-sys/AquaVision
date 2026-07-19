@@ -1,49 +1,20 @@
 import { navigate } from '../../router.js';
 import { MessageCircle, Stethoscope, Users, Droplets, Waves, GraduationCap } from 'lucide-react';
-import { motion } from 'motion/react';
 import { Pad, ScreenHead, AppCard, SoftPanel } from './_kit.jsx';
 import StatusBadge from '../../shared/components/StatusBadge.jsx';
 import StalenessTag from '../../shared/components/StalenessTag.jsx';
-import SampleDataBanner from '../../shared/components/SampleDataBanner.jsx';
+import EnvironmentStrip from '../../shared/components/EnvironmentStrip.jsx';
+import PondCarousel from '../../shared/components/PondCarousel.jsx';
 import { Button } from '../../shared/components/ui/button.jsx';
 import { PondBuddy } from '../../shared/components/PondBuddy.jsx';
 import { AviToggle } from '../../shared/components/AviToggle.jsx';
 import { useAvi } from '../../core/state/AviContext.jsx';
-import { feedingSchedule, lastLoggedDaysAgo } from '../../data/demoFixtures.js';
-
-function PondVisual({ label, status }) {
-  const tone =
-    status === 'no_data'
-      ? 'from-[#8A97A0]/40 to-[#3D5F83]/50'
-      : status === 'warning'
-        ? 'from-[#E2721F]/35 to-[#0B608F]/55'
-        : 'from-[#44A7D2]/40 to-[#0B608F]/60';
-
-  return (
-    <div className={`relative overflow-hidden rounded-xl bg-gradient-to-br ${tone} px-2.5 py-2 text-white shadow-sm`}>
-      <motion.div
-        className="absolute inset-x-0 bottom-0 h-7 bg-white/15"
-        animate={{ x: [0, 10, 0] }}
-        transition={{ repeat: Infinity, duration: 3.5, ease: 'easeInOut' }}
-        style={{
-          clipPath:
-            'polygon(0 45%, 15% 25%, 32% 50%, 50% 20%, 68% 48%, 84% 28%, 100% 42%, 100% 100%, 0 100%)',
-        }}
-      />
-      <div className="relative flex items-start justify-between gap-1.5">
-        <div>
-          <p className="text-[9px] font-bold uppercase tracking-wider text-white/70">Pond</p>
-          <p className="text-xs font-semibold leading-tight">{label}</p>
-        </div>
-        <Waves className="size-3.5 text-white/70" />
-      </div>
-    </div>
-  );
-}
+import { feedingSchedule, lastLoggedDaysAgo, ponds } from '../../data/demoFixtures.js';
 
 export default function Home() {
   const { aviVisible, setAviVisible } = useAvi();
   const nextFeed = feedingSchedule.find((f) => f.status !== 'done');
+  const speciesCount = new Set(ponds.map((p) => p.species)).size;
 
   const buddyMood = lastLoggedDaysAgo > 3 ? 'concerned' : 'neutral';
   const buddyLines = [
@@ -58,15 +29,8 @@ export default function Home() {
   return (
     <Pad>
       <div className="relative">
-        <ScreenHead title="Good morning" sub="Pond A · Pond B" />
+        <ScreenHead title="Good morning" sub={`${ponds.length} ponds · ${speciesCount} species`} />
         <AviToggle className="absolute right-0 top-0" />
-      </div>
-
-      <SampleDataBanner compact />
-
-      <div className="grid grid-cols-2 gap-2">
-        <PondVisual label="A · tilapia" status="no_data" />
-        <PondVisual label="B · milkfish" status="ok" />
       </div>
 
       {aviVisible && (
@@ -78,6 +42,10 @@ export default function Home() {
           />
         </SoftPanel>
       )}
+
+      <EnvironmentStrip />
+
+      <PondCarousel ponds={ponds} onSelect={(pond) => navigate(`/demo/free/pond/${pond.id}`)} />
 
       <AppCard accent="var(--status-nodata)">
         <div className="mb-1 flex items-center justify-between gap-2">
